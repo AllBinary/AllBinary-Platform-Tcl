@@ -1,0 +1,72 @@
+#
+# AllBinary Open License Version 1
+# Copyright (c) 2011 AllBinary
+# 
+# By agreeing to this license you and any business entity you represent are
+# legally bound to the AllBinary Open License Version 1 legal agreement.
+# 
+# You may obtain the AllBinary Open License Version 1 legal agreement from
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository.
+# 
+# Created By: Travis Berthelot
+#  
+# Generated Code Do Not Modify
+
+package org::allbinary::media::image::comparison::motion::MotionRectanglesResultsFrameCacheable;
+use strict;
+use warnings;
+use feature 'try';
+no warnings 'experimental::try';
+use parent -norequire,'java::lang::Object','org::allbinary::logic::util::cache::CacheableInterface';
+
+
+sub _init_fields {
+    my ($self) = @_;
+    $self->{motionRectangles} = undef;
+    $self->{frame} = undef;
+}
+
+
+sub new {
+    my ($class, $motionRectangles, $frame) = @_;
+    my $self = bless({}, $class);
+    _init_fields($self);
+        $self->{frame} = $frame;
+        $self->setMotionRectangles($motionRectangles);
+    return $self;
+}
+
+
+sub getKey {
+    my ($self) = @_;
+        return $self->{frame};
+}
+
+
+sub getMotionRectangles {
+    my ($self) = @_;
+        return $self->{motionRectangles};
+}
+
+
+sub setMotionRectangles {
+    my ($self, $motionRectangles) = @_;
+        $self->{motionRectangles} = $motionRectangles;
+}
+
+
+sub toString {
+    my ($self) = @_;
+        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
+        $stringBuffer->append(ref($self));
+        $stringBuffer->append(" Frame: ");
+        $stringBuffer->append($self->getKey()->toString());
+        return $stringBuffer->toString();
+}
+
+use java::lang::Object ();
+use org::allbinary::logic::string::StringMaker ();
+use org::allbinary::logic::util::cache::CacheableInterface ();
+
+1;
+

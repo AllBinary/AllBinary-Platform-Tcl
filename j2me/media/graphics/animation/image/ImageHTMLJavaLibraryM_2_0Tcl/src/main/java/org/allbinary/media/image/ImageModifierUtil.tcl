@@ -1,0 +1,212 @@
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2022 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+
+package org::allbinary::media::image::ImageModifierUtil;
+use strict;
+use warnings;
+use feature 'try';
+no warnings 'experimental::try';
+use parent -norequire,'java::lang::Object';
+
+
+sub _init_fields {
+    my ($self) = @_;
+    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
+    $self->{resourceCallbackStrings} = 'org::microemu::device::ResourceCallbackStrings'->getInstance();
+    $self->{playnUtil} = 'playn::html::HTMLPlaynUtil'->getInstance();
+    $self->{alphaArray} = undef;
+}
+
+sub new {
+    my ($class) = @_;
+    my $self = bless({}, $class);
+    _init_fields($self);
+    return $self;
+}
+
+
+sub getInstanceOrCreate {
+    my ($class) = @_;
+        return 'org::allbinary::media::image::ImageModifierUtil'->new();
+}
+
+
+sub setColor {
+    my ($self, $unusedOriginalImage, $image, $imageIndex, $basicColor) = @_;
+}
+
+
+sub changeColor {
+    my ($self, $unusedOriginalImage, $image, $imageIndex, $basicColor) = @_;
+}
+
+
+sub setAlpha {
+    my ($self, $originalImage, $image, $imageIndex, $alpha) = @_;
+        my $alphaF = $alpha;
+        my $alphaFloat = $alphaF / 255.0;
+        $self->setAlphaF($originalImage, $image, $imageIndex, $alphaFloat);
+}
+
+
+sub setAlphaF {
+    my ($self, $originalImage, $image, $imageIndex, $alpha) = @_;
+        if ($self->{alphaArray}->[$imageIndex]) {
+            $self->{alphaArray}->[$imageIndex] = 0;
+            $self->setAlpha2($originalImage, $image, $imageIndex, $alpha);
+        }
+}
+
+
+sub setAlpha2 {
+    my ($self, $originalImage, $image, $imageIndex, $alpha) = @_;
+        my $htmlImage = $image;
+        my $canvasImage = $htmlImage->getImage();
+        my $originalPlaynImage = ($originalImage)->getImage();
+        my $canvas = $self->{playnUtil}->getCanvas($canvasImage);
+        $canvas->clear();
+        $canvas->setAlpha($alpha);
+        $canvas->draw($originalPlaynImage, 0, 0);
+}
+
+
+sub setAlpha3 {
+    my ($self, $image, $alpha) = @_;
+        my $alphaF = $alpha;
+        my $alphaFloat = $alphaF / 255.0;
+        my $htmlImage = $image;
+        my $canvasImage = $htmlImage->getImage();
+        my $canvas = $self->{playnUtil}->getCanvas($canvasImage);
+        $canvas->setAlpha($alphaFloat);
+}
+
+
+sub getImageArray {
+    my ($self, $originalImageArray) = @_;
+        my $size = scalar(@{$originalImageArray});
+        $self->{alphaArray} = [(0) x ($size)];
+        my $imageArray = [(undef) x ($size)];
+        for (my $index = 0; $index < $size; $index++) {
+            $imageArray->[$index] = $originalImageArray->[$index];
+            $self->handleImage($imageArray, $index, $originalImageArray->[$index]);
+        }
+        return $imageArray;
+}
+
+
+sub handleImage {
+    my ($self, $imageArray, $index, $image) = @_;
+        my $image3 = ($image)->getImage();
+        if (defined($image3)) {
+            if ($image3->isReady() || $image3->width() + $image3->height() <= 0 || $image->getName() eq $self->{resourceCallbackStrings}->{FROM_DATA}) {
+                $self->copy($imageArray, $index, $image, $image3);
+            } else {
+                my $callback = 'org::allbinary::media::image::ImageCopyCallback'->new($self, $imageArray, $index, $image, $image3);
+                $image3->addCallback($callback);
+            }
+        } else {
+            $self->{logUtil}->putF($self->{resourceCallbackStrings}->{NULL} + $image->isMutable(), $self, $self->{resourceCallbackStrings}->{HANDLE_IMAGE});
+        }
+}
+
+
+sub copy {
+    my ($self, $imageArray, $index, $image, $image3) = @_;
+        try {
+            my $image2 = 'javax::microedition::lcdui::Image'->createImageWH(int($image3->width()), int($image3->height()));
+            my $graphics = $image2->getGraphics();
+            $graphics->drawImage($image, 0, 0, $org::allbinary::graphics::Anchor::TOP_LEFT);
+            $imageArray->[$index] = $image2;
+        } catch ($e) {
+            $self->{logUtil}->putF($self->{commonStrings}->{EXCEPTION_LABEL} + $self->{resourceCallbackStrings}->{DONE}, $self, $self->{resourceCallbackStrings}->{HANDLE_IMAGE});
+        }
+}
+
+
+sub reset {
+    my ($self) = @_;
+        my $size = scalar(@{$self->{alphaArray}});
+        for (my $index = 0; $index < $size; $index++) {
+            $self->{alphaArray}->[$index] = 1;
+        }
+}
+{
+    package org::allbinary::media::image::ImageCopyCallback;
+    use strict;
+    use warnings;
+    use feature 'try';
+    no warnings 'experimental::try';
+    use parent -norequire,'java::lang::Object','playn::core::Callback';
+    
+
+    sub _init_fields {
+        my ($self) = @_;
+        $self->{imageModifierUtil} = undef;
+        $self->{imageArray} = undef;
+        $self->{index} = undef;
+        $self->{image} = undef;
+        $self->{image3} = undef;
+    }
+    
+
+    sub new {
+        my ($class, $imageModifierUtil, $imageArray, $index, $image, $image3) = @_;
+        my $self = bless({}, $class);
+        _init_fields($self);
+            $self->{imageModifierUtil} = $imageModifierUtil;
+            $self->{imageArray} = $imageArray;
+            $self->{index} = $index;
+            $self->{image} = $image;
+            $self->{image3} = $image3;
+        return $self;
+    }
+    
+
+    sub onSuccess {
+        my ($self, $resource) = @_;
+            my $logUtil = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+            my $resourceCallbackStrings = $self->{imageModifierUtil}->{resourceCallbackStrings};
+            $logUtil->putF($resourceCallbackStrings->{DONE} . $self->{image}->getName(), $self, $resourceCallbackStrings->{HANDLE_IMAGE});
+            $self->{imageModifierUtil}->copy($self->{imageArray}, $self->{index}, $self->{image}, $self->{image3});
+    }
+    
+
+    sub onFailure {
+        my ($self, $e) = @_;
+            my $logUtil = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+            my $resourceCallbackStrings = $self->{imageModifierUtil}->{resourceCallbackStrings};
+            $logUtil->put('org::allbinary::logic::string::StringMaker'->new()->append($self->{imageModifierUtil}->{commonStrings}->{EXCEPTION_LABEL})->append($resourceCallbackStrings->{ERROR})->append($self->{image}->getName())->toString(), $self, $resourceCallbackStrings->{HANDLE_IMAGE}, $e);
+    }
+    }
+
+
+use java::lang::Object ();
+use javax::microedition::lcdui::Graphics ();
+use javax::microedition::lcdui::Image ();
+use org::allbinary::graphics::Anchor ();
+use org::allbinary::graphics::color::BasicColor ();
+use org::allbinary::string::CommonStrings ();
+use org::allbinary::logic::communication::log::LogUtil ();
+use org::allbinary::logic::string::StringMaker ();
+use org::microemu::device::playn::PlaynImage ();
+use org::microemu::device::ResourceCallbackStrings ();
+use playn::core::Callback ();
+use playn::core::Canvas ();
+use playn::core::CoreImage ();
+use playn::core::ImageImpl ();
+use playn::html::HTMLPlaynUtil ();
+
+1;
+

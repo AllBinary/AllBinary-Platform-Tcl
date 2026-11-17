@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.allbinary</groupId>
+    <artifactId>AllBinaryPersistenceLibraryPTcl</artifactId>
+    <packaging>pom</packaging>
+    <!-- AllBinary Platform Version Start -->
+    <version>1.0.0-SNAPSHOT</version>
+    <!-- AllBinary Platform Version End -->
+
+    <name>AllBinaryPersistenceLibraryPTcl</name>
+    <url>http://www.allbinary.com/</url>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>AllBinary Snapshots Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-releases</id>
+            <name>AllBinary Releases Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/releases/</url>
+        </repository>
+    </distributionManagement>
+    
+    <properties>
+        <buildLabel>${project.version}</buildLabel>
+        <assemblyPluginVersion>2.2-beta-1</assemblyPluginVersion>
+    </properties>
+
+    <modules>
+        
+        <!--
+        -->
+        <module>../allbinary_src/cache/AllBinaryCacheLibraryTclM</module>
+        <module>../allbinary_src/PermutationsJavaLibraryTclM</module>
+        <module>../allbinary_src/logic/BasePreloaderFileJavaLibraryTclM</module>
+        <module>../allbinary_src/logic/data/file/FileJavaLibraryTclM</module>
+        <module>../allbinary_src/logic/data/file/FileJ2SEJavaLibraryTclM</module>
+        <!--<module>../allbinary_src/data/DataJavaLibraryTclM</module>-->
+        <!--<module>../allbinary_src/logic/data/file/FileUnamedJavaLibraryTclM</module>-->
+        <!--<module>../allbinary_src/logic/data/file/FileAdvancedJavaLibraryTclM</module>-->
+        <!--<module>../allbinary_src/PreLoaderJavaLibraryTclM</module>-->
+        <!--<module>../allbinary_src/FileInitInfoJavaLibraryTclM</module>-->
+        <!--<module>../allbinary_src/PreLoaderFileJavaLibraryTclM</module>-->
+        <!--<module>../allbinary_src/PreLoaderLicenseJavaLibraryTclM</module>-->
+        <module>../j2me/PCResourceLibraryTclM</module>
+        <module>../j2me/ProgressJ2MEJavaLibraryTclM</module>
+        <module>../allbinary_src/licensing/ClientInfoBaseJavaLibraryTclM</module>
+        <!--<module>../allbinary_src/licensing/RemoteXmlRpcJavaLibraryTclM</module>-->
+        <!--<module>../allbinary_src/licensing/LicenseClientJavaLibraryTclM</module>-->
+
+        <!--
+        <module>../allbinary_src/PreLoaderLicenseJavaLibraryTclM</module>
+        -->
+    </modules>
+
+</project>
+

@@ -1,0 +1,62 @@
+# Generated Code Do Not Modify
+
+package org::allbinary::graphics::OpenGLBitmapFactory;
+use strict;
+use warnings;
+use feature 'try';
+no warnings 'experimental::try';
+use parent -norequire,'org::allbinary::platform::graphics::PlatformBitmapBaseFactory';
+
+tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::OpenGLBitmapFactory'->new() };
+
+sub _init_fields {
+    my ($self) = @_;
+    $self->{ARGB_8888} = 'org::allbinary::graphics::OpenGLBitmapConfig'->new(undef);
+}
+
+sub new {
+    my ($class) = @_;
+    my $self = $class->SUPER::new();
+    _init_fields($self);
+    return $self;
+}
+
+
+sub getInstance {
+    my ($class) = @_;
+        return $org::allbinary::graphics::OpenGLBitmapFactory::instance;
+}
+
+
+sub createBitmap {
+    my ($self, $width, $height, $config) = @_;
+        return 'org::allbinary::graphics::OpenGLBitmap'->new('javax::microedition::lcdui::Image'->createImage($width, $height));
+}
+
+
+# throws Exception
+sub decodeStream {
+    my ($self, $inputStream) = @_;
+        return 'org::allbinary::graphics::OpenGLBitmap'->new('org::allbinary::image::ImageFactory'->getInstance()->createImageFromInputStream($inputStream));
+}
+
+
+# Java overloaded method: Perl keeps the last definition
+sub createBitmap {
+    my ($self, $image) = @_;
+        return 'org::allbinary::graphics::OpenGLBitmap'->new($image);
+}
+
+use java::lang::Object ();
+use java::lang::LazyStatic ();
+# use java::io::IOException ();
+# use java::io::InputStream ();
+use javax::microedition::lcdui::Image ();
+use org::allbinary::image::ImageFactory ();
+use org::allbinary::platform::graphics::PlatformBitmapBaseFactory ();
+use org::allbinary::platform::graphics::PlatformBitmapBase ();
+use org::allbinary::graphics::OpenGLBitmapConfig ();
+use org::allbinary::graphics::OpenGLBitmap ();
+
+1;
+

@@ -1,0 +1,76 @@
+# 
+# AllBinary Open License Version 1 
+# Copyright (c) 2025 AllBinary 
+#  
+# By agreeing to this license you and any business entity you represent are 
+# legally bound to the AllBinary Open License Version 1 legal agreement. 
+#  
+# You may obtain the AllBinary Open License Version 1 legal agreement from 
+# AllBinary or the root directory of AllBinary's AllBinary Platform repository. 
+#  
+# Created By: Travis Berthelot 
+#   
+# Generated Code Do Not Modify
+# package org.allbinary.logic
+
+#ActualPlatform
+oo::class create ::NullUtil {
+    superclass ::JObject
+}
+
+oo::define ::NullUtil {
+    method initFields_NullUtil {} {
+        my jset NULL_OBJECT {}
+        my jset NULL_CLASS {}
+        my jset NULL_OBJECT_ARRAY {}
+        my jset NULL_CHAR_ARRAY {}
+        my jset NULL_BYTE_ARRAY {}
+        my jset NULL_SHORT_ARRAY_ARRAY {}
+        my jset NULL_INT_ARRAY {}
+        my jset NULL_INT_ARRAY_ARRAY {}
+        my jset NULL_INT_ARRAY_ARRAY_ARRAY {}
+        my jset NULL_FLOAT_ARRAY {}
+        my jset NULL_OBJECT [::JObject new]
+        my jset NULL_CLASS [jclassname [my jget NULL_OBJECT]]
+        my jset NULL_OBJECT_ARRAY [jarray 0 {}]
+        my jset NULL_CHAR_ARRAY [jarray 0 0]
+        my jset NULL_BYTE_ARRAY [jarray 0 0]
+        my jset NULL_SHORT_ARRAY_ARRAY [jarrayof 0 {jarray 0 0}]
+        my jset NULL_INT_ARRAY [jarray 0 0]
+        my jset NULL_INT_ARRAY_ARRAY [jarrayof 0 {jarray 0 0}]
+        my jset NULL_INT_ARRAY_ARRAY_ARRAY [jarrayof 0 {jarrayof 0 {jarray 0 0}}]
+        my jset NULL_FLOAT_ARRAY [jarray 0 0.0]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_NullUtil
+    }
+    
+}
+
+namespace eval ::NullUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::NullUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::NullUtil::staticGet_instance]
+    }
+}
+
+

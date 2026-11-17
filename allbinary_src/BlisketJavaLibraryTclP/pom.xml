@@ -1,0 +1,147 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.allbinary.business</groupId>
+    <artifactId>BlisketJavaLibraryPTcl</artifactId>
+    <packaging>pom</packaging>
+    <!-- AllBinary Platform Version Start -->
+    <version>1.0.0-SNAPSHOT</version>
+    <!-- AllBinary Platform Version End -->
+
+    <name>BlisketJavaLibraryPTcl</name>
+    <url>http://www.allbinary.com/</url>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>AllBinary Snapshots Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-releases</id>
+            <name>AllBinary Releases Nexus</name>
+            <url>https://nexus-allbinary.rhcloud.com/nexus/content/repositories/releases/</url>
+        </repository>
+    </distributionManagement>
+    
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+    <modules>
+
+        <!--
+        <module>../../j2me/AllBinaryJ2MELibraryTclP</module>
+        -->
+        <!--
+        <module>../data/DataJavaLibraryTclM</module>
+        -->
+
+        <module>../licensing/TestServiceClientInfoJavaLibraryTclM</module>        
+
+        <module>../data/DataTableInterfacesTclM</module>
+        
+        <module>../QueueJavaLibraryTclM</module>
+        
+        <!--
+        <module>../TokenizerJavaLibraryTclM</module>
+        -->
+
+        <module>../logging/LogConfigTypeFreeblisketJavaLibraryTclM</module>
+
+        <module>../JavaUtilLibraryTclM</module>
+        <module>../NullInitInfoJavaLibraryTclM</module>        
+        <module>../InitInfoJavaLibraryTclM</module>
+        <module>../PreLoaderHttpJavaLibraryTclM</module>
+        
+        <module>../TagsBaseJavaLibraryTclM</module>
+        <module>../CustomLoaderJavaLibraryTclM</module>
+        
+        <!--
+        <module>../logic/data/file/FileJ2SEJavaLibraryTclM</module>
+        <module>../logic/data/file/FileJavaLibraryTclM</module>
+        -->
+
+        <module>../data/SQLAllBinaryJavaLibraryTclM</module>
+
+        <!--
+        <module>../licensing/FileLicenseInitInfoJavaLibraryTclM</module>
+        -->
+
+        <module>../DocumentObjectModelJavaLibraryTclM</module>
+
+        <module>../VisualStyleJavaLibraryTclM</module>
+
+        <module>../ConfigurationJavaLibraryTclM</module>
+
+        <module>../VisualTransformBaseJavaLibraryTclM</module>
+
+        <module>../CategoryBaseJavaLibraryTclM</module>
+        <module>../CategoryJavaLibraryTclM</module>
+
+        <module>../UserJavaLibraryTclM</module>
+
+        <module>../PaymentGatewayBaseJavaLibraryTclM</module>
+
+        <module>../data/vo/EntitiesBlisketVOJavaLibraryTclM</module>
+        <module>../PaymentGatewayJavaLibraryTclM</module>
+        <module>../data/vo/EntitiesOrderHistoryVOJavaLibraryTclM</module>
+        <module>../data/vo/EntityPaymentGatewayVOJavaLibraryTclM</module>
+        <module>../data/vo/EntityStoreFrontVOJavaLibraryTclM</module>
+
+        <module>../data/EntitiesBlisketBaseInterfacesJavaLibraryTclM</module>
+        <module>../data/EntitiesBlisketBaseJavaLibraryTclM</module>
+        
+        <module>../data/EntitiesAdvertisementBaseJavaLibraryTclM</module>
+        <module>../data/EntityOrderHistoryJavaLibraryTclM</module>
+        <module>../data/EntityPaymentGatewayJavaLibraryTclM</module>
+        <module>../data/EntityVisualTransformJavaLibraryTclM</module>
+        <module>../data/EntityUserJavaLibraryTclM</module>
+        <module>../data/EntityWorkflowJavaLibraryTclM</module>
+
+        <module>../SMTPConfigurationJavaLibraryTclM</module>
+        <module>../SMTPBaseJavaLibraryTclM</module>
+
+        <module>../VisualTransformJavaLibraryTclM</module>
+
+        <module>../../replace_these_stub_projects/allbinary_src/YourRuntimeEnvironmentJavaLibraryTclM</module>
+        <module>../GatewayJavaLibraryTclM</module>
+        
+        <module>../WorkflowBaseJavaLibraryTclM</module>
+        <module>../WorkflowJavaLibraryTclM</module>
+
+        <module>../IdGeneratorUsingFilesJavaLibraryTclM</module>
+        <module>../BlisketPreVOJavaLibraryTclM</module>
+
+        <!-- 
+        EntitiesOrderHistoryVOJavaLibrary
+        UserJavaLibrary
+        -->
+        
+        <module>../BlisketVOJavaLibraryTclM</module>
+
+        <module>../UserCommerceJavaLibraryTclM</module>
+
+        <module>../CustomizerValidatorsJavaLibraryTclM</module>
+
+        <!-- 
+        AllBinaryCacheForShiftOneJavaLibrary
+        AllBinaryJSECacheJavaLibrary
+        ColorJavaLibrary
+        ImageJavaLibrary
+        -->
+        
+        <module>../logic/data/file/FileMediaJ2SEJavaLibraryTclM</module>
+        <module>../BlisketBaseJavaLibraryTclM</module>
+
+        <module>../logging/LoggingGAEAllTclM</module>
+        <module>../BlisketJavaLibraryTclM</module>
+        
+    </modules>
+
+</project>
+
