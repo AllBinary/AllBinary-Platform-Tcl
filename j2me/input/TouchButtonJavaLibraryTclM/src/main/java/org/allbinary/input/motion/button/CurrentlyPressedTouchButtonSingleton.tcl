@@ -11,75 +11,78 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::CurrentlyPressedTouchButtonSingleton;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::input::motion::button::CurrentlyPressedTouchButtonSingleton'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::CurrentlyPressedTouchButtonSingleton {
+    superclass ::JObject
 }
 
+oo::define ::CurrentlyPressedTouchButtonSingleton {
+    method initFields_CurrentlyPressedTouchButtonSingleton {} {
+        my jset list {}
+        my jset list [::BasicArrayListD new]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::motion::button::CurrentlyPressedTouchButtonSingleton::instance;
+    constructor {} {
+        next
+        my initFields_CurrentlyPressedTouchButtonSingleton
+    }
+    
+
+    method size {} {
+        return [[my jget list] size]
+    }
+    
+
+    method removeAt {index} {
+        return [[my jget list] removeAt $index]
+    }
+    
+
+    method remove {touchButtonInput} {
+        return [[my jget list] remove $touchButtonInput]
+    }
+    
+
+    method get {index} {
+        return [[[my jget list] jget objectArray] get $index]
+    }
+    
+
+    method contains {touchButtonInput} {
+        return [[my jget list] contains $touchButtonInput]
+    }
+    
+
+    method add {touchButtonInput} {
+        [my jget list] add $touchButtonInput
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+namespace eval ::CurrentlyPressedTouchButtonSingleton {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::CurrentlyPressedTouchButtonSingleton new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::CurrentlyPressedTouchButtonSingleton::staticGet_instance]
+    }
 }
 
-
-sub size {
-    my ($self) = @_;
-        return $self->{list}->size();
-}
-
-
-sub removeAt {
-    my ($self, $index) = @_;
-        return $self->{list}->removeAt($index);
-}
-
-
-sub remove {
-    my ($self, $touchButtonInput) = @_;
-        return $self->{list}->remove($touchButtonInput);
-}
-
-
-sub get {
-    my ($self, $index) = @_;
-        return $self->{list}->{objectArray}->[$index];
-}
-
-
-sub contains {
-    my ($self, $touchButtonInput) = @_;
-        return $self->{list}->contains($touchButtonInput);
-}
-
-
-sub add {
-    my ($self, $touchButtonInput) = @_;
-        $self->{list}->add($touchButtonInput);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

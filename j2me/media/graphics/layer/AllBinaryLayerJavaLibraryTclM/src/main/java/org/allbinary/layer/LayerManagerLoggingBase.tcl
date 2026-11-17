@@ -11,48 +11,44 @@
 # Created By: Travis Berthelot
 # 
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-package org::allbinary::layer::LayerManagerLoggingBase;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::LayerManagerLoggingBase {
+    superclass ::JObject
 }
 
+oo::define ::LayerManagerLoggingBase {
+    method initFields_LayerManagerLoggingBase {} {
+        return
+    }
 
-# throws Exception
-sub append {
-    my ($self, $layerInterface) = @_;
+    constructor {} {
+        next
+        my initFields_LayerManagerLoggingBase
+    }
+    
+
+    method append {layerInterface} {
+    }
+    
+
+    method appendAt {layerInterface index} {
+    }
+    
+
+    method remove {layerInterface} {
+    }
+    
+
+    method removeResult {layerManager layerInterface result} {
+    }
+    
+
+    method clear {} {
+    }
 }
 
-
-sub appendAt {
-    my ($self, $layerInterface, $index) = @_;
+namespace eval ::LayerManagerLoggingBase {
 }
 
-
-sub remove {
-    my ($self, $layerInterface) = @_;
-}
-
-
-sub removeResult {
-    my ($self, $layerManager, $layerInterface, $result) = @_;
-}
-
-
-sub clear {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-
-1;
 

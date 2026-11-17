@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-# Java interface
-package org::allbinary::animation::SequentialAnimationInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::AnimationInterface','org::allbinary::animation::SequenceInterface';
-
-
-
-sub getSize {
-    my ($self) = @_;
-    die "abstract method getSize";
+oo::class create ::SequentialAnimationInterface {
+    superclass ::JObject
 }
 
+oo::define ::SequentialAnimationInterface {
+    method initFields_SequentialAnimationInterface {} {
+        return
+    }
+    
 
-sub previousFrame {
-    my ($self) = @_;
-    die "abstract method previousFrame";
+    method getSize {} {
+        error [jexception AbstractMethodError getSize]
+    }
+    
+
+    method previousFrame {} {
+        error [jexception AbstractMethodError previousFrame]
+    }
 }
 
-use org::allbinary::animation::AnimationInterface ();
-use org::allbinary::animation::SequenceInterface ();
+namespace eval ::SequentialAnimationInterface {
+}
 
-1;
 

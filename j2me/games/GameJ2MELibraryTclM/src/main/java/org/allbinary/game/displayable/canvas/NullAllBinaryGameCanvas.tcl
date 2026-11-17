@@ -11,64 +11,71 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::NullAllBinaryGameCanvas;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::displayable::canvas::AllBinaryGameCanvasInterface';
-
-tie our $NULL_ALLBINARY_GAME_CANVAS, 'java::lang::LazyStatic', sub { 'org::allbinary::game::displayable::canvas::NullAllBinaryGameCanvas'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullAllBinaryGameCanvas {
+    superclass ::JObject
 }
 
+oo::define ::NullAllBinaryGameCanvas {
+    method initFields_NullAllBinaryGameCanvas {} {
+        return
+    }
 
-sub getLayerManager {
-    my ($self) = @_;
-        die ("RuntimeException");
+    constructor {} {
+        next
+        my initFields_NullAllBinaryGameCanvas
+    }
+    
+
+    method getLayerManager {} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method addCommand {cmd} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method getHeight {} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method getWidth {} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method removeCommand {cmd} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method setCommandListener {l} {
+        error [jexception RuntimeException {}]
+    }
 }
 
-
-sub addCommand {
-    my ($self, $cmd) = @_;
-        die ("RuntimeException");
+namespace eval ::NullAllBinaryGameCanvas {
+    variable NULL_ALLBINARY_GAME_CANVASValue {}
+    variable NULL_ALLBINARY_GAME_CANVASSet 0
+    proc staticGet_NULL_ALLBINARY_GAME_CANVAS {} {
+        variable NULL_ALLBINARY_GAME_CANVASValue
+        variable NULL_ALLBINARY_GAME_CANVASSet
+        if {!$NULL_ALLBINARY_GAME_CANVASSet} {
+            set NULL_ALLBINARY_GAME_CANVASSet 1
+            set NULL_ALLBINARY_GAME_CANVASValue [::NullAllBinaryGameCanvas new]
+        }
+        return $NULL_ALLBINARY_GAME_CANVASValue
+    }
+    proc staticSet_NULL_ALLBINARY_GAME_CANVAS {value} {
+        variable NULL_ALLBINARY_GAME_CANVASValue
+        variable NULL_ALLBINARY_GAME_CANVASSet
+        set NULL_ALLBINARY_GAME_CANVASSet 1
+        set NULL_ALLBINARY_GAME_CANVASValue $value
+    }
 }
 
-
-sub getHeight {
-    my ($self) = @_;
-        die ("RuntimeException");
-}
-
-
-sub getWidth {
-    my ($self) = @_;
-        die ("RuntimeException");
-}
-
-
-sub removeCommand {
-    my ($self, $cmd) = @_;
-        die ("RuntimeException");
-}
-
-
-sub setCommandListener {
-    my ($self, $l) = @_;
-        die ("RuntimeException");
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::CommandListener ();
-use org::allbinary::game::layer::AllBinaryGameLayerManager ();
-use org::allbinary::game::displayable::canvas::AllBinaryGameCanvasInterface ();
-
-1;
 

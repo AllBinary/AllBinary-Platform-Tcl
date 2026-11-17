@@ -11,44 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.physics.acceleration
 
-package org::allbinary::game::physics::acceleration::GravityUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::physics::acceleration::GravityUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{GAME_GRAVITY_VELOCITY} = 1800;
-    $self->{MAX_GAME_VELOCITY} = 18000;
+oo::class create ::GravityUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::GravityUtil {
+    method initFields_GravityUtil {} {
+        my jset GAME_GRAVITY_VELOCITY 0
+        my jset MAX_GAME_VELOCITY 0
+        my jset GAME_GRAVITY_VELOCITY 1800
+        my jset MAX_GAME_VELOCITY 18000
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_GravityUtil
+    }
+    
+    
+
+    method process {velocityProperties customGravity} {
+        [$velocityProperties getVelocityYBasicDecimalP] addint $customGravity
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::physics::acceleration::GravityUtil::instance;
+namespace eval ::GravityUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GravityUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GravityUtil::staticGet_instance]
+    }
 }
 
-
-sub process {
-    my ($self, $velocityProperties, $customGravity) = @_;
-        $velocityProperties->getVelocityYBasicDecimalP()->addint($customGravity);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::physics::velocity::BasicVelocityProperties ();
-
-1;
 

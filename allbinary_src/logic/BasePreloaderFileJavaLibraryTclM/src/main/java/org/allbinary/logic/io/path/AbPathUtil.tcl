@@ -11,37 +11,47 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io.path
 
-package org::allbinary::logic::io::path::AbPathUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::io::path::AbPathUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NO_ABPATH} = 'org::allbinary::logic::io::path::AbPath'->createAbPath();
+oo::class create ::AbPathUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::AbPathUtil {
+    method initFields_AbPathUtil {} {
+        my jset NO_ABPATH {}
+        my jset NO_ABPATH [::AbPath::createAbPath]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_AbPathUtil
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::io::path::AbPathUtil::instance;
+namespace eval ::AbPathUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AbPathUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AbPathUtil::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::io::path::AbPath ();
-
-1;
 

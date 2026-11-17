@@ -11,45 +11,58 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.identification
 
-package org::allbinary::game::identification::GroupCommonFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{ID} = 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt(10);
-    $self->{GROUP_NAME_LABEL} = "Group Name: ";
-    $self->{ID_LABEL} = " Id: ";
-    $self->{ADDING_LABEL} = "Adding: ";
-    $self->{TO_LABEL} = " to: ";
+oo::class create ::GroupCommonFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::GroupCommonFactory {
+    method initFields_GroupCommonFactory {} {
+        my jset ID {}
+        my jset GROUP_NAME_LABEL {}
+        my jset ID_LABEL {}
+        my jset ADDING_LABEL {}
+        my jset TO_LABEL {}
+        my jset ID [[::SmallIntegerSingletonFactory::getInstance] getAt 10]
+        my jset GROUP_NAME_LABEL "Group Name: "
+        my jset ID_LABEL " Id: "
+        my jset ADDING_LABEL "Adding: "
+        my jset TO_LABEL " to: "
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_GroupCommonFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::identification::GroupCommonFactory::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::identification::GroupCommonFactory::instance = 'org::allbinary::game::identification::GroupCommonFactory'->new();
+namespace eval ::GroupCommonFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::game::identification::GroupCommonFactory::instance;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::GroupCommonFactory::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::GroupCommonFactory::staticSet_instance [::GroupCommonFactory new]
+        }
+        return [::GroupCommonFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-
-1;
 

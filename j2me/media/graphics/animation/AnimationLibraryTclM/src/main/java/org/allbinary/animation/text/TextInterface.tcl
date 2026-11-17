@@ -11,45 +11,44 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.text
 
-# Java interface
-package org::allbinary::animation::text::TextInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub setTextWithOnMeasure {
-    my ($self, $text, $textChangeListener) = @_;
-    die "abstract method setTextWithOnMeasure";
+oo::class create ::TextInterface {
+    superclass ::JObject
 }
 
+oo::define ::TextInterface {
+    method initFields_TextInterface {} {
+        return
+    }
+    
 
-sub getText {
-    my ($self) = @_;
-    die "abstract method getText";
+    method setTextWithOnMeasure {text textChangeListener} {
+        error [jexception AbstractMethodError setTextWithOnMeasure]
+    }
+    
+
+    method getText {} {
+        error [jexception AbstractMethodError getText]
+    }
+    
+
+    method setText {text} {
+        error [jexception AbstractMethodError setText]
+    }
+    
+
+    method getFontHeight {} {
+        error [jexception AbstractMethodError getFontHeight]
+    }
+    
+
+    method getWidth {} {
+        error [jexception AbstractMethodError getWidth]
+    }
 }
 
-
-sub setText {
-    my ($self, $text) = @_;
-    die "abstract method setText";
+namespace eval ::TextInterface {
 }
 
-
-sub getFontHeight {
-    my ($self) = @_;
-    die "abstract method getFontHeight";
-}
-
-
-sub getWidth {
-    my ($self) = @_;
-    die "abstract method getWidth";
-}
-
-
-1;
 

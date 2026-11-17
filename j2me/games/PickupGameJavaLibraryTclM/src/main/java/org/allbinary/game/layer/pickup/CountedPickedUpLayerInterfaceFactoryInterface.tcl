@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
-# Java interface
-package org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::pickup::PickedUpLayerInterfaceFactoryInterface','org::allbinary::layer::LayerInterfaceFactoryInterface';
-
-
-
-sub getId {
-    my ($self) = @_;
-    die "abstract method getId";
+oo::class create ::CountedPickedUpLayerInterfaceFactoryInterface {
+    superclass ::JObject
 }
 
+oo::define ::CountedPickedUpLayerInterfaceFactoryInterface {
+    method initFields_CountedPickedUpLayerInterfaceFactoryInterface {} {
+        return
+    }
+    
 
-sub getTotal {
-    my ($self) = @_;
-    die "abstract method getTotal";
+    method getId {} {
+        error [jexception AbstractMethodError getId]
+    }
+    
+
+    method getTotal {} {
+        error [jexception AbstractMethodError getTotal]
+    }
 }
 
-use org::allbinary::layer::LayerInterfaceFactoryInterface ();
-use org::allbinary::game::layer::pickup::PickedUpLayerInterfaceFactoryInterface ();
+namespace eval ::CountedPickedUpLayerInterfaceFactoryInterface {
+}
 
-1;
 

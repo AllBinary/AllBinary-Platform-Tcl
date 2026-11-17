@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-# Java interface
-package org::allbinary::layer::AllBinaryLayerFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub getInstance {
-    my ($self) = @_;
-    die "abstract method getInstance";
+oo::class create ::AllBinaryLayerFactoryInterface {
+    superclass ::JObject
 }
 
+oo::define ::AllBinaryLayerFactoryInterface {
+    method initFields_AllBinaryLayerFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getInstance {} {
+        error [jexception AbstractMethodError getInstance]
+    }
+}
+
+namespace eval ::AllBinaryLayerFactoryInterface {
+}
+
 

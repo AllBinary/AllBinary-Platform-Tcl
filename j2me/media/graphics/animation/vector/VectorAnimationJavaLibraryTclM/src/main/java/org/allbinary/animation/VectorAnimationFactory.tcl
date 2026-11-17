@@ -11,32 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::VectorAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::VectorAnimationFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::VectorAnimationFactory {
+    superclass ::JObject
 }
 
+oo::define ::VectorAnimationFactory {
+    method initFields_VectorAnimationFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($self, $points, $basicColor) = @_;
-        return 'org::allbinary::animation::VectorAnimation'->new($points, $basicColor, 'org::allbinary::animation::AnimationBehavior'->getInstance());
+    constructor {} {
+        next
+        my initFields_VectorAnimationFactory
+    }
+    
+
+    method getInstance {points basicColor} {
+        return [::VectorAnimation new $points $basicColor [::AnimationBehavior::getInstance]]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::animation::VectorAnimationFactoryInterface ();
-use org::allbinary::animation::VectorAnimation ();
-use org::allbinary::animation::AnimationBehavior ();
+namespace eval ::VectorAnimationFactory {
+}
 
-1;
 

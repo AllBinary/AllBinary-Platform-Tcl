@@ -11,29 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.tracking
 
-package org::allbinary::game::tracking::Tracking;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::Tracking {
+    superclass ::JObject
 }
 
+oo::define ::Tracking {
+    method initFields_Tracking {} {
+        return
+    }
+    
 
-sub paint {
-    my ($self, $graphics) = @_;
+    constructor {} {
+        next
+        my initFields_Tracking
+    }
+    
+
+    method paint {graphics} {
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
+namespace eval ::Tracking {
+}
 
-1;
 

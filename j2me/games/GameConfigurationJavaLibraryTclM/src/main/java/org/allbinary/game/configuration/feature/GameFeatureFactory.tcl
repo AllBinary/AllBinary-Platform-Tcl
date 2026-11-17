@@ -11,54 +11,78 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
-package org::allbinary::game::configuration::feature::GameFeatureFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::feature::GameFeatureFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{SOUND} = 'org::allbinary::game::configuration::feature::GameFeature'->new("Sound");
-    $self->{MUSIC} = 'org::allbinary::game::configuration::feature::GameFeature'->new("Music");
-    $self->{SCREEN_SHAKE} = 'org::allbinary::game::configuration::feature::Feature'->new("Screen Shake");
-    $self->{POST_IMAGE_LOADING_MODIFICATION} = 'org::allbinary::game::configuration::feature::Feature'->new("Post Image Loading Modification (Scaling, Rotation, or Other)");
-    $self->{HEALTH_BARS} = 'org::allbinary::game::configuration::feature::GameFeature'->new("Health Bars");
-    $self->{DAMAGE_FLOATERS} = 'org::allbinary::game::configuration::feature::GameFeature'->new("Damage Floaters");
-    $self->{GAME_INPUT_LAYER_PROCESSOR} = 'org::allbinary::game::configuration::feature::GameFeature'->new("Game Input Layer Processor");
-    $self->{ARTIFICIAL_INTELLEGENCE_PROCESSOR} = 'org::allbinary::game::configuration::feature::GameFeature'->new("Artificial Intelligence Layer Processor");
-    $self->{COLLIDABLE_INTERFACE_LAYER_PROCESSOR} = 'org::allbinary::game::configuration::feature::GameFeature'->new("Collidable Interface Layer Processor");
-    $self->{TICKABLE_LAYER_PROCESSOR} = 'org::allbinary::game::configuration::feature::GameFeature'->new("Tickable Layer Processor");
-    $self->{CHEATING} = 'org::allbinary::game::configuration::feature::GameFeature'->new("Cheating");
-    $self->{DROPPED_ITEMS} = 'org::allbinary::game::configuration::feature::GameFeature'->new("Drops");
-    $self->{DROPPED_ITEMS_FROM_DEATH} = 'org::allbinary::game::configuration::feature::GameFeature'->new("Drops from Dead");
-    $self->{TEST_DESTROYED_LAYER_PROCESSOR} = 'org::allbinary::game::configuration::feature::GameFeature'->new("Destroyed Layer Processor");
-    $self->{COLLISIONS_WITH_SOURCE} = 'org::allbinary::game::configuration::feature::GameFeature'->new("Allow Collisions With Source");
-    $self->{COLLISIONS_FORCED_TWO_DIMENSIONAL} = 'org::allbinary::game::configuration::feature::GameFeature'->new("Collisions Forced Two Dimensional");
+oo::class create ::GameFeatureFactory {
+    superclass ::JObject
 }
 
+oo::define ::GameFeatureFactory {
+    method initFields_GameFeatureFactory {} {
+        my jset SOUND {}
+        my jset MUSIC {}
+        my jset SCREEN_SHAKE {}
+        my jset POST_IMAGE_LOADING_MODIFICATION {}
+        my jset HEALTH_BARS {}
+        my jset DAMAGE_FLOATERS {}
+        my jset GAME_INPUT_LAYER_PROCESSOR {}
+        my jset ARTIFICIAL_INTELLEGENCE_PROCESSOR {}
+        my jset COLLIDABLE_INTERFACE_LAYER_PROCESSOR {}
+        my jset TICKABLE_LAYER_PROCESSOR {}
+        my jset CHEATING {}
+        my jset DROPPED_ITEMS {}
+        my jset DROPPED_ITEMS_FROM_DEATH {}
+        my jset TEST_DESTROYED_LAYER_PROCESSOR {}
+        my jset COLLISIONS_WITH_SOURCE {}
+        my jset COLLISIONS_FORCED_TWO_DIMENSIONAL {}
+        my jset SOUND [::GameFeature new "Sound"]
+        my jset MUSIC [::GameFeature new "Music"]
+        my jset SCREEN_SHAKE [::Feature new "Screen Shake"]
+        my jset POST_IMAGE_LOADING_MODIFICATION [::Feature new "Post Image Loading Modification (Scaling, Rotation, or Other)"]
+        my jset HEALTH_BARS [::GameFeature new "Health Bars"]
+        my jset DAMAGE_FLOATERS [::GameFeature new "Damage Floaters"]
+        my jset GAME_INPUT_LAYER_PROCESSOR [::GameFeature new "Game Input Layer Processor"]
+        my jset ARTIFICIAL_INTELLEGENCE_PROCESSOR [::GameFeature new "Artificial Intelligence Layer Processor"]
+        my jset COLLIDABLE_INTERFACE_LAYER_PROCESSOR [::GameFeature new "Collidable Interface Layer Processor"]
+        my jset TICKABLE_LAYER_PROCESSOR [::GameFeature new "Tickable Layer Processor"]
+        my jset CHEATING [::GameFeature new "Cheating"]
+        my jset DROPPED_ITEMS [::GameFeature new "Drops"]
+        my jset DROPPED_ITEMS_FROM_DEATH [::GameFeature new "Drops from Dead"]
+        my jset TEST_DESTROYED_LAYER_PROCESSOR [::GameFeature new "Destroyed Layer Processor"]
+        my jset COLLISIONS_WITH_SOURCE [::GameFeature new "Allow Collisions With Source"]
+        my jset COLLISIONS_FORCED_TWO_DIMENSIONAL [::GameFeature new "Collisions Forced Two Dimensional"]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::feature::GameFeatureFactory::instance;
+    constructor {} {
+        next
+        my initFields_GameFeatureFactory
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+namespace eval ::GameFeatureFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameFeatureFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameFeatureFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::configuration::feature::GameFeature ();
-use org::allbinary::game::configuration::feature::Feature ();
-
-1;
 

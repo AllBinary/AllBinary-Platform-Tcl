@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable
 
-# Java interface
-package org::allbinary::graphics::displayable::StateControlledInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub setState {
-    my ($self, $state) = @_;
-    die "abstract method setState";
+oo::class create ::StateControlledInterface {
+    superclass ::JObject
 }
 
+oo::define ::StateControlledInterface {
+    method initFields_StateControlledInterface {} {
+        return
+    }
+    
 
-1;
+    method setState {state} {
+        error [jexception AbstractMethodError setState]
+    }
+}
+
+namespace eval ::StateControlledInterface {
+}
+
 

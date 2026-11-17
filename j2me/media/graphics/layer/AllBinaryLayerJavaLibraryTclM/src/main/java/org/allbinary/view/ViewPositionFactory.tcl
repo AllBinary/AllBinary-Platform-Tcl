@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.view
 
-package org::allbinary::view::ViewPositionFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::view::ViewPositionFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ViewPositionFactory {
+    superclass ::JObject
 }
 
+oo::define ::ViewPositionFactory {
+    method initFields_ViewPositionFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($self) = @_;
-        return 'org::allbinary::view::ViewPosition'->getInstanceD();
+    constructor {} {
+        next
+        my initFields_ViewPositionFactory
+    }
+    
+
+    method getInstance {} {
+        return [::ViewPosition::getInstanceD]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::view::ViewPositionFactoryInterface ();
-use org::allbinary::view::ViewPosition ();
+namespace eval ::ViewPositionFactory {
+}
 
-1;
 

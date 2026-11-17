@@ -11,55 +11,62 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.math.vector
 
-package org::allbinary::logic::math::vector::AxisMathVectorUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::math::vector::AxisMathVectorUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{noDecimalTrigTable} = 'org::allbinary::math::NoDecimalTrigTable'->getInstance();
+oo::class create ::AxisMathVectorUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::AxisMathVectorUtil {
+    method initFields_AxisMathVectorUtil {} {
+        my jset noDecimalTrigTable {}
+        my jset noDecimalTrigTable [::NoDecimalTrigTable::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_AxisMathVectorUtil
+    }
+    
+    
+
+    method calculateX {magnitude angle} {
+        return [expr {[expr {$magnitude * [[my jget noDecimalTrigTable] cos $angle]}] / 10}]
+    }
+    
+
+    method calculateY {magnitude angle} {
+        return [expr {[expr {$magnitude * [[my jget noDecimalTrigTable] sin $angle]}] / 10}]
+    }
+    
+
+    method calculateZ {magnitude otherAngle} {
+        return [expr {[expr {$magnitude * [[my jget noDecimalTrigTable] sin $otherAngle]}] / 10}]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::math::vector::AxisMathVectorUtil::instance;
+namespace eval ::AxisMathVectorUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AxisMathVectorUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AxisMathVectorUtil::staticGet_instance]
+    }
 }
 
-
-sub calculateX {
-    my ($self, $magnitude, $angle) = @_;
-        return $magnitude * $self->{noDecimalTrigTable}->cos($angle) / 10;
-}
-
-
-sub calculateY {
-    my ($self, $magnitude, $angle) = @_;
-        return $magnitude * $self->{noDecimalTrigTable}->sin($angle) / 10;
-}
-
-
-sub calculateZ {
-    my ($self, $magnitude, $otherAngle) = @_;
-        return $magnitude * $self->{noDecimalTrigTable}->sin($otherAngle) / 10;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::math::NoDecimalTrigTable ();
-
-1;
 

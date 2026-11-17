@@ -11,51 +11,59 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::NullPlayerGameInputComposite;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::input::PlayerGameInputCompositeInterface';
-
-tie our $NULL_PLAYER_GAME_INPUT_COMPOSITE, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::NullPlayerGameInputComposite'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullPlayerGameInputComposite {
+    superclass ::JObject
 }
 
+oo::define ::NullPlayerGameInputComposite {
+    method initFields_NullPlayerGameInputComposite {} {
+        return
+    }
 
-sub getName {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+    constructor {} {
+        next
+        my initFields_NullPlayerGameInputComposite
+    }
+    
+
+    method getName {} {
+        return [[::StringUtil::getInstance] jget EMPTY_STRING]
+    }
+    
+
+    method processInput {layerManager} {
+    }
+    
+
+    method initInputProcessors {} {
+    }
+    
+
+    method getPlayerGameInput {} {
+        return [::NoPlayerGameInput::getInstance]
+    }
 }
 
-
-# throws Exception
-sub processInput {
-    my ($self, $layerManager) = @_;
+namespace eval ::NullPlayerGameInputComposite {
+    variable NULL_PLAYER_GAME_INPUT_COMPOSITEValue {}
+    variable NULL_PLAYER_GAME_INPUT_COMPOSITESet 0
+    proc staticGet_NULL_PLAYER_GAME_INPUT_COMPOSITE {} {
+        variable NULL_PLAYER_GAME_INPUT_COMPOSITEValue
+        variable NULL_PLAYER_GAME_INPUT_COMPOSITESet
+        if {!$NULL_PLAYER_GAME_INPUT_COMPOSITESet} {
+            set NULL_PLAYER_GAME_INPUT_COMPOSITESet 1
+            set NULL_PLAYER_GAME_INPUT_COMPOSITEValue [::NullPlayerGameInputComposite new]
+        }
+        return $NULL_PLAYER_GAME_INPUT_COMPOSITEValue
+    }
+    proc staticSet_NULL_PLAYER_GAME_INPUT_COMPOSITE {value} {
+        variable NULL_PLAYER_GAME_INPUT_COMPOSITEValue
+        variable NULL_PLAYER_GAME_INPUT_COMPOSITESet
+        set NULL_PLAYER_GAME_INPUT_COMPOSITESet 1
+        set NULL_PLAYER_GAME_INPUT_COMPOSITEValue $value
+    }
 }
 
-
-sub initInputProcessors {
-    my ($self) = @_;
-}
-
-
-sub getPlayerGameInput {
-    my ($self) = @_;
-        return 'org::allbinary::game::input::NoPlayerGameInput'->getInstance();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::game::input::PlayerGameInputCompositeInterface ();
-use org::allbinary::game::input::NoPlayerGameInput ();
-
-1;
 

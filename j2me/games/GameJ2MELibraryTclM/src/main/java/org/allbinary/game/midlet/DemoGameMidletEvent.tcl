@@ -11,50 +11,43 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-package org::allbinary::game::midlet::DemoGameMidletEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{demoGameMidletState} = undef;
+oo::class create ::DemoGameMidletEvent {
+    superclass ::AllBinaryEventObject
 }
 
+oo::define ::DemoGameMidletEvent {
+    method initFields_DemoGameMidletEvent {} {
+        my jset demoGameMidletState {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $anyType, $demoGameMidletState) = @_;
-    my $self = $class->SUPER::new($anyType);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{demoGameMidletState} = $demoGameMidletState;
-    return $self;
+    constructor {anyType demoGameMidletState} {
+        next $anyType
+        my initFields_DemoGameMidletEvent
+        my jset demoGameMidletState $demoGameMidletState
+    }
+    
+
+    method init {anyType} {
+        my setSource $anyType
+    }
+    
+
+    method setDemoGameMidletState {demoGameMidletState} {
+        my jset demoGameMidletState $demoGameMidletState
+    }
+    
+
+    method getDemoGameMidletState {} {
+        return [my jget demoGameMidletState]
+    }
 }
 
-
-sub init {
-    my ($self, $anyType) = @_;
-        $self->setSource($anyType);
+namespace eval ::DemoGameMidletEvent {
 }
 
-
-sub setDemoGameMidletState {
-    my ($self, $demoGameMidletState) = @_;
-        $self->{demoGameMidletState} = $demoGameMidletState;
-}
-
-
-sub getDemoGameMidletState {
-    my ($self) = @_;
-        return $self->{demoGameMidletState};
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-
-1;
 

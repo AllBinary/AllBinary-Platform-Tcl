@@ -11,42 +11,53 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.view
 
-package org::allbinary::view::NullEmulatorView;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::view::EmulatorViewInterface';
-
-tie our $NULL_EMULATOR_VIEW, 'java::lang::LazyStatic', sub { 'org::allbinary::view::NullEmulatorView'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullEmulatorView {
+    superclass ::JObject
 }
 
+oo::define ::NullEmulatorView {
+    method initFields_NullEmulatorView {} {
+        return
+    }
 
-sub setMidlet {
-    my ($self, $midlet) = @_;
+    constructor {} {
+        next
+        my initFields_NullEmulatorView
+    }
+    
+
+    method setMidlet {midlet} {
+    }
+    
+
+    method onEmulatorInitComplete {midletActivity} {
+    }
+    
+
+    method onSetDisplayable {displayable} {
+    }
 }
 
-
-sub onEmulatorInitComplete {
-    my ($self, $midletActivity) = @_;
+namespace eval ::NullEmulatorView {
+    variable NULL_EMULATOR_VIEWValue {}
+    variable NULL_EMULATOR_VIEWSet 0
+    proc staticGet_NULL_EMULATOR_VIEW {} {
+        variable NULL_EMULATOR_VIEWValue
+        variable NULL_EMULATOR_VIEWSet
+        if {!$NULL_EMULATOR_VIEWSet} {
+            set NULL_EMULATOR_VIEWSet 1
+            set NULL_EMULATOR_VIEWValue [::NullEmulatorView new]
+        }
+        return $NULL_EMULATOR_VIEWValue
+    }
+    proc staticSet_NULL_EMULATOR_VIEW {value} {
+        variable NULL_EMULATOR_VIEWValue
+        variable NULL_EMULATOR_VIEWSet
+        set NULL_EMULATOR_VIEWSet 1
+        set NULL_EMULATOR_VIEWValue $value
+    }
 }
 
-
-sub onSetDisplayable {
-    my ($self, $displayable) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Displayable ();
-use javax::microedition::midlet::MIDlet ();
-use org::allbinary::view::EmulatorViewInterface ();
-
-1;
 

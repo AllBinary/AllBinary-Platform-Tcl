@@ -11,26 +11,25 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item.validation
 
-package org::allbinary::graphics::form::item::validation::UsernameValidator;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::item::validation::TextFieldItemValidator';
-
-
-
-sub new {
-    my ($class, $textFieldItem, $min, $max, $allowOnEmpty) = @_;
-    my $self = $class->SUPER::new($textFieldItem, $min, $max, $allowOnEmpty);
-        # super(...) made $self above
-    return $self;
+oo::class create ::UsernameValidator {
+    superclass ::TextFieldItemValidator
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::form::item::ABTextFieldItem ();
-use org::allbinary::graphics::form::item::validation::TextFieldItemValidator ();
+oo::define ::UsernameValidator {
+    method initFields_UsernameValidator {} {
+        return
+    }
+    
 
-1;
+    constructor {textFieldItem min max allowOnEmpty} {
+        next $textFieldItem $min $max $allowOnEmpty
+        my initFields_UsernameValidator
+    }
+}
+
+namespace eval ::UsernameValidator {
+}
+
 

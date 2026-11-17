@@ -11,34 +11,34 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.math.permutations
 
-package org::allbinary::logic::math::permutations::ComparableObject;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ComparableObject {
+    superclass ::JObject
 }
 
+oo::define ::ComparableObject {
+    method initFields_ComparableObject {} {
+        return
+    }
 
-sub compareTo {
-    my ($self, $anyType) = @_;
-        if ('org::allbinary::TsUtil'->getInstance()->hashCode($self) < 'org::allbinary::TsUtil'->getInstance()->hashCode($anyType)) {
-            return -1;
-        } elsif ('org::allbinary::TsUtil'->getInstance()->hashCode($self) > 'org::allbinary::TsUtil'->getInstance()->hashCode($anyType)) {
-            return 1;
+    constructor {} {
+        next
+        my initFields_ComparableObject
+    }
+    
+
+    method compareTo {anyType} {
+        if {[expr {[[::TsUtil::getInstance] hashCode1 [self]] < [[::TsUtil::getInstance] hashCode1 $anyType]}]} {
+            return [expr {-1}]
+        } elseif {[expr {[[::TsUtil::getInstance] hashCode1 [self]] > [[::TsUtil::getInstance] hashCode1 $anyType]}]} {
+            return 1
         }
-        return 0;
+        return 0
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::TsUtil ();
+namespace eval ::ComparableObject {
+}
 
-1;
 

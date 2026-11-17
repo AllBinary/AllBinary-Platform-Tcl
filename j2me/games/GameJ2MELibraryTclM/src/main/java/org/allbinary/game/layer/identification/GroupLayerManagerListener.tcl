@@ -11,226 +11,207 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.identification
 
-package org::allbinary::game::layer::identification::GroupLayerManagerListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::event::LayerManagerEventListener';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::identification::GroupLayerManagerListener'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::GroupLayerManagerListener {
+    superclass ::LayerManagerEventListener
 }
 
+oo::define ::GroupLayerManagerListener {
+    method initFields_GroupLayerManagerListener {} {
+        my jset logUtil {}
+        my jset list {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset list [::BasicArrayListD new]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::layer::identification::GroupLayerManagerListener::SINGLETON;
-}
+    constructor {} {
+        next
+        my initFields_GroupLayerManagerListener
+        [::LayerManagerEventHandler::getInstance] addListener [self]
+    }
+    
 
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        'org::allbinary::layer::event::LayerManagerEventHandler'->getInstance()->addListener($self);
-    return $self;
-}
-
-
-sub clear {
-    my ($self) = @_;
-        my $groupList = undef;
-        my $size = $self->{list}->size();
-        for (my $index = $size - 1; $index >= 0; $index--) {
-            $groupList = $self->{list}->{objectArray}->[$index];
-            $groupList->clear();
+    method clear {} {
+        set groupList {}
+        set size [[my jget list] size]
+        for {set index [jint [expr {$size - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set groupList [[[my jget list] jget objectArray] get $index]
+            $groupList clear
         }
-}
+    }
+    
 
+    method getGroupSizeFromInterface {groupInterfaceCompositeInterface} {
+        set groupInterfaceArray [$groupInterfaceCompositeInterface getGroupInterface]
+        return [my getGroupSize [$groupInterfaceArray get 0]]
+    }
+    
 
-sub getGroupSizeFromInterface {
-    my ($self, $groupInterfaceCompositeInterface) = @_;
-        my $groupInterfaceArray = $groupInterfaceCompositeInterface->getGroupInterface();
-        return $self->getGroupSize($groupInterfaceArray->[0]);
-}
+    method getGroupSize {groupInterface} {
+        set id [jint [$groupInterface getGroupId]]
+        return [my getGroupSizeById $id]
+    }
+    
 
+    method getList {groupInterface} {
+        set id [jint [$groupInterface getGroupId]]
+        return [my getListById $id]
+    }
+    
 
-sub getGroupSize {
-    my ($self, $groupInterface) = @_;
-        my $id = int($groupInterface->getGroupId());
-        return $self->getGroupSizeById($id);
-}
+    method getListById {groupId} {
+        set groupList [[[my jget list] jget objectArray] get $groupId]
+        return $groupList
+    }
+    
 
+    method getGroupSizeById {groupId} {
+        set groupList [[[my jget list] jget objectArray] get $groupId]
+        set size [$groupList size]
+        return $size
+    }
+    
 
-sub getList {
-    my ($self, $groupInterface) = @_;
-        my $id = int($groupInterface->getGroupId());
-        return $self->getListById($id);
-}
-
-
-sub getListById {
-    my ($self, $groupId) = @_;
-        my $groupList = $self->{list}->{objectArray}->[$groupId];
-        return $groupList;
-}
-
-
-sub getGroupSizeById {
-    my ($self, $groupId) = @_;
-        my $groupList = $self->{list}->{objectArray}->[$groupId];
-        my $size = $groupList->size();
-        return $size;
-}
-
-
-sub areAllOtherGroupsEmpty {
-    my ($self, $groupInterface) = @_;
-        my $id = int($groupInterface->getGroupId());
-        my $size = $self->{list}->size();
-        for (my $index = $size - 1; $index >= 0; $index--) {
-            if ($id != $index) {
-                my $groupSize = $self->getGroupSizeById($index);
-                if ($groupSize != 0) {
-                    $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Group Size: ")->appendint($groupSize)->toString(), $self, "areAllOtherGroupsEmpty");
-                    return 0;
+    method areAllOtherGroupsEmpty {groupInterface} {
+        set id [jint [$groupInterface getGroupId]]
+        set size [[my jget list] size]
+        for {set index [jint [expr {$size - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            if {[expr {$id != $index}]} {
+                set groupSize [my getGroupSizeById $index]
+                if {[expr {$groupSize != 0}]} {
+                    [my jget logUtil] putF [[[[::StringMaker new] append "Group Size: "] appendint $groupSize] toString] [self] "areAllOtherGroupsEmpty"
+                    return false
                 }
             }
         }
-        return 1;
-}
+        return true
+    }
+    
 
-
-sub isIdInList {
-    my ($self, $id, $excludeGroupList) = @_;
-        my $size = $excludeGroupList->size();
-        my $groupInterfaceArray = undef;
-        my $groupInterface = undef;
-        my $groupId = 0;
-        for (my $index = $size - 1; $index >= 0; $index--) {
-            $groupInterfaceArray = $excludeGroupList->{objectArray}->[$index];
-            my $size2 = scalar(@{$groupInterfaceArray});
-            for (my $index2 = 0; $index2 < $size2; $index2++) {
-                $groupInterface = $groupInterfaceArray->[$index2];
-                $groupId = int($groupInterface->getGroupId());
-                if ($groupId == $id) {
-                    return 1;
+    method isIdInList {id excludeGroupList} {
+        set size [$excludeGroupList size]
+        set groupInterfaceArray {}
+        set groupInterface {}
+        set groupId 0
+        for {set index [jint [expr {$size - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set groupInterfaceArray [[$excludeGroupList jget objectArray] get $index]
+            set size2 [$groupInterfaceArray length]
+            for {set index2 0} {[expr {$index2 < $size2}]} {jpostincr index2 1} {
+                set groupInterface [$groupInterfaceArray get $index2]
+                set groupId [jint [$groupInterface getGroupId]]
+                if {[expr {$groupId == $id}]} {
+                    return true
                 }
             }
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub areAllOtherGroupsLessThan {
-    my ($self, $excludeGroupList, $maxSize) = @_;
-        my $size = $self->{list}->size();
-        for (my $index = $size - 1; $index >= 0; $index--) {
-            if (!$self->isIdInList($index, $excludeGroupList)) {
-                my $groupSize = $self->getGroupSizeById($index);
-                if ($groupSize >= $maxSize) {
-                    return 0;
+    method areAllOtherGroupsLessThan {excludeGroupList maxSize} {
+        set size [[my jget list] size]
+        for {set index [jint [expr {$size - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            if {[expr {![my isIdInList $index $excludeGroupList]}]} {
+                set groupSize [my getGroupSizeById $index]
+                if {[expr {$groupSize >= $maxSize}]} {
+                    return false
                 }
             }
         }
-        return 1;
-}
+        return true
+    }
+    
 
-
-sub init {
-    my ($self, $total) = @_;
-        while ($self->{list}->size() <= $total + 1) {
-            $self->{list}->add('org::allbinary::util::BasicArrayListD'->new());
+    method init {total} {
+        while {[expr {[[my jget list] size] <= [jint [expr {$total + 1}]]}]} {
+            [my jget list] add [::BasicArrayListD new]
         }
-}
+    }
+    
 
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
 
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
-}
-
-
-# throws Exception
-sub onCreateLayerManagerEvent {
-    my ($self, $layerManagerEvent) = @_;
-        my $layerInterface = $layerManagerEvent->getLayerInterface();
-        my $groupInterfaceArray = $layerInterface->getGroupInterface();
-        my $size = scalar(@{$groupInterfaceArray});
-        my $id = 0;
-        my $groupList = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $id = int($groupInterfaceArray->[$index]->getGroupId());
-            $groupList = $self->{list}->{objectArray}->[$id];
-            if (!defined($groupList)) {
-                $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("id: ")->appendint($id)->toString(), $self, "onCreateLayerManagerEvent");
+    method onCreateLayerManagerEvent {layerManagerEvent} {
+        set layerInterface [$layerManagerEvent getLayerInterface]
+        set groupInterfaceArray [$layerInterface getGroupInterface]
+        set size [$groupInterfaceArray length]
+        set id 0
+        set groupList {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set id [jint [[$groupInterfaceArray get $index] getGroupId]]
+            set groupList [[[my jget list] jget objectArray] get $id]
+            if {[expr {$groupList eq {}}]} {
+                [my jget logUtil] putF [[[[::StringMaker new] append "id: "] appendint $id] toString] [self] "onCreateLayerManagerEvent"
             }
-            if (!$groupList->contains($layerInterface)) {
-                $groupList->add($layerInterface);
+            if {[expr {![$groupList contains $layerInterface]}]} {
+                $groupList add $layerInterface
             } else {
             }
         }
-}
+    }
+    
 
-
-# throws Exception
-sub onDeleteLayerManagerEvent {
-    my ($self, $layerManagerEvent) = @_;
-        my $layerInterface = $layerManagerEvent->getLayerInterface();
-        my $groupInterfaceArray = $layerInterface->getGroupInterface();
-        my $size = scalar(@{$groupInterfaceArray});
-        my $id = 0;
-        my $groupList = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $id = int($groupInterfaceArray->[$index]->getGroupId());
-            $groupList = $self->{list}->{objectArray}->[$id];
-            $groupList->remove($layerInterface);
+    method onDeleteLayerManagerEvent {layerManagerEvent} {
+        set layerInterface [$layerManagerEvent getLayerInterface]
+        set groupInterfaceArray [$layerInterface getGroupInterface]
+        set size [$groupInterfaceArray length]
+        set id 0
+        set groupList {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set id [jint [[$groupInterfaceArray get $index] getGroupId]]
+            set groupList [[[my jget list] jget objectArray] get $id]
+            $groupList remove $layerInterface
         }
-}
+    }
+    
 
-
-sub log {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $GROUP = "Group: ";
-        my $SPACE = 'org::allbinary::string::CommonSeps'->getInstance()->{SPACE};
-        my $TOTAL_LABEL = 'org::allbinary::string::CommonLabels'->getInstance()->{TOTAL_LABEL};
-        my $size = $self->{list}->size();
-        for (my $index = $size - 1; $index >= 0; $index--) {
-            my $groupList = $self->{list}->{objectArray}->[$index];
-            $stringBuffer->append($GROUP);
-            $stringBuffer->appendint($index);
-            $stringBuffer->append($SPACE);
-            $stringBuffer->append($TOTAL_LABEL);
-            $stringBuffer->appendint($groupList->size());
-            $stringBuffer->append($SPACE);
+    method log {} {
+        set stringBuffer [::StringMaker new]
+        set GROUP "Group: "
+        set SPACE [[::CommonSeps::getInstance] jget SPACE]
+        set TOTAL_LABEL [[::CommonLabels::getInstance] jget TOTAL_LABEL]
+        set size [[my jget list] size]
+        for {set index [jint [expr {$size - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set groupList [[[my jget list] jget objectArray] get $index]
+            $stringBuffer append $GROUP
+            $stringBuffer appendint $index
+            $stringBuffer append $SPACE
+            $stringBuffer append $TOTAL_LABEL
+            $stringBuffer appendint [$groupList size]
+            $stringBuffer append $SPACE
         }
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, "log");
+        [my jget logUtil] putF [$stringBuffer toString] [self] "log"
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::identification::Group ();
-use org::allbinary::game::identification::GroupInterfaceCompositeInterface ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::event::LayerManagerEvent ();
-use org::allbinary::layer::event::LayerManagerEventHandler ();
-use org::allbinary::layer::event::LayerManagerEventListener ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
+namespace eval ::GroupLayerManagerListener {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::GroupLayerManagerListener new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::GroupLayerManagerListener::staticGet_SINGLETON]
+    }
+}
 
-1;
 

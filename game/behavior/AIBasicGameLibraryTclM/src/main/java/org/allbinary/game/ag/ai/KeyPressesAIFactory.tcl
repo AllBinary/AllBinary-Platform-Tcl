@@ -11,42 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::KeyPressesAIFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::KeyPressesAIFactory {
+    superclass ::JObject
 }
 
+oo::define ::KeyPressesAIFactory {
+    method initFields_KeyPressesAIFactory {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($self, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-        my $isSingleKeyProcessing = 'org::allbinary::game::configuration::feature::InputFeatureFactory'->getInstance()->isSingleKeyProcessing();
-        if ($isSingleKeyProcessing) {
-            return 'org::allbinary::game::ag::ai::KeyPressesAI'->new($hashtable, $ownerLayerInterface, $gameInput);
+    constructor {} {
+        next
+        my initFields_KeyPressesAIFactory
+    }
+    
+
+    method getInstance {hashtable ownerLayerInterface gameInput} {
+        set isSingleKeyProcessing [[::InputFeatureFactory::getInstance] isSingleKeyProcessing]
+        if {$isSingleKeyProcessing} {
+            return [::KeyPressesAI new $hashtable $ownerLayerInterface $gameInput]
         } else {
-            return 'org::allbinary::game::ag::ai::MultiKeyPressesAI'->new($hashtable, $ownerLayerInterface, $gameInput);
+            return [::MultiKeyPressesAI new $hashtable $ownerLayerInterface $gameInput]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-use org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface ();
-use org::allbinary::game::configuration::feature::InputFeatureFactory ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::ag::ai::MultiKeyPressesAI ();
-use org::allbinary::game::ag::ai::KeyPressesAI ();
+namespace eval ::KeyPressesAIFactory {
+}
 
-1;
 

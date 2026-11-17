@@ -1,32 +1,31 @@
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-package org::allbinary::game::collision::CollisionThreedProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::collision::CollisionProcessor';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::CollisionThreedProcessor {
+    superclass ::CollisionProcessor
 }
 
+oo::define ::CollisionThreedProcessor {
+    method initFields_CollisionThreedProcessor {} {
+        return
+    }
 
-sub isCollision {
-    my ($self, $myLayer, $myLayer2) = @_;
-        if ($myLayer2->getXP() >= $myLayer->getX2() || $myLayer2->getYP() >= $myLayer->getY2() || $myLayer2->getX2() <= $myLayer->getXP() || $myLayer2->getY2() <= $myLayer->getYP() || $myLayer2->getZP() < $myLayer->getZ2() || $myLayer2->getZ2() > $myLayer->getZP()) {
-            return 0;
+    constructor {} {
+        next
+        my initFields_CollisionThreedProcessor
+    }
+    
+
+    method isCollision {myLayer myLayer2} {
+        if {[expr {[expr {[expr {[expr {[expr {[expr {[$myLayer2 getXP] >= [$myLayer getX2]}] || [expr {[$myLayer2 getYP] >= [$myLayer getY2]}]}] || [expr {[$myLayer2 getX2] <= [$myLayer getXP]}]}] || [expr {[$myLayer2 getY2] <= [$myLayer getYP]}]}] || [expr {[$myLayer2 getZP] < [$myLayer getZ2]}]}] || [expr {[$myLayer2 getZ2] > [$myLayer getZP]}]}]} {
+            return false
         } else {
-            return 1;
+            return true
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::game::collision::CollisionProcessor ();
+namespace eval ::CollisionThreedProcessor {
+}
 
-1;
 

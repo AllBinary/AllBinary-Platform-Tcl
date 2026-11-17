@@ -11,29 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.debug
 
-package org::allbinary::debug::DebugFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::DebugFactory {
+    superclass ::JObject
 }
 
+oo::define ::DebugFactory {
+    method initFields_DebugFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return 'org::allbinary::debug::NoDebug'->getInstance();
+    constructor {} {
+        next
+        my initFields_DebugFactory
+    }
+    
 }
 
-use java::lang::Object ();
-use org::allbinary::debug::NoDebug ();
+namespace eval ::DebugFactory {
+    proc getInstance {} {
+        return [::NoDebug::getInstance]
+    }
+}
 
-1;
 

@@ -11,114 +11,125 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ai
 
-package org::allbinary::game::ai::BasicAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::ai::ArtificialIntelligence','org::allbinary::game::input::GameKeyEventSourceInterface';
-
-tie our $AI_VISITOR, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt(2) };
-tie our $ID, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt(1) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{gameKeyEventFactory} = 'org::allbinary::game::input::event::GameKeyEventFactory'->getInstance();
-    $self->{ownerLayerInterface} = undef;
-    $self->{gameInput} = undef;
-    $self->{lastKey} = -1;
+oo::class create ::BasicAI {
+    superclass ::ArtificialIntelligence
 }
 
+oo::define ::BasicAI {
+    method initFields_BasicAI {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset gameKeyEventFactory {}
+        my jset ownerLayerInterface {}
+        my jset gameInput {}
+        my jset lastKey 0
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset gameKeyEventFactory [::GameKeyEventFactory::getInstance]
+        
+        
+        my jset lastKey [expr {-1}]
+        return
+    }
+    
 
-sub new {
-    my ($class, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{ownerLayerInterface} = $ownerLayerInterface;
-        $self->{gameInput} = $gameInput;
-    return $self;
-}
+    constructor {ownerLayerInterface gameInput} {
+        next
+        my initFields_BasicAI
+        my jset ownerLayerInterface $ownerLayerInterface
+        my jset gameInput $gameInput
+    }
+    
 
+    method processAI {allBinaryLayerManager} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
 
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
-
-
-# throws Exception
-sub processKeyAI {
-    my ($self, $key) = @_;
-        if ($key != -1) {
-            $self->{gameInput}->add($self->{gameKeyEventFactory}->getInstanceForKey($self, $key));
+    method processKeyAI {key} {
+        if {[expr {$key != [expr {-1}]}]} {
+            [my jget gameInput] add [[my jget gameKeyEventFactory] getInstanceForKey [self] $key]
         }
+    }
+    
+
+    method setLastKey {lastKey} {
+        my jset lastKey $lastKey
+    }
+    
+
+    method getLastKey {} {
+        return [my jget lastKey]
+    }
+    
+
+    method getOwnerLayerInterface {} {
+        return [my jget ownerLayerInterface]
+    }
+    
+
+    method getGameInput {} {
+        return [my jget gameInput]
+    }
+    
+
+    method getName {} {
+        return [jclassname [self]]
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append [[::CommonSeps::getInstance] jget NEW_LINE]
+        $stringBuffer append [my getName]
+        $stringBuffer append " LastKey: "
+        $stringBuffer append [::CanvasUtil::getKeyName [my getLastKey]]
+        return [$stringBuffer toString]
+    }
+    
+
+    method getSourceId {} {
+        return 1
+    }
 }
 
-
-sub setLastKey {
-    my ($self, $lastKey) = @_;
-        $self->{lastKey} = $lastKey;
+namespace eval ::BasicAI {
+    variable AI_VISITORValue {}
+    variable AI_VISITORSet 0
+    proc staticGet_AI_VISITOR {} {
+        variable AI_VISITORValue
+        variable AI_VISITORSet
+        if {!$AI_VISITORSet} {
+            set AI_VISITORSet 1
+            set AI_VISITORValue [[::SmallIntegerSingletonFactory::getInstance] getAt 2]
+        }
+        return $AI_VISITORValue
+    }
+    proc staticSet_AI_VISITOR {value} {
+        variable AI_VISITORValue
+        variable AI_VISITORSet
+        set AI_VISITORSet 1
+        set AI_VISITORValue $value
+    }
+    variable IDValue {}
+    variable IDSet 0
+    proc staticGet_ID {} {
+        variable IDValue
+        variable IDSet
+        if {!$IDSet} {
+            set IDSet 1
+            set IDValue [[::SmallIntegerSingletonFactory::getInstance] getAt 1]
+        }
+        return $IDValue
+    }
+    proc staticSet_ID {value} {
+        variable IDValue
+        variable IDSet
+        set IDSet 1
+        set IDValue $value
+    }
 }
 
-
-sub getLastKey {
-    my ($self) = @_;
-        return $self->{lastKey};
-}
-
-
-sub getOwnerLayerInterface {
-    my ($self) = @_;
-        return $self->{ownerLayerInterface};
-}
-
-
-sub getGameInput {
-    my ($self) = @_;
-        return $self->{gameInput};
-}
-
-
-sub getName {
-    my ($self) = @_;
-        return ref($self);
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{NEW_LINE});
-        $stringBuffer->append($self->getName());
-        $stringBuffer->append(" LastKey: ");
-        $stringBuffer->append('org::allbinary::game::displayable::canvas::CanvasUtil'->getKeyName($self->getLastKey()));
-        return $stringBuffer->toString();
-}
-
-
-sub getSourceId {
-    my ($self) = @_;
-        return 1;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::ai::ArtificialIntelligence ();
-use org::allbinary::game::displayable::canvas::CanvasUtil ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::game::input::GameKeyEventSourceInterface ();
-use org::allbinary::game::input::event::GameKeyEventFactory ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

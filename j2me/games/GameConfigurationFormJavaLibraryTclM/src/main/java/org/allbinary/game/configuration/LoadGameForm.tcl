@@ -11,123 +11,100 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
-package org::allbinary::game::configuration::LoadGameForm;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::displayable::screen::CommandForm';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{meUtil} = 'org::allbinary::MIDPUtil'->getInstance();
-    $self->{areChoices} = 0;
+oo::class create ::LoadGameForm {
+    superclass ::CommandForm
 }
 
+oo::define ::LoadGameForm {
+    method initFields_LoadGameForm {} {
+        my jset meUtil {}
+        my jset areChoices false
+        my jset meUtil [::MIDPUtil::getInstance]
+        my jset areChoices false
+        return
+    }
+    
 
-sub new {
-    my ($class, $commandListener, $title, $backgrounBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($commandListener, $title, $backgrounBasicColor, $foregroundBasicColor);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{CONSTRUCTOR});
-        $self->update();
-        $self->initCommands($commandListener);
-    return $self;
-}
+    constructor {commandListener title backgrounBasicColor foregroundBasicColor} {
+        next $commandListener $title $backgrounBasicColor $foregroundBasicColor
+        my initFields_LoadGameForm
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+        my update
+        my initCommands $commandListener
+    }
+    
 
+    method initCommands {cmdListener} {
+        set gameCommandsFactory [::GameCommandsFactory::getInstance]
+        my removeAllCommands
+        my addCommand [$gameCommandsFactory jget LOAD_FILE]
+        my addCommand [$gameCommandsFactory jget DELETE_FILE]
+        my addCommand [$gameCommandsFactory jget CLOSE_AND_SHOW_GAME_CANVAS]
+        my setCommandListener $cmdListener
+    }
+    
 
-sub initCommands {
-    my ($self, $cmdListener) = @_;
-        my $gameCommandsFactory = 'org::allbinary::game::commands::GameCommandsFactory'->getInstance();
-        $self->removeAllCommands();
-        $self->addCommand($gameCommandsFactory->{LOAD_FILE});
-        $self->addCommand($gameCommandsFactory->{DELETE_FILE});
-        $self->addCommand($gameCommandsFactory->{CLOSE_AND_SHOW_GAME_CANVAS});
-        $self->setCommandListener($cmdListener);
-}
-
-
-# throws Exception
-sub update {
-    my ($self) = @_;
-        my $list = 'org::allbinary::game::configuration::persistance::GamePersistanceSingleton'->getInstance()->getIds();
-        $self->deleteAll();
-        if ($list->size() > 0) {
-            $self->add($list, "Select A Saved Game", $javax::microedition::lcdui::Choice::EXCLUSIVE);
-            $self->{areChoices} = 1;
+    method update {} {
+        set list [[::GamePersistanceSingleton::getInstance] getIds]
+        my deleteAll
+        if {[expr {[$list size] > 0}]} {
+            my add $list "Select A Saved Game" [::Choice::staticGet_EXCLUSIVE]
+            my jset areChoices true
         } else {
-            $self->{meUtil}->appendItem($self, 'javax::microedition::lcdui::StringItem'->new("No Saved Games", 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $javax::microedition::lcdui::Item::PLAIN));
-            $self->{areChoices} = 0;
+            [my jget meUtil] appendItem [self] [::StringItem new "No Saved Games" [[::StringUtil::getInstance] jget EMPTY_STRING] [::Item::staticGet_PLAIN]]
+            my jset areChoices false
         }
-        $self->SUPER::update();
-}
+        next
+    }
+    
 
-
-sub add {
-    my ($self, $list, $name, $option) = @_;
-        my $choiceGroup = $self->getChoiceGroup($list, $name, $option);
-        if ($list->size() > 0) {
-            $choiceGroup->setSelectedIndex(0, 1);
+    method add {list name option} {
+        set choiceGroup [my getChoiceGroup $list $name $option]
+        if {[expr {[$list size] > 0}]} {
+            $choiceGroup setSelectedIndex 0 true
         }
-        $self->{meUtil}->appendItem($self, $choiceGroup);
-}
+        [my jget meUtil] appendItem [self] $choiceGroup
+    }
+    
 
-
-sub getChoiceGroup {
-    my ($self, $list, $name, $option) = @_;
-        my $METHOD_NAME = "getChoiceGroup";
-        my $ADDING_CHOICE = "Adding Choice: ";
-        my $choiceGroup = 'javax::microedition::lcdui::ChoiceGroup'->new($name, $option, 'org::allbinary::logic::string::StringUtil'->getInstance()->getArrayInstance(), $javax::microedition::lcdui::NullImage::NULL_IMAGE_ARRAY);
-        my $size = $list->size();
-        for (my $index = 0; $index < $size; $index++) {
-            my $anyType = $list->{objectArray}->[$index];
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($ADDING_CHOICE)->append($anyType->toString())->toString(), $self, $METHOD_NAME);
-            $choiceGroup->append($anyType->toString(), $javax::microedition::lcdui::NullImage::NULL_IMAGE);
+    method getChoiceGroup {list name option} {
+        set METHOD_NAME "getChoiceGroup"
+        set ADDING_CHOICE "Adding Choice: "
+        set choiceGroup [::ChoiceGroup new $name $option [[::StringUtil::getInstance] getArrayInstance] [::NullImage::staticGet_NULL_IMAGE_ARRAY]]
+        set size [$list size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set anyType [[$list jget objectArray] get $index]
+            [my jget logUtil] putF [[[[::StringMaker new] append $ADDING_CHOICE] append [$anyType toString]] toString] [self] $METHOD_NAME
+            $choiceGroup append [$anyType toString] [::NullImage::staticGet_NULL_IMAGE]
         }
-        return $choiceGroup;
-}
+        return $choiceGroup
+    }
+    
 
-
-sub getSelectedId {
-    my ($self) = @_;
-        if ($self->{areChoices}) {
-            my $choiceGroup = $self->get(0);
-            return $choiceGroup->getSelectedIndex();
+    method getSelectedId {} {
+        if {[my jget areChoices]} {
+            set choiceGroup [my get 0]
+            return [$choiceGroup getSelectedIndex]
         } else {
-            return -1;
+            return [expr {-1}]
         }
-}
+    }
+    
 
-
-sub getSelectedText {
-    my ($self) = @_;
-        if ($self->{areChoices}) {
-            my $choiceGroup = $self->get(0);
-            my $value = int(("" . ($choiceGroup->getString($choiceGroup->getSelectedIndex()))));
-            return $value;
+    method getSelectedText {} {
+        if {[my jget areChoices]} {
+            set choiceGroup [my get 0]
+            set value [[jstr [$choiceGroup getString [$choiceGroup getSelectedIndex]]] intValue]
+            return $value
         } else {
-            return -1;
+            return [expr {-1}]
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Choice ();
-use javax::microedition::lcdui::ChoiceGroup ();
-use javax::microedition::lcdui::CommandListener ();
-use javax::microedition::lcdui::Item ();
-use javax::microedition::lcdui::NullImage ();
-use javax::microedition::lcdui::StringItem ();
-use org::allbinary::MIDPUtil ();
-use org::allbinary::game::commands::GameCommandsFactory ();
-use org::allbinary::game::configuration::persistance::GamePersistanceSingleton ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::displayable::screen::CommandForm ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::util::BasicArrayList ();
+namespace eval ::LoadGameForm {
+}
 
-1;
 

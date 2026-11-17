@@ -11,109 +11,97 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.string.tokens
 
-package org::allbinary::logic::string::tokens::Tokenizer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{sep} = undef;
-    $self->{endSep} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+oo::class create ::Tokenizer {
+    superclass ::JObject
 }
 
+oo::define ::Tokenizer {
+    method initFields_Tokenizer {} {
+        my jset sep {}
+        my jset endSep {}
+        
+        my jset endSep [[::StringUtil::getInstance] jget EMPTY_STRING]
+        return
+    }
+    
 
-sub new {
-    my ($class, $sep) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        if ('org::allbinary::TsUtil'->getInstance()->compareTo($sep, 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}) == 0) {
-            die ("Sep provided is not valid");
+    constructor {sep} {
+        next
+        my initFields_Tokenizer
+        if {[expr {[[::TsUtil::getInstance] compareTo $sep [[::StringUtil::getInstance] jget EMPTY_STRING]] == 0}]} {
+            error [jexception Exception "Sep provided is not valid"]
         }
-        $self->{sep} = $sep;
-    return $self;
-}
+        my jset sep $sep
+    }
+    
 
+    method setSep {sep} {
+        my jset sep $sep
+    }
+    
 
-sub setSep {
-    my ($self, $sep) = @_;
-        $self->{sep} = $sep;
-}
+    method setEndSep {endSep} {
+        my jset endSep $endSep
+    }
+    
 
-
-sub setEndSep {
-    my ($self, $endSep) = @_;
-        $self->{endSep} = $endSep;
-}
-
-
-sub getInsideSep {
-    my ($self, $string) = @_;
-        my $tokenList = 'org::allbinary::util::BasicArrayListD'->new();
-        my $index = 0;
-        my $size = length($string);
-        while ($index < $size) {
-            $index = index($string, $self->{sep}, $index);
-            if ($index != -1) {
-                my $end = index($string, $self->{endSep}, $index + length($self->{sep}));
-                if ($end != -1) {
-                    $tokenList->add(substr($string, $index + length($self->{sep}), ($end - (length($self->{endSep}) - 1)) - ($index + length($self->{sep}))));
-                    $index = $end + length($self->{endSep});
+    method getInsideSep {string} {
+        set tokenList [::BasicArrayListD new]
+        set index 0
+        set size [string length $string]
+        while {[expr {$index < $size}]} {
+            set index [string first [my jget sep] $string]
+            if {[expr {$index != [expr {-1}]}]} {
+                set end [string first [my jget endSep] $string]
+                if {[expr {$end != [expr {-1}]}]} {
+                    $tokenList add [jsubstring $string [jint [expr {$index + [string length [my jget sep]]}]] [jint [expr {$end - ([jint [expr {[string length [my jget endSep]] - 1}]])}]]]
+                    set index [jint [expr {$end + [string length [my jget endSep]]}]]
                 } else {
                 }
             } else {
-                last;
+                break
             }
         }
-        return $tokenList;
-}
+        return $tokenList
+    }
+    
 
-
-sub getTokensFromString {
-    my ($self, $string, $tokenVector) = @_;
-        my $index = 0;
-        my $end = 0;
-        while ($index < length($string)) {
-            $end = index($string, $self->{sep}, $index);
-            if ($end != -1) {
-                $tokenVector->add(substr($string, $index, ($end) - ($index)));
-                $index = $end + length($self->{sep});
+    method getTokensFromString {string tokenVector} {
+        set index 0
+        set end 0
+        while {[expr {$index < [string length $string]}]} {
+            set end [string first [my jget sep] $string]
+            if {[expr {$end != [expr {-1}]}]} {
+                $tokenVector add [jsubstring $string $index $end]
+                set index [jint [expr {$end + [string length [my jget sep]]}]]
             } else {
-                $tokenVector->add(substr($string, $index, (length($string)) - ($index)));
-                last;
+                $tokenVector add [jsubstring $string $index [string length $string]]
+                break
             }
         }
-        return $tokenVector;
-}
+        return $tokenVector
+    }
+    
 
-
-sub getTokens {
-    my ($self, $stringVector) = @_;
-        my $tokenHashtable = 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable();
-        my $string = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-        my $end = 0;
-        my $size = $stringVector->size();
-        for (my $index = 0; $index < $size; $index++) {
-            $string = $stringVector->{objectArray}->[$index];
-            $end = index($string, $self->{sep});
-            if ($end >= 0) {
-                $tokenHashtable->put(substr($string, 0, ($end) - (0)), substr($string, $end + 1, (length($string)) - ($end + 1)));
+    method getTokens {stringVector} {
+        set tokenHashtable [[::StdUtil::getInstance] createHashtable]
+        set string [[::StringUtil::getInstance] jget EMPTY_STRING]
+        set end 0
+        set size [$stringVector size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set string [[$stringVector jget objectArray] get $index]
+            set end [string first [my jget sep] $string]
+            if {[expr {$end >= 0}]} {
+                $tokenHashtable put [jsubstring $string 0 $end] [jsubstring $string [jint [expr {$end + 1}]] [string length $string]]
             }
         }
-        return $tokenHashtable;
+        return $tokenHashtable
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::TsUtil ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
+namespace eval ::Tokenizer {
+}
 
-1;
 

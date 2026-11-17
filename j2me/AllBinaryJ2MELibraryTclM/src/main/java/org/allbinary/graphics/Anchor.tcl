@@ -11,25 +11,41 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-package org::allbinary::graphics::Anchor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $TOP_LEFT, 'java::lang::LazyStatic', sub { $javax::microedition::lcdui::Graphics::TOP & $javax::microedition::lcdui::Graphics::LEFT };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::Anchor {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Graphics ();
+oo::define ::Anchor {
+    method initFields_Anchor {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_Anchor
+    }
+}
+
+namespace eval ::Anchor {
+    variable TOP_LEFTValue {}
+    variable TOP_LEFTSet 0
+    proc staticGet_TOP_LEFT {} {
+        variable TOP_LEFTValue
+        variable TOP_LEFTSet
+        if {!$TOP_LEFTSet} {
+            set TOP_LEFTSet 1
+            set TOP_LEFTValue [expr {[::Graphics::staticGet_TOP] & [::Graphics::staticGet_LEFT]}]
+        }
+        return $TOP_LEFTValue
+    }
+    proc staticSet_TOP_LEFT {value} {
+        variable TOP_LEFTValue
+        variable TOP_LEFTSet
+        set TOP_LEFTSet 1
+        set TOP_LEFTValue $value
+    }
+}
+
 

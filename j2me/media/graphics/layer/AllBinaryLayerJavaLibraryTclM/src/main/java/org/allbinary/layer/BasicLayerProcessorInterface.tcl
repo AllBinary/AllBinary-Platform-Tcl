@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-# Java interface
-package org::allbinary::layer::BasicLayerProcessorInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub process {
-    my ($self, $allBinaryLayerManager) = @_;
-    die "abstract method process";
+oo::class create ::BasicLayerProcessorInterface {
+    superclass ::JObject
 }
 
+oo::define ::BasicLayerProcessorInterface {
+    method initFields_BasicLayerProcessorInterface {} {
+        return
+    }
+    
 
-1;
+    method process {allBinaryLayerManager} {
+        error [jexception AbstractMethodError process]
+    }
+}
+
+namespace eval ::BasicLayerProcessorInterface {
+}
+
 

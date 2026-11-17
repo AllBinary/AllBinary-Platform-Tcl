@@ -11,34 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.ag.weapon.media.audio
 
-package org::allbinary::ag::weapon::media::audio::ExplosionBasicSound;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::media::audio::CompositeSound';
-
-tie our $soundInterface, 'java::lang::LazyStatic', sub { 'org::allbinary::ag::weapon::media::audio::ExplosionBasicSound'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new("resource:/wav/explosion.wav");
-        # super(...) made $self above
-    return $self;
+oo::class create ::ExplosionBasicSound {
+    superclass ::CompositeSound
 }
 
+oo::define ::ExplosionBasicSound {
+    method initFields_ExplosionBasicSound {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::ag::weapon::media::audio::ExplosionBasicSound::soundInterface;
+    constructor {} {
+        next "resource:/wav/explosion.wav"
+        my initFields_ExplosionBasicSound
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::media::audio::CompositeSound ();
-use org::allbinary::media::audio::Sound ();
+namespace eval ::ExplosionBasicSound {
+    variable soundInterfaceValue {}
+    variable soundInterfaceSet 0
+    proc staticGet_soundInterface {} {
+        variable soundInterfaceValue
+        variable soundInterfaceSet
+        if {!$soundInterfaceSet} {
+            set soundInterfaceSet 1
+            set soundInterfaceValue [::ExplosionBasicSound new]
+        }
+        return $soundInterfaceValue
+    }
+    proc staticSet_soundInterface {value} {
+        variable soundInterfaceValue
+        variable soundInterfaceSet
+        set soundInterfaceSet 1
+        set soundInterfaceValue $value
+    }
+    proc getInstance {} {
+        return [::ExplosionBasicSound::staticGet_soundInterface]
+    }
+}
 
-1;
 

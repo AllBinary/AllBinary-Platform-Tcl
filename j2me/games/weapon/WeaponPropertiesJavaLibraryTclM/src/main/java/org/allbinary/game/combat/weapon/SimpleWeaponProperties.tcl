@@ -11,74 +11,67 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.weapon
 
-package org::allbinary::game::combat::weapon::SimpleWeaponProperties;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{damage} = 0;
-    $self->{dissipation} = 0;
-    $self->{range} = 0;
+oo::class create ::SimpleWeaponProperties {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::SimpleWeaponProperties {
+    method initFields_SimpleWeaponProperties {} {
+        my jset damage 0
+        my jset dissipation 0
+        my jset range 0
+        my jset damage 0
+        my jset dissipation 0
+        my jset range 0
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_SimpleWeaponProperties
+    }
+    
+
+    method set {simpleWeaponProperties} {
+        my setDamage [$simpleWeaponProperties getDamage]
+        my setDissipation [$simpleWeaponProperties getDissipation]
+        my setRange [$simpleWeaponProperties getRange]
+    }
+    
+
+    method setDamage {damage} {
+        my jset damage $damage
+    }
+    
+
+    method getDamage {} {
+        return [my jget damage]
+    }
+    
+
+    method setDissipation {dissipation} {
+        my jset dissipation $dissipation
+    }
+    
+
+    method getDissipation {} {
+        return [my jget dissipation]
+    }
+    
+
+    method getRange {} {
+        return [my jget range]
+    }
+    
+
+    method setRange {range} {
+        my jset range $range
+    }
 }
 
-
-sub set {
-    my ($self, $simpleWeaponProperties) = @_;
-        $self->setDamage($simpleWeaponProperties->getDamage());
-        $self->setDissipation($simpleWeaponProperties->getDissipation());
-        $self->setRange($simpleWeaponProperties->getRange());
+namespace eval ::SimpleWeaponProperties {
 }
 
-
-sub setDamage {
-    my ($self, $damage) = @_;
-        $self->{damage} = $damage;
-}
-
-
-sub getDamage {
-    my ($self) = @_;
-        return $self->{damage};
-}
-
-
-sub setDissipation {
-    my ($self, $dissipation) = @_;
-        $self->{dissipation} = $dissipation;
-}
-
-
-sub getDissipation {
-    my ($self) = @_;
-        return $self->{dissipation};
-}
-
-
-sub getRange {
-    my ($self) = @_;
-        return $self->{range};
-}
-
-
-sub setRange {
-    my ($self, $range) = @_;
-        $self->{range} = $range;
-}
-
-use java::lang::Object ();
-
-1;
 

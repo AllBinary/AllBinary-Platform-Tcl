@@ -11,151 +11,128 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::ImageArrayBaseRotationAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::RotationAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{imageModifierUtil} = 'org::allbinary::media::image::ImageModifierUtil'->getInstanceOrCreate();
-    $self->{originalImageArray} = undef;
-    $self->{imageArray} = $javax::microedition::lcdui::NullImage::NULL_IMAGE_ARRAY;
-    $self->{currentImage} = undef;
-    $self->{totalFrames} = 0;
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
+oo::class create ::ImageArrayBaseRotationAnimation {
+    superclass ::RotationAnimation
 }
 
+oo::define ::ImageArrayBaseRotationAnimation {
+    method initFields_ImageArrayBaseRotationAnimation {} {
+        my jset imageModifierUtil {}
+        my jset originalImageArray {}
+        my jset imageArray {}
+        my jset currentImage {}
+        my jset totalFrames 0
+        my jset anchor 0
+        my jset imageModifierUtil [::ImageModifierUtil::getInstanceOrCreate]
+        
+        my jset imageArray [::NullImage::staticGet_NULL_IMAGE_ARRAY]
+        
+        my jset totalFrames 0
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        return
+    }
+    
 
-sub new {
-    my ($class, $originalImageArray, $angleInfo, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($angleInfo, 'org::allbinary::util::CircularIndexUtil'->createInstance(360 / $angleInfo->getAngleIncrementInfo()->getAngleIncrement()), $animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{originalImageArray} = $originalImageArray;
-        $self->setImageArray($self->{imageModifierUtil}->getImageArray($originalImageArray));
-        $self->{currentImage} = $self->{imageArray}->[$self->{circularIndexUtil}->getIndex()];
-    return $self;
-}
+    constructor {originalImageArray angleInfo animationBehavior} {
+        next $angleInfo [::CircularIndexUtil::createInstance [expr {360 / [[$angleInfo getAngleIncrementInfo] getAngleIncrement]}]] $animationBehavior
+        my initFields_ImageArrayBaseRotationAnimation
+        my jset originalImageArray $originalImageArray
+        my setImageArray [[my jget imageModifierUtil] getImageArray $originalImageArray]
+        my jset currentImage [[my jget imageArray] get [[my jget circularIndexUtil] getIndex]]
+    }
+    
 
+    method getAnimationSize {} {
+        return [my getSize]
+    }
+    
 
-# throws Exception
-sub getAnimationSize {
-    my ($self) = @_;
-        return $self->getSize();
-}
-
-
-sub setAlpha {
-    my ($self, $alpha) = @_;
-        if ($self->{alphaP} != $alpha) {
-            $self->SUPER::setAlpha($alpha);
-            $self->{imageModifierUtil}->reset();
-            my $index = $self->{circularIndexUtil}->getIndex();
-            $self->{imageModifierUtil}->setAlpha($self->{originalImageArray}->[$index], $self->{imageArray}->[$index], $index, $self->{alphaP});
+    method setAlpha {alpha} {
+        if {[expr {[my jget alphaP] != $alpha}]} {
+            next $alpha
+            [my jget imageModifierUtil] reset
+            set index [[my jget circularIndexUtil] getIndex]
+            [my jget imageModifierUtil] setAlpha [[my jget originalImageArray] get $index] [[my jget imageArray] get $index] $index [my jget alphaP]
         }
-}
+    }
+    
 
+    method nextRotation {} {
+        next
+        set index [[my jget circularIndexUtil] getIndex]
+        [my jget imageModifierUtil] setAlpha [[my jget originalImageArray] get $index] [[my jget imageArray] get $index] $index [my jget alphaP]
+        my jset currentImage [[my jget imageArray] get $index]
+    }
+    
 
-sub nextRotation {
-    my ($self) = @_;
-        $self->SUPER::nextRotation();
-        my $index = $self->{circularIndexUtil}->getIndex();
-        $self->{imageModifierUtil}->setAlpha($self->{originalImageArray}->[$index], $self->{imageArray}->[$index], $index, $self->{alphaP});
-        $self->{currentImage} = $self->{imageArray}->[$index];
-}
+    method previousRotation {} {
+        next
+        set index [[my jget circularIndexUtil] getIndex]
+        [my jget imageModifierUtil] setAlpha [[my jget originalImageArray] get $index] [[my jget imageArray] get $index] $index [my jget alphaP]
+        my jset currentImage [[my jget imageArray] get $index]
+    }
+    
 
+    method setFrame {index2} {
+        next $index2
+        set index [[my jget circularIndexUtil] getIndex]
+        [my jget imageModifierUtil] setAlpha [[my jget originalImageArray] get $index] [[my jget imageArray] get $index] $index [my jget alphaP]
+        my jset currentImage [[my jget imageArray] get $index]
+    }
+    
 
-sub previousRotation {
-    my ($self) = @_;
-        $self->SUPER::previousRotation();
-        my $index = $self->{circularIndexUtil}->getIndex();
-        $self->{imageModifierUtil}->setAlpha($self->{originalImageArray}->[$index], $self->{imageArray}->[$index], $index, $self->{alphaP});
-        $self->{currentImage} = $self->{imageArray}->[$index];
-}
+    method setSequence {sequence} {
+    }
+    
 
+    method getSequence {} {
+        return [::PrimitiveIntUtil::getArrayInstance]
+    }
+    
 
-sub setFrame {
-    my ($self, $index2) = @_;
-        $self->SUPER::setFrame($index2);
-        my $index = $self->{circularIndexUtil}->getIndex();
-        $self->{imageModifierUtil}->setAlpha($self->{originalImageArray}->[$index], $self->{imageArray}->[$index], $index, $self->{alphaP});
-        $self->{currentImage} = $self->{imageArray}->[$index];
-}
+    method setImageArray {imageArray} {
+        my jset imageArray $imageArray
+        my jset totalFrames [$imageArray length]
+        my jset circularIndexUtil [::CircularIndexUtil::createInstance [my jget totalFrames]]
+    }
+    
 
+    method paintXY {graphics x y} {
+        $graphics drawImage [my jget currentImage] $x $y [my jget anchor]
+    }
+    
 
-sub setSequence {
-    my ($self, $sequence) = @_;
-}
-
-
-sub getSequence {
-    my ($self) = @_;
-        return 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance();
-}
-
-
-sub setImageArray {
-    my ($self, $imageArray) = @_;
-        $self->{imageArray} = $imageArray;
-        $self->{totalFrames} = scalar(@{$imageArray});
-        $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstance($self->{totalFrames});
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $graphics->drawImage($self->{currentImage}, $x, $y, $self->{anchor});
-}
-
-
-# throws Exception
-sub close {
-    my ($self) = @_;
-        my $disposalUtil = 'org::allbinary::DisposalUtil'->getInstance();
-        my $size2 = scalar(@{$self->{imageArray}});
-        for (my $index = 0; $index < $size2; $index++) {
-            $disposalUtil->disposeImage($self->{imageArray}->[$index]);
+    method close {} {
+        set disposalUtil [::DisposalUtil::getInstance]
+        set size2 [[my jget imageArray] length]
+        for {set index 0} {[expr {$index < $size2}]} {jpostincr index 1} {
+            $disposalUtil disposeImage [[my jget imageArray] get $index]
         }
-        my $size = scalar(@{$self->{originalImageArray}});
-        for (my $index = 0; $index < $size; $index++) {
-            $disposalUtil->disposeImage($self->{originalImageArray}->[$index]);
+        set size [[my jget originalImageArray] length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            $disposalUtil disposeImage [[my jget originalImageArray] get $index]
         }
-        $disposalUtil->disposeImage($self->{currentImage});
+        $disposalUtil disposeImage [my jget currentImage]
+    }
+    
+
+    method finalize {} {
+        set disposalUtil [::DisposalUtil::getInstance]
+        set size2 [[my jget imageArray] length]
+        for {set index 0} {[expr {$index < $size2}]} {jpostincr index 1} {
+            $disposalUtil disposeImage [[my jget imageArray] get $index]
+        }
+        set size [[my jget originalImageArray] length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            $disposalUtil disposeImage [[my jget originalImageArray] get $index]
+        }
+        $disposalUtil disposeImage [my jget currentImage]
+    }
 }
 
-
-# throws Throwable
-sub finalize {
-    my ($self) = @_;
-        my $disposalUtil = 'org::allbinary::DisposalUtil'->getInstance();
-        my $size2 = scalar(@{$self->{imageArray}});
-        for (my $index = 0; $index < $size2; $index++) {
-            $disposalUtil->disposeImage($self->{imageArray}->[$index]);
-        }
-        my $size = scalar(@{$self->{originalImageArray}});
-        for (my $index = 0; $index < $size; $index++) {
-            $disposalUtil->disposeImage($self->{originalImageArray}->[$index]);
-        }
-        $disposalUtil->disposeImage($self->{currentImage});
+namespace eval ::ImageArrayBaseRotationAnimation {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::NullImage ();
-use org::allbinary::DisposalUtil ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::animation::RotationAnimation ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::math::AngleInfo ();
-use org::allbinary::media::image::ImageModifierUtil ();
-use org::allbinary::util::CircularIndexUtil ();
-
-1;
 

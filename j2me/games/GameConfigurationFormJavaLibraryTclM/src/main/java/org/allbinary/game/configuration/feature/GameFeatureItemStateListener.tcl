@@ -11,87 +11,83 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
-package org::allbinary::game::configuration::feature::GameFeatureItemStateListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Scalar::Util ();
-use parent -norequire,'java::lang::Object','javax::microedition::lcdui::ItemStateListener';
-
-tie our $toggleList, 'java::lang::LazyStatic', sub { 'org::allbinary::util::BasicArrayListD'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{gameOptionsForm} = undef;
+oo::class create ::GameFeatureItemStateListener {
+    superclass ::JObject
 }
 
+oo::define ::GameFeatureItemStateListener {
+    method initFields_GameFeatureItemStateListener {} {
+        my jset logUtil {}
+        my jset gameOptionsForm {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameOptionsForm) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{gameOptionsForm} = $gameOptionsForm;
-        my $gameFeatureFactory = 'org::allbinary::game::configuration::feature::GameFeatureFactory'->getInstance();
-        'org::allbinary::game::configuration::feature::GameFeatureItemStateListener'->add($gameFeatureFactory->{ARTIFICIAL_INTELLEGENCE_PROCESSOR});
-        'org::allbinary::game::configuration::feature::GameFeatureItemStateListener'->add($gameFeatureFactory->{COLLIDABLE_INTERFACE_LAYER_PROCESSOR});
-        'org::allbinary::game::configuration::feature::GameFeatureItemStateListener'->add($gameFeatureFactory->{DAMAGE_FLOATERS});
-        'org::allbinary::game::configuration::feature::GameFeatureItemStateListener'->add($gameFeatureFactory->{DROPPED_ITEMS});
-        'org::allbinary::game::configuration::feature::GameFeatureItemStateListener'->add($gameFeatureFactory->{GAME_INPUT_LAYER_PROCESSOR});
-        'org::allbinary::game::configuration::feature::GameFeatureItemStateListener'->add($gameFeatureFactory->{HEALTH_BARS});
-        'org::allbinary::game::configuration::feature::GameFeatureItemStateListener'->add($gameFeatureFactory->{SOUND});
-        'org::allbinary::game::configuration::feature::GameFeatureItemStateListener'->add($gameFeatureFactory->{TICKABLE_LAYER_PROCESSOR});
-    return $self;
-}
+    constructor {gameOptionsForm} {
+        next
+        my initFields_GameFeatureItemStateListener
+        my jset gameOptionsForm $gameOptionsForm
+        set gameFeatureFactory [::GameFeatureFactory::getInstance]
+        ::GameFeatureItemStateListener::add [$gameFeatureFactory jget ARTIFICIAL_INTELLEGENCE_PROCESSOR]
+        ::GameFeatureItemStateListener::add [$gameFeatureFactory jget COLLIDABLE_INTERFACE_LAYER_PROCESSOR]
+        ::GameFeatureItemStateListener::add [$gameFeatureFactory jget DAMAGE_FLOATERS]
+        ::GameFeatureItemStateListener::add [$gameFeatureFactory jget DROPPED_ITEMS]
+        ::GameFeatureItemStateListener::add [$gameFeatureFactory jget GAME_INPUT_LAYER_PROCESSOR]
+        ::GameFeatureItemStateListener::add [$gameFeatureFactory jget HEALTH_BARS]
+        ::GameFeatureItemStateListener::add [$gameFeatureFactory jget SOUND]
+        ::GameFeatureItemStateListener::add [$gameFeatureFactory jget TICKABLE_LAYER_PROCESSOR]
+    }
+    
+    
 
-
-sub add {
-    my ($class, $gameFeature) = @_;
-        if (!$org::allbinary::game::configuration::feature::GameFeatureItemStateListener::toggleList->contains($gameFeature)) {
-            $org::allbinary::game::configuration::feature::GameFeatureItemStateListener::toggleList->add($gameFeature);
-        }
-}
-
-
-sub itemStateChanged {
-    my ($self, $item) = @_;
+    method itemStateChanged {item} {
         try {
-            my $itemLabel = $item->getLabel();
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{ITEM_LABEL})->append($itemLabel)->toString(), $self, "itemStateChanged");
-            if ((Scalar::Util::blessed($item) && $item->isa('org::allbinary::game::configuration::GameConfigurationGauge'))) {
-                'org::allbinary::game::configuration::GameConfigurationUtil'->getInstance()->change($self->{gameOptionsForm}, $item);
-            } elsif ((Scalar::Util::blessed($item) && $item->isa('javax::microedition::lcdui::ChoiceGroup'))) {
-                my $gameFeatureUtil = 'org::allbinary::game::configuration::feature::GameFeatureUtil'->getInstance();
-                if ($gameFeatureUtil->isExclusive($itemLabel)) {
-                    $gameFeatureUtil->updateExclusiveForChoiceGroup($item);
+            set itemLabel [$item getLabel]
+            [my jget logUtil] putF [[[[::StringMaker new] append [[::CommonLabels::getInstance] jget ITEM_LABEL]] append $itemLabel] toString] [self] "itemStateChanged"
+            if {[jinstanceof $item ::GameConfigurationGauge]} {
+                [::GameConfigurationUtil::getInstance] change [my jget gameOptionsForm] $item
+            } elseif {[jinstanceof $item ::ChoiceGroup]} {
+                set gameFeatureUtil [::GameFeatureUtil::getInstance]
+                if {[$gameFeatureUtil isExclusive $itemLabel]} {
+                    $gameFeatureUtil updateExclusiveForChoiceGroup $item
                 } else {
-                    $gameFeatureUtil->updateMultiple($item);
+                    $gameFeatureUtil updateMultiple $item
                 }
             }
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, "itemStateChanged", $e);
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] "itemStateChanged" $e
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::ChoiceGroup ();
-use javax::microedition::lcdui::Item ();
-use javax::microedition::lcdui::ItemStateListener ();
-use org::allbinary::game::configuration::GameConfigurationGauge ();
-use org::allbinary::game::configuration::GameConfigurationUtil ();
-use org::allbinary::game::configuration::GameOptionsForm ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::game::configuration::feature::GameFeatureFactory ();
-use org::allbinary::game::configuration::feature::GameFeatureUtil ();
+namespace eval ::GameFeatureItemStateListener {
+    variable toggleListValue {}
+    variable toggleListSet 0
+    proc staticGet_toggleList {} {
+        variable toggleListValue
+        variable toggleListSet
+        if {!$toggleListSet} {
+            set toggleListSet 1
+            set toggleListValue [::BasicArrayListD new]
+        }
+        return $toggleListValue
+    }
+    proc staticSet_toggleList {value} {
+        variable toggleListValue
+        variable toggleListSet
+        set toggleListSet 1
+        set toggleListValue $value
+    }
+    proc add {gameFeature} {
+        if {[expr {![[::GameFeatureItemStateListener::staticGet_toggleList] contains $gameFeature]}]} {
+            [::GameFeatureItemStateListener::staticGet_toggleList] add $gameFeature
+        }
+    }
+}
 
-1;
 

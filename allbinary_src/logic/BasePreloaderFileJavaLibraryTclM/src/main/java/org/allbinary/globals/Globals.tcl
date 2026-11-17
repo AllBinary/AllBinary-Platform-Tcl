@@ -11,75 +11,78 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.globals
 
-package org::allbinary::globals::Globals;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::globals::Globals'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::Globals {
+    superclass ::JObject
 }
 
+oo::define ::Globals {
+    method initFields_Globals {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::globals::Globals::instance;
-}
+    constructor {} {
+        next
+        my initFields_Globals
+    }
+    
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-sub init {
-    my ($self, $classLoader, $pathString) = @_;
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-        my $appUrlGlobals = 'org::allbinary::globals::AppUrlGlobals'->new();
-        $appUrlGlobals->setWebappPath($pathString);
-        $self->{URLGLOBALS}->init($appUrlGlobals);
-        'org::allbinary::logic::system::loader::WebappClassLoaderInfo'->setLoader($classLoader);
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("Setting Up AllBinary System Configuration Args: ");
-        $stringBuffer->append($pathString);
-        $stringBuffer->append(" ClassLoader: ");
-        $stringBuffer->append(ref($classLoader));
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, $commonStrings->{INIT});
-        my $stringValidationUtil = 'org::allbinary::logic::string::StringValidationUtil'->getInstance();
-        if ($stringValidationUtil->isEmpty($pathString)) {
-            $stringBuffer->delete(0, $stringBuffer->length());
-            $stringBuffer->append("No Path Provided. Using Process Path: ");
-            $stringBuffer->append($pathString);
-            $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
-            $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{EQUALS});
-            $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
-            $stringBuffer->append($self->{URLGLOBALS}->getWebappPath());
-            $self->{logUtil}->putF($stringBuffer->toString(), $self, $commonStrings->{INIT});
+    method init {classLoader pathString} {
+        set commonStrings [::CommonStrings::getInstance]
+        set appUrlGlobals [::AppUrlGlobals new]
+        $appUrlGlobals setWebappPath $pathString
+        [::::staticGet_URLGLOBALS] init $appUrlGlobals
+        ::WebappClassLoaderInfo::setLoader $classLoader
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "Setting Up AllBinary System Configuration Args: "
+        $stringBuffer append $pathString
+        $stringBuffer append " ClassLoader: "
+        $stringBuffer append [jclassname $classLoader]
+        [my jget logUtil] putF [$stringBuffer toString] [self] [$commonStrings jget INIT]
+        set stringValidationUtil [::StringValidationUtil::getInstance]
+        if {[$stringValidationUtil isEmpty $pathString]} {
+            $stringBuffer delete 0 [$stringBuffer length]
+            $stringBuffer append "No Path Provided. Using Process Path: "
+            $stringBuffer append $pathString
+            $stringBuffer append [[::CommonSeps::getInstance] jget SPACE]
+            $stringBuffer append [[::CommonSeps::getInstance] jget EQUALS]
+            $stringBuffer append [[::CommonSeps::getInstance] jget SPACE]
+            $stringBuffer append [[::::staticGet_URLGLOBALS] getWebappPath]
+            [my jget logUtil] putF [$stringBuffer toString] [self] [$commonStrings jget INIT]
         }
-        $stringBuffer->delete(0, $stringBuffer->length());
-        $stringBuffer->append("Webapp Path Set To: ");
-        $stringBuffer->append($self->{URLGLOBALS}->getWebappPath());
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, $commonStrings->{INIT});
+        $stringBuffer delete 0 [$stringBuffer length]
+        $stringBuffer append "Webapp Path Set To: "
+        $stringBuffer append [[::::staticGet_URLGLOBALS] getWebappPath]
+        [my jget logUtil] putF [$stringBuffer toString] [self] [$commonStrings jget INIT]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringValidationUtil ();
-use org::allbinary::logic::system::loader::WebappClassLoaderInfo ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::globals::AppUrlGlobals ();
+namespace eval ::Globals {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::Globals new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::Globals::staticGet_instance]
+    }
+}
 
-1;
 

@@ -11,91 +11,76 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.business.init
 
-package org::allbinary::business::init::LicenseInitInfo;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{id} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{serverList} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::LicenseInitInfo {
+    superclass ::JObject
 }
 
+oo::define ::LicenseInitInfo {
+    method initFields_LicenseInitInfo {} {
+        my jset id {}
+        my jset serverList {}
+        my jset id [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset serverList [::BasicArrayListD new]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_LicenseInitInfo
+    }
+    
 
+    method getLicenseId {} {
+        return [my jget id]
+    }
+    
 
-sub getLicenseId {
-    my ($self) = @_;
-        return $self->{id};
-}
+    method getServer {index} {
+        return [[my jget serverList] get $index]
+    }
+    
 
+    method getNumberOfServers {} {
+        return [[my jget serverList] size]
+    }
+    
 
-sub getServer {
-    my ($self, $index) = @_;
-        return $self->{serverList}->get($index);
-}
+    method setLicenseId {value} {
+        my jset id $value
+    }
+    
 
+    method clearServers {} {
+        [my jget serverList] clear
+    }
+    
 
-sub getNumberOfServers {
-    my ($self) = @_;
-        return $self->{serverList}->size();
-}
+    method setServer {value index} {
+        [my jget serverList] addAt $index $value
+    }
+    
 
+    method addServer {value} {
+        [my jget serverList] add $value
+    }
+    
 
-sub setLicenseId {
-    my ($self, $value) = @_;
-        $self->{id} = $value;
-}
+    method getServerList {} {
+        return [my jget serverList]
+    }
+    
 
-
-sub clearServers {
-    my ($self) = @_;
-        $self->{serverList}->clear();
-}
-
-
-sub setServer {
-    my ($self, $value, $index) = @_;
-        $self->{serverList}->addAt($index, $value);
-}
-
-
-sub addServer {
-    my ($self, $value) = @_;
-        $self->{serverList}->add($value);
-}
-
-
-sub getServerList {
-    my ($self) = @_;
-        return $self->{serverList};
-}
-
-
-sub setServerList {
-    my ($self, $servers) = @_;
-        if ('org::allbinary::debug::DebugFactory'->getInstance() == 'org::allbinary::debug::NoDebug'->getInstance()) {
-            $self->{serverList} = $servers;
+    method setServerList {servers} {
+        if {[expr {[::DebugFactory::getInstance] == [::NoDebug::getInstance]}]} {
+            my jset serverList $servers
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::debug::DebugFactory ();
-use org::allbinary::debug::NoDebug ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
+namespace eval ::LicenseInitInfo {
+}
 
-1;
 

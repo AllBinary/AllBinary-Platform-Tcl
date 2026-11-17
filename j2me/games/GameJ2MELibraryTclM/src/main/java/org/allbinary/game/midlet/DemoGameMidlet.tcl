@@ -11,116 +11,89 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-package org::allbinary::game::midlet::DemoGameMidlet;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::midlet::GameMidlet';
-
-
-
-sub new {
-    my ($class, $clientInformationFactory) = @_;
-    my $self = $class->SUPER::new($clientInformationFactory);
-        # super(...) made $self above
-    return $self;
+oo::class create ::DemoGameMidlet {
+    superclass ::GameMidlet
 }
 
+oo::define ::DemoGameMidlet {
+    method initFields_DemoGameMidlet {} {
+        return
+    }
+    
 
-# throws Exception
-sub isContinue {
-    my ($self) = @_;
-        my $hashtable = $self->getStartStateHashtable();
-        if (defined($hashtable) && $hashtable->size() > 0) {
-            return 1;
+    constructor {clientInformationFactory} {
+        next $clientInformationFactory
+        my initFields_DemoGameMidlet
+    }
+    
+
+    method isContinue {} {
+        set hashtable [my getStartStateHashtable]
+        if {[expr {[expr {$hashtable ne {}}] && [expr {[$hashtable size] > 0}]}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
+    
+
+    method getHighestLevel {} {
+        return 1
+    }
+    
+
+    method createDemoGameCanvasRunnableInterface {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget NOT_IMPLEMENTED] [self] [[my jget commonStrings] jget CREATE]
+        return [::NullGameCanvasRunnable::staticGet_NULL_GAME_CANVAS_RUNNABLE]
+    }
+    
+
+    method createGameCanvasRunnable {allBinaryGameLayerManager} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
+
+    method createGameCanvasRunnableInterface {} {
+        return [my createGameCanvasRunnable [my createGameLayerManager]]
+    }
+    
+
+    method demoSetup {} {
+    }
+    
+
+    method postDemoSetup {} {
+    }
+    
+
+    method setDemo {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] "setDemo"
+        set progressCanvas [::ProgressCanvasFactory::getInstance]
+        $progressCanvas start
+        [::PrimaryThreadPool::getInstance] runTask [::DemoRunnable new [self]]
+    }
+    
+
+    method createGame {} {
+        set CREATE_GAME "createGame"
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] $CREATE_GAME
+        set progressCanvas [::ProgressCanvasFactory::getInstance]
+        $progressCanvas start
+        set hashtable [my getStartStateHashtable]
+        my setStartStateHashtable [[::StdUtil::getInstance] jget NULL_TABLE]
+        [::PrimaryThreadPool::getInstance] runTask [::CreateGameRunnable new [self] $hashtable]
+        [my jget logUtil] putF [[my jget commonStrings] jget END] [self] $CREATE_GAME
+    }
+    
+
+    method isReady {} {
+        return true
+    }
 }
 
-
-sub getHighestLevel {
-    my ($self) = @_;
-        return 1;
+namespace eval ::DemoGameMidlet {
 }
 
-
-# throws Exception
-sub createDemoGameCanvasRunnableInterface {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{NOT_IMPLEMENTED}, $self, $self->{commonStrings}->{CREATE});
-        return $org::allbinary::game::displayable::canvas::NullGameCanvasRunnable::NULL_GAME_CANVAS_RUNNABLE;
-}
-
-
-# throws Exception
-sub createGameCanvasRunnable {
-    my ($self, $allBinaryGameLayerManager) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
-
-
-# throws Exception
-sub createGameCanvasRunnableInterface {
-    my ($self) = @_;
-        return $self->createGameCanvasRunnable($self->createGameLayerManager());
-}
-
-
-sub demoSetup {
-    my ($self) = @_;
-}
-
-
-sub postDemoSetup {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub setDemo {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, "setDemo");
-        my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-        $progressCanvas->start();
-        'org::allbinary::thread::PrimaryThreadPool'->getInstance()->runTask('org::allbinary::game::midlet::DemoRunnable'->new($self));
-}
-
-
-# throws Exception
-sub createGame {
-    my ($self) = @_;
-        my $CREATE_GAME = "createGame";
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $CREATE_GAME);
-        my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-        $progressCanvas->start();
-        my $hashtable = $self->getStartStateHashtable();
-        $self->setStartStateHashtable('org::allbinary::logic::StdUtil'->getInstance()->{NULL_TABLE});
-        'org::allbinary::thread::PrimaryThreadPool'->getInstance()->runTask('org::allbinary::game::midlet::CreateGameRunnable'->new($self, $hashtable));
-        $self->{logUtil}->putF($self->{commonStrings}->{END}, $self, $CREATE_GAME);
-}
-
-
-sub isReady {
-    my ($self) = @_;
-        return 1;
-}
-
-use java::lang::Object ();
-use org::allbinary::game::displayable::canvas::GameCanvasRunnableInterface ();
-use org::allbinary::game::layer::AllBinaryGameLayerManager ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvas ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::logic::system::security::licensing::ClientInformationFactory ();
-use org::allbinary::thread::PrimaryThreadPool ();
-use org::allbinary::game::displayable::canvas::NullGameCanvasRunnable ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::midlet::GameMidlet ();
-use org::allbinary::game::midlet::DemoRunnable ();
-use org::allbinary::game::midlet::CreateGameRunnable ();
-
-1;
 

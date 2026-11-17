@@ -11,45 +11,38 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::NoButtonsBuilder;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::motion::button::BaseTouchInput';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::NoButtonsBuilder {
+    superclass ::BaseTouchInput
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+oo::define ::NoButtonsBuilder {
+    method initFields_NoButtonsBuilder {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_NoButtonsBuilder
+    }
+    
 
-sub getList {
-    my ($self) = @_;
+    method getList {} {
         try {
-            $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{CONSTRUCTOR});
-            my $list = 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance();
-            return $list;
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{GET_LIST}, $e);
-            return 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance();
+            [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+            set list [[::BasicArrayListUtil::getInstance] getImmutableInstance]
+            return $list
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget GET_LIST] $e
+            return [[::BasicArrayListUtil::getInstance] getImmutableInstance]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListUtil ();
-use org::allbinary::input::motion::button::BaseTouchInput ();
+namespace eval ::NoButtonsBuilder {
+}
 
-1;
 

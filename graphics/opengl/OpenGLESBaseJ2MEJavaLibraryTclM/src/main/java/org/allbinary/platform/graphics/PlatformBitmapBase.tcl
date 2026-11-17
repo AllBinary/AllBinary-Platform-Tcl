@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.platform.graphics
 
-package org::allbinary::platform::graphics::PlatformBitmapBase;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::PlatformBitmapBase {
+    superclass ::JObject
 }
 
+oo::define ::PlatformBitmapBase {
+    method initFields_PlatformBitmapBase {} {
+        return
+    }
 
-sub getImage {
-    my ($self) = @_;
-        return $javax::microedition::lcdui::NullImage::NULL_IMAGE;
+    constructor {} {
+        next
+        my initFields_PlatformBitmapBase
+    }
+    
+
+    method getImage {} {
+        return [::NullImage::staticGet_NULL_IMAGE]
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::NullImage ();
+namespace eval ::PlatformBitmapBase {
+}
 
-1;
 

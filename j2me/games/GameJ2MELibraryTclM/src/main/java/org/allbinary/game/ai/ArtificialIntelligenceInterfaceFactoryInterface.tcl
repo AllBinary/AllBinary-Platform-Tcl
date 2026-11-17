@@ -11,26 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ai
 
-# Java interface
-package org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub getInstance {
-    my ($self, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-    die "abstract method getInstance";
+oo::class create ::ArtificialIntelligenceInterfaceFactoryInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::util::ABHashtable ();
+oo::define ::ArtificialIntelligenceInterfaceFactoryInterface {
+    method initFields_ArtificialIntelligenceInterfaceFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getInstance {hashtable ownerLayerInterface gameInput} {
+        error [jexception AbstractMethodError getInstance]
+    }
+}
+
+namespace eval ::ArtificialIntelligenceInterfaceFactoryInterface {
+}
+
 

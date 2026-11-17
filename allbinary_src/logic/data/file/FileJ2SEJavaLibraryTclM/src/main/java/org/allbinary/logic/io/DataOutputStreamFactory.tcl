@@ -11,54 +11,60 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
-package org::allbinary::logic::io::DataOutputStreamFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::io::DataOutputStreamFactory'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::DataOutputStreamFactory {
+    superclass ::JObject
 }
 
+oo::define ::DataOutputStreamFactory {
+    method initFields_DataOutputStreamFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::io::DataOutputStreamFactory::instance;
+    constructor {} {
+        next
+        my initFields_DataOutputStreamFactory
+    }
+    
+    
+
+    method getInstanceForAbFile {file} {
+        set idFileOutputStream [::AbFileOutputStream::createFromAbFile $file]
+        set idOutData [::AbDataOutputStream new $idFileOutputStream]
+        return $idOutData
+    }
+    
+
+    method getInstance {filePath fileName} {
+        set fileStreamFactory [::FileStreamFactory::getInstance]
+        set fileOutputStream [$fileStreamFactory getFileOutputStreamInstance $filePath $fileName]
+        set idOutData [::AbDataOutputStream new $fileOutputStream]
+        return $idOutData
+    }
 }
 
-
-# throws Exception
-sub getInstanceForAbFile {
-    my ($self, $file) = @_;
-        my $idFileOutputStream = 'org::allbinary::logic::io::AbFileOutputStream'->createFromAbFile($file);
-        my $idOutData = 'org::allbinary::logic::io::AbDataOutputStream'->new($idFileOutputStream);
-        return $idOutData;
+namespace eval ::DataOutputStreamFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::DataOutputStreamFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::DataOutputStreamFactory::staticGet_instance]
+    }
 }
 
-
-# throws Exception
-# Java overloaded method: Perl keeps the last definition
-sub getInstance {
-    my ($self, $filePath, $fileName) = @_;
-        my $fileStreamFactory = 'org::allbinary::logic::io::FileStreamFactory'->getInstance();
-        my $fileOutputStream = $fileStreamFactory->getFileOutputStreamInstance($filePath, $fileName);
-        my $idOutData = 'org::allbinary::logic::io::AbDataOutputStream'->new($fileOutputStream);
-        return $idOutData;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::io::file::AbFile ();
-use org::allbinary::logic::io::AbFileOutputStream ();
-use org::allbinary::logic::io::AbDataOutputStream ();
-use org::allbinary::logic::io::FileStreamFactory ();
-
-1;
 

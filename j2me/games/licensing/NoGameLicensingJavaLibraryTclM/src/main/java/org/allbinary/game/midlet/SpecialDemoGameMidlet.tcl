@@ -11,38 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-package org::allbinary::game::midlet::SpecialDemoGameMidlet;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::midlet::DemoGameMidlet';
-
-
-
-sub new {
-    my ($class, $clientInformationFactory, $licenseLoadingType, $demoSetupFactory, $licenseCheckRunnableFactory) = @_;
-    my $self = $class->SUPER::new($clientInformationFactory);
-        # super(...) made $self above
-    return $self;
+oo::class create ::SpecialDemoGameMidlet {
+    superclass ::DemoGameMidlet
 }
 
+oo::define ::SpecialDemoGameMidlet {
+    method initFields_SpecialDemoGameMidlet {} {
+        return
+    }
+    
 
-sub initView {
-    my ($self) = @_;
+    constructor {clientInformationFactory licenseLoadingType demoSetupFactory licenseCheckRunnableFactory} {
+        next $clientInformationFactory
+        my initFields_SpecialDemoGameMidlet
+    }
+    
+
+    method initView {} {
+    }
+    
+
+    method preInit {} {
+        [::LicenseServerInitFileUtil new] init
+    }
 }
 
-
-sub preInit {
-    my ($self) = @_;
-        'org::allbinary::logic::system::security::licensing::LicenseServerInitFileUtil'->new()->init();
+namespace eval ::SpecialDemoGameMidlet {
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::system::security::licensing::ClientInformationFactory ();
-use org::allbinary::logic::system::security::licensing::LicenseServerInitFileUtil ();
-use org::allbinary::game::midlet::DemoGameMidlet ();
-
-1;
 

@@ -11,34 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-package org::allbinary::media::audio::CompositeSound;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::media::audio::Sound';
-
-
-
-sub new {
-    my ($class, $resource) = @_;
-    my $self = $class->SUPER::new($resource);
-        # super(...) made $self above
-    return $self;
+oo::class create ::CompositeSound {
+    superclass ::Sound
 }
 
+oo::define ::CompositeSound {
+    method initFields_CompositeSound {} {
+        return
+    }
+    
 
-# throws Exception
-sub init {
-    my ($self) = @_;
-        $self->setPlayerP('org::allbinary::media::audio::PlayerComposite'->new('org::allbinary::media::audio::AllBinaryMediaManager'->createPlayer($self->getResource()), 570));
+    constructor {resource} {
+        next $resource
+        my initFields_CompositeSound
+    }
+    
+
+    method init {} {
+        my setPlayerP [::PlayerComposite new [::AllBinaryMediaManager::createPlayer [my getResource]] 570]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::media::audio::Sound ();
-use org::allbinary::media::audio::PlayerComposite ();
-use org::allbinary::media::audio::AllBinaryMediaManager ();
+namespace eval ::CompositeSound {
+}
 
-1;
 

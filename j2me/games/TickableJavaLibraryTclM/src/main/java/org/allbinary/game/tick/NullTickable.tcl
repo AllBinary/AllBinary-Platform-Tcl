@@ -11,50 +11,56 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.tick
 
-package org::allbinary::game::tick::NullTickable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::tick::TickableInterface';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::tick::NullTickable'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NAME} = "NulLTickable";
+oo::class create ::NullTickable {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::NullTickable {
+    method initFields_NullTickable {} {
+        my jset NAME {}
+        my jset NAME "NulLTickable"
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_NullTickable
+    }
+    
+    
+
+    method processTick {allBinaryLayerManager} {
+    }
+    
+
+    method getName {} {
+        return [my jget NAME]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::tick::NullTickable::SINGLETON;
+namespace eval ::NullTickable {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::NullTickable new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::NullTickable::staticGet_SINGLETON]
+    }
 }
 
-
-# throws Exception
-sub processTick {
-    my ($self, $allBinaryLayerManager) = @_;
-}
-
-
-sub getName {
-    my ($self) = @_;
-        return $self->{NAME};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::game::tick::TickableInterface ();
-
-1;
 

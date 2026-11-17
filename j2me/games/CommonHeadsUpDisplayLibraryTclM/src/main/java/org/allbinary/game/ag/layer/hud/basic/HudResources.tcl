@@ -11,38 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic
 
-package org::allbinary::game::ag::layer::hud::basic::HudResources;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::ag::layer::hud::basic::HudResources'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{RESOURCE_LIFE} = "/hud_life_10_by_10.png";
-    $self->{RESOURCE_HEALTH} = "/hud_health_10_by_10.png";
+oo::class create ::HudResources {
+    superclass ::JObject
 }
 
+oo::define ::HudResources {
+    method initFields_HudResources {} {
+        my jset RESOURCE_LIFE {}
+        my jset RESOURCE_HEALTH {}
+        my jset RESOURCE_LIFE "/hud_life_10_by_10.png"
+        my jset RESOURCE_HEALTH "/hud_health_10_by_10.png"
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::ag::layer::hud::basic::HudResources::instance;
+    constructor {} {
+        next
+        my initFields_HudResources
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+namespace eval ::HudResources {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::HudResources new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::HudResources::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

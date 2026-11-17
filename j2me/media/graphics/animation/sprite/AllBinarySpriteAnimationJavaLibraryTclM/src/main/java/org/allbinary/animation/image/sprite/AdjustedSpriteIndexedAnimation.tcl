@@ -11,62 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image.sprite
 
-package org::allbinary::animation::image::sprite::AdjustedSpriteIndexedAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::image::sprite::SpriteIndexedAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{dx} = undef;
-    $self->{dy} = undef;
+oo::class create ::AdjustedSpriteIndexedAnimation {
+    superclass ::SpriteIndexedAnimation
 }
 
+oo::define ::AdjustedSpriteIndexedAnimation {
+    method initFields_AdjustedSpriteIndexedAnimation {} {
+        my jset dx 0
+        my jset dy 0
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $sprite, $image, $basicColorArray, $dx, $dy, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($sprite, $image, $basicColorArray, $animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{dx} = $dx;
-        $self->{dy} = $dy;
-    return $self;
+    constructor {sprite image basicColorArray dx dy animationBehavior} {
+        next $sprite $image $basicColorArray $animationBehavior
+        my initFields_AdjustedSpriteIndexedAnimation
+        my jset dx $dx
+        my jset dy $dy
+    }
+    
+
+    method paintFrame {graphics frame x y} {
+        my setFrame $frame
+        [my jget sprite] setPosition [jint [expr {$x + [my jget dx]}]] [jint [expr {$y + [my jget dy]}]]
+        next $graphics
+    }
+    
+
+    method paintXY {g x y} {
+        [my jget sprite] setPosition [jint [expr {$x + [my jget dx]}]] [jint [expr {$y + [my jget dy]}]]
+        next $g
+    }
+    
+
+    method paint {g} {
+        [my jget sprite] setPosition [my jget dx] [my jget dy]
+        next $g
+    }
 }
 
-
-sub paintFrame {
-    my ($self, $graphics, $frame, $x, $y) = @_;
-        $self->setFrame($frame);
-        $self->{sprite}->setPosition($x + $self->{dx}, $y + $self->{dy});
-        $self->SUPER::paint($graphics);
+namespace eval ::AdjustedSpriteIndexedAnimation {
 }
 
-
-sub paintXY {
-    my ($self, $g, $x, $y) = @_;
-        $self->{sprite}->setPosition($x + $self->{dx}, $y + $self->{dy});
-        $self->SUPER::paint($g);
-}
-
-
-sub paint {
-    my ($self, $g) = @_;
-        $self->{sprite}->setPosition($self->{dx}, $self->{dy});
-        $self->SUPER::paint($g);
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::game::Sprite ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorUtil ();
-use org::allbinary::animation::image::sprite::SpriteIndexedAnimation ();
-
-1;
 

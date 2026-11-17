@@ -11,55 +11,62 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::PlatformInputMappingFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::PlatformInputMappingFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{inputToGameKeyMapping} = 'org::allbinary::game::input::mapping::PersistentInputMapping'->getNullInstance();
+oo::class create ::PlatformInputMappingFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::PlatformInputMappingFactory {
+    method initFields_PlatformInputMappingFactory {} {
+        my jset logUtil {}
+        my jset inputToGameKeyMapping {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset inputToGameKeyMapping [::PersistentInputMapping::getNullInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_PlatformInputMappingFactory
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::PlatformInputMappingFactory::instance;
-}
-
-
-sub getPersistentInputMappingInstance {
-    my ($self) = @_;
+    method getPersistentInputMappingInstance {} {
         try {
-            if ($self->{inputToGameKeyMapping} == 'org::allbinary::game::input::mapping::PersistentInputMapping'->getNullInstance()) {
-                $self->{inputToGameKeyMapping} = 'org::allbinary::game::input::LaptopGameInputMapping'->new();
+            if {[expr {[my jget inputToGameKeyMapping] eq [::PersistentInputMapping::getNullInstance]}]} {
+                my jset inputToGameKeyMapping [::LaptopGameInputMapping new]
             }
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{GET_INSTANCE}, $e);
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget GET_INSTANCE] $e
         }
-        return $self->{inputToGameKeyMapping};
+        return [my jget inputToGameKeyMapping]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::mapping::PersistentInputMapping ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::input::LaptopGameInputMapping ();
+namespace eval ::PlatformInputMappingFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::PlatformInputMappingFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::PlatformInputMappingFactory::staticGet_instance]
+    }
+}
 
-1;
 

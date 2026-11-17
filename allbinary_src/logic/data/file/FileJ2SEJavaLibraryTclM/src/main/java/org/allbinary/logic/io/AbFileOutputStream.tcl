@@ -11,56 +11,41 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
-package org::allbinary::logic::io::AbFileOutputStream;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-# throws FileNotFoundException
-sub createFromAbFile {
-    my ($class, $file) = @_;
-        return 'org::allbinary::logic::io::AbFileOutputStream'->new($file->getPath(), 0);
+oo::class create ::AbFileOutputStream {
+    superclass ::FileOutputStream
 }
 
+oo::define ::AbFileOutputStream {
+    method initFields_AbFileOutputStream {} {
+        return
+    }
+    
+    
+    
+    
+    
 
-# throws FileNotFoundException
-sub createFromAbFileAppend {
-    my ($class, $file, $append) = @_;
-        return 'org::allbinary::logic::io::AbFileOutputStream'->new($file->getPath(), $append);
+    constructor {name append} {
+        next $name $append
+        my initFields_AbFileOutputStream
+    }
 }
 
-
-# throws FileNotFoundException
-sub createFromFilePath {
-    my ($class, $name) = @_;
-        return 'org::allbinary::logic::io::AbFileOutputStream'->new($name, 0);
+namespace eval ::AbFileOutputStream {
+    proc createFromAbFile {file} {
+        return [::AbFileOutputStream new [$file getPath] false]
+    }
+    proc createFromAbFileAppend {file append} {
+        return [::AbFileOutputStream new [$file getPath] $append]
+    }
+    proc createFromFilePath {name} {
+        return [::AbFileOutputStream new $name false]
+    }
+    proc createFromFilePathAppend {name append} {
+        return [::AbFileOutputStream new $name $append]
+    }
 }
 
-
-# throws FileNotFoundException
-sub createFromFilePathAppend {
-    my ($class, $name, $append) = @_;
-        return 'org::allbinary::logic::io::AbFileOutputStream'->new($name, $append);
-}
-
-
-sub new {
-    my ($class, $name, $append) = @_;
-    my $self = $class->SUPER::new($name, $append);
-        # super(...) made $self above
-    return $self;
-}
-
-use java::lang::Object ();
-# use java::io::FileNotFoundException ();
-# use java::io::FileOutputStream ();
-use org::allbinary::logic::io::file::AbFile ();
-use org::allbinary::logic::io::file::AbFileNativeUtil ();
-
-1;
 

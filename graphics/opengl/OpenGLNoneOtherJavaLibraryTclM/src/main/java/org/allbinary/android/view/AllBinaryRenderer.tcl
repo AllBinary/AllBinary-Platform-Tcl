@@ -11,40 +11,53 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.android.view
 
-package org::allbinary::android::view::AllBinaryRenderer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::android::view::AllBinaryRenderer'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AllBinaryRenderer {
+    superclass ::JObject
 }
 
+oo::define ::AllBinaryRenderer {
+    method initFields_AllBinaryRenderer {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::android::view::AllBinaryRenderer::instance;
+    constructor {} {
+        next
+        my initFields_AllBinaryRenderer
+    }
+    
+    
+
+    method setRunnable {runnable} {
+    }
+    
+
+    method clearRunnable {} {
+    }
 }
 
-
-sub setRunnable {
-    my ($self, $runnable) = @_;
+namespace eval ::AllBinaryRenderer {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AllBinaryRenderer new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AllBinaryRenderer::staticGet_instance]
+    }
 }
 
-
-sub clearRunnable {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

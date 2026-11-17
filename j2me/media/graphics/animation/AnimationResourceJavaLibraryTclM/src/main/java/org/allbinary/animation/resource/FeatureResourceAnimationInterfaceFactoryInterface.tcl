@@ -11,26 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.resource
 
-# Java interface
-package org::allbinary::animation::resource::FeatureResourceAnimationInterfaceFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::resource::ResourceAnimationInterfaceFactoryInterface','org::allbinary::game::resource::RectangleResourceFactoryInterface','org::allbinary::game::configuration::feature::GameFeatureControlledInterface';
-
-
-
-sub getHashtable {
-    my ($self) = @_;
-    die "abstract method getHashtable";
+oo::class create ::FeatureResourceAnimationInterfaceFactoryInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::game::configuration::feature::GameFeatureControlledInterface ();
-use org::allbinary::game::resource::RectangleResourceFactoryInterface ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::animation::resource::ResourceAnimationInterfaceFactoryInterface ();
+oo::define ::FeatureResourceAnimationInterfaceFactoryInterface {
+    method initFields_FeatureResourceAnimationInterfaceFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getHashtable {} {
+        error [jexception AbstractMethodError getHashtable]
+    }
+}
+
+namespace eval ::FeatureResourceAnimationInterfaceFactoryInterface {
+}
+
 

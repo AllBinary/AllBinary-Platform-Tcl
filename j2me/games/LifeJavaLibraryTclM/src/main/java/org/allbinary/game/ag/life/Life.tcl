@@ -11,130 +11,132 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.life
 
-package org::allbinary::game::ag::life::Life;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::ag::life::LifeInterface';
-
-tie our $NO_LIFE, 'java::lang::LazyStatic', sub { 'org::allbinary::game::ag::life::Life'->createLife() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{lives} = undef;
-    $self->{startLives} = undef;
-    $self->{maxlives} = undef;
+oo::class create ::Life {
+    superclass ::JObject
 }
 
+oo::define ::Life {
+    method initFields_Life {} {
+        my jset lives 0
+        my jset startLives 0
+        my jset maxlives 0
+        
+        
+        
+        return
+    }
+    
+    
 
-sub createLife {
-    my ($class) = @_;
+    constructor {lives maxlives} {
+        next
+        my initFields_Life
+        my jset maxlives $maxlives
+        if {[expr {$lives > [my jget maxlives]}]} {
+            error [jexception Exception "To Many Lives"]
+        }
+        my jset lives $lives
+        my jset startLives $lives
+    }
+    
+
+    method get {} {
+        return [my jget lives]
+    }
+    
+
+    method set {lives} {
+        my jset lives $lives
+    }
+    
+
+    method reset {} {
+        my jset lives [my jget startLives]
+    }
+    
+
+    method add {lives} {
+        if {[expr {![my reachedLimit]}]} {
+            if {[expr {[jint [expr {[my jget lives] + $lives}]] <= [jint [my getMaxlives]]}]} {
+                my jset lives [jshort ([jint [expr {[my jget lives] + $lives}]])]
+            } else {
+                my jset lives [my getMaxlives]
+            }
+        }
+    }
+    
+
+    method isAlive {} {
+        if {[expr {[jint [my jget lives]] <= 0}]} {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+
+    method getMaxlives {} {
+        return [my jget maxlives]
+    }
+    
+
+    method reachedLimit {} {
+        if {[expr {[expr {[my jget lives] > [my jget maxlives]}] || [expr {[jint [my jget lives]] < 0}]}]} {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+
+    method deaths {lives} {
+        if {[expr {![my reachedLimit]}]} {
+            if {[expr {[jint [expr {[my jget lives] - $lives}]] >= 0}]} {
+                my jset lives [jshort ([jint [expr {[my jget lives] - $lives}]])]
+            } else {
+                my jset lives 0
+            }
+        }
+    }
+    
+
+    method getStartLives {} {
+        return [my jget startLives]
+    }
+    
+
+    method setStartLives {startLives} {
+        my jset startLives $startLives
+    }
+}
+
+namespace eval ::Life {
+    variable NO_LIFEValue {}
+    variable NO_LIFESet 0
+    proc staticGet_NO_LIFE {} {
+        variable NO_LIFEValue
+        variable NO_LIFESet
+        if {!$NO_LIFESet} {
+            set NO_LIFESet 1
+            set NO_LIFEValue [::Life::createLife]
+        }
+        return $NO_LIFEValue
+    }
+    proc staticSet_NO_LIFE {value} {
+        variable NO_LIFEValue
+        variable NO_LIFESet
+        set NO_LIFESet 1
+        set NO_LIFEValue $value
+    }
+    proc createLife {} {
         try {
-            return 'org::allbinary::game::ag::life::Life'->new(((int(0) + 32768) % 65536 - 32768), ((int(0) + 32768) % 65536 - 32768));
-        } catch ($e) {
-            die ("RuntimeException");
+            return [::Life new [jshort 0] [jshort 0]]
+        } on error {e} {
+            error [jexception RuntimeException {}]
         }
+    }
 }
 
-
-sub new {
-    my ($class, $lives, $maxlives) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{maxlives} = $maxlives;
-        if ($lives > $self->{maxlives}) {
-            die ("To Many Lives");
-        }
-        $self->{lives} = $lives;
-        $self->{startLives} = $lives;
-    return $self;
-}
-
-
-sub get {
-    my ($self) = @_;
-        return $self->{lives};
-}
-
-
-sub set {
-    my ($self, $lives) = @_;
-        $self->{lives} = $lives;
-}
-
-
-sub reset {
-    my ($self) = @_;
-        $self->{lives} = $self->{startLives};
-}
-
-
-sub add {
-    my ($self, $lives) = @_;
-        if (!$self->reachedLimit()) {
-            if ($self->{lives} + $lives <= $self->getMaxlives()) {
-                $self->{lives} = ((int(($self->{lives} + $lives)) + 32768) % 65536 - 32768);
-            } else {
-                $self->{lives} = $self->getMaxlives();
-            }
-        }
-}
-
-
-sub isAlive {
-    my ($self) = @_;
-        if ($self->{lives} <= 0) {
-            return 0;
-        } else {
-            return 1;
-        }
-}
-
-
-sub getMaxlives {
-    my ($self) = @_;
-        return $self->{maxlives};
-}
-
-
-sub reachedLimit {
-    my ($self) = @_;
-        if ($self->{lives} > $self->{maxlives} || $self->{lives} < 0) {
-            return 1;
-        } else {
-            return 0;
-        }
-}
-
-
-sub deaths {
-    my ($self, $lives) = @_;
-        if (!$self->reachedLimit()) {
-            if ($self->{lives} - $lives >= 0) {
-                $self->{lives} = ((int(($self->{lives} - $lives)) + 32768) % 65536 - 32768);
-            } else {
-                $self->{lives} = 0;
-            }
-        }
-}
-
-
-sub getStartLives {
-    my ($self) = @_;
-        return $self->{startLives};
-}
-
-
-sub setStartLives {
-    my ($self, $startLives) = @_;
-        $self->{startLives} = $startLives;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::ag::life::LifeInterface ();
-
-1;
 

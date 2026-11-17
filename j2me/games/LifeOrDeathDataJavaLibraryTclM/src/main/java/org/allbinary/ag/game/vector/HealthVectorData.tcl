@@ -11,23 +11,41 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.ag.game.vector
 
-package org::allbinary::ag::game::vector::HealthVectorData;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $points = [[[2, 1], [3, 2], [3, 2], [4, 1], [4, 1], [5, 1], [5, 1], [6, 2], [6, 2], [6, 3], [6, 3], [3, 6], [3, 6], [0, 3], [0, 3], [0, 2], [0, 2], [1, 1], [1, 1], [2, 1], [1000, 1000]]];
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::HealthVectorData {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
+oo::define ::HealthVectorData {
+    method initFields_HealthVectorData {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_HealthVectorData
+    }
+}
+
+namespace eval ::HealthVectorData {
+    variable pointsValue {}
+    variable pointsSet 0
+    proc staticGet_points {} {
+        variable pointsValue
+        variable pointsSet
+        if {!$pointsSet} {
+            set pointsSet 1
+            set pointsValue [jarrayfrom [list [jarrayfrom [list [jarrayfrom [list 2 1]] [jarrayfrom [list 3 2]] [jarrayfrom [list 3 2]] [jarrayfrom [list 4 1]] [jarrayfrom [list 4 1]] [jarrayfrom [list 5 1]] [jarrayfrom [list 5 1]] [jarrayfrom [list 6 2]] [jarrayfrom [list 6 2]] [jarrayfrom [list 6 3]] [jarrayfrom [list 6 3]] [jarrayfrom [list 3 6]] [jarrayfrom [list 3 6]] [jarrayfrom [list 0 3]] [jarrayfrom [list 0 3]] [jarrayfrom [list 0 2]] [jarrayfrom [list 0 2]] [jarrayfrom [list 1 1]] [jarrayfrom [list 1 1]] [jarrayfrom [list 2 1]] [jarrayfrom [list 1000 1000]]]]]]
+        }
+        return $pointsValue
+    }
+    proc staticSet_points {value} {
+        variable pointsValue
+        variable pointsSet
+        set pointsSet 1
+        set pointsValue $value
+    }
+}
+
 

@@ -11,72 +11,75 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.drop
 
-package org::allbinary::game::layer::drop::DropLayerFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $DROP_LAYER_FACTORY, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::drop::DropLayerFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{basicArrayListUtil} = 'org::allbinary::util::BasicArrayListUtil'->getInstance();
+oo::class create ::DropLayerFactory {
+    superclass ::JObject
 }
 
+oo::define ::DropLayerFactory {
+    method initFields_DropLayerFactory {} {
+        my jset list {}
+        my jset basicArrayListUtil {}
+        my jset list [::BasicArrayListD new]
+        my jset basicArrayListUtil [::BasicArrayListUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_DropLayerFactory
+    }
+    
+
+    method clear {} {
+        [my jget list] clear
+    }
+    
+    
+
+    method getSize {} {
+        return [[my jget list] size]
+    }
+    
+
+    method getRandomInstance {} {
+        return [[my jget basicArrayListUtil] getRandom [my jget list]]
+    }
+    
+
+    method add {layerInterfaceFactoryInterface} {
+        [my jget list] add $layerInterfaceFactoryInterface
+    }
+    
+
+    method getList {} {
+        return [my jget list]
+    }
 }
 
-
-sub clear {
-    my ($self) = @_;
-        $self->{list}->clear();
+namespace eval ::DropLayerFactory {
+    variable DROP_LAYER_FACTORYValue {}
+    variable DROP_LAYER_FACTORYSet 0
+    proc staticGet_DROP_LAYER_FACTORY {} {
+        variable DROP_LAYER_FACTORYValue
+        variable DROP_LAYER_FACTORYSet
+        if {!$DROP_LAYER_FACTORYSet} {
+            set DROP_LAYER_FACTORYSet 1
+            set DROP_LAYER_FACTORYValue [::DropLayerFactory new]
+        }
+        return $DROP_LAYER_FACTORYValue
+    }
+    proc staticSet_DROP_LAYER_FACTORY {value} {
+        variable DROP_LAYER_FACTORYValue
+        variable DROP_LAYER_FACTORYSet
+        set DROP_LAYER_FACTORYSet 1
+        set DROP_LAYER_FACTORYValue $value
+    }
+    proc getInstance {} {
+        return [::DropLayerFactory::staticGet_DROP_LAYER_FACTORY]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::layer::drop::DropLayerFactory::DROP_LAYER_FACTORY;
-}
-
-
-sub getSize {
-    my ($self) = @_;
-        return $self->{list}->size();
-}
-
-
-sub getRandomInstance {
-    my ($self) = @_;
-        return $self->{basicArrayListUtil}->getRandom($self->{list});
-}
-
-
-sub add {
-    my ($self, $layerInterfaceFactoryInterface) = @_;
-        $self->{list}->add($layerInterfaceFactoryInterface);
-}
-
-
-sub getList {
-    my ($self) = @_;
-        return $self->{list};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::layer::pickup::PickedUpLayerInterfaceFactoryInterface ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::util::BasicArrayListUtil ();
-
-1;
 

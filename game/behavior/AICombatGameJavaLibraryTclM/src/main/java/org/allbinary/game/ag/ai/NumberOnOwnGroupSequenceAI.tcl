@@ -11,52 +11,41 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::NumberOnOwnGroupSequenceAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ag::ai::sequence::SequenceAI';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{numberOnSameTeam} = undef;
+oo::class create ::NumberOnOwnGroupSequenceAI {
+    superclass ::SequenceAI
 }
 
+oo::define ::NumberOnOwnGroupSequenceAI {
+    method initFields_NumberOnOwnGroupSequenceAI {} {
+        my jset numberOnSameTeam {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $numberOnSameTeam, $artificialIntelligenceInterface, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($artificialIntelligenceInterface, $ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{numberOnSameTeam} = $numberOnSameTeam;
-    return $self;
-}
+    constructor {numberOnSameTeam artificialIntelligenceInterface ownerLayerInterface gameInput} {
+        next $artificialIntelligenceInterface $ownerLayerInterface $gameInput
+        my initFields_NumberOnOwnGroupSequenceAI
+        my jset numberOnSameTeam $numberOnSameTeam
+    }
+    
 
-
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        my $layerInterface = $self->getOwnerLayerInterface();
-        my $index = $self->getIndex();
-        if (scalar(@{$self->{numberOnSameTeam}}) > $index) {
-            my $size = 'org::allbinary::game::layer::identification::GroupLayerManagerListener'->getInstance()->getGroupSizeFromInterface($layerInterface);
-            if (int($self->{numberOnSameTeam}->[$index]) > $size) {
-                $self->next();
+    method processAI {allBinaryLayerManager} {
+        set layerInterface [my getOwnerLayerInterface]
+        set index [my getIndex]
+        if {[expr {[[my jget numberOnSameTeam] length] > $index}]} {
+            set size [[::GroupLayerManagerListener::getInstance] getGroupSizeFromInterface $layerInterface]
+            if {[expr {[[[my jget numberOnSameTeam] get $index] intValue] > $size}]} {
+                my next
             }
         }
-        $self->SUPER::processAI($allBinaryLayerManager);
+        next $allBinaryLayerManager
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-use org::allbinary::game::ag::ai::sequence::SequenceAI ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::game::layer::identification::GroupLayerManagerListener ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
+namespace eval ::NumberOnOwnGroupSequenceAI {
+}
 
-1;
 

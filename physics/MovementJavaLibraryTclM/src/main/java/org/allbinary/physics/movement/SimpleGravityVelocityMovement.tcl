@@ -11,43 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
-package org::allbinary::physics::movement::SimpleGravityVelocityMovement;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::physics::movement::BasicConstantVelocityMovement';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gravityUtil} = 'org::allbinary::game::physics::acceleration::GravityUtil'->getInstance();
+oo::class create ::SimpleGravityVelocityMovement {
+    superclass ::BasicConstantVelocityMovement
 }
 
+oo::define ::SimpleGravityVelocityMovement {
+    method initFields_SimpleGravityVelocityMovement {} {
+        my jset gravityUtil {}
+        my jset gravityUtil [::GravityUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $speedBasicDecimal) = @_;
-    my $self = $class->SUPER::new($speedBasicDecimal, 'org::allbinary::game::physics::velocity::VelocityProperties'->new(int($speedBasicDecimal->getUnscaled()), int($speedBasicDecimal->getUnscaled())));
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
+    constructor {speedBasicDecimal} {
+        next $speedBasicDecimal [::VelocityProperties new [jint [$speedBasicDecimal getUnscaled]] [jint [$speedBasicDecimal getUnscaled]]]
+        my initFields_SimpleGravityVelocityMovement
+    }
+    
+
+    method process {layer} {
+        [my jget gravityUtil] process [my getVelocityProperties] [[my jget gravityUtil] jget GAME_GRAVITY_VELOCITY]
+        next $layer
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $layer) = @_;
-        $self->{gravityUtil}->process($self->getVelocityProperties(), $self->{gravityUtil}->{GAME_GRAVITY_VELOCITY});
-        $self->SUPER::process($layer);
+namespace eval ::SimpleGravityVelocityMovement {
 }
 
-use java::lang::Object ();
-use org::allbinary::game::layer::AllBinaryGameLayer ();
-use org::allbinary::game::physics::acceleration::GravityUtil ();
-use org::allbinary::game::physics::velocity::VelocityProperties ();
-use org::allbinary::logic::math::BasicDecimal ();
-use org::allbinary::physics::movement::BasicConstantVelocityMovement ();
-
-1;
 

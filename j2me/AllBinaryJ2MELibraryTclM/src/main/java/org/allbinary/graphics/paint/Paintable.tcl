@@ -11,40 +11,36 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-package org::allbinary::graphics::paint::Paintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::graphics::paint::PaintableInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::Paintable {
+    superclass ::JObject
 }
 
+oo::define ::Paintable {
+    method initFields_Paintable {} {
+        return
+    }
 
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
+    constructor {} {
+        next
+        my initFields_Paintable
+    }
+    
+
+    method setBasicColorP {basicColor} {
+    }
+    
+
+    method paint {graphics} {
+    }
+    
+
+    method paintThreed {graphics} {
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
+namespace eval ::Paintable {
 }
 
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::paint::PaintableInterface ();
-
-1;
 

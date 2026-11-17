@@ -1,14 +1,17 @@
 # Generated Code Do Not Modify
+# package javax.microedition.khronos.opengles
 
-# Java interface
-package javax::microedition::khronos::opengles::GL10;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'javax::microedition::khronos::opengles::GL';
+oo::class create ::GL10 {
+    superclass ::JObject
+}
 
+oo::define ::GL10 {
+    method initFields_GL10 {} {
+        return
+    }
+}
 
+namespace eval ::GL10 {
+}
 
-1;
 

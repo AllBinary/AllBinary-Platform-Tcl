@@ -11,63 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion
 
-package org::allbinary::input::motion::OnlyTouchButtonRecognizer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::motion::MotionRecognizer';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{touchButtonRecognizer} = undef;
-    $self->{touchButtonProcessing} = 0;
+oo::class create ::OnlyTouchButtonRecognizer {
+    superclass ::MotionRecognizer
 }
 
+oo::define ::OnlyTouchButtonRecognizer {
+    method initFields_OnlyTouchButtonRecognizer {} {
+        my jset touchButtonRecognizer {}
+        my jset touchButtonProcessing false
+        
+        my jset touchButtonProcessing false
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{touchButtonRecognizer} = 'org::allbinary::input::motion::button::TouchButtonRecognizer'->new();
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_OnlyTouchButtonRecognizer
+        my jset touchButtonRecognizer [::TouchButtonRecognizer new]
+    }
+    
 
-
-# throws Exception
-sub processStartMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-        if ($self->{touchButtonRecognizer}->pressTouchButtonInput($x, $y, $deviceId)) {
-            $self->{touchButtonProcessing} = 1;
+    method processStartMotionEvent {x y deviceId modifiers} {
+        if {[[my jget touchButtonRecognizer] pressTouchButtonInput $x $y $deviceId]} {
+            my jset touchButtonProcessing true
         }
+    }
+    
+
+    method processEndMotionEvent {x y deviceId modifiers} {
+        if {[my jget touchButtonProcessing]} {
+            my jset touchButtonProcessing false
+        }
+        if {[[my jget touchButtonRecognizer] releaseTouchButtonInput $x $y $deviceId]} {
+            return
+        }
+    }
+    
+
+    method processDraggedMotionEvent {x y deviceId modifiers} {
+        if {[my jget touchButtonProcessing]} {
+            [my jget touchButtonRecognizer] pressTouchButtonInput $x $y $deviceId
+        }
+    }
 }
 
-
-# throws Exception
-sub processEndMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-        if ($self->{touchButtonProcessing}) {
-            $self->{touchButtonProcessing} = 0;
-        }
-        if ($self->{touchButtonRecognizer}->releaseTouchButtonInput($x, $y, $deviceId)) {
-            return;
-        }
+namespace eval ::OnlyTouchButtonRecognizer {
 }
 
-
-# throws Exception
-sub processDraggedMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-        if ($self->{touchButtonProcessing}) {
-            $self->{touchButtonRecognizer}->pressTouchButtonInput($x, $y, $deviceId);
-        }
-}
-
-use java::lang::Object ();
-use org::allbinary::input::motion::button::TouchButtonRecognizer ();
-use org::allbinary::input::motion::MotionRecognizer ();
-
-1;
 

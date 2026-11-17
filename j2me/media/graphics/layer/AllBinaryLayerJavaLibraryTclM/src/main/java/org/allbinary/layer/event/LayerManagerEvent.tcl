@@ -11,60 +11,51 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer.event
 
-package org::allbinary::layer::event::LayerManagerEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{layerInterface} = $org::allbinary::layer::AllBinaryLayer::NULL_ALLBINARY_LAYER;
-    $self->{crud} = undef;
+oo::class create ::LayerManagerEvent {
+    superclass ::AllBinaryEventObject
 }
 
+oo::define ::LayerManagerEvent {
+    method initFields_LayerManagerEvent {} {
+        my jset layerInterface {}
+        my jset crud {}
+        my jset layerInterface [::AllBinaryLayer::staticGet_NULL_ALLBINARY_LAYER]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $layerManager, $crud) = @_;
-    my $self = $class->SUPER::new($layerManager);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{crud} = $crud;
-    return $self;
+    constructor {layerManager crud} {
+        next $layerManager
+        my initFields_LayerManagerEvent
+        my jset crud $crud
+    }
+    
+
+    method getLayerInterface {} {
+        return [my jget layerInterface]
+    }
+    
+
+    method setLayerInterface {layerInterface} {
+        my jset layerInterface $layerInterface
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "LayerManagerEvent: \n"
+        $stringBuffer append "LayerInterface: "
+        $stringBuffer append [[my getLayerInterface] toString]
+        $stringBuffer append "\nCRUD: "
+        $stringBuffer append [my jget crud]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub getLayerInterface {
-    my ($self) = @_;
-        return $self->{layerInterface};
+namespace eval ::LayerManagerEvent {
 }
 
-
-sub setLayerInterface {
-    my ($self, $layerInterface) = @_;
-        $self->{layerInterface} = $layerInterface;
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("LayerManagerEvent: \n");
-        $stringBuffer->append("LayerInterface: ");
-        $stringBuffer->append($self->getLayerInterface()->toString());
-        $stringBuffer->append("\nCRUD: ");
-        $stringBuffer->append($self->{crud});
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::LayerManager ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-
-1;
 

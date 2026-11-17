@@ -11,62 +11,55 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game
 
-package org::allbinary::game::Intermission;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::IntermissionInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{enabled} = 0;
-    $self->{timeElapsedHelper} = 'org::allbinary::time::TimeDelayHelper'->new(0);
-    $self->{intermissionEnableListener} = 'org::allbinary::game::NullIntermissionEnableListener'->getInstance();
+oo::class create ::Intermission {
+    superclass ::JObject
 }
 
+oo::define ::Intermission {
+    method initFields_Intermission {} {
+        my jset enabled false
+        my jset timeElapsedHelper {}
+        my jset intermissionEnableListener {}
+        my jset enabled false
+        my jset timeElapsedHelper [::TimeDelayHelper new 0]
+        my jset intermissionEnableListener [::NullIntermissionEnableListener::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_Intermission
+    }
+    
 
+    method setListener {enableListener} {
+        my jset intermissionEnableListener $enableListener
+    }
+    
 
-sub setListener {
-    my ($self, $enableListener) = @_;
-        $self->{intermissionEnableListener} = $enableListener;
-}
+    method getTimeDelayHelper {} {
+        return [my jget timeElapsedHelper]
+    }
+    
 
-
-sub getTimeDelayHelper {
-    my ($self) = @_;
-        return $self->{timeElapsedHelper};
-}
-
-
-sub setEnabled {
-    my ($self, $enabled) = @_;
-        $self->{enabled} = $enabled;
-        if ($self->isEnabled()) {
-            $self->getTimeDelayHelper()->setStartTimeTNT();
+    method setEnabled {enabled} {
+        my jset enabled $enabled
+        if {[my isEnabled]} {
+            [my getTimeDelayHelper] setStartTimeTNT
         }
-        $self->{intermissionEnableListener}->notifyIntermission($enabled);
+        [my jget intermissionEnableListener] notifyIntermission $enabled
+    }
+    
+
+    method isEnabled {} {
+        return [my jget enabled]
+    }
 }
 
-
-sub isEnabled {
-    my ($self) = @_;
-        return $self->{enabled};
+namespace eval ::Intermission {
 }
 
-use java::lang::Object ();
-use org::allbinary::time::TimeDelayHelper ();
-use org::allbinary::game::IntermissionInterface ();
-use org::allbinary::game::NullIntermissionEnableListener ();
-
-1;
 

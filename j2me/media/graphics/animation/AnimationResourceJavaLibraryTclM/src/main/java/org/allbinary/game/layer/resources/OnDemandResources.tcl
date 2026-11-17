@@ -11,53 +11,57 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.resources
 
-package org::allbinary::game::layer::resources::OnDemandResources;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_ON_DEMAND_RESOURCES, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::resources::OnDemandResources'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::OnDemandResources {
+    superclass ::JObject
 }
 
+oo::define ::OnDemandResources {
+    method initFields_OnDemandResources {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_OnDemandResources
+    }
+    
+
+    method waitFor {} {
+    }
+    
+
+    method init {} {
+    }
+    
+
+    method initAt {imageCache resourceAnimationInterfaceFactoryInterfaceFactory portion loadingString index} {
+        return 0
+    }
 }
 
-
-# throws Exception
-sub waitFor {
-    my ($self) = @_;
+namespace eval ::OnDemandResources {
+    variable NULL_ON_DEMAND_RESOURCESValue {}
+    variable NULL_ON_DEMAND_RESOURCESSet 0
+    proc staticGet_NULL_ON_DEMAND_RESOURCES {} {
+        variable NULL_ON_DEMAND_RESOURCESValue
+        variable NULL_ON_DEMAND_RESOURCESSet
+        if {!$NULL_ON_DEMAND_RESOURCESSet} {
+            set NULL_ON_DEMAND_RESOURCESSet 1
+            set NULL_ON_DEMAND_RESOURCESValue [::OnDemandResources new]
+        }
+        return $NULL_ON_DEMAND_RESOURCESValue
+    }
+    proc staticSet_NULL_ON_DEMAND_RESOURCES {value} {
+        variable NULL_ON_DEMAND_RESOURCESValue
+        variable NULL_ON_DEMAND_RESOURCESSet
+        set NULL_ON_DEMAND_RESOURCESSet 1
+        set NULL_ON_DEMAND_RESOURCESValue $value
+    }
 }
 
-
-# throws Exception
-sub init {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub initAt {
-    my ($self, $imageCache, $resourceAnimationInterfaceFactoryInterfaceFactory, $portion, $loadingString, $index) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::animation::resource::BaseResourceAnimationInterfaceFactoryInterfaceFactory ();
-use org::allbinary::image::ImageCache ();
-use org::allbinary::logic::communication::log::LogUtil ();
-
-1;
 

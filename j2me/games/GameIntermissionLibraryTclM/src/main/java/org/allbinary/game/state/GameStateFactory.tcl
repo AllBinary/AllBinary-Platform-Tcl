@@ -11,52 +11,64 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.state
 
-package org::allbinary::game::state::GameStateFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{index} = 0;
-    $self->{NO_GAME_STATE} = $self->createGameState("NO_GAME_STATE");
-    $self->{PLAYING_GAME_STATE} = $self->createGameState("PLAYING_GAME_STATE");
-    $self->{SHOW_END_RESULT_GAME_STATE} = $self->createGameState("SHOW_END_RESULT_GAME_STATE");
-    $self->{SHOW_HIGH_SCORE_GAME_STATE} = $self->createGameState("SHOW_HIGH_SCORE_GAME_STATE");
+oo::class create ::GameStateFactory {
+    superclass ::JObject
 }
 
+oo::define ::GameStateFactory {
+    method initFields_GameStateFactory {} {
+        my jset index 0
+        my jset NO_GAME_STATE {}
+        my jset PLAYING_GAME_STATE {}
+        my jset SHOW_END_RESULT_GAME_STATE {}
+        my jset SHOW_HIGH_SCORE_GAME_STATE {}
+        my jset index 0
+        my jset NO_GAME_STATE [my createGameState "NO_GAME_STATE"]
+        my jset PLAYING_GAME_STATE [my createGameState "PLAYING_GAME_STATE"]
+        my jset SHOW_END_RESULT_GAME_STATE [my createGameState "SHOW_END_RESULT_GAME_STATE"]
+        my jset SHOW_HIGH_SCORE_GAME_STATE [my createGameState "SHOW_HIGH_SCORE_GAME_STATE"]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::state::GameStateFactory::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::state::GameStateFactory::instance = 'org::allbinary::game::state::GameStateFactory'->new();
+    constructor {} {
+        next
+        my initFields_GameStateFactory
+    }
+    
+
+    method createGameState {name} {
+        return [::GameState new $name [my jpostinc index 1]]
+    }
+}
+
+namespace eval ::GameStateFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::game::state::GameStateFactory::instance;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::GameStateFactory::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::GameStateFactory::staticSet_instance [::GameStateFactory new]
+        }
+        return [::GameStateFactory::staticGet_instance]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-sub createGameState {
-    my ($self, $name) = @_;
-        return 'org::allbinary::game::state::GameState'->new($name, $self->{index}++);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::game::state::GameState ();
-
-1;
 

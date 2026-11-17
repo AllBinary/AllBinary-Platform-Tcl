@@ -11,53 +11,49 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-# Java interface
-package org::allbinary::game::input::TestInputInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::PaintableInterface';
-
-
-
-sub up {
-    my ($self) = @_;
-    die "abstract method up";
+oo::class create ::TestInputInterface {
+    superclass ::JObject
 }
 
+oo::define ::TestInputInterface {
+    method initFields_TestInputInterface {} {
+        return
+    }
+    
 
-sub down {
-    my ($self) = @_;
-    die "abstract method down";
+    method up {} {
+        error [jexception AbstractMethodError up]
+    }
+    
+
+    method down {} {
+        error [jexception AbstractMethodError down]
+    }
+    
+
+    method left {} {
+        error [jexception AbstractMethodError left]
+    }
+    
+
+    method right {} {
+        error [jexception AbstractMethodError right]
+    }
+    
+
+    method strafeLeft {} {
+        error [jexception AbstractMethodError strafeLeft]
+    }
+    
+
+    method strafeRight {} {
+        error [jexception AbstractMethodError strafeRight]
+    }
 }
 
-
-sub left {
-    my ($self) = @_;
-    die "abstract method left";
+namespace eval ::TestInputInterface {
 }
 
-
-sub right {
-    my ($self) = @_;
-    die "abstract method right";
-}
-
-
-sub strafeLeft {
-    my ($self) = @_;
-    die "abstract method strafeLeft";
-}
-
-
-sub strafeRight {
-    my ($self) = @_;
-    die "abstract method strafeRight";
-}
-
-use org::allbinary::graphics::paint::PaintableInterface ();
-
-1;
 

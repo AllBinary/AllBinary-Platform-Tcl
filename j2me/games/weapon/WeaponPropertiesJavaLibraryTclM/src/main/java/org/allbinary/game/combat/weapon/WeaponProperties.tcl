@@ -11,130 +11,196 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.weapon
 
-package org::allbinary::game::combat::weapon::WeaponProperties;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::combat::weapon::SimpleWeaponProperties';
-
-tie our $NULL_WEAPON_PROPERTIES, 'java::lang::LazyStatic', sub { 'org::allbinary::game::combat::weapon::WeaponProperties'->new(0, 0, 0, 0, ((int(0) + 32768) % 65536 - 32768)) };
-our $messageSent = 0;
-our $DAMAGE = "Damage: ";
-our $RANGE = "Range: ";
-our $RELOAD = "Reload: ";
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{reloadTime} = 0;
-    $self->{targetingTime} = 0;
-    $self->{speed} = $org::allbinary::logic::math::BasicDecimal::ZERO_BIGDECIMAL;
-    $self->{MAX} = 10240;
-    $self->{ZERO} = 0;
+oo::class create ::WeaponProperties {
+    superclass ::SimpleWeaponProperties
 }
 
+oo::define ::WeaponProperties {
+    method initFields_WeaponProperties {} {
+        my jset reloadTime 0
+        my jset targetingTime 0
+        my jset speed {}
+        my jset MAX 0
+        my jset ZERO 0
+        my jset reloadTime 0
+        my jset targetingTime 0
+        my jset speed [::BasicDecimal::staticGet_ZERO_BIGDECIMAL]
+        my jset MAX 10240
+        my jset ZERO 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $reloadTime, $targetingTime, $speed, $damage, $dissipation) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        if ($speed < $self->{MAX} && $speed != 0 && !$org::allbinary::game::combat::weapon::WeaponProperties::messageSent) {
-            my $MESSAGE = "Danger Danger Danger: Speed probably to slow if using 1 degree calculations as velocity for a single axis could be below 1024: ";
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append($MESSAGE)->appendlong($speed)->toString(), $self, $commonStrings->{CONSTRUCTOR});
-            $org::allbinary::game::combat::weapon::WeaponProperties::messageSent = 1;
+    constructor {reloadTime targetingTime speed damage dissipation} {
+        next
+        my initFields_WeaponProperties
+        if {[expr {[expr {[expr {$speed < [my jget MAX]}] && [expr {$speed != 0}]}] && [expr {![::WeaponProperties::staticGet_messageSent]}]}]} {
+            set MESSAGE "Danger Danger Danger: Speed probably to slow if using 1 degree calculations as velocity for a single axis could be below 1024: "
+            set commonStrings [::CommonStrings::getInstance]
+            ::PreLogUtil::put [[[[::StringMaker new] append $MESSAGE] appendlong $speed] toString] [self] [$commonStrings jget CONSTRUCTOR]
+            ::WeaponProperties::staticSet_messageSent true
         }
-        $self->setReloadTime($reloadTime);
-        $self->setTargetingTime($targetingTime);
-        $self->setDamage($damage);
-        $self->setDissipation($dissipation);
-        $self->setSpeed('org::allbinary::logic::math::BasicDecimal'->new($speed));
-        if ($dissipation != $self->{ZERO}) {
-            my $unscaledDamage = $self->{speed}->getUnscaled() * $damage;
-            my $scaledDissipation = $dissipation * $self->{speed}->getScaledFactorValue();
-            my $value = (int($unscaledDamage / $scaledDissipation));
-            $self->setRange(int(($value * 9) / 10));
+        my setReloadTime $reloadTime
+        my setTargetingTime $targetingTime
+        my setDamage $damage
+        my setDissipation $dissipation
+        my setSpeed [::BasicDecimal new $speed]
+        if {[expr {$dissipation != [my jget ZERO]}]} {
+            set unscaledDamage [expr {[[my jget speed] getUnscaled] * $damage}]
+            set scaledDissipation [expr {$dissipation * [[my jget speed] getScaledFactorValue]}]
+            set value ([jdiv $unscaledDamage $scaledDissipation])
+            my setRange [jdiv [jint ([jlong [expr {$value * 9}]])] 10]
         }
-    return $self;
+    }
+    
+
+    method setReloadTime {reloadTime} {
+        my jset reloadTime $reloadTime
+    }
+    
+
+    method getReloadTime {} {
+        return [my jget reloadTime]
+    }
+    
+
+    method setTargetingTime {targetingTime} {
+        my jset targetingTime $targetingTime
+    }
+    
+
+    method getTargetingTime {} {
+        return [my jget targetingTime]
+    }
+    
+
+    method getSpeed {} {
+        return [my jget speed]
+    }
+    
+
+    method setSpeed {speed} {
+        my jset speed $speed
+    }
+    
+
+    method getDamageI {range} {
+        return [expr {[my getDamage] - ([expr {([expr {[my getDissipation] * $range}]) / [[my jget speed] getScaled]}])}]
+    }
+    
+
+    method toStringArray {} {
+        set index 0
+        set stringArray [jarray 3 {}]
+        set stringBuffer [::StringMaker new]
+        $stringArray set [jpostincr index 1] [[[$stringBuffer append [::WeaponProperties::staticGet_DAMAGE]] appendint [jint [my getDamage]]] toString]
+        $stringBuffer delete 0 [$stringBuffer length]
+        $stringArray set [jpostincr index 1] [[[$stringBuffer append [::WeaponProperties::staticGet_RANGE]] appendint [jint [my getRange]]] toString]
+        $stringBuffer delete 0 [$stringBuffer length]
+        $stringArray set [jpostincr index 1] [[[$stringBuffer append [::WeaponProperties::staticGet_RELOAD]] appendlong [my getReloadTime]] toString]
+        return $stringArray
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        [$stringBuffer append [::WeaponProperties::staticGet_DAMAGE]] appendint [jint [my getDamage]]
+        $stringBuffer append [[::CommonSeps::getInstance] jget SPACE]
+        [$stringBuffer append [::WeaponProperties::staticGet_RANGE]] appendint [jint [my getRange]]
+        $stringBuffer append [[::CommonSeps::getInstance] jget SPACE]
+        [$stringBuffer append [::WeaponProperties::staticGet_RELOAD]] appendlong [my getReloadTime]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub setReloadTime {
-    my ($self, $reloadTime) = @_;
-        $self->{reloadTime} = $reloadTime;
+namespace eval ::WeaponProperties {
+    variable NULL_WEAPON_PROPERTIESValue {}
+    variable NULL_WEAPON_PROPERTIESSet 0
+    proc staticGet_NULL_WEAPON_PROPERTIES {} {
+        variable NULL_WEAPON_PROPERTIESValue
+        variable NULL_WEAPON_PROPERTIESSet
+        if {!$NULL_WEAPON_PROPERTIESSet} {
+            set NULL_WEAPON_PROPERTIESSet 1
+            set NULL_WEAPON_PROPERTIESValue [::WeaponProperties new 0 0 0 0 [jshort 0]]
+        }
+        return $NULL_WEAPON_PROPERTIESValue
+    }
+    proc staticSet_NULL_WEAPON_PROPERTIES {value} {
+        variable NULL_WEAPON_PROPERTIESValue
+        variable NULL_WEAPON_PROPERTIESSet
+        set NULL_WEAPON_PROPERTIESSet 1
+        set NULL_WEAPON_PROPERTIESValue $value
+    }
+    variable messageSentValue {}
+    variable messageSentSet 0
+    proc staticGet_messageSent {} {
+        variable messageSentValue
+        variable messageSentSet
+        if {!$messageSentSet} {
+            set messageSentSet 1
+            set messageSentValue false
+        }
+        return $messageSentValue
+    }
+    proc staticSet_messageSent {value} {
+        variable messageSentValue
+        variable messageSentSet
+        set messageSentSet 1
+        set messageSentValue $value
+    }
+    variable DAMAGEValue {}
+    variable DAMAGESet 0
+    proc staticGet_DAMAGE {} {
+        variable DAMAGEValue
+        variable DAMAGESet
+        if {!$DAMAGESet} {
+            set DAMAGESet 1
+            set DAMAGEValue "Damage: "
+        }
+        return $DAMAGEValue
+    }
+    proc staticSet_DAMAGE {value} {
+        variable DAMAGEValue
+        variable DAMAGESet
+        set DAMAGESet 1
+        set DAMAGEValue $value
+    }
+    variable RANGEValue {}
+    variable RANGESet 0
+    proc staticGet_RANGE {} {
+        variable RANGEValue
+        variable RANGESet
+        if {!$RANGESet} {
+            set RANGESet 1
+            set RANGEValue "Range: "
+        }
+        return $RANGEValue
+    }
+    proc staticSet_RANGE {value} {
+        variable RANGEValue
+        variable RANGESet
+        set RANGESet 1
+        set RANGEValue $value
+    }
+    variable RELOADValue {}
+    variable RELOADSet 0
+    proc staticGet_RELOAD {} {
+        variable RELOADValue
+        variable RELOADSet
+        if {!$RELOADSet} {
+            set RELOADSet 1
+            set RELOADValue "Reload: "
+        }
+        return $RELOADValue
+    }
+    proc staticSet_RELOAD {value} {
+        variable RELOADValue
+        variable RELOADSet
+        set RELOADSet 1
+        set RELOADValue $value
+    }
 }
 
-
-sub getReloadTime {
-    my ($self) = @_;
-        return $self->{reloadTime};
-}
-
-
-sub setTargetingTime {
-    my ($self, $targetingTime) = @_;
-        $self->{targetingTime} = $targetingTime;
-}
-
-
-sub getTargetingTime {
-    my ($self) = @_;
-        return $self->{targetingTime};
-}
-
-
-sub getSpeed {
-    my ($self) = @_;
-        return $self->{speed};
-}
-
-
-sub setSpeed {
-    my ($self, $speed) = @_;
-        $self->{speed} = $speed;
-}
-
-
-sub getDamageI {
-    my ($self, $range) = @_;
-        return $self->getDamage() - (($self->getDissipation() * $range) / $self->{speed}->getScaled());
-}
-
-
-sub toStringArray {
-    my ($self) = @_;
-        my $index = 0;
-        my $stringArray = [(undef) x (3)];
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringArray->[$index++] = $stringBuffer->append($org::allbinary::game::combat::weapon::WeaponProperties::DAMAGE)->appendint(int($self->getDamage()))->toString();
-        $stringBuffer->delete(0, $stringBuffer->length());
-        $stringArray->[$index++] = $stringBuffer->append($org::allbinary::game::combat::weapon::WeaponProperties::RANGE)->appendint(int($self->getRange()))->toString();
-        $stringBuffer->delete(0, $stringBuffer->length());
-        $stringArray->[$index++] = $stringBuffer->append($org::allbinary::game::combat::weapon::WeaponProperties::RELOAD)->appendlong($self->getReloadTime())->toString();
-        return $stringArray;
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append($org::allbinary::game::combat::weapon::WeaponProperties::DAMAGE)->appendint(int($self->getDamage()));
-        $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
-        $stringBuffer->append($org::allbinary::game::combat::weapon::WeaponProperties::RANGE)->appendint(int($self->getRange()));
-        $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
-        $stringBuffer->append($org::allbinary::game::combat::weapon::WeaponProperties::RELOAD)->appendlong($self->getReloadTime());
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::math::BasicDecimal ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::combat::weapon::SimpleWeaponProperties ();
-
-1;
 

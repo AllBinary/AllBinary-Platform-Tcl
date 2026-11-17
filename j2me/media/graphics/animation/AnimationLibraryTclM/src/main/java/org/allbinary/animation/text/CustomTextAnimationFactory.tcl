@@ -11,93 +11,82 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.text
 
-package org::allbinary::animation::text::CustomTextAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::AnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{animationBehaviorFactory} = undef;
-    $self->{basicColor} = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{BLACK};
-    $self->{text} = undef;
-    $self->{initScaleHeight} = undef;
-    $self->{dx} = 0;
-    $self->{dy} = 0;
-    $self->{font} = undef;
-    $self->{scaleProperties} = undef;
+oo::class create ::CustomTextAnimationFactory {
+    superclass ::JObject
 }
 
+oo::define ::CustomTextAnimationFactory {
+    method initFields_CustomTextAnimationFactory {} {
+        my jset logUtil {}
+        my jset animationBehaviorFactory {}
+        my jset basicColor {}
+        my jset text {}
+        my jset initScaleHeight 0
+        my jset dx 0
+        my jset dy 0
+        my jset font {}
+        my jset scaleProperties {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        my jset basicColor [[::BasicColorFactory::getInstance] jget BLACK]
+        
+        
+        my jset dx 0
+        my jset dy 0
+        
+        
+        return
+    }
+    
+    
 
-sub createDXY {
-    my ($class, $text, $fontSize, $dx, $dy, $animationBehaviorFactory) = @_;
-        my $customTextAnimationFactory = 'org::allbinary::animation::text::CustomTextAnimationFactory'->new($text, $fontSize, $animationBehaviorFactory);
-        $customTextAnimationFactory->{dx} = $dx;
-        $customTextAnimationFactory->{dy} = $dy;
-        return $customTextAnimationFactory;
-}
+    constructor {text fontSize animationBehaviorFactory} {
+        next
+        my initFields_CustomTextAnimationFactory
+        my jset scaleProperties [::ScaleProperties new]
+        my jset text $text
+        [my jget scaleProperties] jset scaleHeight [jint [expr {$fontSize - ([jdiv $fontSize 4])}]]
+        my jset initScaleHeight [[my jget scaleProperties] jget scaleHeight]
+        my jset animationBehaviorFactory $animationBehaviorFactory
+        my jset font [::Font::getFont [::Font::staticGet_FACE_SYSTEM] [::Font::staticGet_STYLE_PLAIN] [my jget initScaleHeight]]
+    }
+    
 
-
-sub new {
-    my ($class, $text, $fontSize, $animationBehaviorFactory) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{scaleProperties} = 'org::allbinary::media::ScaleProperties'->new();
-        $self->{text} = $text;
-        $self->{scaleProperties}->{scaleHeight} = $fontSize - (int($fontSize / 4));
-        $self->{initScaleHeight} = $self->{scaleProperties}->{scaleHeight};
-        $self->{animationBehaviorFactory} = $animationBehaviorFactory;
-        $self->{font} = 'javax::microedition::lcdui::Font'->getFont($javax::microedition::lcdui::Font::FACE_SYSTEM, $javax::microedition::lcdui::Font::STYLE_PLAIN, $self->{initScaleHeight});
-    return $self;
-}
-
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        my $customTextAnimation = undef;
-        if ($self->{dx} != 0 || $self->{dy} != 0) {
-            $customTextAnimation = 'org::allbinary::animation::text::AdjustCustomTextAnimation'->new($self->{text}, $self->{scaleProperties}->{scaleHeight}, $self->{dx}, $self->{dy}, $self->{animationBehaviorFactory}->getOrCreateInstance());
+    method getInstance {instanceId} {
+        set customTextAnimation {}
+        if {[expr {[expr {[my jget dx] != 0}] || [expr {[my jget dy] != 0}]}]} {
+            set customTextAnimation [::AdjustCustomTextAnimation new [my jget text] [[my jget scaleProperties] jget scaleHeight] [my jget dx] [my jget dy] [[my jget animationBehaviorFactory] getOrCreateInstance]]
         } else {
-            $customTextAnimation = 'org::allbinary::animation::text::CustomTextAnimation'->new($self->{text}, $self->{scaleProperties}->{scaleHeight}, $self->{animationBehaviorFactory}->getOrCreateInstance());
+            set customTextAnimation [::CustomTextAnimation new [my jget text] [[my jget scaleProperties] jget scaleHeight] [[my jget animationBehaviorFactory] getOrCreateInstance]]
         }
-        $customTextAnimation->setBasicColorP($self->{basicColor});
-        return $customTextAnimation;
+        $customTextAnimation setBasicColorP [my jget basicColor]
+        return $customTextAnimation
+    }
+    
+
+    method setInitialScale {scaleProperties} {
+    }
+    
+
+    method getWidth {} {
+        return [[my jget font] stringWidth [my jget text]]
+    }
+    
+
+    method getHeight {} {
+        return [[my jget font] getHeight]
+    }
 }
 
-
-sub setInitialScale {
-    my ($self, $scaleProperties) = @_;
+namespace eval ::CustomTextAnimationFactory {
+    proc createDXY {text fontSize dx dy animationBehaviorFactory} {
+        set customTextAnimationFactory [::CustomTextAnimationFactory new $text $fontSize $animationBehaviorFactory]
+        $customTextAnimationFactory jset dx $dx
+        $customTextAnimationFactory jset dy $dy
+        return $customTextAnimationFactory
+    }
 }
 
-
-sub getWidth {
-    my ($self) = @_;
-        return $self->{font}->stringWidth($self->{text});
-}
-
-
-sub getHeight {
-    my ($self) = @_;
-        return $self->{font}->getHeight();
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::media::ScaleProperties ();
-use org::allbinary::animation::text::CustomTextAnimation ();
-use org::allbinary::animation::text::AdjustCustomTextAnimation ();
-
-1;
 

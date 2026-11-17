@@ -11,58 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::BasicProbabilityAIDataFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::BasicProbabilityAIDataFactory {
+    superclass ::JObject
 }
 
+oo::define ::BasicProbabilityAIDataFactory {
+    method initFields_BasicProbabilityAIDataFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($self) = @_;
-        my $likelyhoodIntegerArray = [map { [(undef) x (2)] } 1 .. ($javax::microedition::lcdui::Canvas::KEY_NUM9 + 1)];
-        my $smallIntegerSingletonFactory = 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance();
-        $likelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::UP]->[0] = $smallIntegerSingletonFactory->getAt(0);
-        $likelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::UP]->[1] = $smallIntegerSingletonFactory->getAt(10);
-        $likelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::DOWN]->[0] = $smallIntegerSingletonFactory->getAt(10);
-        $likelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::DOWN]->[1] = $smallIntegerSingletonFactory->getAt(14);
-        $likelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::LEFT]->[0] = $smallIntegerSingletonFactory->getAt(14);
-        $likelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::LEFT]->[1] = $smallIntegerSingletonFactory->getAt(18);
-        $likelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::RIGHT]->[0] = $smallIntegerSingletonFactory->getAt(18);
-        $likelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::RIGHT]->[1] = $smallIntegerSingletonFactory->getAt(22);
-        $likelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::KEY_NUM7]->[0] = $smallIntegerSingletonFactory->getAt(22);
-        $likelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::KEY_NUM7]->[1] = $smallIntegerSingletonFactory->getAt(26);
-        $likelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::KEY_NUM9]->[0] = $smallIntegerSingletonFactory->getAt(26);
-        $likelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::KEY_NUM9]->[1] = $smallIntegerSingletonFactory->getAt(30);
-        $likelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::KEY_NUM1]->[0] = $smallIntegerSingletonFactory->getAt(30);
-        $likelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::KEY_NUM1]->[1] = $smallIntegerSingletonFactory->getAt(40);
-        my $repeatLikelyhoodIntegerArray = [(undef) x ($javax::microedition::lcdui::Canvas::KEY_NUM9 + 1)];
-        $repeatLikelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::UP] = $smallIntegerSingletonFactory->getAt(0);
-        $repeatLikelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::DOWN] = $smallIntegerSingletonFactory->getAt(0);
-        $repeatLikelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::LEFT] = $smallIntegerSingletonFactory->getAt(0);
-        $repeatLikelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::RIGHT] = $smallIntegerSingletonFactory->getAt(0);
-        $repeatLikelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::KEY_NUM7] = $smallIntegerSingletonFactory->getAt(0);
-        $repeatLikelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::KEY_NUM9] = $smallIntegerSingletonFactory->getAt(0);
-        $repeatLikelyhoodIntegerArray->[$javax::microedition::lcdui::Canvas::KEY_NUM1] = $smallIntegerSingletonFactory->getAt(10);
-        my $inputProbability = 'org::allbinary::game::ag::ai::InputProbability'->new($likelyhoodIntegerArray, $repeatLikelyhoodIntegerArray, 42, $org::allbinary::time::NoTimeDelayHelper::SINGLETON);
-        return $inputProbability->toHashtable();
+    constructor {} {
+        next
+        my initFields_BasicProbabilityAIDataFactory
+    }
+    
+
+    method getInstance {} {
+        set likelyhoodIntegerArray [jarrayof [expr {[::Canvas::staticGet_KEY_NUM9] + 1}] {jarray 2 {}}]
+        set smallIntegerSingletonFactory [::SmallIntegerSingletonFactory::getInstance]
+        [$likelyhoodIntegerArray get [::Canvas::staticGet_UP]] set 0 [$smallIntegerSingletonFactory getAt 0]
+        [$likelyhoodIntegerArray get [::Canvas::staticGet_UP]] set 1 [$smallIntegerSingletonFactory getAt 10]
+        [$likelyhoodIntegerArray get [::Canvas::staticGet_DOWN]] set 0 [$smallIntegerSingletonFactory getAt 10]
+        [$likelyhoodIntegerArray get [::Canvas::staticGet_DOWN]] set 1 [$smallIntegerSingletonFactory getAt 14]
+        [$likelyhoodIntegerArray get [::Canvas::staticGet_LEFT]] set 0 [$smallIntegerSingletonFactory getAt 14]
+        [$likelyhoodIntegerArray get [::Canvas::staticGet_LEFT]] set 1 [$smallIntegerSingletonFactory getAt 18]
+        [$likelyhoodIntegerArray get [::Canvas::staticGet_RIGHT]] set 0 [$smallIntegerSingletonFactory getAt 18]
+        [$likelyhoodIntegerArray get [::Canvas::staticGet_RIGHT]] set 1 [$smallIntegerSingletonFactory getAt 22]
+        [$likelyhoodIntegerArray get [::Canvas::staticGet_KEY_NUM7]] set 0 [$smallIntegerSingletonFactory getAt 22]
+        [$likelyhoodIntegerArray get [::Canvas::staticGet_KEY_NUM7]] set 1 [$smallIntegerSingletonFactory getAt 26]
+        [$likelyhoodIntegerArray get [::Canvas::staticGet_KEY_NUM9]] set 0 [$smallIntegerSingletonFactory getAt 26]
+        [$likelyhoodIntegerArray get [::Canvas::staticGet_KEY_NUM9]] set 1 [$smallIntegerSingletonFactory getAt 30]
+        [$likelyhoodIntegerArray get [::Canvas::staticGet_KEY_NUM1]] set 0 [$smallIntegerSingletonFactory getAt 30]
+        [$likelyhoodIntegerArray get [::Canvas::staticGet_KEY_NUM1]] set 1 [$smallIntegerSingletonFactory getAt 40]
+        set repeatLikelyhoodIntegerArray [jarray [expr {[::Canvas::staticGet_KEY_NUM9] + 1}] {}]
+        $repeatLikelyhoodIntegerArray set [::Canvas::staticGet_UP] [$smallIntegerSingletonFactory getAt 0]
+        $repeatLikelyhoodIntegerArray set [::Canvas::staticGet_DOWN] [$smallIntegerSingletonFactory getAt 0]
+        $repeatLikelyhoodIntegerArray set [::Canvas::staticGet_LEFT] [$smallIntegerSingletonFactory getAt 0]
+        $repeatLikelyhoodIntegerArray set [::Canvas::staticGet_RIGHT] [$smallIntegerSingletonFactory getAt 0]
+        $repeatLikelyhoodIntegerArray set [::Canvas::staticGet_KEY_NUM7] [$smallIntegerSingletonFactory getAt 0]
+        $repeatLikelyhoodIntegerArray set [::Canvas::staticGet_KEY_NUM9] [$smallIntegerSingletonFactory getAt 0]
+        $repeatLikelyhoodIntegerArray set [::Canvas::staticGet_KEY_NUM1] [$smallIntegerSingletonFactory getAt 10]
+        set inputProbability [::InputProbability new $likelyhoodIntegerArray $repeatLikelyhoodIntegerArray 42 [::NoTimeDelayHelper::staticGet_SINGLETON]]
+        return [$inputProbability toHashtable]
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::time::NoTimeDelayHelper ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::ag::ai::InputProbability ();
+namespace eval ::BasicProbabilityAIDataFactory {
+}
 
-1;
 

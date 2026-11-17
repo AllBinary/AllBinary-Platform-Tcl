@@ -11,19 +11,19 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.event
 
-# Java interface
-package org::allbinary::game::input::event::GameKeyEventListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::event::DownGameKeyEventListenerInterface','org::allbinary::game::input::event::UpGameKeyEventListenerInterface','org::allbinary::game::input::event::PressGameKeyEventListenerInterface';
+oo::class create ::GameKeyEventListenerInterface {
+    superclass ::JObject
+}
 
+oo::define ::GameKeyEventListenerInterface {
+    method initFields_GameKeyEventListenerInterface {} {
+        return
+    }
+}
 
-use org::allbinary::game::input::event::DownGameKeyEventListenerInterface ();
-use org::allbinary::game::input::event::UpGameKeyEventListenerInterface ();
-use org::allbinary::game::input::event::PressGameKeyEventListenerInterface ();
+namespace eval ::GameKeyEventListenerInterface {
+}
 
-1;
 

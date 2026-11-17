@@ -11,110 +11,93 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.persistance
 
-package org::allbinary::game::configuration::persistance::BasicPersitance;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{persistanceStrings} = 'org::allbinary::game::configuration::persistance::PersistanceStrings'->getInstance();
-    $self->{platformRecordIdUtil} = 'org::allbinary::persistance::PlatformRecordIdUtil'->getInstance();
-    $self->{recordId} = undef;
-    $self->{valueList} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{idList} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::BasicPersitance {
+    superclass ::JObject
 }
 
+oo::define ::BasicPersitance {
+    method initFields_BasicPersitance {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset persistanceStrings {}
+        my jset platformRecordIdUtil {}
+        my jset recordId {}
+        my jset valueList {}
+        my jset idList {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset persistanceStrings [::PersistanceStrings::getInstance]
+        my jset platformRecordIdUtil [::PlatformRecordIdUtil::getInstance]
+        
+        my jset valueList [::BasicArrayListD new]
+        my jset idList [::BasicArrayListD new]
+        return
+    }
+    
 
-sub new {
-    my ($class, $recordId) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{recordId} = $recordId;
-    return $self;
-}
+    constructor {recordId} {
+        next
+        my initFields_BasicPersitance
+        my jset recordId $recordId
+    }
+    
 
+    method deleteRecoreStore {abeClientInformation} {
+        ::RecordStore::deleteRecordStore [my getRecordId $abeClientInformation]
+    }
+    
 
-# throws Exception
-sub deleteRecoreStore {
-    my ($self, $abeClientInformation) = @_;
-        'javax::microedition::rms::RecordStore'->deleteRecordStore($self->getRecordId($abeClientInformation));
-}
-
-
-# throws Exception
-sub deleteAll {
-    my ($self, $abeClientInformation) = @_;
-        my $size = $self->{idList}->size();
-        for (my $index = 0; $index < $size; $index++) {
-            my $integer = $self->{idList}->{objectArray}->[$index];
-            $self->delete($abeClientInformation, int($integer));
+    method deleteAll {abeClientInformation} {
+        set size [[my jget idList] size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set integer [[[my jget idList] jget objectArray] get $index]
+            my delete $abeClientInformation [$integer intValue]
         }
-        $self->clear();
-}
+        my clear
+    }
+    
 
-
-# throws Exception
-sub delete {
-    my ($self, $abeClientInformation, $deleteId) = @_;
-        my $recordStore = $org::allbinary::game::configuration::persistance::NullRecordStore::NULL_RECORD_STORE;
+    method delete {abeClientInformation deleteId} {
+        set recordStore [::NullRecordStore::staticGet_NULL_RECORD_STORE]
         try {
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{persistanceStrings}->{DELETING_WITH_ID})->appendint($deleteId)->toString(), $self, $self->{commonStrings}->{delete});
-            $recordStore = 'javax::microedition::rms::RecordStore'->openRecordStore($self->getRecordId($abeClientInformation), 1);
-            $recordStore->deleteRecord($deleteId);
-        } catch ($e) {
-            die $e;
+            [my jget logUtil] putF [[[[::StringMaker new] append [[my jget persistanceStrings] jget DELETING_WITH_ID]] appendint $deleteId] toString] [self] [[my jget commonStrings] jget delete]
+            set recordStore [::RecordStore::openRecordStore [my getRecordId $abeClientInformation] true]
+            $recordStore deleteRecord $deleteId
+        } on error {e} {
+            error $e
         } finally {
-            if (defined($recordStore)) {
-                'org::allbinary::logic::communication::log::PreLogUtil'->put($self->{persistanceStrings}->{CLOSING_RECORDSTORE}, $self, $self->{commonStrings}->{delete});
-                $recordStore->closeRecordStore();
+            if {[expr {$recordStore ne {}}]} {
+                ::PreLogUtil::put [[my jget persistanceStrings] jget CLOSING_RECORDSTORE] [self] [[my jget commonStrings] jget delete]
+                $recordStore closeRecordStore
             }
         }
+    }
+    
+
+    method getRecordId {abeClientInformation} {
+        return [[my jget platformRecordIdUtil] getRecordId $abeClientInformation [my jget recordId]]
+    }
+    
+
+    method getList {} {
+        return [my jget valueList]
+    }
+    
+
+    method getIds {} {
+        return [my jget idList]
+    }
+    
+
+    method clear {} {
+        [my jget valueList] clear
+        [my jget idList] clear
+    }
 }
 
-
-sub getRecordId {
-    my ($self, $abeClientInformation) = @_;
-        return $self->{platformRecordIdUtil}->getRecordId($abeClientInformation, $self->{recordId});
+namespace eval ::BasicPersitance {
 }
 
-
-sub getList {
-    my ($self) = @_;
-        return $self->{valueList};
-}
-
-
-sub getIds {
-    my ($self) = @_;
-        return $self->{idList};
-}
-
-
-sub clear {
-    my ($self) = @_;
-        $self->{valueList}->clear();
-        $self->{idList}->clear();
-}
-
-use java::lang::Object ();
-use javax::microedition::rms::RecordStore ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::persistance::PlatformRecordIdUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::game::configuration::persistance::PersistanceStrings ();
-use org::allbinary::game::configuration::persistance::NullRecordStore ();
-
-1;
 

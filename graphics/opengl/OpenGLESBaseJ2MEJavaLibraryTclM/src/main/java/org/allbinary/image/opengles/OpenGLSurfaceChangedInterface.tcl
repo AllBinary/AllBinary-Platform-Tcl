@@ -1,21 +1,22 @@
 # Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
-# Java interface
-package org::allbinary::image::opengles::OpenGLSurfaceChangedInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub set {
-    my ($self, $gl) = @_;
-    die "abstract method set";
+oo::class create ::OpenGLSurfaceChangedInterface {
+    superclass ::JObject
 }
 
-use javax::microedition::khronos::opengles::GL ();
+oo::define ::OpenGLSurfaceChangedInterface {
+    method initFields_OpenGLSurfaceChangedInterface {} {
+        return
+    }
+    
 
-1;
+    method set {gl} {
+        error [jexception AbstractMethodError set]
+    }
+}
+
+namespace eval ::OpenGLSurfaceChangedInterface {
+}
+
 

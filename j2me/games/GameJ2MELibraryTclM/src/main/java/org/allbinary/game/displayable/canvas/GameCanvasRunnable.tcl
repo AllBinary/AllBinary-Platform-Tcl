@@ -11,59 +11,51 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::GameCanvasRunnable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::displayable::canvas::GameRunnable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{gameTickDisplayInfoSingleton} = 'org::allbinary::graphics::displayable::GameTickDisplayInfoSingleton'->getInstance();
-    $self->{allBinaryGameCanvas} = undef;
-    $self->{gameTickTimeDelayHelper} = 'org::allbinary::time::GameTickTimeDelayHelperFactory'->getInstance();
+oo::class create ::GameCanvasRunnable {
+    superclass ::GameRunnable
 }
 
+oo::define ::GameCanvasRunnable {
+    method initFields_GameCanvasRunnable {} {
+        my jset logUtil {}
+        my jset gameTickDisplayInfoSingleton {}
+        my jset allBinaryGameCanvas {}
+        my jset gameTickTimeDelayHelper {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset gameTickDisplayInfoSingleton [::GameTickDisplayInfoSingleton::getInstance]
+        
+        my jset gameTickTimeDelayHelper [::GameTickTimeDelayHelperFactory::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $allBinaryGameCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{allBinaryGameCanvas} = $allBinaryGameCanvas;
-    return $self;
-}
+    constructor {allBinaryGameCanvas} {
+        next
+        my initFields_GameCanvasRunnable
+        my jset allBinaryGameCanvas $allBinaryGameCanvas
+    }
+    
 
-
-sub run {
-    my ($self) = @_;
+    method run {} {
         try {
-            $self->{allBinaryGameCanvas}->getLoopTimeHelperP()->setStartTime($self->{gameTickTimeDelayHelper}->setStartTime());
-            $self->{gameTickDisplayInfoSingleton}->update();
-            $self->{allBinaryGameCanvas}->processGame();
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{RUN}, $e);
+            [[my jget allBinaryGameCanvas] getLoopTimeHelperP] setStartTime [[my jget gameTickTimeDelayHelper] setStartTime]
+            [my jget gameTickDisplayInfoSingleton] update
+            [my jget allBinaryGameCanvas] processGame
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget RUN] $e
         }
+    }
+    
+
+    method processLoopSleep {} {
+        [my jget allBinaryGameCanvas] processLoopSleep
+    }
 }
 
-
-# throws Exception
-sub processLoopSleep {
-    my ($self) = @_;
-        $self->{allBinaryGameCanvas}->processLoopSleep();
+namespace eval ::GameCanvasRunnable {
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::displayable::GameTickDisplayInfoSingleton ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::time::GameTickTimeDelayHelper ();
-use org::allbinary::time::GameTickTimeDelayHelperFactory ();
-use org::allbinary::game::displayable::canvas::GameRunnable ();
-
-1;
 

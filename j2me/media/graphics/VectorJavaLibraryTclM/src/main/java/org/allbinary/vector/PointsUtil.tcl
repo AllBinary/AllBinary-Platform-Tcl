@@ -11,74 +11,85 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.vector
 
-package org::allbinary::vector::PointsUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::vector::PointsUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::PointsUtil {
+    superclass ::JObject
 }
 
+oo::define ::PointsUtil {
+    method initFields_PointsUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::vector::PointsUtil::instance;
-}
+    constructor {} {
+        next
+        my initFields_PointsUtil
+    }
+    
+    
 
-
-sub adjustXY {
-    my ($self, $points, $x, $y) = @_;
-        my $size = scalar(@{$points});
-        my $newPoints = [map { [map { [(0) x (0)] } 1 .. (0)] } 1 .. ($size)];
-        for (my $index = 0; $index < $size; $index++) {
-            my $size2 = scalar(@{$points->[$index]});
-            $newPoints->[$index] = [map { [(0) x (2)] } 1 .. ($size2)];
-            for (my $index2 = 0; $index2 < $size2; $index2++) {
-                if ($points->[$index]->[$index2]->[0] != 1000) {
-                    $newPoints->[$index]->[$index2]->[0] = $points->[$index]->[$index2]->[0] + $x;
-                    $newPoints->[$index]->[$index2]->[1] = $points->[$index]->[$index2]->[1] + $y;
+    method adjustXY {points x y} {
+        set size [$points length]
+        set newPoints [jarrayof $size {jarrayof 0 {jarray 0 0}}]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set size2 [[$points get $index] length]
+            $newPoints set $index [jarrayof $size2 {jarray 2 0}]
+            for {set index2 0} {[expr {$index2 < $size2}]} {jpostincr index2 1} {
+                if {[expr {[[[$points get $index] get $index2] get 0] != 1000}]} {
+                    [[$newPoints get $index] get $index2] set 0 [expr {[[[$points get $index] get $index2] get 0] + $x}]
+                    [[$newPoints get $index] get $index2] set 1 [expr {[[[$points get $index] get $index2] get 1] + $y}]
                 } else {
-                    $newPoints->[$index]->[$index2]->[0] = 1000;
-                    $newPoints->[$index]->[$index2]->[1] = 1000;
+                    [[$newPoints get $index] get $index2] set 0 1000
+                    [[$newPoints get $index] get $index2] set 1 1000
                 }
             }
         }
-        return $newPoints;
-}
+        return $newPoints
+    }
+    
 
+    method adjust {points both} {
+        return [my adjust $points $both $both]
+    }
+    
 
-sub adjust {
-    my ($self, $points, $both) = @_;
-        return $self->adjust($points, $both, $both);
-}
-
-
-# Java overloaded method: Perl keeps the last definition
-sub adjust {
-    my ($self, $points, $x, $y) = @_;
-        my $newPoints = [map { [(0) x (2)] } 1 .. (scalar(@{$points}))];
-        for (my $index2 = 0; $index2 < scalar(@{$points}); $index2++) {
-            if ($points->[$index2]->[0] != 1000) {
-                $newPoints->[$index2]->[0] = $points->[$index2]->[0] + $x;
-                $newPoints->[$index2]->[1] = $points->[$index2]->[1] + $y;
+    method adjust {points x y} {
+        set newPoints [jarrayof [$points length] {jarray 2 0}]
+        for {set index2 0} {[expr {$index2 < [$points length]}]} {jpostincr index2 1} {
+            if {[expr {[[$points get $index2] get 0] != 1000}]} {
+                [$newPoints get $index2] set 0 [expr {[[$points get $index2] get 0] + $x}]
+                [$newPoints get $index2] set 1 [expr {[[$points get $index2] get 1] + $y}]
             } else {
-                $newPoints->[$index2]->[0] = 1000;
-                $newPoints->[$index2]->[1] = 1000;
+                [$newPoints get $index2] set 0 1000
+                [$newPoints get $index2] set 1 1000
             }
         }
-        return $newPoints;
+        return $newPoints
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
+namespace eval ::PointsUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::PointsUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::PointsUtil::staticGet_instance]
+    }
+}
 
-1;
 

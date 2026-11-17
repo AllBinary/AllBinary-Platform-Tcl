@@ -11,42 +11,52 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.event
 
-package org::allbinary::graphics::displayable::event::LastDisplayChangeEventHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::handler::BasicEventHandler';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::displayable::event::LastDisplayChangeEventHandler'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::displayable::event::LastDisplayChangeEventHandler::SINGLETON;
+oo::class create ::LastDisplayChangeEventHandler {
+    superclass ::BasicEventHandler
 }
 
+oo::define ::LastDisplayChangeEventHandler {
+    method initFields_LastDisplayChangeEventHandler {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+    constructor {} {
+        next
+        my initFields_LastDisplayChangeEventHandler
+    }
+    
+
+    method process {eventObject eventListenerInterface} {
+        set displayChangeEventListener ($eventListenerInterface)
+        $displayChangeEventListener onDisplayChangeEvent $eventObject
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $eventObject, $eventListenerInterface) = @_;
-        my $displayChangeEventListener = ($eventListenerInterface);
-        $displayChangeEventListener->onDisplayChangeEvent($eventObject);
+namespace eval ::LastDisplayChangeEventHandler {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::LastDisplayChangeEventHandler new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::LastDisplayChangeEventHandler::staticGet_SINGLETON]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
-
-1;
 

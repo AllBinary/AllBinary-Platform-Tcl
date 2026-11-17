@@ -11,40 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.destroy.event
 
-package org::allbinary::game::combat::destroy::event::DestroyEventFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::logic::util::event::AllBinaryEventObjectFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{combatGameCanvas} = undef;
+oo::class create ::DestroyEventFactory {
+    superclass ::JObject
 }
 
+oo::define ::DestroyEventFactory {
+    method initFields_DestroyEventFactory {} {
+        my jset combatGameCanvas {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $combatGameCanvas) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{combatGameCanvas} = $combatGameCanvas;
-    return $self;
+    constructor {combatGameCanvas} {
+        next
+        my initFields_DestroyEventFactory
+        my jset combatGameCanvas $combatGameCanvas
+    }
+    
+
+    method getInstance {} {
+        return [::DestroyedEvent new [my jget combatGameCanvas]]
+    }
 }
 
-
-sub getInstance {
-    my ($self) = @_;
-        return 'org::allbinary::game::combat::destroy::event::DestroyedEvent'->new($self->{combatGameCanvas});
+namespace eval ::DestroyEventFactory {
 }
 
-use java::lang::Object ();
-use org::allbinary::game::displayable::canvas::AllBinaryGameCanvas ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::AllBinaryEventObjectFactoryInterface ();
-use org::allbinary::game::combat::destroy::event::DestroyedEvent ();
-
-1;
 

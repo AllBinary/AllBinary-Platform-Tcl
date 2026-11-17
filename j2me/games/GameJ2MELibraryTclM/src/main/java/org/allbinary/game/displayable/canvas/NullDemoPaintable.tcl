@@ -11,30 +11,45 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::NullDemoPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::displayable::canvas::DemoPaintableInterface';
-
-tie our $NULL_DEMO_PAINTABLE, 'java::lang::LazyStatic', sub { 'org::allbinary::game::displayable::canvas::NullDemoPaintable'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullDemoPaintable {
+    superclass ::JObject
 }
 
+oo::define ::NullDemoPaintable {
+    method initFields_NullDemoPaintable {} {
+        return
+    }
 
-sub showGamePaintable {
-    my ($self) = @_;
+    constructor {} {
+        next
+        my initFields_NullDemoPaintable
+    }
+    
+
+    method showGamePaintable {} {
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::displayable::canvas::DemoPaintableInterface ();
+namespace eval ::NullDemoPaintable {
+    variable NULL_DEMO_PAINTABLEValue {}
+    variable NULL_DEMO_PAINTABLESet 0
+    proc staticGet_NULL_DEMO_PAINTABLE {} {
+        variable NULL_DEMO_PAINTABLEValue
+        variable NULL_DEMO_PAINTABLESet
+        if {!$NULL_DEMO_PAINTABLESet} {
+            set NULL_DEMO_PAINTABLESet 1
+            set NULL_DEMO_PAINTABLEValue [::NullDemoPaintable new]
+        }
+        return $NULL_DEMO_PAINTABLEValue
+    }
+    proc staticSet_NULL_DEMO_PAINTABLE {value} {
+        variable NULL_DEMO_PAINTABLEValue
+        variable NULL_DEMO_PAINTABLESet
+        set NULL_DEMO_PAINTABLESet 1
+        set NULL_DEMO_PAINTABLEValue $value
+    }
+}
 
-1;
 

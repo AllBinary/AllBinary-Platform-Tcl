@@ -11,64 +11,59 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.draw
 
-package org::allbinary::graphics::draw::KeyValueDrawCharArray;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{myFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{LABEL} = undef;
-    $self->{labelX} = undef;
-    $self->{valueX} = 0;
-    $self->{value} = 'org::allbinary::logic::java::character::CharArrayFactory'->getInstance()->getZeroCharArray();
-    $self->{len} = 0;
+oo::class create ::KeyValueDrawCharArray {
+    superclass ::JObject
 }
 
+oo::define ::KeyValueDrawCharArray {
+    method initFields_KeyValueDrawCharArray {} {
+        my jset myFontProcessor {}
+        my jset LABEL {}
+        my jset labelX 0
+        my jset valueX 0
+        my jset value {}
+        my jset len 0
+        my jset myFontProcessor [::UpdateMyFontProcessor new [self]]
+        
+        
+        my jset valueX 0
+        my jset value [[::CharArrayFactory::getInstance] getZeroCharArray]
+        my jset len 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $label, $x) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{LABEL} = $label;
-        $self->{labelX} = $x;
-    return $self;
+    constructor {label x} {
+        next
+        my initFields_KeyValueDrawCharArray
+        my jset LABEL $label
+        my jset labelX $x
+    }
+    
+
+    method updateMeasurement {graphics} {
+        set labelWidth [expr {[[$graphics getFont] stringWidth [my jget LABEL]] - [string length [my jget LABEL]]}]
+        my jset valueX [jint [expr {$labelWidth + [my jget labelX]}]]
+        my jset myFontProcessor [::MyFontProcessor::getInstance]
+    }
+    
+
+    method paint {graphics y} {
+        [my jget myFontProcessor] process $graphics
+        $graphics drawString [my jget LABEL] [my jget labelX] $y 0
+        $graphics drawChars [my jget value] 0 [my jget len] [my jget valueX] $y 0
+    }
+    
+
+    method update {value len} {
+        my jset value $value
+        my jset len $len
+    }
 }
 
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $labelWidth = $graphics->getFont()->stringWidth($self->{LABEL}) - length($self->{LABEL});
-        $self->{valueX} = $labelWidth + $self->{labelX};
-        $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
+namespace eval ::KeyValueDrawCharArray {
 }
 
-
-sub paint {
-    my ($self, $graphics, $y) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        $graphics->drawString($self->{LABEL}, $self->{labelX}, $y, 0);
-        $graphics->drawChars($self->{value}, 0, $self->{len}, $self->{valueX}, $y, 0);
-}
-
-
-sub update {
-    my ($self, $value, $len) = @_;
-        $self->{value} = $value;
-        $self->{len} = $len;
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::logic::java::character::CharArrayFactory ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-
-1;
 

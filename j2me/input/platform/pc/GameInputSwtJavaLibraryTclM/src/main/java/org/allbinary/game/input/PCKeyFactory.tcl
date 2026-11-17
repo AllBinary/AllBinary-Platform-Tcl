@@ -11,191 +11,269 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::PCKeyFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::PCKeyFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{UNKNOWN} = 'org::allbinary::game::input::PCGameKey'->new(254, "UNKNOWN");
-    $self->{ENTER} = 'org::allbinary::game::input::PCGameKey'->new(13, "Enter");
-    $self->{_A} = 'org::allbinary::game::input::PCGameKey'->new(65, "A");
-    $self->{_B} = 'org::allbinary::game::input::PCGameKey'->new(66, "B");
-    $self->{_C} = 'org::allbinary::game::input::PCGameKey'->new(67, "C");
-    $self->{_D} = 'org::allbinary::game::input::PCGameKey'->new(68, "D");
-    $self->{_E} = 'org::allbinary::game::input::PCGameKey'->new(69, "E");
-    $self->{_F} = 'org::allbinary::game::input::PCGameKey'->new(70, "F");
-    $self->{_G} = 'org::allbinary::game::input::PCGameKey'->new(71, "G");
-    $self->{_H} = 'org::allbinary::game::input::PCGameKey'->new(72, "H");
-    $self->{_I} = 'org::allbinary::game::input::PCGameKey'->new(73, "I");
-    $self->{_J} = 'org::allbinary::game::input::PCGameKey'->new(74, "J");
-    $self->{_K} = 'org::allbinary::game::input::PCGameKey'->new(75, "K");
-    $self->{_L} = 'org::allbinary::game::input::PCGameKey'->new(76, "L");
-    $self->{_M} = 'org::allbinary::game::input::PCGameKey'->new(77, "M");
-    $self->{_N} = 'org::allbinary::game::input::PCGameKey'->new(78, "N");
-    $self->{_O} = 'org::allbinary::game::input::PCGameKey'->new(79, "O");
-    $self->{_P} = 'org::allbinary::game::input::PCGameKey'->new(80, "P");
-    $self->{_Q} = 'org::allbinary::game::input::PCGameKey'->new(81, "Q");
-    $self->{_R} = 'org::allbinary::game::input::PCGameKey'->new(82, "R");
-    $self->{_S} = 'org::allbinary::game::input::PCGameKey'->new(83, "S");
-    $self->{_T} = 'org::allbinary::game::input::PCGameKey'->new(84, "T");
-    $self->{_U} = 'org::allbinary::game::input::PCGameKey'->new(85, "U");
-    $self->{_V} = 'org::allbinary::game::input::PCGameKey'->new(86, "V");
-    $self->{_W} = 'org::allbinary::game::input::PCGameKey'->new(87, "W");
-    $self->{_X} = 'org::allbinary::game::input::PCGameKey'->new(88, "X");
-    $self->{_Y} = 'org::allbinary::game::input::PCGameKey'->new(89, "Y");
-    $self->{_Z} = 'org::allbinary::game::input::PCGameKey'->new(90, "Z");
-    $self->{a} = 'org::allbinary::game::input::PCGameKey'->new(97, "a");
-    $self->{b} = 'org::allbinary::game::input::PCGameKey'->new(98, "b");
-    $self->{c} = 'org::allbinary::game::input::PCGameKey'->new(99, "c");
-    $self->{d} = 'org::allbinary::game::input::PCGameKey'->new(100, "d");
-    $self->{e} = 'org::allbinary::game::input::PCGameKey'->new(101, "e");
-    $self->{f} = 'org::allbinary::game::input::PCGameKey'->new(102, "f");
-    $self->{g} = 'org::allbinary::game::input::PCGameKey'->new(103, "g");
-    $self->{h} = 'org::allbinary::game::input::PCGameKey'->new(104, "h");
-    $self->{i} = 'org::allbinary::game::input::PCGameKey'->new(105, "i");
-    $self->{j} = 'org::allbinary::game::input::PCGameKey'->new(106, "j");
-    $self->{k} = 'org::allbinary::game::input::PCGameKey'->new(107, "k");
-    $self->{l} = 'org::allbinary::game::input::PCGameKey'->new(108, "l");
-    $self->{m} = 'org::allbinary::game::input::PCGameKey'->new(109, "m");
-    $self->{n} = 'org::allbinary::game::input::PCGameKey'->new(110, "n");
-    $self->{o} = 'org::allbinary::game::input::PCGameKey'->new(111, "o");
-    $self->{p} = 'org::allbinary::game::input::PCGameKey'->new(112, "p");
-    $self->{q} = 'org::allbinary::game::input::PCGameKey'->new(113, "q");
-    $self->{r} = 'org::allbinary::game::input::PCGameKey'->new(114, "r");
-    $self->{s} = 'org::allbinary::game::input::PCGameKey'->new(115, "s");
-    $self->{t} = 'org::allbinary::game::input::PCGameKey'->new(116, "t");
-    $self->{u} = 'org::allbinary::game::input::PCGameKey'->new(117, "u");
-    $self->{v} = 'org::allbinary::game::input::PCGameKey'->new(118, "v");
-    $self->{w} = 'org::allbinary::game::input::PCGameKey'->new(119, "w");
-    $self->{x} = 'org::allbinary::game::input::PCGameKey'->new(120, 'org::allbinary::math::PositionStrings'->getInstance()->{X});
-    $self->{y} = 'org::allbinary::game::input::PCGameKey'->new(121, 'org::allbinary::math::PositionStrings'->getInstance()->{Y});
-    $self->{z} = 'org::allbinary::game::input::PCGameKey'->new(122, "z");
-    $self->{ZERO} = 'org::allbinary::game::input::PCGameKey'->new(48, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{ZERO});
-    $self->{ONE} = 'org::allbinary::game::input::PCGameKey'->new(49, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{ONE});
-    $self->{TWO} = 'org::allbinary::game::input::PCGameKey'->new(50, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{TWO});
-    $self->{THREE} = 'org::allbinary::game::input::PCGameKey'->new(51, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{THREE});
-    $self->{FOUR} = 'org::allbinary::game::input::PCGameKey'->new(52, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{FOUR});
-    $self->{FIVE} = 'org::allbinary::game::input::PCGameKey'->new(53, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{FIVE});
-    $self->{SIX} = 'org::allbinary::game::input::PCGameKey'->new(54, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{SIX});
-    $self->{SEVEN} = 'org::allbinary::game::input::PCGameKey'->new(55, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{SEVEN});
-    $self->{EIGHT} = 'org::allbinary::game::input::PCGameKey'->new(56, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{EIGHT});
-    $self->{NINE} = 'org::allbinary::game::input::PCGameKey'->new(57, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{NINE});
-    $self->{DPAD_UP} = 'org::allbinary::game::input::PCGameKey'->new(38, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{UP});
-    $self->{DPAD_DOWN} = 'org::allbinary::game::input::PCGameKey'->new(40, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{DOWN});
-    $self->{DPAD_LEFT} = 'org::allbinary::game::input::PCGameKey'->new(37, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{LEFT});
-    $self->{DPAD_RIGHT} = 'org::allbinary::game::input::PCGameKey'->new(39, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{RIGHT});
-    $self->{DPAD_UP2} = $self->{DPAD_UP};
-    $self->{DPAD_DOWN2} = $self->{DPAD_DOWN};
-    $self->{DPAD_LEFT2} = $self->{DPAD_LEFT};
-    $self->{DPAD_RIGHT2} = $self->{DPAD_RIGHT};
-    $self->{COMMA} = 'org::allbinary::game::input::PCGameKey'->new(44, "COMMA");
-    $self->{SPACE} = 'org::allbinary::game::input::PCGameKey'->new(32, "SPACE");
-    $self->{DEL} = 'org::allbinary::game::input::PCGameKey'->new(46, "DEL");
-    $self->{STAR} = 'org::allbinary::game::input::PCGameKey'->new(42, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{STAR});
-    $self->{QUESTION} = 'org::allbinary::game::input::PCGameKey'->new(47, "?");
-    $self->{PERIOD} = 'org::allbinary::game::input::PCGameKey'->new(46, 'org::allbinary::string::CommonSeps'->getInstance()->{PERIOD});
-    $self->{ESCAPE} = 'org::allbinary::game::input::PCGameKey'->new(27, "Esc");
-    $self->{BACK_SPACE} = 'org::allbinary::game::input::PCGameKey'->new(8, "Backspace");
+oo::class create ::PCKeyFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::PCKeyFactory {
+    method initFields_PCKeyFactory {} {
+        my jset UNKNOWN {}
+        my jset ENTER {}
+        my jset _A {}
+        my jset _B {}
+        my jset _C {}
+        my jset _D {}
+        my jset _E {}
+        my jset _F {}
+        my jset _G {}
+        my jset _H {}
+        my jset _I {}
+        my jset _J {}
+        my jset _K {}
+        my jset _L {}
+        my jset _M {}
+        my jset _N {}
+        my jset _O {}
+        my jset _P {}
+        my jset _Q {}
+        my jset _R {}
+        my jset _S {}
+        my jset _T {}
+        my jset _U {}
+        my jset _V {}
+        my jset _W {}
+        my jset _X {}
+        my jset _Y {}
+        my jset _Z {}
+        my jset a {}
+        my jset b {}
+        my jset c {}
+        my jset d {}
+        my jset e {}
+        my jset f {}
+        my jset g {}
+        my jset h {}
+        my jset i {}
+        my jset j {}
+        my jset k {}
+        my jset l {}
+        my jset m {}
+        my jset n {}
+        my jset o {}
+        my jset p {}
+        my jset q {}
+        my jset r {}
+        my jset s {}
+        my jset t {}
+        my jset u {}
+        my jset v {}
+        my jset w {}
+        my jset x {}
+        my jset y {}
+        my jset z {}
+        my jset ZERO {}
+        my jset ONE {}
+        my jset TWO {}
+        my jset THREE {}
+        my jset FOUR {}
+        my jset FIVE {}
+        my jset SIX {}
+        my jset SEVEN {}
+        my jset EIGHT {}
+        my jset NINE {}
+        my jset DPAD_UP {}
+        my jset DPAD_DOWN {}
+        my jset DPAD_LEFT {}
+        my jset DPAD_RIGHT {}
+        my jset DPAD_UP2 {}
+        my jset DPAD_DOWN2 {}
+        my jset DPAD_LEFT2 {}
+        my jset DPAD_RIGHT2 {}
+        my jset COMMA {}
+        my jset SPACE {}
+        my jset DEL {}
+        my jset STAR {}
+        my jset QUESTION {}
+        my jset PERIOD {}
+        my jset ESCAPE {}
+        my jset BACK_SPACE {}
+        my jset UNKNOWN [::PCGameKey new 254 "UNKNOWN"]
+        my jset ENTER [::PCGameKey new 13 "Enter"]
+        my jset _A [::PCGameKey new 65 "A"]
+        my jset _B [::PCGameKey new 66 "B"]
+        my jset _C [::PCGameKey new 67 "C"]
+        my jset _D [::PCGameKey new 68 "D"]
+        my jset _E [::PCGameKey new 69 "E"]
+        my jset _F [::PCGameKey new 70 "F"]
+        my jset _G [::PCGameKey new 71 "G"]
+        my jset _H [::PCGameKey new 72 "H"]
+        my jset _I [::PCGameKey new 73 "I"]
+        my jset _J [::PCGameKey new 74 "J"]
+        my jset _K [::PCGameKey new 75 "K"]
+        my jset _L [::PCGameKey new 76 "L"]
+        my jset _M [::PCGameKey new 77 "M"]
+        my jset _N [::PCGameKey new 78 "N"]
+        my jset _O [::PCGameKey new 79 "O"]
+        my jset _P [::PCGameKey new 80 "P"]
+        my jset _Q [::PCGameKey new 81 "Q"]
+        my jset _R [::PCGameKey new 82 "R"]
+        my jset _S [::PCGameKey new 83 "S"]
+        my jset _T [::PCGameKey new 84 "T"]
+        my jset _U [::PCGameKey new 85 "U"]
+        my jset _V [::PCGameKey new 86 "V"]
+        my jset _W [::PCGameKey new 87 "W"]
+        my jset _X [::PCGameKey new 88 "X"]
+        my jset _Y [::PCGameKey new 89 "Y"]
+        my jset _Z [::PCGameKey new 90 "Z"]
+        my jset a [::PCGameKey new 97 "a"]
+        my jset b [::PCGameKey new 98 "b"]
+        my jset c [::PCGameKey new 99 "c"]
+        my jset d [::PCGameKey new 100 "d"]
+        my jset e [::PCGameKey new 101 "e"]
+        my jset f [::PCGameKey new 102 "f"]
+        my jset g [::PCGameKey new 103 "g"]
+        my jset h [::PCGameKey new 104 "h"]
+        my jset i [::PCGameKey new 105 "i"]
+        my jset j [::PCGameKey new 106 "j"]
+        my jset k [::PCGameKey new 107 "k"]
+        my jset l [::PCGameKey new 108 "l"]
+        my jset m [::PCGameKey new 109 "m"]
+        my jset n [::PCGameKey new 110 "n"]
+        my jset o [::PCGameKey new 111 "o"]
+        my jset p [::PCGameKey new 112 "p"]
+        my jset q [::PCGameKey new 113 "q"]
+        my jset r [::PCGameKey new 114 "r"]
+        my jset s [::PCGameKey new 115 "s"]
+        my jset t [::PCGameKey new 116 "t"]
+        my jset u [::PCGameKey new 117 "u"]
+        my jset v [::PCGameKey new 118 "v"]
+        my jset w [::PCGameKey new 119 "w"]
+        my jset x [::PCGameKey new 120 [[::PositionStrings::getInstance] jget X]]
+        my jset y [::PCGameKey new 121 [[::PositionStrings::getInstance] jget Y]]
+        my jset z [::PCGameKey new 122 "z"]
+        my jset ZERO [::PCGameKey new 48 [[::CommonPhoneStrings::getInstance] jget ZERO]]
+        my jset ONE [::PCGameKey new 49 [[::CommonPhoneStrings::getInstance] jget ONE]]
+        my jset TWO [::PCGameKey new 50 [[::CommonPhoneStrings::getInstance] jget TWO]]
+        my jset THREE [::PCGameKey new 51 [[::CommonPhoneStrings::getInstance] jget THREE]]
+        my jset FOUR [::PCGameKey new 52 [[::CommonPhoneStrings::getInstance] jget FOUR]]
+        my jset FIVE [::PCGameKey new 53 [[::CommonPhoneStrings::getInstance] jget FIVE]]
+        my jset SIX [::PCGameKey new 54 [[::CommonPhoneStrings::getInstance] jget SIX]]
+        my jset SEVEN [::PCGameKey new 55 [[::CommonPhoneStrings::getInstance] jget SEVEN]]
+        my jset EIGHT [::PCGameKey new 56 [[::CommonPhoneStrings::getInstance] jget EIGHT]]
+        my jset NINE [::PCGameKey new 57 [[::CommonPhoneStrings::getInstance] jget NINE]]
+        my jset DPAD_UP [::PCGameKey new 38 [[::CommonPhoneStrings::getInstance] jget UP]]
+        my jset DPAD_DOWN [::PCGameKey new 40 [[::CommonPhoneStrings::getInstance] jget DOWN]]
+        my jset DPAD_LEFT [::PCGameKey new 37 [[::CommonPhoneStrings::getInstance] jget LEFT]]
+        my jset DPAD_RIGHT [::PCGameKey new 39 [[::CommonPhoneStrings::getInstance] jget RIGHT]]
+        my jset DPAD_UP2 [my jget DPAD_UP]
+        my jset DPAD_DOWN2 [my jget DPAD_DOWN]
+        my jset DPAD_LEFT2 [my jget DPAD_LEFT]
+        my jset DPAD_RIGHT2 [my jget DPAD_RIGHT]
+        my jset COMMA [::PCGameKey new 44 "COMMA"]
+        my jset SPACE [::PCGameKey new 32 "SPACE"]
+        my jset DEL [::PCGameKey new 46 "DEL"]
+        my jset STAR [::PCGameKey new 42 [[::CommonPhoneStrings::getInstance] jget STAR]]
+        my jset QUESTION [::PCGameKey new 47 "?"]
+        my jset PERIOD [::PCGameKey new 46 [[::CommonSeps::getInstance] jget PERIOD]]
+        my jset ESCAPE [::PCGameKey new 27 "Esc"]
+        my jset BACK_SPACE [::PCGameKey new 8 "Backspace"]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_PCKeyFactory
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::PCKeyFactory::SINGLETON;
-}
-
-
-sub isSubmission {
-    my ($self, $input) = @_;
-        if ($input == $self->{ENTER}) {
-            return 1;
+    method isSubmission {input} {
+        if {[expr {$input eq [my jget ENTER]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isDelete {
-    my ($self, $input) = @_;
-        if ($input == $self->{DEL}) {
-            return 1;
+    method isDelete {input} {
+        if {[expr {$input eq [my jget DEL]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isBackSpace {
-    my ($self, $input) = @_;
-        if ($input == $self->{BACK_SPACE}) {
-            return 1;
+    method isBackSpace {input} {
+        if {[expr {$input eq [my jget BACK_SPACE]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isUp {
-    my ($self, $input) = @_;
-        if ($input == $self->{DPAD_UP} || $input == $self->{DPAD_UP2}) {
-            return 1;
+    method isUp {input} {
+        if {[expr {[expr {$input eq [my jget DPAD_UP]}] || [expr {$input eq [my jget DPAD_UP2]}]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isDown {
-    my ($self, $input) = @_;
-        if ($input == $self->{DPAD_DOWN} || $input == $self->{DPAD_DOWN2}) {
-            return 1;
+    method isDown {input} {
+        if {[expr {[expr {$input eq [my jget DPAD_DOWN]}] || [expr {$input eq [my jget DPAD_DOWN2]}]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isLeft {
-    my ($self, $input) = @_;
-        if ($input == $self->{DPAD_LEFT} || $input == $self->{DPAD_LEFT2}) {
-            return 1;
+    method isLeft {input} {
+        if {[expr {[expr {$input eq [my jget DPAD_LEFT]}] || [expr {$input eq [my jget DPAD_LEFT2]}]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isRight {
-    my ($self, $input) = @_;
-        if ($input == $self->{DPAD_RIGHT} || $input == $self->{DPAD_RIGHT2}) {
-            return 1;
+    method isRight {input} {
+        if {[expr {[expr {$input eq [my jget DPAD_RIGHT]}] || [expr {$input eq [my jget DPAD_RIGHT2]}]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isEnter {
-    my ($self, $input) = @_;
-        if ($input == $self->{ENTER}) {
-            return 1;
+    method isEnter {input} {
+        if {[expr {$input eq [my jget ENTER]}]} {
+            return true
         }
-        return 0;
+        return false
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::math::PositionStrings ();
-use org::allbinary::string::CommonPhoneStrings ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::game::input::PCGameKey ();
+namespace eval ::PCKeyFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::PCKeyFactory new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::PCKeyFactory::staticGet_SINGLETON]
+    }
+}
 
-1;
 

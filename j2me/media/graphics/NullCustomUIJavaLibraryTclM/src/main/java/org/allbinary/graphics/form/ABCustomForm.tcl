@@ -1,107 +1,86 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::ABCustomForm;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::CustomScreen';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
+oo::class create ::ABCustomForm {
+    superclass ::CustomScreen
 }
 
+oo::define ::ABCustomForm {
+    method initFields_ABCustomForm {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $title, $items, $backgroundBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
+    constructor {title items backgroundBasicColor foregroundBasicColor} {
+        next
+        my initFields_ABCustomForm
+    }
+    
+
+    method getAllitems {} {
+        return [jarray 0 {}]
+    }
+    
+
+    method size {} {
+        return 0
+    }
+    
+
+    method setSelectedIndex {index} {
+    }
+    
+
+    method getSelectedIndex {} {
+        return 0
+    }
+    
+
+    method deleteAll {} {
+    }
+    
+
+    method delete {itemNum} {
+    }
+    
+
+    method append {item} {
+        return [expr {-1}]
+    }
+    
+
+    method insert {itemNum item} {
+    }
+    
+
+    method set {itemNum item} {
+    }
+    
+
+    method get {itemNum} {
+        return [::ABCustomItem::getNullInstance]
+    }
+    
+
+    method getWidth {} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method paint {graphics} {
+    }
+    
+
+    method getTitle {} {
+        return [[::StringUtil::getInstance] jget EMPTY_STRING]
+    }
 }
 
-
-sub getAllitems {
-    my ($self) = @_;
-        return [(undef) x (0)];
+namespace eval ::ABCustomForm {
 }
 
-
-sub size {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub setSelectedIndex {
-    my ($self, $index) = @_;
-}
-
-
-sub getSelectedIndex {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub deleteAll {
-    my ($self) = @_;
-}
-
-
-sub delete {
-    my ($self, $itemNum) = @_;
-}
-
-
-sub append {
-    my ($self, $item) = @_;
-        return -1;
-}
-
-
-sub insert {
-    my ($self, $itemNum, $item) = @_;
-}
-
-
-sub set {
-    my ($self, $itemNum, $item) = @_;
-}
-
-
-sub get {
-    my ($self, $itemNum) = @_;
-        return 'org::allbinary::graphics::form::item::ABCustomItem'->getNullInstance();
-}
-
-
-sub getWidth {
-    my ($self) = @_;
-        die ("RuntimeException");
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-}
-
-
-sub getTitle {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::graphics::form::CustomScreen ();
-
-1;
 

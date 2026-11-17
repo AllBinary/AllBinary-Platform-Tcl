@@ -11,33 +11,32 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.java
 
-package org::allbinary::logic::java::PrimitiveArrayToString;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::PrimitiveArrayToString {
+    superclass ::JObject
 }
 
+oo::define ::PrimitiveArrayToString {
+    method initFields_PrimitiveArrayToString {} {
+        return
+    }
 
-sub toString {
-    my ($class, $floats) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        for (my $index = 0; $index < scalar(@{$floats}); $index++) {
-            $stringBuffer->appendfloat($floats->[$index]);
+    constructor {} {
+        next
+        my initFields_PrimitiveArrayToString
+    }
+    
+}
+
+namespace eval ::PrimitiveArrayToString {
+    proc toString {floats} {
+        set stringBuffer [::StringMaker new]
+        for {set index 0} {[expr {$index < [$floats length]}]} {jpostincr index 1} {
+            $stringBuffer appendfloat [$floats get $index]
         }
-        return $stringBuffer->toString();
+        return [$stringBuffer toString]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::string::StringMaker ();
-
-1;
 

@@ -1,51 +1,40 @@
 # Generated Code Do Not Modify
+# package org.allbinary.game.terrain
 
-package org::allbinary::game::terrain::TerrainEventListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::terrain::TerrainEventListenerInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::TerrainEventListener {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::TerrainEventListener {
+    method initFields_TerrainEventListener {} {
+        my jset list {}
+        my jset list [::BasicArrayListD new]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_TerrainEventListener
+    }
+    
+
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
+
+    method onTerrainEvent {terrainEvent} {
+        [my jget list] clear
+        [my jget list] add $terrainEvent
+    }
+    
+
+    method getList {} {
+        return [my jget list]
+    }
 }
 
-
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
+namespace eval ::TerrainEventListener {
 }
 
-
-sub onTerrainEvent {
-    my ($self, $terrainEvent) = @_;
-        $self->{list}->clear();
-        $self->{list}->add($terrainEvent);
-}
-
-
-sub getList {
-    my ($self) = @_;
-        return $self->{list};
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::game::terrain::TerrainEventListenerInterface ();
-
-1;
 

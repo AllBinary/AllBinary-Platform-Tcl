@@ -11,42 +11,37 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
-package org::allbinary::physics::movement::Movement;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::physics::movement::MovementInterface';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::Movement {
+    superclass ::JObject
 }
 
+oo::define ::Movement {
+    method initFields_Movement {} {
+        return
+    }
+    
 
-sub init {
-    my ($self, $speedBasicDecimal, $angle, $otherAngle) = @_;
+    constructor {} {
+        next
+        my initFields_Movement
+    }
+    
+
+    method init {speedBasicDecimal angle otherAngle} {
+    }
+    
+
+    method process {layer} {
+    }
+    
+
+    method stop {} {
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $layer) = @_;
+namespace eval ::Movement {
 }
 
-
-sub stop {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-use org::allbinary::game::layer::AllBinaryGameLayer ();
-use org::allbinary::logic::math::BasicDecimal ();
-use org::allbinary::physics::movement::MovementInterface ();
-
-1;
 

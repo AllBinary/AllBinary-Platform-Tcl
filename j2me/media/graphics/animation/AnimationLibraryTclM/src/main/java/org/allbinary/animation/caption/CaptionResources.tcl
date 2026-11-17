@@ -11,23 +11,41 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.caption
 
-package org::allbinary::animation::caption::CaptionResources;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $RESOURCE = "/character_message_bubbled_box.png";
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::CaptionResources {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
+oo::define ::CaptionResources {
+    method initFields_CaptionResources {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_CaptionResources
+    }
+}
+
+namespace eval ::CaptionResources {
+    variable RESOURCEValue {}
+    variable RESOURCESet 0
+    proc staticGet_RESOURCE {} {
+        variable RESOURCEValue
+        variable RESOURCESet
+        if {!$RESOURCESet} {
+            set RESOURCESet 1
+            set RESOURCEValue "/character_message_bubbled_box.png"
+        }
+        return $RESOURCEValue
+    }
+    proc staticSet_RESOURCE {value} {
+        variable RESOURCEValue
+        variable RESOURCESet
+        set RESOURCESet 1
+        set RESOURCEValue $value
+    }
+}
+
 

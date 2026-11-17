@@ -11,35 +11,32 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.gyro
 
-package org::allbinary::input::gyro::SingleSensorGameUpdateProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::gyro::SensorGameUpdateProcessor';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::SingleSensorGameUpdateProcessor {
+    superclass ::SensorGameUpdateProcessor
 }
 
+oo::define ::SingleSensorGameUpdateProcessor {
+    method initFields_SingleSensorGameUpdateProcessor {} {
+        return
+    }
 
-# throws Exception
-sub process {
-    my ($self, $anyType) = @_;
+    constructor {} {
+        next
+        my initFields_SingleSensorGameUpdateProcessor
+    }
+    
+
+    method process {anyType} {
+    }
+    
+
+    method sendNotifications {anyType} {
+    }
 }
 
-
-# throws Exception
-sub sendNotifications {
-    my ($self, $anyType) = @_;
+namespace eval ::SingleSensorGameUpdateProcessor {
 }
 
-use java::lang::Object ();
-use org::allbinary::input::gyro::SensorGameUpdateProcessor ();
-
-1;
 

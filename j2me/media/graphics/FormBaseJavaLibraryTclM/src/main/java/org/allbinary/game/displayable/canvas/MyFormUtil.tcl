@@ -11,73 +11,72 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::MyFormUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::displayable::canvas::MyFormUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{popupMenuRectangle} = $org::allbinary::graphics::RectangleFactory::SINGLETON;
+oo::class create ::MyFormUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::MyFormUtil {
+    method initFields_MyFormUtil {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset popupMenuRectangle {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset popupMenuRectangle [::RectangleFactory::staticGet_SINGLETON]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_MyFormUtil
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::displayable::canvas::MyFormUtil::instance;
-}
-
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        my $displayInfo = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        my $isOpenGL = $features->isDefault('org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance()->{OPENGL});
-        my $TOTAL_CHAR_WIDTH = ('org::allbinary::graphics::threed::SWTJOGLProcessor'->getInstance()->isJOGL() && $isOpenGL ? 2 : 3);
-        my $width = 'org::allbinary::graphics::font::MyFontProcessor'->defaultStringWidth($font, $TOTAL_CHAR_WIDTH);
-        my $pointFactory = 'org::allbinary::graphics::PointFactory'->getInstance();
-        if ($displayInfo->getLastHeight() < 320) {
-            $self->{popupMenuRectangle} = 'org::allbinary::graphics::Rectangle'->new($pointFactory->createXY(0, 25), $width, ($font->getHeight() * 4) + 2);
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        set displayInfo [::DisplayInfoSingleton::getInstance]
+        set features [::Features::getInstance]
+        set isOpenGL [$features isDefault [[::OpenGLFeatureFactory::getInstance] jget OPENGL]]
+        set TOTAL_CHAR_WIDTH [expr {[expr {[[::SWTJOGLProcessor::getInstance] isJOGL] && $isOpenGL}] ? 2 : 3}]
+        set width [::MyFontProcessor::defaultStringWidth $font $TOTAL_CHAR_WIDTH]
+        set pointFactory [::PointFactory::getInstance]
+        if {[expr {[$displayInfo getLastHeight] < 320}]} {
+            my jset popupMenuRectangle [::Rectangle new [$pointFactory createXY 0 25] $width [expr {([expr {[$font getHeight] * 4}]) + 2}]]
         } else {
-            $self->{popupMenuRectangle} = 'org::allbinary::graphics::Rectangle'->new($pointFactory->createXY(0, $displayInfo->getLastHalfHeight() - 70), $width, ($font->getHeight() * 5));
+            my jset popupMenuRectangle [::Rectangle new [$pointFactory createXY 0 [expr {[$displayInfo getLastHalfHeight] - 70}]] $width ([expr {[$font getHeight] * 5}])]
         }
+    }
+    
+
+    method getPopupMenuRectangle {} {
+        return [my jget popupMenuRectangle]
+    }
 }
 
-
-sub getPopupMenuRectangle {
-    my ($self) = @_;
-        return $self->{popupMenuRectangle};
+namespace eval ::MyFormUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::MyFormUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::MyFormUtil::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::RectangleFactory ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::opengles::OpenGLFeatureFactory ();
-use org::allbinary::graphics::threed::SWTJOGLProcessor ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

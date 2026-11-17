@@ -11,65 +11,70 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.crypt.jcehelper
 
-package org::allbinary::logic::system::security::crypt::jcehelper::KeySpecFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::system::security::crypt::jcehelper::KeySpecFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{DES} = "DES";
-    $self->{DESEDE} = "DESede";
-    $self->{BLOWFISH} = "Blowfish";
+oo::class create ::KeySpecFactory {
+    superclass ::JObject
 }
 
+oo::define ::KeySpecFactory {
+    method initFields_KeySpecFactory {} {
+        my jset DES {}
+        my jset DESEDE {}
+        my jset BLOWFISH {}
+        my jset DES "DES"
+        my jset DESEDE "DESede"
+        my jset BLOWFISH "Blowfish"
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::system::security::crypt::jcehelper::KeySpecFactory::instance;
-}
+    constructor {} {
+        next
+        my initFields_KeySpecFactory
+    }
+    
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-# Java overloaded method: Perl keeps the last definition
-sub getInstance {
-    my ($self, $algorithm, $keyData) = @_;
+    method getInstance {algorithm keyData} {
         try {
-            my $tsUtil = 'org::allbinary::TsUtil'->getInstance();
-            if ($tsUtil->compareTo($algorithm, $self->{DES}) == 0) {
-                return 'javax::crypto::spec::DESKeySpec'->new($keyData);
-            } elsif ($tsUtil->compareTo($algorithm, $self->{DESEDE}) == 0) {
-                return 'javax::crypto::spec::DESedeKeySpec'->new($keyData);
+            set tsUtil [::TsUtil::getInstance]
+            if {[expr {[$tsUtil compareTo $algorithm [my jget DES]] == 0}]} {
+                return [::DESKeySpec new $keyData]
+            } elseif {[expr {[$tsUtil compareTo $algorithm [my jget DESEDE]] == 0}]} {
+                return [::DESedeKeySpec new $keyData]
             } else {
-                die ("RuntimeException");
+                error [jexception RuntimeException {}]
             }
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            'org::allbinary::logic::communication::log::PreLogUtil'->putOE($commonStrings->{EXCEPTION}, $self, $commonStrings->{GET_INSTANCE}, $e);
-            die ("RuntimeException");
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            ::PreLogUtil::putOE [$commonStrings jget EXCEPTION] [self] [$commonStrings jget GET_INSTANCE] $e
+            error [jexception RuntimeException {}]
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::security::spec::KeySpec ();
-# use javax::crypto::spec::DESKeySpec ();
-# use javax::crypto::spec::DESedeKeySpec ();
-use org::allbinary::TsUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::KeySpecFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::KeySpecFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::KeySpecFactory::staticGet_instance]
+    }
+}
 
-1;
 

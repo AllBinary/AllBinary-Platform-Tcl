@@ -11,76 +11,76 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.event
 
-package org::allbinary::input::event::VirtualKeyboardEventHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Time::HiRes ();
-use parent -norequire,'org::allbinary::logic::util::event::handler::BasicEventHandler';
-
-tie our $gameKeyEventHandler, 'java::lang::LazyStatic', sub { 'org::allbinary::input::event::VirtualKeyboardEventHandler'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{SHOW_EVENT} = 'org::allbinary::input::event::VirtualKeyboardEvent'->new('org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{TRUE});
-    $self->{HIDE_EVENT} = 'org::allbinary::input::event::VirtualKeyboardEvent'->new('org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{FALSE});
+oo::class create ::VirtualKeyboardEventHandler {
+    superclass ::BasicEventHandler
 }
 
+oo::define ::VirtualKeyboardEventHandler {
+    method initFields_VirtualKeyboardEventHandler {} {
+        my jset SHOW_EVENT {}
+        my jset HIDE_EVENT {}
+        my jset SHOW_EVENT [::VirtualKeyboardEvent new [[::BooleanFactory::getInstance] jget TRUE]]
+        my jset HIDE_EVENT [::VirtualKeyboardEvent new [[::BooleanFactory::getInstance] jget FALSE]]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_VirtualKeyboardEventHandler
+    }
+    
+    
 
+    method process {eventObject eventListenerInterface} {
+        set virtualKeyboardEventListenerInterface $eventListenerInterface
+        $virtualKeyboardEventListenerInterface onVirtualKeyboardEvent $eventObject
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::event::VirtualKeyboardEventHandler::gameKeyEventHandler;
-}
-
-
-# throws Exception
-sub process {
-    my ($self, $eventObject, $eventListenerInterface) = @_;
-        my $virtualKeyboardEventListenerInterface = $eventListenerInterface;
-        $virtualKeyboardEventListenerInterface->onVirtualKeyboardEvent($eventObject);
-}
-
-
-sub open {
-    my ($self) = @_;
+    method open {} {
         try {
-            Time::HiRes::sleep((120) / 1000);
-            $self->fireEvent($self->{SHOW_EVENT});
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "open", $e);
+            ::Thread::sleep 120
+            my fireEvent [my jget SHOW_EVENT]
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "open" $e
         }
-}
+    }
+    
 
-
-# throws Exception
-sub close {
-    my ($self) = @_;
+    method close {} {
         try {
-            Time::HiRes::sleep((120) / 1000);
-            $self->fireEvent($self->{HIDE_EVENT});
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{CLOSE}, $e);
+            ::Thread::sleep 120
+            my fireEvent [my jget HIDE_EVENT]
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget CLOSE] $e
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::java::bool::BooleanFactory ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
-use org::allbinary::input::event::VirtualKeyboardEvent ();
-use java::lang::Thread ();
+namespace eval ::VirtualKeyboardEventHandler {
+    variable gameKeyEventHandlerValue {}
+    variable gameKeyEventHandlerSet 0
+    proc staticGet_gameKeyEventHandler {} {
+        variable gameKeyEventHandlerValue
+        variable gameKeyEventHandlerSet
+        if {!$gameKeyEventHandlerSet} {
+            set gameKeyEventHandlerSet 1
+            set gameKeyEventHandlerValue [::VirtualKeyboardEventHandler new]
+        }
+        return $gameKeyEventHandlerValue
+    }
+    proc staticSet_gameKeyEventHandler {value} {
+        variable gameKeyEventHandlerValue
+        variable gameKeyEventHandlerSet
+        set gameKeyEventHandlerSet 1
+        set gameKeyEventHandlerValue $value
+    }
+    proc getInstance {} {
+        return [::VirtualKeyboardEventHandler::staticGet_gameKeyEventHandler]
+    }
+}
 
-1;
 

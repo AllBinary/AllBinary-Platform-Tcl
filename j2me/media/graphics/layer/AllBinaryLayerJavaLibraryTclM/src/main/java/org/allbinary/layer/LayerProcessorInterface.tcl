@@ -11,37 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-# Java interface
-package org::allbinary::layer::LayerProcessorInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::BasicLayerProcessorInterface';
-
-
-
-sub getLayerManager {
-    my ($self) = @_;
-    die "abstract method getLayerManager";
+oo::class create ::LayerProcessorInterface {
+    superclass ::JObject
 }
 
+oo::define ::LayerProcessorInterface {
+    method initFields_LayerProcessorInterface {} {
+        return
+    }
+    
 
-# throws Exception
-sub processAt {
-    my ($self, $allBinaryLayerManager, $layerInterface, $index) = @_;
-    die "abstract method processAt";
+    method getLayerManager {} {
+        error [jexception AbstractMethodError getLayerManager]
+    }
+    
+
+    method processAt {allBinaryLayerManager layerInterface index} {
+        error [jexception AbstractMethodError processAt]
+    }
+    
+
+    method isProcessorLayer {layerInterface} {
+        error [jexception AbstractMethodError isProcessorLayer]
+    }
 }
 
-
-# throws Exception
-sub isProcessorLayer {
-    my ($self, $layerInterface) = @_;
-    die "abstract method isProcessorLayer";
+namespace eval ::LayerProcessorInterface {
 }
 
-use org::allbinary::layer::BasicLayerProcessorInterface ();
-
-1;
 

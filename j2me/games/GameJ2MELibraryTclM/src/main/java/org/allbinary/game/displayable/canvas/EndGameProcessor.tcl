@@ -11,61 +11,53 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::EndGameProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::canvas::Processor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gameStateFactory} = 'org::allbinary::game::state::GameStateFactory'->getInstance();
-    $self->{gameCanvas} = undef;
-    $self->{WAIT} = 5000;
+oo::class create ::EndGameProcessor {
+    superclass ::Processor
 }
 
+oo::define ::EndGameProcessor {
+    method initFields_EndGameProcessor {} {
+        my jset gameStateFactory {}
+        my jset gameCanvas {}
+        my jset WAIT 0
+        my jset gameStateFactory [::GameStateFactory::getInstance]
+        
+        my jset WAIT 5000
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{gameCanvas} = $gameCanvas;
-    return $self;
-}
+    constructor {gameCanvas} {
+        next
+        my initFields_EndGameProcessor
+        my jset gameCanvas $gameCanvas
+    }
+    
 
-
-# throws Exception
-sub process {
-    my ($self) = @_;
-        if ($self->{gameCanvas}->isHighScoreSubmitted()) {
-            if ($self->{gameCanvas}->getGameStateTimeHelper()->isElapsedTNT($self->{WAIT})) {
-                if ($self->{gameCanvas}->getGameState() == $self->{gameStateFactory}->{SHOW_END_RESULT_GAME_STATE}) {
-                    my $highScoresBase = $self->{gameCanvas}->{highScoresHelper};
-                    my $highScores = $highScoresBase->getSelectedHighScores();
-                    if ($highScores != 'org::allbinary::game::score::NullHighScoresSingletonFactory'->getInstance()) {
-                        $highScoresBase->selectHighScores();
-                        $self->{gameCanvas}->getRealHighScoresPaintable()->setHighScores($highScores);
-                        $self->{gameCanvas}->setGameState($self->{gameStateFactory}->{SHOW_HIGH_SCORE_GAME_STATE});
-                        $self->{gameCanvas}->setHighScoresPaintable($self->{gameCanvas}->getRealHighScoresPaintable());
+    method process {} {
+        if {[[my jget gameCanvas] isHighScoreSubmitted]} {
+            if {[[[my jget gameCanvas] getGameStateTimeHelper] isElapsedTNT [my jget WAIT]]} {
+                if {[expr {[[my jget gameCanvas] getGameState] == [[my jget gameStateFactory] jget SHOW_END_RESULT_GAME_STATE]}]} {
+                    set highScoresBase [[my jget gameCanvas] jget highScoresHelper]
+                    set highScores [$highScoresBase getSelectedHighScores]
+                    if {[expr {$highScores ne [::NullHighScoresSingletonFactory::getInstance]}]} {
+                        $highScoresBase selectHighScores
+                        [[my jget gameCanvas] getRealHighScoresPaintable] setHighScores $highScores
+                        [my jget gameCanvas] setGameState [[my jget gameStateFactory] jget SHOW_HIGH_SCORE_GAME_STATE]
+                        [my jget gameCanvas] setHighScoresPaintable [[my jget gameCanvas] getRealHighScoresPaintable]
                     }
-                } elsif ($self->{gameCanvas}->getGameState() == $self->{gameStateFactory}->{SHOW_HIGH_SCORE_GAME_STATE}) {
-                    $self->{gameCanvas}->setGameState($self->{gameStateFactory}->{SHOW_END_RESULT_GAME_STATE});
-                    $self->{gameCanvas}->setHighScoresPaintable('org::allbinary::graphics::paint::NullPaintable'->getInstance());
+                } elseif {[expr {[[my jget gameCanvas] getGameState] == [[my jget gameStateFactory] jget SHOW_HIGH_SCORE_GAME_STATE]}]} {
+                    [my jget gameCanvas] setGameState [[my jget gameStateFactory] jget SHOW_END_RESULT_GAME_STATE]
+                    [my jget gameCanvas] setHighScoresPaintable [::NullPaintable::getInstance]
                 }
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::game::score::HighScores ();
-use org::allbinary::game::score::HighScoresHelperBase ();
-use org::allbinary::game::score::NullHighScoresSingletonFactory ();
-use org::allbinary::game::state::GameStateFactory ();
-use org::allbinary::graphics::paint::NullPaintable ();
+namespace eval ::EndGameProcessor {
+}
 
-1;
 

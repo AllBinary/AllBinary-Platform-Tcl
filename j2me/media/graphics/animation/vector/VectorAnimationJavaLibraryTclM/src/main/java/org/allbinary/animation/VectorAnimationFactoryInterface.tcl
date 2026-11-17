@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-# Java interface
-package org::allbinary::animation::VectorAnimationFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getInstance {
-    my ($self, $points, $basicColor) = @_;
-    die "abstract method getInstance";
+oo::class create ::VectorAnimationFactoryInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::graphics::color::BasicColor ();
+oo::define ::VectorAnimationFactoryInterface {
+    method initFields_VectorAnimationFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getInstance {points basicColor} {
+        error [jexception AbstractMethodError getInstance]
+    }
+}
+
+namespace eval ::VectorAnimationFactoryInterface {
+}
+
 

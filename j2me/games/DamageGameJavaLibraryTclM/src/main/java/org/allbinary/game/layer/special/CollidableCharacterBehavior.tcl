@@ -11,52 +11,42 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.special
 
-package org::allbinary::game::layer::special::CollidableCharacterBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::special::CollidableDestroyableDamageableBehavior';
-
-
-
-sub new {
-    my ($class, $collidable) = @_;
-    my $self = $class->SUPER::new($collidable);
-        # super(...) made $self above
-    return $self;
+oo::class create ::CollidableCharacterBehavior {
+    superclass ::CollidableDestroyableDamageableBehavior
 }
 
+oo::define ::CollidableCharacterBehavior {
+    method initFields_CollidableCharacterBehavior {} {
+        return
+    }
+    
 
-# throws Exception
-sub collide {
-    my ($self, $ownerLayer, $collidableInterfaceCompositeInterface) = @_;
-        my $collisionTypeFactory = 'org::allbinary::game::collision::CollisionTypeFactory'->getInstance();
-        my $collisionType = $collidableInterfaceCompositeInterface->getCollidableInferface()->getCollisionTypeWith($ownerLayer);
-        if ($collisionType == $collisionTypeFactory->{PICKUP}) {
-            my $collidableDestroyableDamageableLayer = $ownerLayer;
-            $collidableDestroyableDamageableLayer->getPickupBehavior()->doPickupLayer($collidableInterfaceCompositeInterface);
+    constructor {collidable} {
+        next $collidable
+        my initFields_CollidableCharacterBehavior
+    }
+    
+
+    method collide {ownerLayer collidableInterfaceCompositeInterface} {
+        set collisionTypeFactory [::CollisionTypeFactory::getInstance]
+        set collisionType [[$collidableInterfaceCompositeInterface getCollidableInferface] getCollisionTypeWith $ownerLayer]
+        if {[expr {$collisionType eq [$collisionTypeFactory jget PICKUP]}]} {
+            set collidableDestroyableDamageableLayer $ownerLayer
+            [$collidableDestroyableDamageableLayer getPickupBehavior] doPickupLayer $collidableInterfaceCompositeInterface
         } else {
-            $self->SUPER::collide($ownerLayer, $collidableInterfaceCompositeInterface);
+            next $ownerLayer $collidableInterfaceCompositeInterface
         }
+    }
+    
+
+    method collideInterface {ownerLayer collidableInterfaceCompositeInterface} {
+        ::ForcedLogUtil::log [[my jget commonStrings] jget NOT_IMPLEMENTED] [self]
+    }
 }
 
-
-# throws Exception
-sub collideInterface {
-    my ($self, $ownerLayer, $collidableInterfaceCompositeInterface) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log($self->{commonStrings}->{NOT_IMPLEMENTED}, $self);
+namespace eval ::CollidableCharacterBehavior {
 }
 
-use java::lang::Object ();
-use org::allbinary::game::collision::CollidableInterfaceCompositeInterface ();
-use org::allbinary::game::collision::CollisionType ();
-use org::allbinary::game::collision::CollisionTypeFactory ();
-use org::allbinary::game::layer::CollidableCompositeLayer ();
-use org::allbinary::game::layer::pickup::PickedUpLayerInterface ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::game::layer::special::CollidableDestroyableDamageableBehavior ();
-
-1;
 

@@ -11,63 +11,66 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-package org::allbinary::game::layer::LevelLayersFinder;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::LevelLayersFinder'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{enumerationUtil} = 'org::allbinary::util::EnumerationUtil'->getInstance();
+oo::class create ::LevelLayersFinder {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::LevelLayersFinder {
+    method initFields_LevelLayersFinder {} {
+        my jset enumerationUtil {}
+        my jset enumerationUtil [::EnumerationUtil::getInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_LevelLayersFinder
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::layer::LevelLayersFinder::instance;
-}
-
-
-sub get {
-    my ($self, $hashtable) = @_;
-        my $smallIntegerSingletonFactory = 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance();
-        my $list = 'org::allbinary::util::BasicArrayListD'->new();
-        my $enumeration = $hashtable->keys();
-        my $layerHashtableCanBeNull = undef;
-        my $integerCanBeNull = undef;
-        my $cachedIntegerCanBeNull = undef;
-        while ($self->{enumerationUtil}->hasMoreElements($enumeration)) {
-            $layerHashtableCanBeNull = $hashtable->get($self->{enumerationUtil}->nextElement($enumeration));
-            $integerCanBeNull = $layerHashtableCanBeNull->get($org::allbinary::layer::Layer::ID);
-            $cachedIntegerCanBeNull = $smallIntegerSingletonFactory->getAt(int($integerCanBeNull));
-            if (!$list->contains($cachedIntegerCanBeNull)) {
-                $list->add($cachedIntegerCanBeNull);
+    method get {hashtable} {
+        set smallIntegerSingletonFactory [::SmallIntegerSingletonFactory::getInstance]
+        set list [::BasicArrayListD new]
+        set enumeration [$hashtable keys]
+        set layerHashtableCanBeNull {}
+        set integerCanBeNull {}
+        set cachedIntegerCanBeNull {}
+        while {[[my jget enumerationUtil] hasMoreElements $enumeration]} {
+            set layerHashtableCanBeNull [$hashtable get [[my jget enumerationUtil] nextElement $enumeration]]
+            set integerCanBeNull [$layerHashtableCanBeNull get [::Layer::staticGet_ID]]
+            set cachedIntegerCanBeNull [$smallIntegerSingletonFactory getAt [$integerCanBeNull intValue]]
+            if {[expr {![$list contains $cachedIntegerCanBeNull]}]} {
+                $list add $cachedIntegerCanBeNull
             }
         }
-        return $list;
+        return $list
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use java::util::Enumeration ();
-use org::allbinary::layer::Layer ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::util::EnumerationUtil ();
+namespace eval ::LevelLayersFinder {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LevelLayersFinder new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LevelLayersFinder::staticGet_instance]
+    }
+}
 
-1;
 

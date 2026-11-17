@@ -11,57 +11,67 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::DemoGameStartupRunnable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::thread::ABRunnable';
-
-our $TYPE = 4;
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{demoCanvas} = undef;
+oo::class create ::DemoGameStartupRunnable {
+    superclass ::ABRunnable
 }
 
+oo::define ::DemoGameStartupRunnable {
+    method initFields_DemoGameStartupRunnable {} {
+        my jset logUtil {}
+        my jset demoCanvas {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $demoCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{demoCanvas} = $demoCanvas;
-    return $self;
-}
+    constructor {demoCanvas} {
+        next
+        my initFields_DemoGameStartupRunnable
+        my jset demoCanvas $demoCanvas
+    }
+    
 
-
-sub run {
-    my ($self) = @_;
+    method run {} {
         try {
-            $self->setRunning(1);
-            $self->{demoCanvas}->stopGameDemo();
-            $self->{demoCanvas}->create();
-            $self->{demoCanvas}->start();
-            $self->setRunning(0);
-        } catch ($e) {
-            $self->setRunning(0);
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{RUN}, $e);
+            my setRunning true
+            [my jget demoCanvas] stopGameDemo
+            [my jget demoCanvas] create
+            [my jget demoCanvas] start
+            my setRunning false
+        } on error {e} {
+            my setRunning false
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget RUN] $e
         }
+    }
+    
+
+    method getType {} {
+        return [::DemoGameStartupRunnable::staticGet_TYPE]
+    }
 }
 
-
-sub getType {
-    my ($self) = @_;
-        return $org::allbinary::game::displayable::canvas::DemoGameStartupRunnable::TYPE;
+namespace eval ::DemoGameStartupRunnable {
+    variable TYPEValue {}
+    variable TYPESet 0
+    proc staticGet_TYPE {} {
+        variable TYPEValue
+        variable TYPESet
+        if {!$TYPESet} {
+            set TYPESet 1
+            set TYPEValue 4
+        }
+        return $TYPEValue
+    }
+    proc staticSet_TYPE {value} {
+        variable TYPEValue
+        variable TYPESet
+        set TYPESet 1
+        set TYPEValue $value
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::thread::ABRunnable ();
-
-1;
 

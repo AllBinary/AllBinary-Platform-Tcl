@@ -11,163 +11,131 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::resource::BaseResourceAnimationInterfaceFactoryInterfaceFactory';
-
-
-
-sub createFactory {
-    my ($class) = @_;
-        return 'org::allbinary::input::motion::button::TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory'->new("TouchButton Animations");
+oo::class create ::TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory {
+    superclass ::BaseResourceAnimationInterfaceFactoryInterfaceFactory
 }
 
+oo::define ::TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory {
+    method initFields_TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class, $name) = @_;
-    my $self = $class->SUPER::new($name, 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable(), 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable(), 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable());
-        # super(...) made $self above
-    return $self;
-}
+    constructor {name} {
+        next $name [[::StdUtil::getInstance] createHashtable] [[::StdUtil::getInstance] createHashtable] [[::StdUtil::getInstance] createHashtable]
+        my initFields_TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory
+    }
+    
 
+    method init {level} {
+        my initImageCache [::ImageCacheFactory::getInstance] $level
+    }
+    
 
-# throws Exception
-sub init {
-    my ($self, $level) = @_;
-        $self->initImageCache('org::allbinary::image::ImageCacheFactory'->getInstance(), $level);
-}
-
-
-# throws Exception
-sub initImageCache {
-    my ($self, $imageCache, $level) = @_;
-        if ($self->isInitialized()) {
-            return;
+    method initImageCache {imageCache level} {
+        if {[my isInitialized]} {
+            return
         }
-        my $portion = 140;
-        my $loadingString = 'org::allbinary::logic::string::StringMaker'->new()->append($self->toString())->append(" Loading: ")->toString();
-        my $index = 0;
-        my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-        $progressCanvas->addPortion($portion, $loadingString, $index++);
-        my $touchButtonBlankResource = 'org::allbinary::input::motion::button::TouchButtonBlankResource'->getInstance();
-        my $touchButtonGenericActionResource = 'org::allbinary::input::motion::button::TouchButtonGenericActionResource'->getInstance();
-        my $touchButtonStartResource = 'org::allbinary::input::motion::button::TouchButtonStartResource'->getInstance();
-        my $touchButtonUpResource = 'org::allbinary::input::motion::button::TouchButtonUpResource'->getInstance();
-        my $touchButtonDownResource = 'org::allbinary::input::motion::button::TouchButtonDownResource'->getInstance();
-        my $touchButtonTurnLeftResource = 'org::allbinary::input::motion::button::TouchButtonTurnLeftResource'->getInstance();
-        my $touchButtonTurnRightResource = 'org::allbinary::input::motion::button::TouchButtonTurnRightResource'->getInstance();
-        my $touchButtonStrafeLeftResource = 'org::allbinary::input::motion::button::TouchButtonStrafeLeftResource'->getInstance();
-        my $touchButtonStrafeRightResource = 'org::allbinary::input::motion::button::TouchButtonStrafeRightResource'->getInstance();
-        my $touchButtonBlankResourceImage = $imageCache->getWithKey($touchButtonBlankResource->{RESOURCE});
-        my $touchButtonGenericActionResourceImage = $imageCache->getWithKey($touchButtonGenericActionResource->{RESOURCE});
-        my $touchButtonStartResourceImage = $imageCache->getWithKey($touchButtonStartResource->{RESOURCE});
-        my $touchButtonUpResourceImage = $imageCache->getWithKey($touchButtonUpResource->{RESOURCE});
-        my $touchButtonDownResourceImage = $imageCache->getWithKey($touchButtonDownResource->{RESOURCE});
-        my $touchButtonTurnLeftResourceImage = $imageCache->getWithKey($touchButtonTurnLeftResource->{RESOURCE});
-        my $touchButtonTurnRightResourceImage = $imageCache->getWithKey($touchButtonTurnRightResource->{RESOURCE});
-        my $touchButtonStrafeLeftResourceImage = $imageCache->getWithKey($touchButtonStrafeLeftResource->{RESOURCE});
-        my $touchButtonStrafeRightResourceImage = $imageCache->getWithKey($touchButtonStrafeRightResource->{RESOURCE});
-        my $nullAnimationFactory = 'org::allbinary::animation::NullAnimationFactory'->getFactoryInstance();
-        if ('org::allbinary::logic::system::os::OperatingSystemFactory'->getInstance()->getOperatingSystemInstance()->isOverScan()) {
-            $imageCache->getWithKey('org::allbinary::input::motion::button::TouchButtonStartResource'->getInstance()->{HINT});
+        set portion 140
+        set loadingString [[[[::StringMaker new] append [my toString]] append " Loading: "] toString]
+        set index 0
+        set progressCanvas [::ProgressCanvasFactory::getInstance]
+        $progressCanvas addPortion $portion $loadingString [jpostincr index 1]
+        set touchButtonBlankResource [::TouchButtonBlankResource::getInstance]
+        set touchButtonGenericActionResource [::TouchButtonGenericActionResource::getInstance]
+        set touchButtonStartResource [::TouchButtonStartResource::getInstance]
+        set touchButtonUpResource [::TouchButtonUpResource::getInstance]
+        set touchButtonDownResource [::TouchButtonDownResource::getInstance]
+        set touchButtonTurnLeftResource [::TouchButtonTurnLeftResource::getInstance]
+        set touchButtonTurnRightResource [::TouchButtonTurnRightResource::getInstance]
+        set touchButtonStrafeLeftResource [::TouchButtonStrafeLeftResource::getInstance]
+        set touchButtonStrafeRightResource [::TouchButtonStrafeRightResource::getInstance]
+        set touchButtonBlankResourceImage [$imageCache getWithKey [$touchButtonBlankResource jget RESOURCE]]
+        set touchButtonGenericActionResourceImage [$imageCache getWithKey [$touchButtonGenericActionResource jget RESOURCE]]
+        set touchButtonStartResourceImage [$imageCache getWithKey [$touchButtonStartResource jget RESOURCE]]
+        set touchButtonUpResourceImage [$imageCache getWithKey [$touchButtonUpResource jget RESOURCE]]
+        set touchButtonDownResourceImage [$imageCache getWithKey [$touchButtonDownResource jget RESOURCE]]
+        set touchButtonTurnLeftResourceImage [$imageCache getWithKey [$touchButtonTurnLeftResource jget RESOURCE]]
+        set touchButtonTurnRightResourceImage [$imageCache getWithKey [$touchButtonTurnRightResource jget RESOURCE]]
+        set touchButtonStrafeLeftResourceImage [$imageCache getWithKey [$touchButtonStrafeLeftResource jget RESOURCE]]
+        set touchButtonStrafeRightResourceImage [$imageCache getWithKey [$touchButtonStrafeRightResource jget RESOURCE]]
+        set nullAnimationFactory [::NullAnimationFactory::getFactoryInstance]
+        if {[[[::OperatingSystemFactory::getInstance] getOperatingSystemInstance] isOverScan]} {
+            $imageCache getWithKey [[::TouchButtonStartResource::getInstance] jget HINT]
         }
-        $progressCanvas->addPortion($portion, $loadingString, $index++);
-        my $imageCompleteUtil = 'org::allbinary::media::image::ImageCompleteUtil'->getInstance();
-        $progressCanvas->addPortion($portion, $loadingString, $index++);
-        $imageCompleteUtil->waitForImage($touchButtonBlankResourceImage, $touchButtonBlankResource->{RESOURCE});
-        $self->add($touchButtonBlankResource->{RESOURCE}, 'org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory'->createFactory($touchButtonBlankResourceImage, 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance()));
-        $self->add($touchButtonBlankResource->{HINT}, $nullAnimationFactory);
-        $progressCanvas->addPortion($portion, $loadingString, $index++);
-        $imageCompleteUtil->waitForImage($touchButtonGenericActionResourceImage, $touchButtonGenericActionResource->{RESOURCE});
-        $self->add($touchButtonGenericActionResource->{RESOURCE}, 'org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory'->createFactory($touchButtonGenericActionResourceImage, 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance()));
-        $self->add($touchButtonGenericActionResource->{HINT}, $nullAnimationFactory);
-        $progressCanvas->addPortion($portion, $loadingString, $index++);
-        $imageCompleteUtil->waitForImage($touchButtonStartResourceImage, $touchButtonStartResource->{RESOURCE});
-        $self->add($touchButtonStartResource->{RESOURCE}, 'org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory'->createFactory($touchButtonStartResourceImage, 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance()));
-        $progressCanvas->addPortion($portion, $loadingString, $index++);
-        $imageCompleteUtil->waitForImage($touchButtonUpResourceImage, $touchButtonUpResource->{RESOURCE});
-        $self->add($touchButtonUpResource->{RESOURCE}, 'org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory'->createFactory($touchButtonUpResourceImage, 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance()));
-        $self->add($touchButtonUpResource->{HINT}, $nullAnimationFactory);
-        $progressCanvas->addPortion($portion, $loadingString, $index++);
-        $imageCompleteUtil->waitForImage($touchButtonDownResourceImage, $touchButtonDownResource->{RESOURCE});
-        $self->add($touchButtonDownResource->{RESOURCE}, 'org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory'->createFactory($touchButtonDownResourceImage, 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance()));
-        $self->add($touchButtonDownResource->{HINT}, $nullAnimationFactory);
-        $progressCanvas->addPortion($portion, $loadingString, $index++);
-        $imageCompleteUtil->waitForImage($touchButtonTurnLeftResourceImage, $touchButtonTurnLeftResource->{RESOURCE});
-        $self->add($touchButtonTurnLeftResource->{RESOURCE}, 'org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory'->createFactory($touchButtonTurnLeftResourceImage, 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance()));
-        $self->add($touchButtonTurnLeftResource->{HINT}, $nullAnimationFactory);
-        $progressCanvas->addPortion($portion, $loadingString, $index++);
-        $imageCompleteUtil->waitForImage($touchButtonTurnRightResourceImage, $touchButtonTurnRightResource->{RESOURCE});
-        $self->add($touchButtonTurnRightResource->{RESOURCE}, 'org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory'->createFactory($touchButtonTurnRightResourceImage, 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance()));
-        $self->add($touchButtonTurnRightResource->{HINT}, $nullAnimationFactory);
-        $progressCanvas->addPortion($portion, $loadingString, $index++);
-        $imageCompleteUtil->waitForImage($touchButtonStrafeLeftResourceImage, $touchButtonStrafeLeftResource->{RESOURCE});
-        $self->add($touchButtonStrafeLeftResource->{RESOURCE}, 'org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory'->createFactory($touchButtonStrafeLeftResourceImage, 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance()));
-        $self->add($touchButtonStrafeLeftResource->{HINT}, $nullAnimationFactory);
-        $progressCanvas->addPortion($portion, $loadingString, $index++);
-        $imageCompleteUtil->waitForImage($touchButtonStrafeRightResourceImage, $touchButtonStrafeRightResource->{RESOURCE});
-        $self->add($touchButtonStrafeRightResource->{RESOURCE}, 'org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory'->createFactory($touchButtonStrafeRightResourceImage, 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance()));
-        $self->add($touchButtonStrafeRightResource->{HINT}, $nullAnimationFactory);
-        if ('org::allbinary::logic::system::os::OperatingSystemFactory'->getInstance()->getOperatingSystemInstance()->isOverScan()) {
-            my $touchButtonStartHintResource = $imageCache->getWithKey('org::allbinary::input::motion::button::TouchButtonStartResource'->getInstance()->{HINT});
-            $self->add($touchButtonStartResource->{HINT}, 'org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory'->createFactory($touchButtonStartHintResource, 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance()));
+        $progressCanvas addPortion $portion $loadingString [jpostincr index 1]
+        set imageCompleteUtil [::ImageCompleteUtil::getInstance]
+        $progressCanvas addPortion $portion $loadingString [jpostincr index 1]
+        $imageCompleteUtil waitForImage $touchButtonBlankResourceImage [$touchButtonBlankResource jget RESOURCE]
+        my add [$touchButtonBlankResource jget RESOURCE] [::OneRowSpriteIndexedAnimationFactory::createFactory $touchButtonBlankResourceImage [::AnimationBehaviorFactory::getInstance]]
+        my add [$touchButtonBlankResource jget HINT] $nullAnimationFactory
+        $progressCanvas addPortion $portion $loadingString [jpostincr index 1]
+        $imageCompleteUtil waitForImage $touchButtonGenericActionResourceImage [$touchButtonGenericActionResource jget RESOURCE]
+        my add [$touchButtonGenericActionResource jget RESOURCE] [::OneRowSpriteIndexedAnimationFactory::createFactory $touchButtonGenericActionResourceImage [::AnimationBehaviorFactory::getInstance]]
+        my add [$touchButtonGenericActionResource jget HINT] $nullAnimationFactory
+        $progressCanvas addPortion $portion $loadingString [jpostincr index 1]
+        $imageCompleteUtil waitForImage $touchButtonStartResourceImage [$touchButtonStartResource jget RESOURCE]
+        my add [$touchButtonStartResource jget RESOURCE] [::OneRowSpriteIndexedAnimationFactory::createFactory $touchButtonStartResourceImage [::AnimationBehaviorFactory::getInstance]]
+        $progressCanvas addPortion $portion $loadingString [jpostincr index 1]
+        $imageCompleteUtil waitForImage $touchButtonUpResourceImage [$touchButtonUpResource jget RESOURCE]
+        my add [$touchButtonUpResource jget RESOURCE] [::OneRowSpriteIndexedAnimationFactory::createFactory $touchButtonUpResourceImage [::AnimationBehaviorFactory::getInstance]]
+        my add [$touchButtonUpResource jget HINT] $nullAnimationFactory
+        $progressCanvas addPortion $portion $loadingString [jpostincr index 1]
+        $imageCompleteUtil waitForImage $touchButtonDownResourceImage [$touchButtonDownResource jget RESOURCE]
+        my add [$touchButtonDownResource jget RESOURCE] [::OneRowSpriteIndexedAnimationFactory::createFactory $touchButtonDownResourceImage [::AnimationBehaviorFactory::getInstance]]
+        my add [$touchButtonDownResource jget HINT] $nullAnimationFactory
+        $progressCanvas addPortion $portion $loadingString [jpostincr index 1]
+        $imageCompleteUtil waitForImage $touchButtonTurnLeftResourceImage [$touchButtonTurnLeftResource jget RESOURCE]
+        my add [$touchButtonTurnLeftResource jget RESOURCE] [::OneRowSpriteIndexedAnimationFactory::createFactory $touchButtonTurnLeftResourceImage [::AnimationBehaviorFactory::getInstance]]
+        my add [$touchButtonTurnLeftResource jget HINT] $nullAnimationFactory
+        $progressCanvas addPortion $portion $loadingString [jpostincr index 1]
+        $imageCompleteUtil waitForImage $touchButtonTurnRightResourceImage [$touchButtonTurnRightResource jget RESOURCE]
+        my add [$touchButtonTurnRightResource jget RESOURCE] [::OneRowSpriteIndexedAnimationFactory::createFactory $touchButtonTurnRightResourceImage [::AnimationBehaviorFactory::getInstance]]
+        my add [$touchButtonTurnRightResource jget HINT] $nullAnimationFactory
+        $progressCanvas addPortion $portion $loadingString [jpostincr index 1]
+        $imageCompleteUtil waitForImage $touchButtonStrafeLeftResourceImage [$touchButtonStrafeLeftResource jget RESOURCE]
+        my add [$touchButtonStrafeLeftResource jget RESOURCE] [::OneRowSpriteIndexedAnimationFactory::createFactory $touchButtonStrafeLeftResourceImage [::AnimationBehaviorFactory::getInstance]]
+        my add [$touchButtonStrafeLeftResource jget HINT] $nullAnimationFactory
+        $progressCanvas addPortion $portion $loadingString [jpostincr index 1]
+        $imageCompleteUtil waitForImage $touchButtonStrafeRightResourceImage [$touchButtonStrafeRightResource jget RESOURCE]
+        my add [$touchButtonStrafeRightResource jget RESOURCE] [::OneRowSpriteIndexedAnimationFactory::createFactory $touchButtonStrafeRightResourceImage [::AnimationBehaviorFactory::getInstance]]
+        my add [$touchButtonStrafeRightResource jget HINT] $nullAnimationFactory
+        if {[[[::OperatingSystemFactory::getInstance] getOperatingSystemInstance] isOverScan]} {
+            set touchButtonStartHintResource [$imageCache getWithKey [[::TouchButtonStartResource::getInstance] jget HINT]]
+            my add [$touchButtonStartResource jget HINT] [::OneRowSpriteIndexedAnimationFactory::createFactory $touchButtonStartHintResource [::AnimationBehaviorFactory::getInstance]]
         } else {
-            $self->add($touchButtonStartResource->{HINT}, $nullAnimationFactory);
+            my add [$touchButtonStartResource jget HINT] $nullAnimationFactory
         }
-        $self->SUPER::init($level);
-}
+        next $level
+    }
+    
 
-
-sub isLoadingLevel {
-    my ($self, $level) = @_;
-        my $resourceLoadingLevelFactory = 'org::allbinary::game::resource::ResourceLoadingLevelFactory'->getInstance();
-        if ($level == $resourceLoadingLevelFactory->{LOAD_TOUCH}->getLevel()) {
-            return 1;
+    method isLoadingLevel {level} {
+        set resourceLoadingLevelFactory [::ResourceLoadingLevelFactory::getInstance]
+        if {[expr {$level == [[$resourceLoadingLevelFactory jget LOAD_TOUCH] getLevel]}]} {
+            return true
         } else {
-            return $self->SUPER::isLoadingLevel($level);
+            return [next $level]
         }
-}
+    }
+    
 
-
-sub isFeature {
-    my ($self) = @_;
-        if (!'org::allbinary::game::configuration::feature::Features'->getInstance()->isDefault('org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance()->{OPENGL})) {
-            return 1;
+    method isFeature {} {
+        if {[expr {![[::Features::getInstance] isDefault [[::OpenGLFeatureFactory::getInstance] jget OPENGL]]}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::animation::NullAnimationFactory ();
-use org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory ();
-use org::allbinary::animation::resource::BaseResourceAnimationInterfaceFactoryInterfaceFactory ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::resource::ResourceLoadingLevelFactory ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvas ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory ();
-use org::allbinary::graphics::opengles::OpenGLFeatureFactory ();
-use org::allbinary::image::ImageCache ();
-use org::allbinary::image::ImageCacheFactory ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::system::os::OperatingSystemFactory ();
-use org::allbinary::media::image::ImageCompleteUtil ();
-use org::allbinary::input::motion::button::TouchButtonBlankResource ();
-use org::allbinary::input::motion::button::TouchButtonGenericActionResource ();
-use org::allbinary::input::motion::button::TouchButtonStartResource ();
-use org::allbinary::input::motion::button::TouchButtonUpResource ();
-use org::allbinary::input::motion::button::TouchButtonDownResource ();
-use org::allbinary::input::motion::button::TouchButtonTurnLeftResource ();
-use org::allbinary::input::motion::button::TouchButtonTurnRightResource ();
-use org::allbinary::input::motion::button::TouchButtonStrafeLeftResource ();
-use org::allbinary::input::motion::button::TouchButtonStrafeRightResource ();
+namespace eval ::TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory {
+    proc createFactory {} {
+        return [::TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory new "TouchButton Animations"]
+    }
+}
 
-1;
 

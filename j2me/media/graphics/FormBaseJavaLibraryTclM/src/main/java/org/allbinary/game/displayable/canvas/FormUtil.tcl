@@ -11,43 +11,53 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::FormUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::displayable::canvas::FormUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::FormUtil {
+    superclass ::JObject
 }
 
+oo::define ::FormUtil {
+    method initFields_FormUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::displayable::canvas::FormUtil::instance;
+    constructor {} {
+        next
+        my initFields_FormUtil
+    }
+    
+    
+
+    method createFormRectangle {} {
+        set displayInfo [::DisplayInfoSingleton::getInstance]
+        set pointFactory [::PointFactory::getInstance]
+        set rectangle [::Rectangle new [$pointFactory createXY 30 10] [expr {[$displayInfo getLastWidth] - 30}] [expr {[$displayInfo getLastHeight] - 35}]]
+        return $rectangle
+    }
 }
 
-
-sub createFormRectangle {
-    my ($self) = @_;
-        my $displayInfo = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-        my $pointFactory = 'org::allbinary::graphics::PointFactory'->getInstance();
-        my $rectangle = 'org::allbinary::graphics::Rectangle'->new($pointFactory->createXY(30, 10), $displayInfo->getLastWidth() - 30, $displayInfo->getLastHeight() - 35);
-        return $rectangle;
+namespace eval ::FormUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::FormUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::FormUtil::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::logic::communication::log::LogUtil ();
-
-1;
 

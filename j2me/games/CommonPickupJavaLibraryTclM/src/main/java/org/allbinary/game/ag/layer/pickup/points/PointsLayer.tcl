@@ -11,49 +11,37 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.pickup.points
 
-package org::allbinary::game::ag::layer::pickup::points::PointsLayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::AllBinaryLayer';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{points} = undef;
+oo::class create ::PointsLayer {
+    superclass ::AllBinaryLayer
 }
 
+oo::define ::PointsLayer {
+    method initFields_PointsLayer {} {
+        my jset points 0
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $points) = @_;
-    my $self = $class->SUPER::new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, 'org::allbinary::graphics::Rectangle'->new('org::allbinary::graphics::PointFactory'->getInstance()->{ZERO_ZERO}, 0, 0), 'org::allbinary::view::ViewPosition'->getInstanceD());
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{points} = $points;
-    return $self;
+    constructor {points} {
+        next [[::StringUtil::getInstance] jget EMPTY_STRING] [::Rectangle new [[::PointFactory::getInstance] jget ZERO_ZERO] 0 0] [::ViewPosition::getInstanceD]
+        my initFields_PointsLayer
+        my jset points $points
+    }
+    
+
+    method paint {graphics} {
+    }
+    
+
+    method visit {scoreableInterface} {
+        $scoreableInterface addPoints [my jget points]
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
+namespace eval ::PointsLayer {
 }
 
-
-sub visit {
-    my ($self, $scoreableInterface) = @_;
-        $scoreableInterface->addPoints($self->{points});
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::score::ScoreableInterface ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::view::ViewPosition ();
-
-1;
 

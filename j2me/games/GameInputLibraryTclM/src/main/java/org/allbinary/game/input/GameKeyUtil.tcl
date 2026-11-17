@@ -11,41 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::GameKeyUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::GameKeyUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::GameKeyUtil {
+    superclass ::JObject
 }
 
+oo::define ::GameKeyUtil {
+    method initFields_GameKeyUtil {} {
+        return
+    }
 
-sub isDirectionKey {
-    my ($self, $key) = @_;
-        if ($key == $javax::microedition::lcdui::Canvas::UP || $key == $javax::microedition::lcdui::Canvas::DOWN || $key == $javax::microedition::lcdui::Canvas::LEFT || $key == $javax::microedition::lcdui::Canvas::RIGHT) {
-            return 1;
+    constructor {} {
+        next
+        my initFields_GameKeyUtil
+    }
+    
+
+    method isDirectionKey {key} {
+        if {[expr {[expr {[expr {[expr {$key == [::Canvas::staticGet_UP]}] || [expr {$key == [::Canvas::staticGet_DOWN]}]}] || [expr {$key == [::Canvas::staticGet_LEFT]}]}] || [expr {$key == [::Canvas::staticGet_RIGHT]}]}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::GameKeyUtil::instance;
+namespace eval ::GameKeyUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameKeyUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameKeyUtil::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Canvas ();
-
-1;
 

@@ -1,19 +1,22 @@
 # Generated Code Do Not Modify
+# package java.lang.annotation
 
-# Java interface
-package java::lang::annotation::Annotation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub annotationType {
-    my ($self) = @_;
-    die "abstract method annotationType";
+oo::class create ::Annotation {
+    superclass ::JObject
 }
 
+oo::define ::Annotation {
+    method initFields_Annotation {} {
+        return
+    }
+    
 
-1;
+    method annotationType {} {
+        error [jexception AbstractMethodError annotationType]
+    }
+}
+
+namespace eval ::Annotation {
+}
+
 

@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.ai
 
-# Java interface
-package org::allbinary::ai::ArtificialIntelligenceCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub getArtificialIntelligenceInterface {
-    my ($self) = @_;
-    die "abstract method getArtificialIntelligenceInterface";
+oo::class create ::ArtificialIntelligenceCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::ArtificialIntelligenceCompositeInterface {
+    method initFields_ArtificialIntelligenceCompositeInterface {} {
+        return
+    }
+    
 
-1;
+    method getArtificialIntelligenceInterface {} {
+        error [jexception AbstractMethodError getArtificialIntelligenceInterface]
+    }
+}
+
+namespace eval ::ArtificialIntelligenceCompositeInterface {
+}
+
 

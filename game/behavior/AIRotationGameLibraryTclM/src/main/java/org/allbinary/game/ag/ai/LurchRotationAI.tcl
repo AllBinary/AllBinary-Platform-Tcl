@@ -11,63 +11,51 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::LurchRotationAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ag::ai::tactical::LurchAI';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{rotationAnimationInterface} = undef;
+oo::class create ::LurchRotationAI {
+    superclass ::LurchAI
 }
 
+oo::define ::LurchRotationAI {
+    method initFields_LurchRotationAI {} {
+        my jset rotationAnimationInterface {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        my $rotationAnimationInterfaceCompositeInterface = $self->getOwnerLayerInterface();
-        $self->{rotationAnimationInterface} = $rotationAnimationInterfaceCompositeInterface->getRotationAnimationInterface();
-        $self->update();
-    return $self;
-}
+    constructor {ownerLayerInterface gameInput} {
+        next $ownerLayerInterface $gameInput
+        my initFields_LurchRotationAI
+        set rotationAnimationInterfaceCompositeInterface [my getOwnerLayerInterface]
+        my jset rotationAnimationInterface [$rotationAnimationInterfaceCompositeInterface getRotationAnimationInterface]
+        my update
+    }
+    
 
+    method reverse {} {
+        next
+        my update
+    }
+    
 
-sub reverse {
-    my ($self) = @_;
-        $self->SUPER::reverse();
-        $self->update();
-}
-
-
-sub update {
-    my ($self) = @_;
-        if ($self->{currentRelativeAngle} == 0) {
-            my $rotationAnimationInterface = $self->{rotationAnimationInterface};
-            my $angleIncrementInfo = $rotationAnimationInterface->getAngleInfoP()->getAngleIncrementInfo();
-            my $rotationAnimationInterfaceCompositeInterface = $self->getOwnerLayerInterface();
-            $rotationAnimationInterfaceCompositeInterface->setFrame(int($angleIncrementInfo->{RIGHT_FRAME}));
-        } elsif ($self->{currentRelativeAngle} == 180) {
-            my $rotationAnimationInterface = $self->{rotationAnimationInterface};
-            my $angleIncrementInfo = $rotationAnimationInterface->getAngleInfoP()->getAngleIncrementInfo();
-            my $rotationAnimationInterfaceCompositeInterface = $self->getOwnerLayerInterface();
-            $rotationAnimationInterfaceCompositeInterface->setFrame(int($angleIncrementInfo->{LEFT_FRAME}));
+    method update {} {
+        if {[expr {[my jget currentRelativeAngle] == 0}]} {
+            set rotationAnimationInterface [my jget rotationAnimationInterface]
+            set angleIncrementInfo [[$rotationAnimationInterface getAngleInfoP] getAngleIncrementInfo]
+            set rotationAnimationInterfaceCompositeInterface [my getOwnerLayerInterface]
+            $rotationAnimationInterfaceCompositeInterface setFrame [[$angleIncrementInfo jget RIGHT_FRAME] intValue]
+        } elseif {[expr {[my jget currentRelativeAngle] == 180}]} {
+            set rotationAnimationInterface [my jget rotationAnimationInterface]
+            set angleIncrementInfo [[$rotationAnimationInterface getAngleInfoP] getAngleIncrementInfo]
+            set rotationAnimationInterfaceCompositeInterface [my getOwnerLayerInterface]
+            $rotationAnimationInterfaceCompositeInterface setFrame [[$angleIncrementInfo jget LEFT_FRAME] intValue]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::animation::RotationAnimationInterface ();
-use org::allbinary::animation::RotationAnimationInterfaceCompositeInterface ();
-use org::allbinary::game::ag::ai::tactical::LurchAI ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::math::AngleIncrementInfo ();
+namespace eval ::LurchRotationAI {
+}
 
-1;
 

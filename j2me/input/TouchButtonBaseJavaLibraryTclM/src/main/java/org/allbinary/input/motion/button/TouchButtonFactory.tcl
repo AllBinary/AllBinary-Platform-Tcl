@@ -11,88 +11,95 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchButtonFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::input::motion::button::TouchButtonFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{LIST} = 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance();
-    $self->{list} = $self->{LIST};
-    $self->{savedList} = $self->{LIST};
-    $self->{saved} = 0;
+oo::class create ::TouchButtonFactory {
+    superclass ::JObject
 }
 
+oo::define ::TouchButtonFactory {
+    method initFields_TouchButtonFactory {} {
+        my jset LIST {}
+        my jset list {}
+        my jset savedList {}
+        my jset saved false
+        my jset LIST [[::BasicArrayListUtil::getInstance] getImmutableInstance]
+        my jset list [my jget LIST]
+        my jset savedList [my jget LIST]
+        my jset saved false
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::motion::button::TouchButtonFactory::SINGLETON;
-}
+    constructor {} {
+        next
+        my initFields_TouchButtonFactory
+    }
+    
 
+    method defaultList {} {
+        my jset list [my jget LIST]
+        my toggle false [my jget LIST]
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-sub defaultList {
-    my ($self) = @_;
-        $self->{list} = $self->{LIST};
-        $self->toggle(0, $self->{LIST});
-}
-
-
-sub toggle {
-    my ($self, $save, $list) = @_;
-        if ($list != 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance()) {
-            $self->{savedList} = $list;
-            if (!$self->{saved}) {
-                $self->{list} = $self->{savedList};
+    method toggle {save list} {
+        if {[expr {$list ne [[::BasicArrayListUtil::getInstance] getImmutableInstance]}]} {
+            my jset savedList $list
+            if {[expr {![my jget saved]}]} {
+                my jset list [my jget savedList]
             }
         } else {
-            if ($save) {
-                if (!$self->{saved}) {
-                    $self->{saved} = 1;
-                    $self->{savedList} = $self->{list};
-                    $self->{list} = $self->{LIST};
+            if {$save} {
+                if {[expr {![my jget saved]}]} {
+                    my jset saved true
+                    my jset savedList [my jget list]
+                    my jset list [my jget LIST]
                 } else {
                 }
             } else {
-                $self->{list} = $self->{savedList};
-                $self->{saved} = 0;
+                my jset list [my jget savedList]
+                my jset saved false
             }
         }
-}
+    }
+    
 
-
-# throws Exception
-sub setList {
-    my ($self, $list) = @_;
-        if (!defined($list)) {
-            die ("Null List");
+    method setList {list} {
+        if {[expr {$list eq {}}]} {
+            error [jexception Exception "Null List"]
         }
-        $self->{list} = $list;
+        my jset list $list
+    }
+    
+
+    method getList {} {
+        return [my jget list]
+    }
 }
 
-
-sub getList {
-    my ($self) = @_;
-        return $self->{list};
+namespace eval ::TouchButtonFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::TouchButtonFactory new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::TouchButtonFactory::staticGet_SINGLETON]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListUtil ();
-
-1;
 

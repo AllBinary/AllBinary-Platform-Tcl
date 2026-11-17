@@ -11,54 +11,60 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::NullSpecialAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::AnimationInterfaceFactoryInterface','org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface';
-
-tie our $NULL_SPECIAL_ANIMATION_FACTORY, 'java::lang::LazyStatic', sub { 'org::allbinary::animation::NullSpecialAnimationFactory'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullSpecialAnimationFactory {
+    superclass ::JObject
 }
 
+oo::define ::NullSpecialAnimationFactory {
+    method initFields_NullSpecialAnimationFactory {} {
+        return
+    }
+    
 
-sub getFactoryInstance {
-    my ($class) = @_;
-        return $org::allbinary::animation::NullSpecialAnimationFactory::NULL_SPECIAL_ANIMATION_FACTORY;
+    constructor {} {
+        next
+        my initFields_NullSpecialAnimationFactory
+    }
+    
+    
+
+    method getInstance {instanceId} {
+        return [::SpecialAnimation::getInstance]
+    }
+    
+
+    method getInstanceAnimation {animationInterface} {
+        return [::SpecialAnimation::getInstance]
+    }
+    
+
+    method setInitialScale {scaleProperties} {
+    }
 }
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        return 'org::allbinary::animation::special::SpecialAnimation'->getInstance();
+namespace eval ::NullSpecialAnimationFactory {
+    variable NULL_SPECIAL_ANIMATION_FACTORYValue {}
+    variable NULL_SPECIAL_ANIMATION_FACTORYSet 0
+    proc staticGet_NULL_SPECIAL_ANIMATION_FACTORY {} {
+        variable NULL_SPECIAL_ANIMATION_FACTORYValue
+        variable NULL_SPECIAL_ANIMATION_FACTORYSet
+        if {!$NULL_SPECIAL_ANIMATION_FACTORYSet} {
+            set NULL_SPECIAL_ANIMATION_FACTORYSet 1
+            set NULL_SPECIAL_ANIMATION_FACTORYValue [::NullSpecialAnimationFactory new]
+        }
+        return $NULL_SPECIAL_ANIMATION_FACTORYValue
+    }
+    proc staticSet_NULL_SPECIAL_ANIMATION_FACTORY {value} {
+        variable NULL_SPECIAL_ANIMATION_FACTORYValue
+        variable NULL_SPECIAL_ANIMATION_FACTORYSet
+        set NULL_SPECIAL_ANIMATION_FACTORYSet 1
+        set NULL_SPECIAL_ANIMATION_FACTORYValue $value
+    }
+    proc getFactoryInstance {} {
+        return [::NullSpecialAnimationFactory::staticGet_NULL_SPECIAL_ANIMATION_FACTORY]
+    }
 }
 
-
-# throws Exception
-sub getInstanceAnimation {
-    my ($self, $animationInterface) = @_;
-        return 'org::allbinary::animation::special::SpecialAnimation'->getInstance();
-}
-
-
-sub setInitialScale {
-    my ($self, $scaleProperties) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::animation::special::SpecialAnimation ();
-use org::allbinary::media::ScaleProperties ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface ();
-
-1;
 

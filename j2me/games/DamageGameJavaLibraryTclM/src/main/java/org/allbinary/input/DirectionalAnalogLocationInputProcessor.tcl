@@ -11,98 +11,91 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input
 
-package org::allbinary::input::DirectionalAnalogLocationInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::android::input::motion::AnalogLocationInputProcessor','org::allbinary::game::input::GameKeyEventSourceInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{inputProcessorArray} = undef;
-    $self->{gameKeyFactory} = 'org::allbinary::game::input::GameKeyFactory'->getInstance();
-    $self->{leftGameKeyEvent} = $org::allbinary::game::input::event::GameKeyEvent::NONE;
-    $self->{rightGameKeyEvent} = $org::allbinary::game::input::event::GameKeyEvent::NONE;
-    $self->{upGameKeyEvent} = $org::allbinary::game::input::event::GameKeyEvent::NONE;
-    $self->{downGameKeyEvent} = $org::allbinary::game::input::event::GameKeyEvent::NONE;
-    $self->{leftTriggerGameKeyEvent} = $org::allbinary::game::input::event::GameKeyEvent::NONE;
-    $self->{rightTriggerGameKeyEvent} = $org::allbinary::game::input::event::GameKeyEvent::NONE;
+oo::class create ::DirectionalAnalogLocationInputProcessor {
+    superclass ::AnalogLocationInputProcessor
 }
 
+oo::define ::DirectionalAnalogLocationInputProcessor {
+    method initFields_DirectionalAnalogLocationInputProcessor {} {
+        my jset logUtil {}
+        my jset inputProcessorArray {}
+        my jset gameKeyFactory {}
+        my jset leftGameKeyEvent {}
+        my jset rightGameKeyEvent {}
+        my jset upGameKeyEvent {}
+        my jset downGameKeyEvent {}
+        my jset leftTriggerGameKeyEvent {}
+        my jset rightTriggerGameKeyEvent {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        my jset gameKeyFactory [::GameKeyFactory::getInstance]
+        my jset leftGameKeyEvent [::GameKeyEvent::staticGet_NONE]
+        my jset rightGameKeyEvent [::GameKeyEvent::staticGet_NONE]
+        my jset upGameKeyEvent [::GameKeyEvent::staticGet_NONE]
+        my jset downGameKeyEvent [::GameKeyEvent::staticGet_NONE]
+        my jset leftTriggerGameKeyEvent [::GameKeyEvent::staticGet_NONE]
+        my jset rightTriggerGameKeyEvent [::GameKeyEvent::staticGet_NONE]
+        return
+    }
+    
 
-sub new {
-    my ($class, $inputProcessorArray) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{inputProcessorArray} = $inputProcessorArray;
+    constructor {inputProcessorArray} {
+        next
+        my initFields_DirectionalAnalogLocationInputProcessor
+        my jset inputProcessorArray $inputProcessorArray
         try {
-            $self->{leftGameKeyEvent} = 'org::allbinary::game::input::event::GameKeyEventFactory'->getInstance()->getInstanceForInput($self, $self->{gameKeyFactory}->{LEFT});
-            $self->{rightGameKeyEvent} = 'org::allbinary::game::input::event::GameKeyEventFactory'->getInstance()->getInstanceForInput($self, $self->{gameKeyFactory}->{RIGHT});
-            $self->{upGameKeyEvent} = 'org::allbinary::game::input::event::GameKeyEventFactory'->getInstance()->getInstanceForInput($self, $self->{gameKeyFactory}->{UP});
-            $self->{downGameKeyEvent} = 'org::allbinary::game::input::event::GameKeyEventFactory'->getInstance()->getInstanceForInput($self, $self->{gameKeyFactory}->{DOWN});
-            $self->{leftTriggerGameKeyEvent} = 'org::allbinary::game::input::event::GameKeyEventFactory'->getInstance()->getInstanceForInput($self, $self->{gameKeyFactory}->{KEY_NUM0});
-            $self->{rightTriggerGameKeyEvent} = 'org::allbinary::game::input::event::GameKeyEventFactory'->getInstance()->getInstanceForInput($self, $self->{gameKeyFactory}->{KEY_NUM5});
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{CONSTRUCTOR}, $e);
+            my jset leftGameKeyEvent [[::GameKeyEventFactory::getInstance] getInstanceForInput [self] [[my jget gameKeyFactory] jget LEFT]]
+            my jset rightGameKeyEvent [[::GameKeyEventFactory::getInstance] getInstanceForInput [self] [[my jget gameKeyFactory] jget RIGHT]]
+            my jset upGameKeyEvent [[::GameKeyEventFactory::getInstance] getInstanceForInput [self] [[my jget gameKeyFactory] jget UP]]
+            my jset downGameKeyEvent [[::GameKeyEventFactory::getInstance] getInstanceForInput [self] [[my jget gameKeyFactory] jget DOWN]]
+            my jset leftTriggerGameKeyEvent [[::GameKeyEventFactory::getInstance] getInstanceForInput [self] [[my jget gameKeyFactory] jget KEY_NUM0]]
+            my jset rightTriggerGameKeyEvent [[::GameKeyEventFactory::getInstance] getInstanceForInput [self] [[my jget gameKeyFactory] jget KEY_NUM5]]
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget CONSTRUCTOR] $e
         }
-    return $self;
-}
+    }
+    
 
-
-sub process {
-    my ($self, $allbinaryLayerManager, $analogLocationInput) = @_;
+    method process {allbinaryLayerManager analogLocationInput} {
         try {
-            my $customGPoint = undef;
-            $customGPoint = $analogLocationInput->getCustomGPoint();
-            my $x = $customGPoint->getX();
-            my $y = $customGPoint->getY();
-            my $leftTrigger = $analogLocationInput->getLeftTrigger();
-            my $rightTrigger = $analogLocationInput->getRightTrigger();
-            if ($x < 0) {
-                $self->{inputProcessorArray}->[$self->{leftGameKeyEvent}->getKey()]->processAnalog($allbinaryLayerManager, $self->{leftGameKeyEvent}, $x);
-            } elsif ($x > 0) {
-                $self->{inputProcessorArray}->[$self->{rightGameKeyEvent}->getKey()]->processAnalog($allbinaryLayerManager, $self->{rightGameKeyEvent}, $x);
+            set customGPoint {}
+            set customGPoint [$analogLocationInput getCustomGPoint]
+            set x [$customGPoint getX]
+            set y [$customGPoint getY]
+            set leftTrigger [$analogLocationInput getLeftTrigger]
+            set rightTrigger [$analogLocationInput getRightTrigger]
+            if {[expr {$x < 0}]} {
+                [[my jget inputProcessorArray] get [[my jget leftGameKeyEvent] getKey]] processAnalog $allbinaryLayerManager [my jget leftGameKeyEvent] $x
+            } elseif {[expr {$x > 0}]} {
+                [[my jget inputProcessorArray] get [[my jget rightGameKeyEvent] getKey]] processAnalog $allbinaryLayerManager [my jget rightGameKeyEvent] $x
             }
-            if ($y < 0) {
-                $self->{inputProcessorArray}->[$self->{downGameKeyEvent}->getKey()]->processAnalog($allbinaryLayerManager, $self->{downGameKeyEvent}, $y);
-            } elsif ($y > 0) {
-                $self->{inputProcessorArray}->[$self->{upGameKeyEvent}->getKey()]->processAnalog($allbinaryLayerManager, $self->{upGameKeyEvent}, $y);
+            if {[expr {$y < 0}]} {
+                [[my jget inputProcessorArray] get [[my jget downGameKeyEvent] getKey]] processAnalog $allbinaryLayerManager [my jget downGameKeyEvent] $y
+            } elseif {[expr {$y > 0}]} {
+                [[my jget inputProcessorArray] get [[my jget upGameKeyEvent] getKey]] processAnalog $allbinaryLayerManager [my jget upGameKeyEvent] $y
             }
-            if ($leftTrigger > 0) {
-                $self->{inputProcessorArray}->[$self->{leftTriggerGameKeyEvent}->getKey()]->processAnalog($allbinaryLayerManager, $self->{leftTriggerGameKeyEvent}, $leftTrigger);
+            if {[expr {$leftTrigger > 0}]} {
+                [[my jget inputProcessorArray] get [[my jget leftTriggerGameKeyEvent] getKey]] processAnalog $allbinaryLayerManager [my jget leftTriggerGameKeyEvent] $leftTrigger
             }
-            if ($rightTrigger > 0) {
-                $self->{inputProcessorArray}->[$self->{rightTriggerGameKeyEvent}->getKey()]->processAnalog($allbinaryLayerManager, $self->{rightTriggerGameKeyEvent}, $rightTrigger);
+            if {[expr {$rightTrigger > 0}]} {
+                [[my jget inputProcessorArray] get [[my jget rightTriggerGameKeyEvent] getKey]] processAnalog $allbinaryLayerManager [my jget rightTriggerGameKeyEvent] $rightTrigger
             }
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put("Unable to process analog input", $self, $commonStrings->{PROCESS}, $e);
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put "Unable to process analog input" [self] [$commonStrings jget PROCESS] $e
         }
+    }
+    
+
+    method getSourceId {} {
+        return 0
+    }
 }
 
-
-sub getSourceId {
-    my ($self) = @_;
-        return 0;
+namespace eval ::DirectionalAnalogLocationInputProcessor {
 }
 
-use java::lang::Object ();
-use org::allbinary::android::input::motion::AnalogLocationInputProcessor ();
-use org::allbinary::game::input::GameInputProcessor ();
-use org::allbinary::game::input::GameKeyEventSourceInterface ();
-use org::allbinary::game::input::GameKeyFactory ();
-use org::allbinary::game::input::analog::AnalogLocationInput ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::game::input::event::GameKeyEventFactory ();
-use org::allbinary::graphics::CustomGPoint ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

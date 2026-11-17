@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input
 
-# Java interface
-package org::allbinary::input::AllBinarySensorListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub onSensorChange {
-    my ($self) = @_;
-    die "abstract method onSensorChange";
+oo::class create ::AllBinarySensorListener {
+    superclass ::JObject
 }
 
+oo::define ::AllBinarySensorListener {
+    method initFields_AllBinarySensorListener {} {
+        return
+    }
+    
 
-1;
+    method onSensorChange {} {
+        error [jexception AbstractMethodError onSensorChange]
+    }
+}
+
+namespace eval ::AllBinarySensorListener {
+}
+
 

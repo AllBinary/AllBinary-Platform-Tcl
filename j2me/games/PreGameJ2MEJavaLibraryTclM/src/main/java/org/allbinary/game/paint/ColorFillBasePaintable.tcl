@@ -11,66 +11,55 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.paint
 
-package org::allbinary::game::paint::ColorFillBasePaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable','org::allbinary::graphics::color::ColorCompositeInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{basicColor} = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE};
-    $self->{colorP} = 0;
+oo::class create ::ColorFillBasePaintable {
+    superclass ::Paintable
 }
 
+oo::define ::ColorFillBasePaintable {
+    method initFields_ColorFillBasePaintable {} {
+        my jset basicColor {}
+        my jset colorP 0
+        my jset basicColor [[::BasicColorFactory::getInstance] jget WHITE]
+        my jset colorP 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $basicColor) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->setBasicColorP($basicColor);
-    return $self;
+    constructor {basicColor} {
+        next
+        my initFields_ColorFillBasePaintable
+        my setBasicColorP $basicColor
+    }
+    
+
+    method setBasicColorP {basicColor} {
+        my jset basicColor $basicColor
+        my setColor [[my getBasicColorP] intValue]
+    }
+    
+
+    method getBasicColorP {} {
+        return [my jget basicColor]
+    }
+    
+
+    method getColor {} {
+        return [my jget colorP]
+    }
+    
+
+    method setColor {color} {
+        my jset colorP $color
+    }
+    
+
+    method paint {graphics} {
+    }
 }
 
-
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
-        $self->{basicColor} = $basicColor;
-        $self->setColor(int($self->getBasicColorP()));
+namespace eval ::ColorFillBasePaintable {
 }
 
-
-sub getBasicColorP {
-    my ($self) = @_;
-        return $self->{basicColor};
-}
-
-
-sub getColor {
-    my ($self) = @_;
-        return $self->{colorP};
-}
-
-
-sub setColor {
-    my ($self, $color) = @_;
-        $self->{colorP} = $color;
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::color::ColorCompositeInterface ();
-use org::allbinary::graphics::paint::Paintable ();
-
-1;
 

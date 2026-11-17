@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-# Java interface
-package org::allbinary::game::displayable::canvas::MenuListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::GameKeyEventSourceInterface';
-
-
-
-sub open {
-    my ($self) = @_;
-    die "abstract method open";
+oo::class create ::MenuListener {
+    superclass ::JObject
 }
 
+oo::define ::MenuListener {
+    method initFields_MenuListener {} {
+        return
+    }
+    
 
-# throws Exception
-sub close {
-    my ($self) = @_;
-    die "abstract method close";
+    method open {} {
+        error [jexception AbstractMethodError open]
+    }
+    
+
+    method close {} {
+        error [jexception AbstractMethodError close]
+    }
 }
 
-use org::allbinary::game::input::GameKeyEventSourceInterface ();
+namespace eval ::MenuListener {
+}
 
-1;
 

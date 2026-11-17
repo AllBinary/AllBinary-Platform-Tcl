@@ -11,29 +11,28 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.device
 
-package org::allbinary::device::LoadTextures;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::LoadTextures {
+    superclass ::JObject
 }
 
+oo::define ::LoadTextures {
+    method initFields_LoadTextures {} {
+        return
+    }
 
-# throws Exception
-sub load {
-    my ($self, $gl) = @_;
+    constructor {} {
+        next
+        my initFields_LoadTextures
+    }
+    
+
+    method load {gl} {
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::khronos::opengles::GL10 ();
+namespace eval ::LoadTextures {
+}
 
-1;
 

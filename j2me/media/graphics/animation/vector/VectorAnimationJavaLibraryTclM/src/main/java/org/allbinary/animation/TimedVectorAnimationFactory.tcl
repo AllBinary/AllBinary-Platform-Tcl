@@ -11,32 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::TimedVectorAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::VectorAnimationFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::TimedVectorAnimationFactory {
+    superclass ::JObject
 }
 
+oo::define ::TimedVectorAnimationFactory {
+    method initFields_TimedVectorAnimationFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($self, $points, $basicColor) = @_;
-        return 'org::allbinary::animation::TimedVectorAnimation'->new($points, $basicColor, 'org::allbinary::animation::AnimationBehavior'->getInstance());
+    constructor {} {
+        next
+        my initFields_TimedVectorAnimationFactory
+    }
+    
+
+    method getInstance {points basicColor} {
+        return [::TimedVectorAnimation new $points $basicColor [::AnimationBehavior::getInstance]]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::animation::VectorAnimationFactoryInterface ();
-use org::allbinary::animation::TimedVectorAnimation ();
-use org::allbinary::animation::AnimationBehavior ();
+namespace eval ::TimedVectorAnimationFactory {
+}
 
-1;
 

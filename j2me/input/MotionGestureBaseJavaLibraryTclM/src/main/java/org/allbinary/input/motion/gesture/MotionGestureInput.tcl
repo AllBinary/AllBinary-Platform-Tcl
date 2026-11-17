@@ -11,28 +11,27 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture
 
-package org::allbinary::input::motion::gesture::MotionGestureInput;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::Input';
-
-
-
-sub new {
-    my ($class, $id, $name) = @_;
-    my $self = $class->SUPER::new($id, $name);
-        # super(...) made $self above
-        my $inputFactory = 'org::allbinary::game::input::InputFactory'->getInstance();
-        $inputFactory->add($self->getId(), $self);
-    return $self;
+oo::class create ::MotionGestureInput {
+    superclass ::Input
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::Input ();
-use org::allbinary::game::input::InputFactory ();
+oo::define ::MotionGestureInput {
+    method initFields_MotionGestureInput {} {
+        return
+    }
+    
 
-1;
+    constructor {id name} {
+        next $id $name
+        my initFields_MotionGestureInput
+        set inputFactory [::InputFactory::getInstance]
+        $inputFactory add [my getId] [self]
+    }
+}
+
+namespace eval ::MotionGestureInput {
+}
+
 

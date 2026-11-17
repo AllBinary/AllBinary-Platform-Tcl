@@ -1,139 +1,133 @@
 # Generated Code Do Not Modify
+# package org.allbinary.configuration
 
-package org::allbinary::configuration::ApplicationConfiguration;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{fullscreen} = 1;
-    $self->{showTitleBar} = 0;
-    $self->{progressBarView} = 0;
+oo::class create ::ApplicationConfiguration {
+    superclass ::JObject
 }
 
+oo::define ::ApplicationConfiguration {
+    method initFields_ApplicationConfiguration {} {
+        my jset logUtil {}
+        my jset fullscreen false
+        my jset showTitleBar false
+        my jset progressBarView false
+        my jset logUtil [::LogUtil::getInstance]
+        my jset fullscreen true
+        my jset showTitleBar false
+        my jset progressBarView false
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::configuration::ApplicationConfiguration::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::configuration::ApplicationConfiguration::instance = 'org::allbinary::configuration::ApplicationConfiguration'->new();
-        }
-        return $org::allbinary::configuration::ApplicationConfiguration::instance;
-}
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
+    constructor {} {
+        next
+        my initFields_ApplicationConfiguration
         try {
-            $self->read();
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{CONSTRUCTOR}, $e);
+            my read
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget CONSTRUCTOR] $e
         }
-    return $self;
-}
+    }
+    
 
+    method read {} {
+        my setFullscreen true
+        my setProgressBarView false
+        my setShowTitleBar false
+        [my jget logUtil] putF [string cat "Read Configuration: " [my toString]] [self] "read"
+    }
+    
 
-# throws Exception
-sub read {
-    my ($self) = @_;
-        $self->setFullscreen(1);
-        $self->setProgressBarView(0);
-        $self->setShowTitleBar(0);
-        $self->{logUtil}->putF("Read Configuration: " . $self->toString(), $self, "read");
-}
+    method write {} {
+    }
+    
 
-
-# throws Exception
-sub write {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub update {
-    my ($self, $gameFeature) = @_;
-        if ($gameFeature == 'org::allbinary::game::configuration::feature::MainFeatureFactory'->getInstance()->{FULL_SCREEN}) {
-            my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-            if ($features->isFeature($gameFeature)) {
-                if (!$self->isFullscreen()) {
-                    $self->setFullscreen(1);
-                    $self->write();
+    method update {gameFeature} {
+        if {[expr {$gameFeature eq [[::MainFeatureFactory::getInstance] jget FULL_SCREEN]}]} {
+            set features [::Features::getInstance]
+            if {[$features isFeature $gameFeature]} {
+                if {[expr {![my isFullscreen]}]} {
+                    my setFullscreen true
+                    my write
                 }
             } else {
-                if ($self->isFullscreen()) {
-                    $self->setFullscreen(0);
-                    $self->write();
+                if {[my isFullscreen]} {
+                    my setFullscreen false
+                    my write
                 }
             }
         }
+    }
+    
+
+    method setFullscreen {fullscreen} {
+        my jset fullscreen $fullscreen
+    }
+    
+
+    method isFullscreen {} {
+        return [my jget fullscreen]
+    }
+    
+
+    method setShowTitleBar {showTitleBar} {
+        my jset showTitleBar $showTitleBar
+    }
+    
+
+    method isShowTitleBar {} {
+        return [my jget showTitleBar]
+    }
+    
+
+    method setProgressBarView {progressBarView} {
+        my jset progressBarView $progressBarView
+    }
+    
+
+    method isProgressBarView {} {
+        return [my jget progressBarView]
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "isFullscreen: "
+        $stringBuffer appendboolean [my isFullscreen]
+        $stringBuffer append " isProgressBarView: "
+        $stringBuffer appendboolean [my isProgressBarView]
+        $stringBuffer append " isShowTitleBar: "
+        $stringBuffer appendboolean [my isShowTitleBar]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub setFullscreen {
-    my ($self, $fullscreen) = @_;
-        $self->{fullscreen} = $fullscreen;
+namespace eval ::ApplicationConfiguration {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::ApplicationConfiguration::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::ApplicationConfiguration::staticSet_instance [::ApplicationConfiguration new]
+        }
+        return [::ApplicationConfiguration::staticGet_instance]
+    }
 }
 
-
-sub isFullscreen {
-    my ($self) = @_;
-        return $self->{fullscreen};
-}
-
-
-sub setShowTitleBar {
-    my ($self, $showTitleBar) = @_;
-        $self->{showTitleBar} = $showTitleBar;
-}
-
-
-sub isShowTitleBar {
-    my ($self) = @_;
-        return $self->{showTitleBar};
-}
-
-
-sub setProgressBarView {
-    my ($self, $progressBarView) = @_;
-        $self->{progressBarView} = $progressBarView;
-}
-
-
-sub isProgressBarView {
-    my ($self) = @_;
-        return $self->{progressBarView};
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("isFullscreen: ");
-        $stringBuffer->appendboolean($self->isFullscreen());
-        $stringBuffer->append(" isProgressBarView: ");
-        $stringBuffer->appendboolean($self->isProgressBarView());
-        $stringBuffer->append(" isShowTitleBar: ");
-        $stringBuffer->appendboolean($self->isShowTitleBar());
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::configuration::feature::Feature ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::MainFeatureFactory ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

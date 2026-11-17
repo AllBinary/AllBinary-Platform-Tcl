@@ -11,174 +11,145 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
 #GameInputPersistanceLibrary
-package org::allbinary::game::input::InputPersistance;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::configuration::persistance::BasicPersitance';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{tsUtil} = 'org::allbinary::TsUtil'->getInstance();
-    $self->{hashtableUtil} = 'org::allbinary::util::HashtableUtil'->getInstance();
+oo::class create ::InputPersistance {
+    superclass ::BasicPersitance
 }
 
+oo::define ::InputPersistance {
+    method initFields_InputPersistance {} {
+        my jset tsUtil {}
+        my jset hashtableUtil {}
+        my jset tsUtil [::TsUtil::getInstance]
+        my jset hashtableUtil [::HashtableUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $name) = @_;
-    my $self = $class->SUPER::new($name);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
-}
+    constructor {name} {
+        next $name
+        my initFields_InputPersistance
+    }
+    
 
-
-# throws Exception
-sub loadAll {
-    my ($self, $abeClientInformation) = @_;
-        my $recordStore = $org::allbinary::game::configuration::persistance::NullRecordStore::NULL_RECORD_STORE;
+    method loadAll {abeClientInformation} {
+        set recordStore [::NullRecordStore::staticGet_NULL_RECORD_STORE]
         try {
-            $recordStore = 'javax::microedition::rms::RecordStore'->openRecordStore($self->getRecordId($abeClientInformation), 1);
-            my $recordEnum = $recordStore->enumerateRecords($org::allbinary::game::configuration::persistance::NullRecordFilter::NULL_RECORD_FILTER, $org::allbinary::game::configuration::persistance::NullRecordComparator::NULL_RECORD_COMPARATOR, 1);
-            my $gameActionInputId = 0;
-            my $inputId = 0;
-            my $gameActionInput = undef;
-            my $input = undef;
-            my $hashtable = undef;
-            my $gameKeyFactory = 'org::allbinary::game::input::GameKeyMappingFactory'->getInstance();
-            my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-            my $inputFactory = 'org::allbinary::game::input::InputFactory'->getInstance();
-            my $smallIntegerSingletonFactory = 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance();
-            my $stdUtil = 'org::allbinary::logic::StdUtil'->getInstance();
-            my $recordAsBytes = undef;
-            my $byteArrayInputStream = undef;
-            my $inputStream = undef;
-            while ($recordEnum->hasNextElement()) {
-                my $id = $recordEnum->nextRecordId();
-                $stringBuffer->delete(0, $stringBuffer->length());
-                $self->{logUtil}->putF($stringBuffer->append($self->{persistanceStrings}->{LOADING_ID})->appendint($id)->toString(), $self, $self->{persistanceStrings}->{LOAD_ALL});
-                $recordAsBytes = $self->{tsUtil}->getRecord($recordStore, $id);
-                if (defined($recordAsBytes)) {
-                    $byteArrayInputStream = 'java::io::ByteArrayInputStream'->new($recordAsBytes);
-                    $inputStream = 'java::io::DataInputStream'->new($byteArrayInputStream);
-                    $hashtable = $stdUtil->createHashtable();
-                    my $value = 0;
-                    while ($inputStream->available() > 0) {
-                        my $gameActionInputIdAsString = $inputStream->readUTF();
-                        $value = int($gameActionInputIdAsString);
-                        $gameActionInputId = $value;
-                        $inputStream->readUTF();
-                        $value = int($inputStream->readUTF());
-                        $inputId = $value;
-                        $gameActionInput = $gameKeyFactory->getGameKey($gameActionInputId);
-                        $input = $inputFactory->getInstanceById($inputId);
-                        if ($input == $inputFactory->{NO_INPUT} || !defined($gameActionInput)) {
-                            $stringBuffer->delete(0, $stringBuffer->length());
-                            if ($input == $inputFactory->{NO_INPUT}) {
-                                $stringBuffer->append($self->{persistanceStrings}->{ERROR_LOADING_ID});
-                                $stringBuffer->appendlong($inputId);
-                                $stringBuffer->append($self->{persistanceStrings}->{GAME_ACTION_INPUT});
-                                $stringBuffer->appendlong($gameActionInputId);
-                                'org::allbinary::logic::communication::log::PreLogUtil'->put($stringBuffer->toString(), $self, $self->{persistanceStrings}->{LOAD_ALL});
+            set recordStore [::RecordStore::openRecordStore [my getRecordId $abeClientInformation] true]
+            set recordEnum [$recordStore enumerateRecords [::NullRecordFilter::staticGet_NULL_RECORD_FILTER] [::NullRecordComparator::staticGet_NULL_RECORD_COMPARATOR] true]
+            set gameActionInputId 0
+            set inputId 0
+            set gameActionInput {}
+            set input {}
+            set hashtable {}
+            set gameKeyFactory [::GameKeyMappingFactory::getInstance]
+            set stringBuffer [::StringMaker new]
+            set inputFactory [::InputFactory::getInstance]
+            set smallIntegerSingletonFactory [::SmallIntegerSingletonFactory::getInstance]
+            set stdUtil [::StdUtil::getInstance]
+            set recordAsBytes {}
+            set byteArrayInputStream {}
+            set inputStream {}
+            while {[$recordEnum hasNextElement]} {
+                set id [$recordEnum nextRecordId]
+                $stringBuffer delete 0 [$stringBuffer length]
+                [my jget logUtil] putF [[[$stringBuffer append [[my jget persistanceStrings] jget LOADING_ID]] appendint $id] toString] [self] [[my jget persistanceStrings] jget LOAD_ALL]
+                set recordAsBytes [[my jget tsUtil] getRecord $recordStore $id]
+                if {[expr {$recordAsBytes ne {}}]} {
+                    set byteArrayInputStream [::ByteArrayInputStream new $recordAsBytes]
+                    set inputStream [::DataInputStream new $byteArrayInputStream]
+                    set hashtable [$stdUtil createHashtable]
+                    set value 0
+                    while {[expr {[$inputStream available] > 0}]} {
+                        set gameActionInputIdAsString [$inputStream readUTF]
+                        set value [string trim $gameActionInputIdAsString]
+                        set gameActionInputId $value
+                        $inputStream readUTF
+                        set value [string trim [$inputStream readUTF]]
+                        set inputId $value
+                        set gameActionInput [$gameKeyFactory getGameKey [jint $gameActionInputId]]
+                        set input [$inputFactory getInstanceById [jint $inputId]]
+                        if {[expr {[expr {$input eq [$inputFactory jget NO_INPUT]}] || [expr {$gameActionInput eq {}}]}]} {
+                            $stringBuffer delete 0 [$stringBuffer length]
+                            if {[expr {$input eq [$inputFactory jget NO_INPUT]}]} {
+                                $stringBuffer append [[my jget persistanceStrings] jget ERROR_LOADING_ID]
+                                $stringBuffer appendlong $inputId
+                                $stringBuffer append [[my jget persistanceStrings] jget GAME_ACTION_INPUT]
+                                $stringBuffer appendlong $gameActionInputId
+                                ::PreLogUtil::put [$stringBuffer toString] [self] [[my jget persistanceStrings] jget LOAD_ALL]
                             }
-                            if (!defined($gameActionInput)) {
-                                $stringBuffer->delete(0, $stringBuffer->length());
-                                $stringBuffer->append($self->{persistanceStrings}->{ERROR_LOADING});
-                                $stringBuffer->appendlong($gameActionInputId);
-                                $stringBuffer->append($self->{persistanceStrings}->{ID});
-                                $stringBuffer->appendlong($inputId);
-                                'org::allbinary::logic::communication::log::PreLogUtil'->put($stringBuffer->toString(), $self, $self->{persistanceStrings}->{LOAD_ALL});
+                            if {[expr {$gameActionInput eq {}}]} {
+                                $stringBuffer delete 0 [$stringBuffer length]
+                                $stringBuffer append [[my jget persistanceStrings] jget ERROR_LOADING]
+                                $stringBuffer appendlong $gameActionInputId
+                                $stringBuffer append [[my jget persistanceStrings] jget ID]
+                                $stringBuffer appendlong $inputId
+                                ::PreLogUtil::put [$stringBuffer toString] [self] [[my jget persistanceStrings] jget LOAD_ALL]
                             }
                         } else {
                         }
-                        $hashtable->put($input, $gameActionInput);
+                        $hashtable put $input $gameActionInput
                     }
-                    $self->{valueList}->add($hashtable);
-                    $self->{idList}->add($smallIntegerSingletonFactory->getAt($id));
+                    [my jget valueList] add $hashtable
+                    [my jget idList] add [$smallIntegerSingletonFactory getAt $id]
                 } else {
                 }
             }
-        } catch ($e) {
-            die $e;
+        } on error {e} {
+            error $e
         } finally {
-            if (defined($recordStore)) {
-                'org::allbinary::logic::communication::log::PreLogUtil'->put($self->{persistanceStrings}->{CLOSING_RECORDSTORE}, $self, $self->{persistanceStrings}->{LOAD_ALL});
-                $recordStore->closeRecordStore();
+            if {[expr {$recordStore ne {}}]} {
+                ::PreLogUtil::put [[my jget persistanceStrings] jget CLOSING_RECORDSTORE] [self] [[my jget persistanceStrings] jget LOAD_ALL]
+                $recordStore closeRecordStore
             }
         }
-}
+    }
+    
 
-
-# throws Exception
-sub save {
-    my ($self, $abeClientInformation, $hashtable) = @_;
-        my $recordStore = $org::allbinary::game::configuration::persistance::NullRecordStore::NULL_RECORD_STORE;
+    method save {abeClientInformation hashtable} {
+        set recordStore [::NullRecordStore::staticGet_NULL_RECORD_STORE]
         try {
-            my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-            'org::allbinary::logic::communication::log::PreLogUtil'->put($stringBuffer->append($self->{persistanceStrings}->{SAVING})->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($hashtable))->toString(), $self, $self->{commonStrings}->{SAVE});
-            $recordStore = 'javax::microedition::rms::RecordStore'->openRecordStore($self->getRecordId($abeClientInformation), 1);
-            my $byteArrayOutputStream = 'java::io::ByteArrayOutputStream'->new();
-            my $outputStream = 'java::io::DataOutputStream'->new($byteArrayOutputStream);
-            my $gameActionInput = undef;
-            my $list = undef;
-            my $input = undef;
-            my $savedGameBytes = undef;
-            my $commonSeps = 'org::allbinary::string::CommonSeps'->getInstance();
-            my $smallIntegerSingletonFactory = 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance();
-            my $inputObjectArray = $self->{hashtableUtil}->getKeysAsArray($hashtable);
-            my $size = scalar(@{$inputObjectArray});
-            for (my $index = 0; $index < $size; $index++) {
-                $gameActionInput = $inputObjectArray->[$index];
-                $list = $hashtable->get($inputObjectArray->[$index]);
-                for (my $index2 = 0; $index2 < $list->size(); $index2++) {
-                    my $gameActionInputIdAsString = $smallIntegerSingletonFactory->getAt($gameActionInput->getId())->toString();
-                    $outputStream->writeUTF($gameActionInputIdAsString);
-                    $outputStream->writeUTF($commonSeps->{EQUALS});
-                    $input = $list->{objectArray}->[$index2];
-                    my $inputIdAsString = $smallIntegerSingletonFactory->getAt($input->getId())->toString();
-                    $outputStream->writeUTF($inputIdAsString);
+            set stringBuffer [::StringMaker new]
+            ::PreLogUtil::put [[[$stringBuffer append [[my jget persistanceStrings] jget SAVING]] append [[::StringUtil::getInstance] toString1 $hashtable]] toString] [self] [[my jget commonStrings] jget SAVE]
+            set recordStore [::RecordStore::openRecordStore [my getRecordId $abeClientInformation] true]
+            set byteArrayOutputStream [::ByteArrayOutputStream new]
+            set outputStream [::DataOutputStream new $byteArrayOutputStream]
+            set gameActionInput {}
+            set list {}
+            set input {}
+            set savedGameBytes {}
+            set commonSeps [::CommonSeps::getInstance]
+            set smallIntegerSingletonFactory [::SmallIntegerSingletonFactory::getInstance]
+            set inputObjectArray [[my jget hashtableUtil] getKeysAsArray $hashtable]
+            set size [$inputObjectArray length]
+            for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+                set gameActionInput [$inputObjectArray get $index]
+                set list [$hashtable get [$inputObjectArray get $index]]
+                for {set index2 0} {[expr {$index2 < [$list size]}]} {jpostincr index2 1} {
+                    set gameActionInputIdAsString [[$smallIntegerSingletonFactory getAt [$gameActionInput getId]] toString]
+                    $outputStream writeUTF $gameActionInputIdAsString
+                    $outputStream writeUTF [$commonSeps jget EQUALS]
+                    set input [[$list jget objectArray] get $index2]
+                    set inputIdAsString [[$smallIntegerSingletonFactory getAt [$input getId]] toString]
+                    $outputStream writeUTF $inputIdAsString
                 }
             }
-            $savedGameBytes = $byteArrayOutputStream->toByteArray();
-            $recordStore->addRecord($savedGameBytes, 0, scalar(@{$savedGameBytes}));
-        } catch ($e) {
-            die $e;
+            set savedGameBytes [$byteArrayOutputStream toByteArray]
+            $recordStore addRecord $savedGameBytes 0 [$savedGameBytes length]
+        } on error {e} {
+            error $e
         } finally {
-            if (defined($recordStore)) {
-                'org::allbinary::logic::communication::log::PreLogUtil'->put($self->{persistanceStrings}->{CLOSING_RECORDSTORE}, $self, $self->{commonStrings}->{SAVE});
-                $recordStore->closeRecordStore();
+            if {[expr {$recordStore ne {}}]} {
+                ::PreLogUtil::put [[my jget persistanceStrings] jget CLOSING_RECORDSTORE] [self] [[my jget commonStrings] jget SAVE]
+                $recordStore closeRecordStore
             }
         }
+    }
 }
 
-use java::lang::Object ();
-# use java::io::ByteArrayInputStream ();
-# use java::io::ByteArrayOutputStream ();
-# use java::io::DataInputStream ();
-# use java::io::DataOutputStream ();
-use javax::microedition::rms::RecordEnumeration ();
-use javax::microedition::rms::RecordStore ();
-use org::allbinary::TsUtil ();
-use org::allbinary::game::configuration::persistance::BasicPersitance ();
-use org::allbinary::game::configuration::persistance::NullRecordComparator ();
-use org::allbinary::game::configuration::persistance::NullRecordFilter ();
-use org::allbinary::game::configuration::persistance::NullRecordStore ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::HashtableUtil ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::input::GameKeyMappingFactory ();
-use org::allbinary::game::input::InputFactory ();
+namespace eval ::InputPersistance {
+}
 
-1;
 

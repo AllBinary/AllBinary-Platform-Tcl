@@ -11,29 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::ScrollSelectionFormNoneFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ScrollSelectionFormNoneFactory {
+    superclass ::JObject
 }
 
+oo::define ::ScrollSelectionFormNoneFactory {
+    method initFields_ScrollSelectionFormNoneFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return 'org::allbinary::graphics::form::ScrollSelectionForm'->getNullScrollSelectionFormHorizontal();
+    constructor {} {
+        next
+        my initFields_ScrollSelectionFormNoneFactory
+    }
+    
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::form::ScrollSelectionForm ();
+namespace eval ::ScrollSelectionFormNoneFactory {
+    proc getInstance {} {
+        return [::ScrollSelectionForm::getNullScrollSelectionFormHorizontal]
+    }
+}
 
-1;
 

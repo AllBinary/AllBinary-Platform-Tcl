@@ -11,44 +11,53 @@
 # Created By: Travis Berthelot 
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
-package org::allbinary::logic::io::NullOutputStream;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_OUTPUT_STREAM, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::io::NullOutputStream'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::NullOutputStream {
+    superclass ::OutputStream
 }
 
+oo::define ::NullOutputStream {
+    method initFields_NullOutputStream {} {
+        return
+    }
 
-# throws IOException
-sub write {
-    my ($self, $b) = @_;
+    constructor {} {
+        next
+        my initFields_NullOutputStream
+    }
+    
+
+    method write {b} {
+    }
+    
+
+    method write {b off len} {
+    }
+    
+
+    method close {} {
+    }
 }
 
-
-# throws IOException
-# Java overloaded method: Perl keeps the last definition
-sub write {
-    my ($self, $b, $off, $len) = @_;
+namespace eval ::NullOutputStream {
+    variable NULL_OUTPUT_STREAMValue {}
+    variable NULL_OUTPUT_STREAMSet 0
+    proc staticGet_NULL_OUTPUT_STREAM {} {
+        variable NULL_OUTPUT_STREAMValue
+        variable NULL_OUTPUT_STREAMSet
+        if {!$NULL_OUTPUT_STREAMSet} {
+            set NULL_OUTPUT_STREAMSet 1
+            set NULL_OUTPUT_STREAMValue [::NullOutputStream new]
+        }
+        return $NULL_OUTPUT_STREAMValue
+    }
+    proc staticSet_NULL_OUTPUT_STREAM {value} {
+        variable NULL_OUTPUT_STREAMValue
+        variable NULL_OUTPUT_STREAMSet
+        set NULL_OUTPUT_STREAMSet 1
+        set NULL_OUTPUT_STREAMValue $value
+    }
 }
 
-
-sub close {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::IOException ();
-# use java::io::OutputStream ();
-
-1;
 

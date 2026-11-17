@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-# Java interface
-package org::allbinary::graphics::IdentifierInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getId {
-    my ($self) = @_;
-    die "abstract method getId";
+oo::class create ::IdentifierInterface {
+    superclass ::JObject
 }
 
+oo::define ::IdentifierInterface {
+    method initFields_IdentifierInterface {} {
+        return
+    }
+    
 
-1;
+    method getId {} {
+        error [jexception AbstractMethodError getId]
+    }
+}
+
+namespace eval ::IdentifierInterface {
+}
+
 

@@ -11,44 +11,39 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.threed
 
-package org::allbinary::graphics::threed::GLHolder;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{isCreated} = 1;
+oo::class create ::GLHolder {
+    superclass ::JObject
 }
 
+oo::define ::GLHolder {
+    method initFields_GLHolder {} {
+        my jset isCreated false
+        my jset isCreated true
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_GLHolder
+    }
+    
+
+    method runOnSurfaceCreated {renderer} {
+    }
+    
+
+    method runOnSurfaceChanged {renderer width height} {
+    }
+    
+
+    method run {renderer} {
+    }
 }
 
-
-sub runOnSurfaceCreated {
-    my ($self, $renderer) = @_;
+namespace eval ::GLHolder {
 }
 
-
-sub runOnSurfaceChanged {
-    my ($self, $renderer, $width, $height) = @_;
-}
-
-
-sub run {
-    my ($self, $renderer) = @_;
-}
-
-use java::lang::Object ();
-
-1;
 

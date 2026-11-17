@@ -11,43 +11,55 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
-package org::allbinary::logic::system::security::licensing::LockedUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::logic::system::security::licensing::LockedUtilInterface';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::system::security::licensing::LockedUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::LockedUtil {
+    superclass ::JObject
 }
 
+oo::define ::LockedUtil {
+    method initFields_LockedUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::system::security::licensing::LockedUtil::instance;
+    constructor {} {
+        next
+        my initFields_LockedUtil
+    }
+    
+    
+
+    method isLocked {} {
+        return true
+    }
+    
+
+    method isLockedFeature {lockableFeatrue} {
+        return true
+    }
 }
 
-
-sub isLocked {
-    my ($self) = @_;
-        return 1;
+namespace eval ::LockedUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LockedUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LockedUtil::staticGet_instance]
+    }
 }
 
-
-sub isLockedFeature {
-    my ($self, $lockableFeatrue) = @_;
-        return 1;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::system::security::licensing::LockedUtilInterface ();
-
-1;
 

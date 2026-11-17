@@ -11,197 +11,188 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
-package org::allbinary::game::configuration::feature::GameFeatureUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::feature::GameFeatureUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{tsUtil} = 'org::allbinary::TsUtil'->getInstance();
-    $self->{enumerationUtil} = 'org::allbinary::util::EnumerationUtil'->getInstance();
-    $self->{ON_GAME_FEATURE_CHANGE} = "onGameFeatureChange";
-    $self->{GAME_FEATURE_CHANGED} = "Game Feature Changed: ";
+oo::class create ::GameFeatureUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::GameFeatureUtil {
+    method initFields_GameFeatureUtil {} {
+        my jset logUtil {}
+        my jset tsUtil {}
+        my jset enumerationUtil {}
+        my jset ON_GAME_FEATURE_CHANGE {}
+        my jset GAME_FEATURE_CHANGED {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset tsUtil [::TsUtil::getInstance]
+        my jset enumerationUtil [::EnumerationUtil::getInstance]
+        my jset ON_GAME_FEATURE_CHANGE "onGameFeatureChange"
+        my jset GAME_FEATURE_CHANGED "Game Feature Changed: "
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_GameFeatureUtil
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::feature::GameFeatureUtil::instance;
-}
-
-
-# throws Exception
-sub setDefault {
-    my ($self, $choiceGroup) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $METHOD_NAME = "setDefault";
-        my $SELECTED_ARRAY_RETURN = "selectedArray_return[";
-        my $SELECTED_SEP = "] = ";
-        my $selectedArray_return = [(0) x ($choiceGroup->size())];
-        my $total = $choiceGroup->getSelectedFlags($selectedArray_return);
-        $stringBuffer->append("Multiple Total Choices: ");
-        $stringBuffer->appendint($total);
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, $METHOD_NAME);
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        for (my $index = 0; $index < scalar(@{$selectedArray_return}); $index++) {
-            my $isSelected = $selectedArray_return->[$index];
-            $stringBuffer->delete(0, $stringBuffer->length());
-            $stringBuffer->append($SELECTED_ARRAY_RETURN);
-            $stringBuffer->appendint($index);
-            $stringBuffer->append($SELECTED_SEP);
-            $stringBuffer->appendboolean($isSelected);
-            $self->{logUtil}->putF($stringBuffer->toString(), $self, $METHOD_NAME);
-            my $selectedChoiceLabel = $choiceGroup->getString($index);
-            my $gameFeature = 'org::allbinary::game::configuration::feature::Feature'->getInstance($selectedChoiceLabel);
-            if ($features->isDefault($gameFeature)) {
-                $features->add($gameFeature);
-                $choiceGroup->setSelectedIndex($index, 1);
+    method setDefault {choiceGroup} {
+        set stringBuffer [::StringMaker new]
+        set METHOD_NAME "setDefault"
+        set SELECTED_ARRAY_RETURN "selectedArray_return\["
+        set SELECTED_SEP "\] = "
+        set selectedArray_return [jarray [$choiceGroup size] false]
+        set total [$choiceGroup getSelectedFlags $selectedArray_return]
+        $stringBuffer append "Multiple Total Choices: "
+        $stringBuffer appendint $total
+        [my jget logUtil] putF [$stringBuffer toString] [self] $METHOD_NAME
+        set features [::Features::getInstance]
+        for {set index 0} {[expr {$index < [$selectedArray_return length]}]} {jpostincr index 1} {
+            set isSelected [$selectedArray_return get $index]
+            $stringBuffer delete 0 [$stringBuffer length]
+            $stringBuffer append $SELECTED_ARRAY_RETURN
+            $stringBuffer appendint $index
+            $stringBuffer append $SELECTED_SEP
+            $stringBuffer appendboolean $isSelected
+            [my jget logUtil] putF [$stringBuffer toString] [self] $METHOD_NAME
+            set selectedChoiceLabel [$choiceGroup getString $index]
+            set gameFeature [::Feature::getInstance $selectedChoiceLabel]
+            if {[$features isDefault $gameFeature]} {
+                $features add $gameFeature
+                $choiceGroup setSelectedIndex $index true
             } else {
-                $features->remove($gameFeature);
-                $choiceGroup->setSelectedIndex($index, 0);
+                $features remove $gameFeature
+                $choiceGroup setSelectedIndex $index false
             }
         }
-}
+    }
+    
 
-
-# throws Exception
-sub updateMultiple {
-    my ($self, $choiceGroup) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $METHOD_NAME = "updateMultiple";
-        my $SELECTED_ARRAY_RETURN = "selectedArray_return[";
-        my $SELECTED_SEP = "] = ";
-        my $selectedArray_return = [(0) x ($choiceGroup->size())];
-        my $total = $choiceGroup->getSelectedFlags($selectedArray_return);
-        $stringBuffer->append("Multiple Total Choices: ");
-        $stringBuffer->appendint($total);
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, $METHOD_NAME);
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        for (my $index = 0; $index < scalar(@{$selectedArray_return}); $index++) {
-            my $isSelected = $selectedArray_return->[$index];
-            $stringBuffer->delete(0, $stringBuffer->length());
-            $stringBuffer->append($SELECTED_ARRAY_RETURN);
-            $stringBuffer->appendint($index);
-            $stringBuffer->append($SELECTED_SEP);
-            $stringBuffer->appendboolean($isSelected);
-            $self->{logUtil}->putF($stringBuffer->toString(), $self, $METHOD_NAME);
-            my $selectedChoiceLabel = $choiceGroup->getString($index);
-            my $gameFeature = 'org::allbinary::game::configuration::feature::Feature'->getInstance($selectedChoiceLabel);
-            if (!$isSelected && $features->isFeature($gameFeature)) {
-                $features->remove($gameFeature);
-            } elsif ($isSelected && !$features->isFeature($gameFeature)) {
-                $features->add($gameFeature);
+    method updateMultiple {choiceGroup} {
+        set stringBuffer [::StringMaker new]
+        set METHOD_NAME "updateMultiple"
+        set SELECTED_ARRAY_RETURN "selectedArray_return\["
+        set SELECTED_SEP "\] = "
+        set selectedArray_return [jarray [$choiceGroup size] false]
+        set total [$choiceGroup getSelectedFlags $selectedArray_return]
+        $stringBuffer append "Multiple Total Choices: "
+        $stringBuffer appendint $total
+        [my jget logUtil] putF [$stringBuffer toString] [self] $METHOD_NAME
+        set features [::Features::getInstance]
+        for {set index 0} {[expr {$index < [$selectedArray_return length]}]} {jpostincr index 1} {
+            set isSelected [$selectedArray_return get $index]
+            $stringBuffer delete 0 [$stringBuffer length]
+            $stringBuffer append $SELECTED_ARRAY_RETURN
+            $stringBuffer appendint $index
+            $stringBuffer append $SELECTED_SEP
+            $stringBuffer appendboolean $isSelected
+            [my jget logUtil] putF [$stringBuffer toString] [self] $METHOD_NAME
+            set selectedChoiceLabel [$choiceGroup getString $index]
+            set gameFeature [::Feature::getInstance $selectedChoiceLabel]
+            if {[expr {[expr {!$isSelected}] && [$features isFeature $gameFeature]}]} {
+                $features remove $gameFeature
+            } elseif {[expr {$isSelected && [expr {![$features isFeature $gameFeature]}]}]} {
+                $features add $gameFeature
             }
         }
-}
+    }
+    
 
-
-# throws Exception
-sub updateExclusiveForChoiceGroup {
-    my ($self, $choiceGroup) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $METHOD_NAME = "updateExclusive";
-        my $SELECTED_ARRAY_RETURN = "selectedArray_return[";
-        my $SELECTED_SEP = "] = ";
-        my $selectedArray_return = [(0) x ($choiceGroup->size())];
-        my $total = $choiceGroup->getSelectedFlags($selectedArray_return);
-        $stringBuffer->append("Exclusive Total Choices: 1==");
-        $stringBuffer->appendint($total);
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, $METHOD_NAME);
-        for (my $index = 0; $index < scalar(@{$selectedArray_return}); $index++) {
-            my $isSelected = $selectedArray_return->[$index];
-            $stringBuffer->delete(0, $stringBuffer->length());
-            $stringBuffer->append($SELECTED_ARRAY_RETURN);
-            $stringBuffer->appendint($index);
-            $stringBuffer->append($SELECTED_SEP);
-            $stringBuffer->appendboolean($isSelected);
-            $self->{logUtil}->putF($stringBuffer->toString(), $self, $METHOD_NAME);
-            if ($isSelected) {
-                my $selectedChoiceLabel = $choiceGroup->getString($index);
-                $self->updateExclusive($selectedChoiceLabel);
+    method updateExclusiveForChoiceGroup {choiceGroup} {
+        set stringBuffer [::StringMaker new]
+        set METHOD_NAME "updateExclusive"
+        set SELECTED_ARRAY_RETURN "selectedArray_return\["
+        set SELECTED_SEP "\] = "
+        set selectedArray_return [jarray [$choiceGroup size] false]
+        set total [$choiceGroup getSelectedFlags $selectedArray_return]
+        $stringBuffer append "Exclusive Total Choices: 1=="
+        $stringBuffer appendint $total
+        [my jget logUtil] putF [$stringBuffer toString] [self] $METHOD_NAME
+        for {set index 0} {[expr {$index < [$selectedArray_return length]}]} {jpostincr index 1} {
+            set isSelected [$selectedArray_return get $index]
+            $stringBuffer delete 0 [$stringBuffer length]
+            $stringBuffer append $SELECTED_ARRAY_RETURN
+            $stringBuffer appendint $index
+            $stringBuffer append $SELECTED_SEP
+            $stringBuffer appendboolean $isSelected
+            [my jget logUtil] putF [$stringBuffer toString] [self] $METHOD_NAME
+            if {$isSelected} {
+                set selectedChoiceLabel [$choiceGroup getString $index]
+                my updateExclusive $selectedChoiceLabel
             }
         }
-}
+    }
+    
 
-
-sub isExclusive {
-    my ($self, $itemLabel) = @_;
-        my $enumeration = 'org::allbinary::game::configuration::feature::GameFeatureChoiceGroups'->getExclusiveInstance()->get()->keys();
-        my $name = undef;
-        while ($self->{enumerationUtil}->hasMoreElements($enumeration)) {
-            $name = $self->{enumerationUtil}->nextElement($enumeration);
-            if ($self->{tsUtil}->compareTo($itemLabel, $name) == 0) {
-                return 1;
+    method isExclusive {itemLabel} {
+        set enumeration [[[::GameFeatureChoiceGroups::getExclusiveInstance] get] keys]
+        set name {}
+        while {[[my jget enumerationUtil] hasMoreElements $enumeration]} {
+            set name [[my jget enumerationUtil] nextElement $enumeration]
+            if {[expr {[[my jget tsUtil] compareTo $itemLabel $name] == 0}]} {
+                return true
             }
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-# throws Exception
-sub updateExclusive {
-    my ($self, $selectedChoiceLabel) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{ITEM_LABEL})->append($selectedChoiceLabel)->toString(), $self, "updateExclusive");
-        my $gameFeature = 'org::allbinary::game::configuration::feature::Feature'->getInstance($selectedChoiceLabel);
-        my $hashtable = 'org::allbinary::game::configuration::feature::GameFeatureChoiceGroups'->getExclusiveInstance()->get();
-        my $objectArray = 'org::allbinary::util::HashtableUtil'->getInstance()->getKeysAsArray($hashtable);
-        my $basicArrayList = undef;
-        my $anyType = undef;
-        my $size = scalar(@{$objectArray});
-        for (my $index = 0; $index < $size; $index++) {
-            $anyType = $objectArray->[$index];
-            $basicArrayList = $hashtable->get($anyType);
-            $self->updateExclusiveList($gameFeature, $basicArrayList);
+    method updateExclusive {selectedChoiceLabel} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[::CommonLabels::getInstance] jget ITEM_LABEL]] append $selectedChoiceLabel] toString] [self] "updateExclusive"
+        set gameFeature [::Feature::getInstance $selectedChoiceLabel]
+        set hashtable [[::GameFeatureChoiceGroups::getExclusiveInstance] get]
+        set objectArray [[::HashtableUtil::getInstance] getKeysAsArray $hashtable]
+        set basicArrayList {}
+        set anyType {}
+        set size [$objectArray length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set anyType [$objectArray get $index]
+            set basicArrayList [$hashtable get $anyType]
+            my updateExclusiveList $gameFeature $basicArrayList
         }
-}
+    }
+    
 
-
-# throws Exception
-sub updateExclusiveList {
-    my ($self, $gameFeature, $list) = @_;
-        if ($list->contains($gameFeature)) {
-            my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-            my $addIndex = $list->indexOf($gameFeature);
-            my $size = $list->size();
-            for (my $index = 0; $index < $size; $index++) {
-                if ($addIndex != $index) {
-                    $features->remove($list->{objectArray}->[$index]);
+    method updateExclusiveList {gameFeature list} {
+        if {[$list contains $gameFeature]} {
+            set features [::Features::getInstance]
+            set addIndex [$list indexOf $gameFeature]
+            set size [$list size]
+            for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+                if {[expr {$addIndex != $index}]} {
+                    $features remove [[$list jget objectArray] get $index]
                 } else {
-                    $features->add($list->{objectArray}->[$index]);
+                    $features add [[$list jget objectArray] get $index]
                 }
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use java::util::Enumeration ();
-use javax::microedition::lcdui::ChoiceGroup ();
-use org::allbinary::TsUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::EnumerationUtil ();
-use org::allbinary::util::HashtableUtil ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::Feature ();
-use org::allbinary::game::configuration::feature::GameFeatureChoiceGroups ();
+namespace eval ::GameFeatureUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameFeatureUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameFeatureUtil::staticGet_instance]
+    }
+}
 
-1;
 

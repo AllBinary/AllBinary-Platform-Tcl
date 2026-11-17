@@ -11,31 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchButtonsBuilderFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NO_TOUCH_BUTTON_BUILDER_FACTORY, 'java::lang::LazyStatic', sub { 'org::allbinary::input::motion::button::TouchButtonsBuilderFactory'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::TouchButtonsBuilderFactory {
+    superclass ::JObject
 }
 
+oo::define ::TouchButtonsBuilderFactory {
+    method initFields_TouchButtonsBuilderFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($self) = @_;
-        return 'org::allbinary::input::motion::button::NoButtonsTouchInputFactory'->getInstance();
+    constructor {} {
+        next
+        my initFields_TouchButtonsBuilderFactory
+    }
+    
+
+    method getInstance {} {
+        return [::NoButtonsTouchInputFactory::getInstance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::input::motion::button::NoButtonsTouchInputFactory ();
+namespace eval ::TouchButtonsBuilderFactory {
+    variable NO_TOUCH_BUTTON_BUILDER_FACTORYValue {}
+    variable NO_TOUCH_BUTTON_BUILDER_FACTORYSet 0
+    proc staticGet_NO_TOUCH_BUTTON_BUILDER_FACTORY {} {
+        variable NO_TOUCH_BUTTON_BUILDER_FACTORYValue
+        variable NO_TOUCH_BUTTON_BUILDER_FACTORYSet
+        if {!$NO_TOUCH_BUTTON_BUILDER_FACTORYSet} {
+            set NO_TOUCH_BUTTON_BUILDER_FACTORYSet 1
+            set NO_TOUCH_BUTTON_BUILDER_FACTORYValue [::TouchButtonsBuilderFactory new]
+        }
+        return $NO_TOUCH_BUTTON_BUILDER_FACTORYValue
+    }
+    proc staticSet_NO_TOUCH_BUTTON_BUILDER_FACTORY {value} {
+        variable NO_TOUCH_BUTTON_BUILDER_FACTORYValue
+        variable NO_TOUCH_BUTTON_BUILDER_FACTORYSet
+        set NO_TOUCH_BUTTON_BUILDER_FACTORYSet 1
+        set NO_TOUCH_BUTTON_BUILDER_FACTORYValue $value
+    }
+}
 
-1;
 

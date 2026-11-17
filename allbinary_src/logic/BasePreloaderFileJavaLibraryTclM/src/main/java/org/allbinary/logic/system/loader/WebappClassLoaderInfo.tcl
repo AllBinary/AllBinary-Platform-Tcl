@@ -11,38 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.loader
 
-package org::allbinary::logic::system::loader::WebappClassLoaderInfo;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $classLoader, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::WebappClassLoaderInfo {
+    superclass ::JObject
 }
 
+oo::define ::WebappClassLoaderInfo {
+    method initFields_WebappClassLoaderInfo {} {
+        return
+    }
+    
 
-sub setLoader {
-    my ($class, $classLoader) = @_;
-        $org::allbinary::logic::system::loader::WebappClassLoaderInfo::classLoader = $classLoader;
+    constructor {} {
+        next
+        my initFields_WebappClassLoaderInfo
+    }
+    
+    
 }
 
-
-sub getLoader {
-    my ($class) = @_;
-        return $org::allbinary::logic::system::loader::WebappClassLoaderInfo::classLoader;
+namespace eval ::WebappClassLoaderInfo {
+    variable classLoaderValue {}
+    variable classLoaderSet 0
+    proc staticGet_classLoader {} {
+        variable classLoaderValue
+        variable classLoaderSet
+        if {!$classLoaderSet} {
+            set classLoaderSet 1
+            set classLoaderValue [[::NullUtil::getInstance] jget NULL_OBJECT]
+        }
+        return $classLoaderValue
+    }
+    proc staticSet_classLoader {value} {
+        variable classLoaderValue
+        variable classLoaderSet
+        set classLoaderSet 1
+        set classLoaderValue $value
+    }
+    proc setLoader {classLoader} {
+        ::WebappClassLoaderInfo::staticSet_classLoader $classLoader
+    }
+    proc getLoader {} {
+        return [::WebappClassLoaderInfo::staticGet_classLoader]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::NullUtil ();
-
-1;
 

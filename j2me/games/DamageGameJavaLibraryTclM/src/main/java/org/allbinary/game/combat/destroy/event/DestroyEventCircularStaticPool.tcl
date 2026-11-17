@@ -11,56 +11,60 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.destroy.event
 
-package org::allbinary::game::combat::destroy::event::DestroyEventCircularStaticPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::combat::destroy::event::DestroyEventCircularStaticPool'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{EVENT_POOL} = 'org::allbinary::logic::util::event::AllBinaryEventCircularPool'->new(20);
+oo::class create ::DestroyEventCircularStaticPool {
+    superclass ::JObject
 }
 
+oo::define ::DestroyEventCircularStaticPool {
+    method initFields_DestroyEventCircularStaticPool {} {
+        my jset EVENT_POOL {}
+        my jset EVENT_POOL [::AllBinaryEventCircularPool new 20]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::combat::destroy::event::DestroyEventCircularStaticPool::instance;
+    constructor {} {
+        next
+        my initFields_DestroyEventCircularStaticPool
+    }
+    
+
+    method init {combatGameCanvas} {
+        [my jget EVENT_POOL] initAllBinaryEventCircularPool [::DestroyEventFactory new $combatGameCanvas]
+    }
+    
+
+    method getInstanceForLayer {layerInterface} {
+        set destroyedEvent [[my jget EVENT_POOL] getNextInstance]
+        $destroyedEvent setLayerInterfaceForCircularStaticPool $layerInterface
+        return $destroyedEvent
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+namespace eval ::DestroyEventCircularStaticPool {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::DestroyEventCircularStaticPool new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::DestroyEventCircularStaticPool::staticGet_instance]
+    }
 }
 
-
-sub init {
-    my ($self, $combatGameCanvas) = @_;
-        $self->{EVENT_POOL}->initAllBinaryEventCircularPool('org::allbinary::game::combat::destroy::event::DestroyEventFactory'->new($combatGameCanvas));
-}
-
-
-# throws Exception
-sub getInstanceForLayer {
-    my ($self, $layerInterface) = @_;
-        my $destroyedEvent = $self->{EVENT_POOL}->getNextInstance();
-        $destroyedEvent->setLayerInterfaceForCircularStaticPool($layerInterface);
-        return $destroyedEvent;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::displayable::canvas::AllBinaryGameCanvas ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::logic::util::event::AllBinaryEventCircularPool ();
-use org::allbinary::game::combat::destroy::event::DestroyEventFactory ();
-
-1;
 

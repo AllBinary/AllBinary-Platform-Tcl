@@ -11,39 +11,51 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game
 
-package org::allbinary::game::PlayerTypesFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::PlayerTypesFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{PLAYER_TYPE_ONE} = 'org::allbinary::game::PlayerType'->new("Player Type One", 0);
-    $self->{PLAYER_TYPE_TWO} = 'org::allbinary::game::PlayerType'->new("Player Type Two", 1);
-    $self->{PLAYER_TYPE_THREE} = 'org::allbinary::game::PlayerType'->new("Player Type Three", 2);
+oo::class create ::PlayerTypesFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::PlayerTypesFactory {
+    method initFields_PlayerTypesFactory {} {
+        my jset PLAYER_TYPE_ONE {}
+        my jset PLAYER_TYPE_TWO {}
+        my jset PLAYER_TYPE_THREE {}
+        my jset PLAYER_TYPE_ONE [::PlayerType new "Player Type One" 0]
+        my jset PLAYER_TYPE_TWO [::PlayerType new "Player Type Two" 1]
+        my jset PLAYER_TYPE_THREE [::PlayerType new "Player Type Three" 2]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_PlayerTypesFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::PlayerTypesFactory::SINGLETON;
+namespace eval ::PlayerTypesFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::PlayerTypesFactory new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::PlayerTypesFactory::staticGet_SINGLETON]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::PlayerType ();
-
-1;
 

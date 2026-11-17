@@ -11,51 +11,42 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::AnimationInterfaceFactoryInterfaceComposite;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::AnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{animationInterfaceFactoryInterfaceArray} = undef;
+oo::class create ::AnimationInterfaceFactoryInterfaceComposite {
+    superclass ::JObject
 }
 
+oo::define ::AnimationInterfaceFactoryInterfaceComposite {
+    method initFields_AnimationInterfaceFactoryInterfaceComposite {} {
+        my jset animationInterfaceFactoryInterfaceArray {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $basicAnimationInterfaceFactoryInterfaceArray) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{animationInterfaceFactoryInterfaceArray} = $basicAnimationInterfaceFactoryInterfaceArray;
-    return $self;
+    constructor {basicAnimationInterfaceFactoryInterfaceArray} {
+        next
+        my initFields_AnimationInterfaceFactoryInterfaceComposite
+        my jset animationInterfaceFactoryInterfaceArray $basicAnimationInterfaceFactoryInterfaceArray
+    }
+    
+
+    method getInstance {instanceId} {
+        return [[::NullAnimationFactory::getFactoryInstance] getInstance 0]
+    }
+    
+
+    method getAnimationInterfaceFactoryInterfaceArray {} {
+        return [my jget animationInterfaceFactoryInterfaceArray]
+    }
+    
+
+    method setInitialScale {scaleProperties} {
+    }
 }
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        return 'org::allbinary::animation::NullAnimationFactory'->getFactoryInstance()->getInstance(0);
+namespace eval ::AnimationInterfaceFactoryInterfaceComposite {
 }
 
-
-sub getAnimationInterfaceFactoryInterfaceArray {
-    my ($self) = @_;
-        return $self->{animationInterfaceFactoryInterfaceArray};
-}
-
-
-sub setInitialScale {
-    my ($self, $scaleProperties) = @_;
-}
-
-use java::lang::Object ();
-use org::allbinary::media::ScaleProperties ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::NullAnimationFactory ();
-
-1;
 

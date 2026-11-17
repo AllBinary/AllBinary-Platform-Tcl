@@ -11,55 +11,59 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::BasicTouchButtonsBuilder;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::motion::button::BaseTouchInput';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::input::motion::button::BasicTouchButtonsBuilder'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::BasicTouchButtonsBuilder {
+    superclass ::BaseTouchInput
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+oo::define ::BasicTouchButtonsBuilder {
+    method initFields_BasicTouchButtonsBuilder {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_BasicTouchButtonsBuilder
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::motion::button::BasicTouchButtonsBuilder::SINGLETON;
-}
-
-
-sub getList {
-    my ($self) = @_;
+    method getList {} {
         try {
-            $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{GET_LIST});
-            my $list = 'org::allbinary::util::BasicArrayListD'->new();
-            return $list;
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{GET_LIST}, $e);
-            return 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance();
+            [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget GET_LIST]
+            set list [::BasicArrayListD new]
+            return $list
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget GET_LIST] $e
+            return [[::BasicArrayListUtil::getInstance] getImmutableInstance]
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::util::BasicArrayListUtil ();
-use org::allbinary::input::motion::button::BaseTouchInput ();
+namespace eval ::BasicTouchButtonsBuilder {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::BasicTouchButtonsBuilder new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::BasicTouchButtonsBuilder::staticGet_SINGLETON]
+    }
+}
 
-1;
 

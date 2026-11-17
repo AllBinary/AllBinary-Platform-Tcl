@@ -11,29 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::DiveAndDirectionalTrackingAICompositeVisitorFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::DiveAndDirectionalTrackingAICompositeVisitorFactory {
+    superclass ::JObject
 }
 
+oo::define ::DiveAndDirectionalTrackingAICompositeVisitorFactory {
+    method initFields_DiveAndDirectionalTrackingAICompositeVisitorFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($self, $diveBombAI) = @_;
-        return 'org::allbinary::logic::util::visitor::Visitor'->getInstance();
+    constructor {} {
+        next
+        my initFields_DiveAndDirectionalTrackingAICompositeVisitorFactory
+    }
+    
+
+    method getInstance {diveBombAI} {
+        return [::Visitor::getInstance]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::util::visitor::Visitor ();
+namespace eval ::DiveAndDirectionalTrackingAICompositeVisitorFactory {
+}
 
-1;
 

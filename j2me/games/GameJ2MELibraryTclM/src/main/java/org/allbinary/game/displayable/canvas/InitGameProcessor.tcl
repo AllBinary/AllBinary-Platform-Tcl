@@ -11,43 +11,35 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::InitGameProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::canvas::Processor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gameCanvas} = undef;
+oo::class create ::InitGameProcessor {
+    superclass ::Processor
 }
 
+oo::define ::InitGameProcessor {
+    method initFields_InitGameProcessor {} {
+        my jset gameCanvas {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{gameCanvas} = $gameCanvas;
-    return $self;
-}
+    constructor {gameCanvas} {
+        next
+        my initFields_InitGameProcessor
+        my jset gameCanvas $gameCanvas
+    }
+    
 
-
-# throws Exception
-sub process {
-    my ($self) = @_;
-        if ('org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance()->isInGame()) {
-            $self->{gameCanvas}->setProcessGameProcessorInit();
+    method process {} {
+        if {[[::ProgressCanvasFactory::getInstance] isInGame]} {
+            [my jget gameCanvas] setProcessGameProcessorInit
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::InitGameProcessor {
+}
 
-1;
 

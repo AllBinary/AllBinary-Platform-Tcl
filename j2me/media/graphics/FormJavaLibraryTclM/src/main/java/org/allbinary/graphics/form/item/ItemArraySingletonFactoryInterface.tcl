@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
-# Java interface
-package org::allbinary::graphics::form::item::ItemArraySingletonFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub getItems {
-    my ($self) = @_;
-    die "abstract method getItems";
+oo::class create ::ItemArraySingletonFactoryInterface {
+    superclass ::JObject
 }
 
+oo::define ::ItemArraySingletonFactoryInterface {
+    method initFields_ItemArraySingletonFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getItems {} {
+        error [jexception AbstractMethodError getItems]
+    }
+}
+
+namespace eval ::ItemArraySingletonFactoryInterface {
+}
+
 

@@ -11,36 +11,36 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.string
 
-package org::allbinary::logic::string::StringValidationJSEUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::StringValidationJSEUtil {
+    superclass ::JObject
 }
 
+oo::define ::StringValidationJSEUtil {
+    method initFields_StringValidationJSEUtil {} {
+        return
+    }
+    
 
-sub isBlank {
-    my ($class, $string) = @_;
-        my $len = length($string);
-        for (my $i = 0; $i < $len; $i++) {
-            my $c = substr($string, $i, 1);
-            if (($c =~ /^\s$/) == 0) {
-                return 0;
+    constructor {} {
+        next
+        my initFields_StringValidationJSEUtil
+    }
+    
+}
+
+namespace eval ::StringValidationJSEUtil {
+    proc isBlank {string} {
+        set len [string length $string]
+        for {set i 0} {[expr {$i < $len}]} {jpostincr i 1} {
+            set c [scan [string index $string $i] %c]
+            if {[expr {[::Character::isWhitespace $c] == false}]} {
+                return false
             }
         }
-        return 1;
+        return true
+    }
 }
 
-use java::lang::Object ();
-
-1;
 

@@ -11,32 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.pickup.life
 
-package org::allbinary::game::ag::layer::pickup::life::LifeLayerFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::layer::AllBinaryLayerFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::LifeLayerFactory {
+    superclass ::JObject
 }
 
+oo::define ::LifeLayerFactory {
+    method initFields_LifeLayerFactory {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($self) = @_;
-        return 'org::allbinary::game::ag::layer::pickup::life::LifeLayer'->new();
+    constructor {} {
+        next
+        my initFields_LifeLayerFactory
+    }
+    
+
+    method getInstance {} {
+        return [::LifeLayer new]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerFactoryInterface ();
-use org::allbinary::game::ag::layer::pickup::life::LifeLayer ();
+namespace eval ::LifeLayerFactory {
+}
 
-1;
 

@@ -11,115 +11,102 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.business.advertisement
 
-package org::allbinary::business::advertisement::Advertisements;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{bannerList} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{pageList} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{myRandomFactory} = 'org::allbinary::game::rand::MyRandomFactory'->getInstance();
+oo::class create ::Advertisements {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::Advertisements {
+    method initFields_Advertisements {} {
+        my jset bannerList {}
+        my jset pageList {}
+        my jset myRandomFactory {}
+        my jset bannerList [::BasicArrayListD new]
+        my jset pageList [::BasicArrayListD new]
+        my jset myRandomFactory [::MyRandomFactory::getInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_Advertisements
+    }
+    
 
-sub addPage {
-    my ($self, $advertisementProcessorInterface) = @_;
-        if (!$self->{pageList}->contains($advertisementProcessorInterface)) {
-            $self->{pageList}->add($advertisementProcessorInterface);
+    method addPage {advertisementProcessorInterface} {
+        if {[expr {![[my jget pageList] contains $advertisementProcessorInterface]}]} {
+            [my jget pageList] add $advertisementProcessorInterface
         }
-}
+    }
+    
 
-
-sub startRandomPage {
-    my ($self) = @_;
-        my $size = $self->{pageList}->size();
-        if ($size > 0) {
-            my $random = $self->{myRandomFactory}->getAbsoluteNextInt($size);
-            my $advertisementProcessorInterface = $self->{pageList}->{objectArray}->[$random];
-            $advertisementProcessorInterface->start();
+    method startRandomPage {} {
+        set size [[my jget pageList] size]
+        if {[expr {$size > 0}]} {
+            set random [[my jget myRandomFactory] getAbsoluteNextInt $size]
+            set advertisementProcessorInterface [[[my jget pageList] jget objectArray] get $random]
+            $advertisementProcessorInterface start
         }
-}
+    }
+    
 
-
-sub processRandomPage {
-    my ($self) = @_;
-        if ('org::allbinary::logic::system::security::licensing::LockedUtil'->getInstance()->isLocked()) {
-            my $size = $self->{pageList}->size();
-            if ($size > 0) {
-                my $random = $self->{myRandomFactory}->getAbsoluteNextInt($size);
-                my $advertisementProcessorInterface = $self->{pageList}->{objectArray}->[$random];
-                $advertisementProcessorInterface->process();
+    method processRandomPage {} {
+        if {[[::LockedUtil::getInstance] isLocked]} {
+            set size [[my jget pageList] size]
+            if {[expr {$size > 0}]} {
+                set random [[my jget myRandomFactory] getAbsoluteNextInt $size]
+                set advertisementProcessorInterface [[[my jget pageList] jget objectArray] get $random]
+                $advertisementProcessorInterface process
             }
         }
-}
+    }
+    
 
-
-sub stopAllPage {
-    my ($self) = @_;
-        for (my $index = $self->{pageList}->size(); --$index >= 0; ) {
-            my $advertisementProcessorInterface = $self->{pageList}->{objectArray}->[$index];
-            $advertisementProcessorInterface->stop();
+    method stopAllPage {} {
+        for {set index [[my jget pageList] size]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            set advertisementProcessorInterface [[[my jget pageList] jget objectArray] get $index]
+            $advertisementProcessorInterface stop
         }
-}
+    }
+    
 
-
-sub addBanner {
-    my ($self, $advertisementProcessorInterface) = @_;
-        if (!$self->{bannerList}->contains($advertisementProcessorInterface)) {
-            $self->{bannerList}->add($advertisementProcessorInterface);
+    method addBanner {advertisementProcessorInterface} {
+        if {[expr {![[my jget bannerList] contains $advertisementProcessorInterface]}]} {
+            [my jget bannerList] add $advertisementProcessorInterface
         }
-}
+    }
+    
 
-
-sub startAll {
-    my ($self) = @_;
-        for (my $index = $self->{bannerList}->size(); --$index >= 0; ) {
-            my $advertisementProcessorInterface = $self->{bannerList}->{objectArray}->[$index];
-            $advertisementProcessorInterface->start();
+    method startAll {} {
+        for {set index [[my jget bannerList] size]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            set advertisementProcessorInterface [[[my jget bannerList] jget objectArray] get $index]
+            $advertisementProcessorInterface start
         }
-}
+    }
+    
 
-
-sub stopAllBanner {
-    my ($self) = @_;
-        for (my $index = $self->{bannerList}->size(); --$index >= 0; ) {
-            my $advertisementProcessorInterface = $self->{bannerList}->{objectArray}->[$index];
-            $advertisementProcessorInterface->stop();
+    method stopAllBanner {} {
+        for {set index [[my jget bannerList] size]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            set advertisementProcessorInterface [[[my jget bannerList] jget objectArray] get $index]
+            $advertisementProcessorInterface stop
         }
+    }
+    
+
+    method getBanner {index} {
+        set advertisementProcessorInterface [[[my jget bannerList] jget objectArray] get $index]
+        return $advertisementProcessorInterface
+    }
+    
+
+    method stopAll {} {
+        my stopAllBanner
+        my stopAllPage
+    }
 }
 
-
-sub getBanner {
-    my ($self, $index) = @_;
-        my $advertisementProcessorInterface = $self->{bannerList}->{objectArray}->[$index];
-        return $advertisementProcessorInterface;
+namespace eval ::Advertisements {
 }
 
-
-sub stopAll {
-    my ($self) = @_;
-        $self->stopAllBanner();
-        $self->stopAllPage();
-}
-
-use java::lang::Object ();
-use org::allbinary::game::rand::MyRandomFactory ();
-use org::allbinary::logic::system::security::licensing::LockedUtil ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

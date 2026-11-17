@@ -11,33 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-package org::allbinary::game::collision::CollidableAlwaysPickupNeverCollideBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::collision::CollidableNeverCollideBehavior';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new(1);
-        # super(...) made $self above
-    return $self;
+oo::class create ::CollidableAlwaysPickupNeverCollideBehavior {
+    superclass ::CollidableNeverCollideBehavior
 }
 
+oo::define ::CollidableAlwaysPickupNeverCollideBehavior {
+    method initFields_CollidableAlwaysPickupNeverCollideBehavior {} {
+        return
+    }
+    
 
-sub getCollisionTypeWith {
-    my ($self, $layerInterface) = @_;
-        return 'org::allbinary::game::collision::CollisionTypeFactory'->getInstance()->{PICKUP};
+    constructor {} {
+        next true
+        my initFields_CollidableAlwaysPickupNeverCollideBehavior
+    }
+    
+
+    method getCollisionTypeWith {layerInterface} {
+        return [[::CollisionTypeFactory::getInstance] jget PICKUP]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::game::collision::CollidableNeverCollideBehavior ();
-use org::allbinary::game::collision::CollisionTypeFactory ();
+namespace eval ::CollidableAlwaysPickupNeverCollideBehavior {
+}
 
-1;
 

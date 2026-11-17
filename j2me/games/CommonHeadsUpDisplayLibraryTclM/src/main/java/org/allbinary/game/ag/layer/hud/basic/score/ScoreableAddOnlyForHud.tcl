@@ -11,51 +11,44 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic.score
 
-package org::allbinary::game::ag::layer::hud::basic::score::ScoreableAddOnlyForHud;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::score::Scoreable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{scoreHudWidget} = undef;
+oo::class create ::ScoreableAddOnlyForHud {
+    superclass ::Scoreable
 }
 
+oo::define ::ScoreableAddOnlyForHud {
+    method initFields_ScoreableAddOnlyForHud {} {
+        my jset scoreHudWidget {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $scoreVectorGraphic) = @_;
-    my $self = $class->SUPER::new(0);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{scoreHudWidget} = $scoreVectorGraphic;
-        $self->getScoreHudWidget()->set(0);
-    return $self;
+    constructor {scoreVectorGraphic} {
+        next 0
+        my initFields_ScoreableAddOnlyForHud
+        my jset scoreHudWidget $scoreVectorGraphic
+        [my getScoreHudWidget] set 0
+    }
+    
+
+    method removePoints {points} {
+    }
+    
+
+    method addPoints {points} {
+        next $points
+        [my getScoreHudWidget] add $points
+    }
+    
+
+    method getScoreHudWidget {} {
+        return [my jget scoreHudWidget]
+    }
 }
 
-
-sub removePoints {
-    my ($self, $points) = @_;
+namespace eval ::ScoreableAddOnlyForHud {
 }
 
-
-sub addPoints {
-    my ($self, $points) = @_;
-        $self->SUPER::addPoints($points);
-        $self->getScoreHudWidget()->add($points);
-}
-
-
-sub getScoreHudWidget {
-    my ($self) = @_;
-        return $self->{scoreHudWidget};
-}
-
-use java::lang::Object ();
-use org::allbinary::game::score::Scoreable ();
-
-1;
 

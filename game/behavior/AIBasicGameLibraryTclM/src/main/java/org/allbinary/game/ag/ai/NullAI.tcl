@@ -11,31 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::NullAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::ai::ArtificialIntelligence';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::NullAI {
+    superclass ::ArtificialIntelligence
 }
 
+oo::define ::NullAI {
+    method initFields_NullAI {} {
+        return
+    }
+    
 
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
+    constructor {} {
+        next
+        my initFields_NullAI
+    }
+    
+
+    method processAI {allBinaryLayerManager} {
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::ai::ArtificialIntelligence ();
-use org::allbinary::layer::AllBinaryLayerManager ();
+namespace eval ::NullAI {
+}
 
-1;
 

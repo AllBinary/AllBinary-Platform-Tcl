@@ -11,37 +11,49 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-package org::allbinary::graphics::paint::LocationPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::graphics::paint::LocationPaintableInterface';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::paint::LocationPaintable'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::LocationPaintable {
+    superclass ::JObject
 }
 
+oo::define ::LocationPaintable {
+    method initFields_LocationPaintable {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::paint::LocationPaintable::instance;
+    constructor {} {
+        next
+        my initFields_LocationPaintable
+    }
+    
+    
+
+    method paintXY {graphics x y} {
+    }
 }
 
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
+namespace eval ::LocationPaintable {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LocationPaintable new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LocationPaintable::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::paint::LocationPaintableInterface ();
-
-1;
 

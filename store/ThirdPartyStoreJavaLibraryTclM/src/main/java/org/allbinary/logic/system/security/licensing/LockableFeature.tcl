@@ -11,36 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
-package org::allbinary::logic::system::security::licensing::LockableFeature;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{name} = undef;
+oo::class create ::LockableFeature {
+    superclass ::JObject
 }
 
+oo::define ::LockableFeature {
+    method initFields_LockableFeature {} {
+        my jset name {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $name) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{name} = $name;
-    return $self;
+    constructor {name} {
+        next
+        my initFields_LockableFeature
+        my jset name $name
+    }
+    
+
+    method getName {} {
+        return [my jget name]
+    }
 }
 
-
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
+namespace eval ::LockableFeature {
 }
 
-use java::lang::Object ();
-
-1;
 

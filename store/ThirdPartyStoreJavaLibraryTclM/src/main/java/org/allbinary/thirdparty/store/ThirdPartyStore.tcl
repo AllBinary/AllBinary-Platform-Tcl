@@ -11,55 +11,49 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.thirdparty.store
 
-package org::allbinary::thirdparty::store::ThirdPartyStore;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{authorized} = 0;
-    $self->{name} = undef;
+oo::class create ::ThirdPartyStore {
+    superclass ::JObject
 }
 
+oo::define ::ThirdPartyStore {
+    method initFields_ThirdPartyStore {} {
+        my jset authorized false
+        my jset name {}
+        my jset authorized false
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $name) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{name} = $name;
-    return $self;
+    constructor {name} {
+        next
+        my initFields_ThirdPartyStore
+        my jset name $name
+    }
+    
+
+    method authorize {clientInformationInterface} {
+    }
+    
+
+    method isAuthorized {} {
+        return [my jget authorized]
+    }
+    
+
+    method setAuthorized {authorized} {
+        my jset authorized $authorized
+    }
+    
+
+    method getName {} {
+        return [my jget name]
+    }
 }
 
-
-sub authorize {
-    my ($self, $clientInformationInterface) = @_;
+namespace eval ::ThirdPartyStore {
 }
 
-
-sub isAuthorized {
-    my ($self) = @_;
-        return $self->{authorized};
-}
-
-
-sub setAuthorized {
-    my ($self, $authorized) = @_;
-        $self->{authorized} = $authorized;
-}
-
-
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-
-1;
 

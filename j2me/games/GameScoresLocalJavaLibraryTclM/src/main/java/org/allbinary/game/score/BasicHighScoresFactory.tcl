@@ -1,75 +1,66 @@
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::BasicHighScoresFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::score::HighScoresBase';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{abeClientInformation} = undef;
-    $self->{highScoresArray} = [(undef) x (1)];
-    $self->{TOP} = "Top";
-    $self->{SCORES} = "Scores";
-    $self->{PERSONAL_HIGH_SCORES} = "Personal Top Scores";
-    $self->{FETCH} = "fetchHighScores";
+oo::class create ::BasicHighScoresFactory {
+    superclass ::HighScoresBase
 }
 
+oo::define ::BasicHighScoresFactory {
+    method initFields_BasicHighScoresFactory {} {
+        my jset logUtil {}
+        my jset abeClientInformation {}
+        my jset highScoresArray {}
+        my jset TOP {}
+        my jset SCORES {}
+        my jset PERSONAL_HIGH_SCORES {}
+        my jset FETCH {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        my jset highScoresArray [jarray 1 {}]
+        my jset TOP "Top"
+        my jset SCORES "Scores"
+        my jset PERSONAL_HIGH_SCORES "Personal Top Scores"
+        my jset FETCH "fetchHighScores"
+        return
+    }
+    
 
-sub new {
-    my ($class, $abeClientInformation, $softwareInformation) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{abeClientInformation} = $abeClientInformation;
-    return $self;
-}
+    constructor {abeClientInformation softwareInformation} {
+        next
+        my initFields_BasicHighScoresFactory
+        my jset abeClientInformation $abeClientInformation
+    }
+    
 
+    method fetchHighScores {gameInfo highScoresResultsListener} {
+        [my jget logUtil] putF "Getting Local HighScores" [self] [my jget FETCH]
+        my fetchHighScoresPreload $gameInfo $highScoresResultsListener true
+    }
+    
 
-sub fetchHighScores {
-    my ($self, $gameInfo, $highScoresResultsListener) = @_;
-        $self->{logUtil}->putF("Getting Local HighScores", $self, $self->{FETCH});
-        $self->fetchHighScoresPreload($gameInfo, $highScoresResultsListener, 1);
-}
-
-
-sub fetchHighScoresPreload {
-    my ($self, $gameInfo, $highScoresResultsListener, $preload) = @_;
+    method fetchHighScoresPreload {gameInfo highScoresResultsListener preload} {
         try {
-            $self->{highScoresArray}->[0] = 'org::allbinary::game::score::RecordStoreHighScores'->getInstance($self->{abeClientInformation}, $gameInfo, $self->{TOP}, $self->{PERSONAL_HIGH_SCORES}, $self->{SCORES}, 'org::allbinary::game::score::ScoreComparator'->new(1));
-            $highScoresResultsListener->setHighScoresArray($self->{highScoresArray});
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{FETCH}, $e);
+            [my jget highScoresArray] set 0 [::RecordStoreHighScores::getInstance [my jget abeClientInformation] $gameInfo [my jget TOP] [my jget PERSONAL_HIGH_SCORES] [my jget SCORES] [::ScoreComparator new true]]
+            $highScoresResultsListener setHighScoresArray [my jget highScoresArray]
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [my jget FETCH] $e
         }
+    }
+    
+
+    method createHighScoresHelper {} {
+        return [::HighScoresHelper2 new]
+    }
+    
 }
 
-
-sub createHighScoresHelper {
-    my ($self) = @_;
-        return 'org::allbinary::game::score::HighScoresHelper2'->new();
-}
-
-
-sub loaded {
-    my ($class, $index2) = @_;
-        if ($index2 >= 0) {
-            return 1;
+namespace eval ::BasicHighScoresFactory {
+    proc loaded {index2} {
+        if {[expr {$index2 >= 0}]} {
+            return true
         }
-        return 0;
+        return false
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::GameInfo ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::system::SoftwareInformation ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::game::score::HighScoresBase ();
-use org::allbinary::game::score::RecordStoreHighScores ();
-use org::allbinary::game::score::ScoreComparator ();
-use org::allbinary::game::score::HighScoresHelper2 ();
-
-1;
 

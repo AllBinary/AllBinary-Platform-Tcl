@@ -11,44 +11,39 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-package org::allbinary::game::layer::GameLayerUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::GameLayerUtil {
+    superclass ::JObject
 }
 
+oo::define ::GameLayerUtil {
+    method initFields_GameLayerUtil {} {
+        return
+    }
+    
 
-sub isOnScreen {
-    my ($class, $layer) = @_;
-        my $displayInfo = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-        my $viewPosition = $layer->getViewPosition();
-        return 'org::allbinary::game::layer::GameLayerUtil'->isInside($viewPosition->getX(), $viewPosition->getY(), $viewPosition->getX2(), $viewPosition->getY2(), 0, 0, $displayInfo->getLastWidth(), $displayInfo->getLastHeight());
+    constructor {} {
+        next
+        my initFields_GameLayerUtil
+    }
+    
+    
 }
 
-
-sub isInside {
-    my ($class, $rectX1, $rectY1, $rectX2, $rectY2, $rect2X1, $rect2Y1, $rect2X2, $rect2Y2) = @_;
-        if ($rectX1 > $rect2X1 && $rectX2 < $rect2X2 && $rectY1 > $rect2Y1 && $rectY2 < $rect2Y2) {
-            return 1;
+namespace eval ::GameLayerUtil {
+    proc isOnScreen {layer} {
+        set displayInfo [::DisplayInfoSingleton::getInstance]
+        set viewPosition [$layer getViewPosition]
+        return [::GameLayerUtil::isInside [$viewPosition getX] [$viewPosition getY] [$viewPosition getX2] [$viewPosition getY2] 0 0 [$displayInfo getLastWidth] [$displayInfo getLastHeight]]
+    }
+    proc isInside {rectX1 rectY1 rectX2 rectY2 rect2X1 rect2Y1 rect2X2 rect2Y2} {
+        if {[expr {[expr {[expr {[expr {$rectX1 > $rect2X1}] && [expr {$rectX2 < $rect2X2}]}] && [expr {$rectY1 > $rect2Y1}]}] && [expr {$rectY2 < $rect2Y2}]}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::view::ViewPositionBase ();
-
-1;
 

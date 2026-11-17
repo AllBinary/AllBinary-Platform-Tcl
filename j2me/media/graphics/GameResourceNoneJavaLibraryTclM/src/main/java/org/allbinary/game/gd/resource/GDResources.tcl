@@ -11,37 +11,49 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.gd.resource
 
-package org::allbinary::game::gd::resource::GDResources;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::gd::resource::GDResources'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{resourceStringArray} = [];
-    $self->{currentLayoutRequiredTotal} = 0;
+oo::class create ::GDResources {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::GDResources {
+    method initFields_GDResources {} {
+        my jset resourceStringArray {}
+        my jset currentLayoutRequiredTotal 0
+        my jset resourceStringArray [jarrayfrom [list ]]
+        my jset currentLayoutRequiredTotal 0
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_GDResources
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::gd::resource::GDResources::instance;
+namespace eval ::GDResources {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GDResources new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GDResources::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

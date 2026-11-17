@@ -11,17 +11,19 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-# Java interface
-package org::allbinary::game::input::CompleteMotionGestureInputInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::NamedInterface';
+oo::class create ::CompleteMotionGestureInputInterface {
+    superclass ::JObject
+}
 
+oo::define ::CompleteMotionGestureInputInterface {
+    method initFields_CompleteMotionGestureInputInterface {} {
+        return
+    }
+}
 
-use org::allbinary::layer::NamedInterface ();
+namespace eval ::CompleteMotionGestureInputInterface {
+}
 
-1;
 

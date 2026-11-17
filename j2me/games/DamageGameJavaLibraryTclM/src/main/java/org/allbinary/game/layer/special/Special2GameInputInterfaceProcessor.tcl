@@ -11,34 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.special
 
-package org::allbinary::game::layer::special::Special2GameInputInterfaceProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::special::SpecialGameInputInterfaceProcessor';
-
-
-
-sub new {
-    my ($class, $collidableDestroyableDamageableLayer) = @_;
-    my $self = $class->SUPER::new($collidableDestroyableDamageableLayer);
-        # super(...) made $self above
-    return $self;
+oo::class create ::Special2GameInputInterfaceProcessor {
+    superclass ::SpecialGameInputInterfaceProcessor
 }
 
+oo::define ::Special2GameInputInterfaceProcessor {
+    method initFields_Special2GameInputInterfaceProcessor {} {
+        return
+    }
+    
 
-# throws Exception
-sub processEvent {
-    my ($self, $allbinaryLayerManager, $gameKeyEvent) = @_;
-        $self->{specialGameInputInterface}->special2($allbinaryLayerManager, $gameKeyEvent);
+    constructor {collidableDestroyableDamageableLayer} {
+        next $collidableDestroyableDamageableLayer
+        my initFields_Special2GameInputInterfaceProcessor
+    }
+    
+
+    method processEvent {allbinaryLayerManager gameKeyEvent} {
+        [my jget specialGameInputInterface] special2 $allbinaryLayerManager $gameKeyEvent
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::game::layer::special::SpecialGameInputInterfaceProcessor ();
+namespace eval ::Special2GameInputInterfaceProcessor {
+}
 
-1;
 

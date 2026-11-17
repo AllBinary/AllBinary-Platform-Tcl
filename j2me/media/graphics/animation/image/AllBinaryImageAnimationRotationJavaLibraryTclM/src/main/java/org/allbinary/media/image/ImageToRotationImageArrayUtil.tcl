@@ -11,47 +11,58 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.image
 
-package org::allbinary::media::image::ImageToRotationImageArrayUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::media::image::ImageToRotationImageArrayUtil'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::media::image::ImageToRotationImageArrayUtil::instance;
+oo::class create ::ImageToRotationImageArrayUtil {
+    superclass ::JObject
 }
 
+oo::define ::ImageToRotationImageArrayUtil {
+    method initFields_ImageToRotationImageArrayUtil {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_ImageToRotationImageArrayUtil
+    }
+    
 
-
-# throws Exception
-sub generate {
-    my ($self, $image, $angleIncrement, $totalAngle) = @_;
-        my $imageRotationUtil = 'org::allbinary::media::image::ImageRotationUtil'->getInstance();
-        my $totalFrames = int($totalAngle / $angleIncrement);
-        my $imageArray = [(undef) x ($totalFrames)];
-        $imageArray->[0] = $image;
-        for (my $index = 1; $index < $totalFrames; $index++) {
-            $imageArray->[$index] = $imageRotationUtil->createRotatedImage($image, $index * $angleIncrement);
+    method generate {image angleIncrement totalAngle} {
+        set imageRotationUtil [::ImageRotationUtil::getInstance]
+        set totalFrames [jdiv $totalAngle $angleIncrement]
+        set imageArray [jarray $totalFrames {}]
+        $imageArray set 0 $image
+        for {set index 1} {[expr {$index < $totalFrames}]} {jpostincr index 1} {
+            $imageArray set $index [$imageRotationUtil createRotatedImage $image [jint [expr {$index * $angleIncrement}]]]
         }
-        return $imageArray;
+        return $imageArray
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::media::image::ImageRotationUtil ();
+namespace eval ::ImageToRotationImageArrayUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ImageToRotationImageArrayUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ImageToRotationImageArrayUtil::staticGet_instance]
+    }
+}
 
-1;
 

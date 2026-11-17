@@ -1,20 +1,22 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
-package org::allbinary::graphics::form::item::ImageItem;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ImageItem {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
+oo::define ::ImageItem {
+    method initFields_ImageItem {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_ImageItem
+    }
+}
+
+namespace eval ::ImageItem {
+}
+
 

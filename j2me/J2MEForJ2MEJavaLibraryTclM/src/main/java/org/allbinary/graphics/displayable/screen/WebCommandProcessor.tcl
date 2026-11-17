@@ -11,57 +11,61 @@
 # Created By: Travis Berthelot
 # 
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.screen
 
-package org::allbinary::graphics::displayable::screen::WebCommandProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::displayable::screen::WebCommandProcessor'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{aboutCommandProcessor} = 'org::allbinary::graphics::displayable::screen::AboutCommandProcessor'->getInstance();
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::WebCommandProcessor {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::WebCommandProcessor {
+    method initFields_WebCommandProcessor {} {
+        my jset logUtil {}
+        my jset aboutCommandProcessor {}
+        my jset list {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset aboutCommandProcessor [::AboutCommandProcessor::getInstance]
+        my jset list [::BasicArrayListD new]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_WebCommandProcessor
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::displayable::screen::WebCommandProcessor::instance;
-}
-
-
-sub process {
-    my ($self, $midletCommandListener, $command, $canvas) = @_;
+    method process {midletCommandListener command canvas} {
         try {
-            $self->{list}->removeAt(0);
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{PROCESS}, $e);
+            [my jget list] removeAt 0
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget PROCESS] $e
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Canvas ();
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::CommandListener ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::graphics::displayable::screen::AboutCommandProcessor ();
+namespace eval ::WebCommandProcessor {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::WebCommandProcessor new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::WebCommandProcessor::staticGet_instance]
+    }
+}
 
-1;
 

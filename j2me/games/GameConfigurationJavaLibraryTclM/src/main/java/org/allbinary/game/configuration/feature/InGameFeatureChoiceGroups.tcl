@@ -11,59 +11,79 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
-package org::allbinary::game::configuration::feature::InGameFeatureChoiceGroups;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $gameFeatureChoiceGroupsExclusive, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::feature::InGameFeatureChoiceGroups'->new() };
-tie our $gameFeatureChoiceGroupsMultiple, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::feature::InGameFeatureChoiceGroups'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{hashtable} = 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable();
+oo::class create ::InGameFeatureChoiceGroups {
+    superclass ::JObject
 }
 
+oo::define ::InGameFeatureChoiceGroups {
+    method initFields_InGameFeatureChoiceGroups {} {
+        my jset hashtable {}
+        my jset hashtable [[::StdUtil::getInstance] createHashtable]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_InGameFeatureChoiceGroups
+    }
+    
+    
+    
+
+    method get {} {
+        return [my jget hashtable]
+    }
+    
+
+    method add {name list} {
+        [my jget hashtable] put $name $list
+    }
 }
 
-
-sub getExclusiveInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::feature::InGameFeatureChoiceGroups::gameFeatureChoiceGroupsExclusive;
+namespace eval ::InGameFeatureChoiceGroups {
+    variable gameFeatureChoiceGroupsExclusiveValue {}
+    variable gameFeatureChoiceGroupsExclusiveSet 0
+    proc staticGet_gameFeatureChoiceGroupsExclusive {} {
+        variable gameFeatureChoiceGroupsExclusiveValue
+        variable gameFeatureChoiceGroupsExclusiveSet
+        if {!$gameFeatureChoiceGroupsExclusiveSet} {
+            set gameFeatureChoiceGroupsExclusiveSet 1
+            set gameFeatureChoiceGroupsExclusiveValue [::InGameFeatureChoiceGroups new]
+        }
+        return $gameFeatureChoiceGroupsExclusiveValue
+    }
+    proc staticSet_gameFeatureChoiceGroupsExclusive {value} {
+        variable gameFeatureChoiceGroupsExclusiveValue
+        variable gameFeatureChoiceGroupsExclusiveSet
+        set gameFeatureChoiceGroupsExclusiveSet 1
+        set gameFeatureChoiceGroupsExclusiveValue $value
+    }
+    variable gameFeatureChoiceGroupsMultipleValue {}
+    variable gameFeatureChoiceGroupsMultipleSet 0
+    proc staticGet_gameFeatureChoiceGroupsMultiple {} {
+        variable gameFeatureChoiceGroupsMultipleValue
+        variable gameFeatureChoiceGroupsMultipleSet
+        if {!$gameFeatureChoiceGroupsMultipleSet} {
+            set gameFeatureChoiceGroupsMultipleSet 1
+            set gameFeatureChoiceGroupsMultipleValue [::InGameFeatureChoiceGroups new]
+        }
+        return $gameFeatureChoiceGroupsMultipleValue
+    }
+    proc staticSet_gameFeatureChoiceGroupsMultiple {value} {
+        variable gameFeatureChoiceGroupsMultipleValue
+        variable gameFeatureChoiceGroupsMultipleSet
+        set gameFeatureChoiceGroupsMultipleSet 1
+        set gameFeatureChoiceGroupsMultipleValue $value
+    }
+    proc getExclusiveInstance {} {
+        return [::InGameFeatureChoiceGroups::staticGet_gameFeatureChoiceGroupsExclusive]
+    }
+    proc getMultipleInstance {} {
+        return [::InGameFeatureChoiceGroups::staticGet_gameFeatureChoiceGroupsMultiple]
+    }
 }
 
-
-sub getMultipleInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::feature::InGameFeatureChoiceGroups::gameFeatureChoiceGroupsMultiple;
-}
-
-
-sub get {
-    my ($self) = @_;
-        return $self->{hashtable};
-}
-
-
-sub add {
-    my ($self, $name, $list) = @_;
-        $self->{hashtable}->put($name, $list);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-
-1;
 

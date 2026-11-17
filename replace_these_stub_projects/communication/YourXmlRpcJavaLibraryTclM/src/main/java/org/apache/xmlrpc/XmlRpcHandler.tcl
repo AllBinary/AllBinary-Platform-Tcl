@@ -1,22 +1,22 @@
 # Generated Code Do Not Modify
+# package org.apache.xmlrpc
 
-# Java interface
-package org::apache::xmlrpc::XmlRpcHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub execute {
-    my ($self, $method, $params) = @_;
-    die "abstract method execute";
+oo::class create ::XmlRpcHandler {
+    superclass ::JObject
 }
 
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
+oo::define ::XmlRpcHandler {
+    method initFields_XmlRpcHandler {} {
+        return
+    }
+    
 
-1;
+    method execute {method params} {
+        error [jexception AbstractMethodError execute]
+    }
+}
+
+namespace eval ::XmlRpcHandler {
+}
+
 

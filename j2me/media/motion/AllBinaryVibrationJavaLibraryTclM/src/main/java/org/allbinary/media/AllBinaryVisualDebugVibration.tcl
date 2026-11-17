@@ -11,67 +11,57 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media
 
-package org::allbinary::media::AllBinaryVisualDebugVibration;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::media::AllBinaryVibrationME','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{displayInfoSingleton} = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-    $self->{timeDelayHelper} = 'org::allbinary::time::TimeDelayHelper'->new(2147483647);
-    $self->{VIBRATING} = "Vibrating";
-    $self->{myFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
-    $self->{width} = 0;
+oo::class create ::AllBinaryVisualDebugVibration {
+    superclass ::AllBinaryVibrationME
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+oo::define ::AllBinaryVisualDebugVibration {
+    method initFields_AllBinaryVisualDebugVibration {} {
+        my jset displayInfoSingleton {}
+        my jset timeDelayHelper {}
+        my jset VIBRATING {}
+        my jset myFontProcessor {}
+        my jset anchor 0
+        my jset width 0
+        my jset displayInfoSingleton [::DisplayInfoSingleton::getInstance]
+        my jset timeDelayHelper [::TimeDelayHelper new [::Integer::staticGet_MAX_VALUE]]
+        my jset VIBRATING "Vibrating"
+        my jset myFontProcessor [::UpdateMyFontProcessor new [self]]
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        my jset width 0
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_AllBinaryVisualDebugVibration
+    }
+    
 
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->{width} = $font->stringWidth($self->{VIBRATING});
-        $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
-}
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        my jset width [$font stringWidth [my jget VIBRATING]]
+        my jset myFontProcessor [::MyFontProcessor::getInstance]
+    }
+    
 
+    method vibrate {duration type volume} {
+        [my jget timeDelayHelper] jset delay $duration
+    }
+    
 
-sub vibrate {
-    my ($self, $duration, $type, $volume) = @_;
-        $self->{timeDelayHelper}->{delay} = $duration;
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        if ($self->{timeDelayHelper}->isTimeTNT()) {
-            $self->{timeDelayHelper}->{delay} = 2147483647;
-            $self->{myFontProcessor}->process($graphics);
-            $graphics->drawString($self->{VIBRATING}, $self->{displayInfoSingleton}->getLastHalfWidth() - (POSIX::floor(($self->{width}) / (2 ** (1)))), 0, $self->{anchor});
+    method paint {graphics} {
+        if {[[my jget timeDelayHelper] isTimeTNT]} {
+            [my jget timeDelayHelper] jset delay [::Integer::staticGet_MAX_VALUE]
+            [my jget myFontProcessor] process $graphics
+            $graphics drawString [my jget VIBRATING] [expr {[[my jget displayInfoSingleton] getLastHalfWidth] - ([expr {[my jget width] >> 1}])}] 0 [my jget anchor]
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::time::TimeDelayHelper ();
-use org::allbinary::media::AllBinaryVibrationME ();
+namespace eval ::AllBinaryVisualDebugVibration {
+}
 
-1;
 

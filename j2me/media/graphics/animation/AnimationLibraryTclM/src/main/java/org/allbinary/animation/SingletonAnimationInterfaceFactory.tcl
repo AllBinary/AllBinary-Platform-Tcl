@@ -11,52 +11,42 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::SingletonAnimationInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::AnimationInterfaceFactoryInterface','org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{animationInterface} = undef;
+oo::class create ::SingletonAnimationInterfaceFactory {
+    superclass ::JObject
 }
 
+oo::define ::SingletonAnimationInterfaceFactory {
+    method initFields_SingletonAnimationInterfaceFactory {} {
+        my jset animationInterface {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $animationInterface) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{animationInterface} = $animationInterface;
-    return $self;
+    constructor {animationInterface} {
+        next
+        my initFields_SingletonAnimationInterfaceFactory
+        my jset animationInterface $animationInterface
+    }
+    
+
+    method getInstance {instanceId} {
+        return [my jget animationInterface]
+    }
+    
+
+    method getInstanceAnimation {animationInterface} {
+        return [my jget animationInterface]
+    }
+    
+
+    method setInitialScale {scaleProperties} {
+    }
 }
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        return $self->{animationInterface};
+namespace eval ::SingletonAnimationInterfaceFactory {
 }
 
-
-# throws Exception
-sub getInstanceAnimation {
-    my ($self, $animationInterface) = @_;
-        return $self->{animationInterface};
-}
-
-
-sub setInitialScale {
-    my ($self, $scaleProperties) = @_;
-}
-
-use java::lang::Object ();
-use org::allbinary::media::ScaleProperties ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface ();
-
-1;
 

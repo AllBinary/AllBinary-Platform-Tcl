@@ -11,25 +11,25 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.event
 
-package org::allbinary::input::event::VirtualKeyboardEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject';
-
-
-
-sub new {
-    my ($class, $anyType) = @_;
-    my $self = $class->SUPER::new($anyType);
-        # super(...) made $self above
-    return $self;
+oo::class create ::VirtualKeyboardEvent {
+    superclass ::AllBinaryEventObject
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
+oo::define ::VirtualKeyboardEvent {
+    method initFields_VirtualKeyboardEvent {} {
+        return
+    }
+    
 
-1;
+    constructor {anyType} {
+        next $anyType
+        my initFields_VirtualKeyboardEvent
+    }
+}
+
+namespace eval ::VirtualKeyboardEvent {
+}
+
 

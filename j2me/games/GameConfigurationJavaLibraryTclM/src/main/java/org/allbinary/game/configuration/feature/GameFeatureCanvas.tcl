@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
-package org::allbinary::game::configuration::feature::GameFeatureCanvas;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'javax::microedition::lcdui::Canvas';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::GameFeatureCanvas {
+    superclass ::Canvas
 }
 
+oo::define ::GameFeatureCanvas {
+    method initFields_GameFeatureCanvas {} {
+        return
+    }
+    
 
-sub paint {
-    my ($self, $graphics) = @_;
+    constructor {} {
+        next
+        my initFields_GameFeatureCanvas
+    }
+    
+
+    method paint {graphics} {
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use javax::microedition::lcdui::Graphics ();
+namespace eval ::GameFeatureCanvas {
+}
 
-1;
 

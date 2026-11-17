@@ -11,34 +11,47 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
 #Use 8hz16bitmono for most J2ME
-package org::allbinary::media::audio::GameYouWinSound;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::media::audio::CompositeSound';
-
-tie our $soundInterface, 'java::lang::LazyStatic', sub { 'org::allbinary::media::audio::GameYouWinSound'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new("resource:/wav/youwin.wav");
-        # super(...) made $self above
-    return $self;
+oo::class create ::GameYouWinSound {
+    superclass ::CompositeSound
 }
 
+oo::define ::GameYouWinSound {
+    method initFields_GameYouWinSound {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::media::audio::GameYouWinSound::soundInterface;
+    constructor {} {
+        next "resource:/wav/youwin.wav"
+        my initFields_GameYouWinSound
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::media::audio::CompositeSound ();
+namespace eval ::GameYouWinSound {
+    variable soundInterfaceValue {}
+    variable soundInterfaceSet 0
+    proc staticGet_soundInterface {} {
+        variable soundInterfaceValue
+        variable soundInterfaceSet
+        if {!$soundInterfaceSet} {
+            set soundInterfaceSet 1
+            set soundInterfaceValue [::GameYouWinSound new]
+        }
+        return $soundInterfaceValue
+    }
+    proc staticSet_soundInterface {value} {
+        variable soundInterfaceValue
+        variable soundInterfaceSet
+        set soundInterfaceSet 1
+        set soundInterfaceValue $value
+    }
+    proc getInstance {} {
+        return [::GameYouWinSound::staticGet_soundInterface]
+    }
+}
 
-1;
 

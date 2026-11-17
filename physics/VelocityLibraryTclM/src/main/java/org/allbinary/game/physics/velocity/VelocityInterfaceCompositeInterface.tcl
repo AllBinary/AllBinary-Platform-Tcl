@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.physics.velocity
 
-# Java interface
-package org::allbinary::game::physics::velocity::VelocityInterfaceCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getVelocityProperties {
-    my ($self) = @_;
-    die "abstract method getVelocityProperties";
+oo::class create ::VelocityInterfaceCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::VelocityInterfaceCompositeInterface {
+    method initFields_VelocityInterfaceCompositeInterface {} {
+        return
+    }
+    
 
-1;
+    method getVelocityProperties {} {
+        error [jexception AbstractMethodError getVelocityProperties]
+    }
+}
+
+namespace eval ::VelocityInterfaceCompositeInterface {
+}
+
 

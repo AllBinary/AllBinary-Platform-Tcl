@@ -1,166 +1,394 @@
 # Generated Code Do Not Modify
+# package javax.microedition.khronos.opengles
 
-# Java interface
-package javax::microedition::khronos::opengles::GL11Ext;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'javax::microedition::khronos::opengles::GL';
-
-our $GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OES = 35742;
-our $GL_MATRIX_INDEX_ARRAY_OES = 34884;
-our $GL_MATRIX_INDEX_ARRAY_POINTER_OES = 34889;
-our $GL_MATRIX_INDEX_ARRAY_SIZE_OES = 34886;
-our $GL_MATRIX_INDEX_ARRAY_STRIDE_OES = 34888;
-our $GL_MATRIX_INDEX_ARRAY_TYPE_OES = 34887;
-our $GL_MATRIX_PALETTE_OES = 34880;
-our $GL_MAX_PALETTE_MATRICES_OES = 34882;
-our $GL_MAX_VERTEX_UNITS_OES = 34468;
-our $GL_TEXTURE_CROP_RECT_OES = 35741;
-our $GL_WEIGHT_ARRAY_BUFFER_BINDING_OES = 34974;
-our $GL_WEIGHT_ARRAY_OES = 34477;
-our $GL_WEIGHT_ARRAY_POINTER_OES = 34476;
-our $GL_WEIGHT_ARRAY_SIZE_OES = 34475;
-our $GL_WEIGHT_ARRAY_STRIDE_OES = 34474;
-our $GL_WEIGHT_ARRAY_TYPE_OES = 34473;
-
-
-sub glTexParameterfv {
-    my ($self, $target, $pname, $param, $offset) = @_;
-    die "abstract method glTexParameterfv";
+oo::class create ::GL11Ext {
+    superclass ::JObject
 }
 
+oo::define ::GL11Ext {
+    method initFields_GL11Ext {} {
+        return
+    }
+    
 
-sub glCurrentPaletteMatrixOES {
-    my ($self, $matrixpaletteindex) = @_;
-    die "abstract method glCurrentPaletteMatrixOES";
+    method glTexParameterfv {target pname param offset} {
+        error [jexception AbstractMethodError glTexParameterfv]
+    }
+    
+
+    method glCurrentPaletteMatrixOES {matrixpaletteindex} {
+        error [jexception AbstractMethodError glCurrentPaletteMatrixOES]
+    }
+    
+
+    method glDrawTexfOES {x y z width height} {
+        error [jexception AbstractMethodError glDrawTexfOES]
+    }
+    
+
+    method glDrawTexfvOES {coords offset} {
+        error [jexception AbstractMethodError glDrawTexfvOES]
+    }
+    
+
+    method glDrawTexfvOES {coords} {
+        error [jexception AbstractMethodError glDrawTexfvOES]
+    }
+    
+
+    method glDrawTexiOES {x y z width height} {
+        error [jexception AbstractMethodError glDrawTexiOES]
+    }
+    
+
+    method glDrawTexivOES {coords offset} {
+        error [jexception AbstractMethodError glDrawTexivOES]
+    }
+    
+
+    method glDrawTexivOES {coords} {
+        error [jexception AbstractMethodError glDrawTexivOES]
+    }
+    
+
+    method glDrawTexsOES {x y z width height} {
+        error [jexception AbstractMethodError glDrawTexsOES]
+    }
+    
+
+    method glDrawTexsvOES {coords offset} {
+        error [jexception AbstractMethodError glDrawTexsvOES]
+    }
+    
+
+    method glDrawTexsvOES {coords} {
+        error [jexception AbstractMethodError glDrawTexsvOES]
+    }
+    
+
+    method glDrawTexxOES {x y z width height} {
+        error [jexception AbstractMethodError glDrawTexxOES]
+    }
+    
+
+    method glDrawTexxvOES {coords offset} {
+        error [jexception AbstractMethodError glDrawTexxvOES]
+    }
+    
+
+    method glDrawTexxvOES {coords} {
+        error [jexception AbstractMethodError glDrawTexxvOES]
+    }
+    
+
+    method glEnable {cap} {
+        error [jexception AbstractMethodError glEnable]
+    }
+    
+
+    method glEnableClientState {array} {
+        error [jexception AbstractMethodError glEnableClientState]
+    }
+    
+
+    method glLoadPaletteFromModelViewMatrixOES {} {
+        error [jexception AbstractMethodError glLoadPaletteFromModelViewMatrixOES]
+    }
+    
+
+    method glMatrixIndexPointerOES {size type stride pointer} {
+        error [jexception AbstractMethodError glMatrixIndexPointerOES]
+    }
+    
+
+    method glMatrixIndexPointerOES {size type stride offset} {
+        error [jexception AbstractMethodError glMatrixIndexPointerOES]
+    }
+    
+
+    method glWeightPointerOES {size type stride pointer} {
+        error [jexception AbstractMethodError glWeightPointerOES]
+    }
+    
+
+    method glWeightPointerOES {size type stride offset} {
+        error [jexception AbstractMethodError glWeightPointerOES]
+    }
 }
 
-
-sub glDrawTexfOES {
-    my ($self, $x, $y, $z, $width, $height) = @_;
-    die "abstract method glDrawTexfOES";
+namespace eval ::GL11Ext {
+    variable GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OESValue {}
+    variable GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OESSet 0
+    proc staticGet_GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OES {} {
+        variable GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OESValue
+        variable GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OESSet
+        if {!$GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OESSet} {
+            set GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OESSet 1
+            set GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OESValue 35742
+        }
+        return $GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OESValue
+    }
+    proc staticSet_GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OES {value} {
+        variable GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OESValue
+        variable GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OESSet
+        set GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OESSet 1
+        set GL_MATRIX_INDEX_ARRAY_BUFFER_BINDING_OESValue $value
+    }
+    variable GL_MATRIX_INDEX_ARRAY_OESValue {}
+    variable GL_MATRIX_INDEX_ARRAY_OESSet 0
+    proc staticGet_GL_MATRIX_INDEX_ARRAY_OES {} {
+        variable GL_MATRIX_INDEX_ARRAY_OESValue
+        variable GL_MATRIX_INDEX_ARRAY_OESSet
+        if {!$GL_MATRIX_INDEX_ARRAY_OESSet} {
+            set GL_MATRIX_INDEX_ARRAY_OESSet 1
+            set GL_MATRIX_INDEX_ARRAY_OESValue 34884
+        }
+        return $GL_MATRIX_INDEX_ARRAY_OESValue
+    }
+    proc staticSet_GL_MATRIX_INDEX_ARRAY_OES {value} {
+        variable GL_MATRIX_INDEX_ARRAY_OESValue
+        variable GL_MATRIX_INDEX_ARRAY_OESSet
+        set GL_MATRIX_INDEX_ARRAY_OESSet 1
+        set GL_MATRIX_INDEX_ARRAY_OESValue $value
+    }
+    variable GL_MATRIX_INDEX_ARRAY_POINTER_OESValue {}
+    variable GL_MATRIX_INDEX_ARRAY_POINTER_OESSet 0
+    proc staticGet_GL_MATRIX_INDEX_ARRAY_POINTER_OES {} {
+        variable GL_MATRIX_INDEX_ARRAY_POINTER_OESValue
+        variable GL_MATRIX_INDEX_ARRAY_POINTER_OESSet
+        if {!$GL_MATRIX_INDEX_ARRAY_POINTER_OESSet} {
+            set GL_MATRIX_INDEX_ARRAY_POINTER_OESSet 1
+            set GL_MATRIX_INDEX_ARRAY_POINTER_OESValue 34889
+        }
+        return $GL_MATRIX_INDEX_ARRAY_POINTER_OESValue
+    }
+    proc staticSet_GL_MATRIX_INDEX_ARRAY_POINTER_OES {value} {
+        variable GL_MATRIX_INDEX_ARRAY_POINTER_OESValue
+        variable GL_MATRIX_INDEX_ARRAY_POINTER_OESSet
+        set GL_MATRIX_INDEX_ARRAY_POINTER_OESSet 1
+        set GL_MATRIX_INDEX_ARRAY_POINTER_OESValue $value
+    }
+    variable GL_MATRIX_INDEX_ARRAY_SIZE_OESValue {}
+    variable GL_MATRIX_INDEX_ARRAY_SIZE_OESSet 0
+    proc staticGet_GL_MATRIX_INDEX_ARRAY_SIZE_OES {} {
+        variable GL_MATRIX_INDEX_ARRAY_SIZE_OESValue
+        variable GL_MATRIX_INDEX_ARRAY_SIZE_OESSet
+        if {!$GL_MATRIX_INDEX_ARRAY_SIZE_OESSet} {
+            set GL_MATRIX_INDEX_ARRAY_SIZE_OESSet 1
+            set GL_MATRIX_INDEX_ARRAY_SIZE_OESValue 34886
+        }
+        return $GL_MATRIX_INDEX_ARRAY_SIZE_OESValue
+    }
+    proc staticSet_GL_MATRIX_INDEX_ARRAY_SIZE_OES {value} {
+        variable GL_MATRIX_INDEX_ARRAY_SIZE_OESValue
+        variable GL_MATRIX_INDEX_ARRAY_SIZE_OESSet
+        set GL_MATRIX_INDEX_ARRAY_SIZE_OESSet 1
+        set GL_MATRIX_INDEX_ARRAY_SIZE_OESValue $value
+    }
+    variable GL_MATRIX_INDEX_ARRAY_STRIDE_OESValue {}
+    variable GL_MATRIX_INDEX_ARRAY_STRIDE_OESSet 0
+    proc staticGet_GL_MATRIX_INDEX_ARRAY_STRIDE_OES {} {
+        variable GL_MATRIX_INDEX_ARRAY_STRIDE_OESValue
+        variable GL_MATRIX_INDEX_ARRAY_STRIDE_OESSet
+        if {!$GL_MATRIX_INDEX_ARRAY_STRIDE_OESSet} {
+            set GL_MATRIX_INDEX_ARRAY_STRIDE_OESSet 1
+            set GL_MATRIX_INDEX_ARRAY_STRIDE_OESValue 34888
+        }
+        return $GL_MATRIX_INDEX_ARRAY_STRIDE_OESValue
+    }
+    proc staticSet_GL_MATRIX_INDEX_ARRAY_STRIDE_OES {value} {
+        variable GL_MATRIX_INDEX_ARRAY_STRIDE_OESValue
+        variable GL_MATRIX_INDEX_ARRAY_STRIDE_OESSet
+        set GL_MATRIX_INDEX_ARRAY_STRIDE_OESSet 1
+        set GL_MATRIX_INDEX_ARRAY_STRIDE_OESValue $value
+    }
+    variable GL_MATRIX_INDEX_ARRAY_TYPE_OESValue {}
+    variable GL_MATRIX_INDEX_ARRAY_TYPE_OESSet 0
+    proc staticGet_GL_MATRIX_INDEX_ARRAY_TYPE_OES {} {
+        variable GL_MATRIX_INDEX_ARRAY_TYPE_OESValue
+        variable GL_MATRIX_INDEX_ARRAY_TYPE_OESSet
+        if {!$GL_MATRIX_INDEX_ARRAY_TYPE_OESSet} {
+            set GL_MATRIX_INDEX_ARRAY_TYPE_OESSet 1
+            set GL_MATRIX_INDEX_ARRAY_TYPE_OESValue 34887
+        }
+        return $GL_MATRIX_INDEX_ARRAY_TYPE_OESValue
+    }
+    proc staticSet_GL_MATRIX_INDEX_ARRAY_TYPE_OES {value} {
+        variable GL_MATRIX_INDEX_ARRAY_TYPE_OESValue
+        variable GL_MATRIX_INDEX_ARRAY_TYPE_OESSet
+        set GL_MATRIX_INDEX_ARRAY_TYPE_OESSet 1
+        set GL_MATRIX_INDEX_ARRAY_TYPE_OESValue $value
+    }
+    variable GL_MATRIX_PALETTE_OESValue {}
+    variable GL_MATRIX_PALETTE_OESSet 0
+    proc staticGet_GL_MATRIX_PALETTE_OES {} {
+        variable GL_MATRIX_PALETTE_OESValue
+        variable GL_MATRIX_PALETTE_OESSet
+        if {!$GL_MATRIX_PALETTE_OESSet} {
+            set GL_MATRIX_PALETTE_OESSet 1
+            set GL_MATRIX_PALETTE_OESValue 34880
+        }
+        return $GL_MATRIX_PALETTE_OESValue
+    }
+    proc staticSet_GL_MATRIX_PALETTE_OES {value} {
+        variable GL_MATRIX_PALETTE_OESValue
+        variable GL_MATRIX_PALETTE_OESSet
+        set GL_MATRIX_PALETTE_OESSet 1
+        set GL_MATRIX_PALETTE_OESValue $value
+    }
+    variable GL_MAX_PALETTE_MATRICES_OESValue {}
+    variable GL_MAX_PALETTE_MATRICES_OESSet 0
+    proc staticGet_GL_MAX_PALETTE_MATRICES_OES {} {
+        variable GL_MAX_PALETTE_MATRICES_OESValue
+        variable GL_MAX_PALETTE_MATRICES_OESSet
+        if {!$GL_MAX_PALETTE_MATRICES_OESSet} {
+            set GL_MAX_PALETTE_MATRICES_OESSet 1
+            set GL_MAX_PALETTE_MATRICES_OESValue 34882
+        }
+        return $GL_MAX_PALETTE_MATRICES_OESValue
+    }
+    proc staticSet_GL_MAX_PALETTE_MATRICES_OES {value} {
+        variable GL_MAX_PALETTE_MATRICES_OESValue
+        variable GL_MAX_PALETTE_MATRICES_OESSet
+        set GL_MAX_PALETTE_MATRICES_OESSet 1
+        set GL_MAX_PALETTE_MATRICES_OESValue $value
+    }
+    variable GL_MAX_VERTEX_UNITS_OESValue {}
+    variable GL_MAX_VERTEX_UNITS_OESSet 0
+    proc staticGet_GL_MAX_VERTEX_UNITS_OES {} {
+        variable GL_MAX_VERTEX_UNITS_OESValue
+        variable GL_MAX_VERTEX_UNITS_OESSet
+        if {!$GL_MAX_VERTEX_UNITS_OESSet} {
+            set GL_MAX_VERTEX_UNITS_OESSet 1
+            set GL_MAX_VERTEX_UNITS_OESValue 34468
+        }
+        return $GL_MAX_VERTEX_UNITS_OESValue
+    }
+    proc staticSet_GL_MAX_VERTEX_UNITS_OES {value} {
+        variable GL_MAX_VERTEX_UNITS_OESValue
+        variable GL_MAX_VERTEX_UNITS_OESSet
+        set GL_MAX_VERTEX_UNITS_OESSet 1
+        set GL_MAX_VERTEX_UNITS_OESValue $value
+    }
+    variable GL_TEXTURE_CROP_RECT_OESValue {}
+    variable GL_TEXTURE_CROP_RECT_OESSet 0
+    proc staticGet_GL_TEXTURE_CROP_RECT_OES {} {
+        variable GL_TEXTURE_CROP_RECT_OESValue
+        variable GL_TEXTURE_CROP_RECT_OESSet
+        if {!$GL_TEXTURE_CROP_RECT_OESSet} {
+            set GL_TEXTURE_CROP_RECT_OESSet 1
+            set GL_TEXTURE_CROP_RECT_OESValue 35741
+        }
+        return $GL_TEXTURE_CROP_RECT_OESValue
+    }
+    proc staticSet_GL_TEXTURE_CROP_RECT_OES {value} {
+        variable GL_TEXTURE_CROP_RECT_OESValue
+        variable GL_TEXTURE_CROP_RECT_OESSet
+        set GL_TEXTURE_CROP_RECT_OESSet 1
+        set GL_TEXTURE_CROP_RECT_OESValue $value
+    }
+    variable GL_WEIGHT_ARRAY_BUFFER_BINDING_OESValue {}
+    variable GL_WEIGHT_ARRAY_BUFFER_BINDING_OESSet 0
+    proc staticGet_GL_WEIGHT_ARRAY_BUFFER_BINDING_OES {} {
+        variable GL_WEIGHT_ARRAY_BUFFER_BINDING_OESValue
+        variable GL_WEIGHT_ARRAY_BUFFER_BINDING_OESSet
+        if {!$GL_WEIGHT_ARRAY_BUFFER_BINDING_OESSet} {
+            set GL_WEIGHT_ARRAY_BUFFER_BINDING_OESSet 1
+            set GL_WEIGHT_ARRAY_BUFFER_BINDING_OESValue 34974
+        }
+        return $GL_WEIGHT_ARRAY_BUFFER_BINDING_OESValue
+    }
+    proc staticSet_GL_WEIGHT_ARRAY_BUFFER_BINDING_OES {value} {
+        variable GL_WEIGHT_ARRAY_BUFFER_BINDING_OESValue
+        variable GL_WEIGHT_ARRAY_BUFFER_BINDING_OESSet
+        set GL_WEIGHT_ARRAY_BUFFER_BINDING_OESSet 1
+        set GL_WEIGHT_ARRAY_BUFFER_BINDING_OESValue $value
+    }
+    variable GL_WEIGHT_ARRAY_OESValue {}
+    variable GL_WEIGHT_ARRAY_OESSet 0
+    proc staticGet_GL_WEIGHT_ARRAY_OES {} {
+        variable GL_WEIGHT_ARRAY_OESValue
+        variable GL_WEIGHT_ARRAY_OESSet
+        if {!$GL_WEIGHT_ARRAY_OESSet} {
+            set GL_WEIGHT_ARRAY_OESSet 1
+            set GL_WEIGHT_ARRAY_OESValue 34477
+        }
+        return $GL_WEIGHT_ARRAY_OESValue
+    }
+    proc staticSet_GL_WEIGHT_ARRAY_OES {value} {
+        variable GL_WEIGHT_ARRAY_OESValue
+        variable GL_WEIGHT_ARRAY_OESSet
+        set GL_WEIGHT_ARRAY_OESSet 1
+        set GL_WEIGHT_ARRAY_OESValue $value
+    }
+    variable GL_WEIGHT_ARRAY_POINTER_OESValue {}
+    variable GL_WEIGHT_ARRAY_POINTER_OESSet 0
+    proc staticGet_GL_WEIGHT_ARRAY_POINTER_OES {} {
+        variable GL_WEIGHT_ARRAY_POINTER_OESValue
+        variable GL_WEIGHT_ARRAY_POINTER_OESSet
+        if {!$GL_WEIGHT_ARRAY_POINTER_OESSet} {
+            set GL_WEIGHT_ARRAY_POINTER_OESSet 1
+            set GL_WEIGHT_ARRAY_POINTER_OESValue 34476
+        }
+        return $GL_WEIGHT_ARRAY_POINTER_OESValue
+    }
+    proc staticSet_GL_WEIGHT_ARRAY_POINTER_OES {value} {
+        variable GL_WEIGHT_ARRAY_POINTER_OESValue
+        variable GL_WEIGHT_ARRAY_POINTER_OESSet
+        set GL_WEIGHT_ARRAY_POINTER_OESSet 1
+        set GL_WEIGHT_ARRAY_POINTER_OESValue $value
+    }
+    variable GL_WEIGHT_ARRAY_SIZE_OESValue {}
+    variable GL_WEIGHT_ARRAY_SIZE_OESSet 0
+    proc staticGet_GL_WEIGHT_ARRAY_SIZE_OES {} {
+        variable GL_WEIGHT_ARRAY_SIZE_OESValue
+        variable GL_WEIGHT_ARRAY_SIZE_OESSet
+        if {!$GL_WEIGHT_ARRAY_SIZE_OESSet} {
+            set GL_WEIGHT_ARRAY_SIZE_OESSet 1
+            set GL_WEIGHT_ARRAY_SIZE_OESValue 34475
+        }
+        return $GL_WEIGHT_ARRAY_SIZE_OESValue
+    }
+    proc staticSet_GL_WEIGHT_ARRAY_SIZE_OES {value} {
+        variable GL_WEIGHT_ARRAY_SIZE_OESValue
+        variable GL_WEIGHT_ARRAY_SIZE_OESSet
+        set GL_WEIGHT_ARRAY_SIZE_OESSet 1
+        set GL_WEIGHT_ARRAY_SIZE_OESValue $value
+    }
+    variable GL_WEIGHT_ARRAY_STRIDE_OESValue {}
+    variable GL_WEIGHT_ARRAY_STRIDE_OESSet 0
+    proc staticGet_GL_WEIGHT_ARRAY_STRIDE_OES {} {
+        variable GL_WEIGHT_ARRAY_STRIDE_OESValue
+        variable GL_WEIGHT_ARRAY_STRIDE_OESSet
+        if {!$GL_WEIGHT_ARRAY_STRIDE_OESSet} {
+            set GL_WEIGHT_ARRAY_STRIDE_OESSet 1
+            set GL_WEIGHT_ARRAY_STRIDE_OESValue 34474
+        }
+        return $GL_WEIGHT_ARRAY_STRIDE_OESValue
+    }
+    proc staticSet_GL_WEIGHT_ARRAY_STRIDE_OES {value} {
+        variable GL_WEIGHT_ARRAY_STRIDE_OESValue
+        variable GL_WEIGHT_ARRAY_STRIDE_OESSet
+        set GL_WEIGHT_ARRAY_STRIDE_OESSet 1
+        set GL_WEIGHT_ARRAY_STRIDE_OESValue $value
+    }
+    variable GL_WEIGHT_ARRAY_TYPE_OESValue {}
+    variable GL_WEIGHT_ARRAY_TYPE_OESSet 0
+    proc staticGet_GL_WEIGHT_ARRAY_TYPE_OES {} {
+        variable GL_WEIGHT_ARRAY_TYPE_OESValue
+        variable GL_WEIGHT_ARRAY_TYPE_OESSet
+        if {!$GL_WEIGHT_ARRAY_TYPE_OESSet} {
+            set GL_WEIGHT_ARRAY_TYPE_OESSet 1
+            set GL_WEIGHT_ARRAY_TYPE_OESValue 34473
+        }
+        return $GL_WEIGHT_ARRAY_TYPE_OESValue
+    }
+    proc staticSet_GL_WEIGHT_ARRAY_TYPE_OES {value} {
+        variable GL_WEIGHT_ARRAY_TYPE_OESValue
+        variable GL_WEIGHT_ARRAY_TYPE_OESSet
+        set GL_WEIGHT_ARRAY_TYPE_OESSet 1
+        set GL_WEIGHT_ARRAY_TYPE_OESValue $value
+    }
 }
 
-
-sub glDrawTexfvOES {
-    my ($self, $coords, $offset) = @_;
-    die "abstract method glDrawTexfvOES";
-}
-
-
-# Java overloaded method: Perl keeps the last definition
-sub glDrawTexfvOES {
-    my ($self, $coords) = @_;
-    die "abstract method glDrawTexfvOES";
-}
-
-
-sub glDrawTexiOES {
-    my ($self, $x, $y, $z, $width, $height) = @_;
-    die "abstract method glDrawTexiOES";
-}
-
-
-sub glDrawTexivOES {
-    my ($self, $coords, $offset) = @_;
-    die "abstract method glDrawTexivOES";
-}
-
-
-# Java overloaded method: Perl keeps the last definition
-sub glDrawTexivOES {
-    my ($self, $coords) = @_;
-    die "abstract method glDrawTexivOES";
-}
-
-
-sub glDrawTexsOES {
-    my ($self, $x, $y, $z, $width, $height) = @_;
-    die "abstract method glDrawTexsOES";
-}
-
-
-sub glDrawTexsvOES {
-    my ($self, $coords, $offset) = @_;
-    die "abstract method glDrawTexsvOES";
-}
-
-
-# Java overloaded method: Perl keeps the last definition
-sub glDrawTexsvOES {
-    my ($self, $coords) = @_;
-    die "abstract method glDrawTexsvOES";
-}
-
-
-sub glDrawTexxOES {
-    my ($self, $x, $y, $z, $width, $height) = @_;
-    die "abstract method glDrawTexxOES";
-}
-
-
-sub glDrawTexxvOES {
-    my ($self, $coords, $offset) = @_;
-    die "abstract method glDrawTexxvOES";
-}
-
-
-# Java overloaded method: Perl keeps the last definition
-sub glDrawTexxvOES {
-    my ($self, $coords) = @_;
-    die "abstract method glDrawTexxvOES";
-}
-
-
-sub glEnable {
-    my ($self, $cap) = @_;
-    die "abstract method glEnable";
-}
-
-
-sub glEnableClientState {
-    my ($self, $array) = @_;
-    die "abstract method glEnableClientState";
-}
-
-
-sub glLoadPaletteFromModelViewMatrixOES {
-    my ($self) = @_;
-    die "abstract method glLoadPaletteFromModelViewMatrixOES";
-}
-
-
-sub glMatrixIndexPointerOES {
-    my ($self, $size, $type, $stride, $pointer) = @_;
-    die "abstract method glMatrixIndexPointerOES";
-}
-
-
-# Java overloaded method: Perl keeps the last definition
-sub glMatrixIndexPointerOES {
-    my ($self, $size, $type, $stride, $offset) = @_;
-    die "abstract method glMatrixIndexPointerOES";
-}
-
-
-sub glWeightPointerOES {
-    my ($self, $size, $type, $stride, $pointer) = @_;
-    die "abstract method glWeightPointerOES";
-}
-
-
-# Java overloaded method: Perl keeps the last definition
-sub glWeightPointerOES {
-    my ($self, $size, $type, $stride, $offset) = @_;
-    die "abstract method glWeightPointerOES";
-}
-
-# use java::nio::Buffer ();
-# use java::nio::FloatBuffer ();
-# use java::nio::IntBuffer ();
-# use java::nio::ShortBuffer ();
-
-1;
 

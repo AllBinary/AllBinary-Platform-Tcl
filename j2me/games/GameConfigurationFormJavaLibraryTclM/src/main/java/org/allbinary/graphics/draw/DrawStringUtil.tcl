@@ -11,96 +11,95 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.draw
 
-package org::allbinary::graphics::draw::DrawStringUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::draw::DrawStringUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{EMPTY_STRING} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
+oo::class create ::DrawStringUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::DrawStringUtil {
+    method initFields_DrawStringUtil {} {
+        my jset EMPTY_STRING {}
+        my jset anchor 0
+        my jset EMPTY_STRING [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_DrawStringUtil
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::draw::DrawStringUtil::instance;
-}
-
-
-sub drawCenterString {
-    my ($self, $graphics, $string, $offset, $length, $x, $y) = @_;
-        my $width = (POSIX::floor(($graphics->getFont()->substringWidth($string, $offset, $length)) / (2 ** (1))));
+    method drawCenterString {graphics string offset length x y} {
+        set width ([expr {[[$graphics getFont] substringWidth $string $offset $length] >> 1}])
         try {
-            $graphics->drawSubstring($string, $offset, $length, $x - $width, $y, $self->{anchor});
-        } catch ($e) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append("Exception: stringLength: ")->appendint(length($string))->append(" offset: ")->appendint($offset)->append(" currentLength: ")->appendint($length)->toString(), $self, "drawCenterString");
+            $graphics drawSubstring $string $offset $length [jint [expr {$x - $width}]] $y [my jget anchor]
+        } on error {e} {
+            ::PreLogUtil::put [[[[[[[[::StringMaker new] append "Exception: stringLength: "] appendint [string length $string]] append " offset: "] appendint $offset] append " currentLength: "] appendint $length] toString] [self] "drawCenterString"
         }
-}
+    }
+    
 
-
-sub drawCenterStrings {
-    my ($self, $graphics, $stringArray, $maxWidth, $charHeight, $x, $y) = @_;
-        my $extraLines = 0;
-        for (my $index = 0; $index < scalar(@{$stringArray}); $index++) {
-            my $string = $stringArray->[$index];
-            if ($string ne $self->{EMPTY_STRING}) {
-                my $width = $graphics->getFont()->stringWidth($string);
-                my $minTotalLines = 1;
-                if ($width > $maxWidth) {
-                    $minTotalLines = (int($width / $maxWidth)) + 1;
+    method drawCenterStrings {graphics stringArray maxWidth charHeight x y} {
+        set extraLines 0
+        for {set index 0} {[expr {$index < [$stringArray length]}]} {jpostincr index 1} {
+            set string [$stringArray get $index]
+            if {[expr {$string ne [my jget EMPTY_STRING]}]} {
+                set width [[$graphics getFont] stringWidth $string]
+                set minTotalLines 1
+                if {[expr {$width > $maxWidth}]} {
+                    set minTotalLines [jint [expr {([jdiv $width $maxWidth]) + 1}]]
                 }
-                my $linePortion = int(length($string) / $minTotalLines);
-                my $offset = 0;
-                my $currentLength = $linePortion;
-                my $size = length($string);
-                while ($offset < $size) {
-                    if ($offset + $currentLength > $size) {
-                        $currentLength = $size - $offset;
+                set linePortion [jdiv [string length $string] $minTotalLines]
+                set offset 0
+                set currentLength $linePortion
+                set size [string length $string]
+                while {[expr {$offset < $size}]} {
+                    if {[expr {[jint [expr {$offset + $currentLength}]] > $size}]} {
+                        set currentLength [jint [expr {$size - $offset}]]
                     }
-                    if ($offset + $currentLength != $size) {
-                        while ($currentLength > 0 && $stringArray->[$index]->charAt($offset + $currentLength) ne " ") {
-                            $currentLength--;
+                    if {[expr {[jint [expr {$offset + $currentLength}]] != $size}]} {
+                        while {[expr {[expr {$currentLength > 0}] && [expr {[[$stringArray get $index] charAt [jint [expr {$offset + $currentLength}]]] != [scan " " %c]}]}]} {
+                            jpostincr currentLength -1
                         }
-                        if ($currentLength <= 4) {
-                            $currentLength = $linePortion;
+                        if {[expr {$currentLength <= 4}]} {
+                            set currentLength $linePortion
                         }
                     }
-                    $self->drawCenterString($graphics, $string, $offset, $currentLength, $x, $y + (($index + $extraLines++) * $charHeight));
-                    $offset = $offset + $currentLength;
-                    $currentLength = $linePortion;
+                    my drawCenterString $graphics $string $offset $currentLength $x [jint [expr {$y + ([jint [expr {([jint [expr {$index + [jpostincr extraLines 1]}]]) * $charHeight}]])}]]
+                    set offset [jint [expr {$offset + $currentLength}]]
+                    set currentLength $linePortion
                 }
-                $extraLines--;
+                jpostincr extraLines -1
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::AndroidUtil ();
-use org::allbinary::J2MEUtil ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::graphics::opengles::OpenGLFeatureUtil ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
+namespace eval ::DrawStringUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::DrawStringUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::DrawStringUtil::staticGet_instance]
+    }
+}
 
-1;
 

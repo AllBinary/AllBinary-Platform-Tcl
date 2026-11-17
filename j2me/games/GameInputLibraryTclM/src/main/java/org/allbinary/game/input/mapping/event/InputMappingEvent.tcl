@@ -11,44 +11,37 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.mapping.event
 
-package org::allbinary::game::input::mapping::event::InputMappingEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{inputToGameKeyMapping} = 'org::allbinary::game::input::mapping::InputToGameKeyMapping'->getNullInstance();
+oo::class create ::InputMappingEvent {
+    superclass ::AllBinaryEventObject
 }
 
+oo::define ::InputMappingEvent {
+    method initFields_InputMappingEvent {} {
+        my jset inputToGameKeyMapping {}
+        my jset inputToGameKeyMapping [::InputToGameKeyMapping::getNullInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $anyType) = @_;
-    my $self = $class->SUPER::new($anyType);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
+    constructor {anyType} {
+        next $anyType
+        my initFields_InputMappingEvent
+    }
+    
+
+    method setInputToGameKeyMapping {inputToGameKeyMapping} {
+        my jset inputToGameKeyMapping $inputToGameKeyMapping
+    }
+    
+
+    method getInputToGameKeyMapping {} {
+        return [my jget inputToGameKeyMapping]
+    }
 }
 
-
-sub setInputToGameKeyMapping {
-    my ($self, $inputToGameKeyMapping) = @_;
-        $self->{inputToGameKeyMapping} = $inputToGameKeyMapping;
+namespace eval ::InputMappingEvent {
 }
 
-
-sub getInputToGameKeyMapping {
-    my ($self) = @_;
-        return $self->{inputToGameKeyMapping};
-}
-
-use java::lang::Object ();
-use org::allbinary::game::input::mapping::InputToGameKeyMapping ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-
-1;
 

@@ -11,94 +11,82 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::ImmediateCommandFormInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::displayable::canvas::CommandFormInputProcessor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{timeHelper} = 'org::allbinary::time::TimeDelayHelper'->new(25);
-    $self->{gameCommandCanvas} = undef;
+oo::class create ::ImmediateCommandFormInputProcessor {
+    superclass ::CommandFormInputProcessor
 }
 
+oo::define ::ImmediateCommandFormInputProcessor {
+    method initFields_ImmediateCommandFormInputProcessor {} {
+        my jset timeHelper {}
+        my jset gameCommandCanvas {}
+        my jset timeHelper [::TimeDelayHelper new 25]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameKeyEventList, $playerInputId, $gameCommandCanvas, $form) = @_;
-    my $self = $class->SUPER::new($gameKeyEventList, $playerInputId, $gameCommandCanvas, $form);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{gameCommandCanvas} = $gameCommandCanvas;
-    return $self;
-}
+    constructor {gameKeyEventList playerInputId gameCommandCanvas form} {
+        next $gameKeyEventList $playerInputId $gameCommandCanvas $form
+        my initFields_ImmediateCommandFormInputProcessor
+        my jset gameCommandCanvas $gameCommandCanvas
+    }
+    
 
-
-sub onPressGameKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
+    method onPressGameKeyEvent {gameKeyEvent} {
         try {
-            $self->SUPER::onPressGameKeyEvent($gameKeyEvent);
-            if ($self->{timeHelper}->isTimeTNT()) {
-                $self->processInputList();
-                $self->{gameCommandCanvas}->{repaintBehavior}->onChangeRepaint($self->getCanvas());
+            next $gameKeyEvent
+            if {[[my jget timeHelper] isTimeTNT]} {
+                my processInputList
+                [[my jget gameCommandCanvas] jget repaintBehavior] onChangeRepaint [my getCanvas]
             }
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{gameInputStrings}->{ON_PRESS_GAME_KEY}, $e);
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget gameInputStrings] jget ON_PRESS_GAME_KEY] $e
         }
-}
+    }
+    
 
-
-sub onDownGameKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
+    method onDownGameKeyEvent {gameKeyEvent} {
         try {
-            $self->SUPER::onDownGameKeyEvent($gameKeyEvent);
-            if ($self->{timeHelper}->isTimeTNT()) {
-                $self->processInputList();
-                $self->{gameCommandCanvas}->{repaintBehavior}->onChangeRepaint($self->getCanvas());
+            next $gameKeyEvent
+            if {[[my jget timeHelper] isTimeTNT]} {
+                my processInputList
+                [[my jget gameCommandCanvas] jget repaintBehavior] onChangeRepaint [my getCanvas]
             }
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{gameInputStrings}->{ON_DOWN_GAME_KEY}, $e);
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget gameInputStrings] jget ON_DOWN_GAME_KEY] $e
         }
-}
+    }
+    
 
-
-sub onUpGameKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
+    method onUpGameKeyEvent {gameKeyEvent} {
         try {
-            $self->SUPER::onUpGameKeyEvent($gameKeyEvent);
-            if ($self->{timeHelper}->isTimeTNT()) {
-                $self->processInputList();
-                $self->{gameCommandCanvas}->{repaintBehavior}->onChangeRepaint($self->getCanvas());
+            next $gameKeyEvent
+            if {[[my jget timeHelper] isTimeTNT]} {
+                my processInputList
+                [[my jget gameCommandCanvas] jget repaintBehavior] onChangeRepaint [my getCanvas]
             }
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{gameInputStrings}->{ON_UP_GAME_KEY}, $e);
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget gameInputStrings] jget ON_UP_GAME_KEY] $e
         }
-}
+    }
+    
 
-
-sub onMotionGestureEvent {
-    my ($self, $motionGestureEvent) = @_;
+    method onMotionGestureEvent {motionGestureEvent} {
         try {
-            $self->SUPER::onMotionGestureEvent($motionGestureEvent);
-            if ($self->{timeHelper}->isTimeTNT()) {
-                $self->processInputList();
-                $self->{gameCommandCanvas}->{repaintBehavior}->onChangeRepaint($self->getCanvas());
+            next $motionGestureEvent
+            if {[[my jget timeHelper] isTimeTNT]} {
+                my processInputList
+                [[my jget gameCommandCanvas] jget repaintBehavior] onChangeRepaint [my getCanvas]
             }
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "onMotionGestureEvent", $e);
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "onMotionGestureEvent" $e
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::graphics::form::ScrollSelectionForm ();
-use org::allbinary::input::motion::gesture::observer::MotionGestureEvent ();
-use org::allbinary::time::TimeDelayHelper ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::game::displayable::canvas::CommandFormInputProcessor ();
+namespace eval ::ImmediateCommandFormInputProcessor {
+}
 
-1;
 

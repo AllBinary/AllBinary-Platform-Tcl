@@ -1,45 +1,36 @@
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::NullRotationAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::RotationAnimation';
-
-
-
-sub createTotalAngle {
-    my ($class, $angleInfo, $totalAngle, $animationBehavior) = @_;
-        return 'org::allbinary::animation::NullRotationAnimation'->new($angleInfo, 'org::allbinary::util::CircularIndexUtil'->createInstance($totalAngle / $angleInfo->getAngleIncrementInfo()->getAngleIncrement()), $animationBehavior);
+oo::class create ::NullRotationAnimation {
+    superclass ::RotationAnimation
 }
 
+oo::define ::NullRotationAnimation {
+    method initFields_NullRotationAnimation {} {
+        return
+    }
+    
+    
+    
 
-sub createQuarter {
-    my ($class, $animationBehavior) = @_;
-        return 'org::allbinary::animation::NullRotationAnimation'->new('org::allbinary::math::AngleInfo'->getInstance('org::allbinary::math::AngleFactory'->getInstance()->{QUARTER_TOTAL_ANGLE}), 'org::allbinary::util::CircularIndexUtil'->createInstance(4), $animationBehavior);
+    constructor {angleInfo circularIndexUtil animationBehavior} {
+        next $angleInfo $circularIndexUtil $animationBehavior
+        my initFields_NullRotationAnimation
+    }
+    
+
+    method getAnimationSize {} {
+        return 0
+    }
 }
 
-
-sub new {
-    my ($class, $angleInfo, $circularIndexUtil, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($angleInfo, $circularIndexUtil, $animationBehavior);
-        # super(...) made $self above
-    return $self;
+namespace eval ::NullRotationAnimation {
+    proc createTotalAngle {angleInfo totalAngle animationBehavior} {
+        return [::NullRotationAnimation new $angleInfo [::CircularIndexUtil::createInstance [expr {$totalAngle / [[$angleInfo getAngleIncrementInfo] getAngleIncrement]}]] $animationBehavior]
+    }
+    proc createQuarter {animationBehavior} {
+        return [::NullRotationAnimation new [::AngleInfo::getInstance [[::AngleFactory::getInstance] jget QUARTER_TOTAL_ANGLE]] [::CircularIndexUtil::createInstance 4] $animationBehavior]
+    }
 }
 
-
-# throws Exception
-sub getAnimationSize {
-    my ($self) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-use org::allbinary::math::AngleFactory ();
-use org::allbinary::math::AngleInfo ();
-use org::allbinary::util::CircularIndexUtil ();
-use org::allbinary::animation::RotationAnimation ();
-
-1;
 

@@ -11,42 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::TimedVectorAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::VectorAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{timeElapsedHelper} = 'org::allbinary::time::TimeDelayHelper'->new(200);
+oo::class create ::TimedVectorAnimation {
+    superclass ::VectorAnimation
 }
 
+oo::define ::TimedVectorAnimation {
+    method initFields_TimedVectorAnimation {} {
+        my jset timeElapsedHelper {}
+        my jset timeElapsedHelper [::TimeDelayHelper new 200]
+        return
+    }
+    
 
-sub new {
-    my ($class, $currentPoints, $basicColor, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($currentPoints, $basicColor, $animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
-}
+    constructor {currentPoints basicColor animationBehavior} {
+        next $currentPoints $basicColor $animationBehavior
+        my initFields_TimedVectorAnimation
+    }
+    
 
-
-sub nextFrame {
-    my ($self) = @_;
-        if ($self->{timeElapsedHelper}->isTime('org::allbinary::time::GameTickTimeDelayHelperFactory'->getInstance()->{startTime})) {
-            $self->SUPER::nextFrame();
+    method nextFrame {} {
+        if {[[my jget timeElapsedHelper] isTime [[::GameTickTimeDelayHelperFactory::getInstance] jget startTime]]} {
+            next
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::time::GameTickTimeDelayHelperFactory ();
-use org::allbinary::time::TimeDelayHelper ();
-use org::allbinary::animation::VectorAnimation ();
+namespace eval ::TimedVectorAnimation {
+}
 
-1;
 

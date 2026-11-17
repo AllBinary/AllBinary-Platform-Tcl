@@ -11,133 +11,141 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-package org::allbinary::game::layer::AllBinaryGameLayerManager;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::AllBinaryLayerManager';
-
-tie our $NULL_ALLBINARY_LAYER_MANAGER, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-tie our $ID, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt(22) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{backgroundBasicColor} = undef;
-    $self->{foregroundBasicColor} = undef;
-    $self->{gameInfo} = undef;
-    $self->{playerGameInputCompositeInterface} = $org::allbinary::game::input::NullPlayerGameInputComposite::NULL_PLAYER_GAME_INPUT_COMPOSITE;
+oo::class create ::AllBinaryGameLayerManager {
+    superclass ::AllBinaryLayerManager
 }
 
+oo::define ::AllBinaryGameLayerManager {
+    method initFields_AllBinaryGameLayerManager {} {
+        my jset backgroundBasicColor {}
+        my jset foregroundBasicColor {}
+        my jset gameInfo {}
+        my jset playerGameInputCompositeInterface {}
+        
+        
+        
+        my jset playerGameInputCompositeInterface [::NullPlayerGameInputComposite::staticGet_NULL_PLAYER_GAME_INPUT_COMPOSITE]
+        return
+    }
+    
+    
 
-sub getNullInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::layer::AllBinaryGameLayerManager::NULL_ALLBINARY_LAYER_MANAGER == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::layer::AllBinaryGameLayerManager::NULL_ALLBINARY_LAYER_MANAGER = 'org::allbinary::game::layer::AllBinaryGameLayerManager'->new('org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{BLACK}, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE}, $org::allbinary::game::GameInfo::NONE);
+    constructor {backgroundBasicColor foregroundBasicColor gameInfo} {
+        next
+        my initFields_AllBinaryGameLayerManager
+        my jset backgroundBasicColor $backgroundBasicColor
+        my jset foregroundBasicColor $foregroundBasicColor
+        set itemColorFactory [::ItemColorFactory::getInstance]
+        $itemColorFactory jset INVERT_PAINT [[my jget backgroundBasicColor] intValue]
+        $itemColorFactory jset PAINT [[my jget foregroundBasicColor] intValue]
+        my jset gameInfo $gameInfo
+    }
+    
+
+    method getLayerManager {} {
+        return [self]
+    }
+    
+
+    method init {} {
+    }
+    
+
+    method getBackgroundBasicColor {} {
+        return [my jget backgroundBasicColor]
+    }
+    
+
+    method setBackgroundBasicColor {backgroundBasicColor} {
+        my jset backgroundBasicColor $backgroundBasicColor
+        [::ItemColorFactory::getInstance] jset INVERT_PAINT [[my jget backgroundBasicColor] intValue]
+    }
+    
+
+    method getForegroundBasicColor {} {
+        return [my jget foregroundBasicColor]
+    }
+    
+
+    method setForegroundBasicColor {foregroundBasicColor} {
+        my jset foregroundBasicColor $foregroundBasicColor
+        [::ItemColorFactory::getInstance] jset PAINT [[my jget foregroundBasicColor] intValue]
+    }
+    
+
+    method getGameInfo {} {
+        return [my jget gameInfo]
+    }
+    
+
+    method setGameInfo {gameInfo} {
+        my jset gameInfo $gameInfo
+    }
+    
+
+    method setLayerProcessorList {list} {
+        set layerProcessorInterfaceArray [jarray [$list size] {}]
+        set size [$layerProcessorInterfaceArray length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            $layerProcessorInterfaceArray set $index [[$list jget objectArray] get $index]
         }
-        return $org::allbinary::game::layer::AllBinaryGameLayerManager::NULL_ALLBINARY_LAYER_MANAGER;
+        my setLayerProcessorArray $layerProcessorInterfaceArray
+    }
+    
+
+    method setPlayerGameInputCompositeInterface {playerGameInputCompositeInterface} {
+        my jset playerGameInputCompositeInterface $playerGameInputCompositeInterface
+    }
+    
+
+    method getPlayerGameInputCompositeInterface {} {
+        return [my jget playerGameInputCompositeInterface]
+    }
 }
 
-
-sub new {
-    my ($class, $backgroundBasicColor, $foregroundBasicColor, $gameInfo) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{backgroundBasicColor} = $backgroundBasicColor;
-        $self->{foregroundBasicColor} = $foregroundBasicColor;
-        my $itemColorFactory = 'org::allbinary::graphics::ItemColorFactory'->getInstance();
-        $itemColorFactory->{INVERT_PAINT} = int($self->{backgroundBasicColor});
-        $itemColorFactory->{PAINT} = int($self->{foregroundBasicColor});
-        $self->{gameInfo} = $gameInfo;
-    return $self;
-}
-
-
-sub getLayerManager {
-    my ($self) = @_;
-        return $self;
-}
-
-
-sub init {
-    my ($self) = @_;
-}
-
-
-sub getBackgroundBasicColor {
-    my ($self) = @_;
-        return $self->{backgroundBasicColor};
-}
-
-
-sub setBackgroundBasicColor {
-    my ($self, $backgroundBasicColor) = @_;
-        $self->{backgroundBasicColor} = $backgroundBasicColor;
-        'org::allbinary::graphics::ItemColorFactory'->getInstance()->{INVERT_PAINT} = int($self->{backgroundBasicColor});
-}
-
-
-sub getForegroundBasicColor {
-    my ($self) = @_;
-        return $self->{foregroundBasicColor};
-}
-
-
-sub setForegroundBasicColor {
-    my ($self, $foregroundBasicColor) = @_;
-        $self->{foregroundBasicColor} = $foregroundBasicColor;
-        'org::allbinary::graphics::ItemColorFactory'->getInstance()->{PAINT} = int($self->{foregroundBasicColor});
-}
-
-
-sub getGameInfo {
-    my ($self) = @_;
-        return $self->{gameInfo};
-}
-
-
-sub setGameInfo {
-    my ($self, $gameInfo) = @_;
-        $self->{gameInfo} = $gameInfo;
-}
-
-
-sub setLayerProcessorList {
-    my ($self, $list) = @_;
-        my $layerProcessorInterfaceArray = [(undef) x ($list->size())];
-        my $size = scalar(@{$layerProcessorInterfaceArray});
-        for (my $index = 0; $index < $size; $index++) {
-            $layerProcessorInterfaceArray->[$index] = $list->{objectArray}->[$index];
+namespace eval ::AllBinaryGameLayerManager {
+    variable NULL_ALLBINARY_LAYER_MANAGERValue {}
+    variable NULL_ALLBINARY_LAYER_MANAGERSet 0
+    proc staticGet_NULL_ALLBINARY_LAYER_MANAGER {} {
+        variable NULL_ALLBINARY_LAYER_MANAGERValue
+        variable NULL_ALLBINARY_LAYER_MANAGERSet
+        if {!$NULL_ALLBINARY_LAYER_MANAGERSet} {
+            set NULL_ALLBINARY_LAYER_MANAGERSet 1
+            set NULL_ALLBINARY_LAYER_MANAGERValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        $self->setLayerProcessorArray($layerProcessorInterfaceArray);
+        return $NULL_ALLBINARY_LAYER_MANAGERValue
+    }
+    proc staticSet_NULL_ALLBINARY_LAYER_MANAGER {value} {
+        variable NULL_ALLBINARY_LAYER_MANAGERValue
+        variable NULL_ALLBINARY_LAYER_MANAGERSet
+        set NULL_ALLBINARY_LAYER_MANAGERSet 1
+        set NULL_ALLBINARY_LAYER_MANAGERValue $value
+    }
+    variable IDValue {}
+    variable IDSet 0
+    proc staticGet_ID {} {
+        variable IDValue
+        variable IDSet
+        if {!$IDSet} {
+            set IDSet 1
+            set IDValue [[::SmallIntegerSingletonFactory::getInstance] getAt 22]
+        }
+        return $IDValue
+    }
+    proc staticSet_ID {value} {
+        variable IDValue
+        variable IDSet
+        set IDSet 1
+        set IDValue $value
+    }
+    proc getNullInstance {} {
+        if {[expr {[::AllBinaryGameLayerManager::staticGet_NULL_ALLBINARY_LAYER_MANAGER] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::AllBinaryGameLayerManager::staticSet_NULL_ALLBINARY_LAYER_MANAGER [::AllBinaryGameLayerManager new [[::BasicColorFactory::getInstance] jget BLACK] [[::BasicColorFactory::getInstance] jget WHITE] [::GameInfo::staticGet_NONE]]
+        }
+        return [::AllBinaryGameLayerManager::staticGet_NULL_ALLBINARY_LAYER_MANAGER]
+    }
 }
 
-
-sub setPlayerGameInputCompositeInterface {
-    my ($self, $playerGameInputCompositeInterface) = @_;
-        $self->{playerGameInputCompositeInterface} = $playerGameInputCompositeInterface;
-}
-
-
-sub getPlayerGameInputCompositeInterface {
-    my ($self) = @_;
-        return $self->{playerGameInputCompositeInterface};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::GameInfo ();
-use org::allbinary::game::input::NullPlayerGameInputComposite ();
-use org::allbinary::game::input::PlayerGameInputCompositeInterface ();
-use org::allbinary::graphics::ItemColorFactory ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::layer::LayerProcessor ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::util::BasicArrayList ();
-
-1;
 

@@ -11,113 +11,101 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.screen
 
-package org::allbinary::graphics::displayable::screen::CommandForm;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'javax::microedition::lcdui::Form','org::allbinary::graphics::displayable::command::MyCommandInterface','org::allbinary::game::displayable::canvas::MenuListener';
-
-tie our $NULL_COMMAND_FORM, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{repaintProcessor} = 'org::allbinary::graphics::displayable::screen::ScreenRepaintProcessorFactory'->getInstance()->create($self);
-    $self->{commandStack} = undef;
+oo::class create ::CommandForm {
+    superclass ::Form
 }
 
+oo::define ::CommandForm {
+    method initFields_CommandForm {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset repaintProcessor {}
+        my jset commandStack {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset repaintProcessor [[::ScreenRepaintProcessorFactory::getInstance] create [self]]
+        
+        return
+    }
+    
+    
 
-sub getNullCommandForm {
-    my ($class) = @_;
-        if ($org::allbinary::graphics::displayable::screen::CommandForm::NULL_COMMAND_FORM == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::graphics::displayable::screen::CommandForm::NULL_COMMAND_FORM = 'org::allbinary::graphics::displayable::screen::CommandForm'->new($javax::microedition::lcdui::NullCommandListener::NULL_COMMAND_LISTENER, 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{BLACK}, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE});
-        }
-        return $org::allbinary::graphics::displayable::screen::CommandForm::NULL_COMMAND_FORM;
-}
-
-
-sub new {
-    my ($class, $commandListener, $formTitle, $backgrounBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($formTitle);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{commandStack} = 'org::allbinary::logic::StdUtil'->getInstance()->createStack();
+    constructor {commandListener formTitle backgrounBasicColor foregroundBasicColor} {
+        next $formTitle
+        my initFields_CommandForm
+        my jset commandStack [[::StdUtil::getInstance] createStack]
         try {
-            $self->{repaintProcessor}->process();
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{CONSTRUCTOR}, $e);
+            [my jget repaintProcessor] process
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget CONSTRUCTOR] $e
         }
-    return $self;
-}
+    }
+    
 
+    method initCommands {cmdListener} {
+    }
+    
 
-sub initCommands {
-    my ($self, $cmdListener) = @_;
-}
+    method open {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] "open"
+    }
+    
 
+    method close {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget CLOSE]
+    }
+    
 
-sub open {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, "open");
-}
+    method update {} {
+        [my jget repaintProcessor] process
+    }
+    
 
+    method getSourceId {} {
+        return 0
+    }
+    
 
-# throws Exception
-sub close {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{CLOSE});
-}
+    method addCommand {command} {
+        [my jget commandStack] push $command
+        next $command
+    }
+    
 
-
-# throws Exception
-sub update {
-    my ($self) = @_;
-        $self->{repaintProcessor}->process();
-}
-
-
-sub getSourceId {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub addCommand {
-    my ($self, $command) = @_;
-        $self->{commandStack}->push($command);
-        $self->SUPER::addCommand($command);
-}
-
-
-sub removeAllCommands {
-    my ($self) = @_;
-        my $size = $self->{commandStack}->size();
-        for (my $index = 0; $index < $size; $index++) {
-            $self->SUPER::removeCommand($self->{commandStack}->pop());
+    method removeAllCommands {} {
+        set size [[my jget commandStack] size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            next [[my jget commandStack] pop]
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::CommandListener ();
-use javax::microedition::lcdui::Form ();
-use javax::microedition::lcdui::NullCommandListener ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::game::displayable::canvas::MenuListener ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::displayable::command::MyCommandInterface ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::util::ABStack ();
-use org::allbinary::graphics::displayable::screen::ScreenRepaintProcessorFactory ();
+namespace eval ::CommandForm {
+    variable NULL_COMMAND_FORMValue {}
+    variable NULL_COMMAND_FORMSet 0
+    proc staticGet_NULL_COMMAND_FORM {} {
+        variable NULL_COMMAND_FORMValue
+        variable NULL_COMMAND_FORMSet
+        if {!$NULL_COMMAND_FORMSet} {
+            set NULL_COMMAND_FORMSet 1
+            set NULL_COMMAND_FORMValue [[::NullUtil::getInstance] jget NULL_OBJECT]
+        }
+        return $NULL_COMMAND_FORMValue
+    }
+    proc staticSet_NULL_COMMAND_FORM {value} {
+        variable NULL_COMMAND_FORMValue
+        variable NULL_COMMAND_FORMSet
+        set NULL_COMMAND_FORMSet 1
+        set NULL_COMMAND_FORMValue $value
+    }
+    proc getNullCommandForm {} {
+        if {[expr {[::CommandForm::staticGet_NULL_COMMAND_FORM] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::CommandForm::staticSet_NULL_COMMAND_FORM [::CommandForm new [::NullCommandListener::staticGet_NULL_COMMAND_LISTENER] [[::StringUtil::getInstance] jget EMPTY_STRING] [[::BasicColorFactory::getInstance] jget BLACK] [[::BasicColorFactory::getInstance] jget WHITE]]
+        }
+        return [::CommandForm::staticGet_NULL_COMMAND_FORM]
+    }
+}
 
-1;
 

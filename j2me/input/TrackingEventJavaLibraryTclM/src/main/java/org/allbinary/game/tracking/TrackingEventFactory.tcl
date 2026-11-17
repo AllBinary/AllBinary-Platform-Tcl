@@ -11,33 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.tracking
 
-package org::allbinary::game::tracking::TrackingEventFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::logic::util::event::AllBinaryEventObjectFactoryInterface';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::TrackingEventFactory {
+    superclass ::JObject
 }
 
+oo::define ::TrackingEventFactory {
+    method initFields_TrackingEventFactory {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($self) = @_;
-        return 'org::allbinary::game::tracking::TrackingEvent'->new('org::allbinary::game::tracking::TrackingEventHandler'->getInstance());
+    constructor {} {
+        next
+        my initFields_TrackingEventFactory
+    }
+    
+
+    method getInstance {} {
+        return [::TrackingEvent new [::TrackingEventHandler::getInstance]]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::AllBinaryEventObjectFactoryInterface ();
-use org::allbinary::game::tracking::TrackingEvent ();
-use org::allbinary::game::tracking::TrackingEventHandler ();
+namespace eval ::TrackingEventFactory {
+}
 
-1;
 

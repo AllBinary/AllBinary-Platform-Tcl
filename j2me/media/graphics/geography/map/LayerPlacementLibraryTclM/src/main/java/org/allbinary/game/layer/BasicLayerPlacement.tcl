@@ -11,58 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-package org::allbinary::game::layer::BasicLayerPlacement;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{layerType} = undef;
-    $self->{width} = undef;
-    $self->{height} = undef;
+oo::class create ::BasicLayerPlacement {
+    superclass ::JObject
 }
 
+oo::define ::BasicLayerPlacement {
+    method initFields_BasicLayerPlacement {} {
+        my jset layerType {}
+        my jset width 0
+        my jset height 0
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $layerType, $width, $height) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{layerType} = $layerType;
-        $self->{width} = $width;
-        $self->{height} = $height;
-    return $self;
+    constructor {layerType width height} {
+        next
+        my initFields_BasicLayerPlacement
+        my jset layerType $layerType
+        my jset width $width
+        my jset height $height
+    }
+    
+
+    method getWidth {} {
+        return [my jget width]
+    }
+    
+
+    method getHeight {} {
+        return [my jget height]
+    }
+    
+
+    method getLayerType {} {
+        return [my jget layerType]
+    }
+    
+
+    method setLayerType {layerType} {
+        my jset layerType $layerType
+    }
 }
 
-
-sub getWidth {
-    my ($self) = @_;
-        return $self->{width};
+namespace eval ::BasicLayerPlacement {
 }
 
-
-sub getHeight {
-    my ($self) = @_;
-        return $self->{height};
-}
-
-
-sub getLayerType {
-    my ($self) = @_;
-        return $self->{layerType};
-}
-
-
-sub setLayerType {
-    my ($self, $layerType) = @_;
-        $self->{layerType} = $layerType;
-}
-
-use java::lang::Object ();
-
-1;
 

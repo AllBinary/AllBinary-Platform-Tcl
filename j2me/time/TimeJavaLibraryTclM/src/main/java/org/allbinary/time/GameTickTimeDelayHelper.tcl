@@ -47,7 +47,7 @@ oo::define ::GameTickTimeDelayHelper {
         if {[expr {[my jget lastStartTime] == [::Long::staticGet_MIN_VALUE]}]} {
             my jset timeDelta 0
         } else {
-            my jset timeDelta [expr {[clock milliseconds] - [my jget lastStartTime]}]
+            my jset timeDelta [jlong [expr {[clock milliseconds] - [my jget lastStartTime]}]]
         }
     }
     

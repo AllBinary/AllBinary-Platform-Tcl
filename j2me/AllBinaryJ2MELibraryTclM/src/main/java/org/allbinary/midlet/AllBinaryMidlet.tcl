@@ -11,163 +11,145 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.midlet
 
-package org::allbinary::midlet::AllBinaryMidlet;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'javax::microedition::midlet::MIDlet','javax::microedition::lcdui::CommandListener';
-
-tie our $NULL_ALLBINARY_MIDLET, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{SET_DISPLAY} = "setDisplay";
-    $self->{SETTING_} = "Setting: ";
-    $self->{_DISPLAY_} = " Display: ";
-    $self->{SETTING_NO_TITLE} = "Setting: No Title, Display: ";
-    $self->{hashtable} = 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable();
-    $self->{midletDestroyed} = 0;
+oo::class create ::AllBinaryMidlet {
+    superclass ::MIDlet
 }
 
+oo::define ::AllBinaryMidlet {
+    method initFields_AllBinaryMidlet {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset SET_DISPLAY {}
+        my jset SETTING_ {}
+        my jset _DISPLAY_ {}
+        my jset SETTING_NO_TITLE {}
+        my jset hashtable {}
+        my jset midletDestroyed false
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset SET_DISPLAY "setDisplay"
+        my jset SETTING_ "Setting: "
+        my jset _DISPLAY_ " Display: "
+        my jset SETTING_NO_TITLE "Setting: No Title, Display: "
+        my jset hashtable [[::StdUtil::getInstance] createHashtable]
+        my jset midletDestroyed false
+        return
+    }
+    
+    
 
-sub getNullInstance {
-    my ($class) = @_;
-        if ($org::allbinary::midlet::AllBinaryMidlet::NULL_ALLBINARY_MIDLET == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::midlet::AllBinaryMidlet::NULL_ALLBINARY_MIDLET = 'org::allbinary::midlet::AllBinaryMidlet'->new();
+    constructor {} {
+        next
+        my initFields_AllBinaryMidlet
+        [my jget logUtil] putF [[my jget commonStrings] jget CONSTRUCTOR] [self] "AllBinaryMidlet::AllBinaryMidlet"
+    }
+    
+
+    method setDisplay {newDisplay} {
+        set title [[::StringUtil::getInstance] jget EMPTY_STRING]
+        if {[expr {$newDisplay ne [::NullCanvas::staticGet_NULL_CANVAS]}]} {
+            set title [$newDisplay getTitle]
+            [my jget logUtil] putF [[[[[[::StringMaker new] append [my jget SETTING_]] append $title] append [my jget _DISPLAY_]] append [[::StringUtil::getInstance] toString1 $newDisplay]] toString] [self] [my jget SET_DISPLAY]
         }
-        return $org::allbinary::midlet::AllBinaryMidlet::NULL_ALLBINARY_MIDLET;
-}
+        set display [my getDisplay]
+        $display setCurrent $newDisplay
+    }
+    
 
+    method getDisplay {} {
+        return [::Display::getDisplay [self]]
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{logUtil}->putF($self->{commonStrings}->{CONSTRUCTOR}, $self, "AllBinaryMidlet::AllBinaryMidlet");
-    return $self;
-}
+    method getCurrentDisplayable {} {
+        return [[::Display::getDisplay [self]] getCurrent]
+    }
+    
 
+    method setDestroyed {destroyed} {
+        my jset midletDestroyed $destroyed
+    }
+    
 
-sub setDisplay {
-    my ($self, $newDisplay) = @_;
-        my $title = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-        if ($newDisplay != $javax::microedition::lcdui::NullCanvas::NULL_CANVAS) {
-            $title = $newDisplay->getTitle();
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{SETTING_})->append($title)->append($self->{_DISPLAY_})->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($newDisplay))->toString(), $self, $self->{SET_DISPLAY});
-        }
-        my $display = $self->getDisplay();
-        $display->setCurrent($newDisplay);
-}
+    method isDestroyed {} {
+        return [my jget midletDestroyed]
+    }
+    
 
+    method startApp {} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
 
-sub getDisplay {
-    my ($self) = @_;
-        return 'javax::microedition::lcdui::Display'->getDisplay($self);
-}
+    method pauseApp {} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
 
+    method destroyAppInRunnable {unconditional isProgress} {
+    }
+    
 
-sub getCurrentDisplayable {
-    my ($self) = @_;
-        return 'javax::microedition::lcdui::Display'->getDisplay($self)->getCurrent();
-}
-
-
-sub setDestroyed {
-    my ($self, $destroyed) = @_;
-        $self->{midletDestroyed} = $destroyed;
-}
-
-
-sub isDestroyed {
-    my ($self) = @_;
-        return $self->{midletDestroyed};
-}
-
-
-# throws MIDletStateChangeException
-sub startApp {
-    my ($self) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
-}
-
-
-sub pauseApp {
-    my ($self) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
-}
-
-
-sub destroyAppInRunnable {
-    my ($self, $unconditional, $isProgress) = @_;
-}
-
-
-sub destroyApp {
-    my ($self, $unconditional) = @_;
-        my $METHOD_NAME = "AllBinaryMidlet::destroyApp";
+    method destroyApp {unconditional} {
+        set METHOD_NAME "AllBinaryMidlet::destroyApp"
         try {
-            $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $METHOD_NAME);
-            'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::system::Memory'->getInfo(), $self, $METHOD_NAME);
-            $self->setDestroyed(1);
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $METHOD_NAME, $e);
+            [my jget logUtil] putF [[my jget commonStrings] jget START] [self] $METHOD_NAME
+            ::PreLogUtil::put [::Memory::getInfo] [self] $METHOD_NAME
+            my setDestroyed true
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] $METHOD_NAME $e
         }
+    }
+    
+
+    method setStartStateHashtable {hashtable} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[::CommonLabels::getInstance] jget START_LABEL]] append [[::StringUtil::getInstance] toString1 $hashtable]] toString] [self] "setStartStateHashtable"
+        my jset hashtable $hashtable
+    }
+    
+
+    method getStartStateHashtable {} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[::CommonLabels::getInstance] jget START_LABEL]] append [[::StringUtil::getInstance] toString1 [my jget hashtable]]] toString] [self] "getStartStateHashtable"
+        return [my jget hashtable]
+    }
+    
+
+    method getCurrentStateHashtable {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] "getStateHashtable"
+        return [[::StdUtil::getInstance] jget NULL_TABLE]
+    }
+    
+
+    method commandAction {command displayable} {
+    }
 }
 
-
-# throws Exception
-sub setStartStateHashtable {
-    my ($self, $hashtable) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{START_LABEL})->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($hashtable))->toString(), $self, "setStartStateHashtable");
-        $self->{hashtable} = $hashtable;
+namespace eval ::AllBinaryMidlet {
+    variable NULL_ALLBINARY_MIDLETValue {}
+    variable NULL_ALLBINARY_MIDLETSet 0
+    proc staticGet_NULL_ALLBINARY_MIDLET {} {
+        variable NULL_ALLBINARY_MIDLETValue
+        variable NULL_ALLBINARY_MIDLETSet
+        if {!$NULL_ALLBINARY_MIDLETSet} {
+            set NULL_ALLBINARY_MIDLETSet 1
+            set NULL_ALLBINARY_MIDLETValue [[::NullUtil::getInstance] jget NULL_OBJECT]
+        }
+        return $NULL_ALLBINARY_MIDLETValue
+    }
+    proc staticSet_NULL_ALLBINARY_MIDLET {value} {
+        variable NULL_ALLBINARY_MIDLETValue
+        variable NULL_ALLBINARY_MIDLETSet
+        set NULL_ALLBINARY_MIDLETSet 1
+        set NULL_ALLBINARY_MIDLETValue $value
+    }
+    proc getNullInstance {} {
+        if {[expr {[::AllBinaryMidlet::staticGet_NULL_ALLBINARY_MIDLET] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::AllBinaryMidlet::staticSet_NULL_ALLBINARY_MIDLET [::AllBinaryMidlet new]
+        }
+        return [::AllBinaryMidlet::staticGet_NULL_ALLBINARY_MIDLET]
+    }
 }
 
-
-# throws Exception
-sub getStartStateHashtable {
-    my ($self) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{START_LABEL})->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($self->{hashtable}))->toString(), $self, "getStartStateHashtable");
-        return $self->{hashtable};
-}
-
-
-# throws Exception
-sub getCurrentStateHashtable {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, "getStateHashtable");
-        return 'org::allbinary::logic::StdUtil'->getInstance()->{NULL_TABLE};
-}
-
-
-sub commandAction {
-    my ($self, $command, $displayable) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::CommandListener ();
-use javax::microedition::lcdui::Display ();
-use javax::microedition::lcdui::Displayable ();
-use javax::microedition::lcdui::NullCanvas ();
-use javax::microedition::midlet::MIDlet ();
-use javax::microedition::midlet::MIDletStateChangeException ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::system::Memory ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::util::ABHashtable ();
-
-1;
 

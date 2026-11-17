@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.hud.event
 
-# Java interface
-package org::allbinary::game::layer::hud::event::GameNotificationListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-# throws Exception
-sub onGameNotificationEvent {
-    my ($self, $gameNotificationEvent) = @_;
-    die "abstract method onGameNotificationEvent";
+oo::class create ::GameNotificationListenerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::GameNotificationListenerInterface {
+    method initFields_GameNotificationListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onGameNotificationEvent {gameNotificationEvent} {
+        error [jexception AbstractMethodError onGameNotificationEvent]
+    }
+}
+
+namespace eval ::GameNotificationListenerInterface {
+}
+
 

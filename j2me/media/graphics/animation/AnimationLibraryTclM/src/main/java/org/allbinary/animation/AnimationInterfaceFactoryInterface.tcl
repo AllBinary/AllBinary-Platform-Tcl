@@ -11,31 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-# Java interface
-package org::allbinary::animation::AnimationInterfaceFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::BasicAnimationInterfaceFactoryInterface';
-
-
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-    die "abstract method getInstance";
+oo::class create ::AnimationInterfaceFactoryInterface {
+    superclass ::JObject
 }
 
+oo::define ::AnimationInterfaceFactoryInterface {
+    method initFields_AnimationInterfaceFactoryInterface {} {
+        return
+    }
+    
 
-sub setInitialScale {
-    my ($self, $scaleProperties) = @_;
-    die "abstract method setInitialScale";
+    method getInstance {instanceId} {
+        error [jexception AbstractMethodError getInstance]
+    }
+    
+
+    method setInitialScale {scaleProperties} {
+        error [jexception AbstractMethodError setInitialScale]
+    }
 }
 
-use org::allbinary::media::ScaleProperties ();
-use org::allbinary::animation::BasicAnimationInterfaceFactoryInterface ();
+namespace eval ::AnimationInterfaceFactoryInterface {
+}
 
-1;
 

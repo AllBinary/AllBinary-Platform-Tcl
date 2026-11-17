@@ -11,32 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-package org::allbinary::graphics::paint::NullPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::paint::NullPaintable'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::NullPaintable {
+    superclass ::Paintable
 }
 
+oo::define ::NullPaintable {
+    method initFields_NullPaintable {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::paint::NullPaintable::SINGLETON;
+    constructor {} {
+        next
+        my initFields_NullPaintable
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::paint::Paintable ();
+namespace eval ::NullPaintable {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::NullPaintable new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::NullPaintable::staticGet_SINGLETON]
+    }
+}
 
-1;
 

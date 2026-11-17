@@ -1,25 +1,26 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::CustomDisplayable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::CustomDisplayable {
+    superclass ::JObject
 }
 
+oo::define ::CustomDisplayable {
+    method initFields_CustomDisplayable {} {
+        return
+    }
 
-sub setTitle {
-    my ($self, $title) = @_;
+    constructor {} {
+        next
+        my initFields_CustomDisplayable
+    }
+    
+
+    method setTitle {title} {
+    }
 }
 
-use java::lang::Object ();
+namespace eval ::CustomDisplayable {
+}
 
-1;
 

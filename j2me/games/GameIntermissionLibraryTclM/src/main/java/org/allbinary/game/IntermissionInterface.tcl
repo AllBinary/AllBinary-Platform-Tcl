@@ -11,40 +11,39 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game
 
-# Java interface
-package org::allbinary::game::IntermissionInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getTimeDelayHelper {
-    my ($self) = @_;
-    die "abstract method getTimeDelayHelper";
+oo::class create ::IntermissionInterface {
+    superclass ::JObject
 }
 
+oo::define ::IntermissionInterface {
+    method initFields_IntermissionInterface {} {
+        return
+    }
+    
 
-sub isEnabled {
-    my ($self) = @_;
-    die "abstract method isEnabled";
+    method getTimeDelayHelper {} {
+        error [jexception AbstractMethodError getTimeDelayHelper]
+    }
+    
+
+    method isEnabled {} {
+        error [jexception AbstractMethodError isEnabled]
+    }
+    
+
+    method setEnabled {value} {
+        error [jexception AbstractMethodError setEnabled]
+    }
+    
+
+    method setListener {enableListener} {
+        error [jexception AbstractMethodError setListener]
+    }
 }
 
-
-sub setEnabled {
-    my ($self, $value) = @_;
-    die "abstract method setEnabled";
+namespace eval ::IntermissionInterface {
 }
 
-
-sub setListener {
-    my ($self, $enableListener) = @_;
-    die "abstract method setListener";
-}
-
-use org::allbinary::time::TimeDelayHelper ();
-
-1;
 

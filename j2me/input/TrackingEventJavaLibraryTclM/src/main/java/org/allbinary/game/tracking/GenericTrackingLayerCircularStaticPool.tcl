@@ -11,32 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.tracking
 
-package org::allbinary::game::tracking::GenericTrackingLayerCircularStaticPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::AllBinaryLayerCircularPool';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::tracking::GenericTrackingLayerCircularStaticPool'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::GenericTrackingLayerCircularStaticPool {
+    superclass ::AllBinaryLayerCircularPool
 }
 
+oo::define ::GenericTrackingLayerCircularStaticPool {
+    method initFields_GenericTrackingLayerCircularStaticPool {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::tracking::GenericTrackingLayerCircularStaticPool::SINGLETON;
+    constructor {} {
+        next
+        my initFields_GenericTrackingLayerCircularStaticPool
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::layer::AllBinaryLayerCircularPool ();
+namespace eval ::GenericTrackingLayerCircularStaticPool {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::GenericTrackingLayerCircularStaticPool new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::GenericTrackingLayerCircularStaticPool::staticGet_SINGLETON]
+    }
+}
 
-1;
 

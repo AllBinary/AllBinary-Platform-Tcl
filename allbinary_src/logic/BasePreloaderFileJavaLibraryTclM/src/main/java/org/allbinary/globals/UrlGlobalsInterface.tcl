@@ -11,48 +11,44 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.globals
 
-package org::allbinary::globals::UrlGlobalsInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::UrlGlobalsInterface {
+    superclass ::JObject
 }
 
+oo::define ::UrlGlobalsInterface {
+    method initFields_UrlGlobalsInterface {} {
+        return
+    }
 
-# throws Exception
-sub getMainPath {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+    constructor {} {
+        next
+        my initFields_UrlGlobalsInterface
+    }
+    
+
+    method getMainPath {} {
+        return [[::StringUtil::getInstance] jget EMPTY_STRING]
+    }
+    
+
+    method getTestHtmlPath {} {
+        return [[::StringUtil::getInstance] jget EMPTY_STRING]
+    }
+    
+
+    method getWebappPath {} {
+        return [[::StringUtil::getInstance] jget EMPTY_STRING]
+    }
+    
+
+    method isTestingMode {} {
+        return false
+    }
 }
 
-
-sub getTestHtmlPath {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+namespace eval ::UrlGlobalsInterface {
 }
 
-
-sub getWebappPath {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-}
-
-
-sub isTestingMode {
-    my ($self) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::string::StringUtil ();
-
-1;
 

@@ -11,52 +11,61 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-package org::allbinary::media::audio::NoPlayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::media::audio::BasicPlayer';
-
-tie our $NO_PLAYER, 'java::lang::LazyStatic', sub { 'org::allbinary::media::audio::NoPlayer'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::NoPlayer {
+    superclass ::BasicPlayer
 }
 
+oo::define ::NoPlayer {
+    method initFields_NoPlayer {} {
+        return
+    }
+    
 
-sub close {
-    my ($self) = @_;
+    constructor {} {
+        next
+        my initFields_NoPlayer
+    }
+    
+
+    method close {} {
+    }
+    
+
+    method getContentType {} {
+        return [[::StringUtil::getInstance] jget NULL_STRING]
+    }
+    
+
+    method getControl {controlType} {
+        return [::NullControl new]
+    }
+    
+
+    method getControls {} {
+        return [jarray 0 {}]
+    }
 }
 
-
-sub getContentType {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->{NULL_STRING};
+namespace eval ::NoPlayer {
+    variable NO_PLAYERValue {}
+    variable NO_PLAYERSet 0
+    proc staticGet_NO_PLAYER {} {
+        variable NO_PLAYERValue
+        variable NO_PLAYERSet
+        if {!$NO_PLAYERSet} {
+            set NO_PLAYERSet 1
+            set NO_PLAYERValue [::NoPlayer new]
+        }
+        return $NO_PLAYERValue
+    }
+    proc staticSet_NO_PLAYER {value} {
+        variable NO_PLAYERValue
+        variable NO_PLAYERSet
+        set NO_PLAYERSet 1
+        set NO_PLAYERValue $value
+    }
 }
 
-
-sub getControl {
-    my ($self, $controlType) = @_;
-        return 'org::allbinary::media::audio::NullControl'->new();
-}
-
-
-sub getControls {
-    my ($self) = @_;
-        return [(undef) x (0)];
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::media::Control ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::media::audio::BasicPlayer ();
-use org::allbinary::media::audio::NullControl ();
-
-1;
 

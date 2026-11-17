@@ -84,7 +84,7 @@ oo::define ::TimeDelayHelper {
     
 
     method getElapsedTNT {} {
-        return [expr {[clock milliseconds] - [my jget startTime]}]
+        return [jlong [expr {[clock milliseconds] - [my jget startTime]}]]
     }
     
 
@@ -134,7 +134,7 @@ oo::define ::TimeDelayHelper {
 
     method resume {} {
         if {[expr {[my jget elapsedTimeAtPause] != [::Long::staticGet_MIN_VALUE]}]} {
-            my jset startTime [expr {[clock milliseconds] + [my jget elapsedTimeAtPause]}]
+            my jset startTime [jlong [expr {[clock milliseconds] + [my jget elapsedTimeAtPause]}]]
             my jset elapsedTimeAtPause [::Long::staticGet_MIN_VALUE]
             my setStartTimeTNT
             return true

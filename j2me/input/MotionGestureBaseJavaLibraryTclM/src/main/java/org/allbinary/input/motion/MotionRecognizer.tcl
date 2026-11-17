@@ -11,40 +11,36 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion
 
-package org::allbinary::input::motion::MotionRecognizer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::MotionRecognizer {
+    superclass ::JObject
 }
 
+oo::define ::MotionRecognizer {
+    method initFields_MotionRecognizer {} {
+        return
+    }
 
-# throws Exception
-sub processStartMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
+    constructor {} {
+        next
+        my initFields_MotionRecognizer
+    }
+    
+
+    method processStartMotionEvent {x y deviceId modifiers} {
+    }
+    
+
+    method processEndMotionEvent {x y deviceId modifiers} {
+    }
+    
+
+    method processDraggedMotionEvent {x y deviceId modifiers} {
+    }
 }
 
-
-# throws Exception
-sub processEndMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
+namespace eval ::MotionRecognizer {
 }
 
-
-# throws Exception
-sub processDraggedMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-}
-
-use java::lang::Object ();
-
-1;
 

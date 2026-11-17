@@ -11,42 +11,36 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::AdjustedVectorAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::VectorAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{dx} = undef;
-    $self->{dy} = undef;
+oo::class create ::AdjustedVectorAnimation {
+    superclass ::VectorAnimation
 }
 
+oo::define ::AdjustedVectorAnimation {
+    method initFields_AdjustedVectorAnimation {} {
+        my jset dx 0
+        my jset dy 0
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $currentPoints, $basicColor, $dx, $dy, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($currentPoints, $basicColor, $animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{dx} = $dx;
-        $self->{dy} = $dy;
-    return $self;
+    constructor {currentPoints basicColor dx dy animationBehavior} {
+        next $currentPoints $basicColor $animationBehavior
+        my initFields_AdjustedVectorAnimation
+        my jset dx $dx
+        my jset dy $dy
+    }
+    
+
+    method paintXY {graphics x y} {
+        next $graphics [jint [expr {$x + [my jget dx]}]] [jint [expr {$y + [my jget dy]}]]
+    }
 }
 
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->SUPER::paintXY($graphics, $x + $self->{dx}, $y + $self->{dy});
+namespace eval ::AdjustedVectorAnimation {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::animation::VectorAnimation ();
-
-1;
 

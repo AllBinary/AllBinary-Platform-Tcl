@@ -11,78 +11,94 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input
 
-package org::allbinary::input::AllBinarySensor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::input::AllBinarySensorListener';
-
-tie our $NULL_ALLBINARY_SENSOR, 'java::lang::LazyStatic', sub { 'org::allbinary::input::AllBinarySensor'->new() };
-our $max = 100;
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
+oo::class create ::AllBinarySensor {
+    superclass ::JObject
 }
 
+oo::define ::AllBinarySensor {
+    method initFields_AllBinarySensor {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_AllBinarySensor
+    }
+    
+
+    method init {} {
+    }
+    
+
+    method update {} {
+    }
+    
+    
+    
+
+    method getId {} {
+        return [::AllBinarySensor::getMax]
+    }
+    
+
+    method shutdown {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] "shutdown"
+    }
+    
+
+    method onSensorChange {} {
+        ::ForcedLogUtil::log [[my jget commonStrings] jget NOT_IMPLEMENTED] [self]
+    }
 }
 
-
-sub init {
-    my ($self) = @_;
+namespace eval ::AllBinarySensor {
+    variable NULL_ALLBINARY_SENSORValue {}
+    variable NULL_ALLBINARY_SENSORSet 0
+    proc staticGet_NULL_ALLBINARY_SENSOR {} {
+        variable NULL_ALLBINARY_SENSORValue
+        variable NULL_ALLBINARY_SENSORSet
+        if {!$NULL_ALLBINARY_SENSORSet} {
+            set NULL_ALLBINARY_SENSORSet 1
+            set NULL_ALLBINARY_SENSORValue [::AllBinarySensor new]
+        }
+        return $NULL_ALLBINARY_SENSORValue
+    }
+    proc staticSet_NULL_ALLBINARY_SENSOR {value} {
+        variable NULL_ALLBINARY_SENSORValue
+        variable NULL_ALLBINARY_SENSORSet
+        set NULL_ALLBINARY_SENSORSet 1
+        set NULL_ALLBINARY_SENSORValue $value
+    }
+    variable maxValue {}
+    variable maxSet 0
+    proc staticGet_max {} {
+        variable maxValue
+        variable maxSet
+        if {!$maxSet} {
+            set maxSet 1
+            set maxValue 100
+        }
+        return $maxValue
+    }
+    proc staticSet_max {value} {
+        variable maxValue
+        variable maxSet
+        set maxSet 1
+        set maxValue $value
+    }
+    proc setMax {max} {
+        ::AllBinarySensor::staticSet_max $max
+    }
+    proc getMax {} {
+        return [::AllBinarySensor::staticGet_max]
+    }
 }
 
-
-# throws Exception
-sub update {
-    my ($self) = @_;
-}
-
-
-sub setMax {
-    my ($class, $max) = @_;
-        $org::allbinary::input::AllBinarySensor::max = $max;
-}
-
-
-sub getMax {
-    my ($class) = @_;
-        return $org::allbinary::input::AllBinarySensor::max;
-}
-
-
-sub getId {
-    my ($self) = @_;
-        return 'org::allbinary::input::AllBinarySensor'->getMax();
-}
-
-
-sub shutdown {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, "shutdown");
-}
-
-
-sub onSensorChange {
-    my ($self) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log($self->{commonStrings}->{NOT_IMPLEMENTED}, $self);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::input::AllBinarySensorListener ();
-
-1;
 

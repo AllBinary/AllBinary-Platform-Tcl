@@ -11,188 +11,179 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.physics.velocity
 
-package org::allbinary::game::physics::velocity::VelocityProperties;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::physics::velocity::BasicVelocityProperties','org::allbinary::game::physics::velocity::VelocityInterface';
-
-tie our $NULL_VELOCITY_PROPERTIES, 'java::lang::LazyStatic', sub { 'org::allbinary::game::physics::velocity::VelocityProperties'->new(0, 0) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{maxForwardVelocity} = 0;
-    $self->{maxReverseVelocity} = 0;
+oo::class create ::VelocityProperties {
+    superclass ::BasicVelocityProperties
 }
 
+oo::define ::VelocityProperties {
+    method initFields_VelocityProperties {} {
+        my jset maxForwardVelocity 0
+        my jset maxReverseVelocity 0
+        my jset maxForwardVelocity 0
+        my jset maxReverseVelocity 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $maxForwardVelocity, $maxReverseVelocity) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->setMaxForwardVelocity($maxForwardVelocity);
-        $self->setMaxReverseVelocity($maxReverseVelocity);
-    return $self;
-}
+    constructor {maxForwardVelocity maxReverseVelocity} {
+        next
+        my initFields_VelocityProperties
+        my setMaxForwardVelocity $maxForwardVelocity
+        my setMaxReverseVelocity $maxReverseVelocity
+    }
+    
 
+    method getMaxForwardVelocity {} {
+        return [my jget maxForwardVelocity]
+    }
+    
 
-sub getMaxForwardVelocity {
-    my ($self) = @_;
-        return $self->{maxForwardVelocity};
-}
+    method setMaxForwardVelocity {maxForwardVelocity} {
+        my jset maxForwardVelocity $maxForwardVelocity
+    }
+    
 
+    method getMaxReverseVelocity {} {
+        return [my jget maxReverseVelocity]
+    }
+    
 
-sub setMaxForwardVelocity {
-    my ($self, $maxForwardVelocity) = @_;
-        $self->{maxForwardVelocity} = $maxForwardVelocity;
-}
+    method setMaxReverseVelocity {maxReverseVelocity} {
+        my jset maxReverseVelocity $maxReverseVelocity
+    }
+    
 
+    method limitMaxXYForwardVelocity {} {
+        my limitMaxXYVelocity [my getMaxForwardVelocity]
+    }
+    
 
-sub getMaxReverseVelocity {
-    my ($self) = @_;
-        return $self->{maxReverseVelocity};
-}
+    method limitMaxXYReverseVelocity {} {
+        my limitMaxXYVelocity [my getMaxReverseVelocity]
+    }
+    
 
+    method limitMaxYForwardVelocity {} {
+        my limitMaxYVelocity [my getMaxForwardVelocity]
+    }
+    
 
-sub setMaxReverseVelocity {
-    my ($self, $maxReverseVelocity) = @_;
-        $self->{maxReverseVelocity} = $maxReverseVelocity;
-}
+    method limitMaxYReverseVelocity {} {
+        my limitMaxYVelocity [my getMaxReverseVelocity]
+    }
+    
 
+    method limitMaxXForwardVelocity {} {
+        my limitMaxXVelocity [my getMaxForwardVelocity]
+    }
+    
 
-sub limitMaxXYForwardVelocity {
-    my ($self) = @_;
-        $self->limitMaxXYVelocity($self->getMaxForwardVelocity());
-}
+    method limitMaxXReverseVelocity {} {
+        my limitMaxXVelocity [my getMaxReverseVelocity]
+    }
+    
 
+    method isOverXYMaxForwardVelocity {} {
+        return [my isOverXYMaxVelocity [my getMaxForwardVelocity]]
+    }
+    
 
-sub limitMaxXYReverseVelocity {
-    my ($self) = @_;
-        $self->limitMaxXYVelocity($self->getMaxReverseVelocity());
-}
+    method isOverXYMaxReverseVelocity {} {
+        return [my isOverXYMaxVelocity [my getMaxReverseVelocity]]
+    }
+    
 
+    method limitXYToForwardAndReverseMaxVelocity {} {
+        my limitMaxXYForwardVelocity
+        my limitMaxXYReverseVelocity
+    }
+    
 
-sub limitMaxYForwardVelocity {
-    my ($self) = @_;
-        $self->limitMaxYVelocity($self->getMaxForwardVelocity());
-}
+    method limitMaxXYVelocity {maxVelocity} {
+        my limitMaxXVelocity $maxVelocity
+        my limitMaxYVelocity $maxVelocity
+    }
+    
 
-
-sub limitMaxYReverseVelocity {
-    my ($self) = @_;
-        $self->limitMaxYVelocity($self->getMaxReverseVelocity());
-}
-
-
-sub limitMaxXForwardVelocity {
-    my ($self) = @_;
-        $self->limitMaxXVelocity($self->getMaxForwardVelocity());
-}
-
-
-sub limitMaxXReverseVelocity {
-    my ($self) = @_;
-        $self->limitMaxXVelocity($self->getMaxReverseVelocity());
-}
-
-
-sub isOverXYMaxForwardVelocity {
-    my ($self) = @_;
-        return $self->isOverXYMaxVelocity($self->getMaxForwardVelocity());
-}
-
-
-sub isOverXYMaxReverseVelocity {
-    my ($self) = @_;
-        return $self->isOverXYMaxVelocity($self->getMaxReverseVelocity());
-}
-
-
-sub limitXYToForwardAndReverseMaxVelocity {
-    my ($self) = @_;
-        $self->limitMaxXYForwardVelocity();
-        $self->limitMaxXYReverseVelocity();
-}
-
-
-sub limitMaxXYVelocity {
-    my ($self, $maxVelocity) = @_;
-        $self->limitMaxXVelocity($maxVelocity);
-        $self->limitMaxYVelocity($maxVelocity);
-}
-
-
-sub limitMaxPositiveYVelocity {
-    my ($self, $maxVelocity) = @_;
-        if ($self->{velocityYBasicDecimal}->getUnscaled() > $maxVelocity) {
-            $self->{velocityYBasicDecimal}->setint($maxVelocity);
+    method limitMaxPositiveYVelocity {maxVelocity} {
+        if {[expr {[[my jget velocityYBasicDecimal] getUnscaled] > $maxVelocity}]} {
+            [my jget velocityYBasicDecimal] setint $maxVelocity
         }
+    }
+    
+
+    method limitMaxNegativeYVelocity {maxVelocity} {
+        if {[expr {[[my jget velocityYBasicDecimal] getUnscaled] < [expr {-$maxVelocity}]}]} {
+            [my jget velocityYBasicDecimal] setint [expr {-$maxVelocity}]
+        }
+    }
+    
+
+    method limitMaxYVelocity {maxVelocity} {
+        my limitMaxPositiveYVelocity $maxVelocity
+        my limitMaxNegativeYVelocity $maxVelocity
+    }
+    
+
+    method limitMaxXVelocity {maxVelocity} {
+        if {[expr {[[my jget velocityXBasicDecimal] getUnscaled] > $maxVelocity}]} {
+            [my jget velocityXBasicDecimal] setint $maxVelocity
+        }
+        if {[expr {[[my jget velocityXBasicDecimal] getUnscaled] < [expr {-$maxVelocity}]}]} {
+            [my jget velocityXBasicDecimal] setint [expr {-$maxVelocity}]
+        }
+    }
+    
+
+    method isOverXYMaxVelocity {maxVelocity} {
+        if {[expr {[[my jget velocityXBasicDecimal] getUnscaled] > $maxVelocity}]} {
+            return true
+        }
+        if {[expr {[[my jget velocityXBasicDecimal] getUnscaled] < [expr {-$maxVelocity}]}]} {
+            return true
+        }
+        if {[expr {[[my jget velocityYBasicDecimal] getUnscaled] > $maxVelocity}]} {
+            return true
+        }
+        if {[expr {[[my jget velocityYBasicDecimal] getUnscaled] < [expr {-$maxVelocity}]}]} {
+            return true
+        }
+        return false
+    }
+    
+
+    method setVelocityi {magnitude angle otherAngle} {
+        next $magnitude $angle $otherAngle
+        my limitXYToForwardAndReverseMaxVelocity
+    }
+    
+
+    method addVelocityi {magnitude angle otherAngle} {
+        next $magnitude $angle $otherAngle
+        my limitXYToForwardAndReverseMaxVelocity
+    }
 }
 
-
-sub limitMaxNegativeYVelocity {
-    my ($self, $maxVelocity) = @_;
-        if ($self->{velocityYBasicDecimal}->getUnscaled() < -$maxVelocity) {
-            $self->{velocityYBasicDecimal}->setint(-$maxVelocity);
+namespace eval ::VelocityProperties {
+    variable NULL_VELOCITY_PROPERTIESValue {}
+    variable NULL_VELOCITY_PROPERTIESSet 0
+    proc staticGet_NULL_VELOCITY_PROPERTIES {} {
+        variable NULL_VELOCITY_PROPERTIESValue
+        variable NULL_VELOCITY_PROPERTIESSet
+        if {!$NULL_VELOCITY_PROPERTIESSet} {
+            set NULL_VELOCITY_PROPERTIESSet 1
+            set NULL_VELOCITY_PROPERTIESValue [::VelocityProperties new 0 0]
         }
+        return $NULL_VELOCITY_PROPERTIESValue
+    }
+    proc staticSet_NULL_VELOCITY_PROPERTIES {value} {
+        variable NULL_VELOCITY_PROPERTIESValue
+        variable NULL_VELOCITY_PROPERTIESSet
+        set NULL_VELOCITY_PROPERTIESSet 1
+        set NULL_VELOCITY_PROPERTIESValue $value
+    }
 }
 
-
-sub limitMaxYVelocity {
-    my ($self, $maxVelocity) = @_;
-        $self->limitMaxPositiveYVelocity($maxVelocity);
-        $self->limitMaxNegativeYVelocity($maxVelocity);
-}
-
-
-sub limitMaxXVelocity {
-    my ($self, $maxVelocity) = @_;
-        if ($self->{velocityXBasicDecimal}->getUnscaled() > $maxVelocity) {
-            $self->{velocityXBasicDecimal}->setint($maxVelocity);
-        }
-        if ($self->{velocityXBasicDecimal}->getUnscaled() < -$maxVelocity) {
-            $self->{velocityXBasicDecimal}->setint(-$maxVelocity);
-        }
-}
-
-
-sub isOverXYMaxVelocity {
-    my ($self, $maxVelocity) = @_;
-        if ($self->{velocityXBasicDecimal}->getUnscaled() > $maxVelocity) {
-            return 1;
-        }
-        if ($self->{velocityXBasicDecimal}->getUnscaled() < -$maxVelocity) {
-            return 1;
-        }
-        if ($self->{velocityYBasicDecimal}->getUnscaled() > $maxVelocity) {
-            return 1;
-        }
-        if ($self->{velocityYBasicDecimal}->getUnscaled() < -$maxVelocity) {
-            return 1;
-        }
-        return 0;
-}
-
-
-sub setVelocityi {
-    my ($self, $magnitude, $angle, $otherAngle) = @_;
-        $self->SUPER::setVelocityi($magnitude, $angle, $otherAngle);
-        $self->limitXYToForwardAndReverseMaxVelocity();
-}
-
-
-sub addVelocityi {
-    my ($self, $magnitude, $angle, $otherAngle) = @_;
-        $self->SUPER::addVelocityi($magnitude, $angle, $otherAngle);
-        $self->limitXYToForwardAndReverseMaxVelocity();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::physics::velocity::BasicVelocityProperties ();
-use org::allbinary::game::physics::velocity::VelocityInterface ();
-
-1;
 

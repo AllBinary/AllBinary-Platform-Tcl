@@ -11,63 +11,53 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::VectorRotationAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::VectorBaseRotationAnimation';
-
-
-
-sub new {
-    my ($class, $currentPoints, $basicColor, $animationBehavior) = @_;
-    my $self = $class->SUPER::new('org::allbinary::math::AngleInfo'->getInstance(((int(('org::allbinary::math::AngleFactory'->getInstance()->{TOTAL_ANGLE} / scalar(@{$currentPoints}))) + 32768) % 65536 - 32768)), $currentPoints, $basicColor, $animationBehavior);
-        # super(...) made $self above
-        $self->{angleInfo}->adjustAngle($self->getFrame());
-    return $self;
+oo::class create ::VectorRotationAnimation {
+    superclass ::VectorBaseRotationAnimation
 }
 
+oo::define ::VectorRotationAnimation {
+    method initFields_VectorRotationAnimation {} {
+        return
+    }
+    
 
-sub setFrameByDirection {
-    my ($self, $direction) = @_;
-        my $angle = $self->{directionUtil}->getFrameAngle($direction);
-        $self->adjustFrameToAngle($angle);
+    constructor {currentPoints basicColor animationBehavior} {
+        next [::AngleInfo::getInstance [jshort ([expr {[[::AngleFactory::getInstance] jget TOTAL_ANGLE] / [$currentPoints length]}])]] $currentPoints $basicColor $animationBehavior
+        my initFields_VectorRotationAnimation
+        [my jget angleInfo] adjustAngle [my getFrame]
+    }
+    
+
+    method setFrameByDirection {direction} {
+        set angle [[my jget directionUtil] getFrameAngle $direction]
+        my adjustFrameToAngle $angle
+    }
+    
+
+    method setFrameToAngle {angle} {
+        my adjustFrameToAngle $angle
+    }
+    
+
+    method setFrame {index} {
+        next $index
+        [my jget angleInfo] adjustAngle [my getFrame]
+    }
+    
+
+    method adjustFrame {newAngle} {
+        my setFrame [[my jget frameUtil] getFrameForAngle $newAngle [jint [[[my jget angleInfo] getAngleIncrementInfo] getAngleIncrement]]]
+    }
+    
+
+    method adjustFrameToAngle {newAngle} {
+        my adjustFrame [$newAngle getValue]
+    }
 }
 
-
-sub setFrameToAngle {
-    my ($self, $angle) = @_;
-        $self->adjustFrameToAngle($angle);
+namespace eval ::VectorRotationAnimation {
 }
 
-
-sub setFrame {
-    my ($self, $index) = @_;
-        $self->SUPER::setFrame($index);
-        $self->{angleInfo}->adjustAngle($self->getFrame());
-}
-
-
-sub adjustFrame {
-    my ($self, $newAngle) = @_;
-        $self->setFrame($self->{frameUtil}->getFrameForAngle($newAngle, int($self->{angleInfo}->getAngleIncrementInfo()->getAngleIncrement())));
-}
-
-
-sub adjustFrameToAngle {
-    my ($self, $newAngle) = @_;
-        $self->adjustFrame($newAngle->getValue());
-}
-
-use java::lang::Object ();
-use org::allbinary::direction::Direction ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::math::Angle ();
-use org::allbinary::math::AngleFactory ();
-use org::allbinary::math::AngleInfo ();
-use org::allbinary::animation::VectorBaseRotationAnimation ();
-
-1;
 

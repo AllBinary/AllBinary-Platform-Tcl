@@ -11,37 +11,51 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles
 
-package org::allbinary::graphics::opengles::OpenGLFeatureUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::opengles::OpenGLFeatureUtil'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::opengles::OpenGLFeatureUtil::instance;
+oo::class create ::OpenGLFeatureUtil {
+    superclass ::JObject
 }
 
+oo::define ::OpenGLFeatureUtil {
+    method initFields_OpenGLFeatureUtil {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+    constructor {} {
+        next
+        my initFields_OpenGLFeatureUtil
+    }
+    
+
+    method isAnyThreed {} {
+        return false
+    }
 }
 
-
-sub isAnyThreed {
-    my ($self) = @_;
-        return 0;
+namespace eval ::OpenGLFeatureUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::OpenGLFeatureUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::OpenGLFeatureUtil::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

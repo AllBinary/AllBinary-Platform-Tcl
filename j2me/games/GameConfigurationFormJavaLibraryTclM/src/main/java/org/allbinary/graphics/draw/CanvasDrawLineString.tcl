@@ -11,58 +11,67 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.draw
 
-package org::allbinary::graphics::draw::CanvasDrawLineString;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-tie our $NULL_CANVAS_DRAW_LINE_STRING, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::draw::CanvasDrawLineString'->new(0, 0) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{drawStringUtil} = 'org::allbinary::graphics::draw::DrawStringUtil'->getInstance();
-    $self->{myFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{x} = undef;
-    $self->{y} = undef;
-    $self->{fontHeight} = 0;
+oo::class create ::CanvasDrawLineString {
+    superclass ::JObject
 }
 
+oo::define ::CanvasDrawLineString {
+    method initFields_CanvasDrawLineString {} {
+        my jset drawStringUtil {}
+        my jset myFontProcessor {}
+        my jset x 0
+        my jset y 0
+        my jset fontHeight 0
+        my jset drawStringUtil [::DrawStringUtil::getInstance]
+        my jset myFontProcessor [::UpdateMyFontProcessor new [self]]
+        
+        
+        my jset fontHeight 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $x, $y) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{x} = $x;
-        $self->{y} = $y;
-    return $self;
+    constructor {x y} {
+        next
+        my initFields_CanvasDrawLineString
+        my jset x $x
+        my jset y $y
+    }
+    
+
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        my jset fontHeight [$font getHeight]
+        my jset myFontProcessor [::MyFontProcessor::getInstance]
+    }
+    
+
+    method paint {graphics string line} {
+        [my jget myFontProcessor] process $graphics
+        [my jget drawStringUtil] drawCenterString $graphics $string 0 [string length $string] [my jget x] [jint [expr {[my jget y] + ([jint [expr {$line * [my jget fontHeight]}]])}]]
+    }
 }
 
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->{fontHeight} = $font->getHeight();
-        $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
+namespace eval ::CanvasDrawLineString {
+    variable NULL_CANVAS_DRAW_LINE_STRINGValue {}
+    variable NULL_CANVAS_DRAW_LINE_STRINGSet 0
+    proc staticGet_NULL_CANVAS_DRAW_LINE_STRING {} {
+        variable NULL_CANVAS_DRAW_LINE_STRINGValue
+        variable NULL_CANVAS_DRAW_LINE_STRINGSet
+        if {!$NULL_CANVAS_DRAW_LINE_STRINGSet} {
+            set NULL_CANVAS_DRAW_LINE_STRINGSet 1
+            set NULL_CANVAS_DRAW_LINE_STRINGValue [::CanvasDrawLineString new 0 0]
+        }
+        return $NULL_CANVAS_DRAW_LINE_STRINGValue
+    }
+    proc staticSet_NULL_CANVAS_DRAW_LINE_STRING {value} {
+        variable NULL_CANVAS_DRAW_LINE_STRINGValue
+        variable NULL_CANVAS_DRAW_LINE_STRINGSet
+        set NULL_CANVAS_DRAW_LINE_STRINGSet 1
+        set NULL_CANVAS_DRAW_LINE_STRINGValue $value
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics, $string, $line) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        $self->{drawStringUtil}->drawCenterString($graphics, $string, 0, length($string), $self->{x}, $self->{y} + ($line * $self->{fontHeight}));
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::graphics::draw::DrawStringUtil ();
-
-1;
 

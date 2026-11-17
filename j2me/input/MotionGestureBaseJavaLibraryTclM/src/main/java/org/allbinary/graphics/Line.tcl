@@ -11,88 +11,80 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-package org::allbinary::graphics::Line;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{p1} = undef;
-    $self->{p2} = undef;
-    $self->{deltaX} = 0.0;
-    $self->{deltaY} = 0.0;
+oo::class create ::Line {
+    superclass ::JObject
 }
 
+oo::define ::Line {
+    method initFields_Line {} {
+        my jset p1 {}
+        my jset p2 {}
+        my jset deltaX 0.0
+        my jset deltaY 0.0
+        
+        
+        my jset deltaX 0.0
+        my jset deltaY 0.0
+        return
+    }
+    
 
-sub new {
-    my ($class, $p1, $p2) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{p1} = 'org::allbinary::graphics::PointFactory'->getInstance()->{ZERO_ZERO};
-        $self->{p2} = $self->{p1};
-        $self->setP1($p1);
-        $self->setP2($p2);
-    return $self;
+    constructor {p1 p2} {
+        next
+        my initFields_Line
+        my jset p1 [[::PointFactory::getInstance] jget ZERO_ZERO]
+        my jset p2 [my jget p1]
+        my setP1 $p1
+        my setP2 $p2
+    }
+    
+
+    method getGradient {} {
+        return [expr {[my getDeltaY] / [my getDeltaX]}]
+    }
+    
+
+    method update {} {
+        my jset deltaX [expr {[expr {double([[my getP1] getX])}] - [[my getP2] getX]}]
+        my jset deltaY [expr {[expr {double([[my getP1] getY])}] - [[my getP2] getY]}]
+    }
+    
+
+    method getDeltaX {} {
+        return [my jget deltaX]
+    }
+    
+
+    method getDeltaY {} {
+        return [my jget deltaY]
+    }
+    
+
+    method getP1 {} {
+        return [my jget p1]
+    }
+    
+
+    method getP2 {} {
+        return [my jget p2]
+    }
+    
+
+    method setP1 {p1} {
+        my jset p1 $p1
+        my update
+    }
+    
+
+    method setP2 {p2} {
+        my jset p2 $p2
+        my update
+    }
 }
 
-
-sub getGradient {
-    my ($self) = @_;
-        return $self->getDeltaY() / $self->getDeltaX();
+namespace eval ::Line {
 }
 
-
-sub update {
-    my ($self) = @_;
-        $self->{deltaX} = $self->getP1()->getX() - $self->getP2()->getX();
-        $self->{deltaY} = $self->getP1()->getY() - $self->getP2()->getY();
-}
-
-
-sub getDeltaX {
-    my ($self) = @_;
-        return $self->{deltaX};
-}
-
-
-sub getDeltaY {
-    my ($self) = @_;
-        return $self->{deltaY};
-}
-
-
-sub getP1 {
-    my ($self) = @_;
-        return $self->{p1};
-}
-
-
-sub getP2 {
-    my ($self) = @_;
-        return $self->{p2};
-}
-
-
-sub setP1 {
-    my ($self, $p1) = @_;
-        $self->{p1} = $p1;
-        $self->update();
-}
-
-
-sub setP2 {
-    my ($self, $p2) = @_;
-        $self->{p2} = $p2;
-        $self->update();
-}
-
-use java::lang::Object ();
-use org::allbinary::graphics::PointFactory ();
-
-1;
 

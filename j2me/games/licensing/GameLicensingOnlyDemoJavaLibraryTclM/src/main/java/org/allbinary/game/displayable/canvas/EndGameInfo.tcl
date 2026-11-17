@@ -11,71 +11,65 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::EndGameInfo;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NORMAL_GAME_OVER_WIN} = "You Won";
-    $self->{TEASER_DEMO_GAME_END_LAST_LEVEL} = "End of Demo.";
-    $self->{TEASER_DEMO_GAME_END} = "Demo Game Over.";
-    $self->{gameOverStr} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{winStr} = $self->{gameOverStr};
+oo::class create ::EndGameInfo {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::EndGameInfo {
+    method initFields_EndGameInfo {} {
+        my jset NORMAL_GAME_OVER_WIN {}
+        my jset TEASER_DEMO_GAME_END_LAST_LEVEL {}
+        my jset TEASER_DEMO_GAME_END {}
+        my jset gameOverStr {}
+        my jset winStr {}
+        my jset NORMAL_GAME_OVER_WIN "You Won"
+        my jset TEASER_DEMO_GAME_END_LAST_LEVEL "End of Demo."
+        my jset TEASER_DEMO_GAME_END "Demo Game Over."
+        my jset gameOverStr [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset winStr [my jget gameOverStr]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_EndGameInfo
+    }
+    
 
-sub update {
-    my ($self, $gameInfo, $myCanvas) = @_;
-        if ($gameInfo->isLastLevel()) {
-            $self->setWinStr($self->{TEASER_DEMO_GAME_END_LAST_LEVEL});
-            $self->setGameOverStr($self->{TEASER_DEMO_GAME_END_LAST_LEVEL});
+    method update {gameInfo myCanvas} {
+        if {[$gameInfo isLastLevel]} {
+            my setWinStr [my jget TEASER_DEMO_GAME_END_LAST_LEVEL]
+            my setGameOverStr [my jget TEASER_DEMO_GAME_END_LAST_LEVEL]
         } else {
-            $self->setWinStr($self->{NORMAL_GAME_OVER_WIN});
-            $self->setGameOverStr($self->{TEASER_DEMO_GAME_END});
+            my setWinStr [my jget NORMAL_GAME_OVER_WIN]
+            my setGameOverStr [my jget TEASER_DEMO_GAME_END]
         }
+    }
+    
+
+    method getGameOverStr {} {
+        return [my jget gameOverStr]
+    }
+    
+
+    method setGameOverStr {gameOverStr} {
+        my jset gameOverStr $gameOverStr
+    }
+    
+
+    method getWinStr {} {
+        return [my jget winStr]
+    }
+    
+
+    method setWinStr {winStr} {
+        my jset winStr $winStr
+    }
 }
 
-
-sub getGameOverStr {
-    my ($self) = @_;
-        return $self->{gameOverStr};
+namespace eval ::EndGameInfo {
 }
 
-
-sub setGameOverStr {
-    my ($self, $gameOverStr) = @_;
-        $self->{gameOverStr} = $gameOverStr;
-}
-
-
-sub getWinStr {
-    my ($self) = @_;
-        return $self->{winStr};
-}
-
-
-sub setWinStr {
-    my ($self, $winStr) = @_;
-        $self->{winStr} = $winStr;
-}
-
-use java::lang::Object ();
-use org::allbinary::game::GameInfo ();
-use org::allbinary::graphics::displayable::MyCanvas ();
-use org::allbinary::logic::string::StringUtil ();
-
-1;
 

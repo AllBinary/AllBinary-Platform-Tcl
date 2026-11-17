@@ -11,48 +11,42 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-package org::allbinary::graphics::paint::PaintableComposite;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{paintableArray} = undef;
+oo::class create ::PaintableComposite {
+    superclass ::Paintable
 }
 
+oo::define ::PaintableComposite {
+    method initFields_PaintableComposite {} {
+        my jset paintableArray {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $paintableArray) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{paintableArray} = $paintableArray;
-    return $self;
-}
+    constructor {paintableArray} {
+        next
+        my initFields_PaintableComposite
+        my jset paintableArray $paintableArray
+    }
+    
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        for (my $index = scalar(@{$self->{paintableArray}}) - 1; $index >= 0; $index--) {
-            $self->{paintableArray}->[$index]->paint($graphics);
+    method paint {graphics} {
+        for {set index [jint [expr {[[my jget paintableArray] length] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            [[my jget paintableArray] get $index] paint $graphics
         }
-}
+    }
+    
 
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
-        for (my $index = scalar(@{$self->{paintableArray}}) - 1; $index >= 0; $index--) {
-            $self->{paintableArray}->[$index]->paintThreed($graphics);
+    method paintThreed {graphics} {
+        for {set index [jint [expr {[[my jget paintableArray] length] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            [[my jget paintableArray] get $index] paintThreed $graphics
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::paint::Paintable ();
+namespace eval ::PaintableComposite {
+}
 
-1;
 

@@ -11,65 +11,71 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.canvas
 
-package org::allbinary::canvas::FullScreenUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::canvas::FullScreenUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::FullScreenUtil {
+    superclass ::JObject
 }
 
+oo::define ::FullScreenUtil {
+    method initFields_FullScreenUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::canvas::FullScreenUtil::instance;
-}
+    constructor {} {
+        next
+        my initFields_FullScreenUtil
+    }
+    
+    
 
-
-# throws Exception
-sub initOnRun {
-    my ($self, $fullScreenInterface, $commandListener) = @_;
-        if (defined($commandListener)) {
-            $self->init($fullScreenInterface);
+    method initOnRun {fullScreenInterface commandListener} {
+        if {[expr {$commandListener ne {}}]} {
+            my init $fullScreenInterface
         }
-}
+    }
+    
 
+    method init {fullScreenInterface} {
+    }
+    
 
-sub init {
-    my ($self, $fullScreenInterface) = @_;
-}
-
-
-sub isScreenChange {
-    my ($self, $isFullScreen) = @_;
-        my $mainFeatureFactory = 'org::allbinary::game::configuration::feature::MainFeatureFactory'->getInstance();
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        if ($features->isFeature($mainFeatureFactory->{FULL_SCREEN}) != $isFullScreen) {
-            return 1;
+    method isScreenChange {isFullScreen} {
+        set mainFeatureFactory [::MainFeatureFactory::getInstance]
+        set features [::Features::getInstance]
+        if {[expr {[$features isFeature [$mainFeatureFactory jget FULL_SCREEN]] != $isFullScreen}]} {
+            return true
         }
-        return 0;
+        return false
+    }
+    
+
+    method isScreenChangeCanvas {fullScreenInterface} {
+        return [my isScreenChange false]
+    }
 }
 
-
-sub isScreenChangeCanvas {
-    my ($self, $fullScreenInterface) = @_;
-        return $self->isScreenChange(0);
+namespace eval ::FullScreenUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::FullScreenUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::FullScreenUtil::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Canvas ();
-use javax::microedition::lcdui::CommandListener ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::MainFeatureFactory ();
-
-1;
 

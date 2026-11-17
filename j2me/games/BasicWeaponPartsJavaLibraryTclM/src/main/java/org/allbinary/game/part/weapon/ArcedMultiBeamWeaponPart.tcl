@@ -11,60 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.part.weapon
 
-package org::allbinary::game::part::weapon::ArcedMultiBeamWeaponPart;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::game::part::weapon::BasicWeaponPart';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{weaponLayerCircularStaticPool} = undef;
-    $self->{total} = undef;
-    $self->{TOTAL_ANGLE} = int('org::allbinary::math::AngleFactory'->getInstance()->{TOTAL_ANGLE});
+oo::class create ::ArcedMultiBeamWeaponPart {
+    superclass ::BasicWeaponPart
 }
 
+oo::define ::ArcedMultiBeamWeaponPart {
+    method initFields_ArcedMultiBeamWeaponPart {} {
+        my jset weaponLayerCircularStaticPool {}
+        my jset total 0
+        my jset TOTAL_ANGLE 0
+        
+        
+        my jset TOTAL_ANGLE [jint [[::AngleFactory::getInstance] jget TOTAL_ANGLE]]
+        return
+    }
+    
 
-sub new {
-    my ($class, $animationInterface, $sourceLayerInterface, $weaponLayerCircularStaticPool, $total, $weaponProperties, $scoreableInterface, $relativeRelationship) = @_;
-    my $self = $class->SUPER::new($animationInterface, $sourceLayerInterface, $weaponProperties, $scoreableInterface, $relativeRelationship);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{total} = $total;
-        $self->{weaponLayerCircularStaticPool} = $weaponLayerCircularStaticPool;
-    return $self;
-}
+    constructor {animationInterface sourceLayerInterface weaponLayerCircularStaticPool total weaponProperties scoreableInterface relativeRelationship} {
+        next $animationInterface $sourceLayerInterface $weaponProperties $scoreableInterface $relativeRelationship
+        my initFields_ArcedMultiBeamWeaponPart
+        my jset total $total
+        my jset weaponLayerCircularStaticPool $weaponLayerCircularStaticPool
+    }
+    
 
-
-# throws Exception
-sub processScore {
-    my ($self, $allbinaryLayerManager, $angle, $otherAngle, $weaponProperties, $scoreableInterface) = @_;
-        my $increment = ((int((int(($self->{total} - 1) / $self->{TOTAL_ANGLE}))) + 32768) % 65536 - 32768);
-        my $minAngle = ((int(($angle - (POSIX::floor((($increment * $self->{total})) / (2 ** (1)))))) + 32768) % 65536 - 32768);
-        my $next = 0;
-        my $weaponLayer = undef;
-        for (my $index = 0; $index < $self->{total}; $index++) {
-            $weaponLayer = $self->{weaponLayerCircularStaticPool}->getInstanceWeaponLayer($self->getOwnerLayerInterface(), $self->{relativeRelationship}->getX(), $self->{relativeRelationship}->getY(), 0, ($minAngle + $increment), $otherAngle, $weaponProperties, $scoreableInterface);
-            $allbinaryLayerManager->append($weaponLayer);
-            $next += $increment;
+    method processScore {allbinaryLayerManager angle otherAngle weaponProperties scoreableInterface} {
+        set increment [jshort ([jdiv ([jint [expr {[my jget total] - 1}]]) [my jget TOTAL_ANGLE]])]
+        set minAngle [jshort ([jint [expr {[jint $angle] - ([expr {([jint [expr {[jint $increment] * [my jget total]}]]) >> 1}])}]])]
+        set next 0
+        set weaponLayer {}
+        for {set index 0} {[expr {$index < [my jget total]}]} {jpostincr index 1} {
+            set weaponLayer [[my jget weaponLayerCircularStaticPool] getInstanceWeaponLayer [my getOwnerLayerInterface] [[my jget relativeRelationship] getX] [[my jget relativeRelationship] getY] 0 ([jint [expr {$minAngle + $increment}]]) [jint $otherAngle] $weaponProperties $scoreableInterface]
+            $allbinaryLayerManager append $weaponLayer
+            set next [jint [expr {$next + [jint $increment]}]]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::game::combat::weapon::WeaponProperties ();
-use org::allbinary::game::layer::weapon::WeaponLayer ();
-use org::allbinary::game::layer::weapon::WeaponLayerCircularPool ();
-use org::allbinary::game::score::ScoreableInterface ();
-use org::allbinary::graphics::RelativeRelationship ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::math::AngleFactory ();
-use org::allbinary::game::part::weapon::BasicWeaponPart ();
+namespace eval ::ArcedMultiBeamWeaponPart {
+}
 
-1;
 

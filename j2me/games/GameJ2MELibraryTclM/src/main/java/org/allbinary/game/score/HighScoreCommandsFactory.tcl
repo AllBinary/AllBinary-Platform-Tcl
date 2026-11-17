@@ -11,35 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::HighScoreCommandsFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::score::HighScoreCommandsBaseFactory';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::score::HighScoreCommandsFactory'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::score::HighScoreCommandsFactory::instance;
+oo::class create ::HighScoreCommandsFactory {
+    superclass ::HighScoreCommandsBaseFactory
 }
 
+oo::define ::HighScoreCommandsFactory {
+    method initFields_HighScoreCommandsFactory {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new(['org::allbinary::game::score::HighScoreCommands'->getInstance()->{PERSONAL}, 'org::allbinary::game::score::HighScoreCommands'->getInstance()->{WORLD}]);
-        # super(...) made $self above
-    return $self;
+    constructor {} {
+        next [jarrayfrom [list [[::HighScoreCommands::getInstance] jget PERSONAL] [[::HighScoreCommands::getInstance] jget WORLD]]]
+        my initFields_HighScoreCommandsFactory
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Command ();
-use org::allbinary::game::score::HighScoreCommandsBaseFactory ();
-use org::allbinary::game::score::HighScoreCommands ();
+namespace eval ::HighScoreCommandsFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::HighScoreCommandsFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::HighScoreCommandsFactory::staticGet_instance]
+    }
+}
 
-1;
 

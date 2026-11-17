@@ -11,74 +11,61 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::BottomToTopImageAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::image::ImageSegmentAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{startHeight} = 0;
-    $self->{currentHeight} = 0;
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
+oo::class create ::BottomToTopImageAnimation {
+    superclass ::ImageSegmentAnimation
 }
 
+oo::define ::BottomToTopImageAnimation {
+    method initFields_BottomToTopImageAnimation {} {
+        my jset startHeight 0
+        my jset currentHeight 0
+        my jset anchor 0
+        my jset startHeight 0
+        my jset currentHeight 0
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        return
+    }
+    
 
-sub new {
-    my ($class, $image, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->setFrame($self->getSize() - 1);
-    return $self;
+    constructor {image animationBehavior} {
+        next $image [::PrimitiveIntUtil::getArrayInstance] $animationBehavior
+        my initFields_BottomToTopImageAnimation
+        my setFrame [expr {[my getSize] - 1}]
+    }
+    
+
+    method nextFrame {} {
+        next
+        my update
+    }
+    
+
+    method previousFrame {} {
+        next
+        my update
+    }
+    
+
+    method setFrame {index} {
+        next $index
+        my update
+    }
+    
+
+    method update {} {
+        my jset startHeight [expr {[expr {[my getDrawHeight] * [my getFrame]}] / [my getSize]}]
+        my jset currentHeight [expr {[my getDrawHeight] - [my jget startHeight]}]
+    }
+    
+
+    method paintXY {graphics x y} {
+        $graphics drawRegion [my getImage] [my getStartX] [my jget startHeight] [my getDrawWidth] [my jget currentHeight] [::Sprite::staticGet_TRANS_NONE] $x [jint [expr {$y + [my jget startHeight]}]] [my jget anchor]
+    }
 }
 
-
-sub nextFrame {
-    my ($self) = @_;
-        $self->SUPER::previousFrame();
-        $self->update();
+namespace eval ::BottomToTopImageAnimation {
 }
 
-
-sub previousFrame {
-    my ($self) = @_;
-        $self->SUPER::nextFrame();
-        $self->update();
-}
-
-
-sub setFrame {
-    my ($self, $index) = @_;
-        $self->SUPER::setFrame($index);
-        $self->update();
-}
-
-
-sub update {
-    my ($self) = @_;
-        $self->{startHeight} = $self->getDrawHeight() * $self->getFrame() / $self->getSize();
-        $self->{currentHeight} = $self->getDrawHeight() - $self->{startHeight};
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $graphics->drawRegion($self->getImage(), $self->getStartX(), $self->{startHeight}, $self->getDrawWidth(), $self->{currentHeight}, $javax::microedition::lcdui::game::Sprite::TRANS_NONE, $x, $y + $self->{startHeight}, $self->{anchor});
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::game::Sprite ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::animation::image::ImageSegmentAnimation ();
-
-1;
 

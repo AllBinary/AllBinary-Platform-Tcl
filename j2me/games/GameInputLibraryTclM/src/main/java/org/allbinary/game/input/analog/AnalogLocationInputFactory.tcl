@@ -1,63 +1,68 @@
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.analog
 
-package org::allbinary::game::input::analog::AnalogLocationInputFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::analog::AnalogLocationInputFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::AnalogLocationInputFactory {
+    superclass ::JObject
 }
 
+oo::define ::AnalogLocationInputFactory {
+    method initFields_AnalogLocationInputFactory {} {
+        my jset list {}
+        my jset list [::BasicArrayListD new]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::analog::AnalogLocationInputFactory::instance;
-}
+    constructor {} {
+        next
+        my initFields_AnalogLocationInputFactory
+    }
+    
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-sub addPlayer {
-    my ($self, $playerInputId) = @_;
-        my $analogLocationInput = $org::allbinary::game::input::analog::AnalogLocationInput::NULL_ANALOG_LOCATION_INPUT;
-        if ($playerInputId < $self->{list}->size()) {
-            $analogLocationInput = $self->{list}->get($playerInputId);
+    method addPlayer {playerInputId} {
+        set analogLocationInput [::AnalogLocationInput::staticGet_NULL_ANALOG_LOCATION_INPUT]
+        if {[expr {$playerInputId < [[my jget list] size]}]} {
+            set analogLocationInput [[my jget list] get $playerInputId]
         }
-        if ($analogLocationInput == $org::allbinary::game::input::analog::AnalogLocationInput::NULL_ANALOG_LOCATION_INPUT) {
-            $analogLocationInput = 'org::allbinary::game::input::analog::AnalogLocationInput'->new($playerInputId);
-            $self->{list}->add($analogLocationInput);
+        if {[expr {$analogLocationInput eq [::AnalogLocationInput::staticGet_NULL_ANALOG_LOCATION_INPUT]}]} {
+            set analogLocationInput [::AnalogLocationInput new $playerInputId]
+            [my jget list] add $analogLocationInput
         }
+    }
+    
+
+    method getInstanceForPlayer {playerInputId} {
+        return [[my jget list] get $playerInputId]
+    }
+    
+
+    method getList {} {
+        return [my jget list]
+    }
 }
 
-
-sub getInstanceForPlayer {
-    my ($self, $playerInputId) = @_;
-        return $self->{list}->get($playerInputId);
+namespace eval ::AnalogLocationInputFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AnalogLocationInputFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AnalogLocationInputFactory::staticGet_instance]
+    }
 }
 
-
-sub getList {
-    my ($self) = @_;
-        return $self->{list};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::game::input::analog::AnalogLocationInput ();
-
-1;
 

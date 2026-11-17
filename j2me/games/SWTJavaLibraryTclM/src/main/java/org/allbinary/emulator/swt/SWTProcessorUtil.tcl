@@ -11,37 +11,47 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.emulator.swt
 
-package org::allbinary::emulator::swt::SWTProcessorUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::emulator::swt::SWTProcessorUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{swtProcessor} = 'org::allbinary::emulator::swt::SWTProcessor'->getInstance();
+oo::class create ::SWTProcessorUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::SWTProcessorUtil {
+    method initFields_SWTProcessorUtil {} {
+        my jset swtProcessor {}
+        my jset swtProcessor [::SWTProcessor::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_SWTProcessorUtil
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::emulator::swt::SWTProcessorUtil::instance;
+namespace eval ::SWTProcessorUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::SWTProcessorUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::SWTProcessorUtil::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::emulator::swt::SWTProcessor ();
-
-1;
 

@@ -11,49 +11,43 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.destroy
 
-package org::allbinary::game::combat::destroy::DestroyableSimpleBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::combat::destroy::DestroyableBaseBehavior';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{ownerLayer} = undef;
-    $self->{destroyed} = 0;
+oo::class create ::DestroyableSimpleBehavior {
+    superclass ::DestroyableBaseBehavior
 }
 
+oo::define ::DestroyableSimpleBehavior {
+    method initFields_DestroyableSimpleBehavior {} {
+        my jset ownerLayer {}
+        my jset destroyed false
+        
+        my jset destroyed false
+        return
+    }
+    
 
-sub new {
-    my ($class, $ownerLayer) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{ownerLayer} = $ownerLayer;
-    return $self;
-}
+    constructor {ownerLayer} {
+        next
+        my initFields_DestroyableSimpleBehavior
+        my jset ownerLayer $ownerLayer
+    }
+    
 
+    method isDestroyed {} {
+        return [my jget destroyed]
+    }
+    
 
-sub isDestroyed {
-    my ($self) = @_;
-        return $self->{destroyed};
-}
-
-
-sub setDestroyed {
-    my ($self, $destroyed) = @_;
-        $self->{destroyed} = $destroyed;
-        if ($self->isDestroyed()) {
-            'org::allbinary::game::combat::destroy::DestroyedLayerProcessor'->getInstance()->add($self->{ownerLayer});
+    method setDestroyed {destroyed} {
+        my jset destroyed $destroyed
+        if {[my isDestroyed]} {
+            [::DestroyedLayerProcessor::getInstance] add [my jget ownerLayer]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::layer::CollidableCompositeLayer ();
-use org::allbinary::game::combat::destroy::DestroyableBaseBehavior ();
-use org::allbinary::game::combat::destroy::DestroyedLayerProcessor ();
+namespace eval ::DestroyableSimpleBehavior {
+}
 
-1;
 

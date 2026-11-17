@@ -11,56 +11,51 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-package org::allbinary::logic::util::cache::CacheType;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{vendor} = undef;
-    $self->{type} = undef;
+oo::class create ::CacheType {
+    superclass ::JObject
 }
 
+oo::define ::CacheType {
+    method initFields_CacheType {} {
+        my jset vendor {}
+        my jset type {}
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $vendor, $type) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{vendor} = $vendor;
-        $self->{type} = $type;
-    return $self;
+    constructor {vendor type} {
+        next
+        my initFields_CacheType
+        my jset vendor $vendor
+        my jset type $type
+    }
+    
+
+    method getVendor {} {
+        return [my jget vendor]
+    }
+    
+
+    method getType {} {
+        return [my jget type]
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "CacheType: Vendor: "
+        $stringBuffer append [my getVendor]
+        $stringBuffer append " Type: "
+        $stringBuffer append [my getType]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub getVendor {
-    my ($self) = @_;
-        return $self->{vendor};
+namespace eval ::CacheType {
 }
 
-
-sub getType {
-    my ($self) = @_;
-        return $self->{type};
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("CacheType: Vendor: ");
-        $stringBuffer->append($self->getVendor());
-        $stringBuffer->append(" Type: ");
-        $stringBuffer->append($self->getType());
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::string::StringMaker ();
-
-1;
 

@@ -11,32 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.part.weapon
 
-# Java interface
-package org::allbinary::game::part::weapon::SalvoInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub process {
-    my ($self, $allbinaryLayerManager, $angle, $otherAngle) = @_;
-    die "abstract method process";
+oo::class create ::SalvoInterface {
+    superclass ::JObject
 }
 
+oo::define ::SalvoInterface {
+    method initFields_SalvoInterface {} {
+        return
+    }
+    
 
-# throws Exception
-sub processScore {
-    my ($self, $allbinaryLayerManager, $angle, $otherAngle, $weaponProperties, $scoreableInterface) = @_;
-    die "abstract method processScore";
+    method process {allbinaryLayerManager angle otherAngle} {
+        error [jexception AbstractMethodError process]
+    }
+    
+
+    method processScore {allbinaryLayerManager angle otherAngle weaponProperties scoreableInterface} {
+        error [jexception AbstractMethodError processScore]
+    }
 }
 
-use org::allbinary::game::combat::weapon::WeaponProperties ();
-use org::allbinary::game::score::ScoreableInterface ();
-use org::allbinary::layer::AllBinaryLayerManager ();
+namespace eval ::SalvoInterface {
+}
 
-1;
 

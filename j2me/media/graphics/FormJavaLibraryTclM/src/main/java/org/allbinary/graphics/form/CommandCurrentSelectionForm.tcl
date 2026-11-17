@@ -11,217 +11,184 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::CommandCurrentSelectionForm;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::ScrollCurrentSelectionForm','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{selectedAnimationArray} = [(undef) x (16)];
-    $self->{unSelectedAnimationArray} = [(undef) x (16)];
+oo::class create ::CommandCurrentSelectionForm {
+    superclass ::ScrollCurrentSelectionForm
 }
 
+oo::define ::CommandCurrentSelectionForm {
+    method initFields_CommandCurrentSelectionForm {} {
+        my jset selectedAnimationArray {}
+        my jset unSelectedAnimationArray {}
+        my jset selectedAnimationArray [jarray 16 {}]
+        my jset unSelectedAnimationArray [jarray 16 {}]
+        return
+    }
+    
 
-sub new {
-    my ($class, $title, $items, $border, $moveForSmallScreen, $backgroundBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($title, $items, 'org::allbinary::graphics::form::ItemPaintableFactory'->getInstance(), $border, -3, $moveForSmallScreen, $backgroundBasicColor, $foregroundBasicColor);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->initAnimations();
-        $self->addAll($items);
-    return $self;
-}
+    constructor {title items border moveForSmallScreen backgroundBasicColor foregroundBasicColor} {
+        next $title $items [::ItemPaintableFactory::getInstance] $border [expr {-3}] $moveForSmallScreen $backgroundBasicColor $foregroundBasicColor
+        my initFields_CommandCurrentSelectionForm
+        my initAnimations
+        my addAll $items
+    }
+    
 
+    method updateMeasurement {graphics} {
+        my updateAll $graphics [my getAllitems]
+        next $graphics
+    }
+    
 
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        $self->updateAll($graphics, $self->getAllitems());
-        $self->SUPER::updateMeasurement($graphics);
-}
-
-
-sub initAnimations {
-    my ($self) = @_;
-        my $nullAnimation = 'org::allbinary::animation::NullAnimationFactory'->getFactoryInstance()->getInstance(0);
-        for (my $index = scalar(@{$self->{selectedAnimationArray}}); --$index >= 0; ) {
-            $self->{selectedAnimationArray}->[$index] = $nullAnimation;
+    method initAnimations {} {
+        set nullAnimation [[::NullAnimationFactory::getFactoryInstance] getInstance 0]
+        for {set index [[my jget selectedAnimationArray] length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            [my jget selectedAnimationArray] set $index $nullAnimation
         }
-        for (my $index = scalar(@{$self->{unSelectedAnimationArray}}); --$index >= 0; ) {
-            $self->{unSelectedAnimationArray}->[$index] = $nullAnimation;
+        for {set index [[my jget unSelectedAnimationArray] length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            [my jget unSelectedAnimationArray] set $index $nullAnimation
         }
-}
+    }
+    
 
-
-sub addAll {
-    my ($self, $items) = @_;
-        for (my $index = scalar(@{$items}); --$index >= 0; ) {
-            $self->addAt($index, $items->[$index]);
+    method addAll {items} {
+        for {set index [$items length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            my addAt $index [$items get $index]
         }
-}
+    }
+    
 
-
-sub addAt {
-    my ($self, $index, $item) = @_;
-        my $basicColorFactory = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance();
-        my $buttonColor = $basicColorFactory->{TRANSPARENT_GREY};
-        my $selectedButtonColor = $basicColorFactory->{TRANSPARENT_RED};
-        my $width = $item->getMinimumWidth();
-        my $height = $item->getMinimumHeight();
-        my $adjustedBorder = 3;
-        my $offset = -($self->{halfBorder} + $adjustedBorder);
-        my $rectWidth = $width + $self->{border} - $adjustedBorder;
-        my $rectHeight = $height + $self->{border} - $adjustedBorder;
-        if ('org::allbinary::J2MEUtil'->isJ2ME() || 'org::allbinary::J2MEUtil'->isHTML()) {
-            $self->{selectedAnimationArray}->[$index] = 'org::allbinary::animation::vector::RectangleAdjustedAnimation'->new($rectWidth, $rectHeight, $offset, $offset, $selectedButtonColor);
+    method addAt {index item} {
+        set basicColorFactory [::BasicColorFactory::getInstance]
+        set buttonColor [$basicColorFactory jget TRANSPARENT_GREY]
+        set selectedButtonColor [$basicColorFactory jget TRANSPARENT_RED]
+        set width [$item getMinimumWidth]
+        set height [$item getMinimumHeight]
+        set adjustedBorder 3
+        set offset [expr {-([expr {[my jget halfBorder] + $adjustedBorder}])}]
+        set rectWidth [expr {[expr {$width + [my jget border]}] - $adjustedBorder}]
+        set rectHeight [expr {[expr {$height + [my jget border]}] - $adjustedBorder}]
+        if {[expr {[::J2MEUtil::isJ2ME] || [::J2MEUtil::isHTML]}]} {
+            [my jget selectedAnimationArray] set $index [::RectangleAdjustedAnimation new $rectWidth $rectHeight $offset $offset $selectedButtonColor]
         } else {
-            $self->{selectedAnimationArray}->[$index] = 'org::allbinary::animation::vector::RectangleFilledAdjustedAnimation'->new($rectWidth, $rectHeight, $offset, $offset, $selectedButtonColor);
+            [my jget selectedAnimationArray] set $index [::RectangleFilledAdjustedAnimation new $rectWidth $rectHeight $offset $offset $selectedButtonColor]
         }
-        $adjustedBorder = 4;
-        if ('org::allbinary::J2MEUtil'->isJ2ME() || 'org::allbinary::J2MEUtil'->isHTML()) {
-            $self->{unSelectedAnimationArray}->[$index] = 'org::allbinary::animation::vector::RectangleAdjustedAnimation'->new($rectWidth, $rectHeight, $offset, $offset, $buttonColor);
+        set adjustedBorder 4
+        if {[expr {[::J2MEUtil::isJ2ME] || [::J2MEUtil::isHTML]}]} {
+            [my jget unSelectedAnimationArray] set $index [::RectangleAdjustedAnimation new $rectWidth $rectHeight $offset $offset $buttonColor]
         } else {
-            $self->{unSelectedAnimationArray}->[$index] = 'org::allbinary::animation::vector::RectangleFilledAdjustedAnimation'->new($rectWidth, $rectHeight, $offset, $offset, $buttonColor);
+            [my jget unSelectedAnimationArray] set $index [::RectangleFilledAdjustedAnimation new $rectWidth $rectHeight $offset $offset $buttonColor]
         }
-}
+    }
+    
 
-
-sub updateAll {
-    my ($self, $graphics, $items) = @_;
-        for (my $index = scalar(@{$items}); --$index >= 0; ) {
-            $items->[$index]->preMeasurement($graphics);
-            $self->updateAt($index, $items->[$index]);
+    method updateAll {graphics items} {
+        for {set index [$items length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            [$items get $index] preMeasurement $graphics
+            my updateAt $index [$items get $index]
         }
-}
+    }
+    
 
-
-sub updateAt {
-    my ($self, $index, $item) = @_;
-        my $basicColorFactory = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance();
-        my $buttonColor = $basicColorFactory->{TRANSPARENT_GREY};
-        my $selectedButtonColor = $basicColorFactory->{TRANSPARENT_RED};
-        my $width = $item->getMinimumWidth();
-        my $height = $item->getMinimumHeight();
-        my $adjustedBorder = 3;
-        my $offset = -($self->{halfBorder} + $adjustedBorder);
-        my $rectWidth = $width + $self->{border} - $adjustedBorder;
-        my $rectHeight = $height + $self->{border} - $adjustedBorder;
-        if ('org::allbinary::J2MEUtil'->isJ2ME() || 'org::allbinary::J2MEUtil'->isHTML()) {
-            my $rectangleAdjustedAnimation = $self->{selectedAnimationArray}->[$index];
-            $rectangleAdjustedAnimation->setWidth($rectWidth);
-            $rectangleAdjustedAnimation->setHeight($rectHeight);
-            $rectangleAdjustedAnimation->setOffsetX($offset);
-            $rectangleAdjustedAnimation->setOffsetY($offset);
-            $rectangleAdjustedAnimation->setBasicColorP($selectedButtonColor);
+    method updateAt {index item} {
+        set basicColorFactory [::BasicColorFactory::getInstance]
+        set buttonColor [$basicColorFactory jget TRANSPARENT_GREY]
+        set selectedButtonColor [$basicColorFactory jget TRANSPARENT_RED]
+        set width [$item getMinimumWidth]
+        set height [$item getMinimumHeight]
+        set adjustedBorder 3
+        set offset [expr {-([expr {[my jget halfBorder] + $adjustedBorder}])}]
+        set rectWidth [expr {[expr {$width + [my jget border]}] - $adjustedBorder}]
+        set rectHeight [expr {[expr {$height + [my jget border]}] - $adjustedBorder}]
+        if {[expr {[::J2MEUtil::isJ2ME] || [::J2MEUtil::isHTML]}]} {
+            set rectangleAdjustedAnimation [[my jget selectedAnimationArray] get $index]
+            $rectangleAdjustedAnimation setWidth $rectWidth
+            $rectangleAdjustedAnimation setHeight $rectHeight
+            $rectangleAdjustedAnimation setOffsetX $offset
+            $rectangleAdjustedAnimation setOffsetY $offset
+            $rectangleAdjustedAnimation setBasicColorP $selectedButtonColor
         } else {
-            my $rectangleAdjustedAnimation = $self->{selectedAnimationArray}->[$index];
-            $rectangleAdjustedAnimation->setWidth($rectWidth);
-            $rectangleAdjustedAnimation->setHeight($rectHeight);
-            $rectangleAdjustedAnimation->setOffsetX($offset);
-            $rectangleAdjustedAnimation->setOffsetY($offset);
-            $rectangleAdjustedAnimation->setBasicColorP($selectedButtonColor);
+            set rectangleAdjustedAnimation [[my jget selectedAnimationArray] get $index]
+            $rectangleAdjustedAnimation setWidth $rectWidth
+            $rectangleAdjustedAnimation setHeight $rectHeight
+            $rectangleAdjustedAnimation setOffsetX $offset
+            $rectangleAdjustedAnimation setOffsetY $offset
+            $rectangleAdjustedAnimation setBasicColorP $selectedButtonColor
         }
-        $adjustedBorder = 4;
-        if ('org::allbinary::J2MEUtil'->isJ2ME() || 'org::allbinary::J2MEUtil'->isHTML()) {
-            my $rectangleAdjustedAnimation = $self->{unSelectedAnimationArray}->[$index];
-            $rectangleAdjustedAnimation->setWidth($rectWidth);
-            $rectangleAdjustedAnimation->setHeight($rectHeight);
-            $rectangleAdjustedAnimation->setOffsetX($offset);
-            $rectangleAdjustedAnimation->setOffsetY($offset);
-            $rectangleAdjustedAnimation->setBasicColorP($buttonColor);
+        set adjustedBorder 4
+        if {[expr {[::J2MEUtil::isJ2ME] || [::J2MEUtil::isHTML]}]} {
+            set rectangleAdjustedAnimation [[my jget unSelectedAnimationArray] get $index]
+            $rectangleAdjustedAnimation setWidth $rectWidth
+            $rectangleAdjustedAnimation setHeight $rectHeight
+            $rectangleAdjustedAnimation setOffsetX $offset
+            $rectangleAdjustedAnimation setOffsetY $offset
+            $rectangleAdjustedAnimation setBasicColorP $buttonColor
         } else {
-            my $rectangleAdjustedAnimation = $self->{unSelectedAnimationArray}->[$index];
-            $rectangleAdjustedAnimation->setWidth($rectWidth);
-            $rectangleAdjustedAnimation->setHeight($rectHeight);
-            $rectangleAdjustedAnimation->setOffsetX($offset);
-            $rectangleAdjustedAnimation->setOffsetY($offset);
-            $rectangleAdjustedAnimation->setBasicColorP($buttonColor);
+            set rectangleAdjustedAnimation [[my jget unSelectedAnimationArray] get $index]
+            $rectangleAdjustedAnimation setWidth $rectWidth
+            $rectangleAdjustedAnimation setHeight $rectHeight
+            $rectangleAdjustedAnimation setOffsetX $offset
+            $rectangleAdjustedAnimation setOffsetY $offset
+            $rectangleAdjustedAnimation setBasicColorP $buttonColor
         }
+    }
+    
+
+    method getSelectedCommand {} {
+        set index [next]
+        set commandTextItem [my get $index]
+        return [$commandTextItem getCommand]
+    }
+    
+
+    method append {item} {
+        set result [next $item]
+        my addAt $result $item
+        return $result
+    }
+    
+
+    method delete {itemNum} {
+        next $itemNum
+    }
+    
+
+    method deleteAll {} {
+        my initAnimations
+        next
+    }
+    
+
+    method insert {itemNum item} {
+        next $itemNum $item
+    }
+    
+
+    method set {itemNum item} {
+        next $itemNum $item
+    }
+    
+
+    method paint {graphics} {
+        [my jget myFontProcessor] process $graphics
+        next $graphics
+    }
+    
+
+    method paintItem {graphics index item x y} {
+        [[my jget selectedAnimationArray] get $index] paintXY $graphics $x $y
+        return [next $graphics $index $item $x $y]
+    }
+    
+
+    method paintUnselectedItem {graphics index item x y} {
+        [[my jget unSelectedAnimationArray] get $index] paintXY $graphics $x $y
+        return [next $graphics $index $item $x $y]
+    }
 }
 
-
-sub getSelectedCommand {
-    my ($self) = @_;
-        my $index = $self->SUPER::getSelectedIndex();
-        my $commandTextItem = $self->get($index);
-        return $commandTextItem->getCommand();
+namespace eval ::CommandCurrentSelectionForm {
 }
 
-
-sub append {
-    my ($self, $item) = @_;
-        my $result = $self->SUPER::append($item);
-        $self->addAt($result, $item);
-        return $result;
-}
-
-
-sub delete {
-    my ($self, $itemNum) = @_;
-        $self->SUPER::delete($itemNum);
-}
-
-
-sub deleteAll {
-    my ($self) = @_;
-        $self->initAnimations();
-        $self->SUPER::deleteAll();
-}
-
-
-sub insert {
-    my ($self, $itemNum, $item) = @_;
-        $self->SUPER::insert($itemNum, $item);
-}
-
-
-sub set {
-    my ($self, $itemNum, $item) = @_;
-        $self->SUPER::set($itemNum, $item);
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        $self->SUPER::paint($graphics);
-}
-
-
-# throws Exception
-sub paintItem {
-    my ($self, $graphics, $index, $item, $x, $y) = @_;
-        $self->{selectedAnimationArray}->[$index]->paintXY($graphics, $x, $y);
-        return $self->SUPER::paintItem($graphics, $index, $item, $x, $y);
-}
-
-
-# throws Exception
-sub paintUnselectedItem {
-    my ($self, $graphics, $index, $item, $x, $y) = @_;
-        $self->{unSelectedAnimationArray}->[$index]->paintXY($graphics, $x, $y);
-        return $self->SUPER::paintUnselectedItem($graphics, $index, $item, $x, $y);
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::J2MEUtil ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::NullAnimationFactory ();
-use org::allbinary::animation::vector::RectangleAdjustedAnimation ();
-use org::allbinary::animation::vector::RectangleFilledAdjustedAnimation ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::form::item::CommandTextItem ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
-use org::allbinary::graphics::form::ScrollCurrentSelectionForm ();
-use org::allbinary::graphics::form::ItemPaintableFactory ();
-
-1;
 

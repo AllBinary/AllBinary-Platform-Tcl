@@ -11,33 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::ColorLessVectorAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::VectorAnimation';
-
-
-
-sub new {
-    my ($class, $currentPoints, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($currentPoints, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE}, $animationBehavior);
-        # super(...) made $self above
-    return $self;
+oo::class create ::ColorLessVectorAnimation {
+    superclass ::VectorAnimation
 }
 
+oo::define ::ColorLessVectorAnimation {
+    method initFields_ColorLessVectorAnimation {} {
+        return
+    }
+    
 
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->paintVectors($graphics, $x, $y);
+    constructor {currentPoints animationBehavior} {
+        next $currentPoints [[::BasicColorFactory::getInstance] jget WHITE] $animationBehavior
+        my initFields_ColorLessVectorAnimation
+    }
+    
+
+    method paintXY {graphics x y} {
+        my paintVectors $graphics $x $y
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::animation::VectorAnimation ();
+namespace eval ::ColorLessVectorAnimation {
+}
 
-1;
 

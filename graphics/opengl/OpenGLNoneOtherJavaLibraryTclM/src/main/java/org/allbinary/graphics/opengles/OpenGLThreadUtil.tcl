@@ -1,43 +1,55 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles
 
-package org::allbinary::graphics::opengles::OpenGLThreadUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::opengles::OpenGLThreadUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::OpenGLThreadUtil {
+    superclass ::JObject
 }
 
+oo::define ::OpenGLThreadUtil {
+    method initFields_OpenGLThreadUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::opengles::OpenGLThreadUtil::instance;
+    constructor {} {
+        next
+        my initFields_OpenGLThreadUtil
+    }
+    
+    
+
+    method set {glSurfaceView} {
+    }
+    
+
+    method onPause {} {
+    }
+    
+
+    method onResume {} {
+    }
 }
 
-
-sub set {
-    my ($self, $glSurfaceView) = @_;
+namespace eval ::OpenGLThreadUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::OpenGLThreadUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::OpenGLThreadUtil::staticGet_instance]
+    }
 }
 
-
-sub onPause {
-    my ($self) = @_;
-}
-
-
-sub onResume {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

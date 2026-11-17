@@ -11,103 +11,95 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.canvas
 
-package org::allbinary::game::combat::canvas::CombatGameCanvas;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::displayable::canvas::AllBinaryGameCanvas';
-
-our $basicLayerProcessor = [(undef) x (0)];
-
-
-sub new {
-    my ($class, $cmdListener, $gameLayerManager, $highScoresFactoryInterface, $gameInitializationInterfaceFactoryInterface, $buffered) = @_;
-    my $self = $class->SUPER::new($cmdListener, $gameLayerManager, $highScoresFactoryInterface, $gameInitializationInterfaceFactoryInterface, $buffered);
-        # super(...) made $self above
-    return $self;
+oo::class create ::CombatGameCanvas {
+    superclass ::AllBinaryGameCanvas
 }
 
+oo::define ::CombatGameCanvas {
+    method initFields_CombatGameCanvas {} {
+        return
+    }
+    
 
-sub CombatGameCanvas_init {
-    my ($self) = @_;
-        'org::allbinary::game::combat::destroy::event::DestroyEventCircularStaticPool'->getInstance()->init($self);
-        'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance()->addNormalPortion(50, "Destroy Events");
-}
+    constructor {cmdListener gameLayerManager highScoresFactoryInterface gameInitializationInterfaceFactoryInterface buffered} {
+        next $cmdListener $gameLayerManager $highScoresFactoryInterface $gameInitializationInterfaceFactoryInterface $buffered
+        my initFields_CombatGameCanvas
+    }
+    
 
+    method CombatGameCanvas_init {} {
+        [::DestroyEventCircularStaticPool::getInstance] init [self]
+        [::ProgressCanvasFactory::getInstance] addNormalPortion 50 "Destroy Events"
+    }
+    
 
-# throws Exception
-sub initApp {
-    my ($self, $abeClientInformation) = @_;
-        $self->CombatGameCanvas_init();
-        $self->SUPER::initApp($abeClientInformation);
-}
+    method initApp {abeClientInformation} {
+        my CombatGameCanvas_init
+        next $abeClientInformation
+    }
+    
 
-
-sub initConfigurablePortion {
-    my ($self, $portion) = @_;
-        'org::allbinary::game::combat::destroy::DestroyedLayerProcessor'->init();
-        'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance()->addNormalPortion($portion, "Basic Processors");
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        my $gameFeatureFactory = 'org::allbinary::game::configuration::feature::GameFeatureFactory'->getInstance();
-        if ($features->isFeature($gameFeatureFactory->{DROPPED_ITEMS}) && $features->isFeature($gameFeatureFactory->{DROPPED_ITEMS_FROM_DEATH})) {
-            $org::allbinary::game::combat::canvas::CombatGameCanvas::basicLayerProcessor = [(undef) x (2)];
-            $org::allbinary::game::combat::canvas::CombatGameCanvas::basicLayerProcessor->[0] = 'org::allbinary::game::combat::destroy::DestroyedLayerProcessor'->getInstance();
-            $org::allbinary::game::combat::canvas::CombatGameCanvas::basicLayerProcessor->[1] = 'org::allbinary::game::layer::drop::DropLayerProcessor'->getInstance();
+    method initConfigurablePortion {portion} {
+        ::DestroyedLayerProcessor::init
+        [::ProgressCanvasFactory::getInstance] addNormalPortion $portion "Basic Processors"
+        set features [::Features::getInstance]
+        set gameFeatureFactory [::GameFeatureFactory::getInstance]
+        if {[expr {[$features isFeature [$gameFeatureFactory jget DROPPED_ITEMS]] && [$features isFeature [$gameFeatureFactory jget DROPPED_ITEMS_FROM_DEATH]]}]} {
+            ::CombatGameCanvas::staticSet_basicLayerProcessor [jarray 2 {}]
+            [::CombatGameCanvas::staticGet_basicLayerProcessor] set 0 [::DestroyedLayerProcessor::getInstance]
+            [::CombatGameCanvas::staticGet_basicLayerProcessor] set 1 [::DropLayerProcessor::getInstance]
         } else {
-            $org::allbinary::game::combat::canvas::CombatGameCanvas::basicLayerProcessor = [(undef) x (1)];
-            $org::allbinary::game::combat::canvas::CombatGameCanvas::basicLayerProcessor->[0] = 'org::allbinary::game::combat::destroy::DestroyedLayerProcessor'->getInstance();
+            ::CombatGameCanvas::staticSet_basicLayerProcessor [jarray 1 {}]
+            [::CombatGameCanvas::staticGet_basicLayerProcessor] set 0 [::DestroyedLayerProcessor::getInstance]
         }
-}
+    }
+    
 
-
-# throws Exception
-sub processPlayingGame {
-    my ($self) = @_;
-        $self->SUPER::processPlayingGame();
-        for (my $index = scalar(@{$org::allbinary::game::combat::canvas::CombatGameCanvas::basicLayerProcessor}); --$index >= 0; ) {
-            $org::allbinary::game::combat::canvas::CombatGameCanvas::basicLayerProcessor->[$index]->process($self->{gameLayerManager});
+    method processPlayingGame {} {
+        next
+        for {set index [[::CombatGameCanvas::staticGet_basicLayerProcessor] length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            [[::CombatGameCanvas::staticGet_basicLayerProcessor] get $index] process [my jget gameLayerManager]
         }
-}
+    }
+    
 
-
-# throws Exception
-sub cleanupGame {
-    my ($self) = @_;
-        $self->SUPER::cleanupGame();
-        for (my $index = scalar(@{$org::allbinary::game::combat::canvas::CombatGameCanvas::basicLayerProcessor}); --$index >= 0; ) {
-            $org::allbinary::game::combat::canvas::CombatGameCanvas::basicLayerProcessor->[$index]->getList()->clear();
+    method cleanupGame {} {
+        next
+        for {set index [[::CombatGameCanvas::staticGet_basicLayerProcessor] length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            [[[::CombatGameCanvas::staticGet_basicLayerProcessor] get $index] getList] clear
         }
-        'org::allbinary::game::layer::identification::GroupLayerManagerListener'->getInstance()->clear();
-        'org::allbinary::game::layer::identification::GroupLayerManagerListener'->getInstance()->log();
-        'org::allbinary::game::combat::destroy::event::DestroyedEventHandler'->getInstance()->removeAllListeners();
-        $self->cleanupManager();
+        [::GroupLayerManagerListener::getInstance] clear
+        [::GroupLayerManagerListener::getInstance] log
+        [::DestroyedEventHandler::getInstance] removeAllListeners
+        my cleanupManager
+    }
+    
+
+    method cleanupManager {} {
+        [my jget gameLayerManager] cleanup
+    }
 }
 
-
-# throws Exception
-sub cleanupManager {
-    my ($self) = @_;
-        $self->{gameLayerManager}->cleanup();
+namespace eval ::CombatGameCanvas {
+    variable basicLayerProcessorValue {}
+    variable basicLayerProcessorSet 0
+    proc staticGet_basicLayerProcessor {} {
+        variable basicLayerProcessorValue
+        variable basicLayerProcessorSet
+        if {!$basicLayerProcessorSet} {
+            set basicLayerProcessorSet 1
+            set basicLayerProcessorValue [jarray 0 {}]
+        }
+        return $basicLayerProcessorValue
+    }
+    proc staticSet_basicLayerProcessor {value} {
+        variable basicLayerProcessorValue
+        variable basicLayerProcessorSet
+        set basicLayerProcessorSet 1
+        set basicLayerProcessorValue $value
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::CommandListener ();
-use org::allbinary::game::combat::destroy::DestroyedLayerProcessor ();
-use org::allbinary::game::combat::destroy::event::DestroyEventCircularStaticPool ();
-use org::allbinary::game::combat::destroy::event::DestroyedEventHandler ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::GameFeatureFactory ();
-use org::allbinary::game::displayable::canvas::AllBinaryGameCanvas ();
-use org::allbinary::game::init::BasicBuildGameInitializerFactory ();
-use org::allbinary::game::layer::AllBinaryGameLayerManager ();
-use org::allbinary::game::layer::drop::DropLayerProcessor ();
-use org::allbinary::game::layer::identification::GroupLayerManagerListener ();
-use org::allbinary::game::score::HighScoresFactoryInterface ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory ();
-use org::allbinary::layer::BasicLayerProcessor ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-
-1;
 

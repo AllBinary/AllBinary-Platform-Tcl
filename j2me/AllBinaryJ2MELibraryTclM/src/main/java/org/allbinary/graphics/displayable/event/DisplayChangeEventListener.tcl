@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.event
 
-# Java interface
-package org::allbinary::graphics::displayable::event::DisplayChangeEventListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-# throws Exception
-sub onDisplayChangeEvent {
-    my ($self, $displayChangeEvent) = @_;
-    die "abstract method onDisplayChangeEvent";
+oo::class create ::DisplayChangeEventListener {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::DisplayChangeEventListener {
+    method initFields_DisplayChangeEventListener {} {
+        return
+    }
+    
 
-1;
+    method onDisplayChangeEvent {displayChangeEvent} {
+        error [jexception AbstractMethodError onDisplayChangeEvent]
+    }
+}
+
+namespace eval ::DisplayChangeEventListener {
+}
+
 

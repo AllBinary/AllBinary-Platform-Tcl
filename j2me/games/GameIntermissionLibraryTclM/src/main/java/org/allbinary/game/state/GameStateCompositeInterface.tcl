@@ -11,28 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.state
 
-# Java interface
-package org::allbinary::game::state::GameStateCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub setGameState {
-    my ($self, $gameState) = @_;
-    die "abstract method setGameState";
+oo::class create ::GameStateCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::GameStateCompositeInterface {
+    method initFields_GameStateCompositeInterface {} {
+        return
+    }
+    
 
-sub getGameState {
-    my ($self) = @_;
-    die "abstract method getGameState";
+    method setGameState {gameState} {
+        error [jexception AbstractMethodError setGameState]
+    }
+    
+
+    method getGameState {} {
+        error [jexception AbstractMethodError getGameState]
+    }
 }
 
+namespace eval ::GameStateCompositeInterface {
+}
 
-1;
 

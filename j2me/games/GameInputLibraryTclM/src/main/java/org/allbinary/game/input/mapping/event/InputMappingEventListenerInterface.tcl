@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.mapping.event
 
-# Java interface
-package org::allbinary::game::input::mapping::event::InputMappingEventListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-# throws Exception
-sub onInputMappingEvent {
-    my ($self, $inputMappingEvent) = @_;
-    die "abstract method onInputMappingEvent";
+oo::class create ::InputMappingEventListenerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::InputMappingEventListenerInterface {
+    method initFields_InputMappingEventListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onInputMappingEvent {inputMappingEvent} {
+        error [jexception AbstractMethodError onInputMappingEvent]
+    }
+}
+
+namespace eval ::InputMappingEventListenerInterface {
+}
+
 

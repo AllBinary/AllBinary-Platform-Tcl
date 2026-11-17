@@ -11,72 +11,60 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::TestInputExample;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::input::TestInputInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{testValue} = 0;
+oo::class create ::TestInputExample {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::TestInputExample {
+    method initFields_TestInputExample {} {
+        my jset testValue 0
+        my jset testValue 0
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_TestInputExample
+    }
+    
+
+    method up {} {
+    }
+    
+
+    method down {} {
+    }
+    
+
+    method left {} {
+        my jpostinc testValue 1
+    }
+    
+
+    method right {} {
+        my jpostinc testValue -1
+    }
+    
+
+    method strafeLeft {} {
+    }
+    
+
+    method strafeRight {} {
+    }
+    
+
+    method paint {graphics} {
+    }
+    
+
+    method paintThreed {graphics} {
+    }
 }
 
-
-sub up {
-    my ($self) = @_;
+namespace eval ::TestInputExample {
 }
 
-
-sub down {
-    my ($self) = @_;
-}
-
-
-sub left {
-    my ($self) = @_;
-        $self->{testValue}++;
-}
-
-
-sub right {
-    my ($self) = @_;
-        $self->{testValue}--;
-}
-
-
-sub strafeLeft {
-    my ($self) = @_;
-}
-
-
-sub strafeRight {
-    my ($self) = @_;
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-}
-
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::input::TestInputInterface ();
-
-1;
 

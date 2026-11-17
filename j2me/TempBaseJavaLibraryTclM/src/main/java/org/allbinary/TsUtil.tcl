@@ -31,12 +31,12 @@ oo::define ::TsUtil {
     
 
     method longBitsToDouble {bits} {
-        return [Double longBitsToDouble $bits]
+        return [::Double::longBitsToDouble $bits]
     }
     
 
     method intBitsToFloat {bits} {
-        return [Float intBitsToFloat $bits]
+        return [::Float::intBitsToFloat $bits]
     }
     
 

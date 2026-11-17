@@ -11,91 +11,73 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::KeyPressesAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ai::BasicAI';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{on} = 1;
-    $self->{keys} = undef;
+oo::class create ::KeyPressesAI {
+    superclass ::BasicAI
 }
 
+oo::define ::KeyPressesAI {
+    method initFields_KeyPressesAI {} {
+        my jset on false
+        my jset keys {}
+        my jset on true
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{keys} = [(undef) x ($hashtable->size())];
-        my $objectArray = 'org::allbinary::util::HashtableUtil'->getInstance()->getKeysAsArray($hashtable);
-        my $size = scalar(@{$objectArray});
-        for (my $index = 0; $index < $size; $index++) {
-            $self->{keys}->[$index] = $hashtable->get($objectArray->[$index]);
+    constructor {hashtable ownerLayerInterface gameInput} {
+        next $ownerLayerInterface $gameInput
+        my initFields_KeyPressesAI
+        my jset keys [jarray [$hashtable size] {}]
+        set objectArray [[::HashtableUtil::getInstance] getKeysAsArray $hashtable]
+        set size [$objectArray length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            [my jget keys] set $index [$hashtable get [$objectArray get $index]]
         }
-    return $self;
-}
+    }
+    
 
-
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        if ($self->{on}) {
-            for (my $index = 0; $index < scalar(@{$self->{keys}}); $index++) {
-                $self->SUPER::processKeyAI(int($self->{keys}->[$index]));
+    method processAI {allBinaryLayerManager} {
+        if {[my jget on]} {
+            for {set index 0} {[expr {$index < [[my jget keys] length]}]} {jpostincr index 1} {
+                next [[[my jget keys] get $index] intValue]
             }
         }
-}
+    }
+    
 
-
-# throws Exception
-sub toggle {
-    my ($self) = @_;
-        if ($self->isOn()) {
-            $self->setOn(0);
+    method toggle {} {
+        if {[my isOn]} {
+            my setOn false
         } else {
-            $self->setOn(1);
+            my setOn true
         }
+    }
+    
+
+    method disable {} {
+        my setOn false
+    }
+    
+
+    method enable {} {
+        my setOn true
+    }
+    
+
+    method setOn {on} {
+        my jset on $on
+    }
+    
+
+    method isOn {} {
+        return [my jget on]
+    }
 }
 
-
-# throws Exception
-sub disable {
-    my ($self) = @_;
-        $self->setOn(0);
+namespace eval ::KeyPressesAI {
 }
 
-
-# throws Exception
-sub enable {
-    my ($self) = @_;
-        $self->setOn(1);
-}
-
-
-sub setOn {
-    my ($self, $on) = @_;
-        $self->{on} = $on;
-}
-
-
-sub isOn {
-    my ($self) = @_;
-        return $self->{on};
-}
-
-use java::lang::Object ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::util::HashtableUtil ();
-use org::allbinary::game::ai::BasicAI ();
-use org::allbinary::util::ABHashtable ();
-
-1;
 

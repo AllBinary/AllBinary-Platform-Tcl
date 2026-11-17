@@ -11,82 +11,76 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic.notification
 
-package org::allbinary::game::ag::layer::hud::basic::notification::GameNotificationHud;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::graphics::hud::BasicHud','org::allbinary::game::layer::hud::event::GameNotificationListenerInterface';
-
-tie our $NULL_GAME_NOTIFICATION, 'java::lang::LazyStatic', sub { 'org::allbinary::game::ag::layer::hud::basic::notification::GameNotificationHud'->new('org::allbinary::game::graphics::hud::BasicHudFactory'->getInstance()->{TOPCENTER}, 'org::allbinary::game::graphics::hud::BasicHudFactory'->getInstance()->{HORIZONTAL}, 0, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{RED}) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{METHOD_NAME} = "onGameNotificationEvent";
-    $self->{lastGameNotificationEvent} = $org::allbinary::game::ag::layer::hud::basic::notification::GameNotification::NULL_GAME_NOTIFICATION_EVENT;
+oo::class create ::GameNotificationHud {
+    superclass ::BasicHud
 }
 
+oo::define ::GameNotificationHud {
+    method initFields_GameNotificationHud {} {
+        my jset METHOD_NAME {}
+        my jset lastGameNotificationEvent {}
+        my jset METHOD_NAME "onGameNotificationEvent"
+        my jset lastGameNotificationEvent [::GameNotification::staticGet_NULL_GAME_NOTIFICATION_EVENT]
+        return
+    }
+    
 
-sub new {
-    my ($class, $location, $direction, $bufferZone, $basicColor) = @_;
-    my $self = $class->SUPER::new($location, $direction, $bufferZone, $basicColor);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
-}
+    constructor {location direction bufferZone basicColor} {
+        next $location $direction $bufferZone $basicColor
+        my initFields_GameNotificationHud
+    }
+    
 
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
 
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
-}
-
-
-# throws Exception
-sub onGameNotificationEvent {
-    my ($self, $gameNotificationEvent) = @_;
-        if ($self->{lastGameNotificationEvent} != $gameNotificationEvent) {
-            $self->{lastGameNotificationEvent} = $gameNotificationEvent;
-            $self->{logUtil}->putF($gameNotificationEvent->getString(), $self, $self->{METHOD_NAME});
+    method onGameNotificationEvent {gameNotificationEvent} {
+        if {[expr {[my jget lastGameNotificationEvent] ne $gameNotificationEvent}]} {
+            my jset lastGameNotificationEvent $gameNotificationEvent
+            [my jget logUtil] putF [$gameNotificationEvent getString] [self] [my jget METHOD_NAME]
         }
-        $self->add($gameNotificationEvent->getString(), $gameNotificationEvent->getSeconds(), $gameNotificationEvent->getBasicColorP(), $gameNotificationEvent->getPermanent());
+        my add [$gameNotificationEvent getString] [$gameNotificationEvent getSeconds] [$gameNotificationEvent getBasicColorP] [$gameNotificationEvent getPermanent]
+    }
+    
+
+    method add {string seconds basicColor permanent} {
+    }
+    
+
+    method processTick {} {
+    }
+    
+
+    method paint {graphics} {
+    }
+    
+
+    method clear {} {
+    }
 }
 
-
-sub add {
-    my ($self, $string, $seconds, $basicColor, $permanent) = @_;
+namespace eval ::GameNotificationHud {
+    variable NULL_GAME_NOTIFICATIONValue {}
+    variable NULL_GAME_NOTIFICATIONSet 0
+    proc staticGet_NULL_GAME_NOTIFICATION {} {
+        variable NULL_GAME_NOTIFICATIONValue
+        variable NULL_GAME_NOTIFICATIONSet
+        if {!$NULL_GAME_NOTIFICATIONSet} {
+            set NULL_GAME_NOTIFICATIONSet 1
+            set NULL_GAME_NOTIFICATIONValue [::GameNotificationHud new [[::BasicHudFactory::getInstance] jget TOPCENTER] [[::BasicHudFactory::getInstance] jget HORIZONTAL] 0 [[::BasicColorFactory::getInstance] jget RED]]
+        }
+        return $NULL_GAME_NOTIFICATIONValue
+    }
+    proc staticSet_NULL_GAME_NOTIFICATION {value} {
+        variable NULL_GAME_NOTIFICATIONValue
+        variable NULL_GAME_NOTIFICATIONSet
+        set NULL_GAME_NOTIFICATIONSet 1
+        set NULL_GAME_NOTIFICATIONValue $value
+    }
 }
 
-
-# throws Exception
-sub processTick {
-    my ($self) = @_;
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-}
-
-
-sub clear {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::graphics::hud::BasicHud ();
-use org::allbinary::game::graphics::hud::BasicHudFactory ();
-use org::allbinary::game::layer::hud::event::GameNotificationEvent ();
-use org::allbinary::game::layer::hud::event::GameNotificationListenerInterface ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::game::ag::layer::hud::basic::notification::GameNotification ();
-
-1;
 

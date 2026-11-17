@@ -11,79 +11,72 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item.validation
 
-package org::allbinary::graphics::form::item::validation::TextFieldItemValidator;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::control::validate::ValidatorBase';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{textFieldItem} = undef;
-    $self->{min} = undef;
-    $self->{max} = undef;
-    $self->{allowOnEmpty} = undef;
+oo::class create ::TextFieldItemValidator {
+    superclass ::ValidatorBase
 }
 
+oo::define ::TextFieldItemValidator {
+    method initFields_TextFieldItemValidator {} {
+        my jset textFieldItem {}
+        my jset min 0
+        my jset max 0
+        my jset allowOnEmpty false
+        
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $textFieldItem, $min, $max, $allowOnEmpty) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{textFieldItem} = $textFieldItem;
-        $self->{min} = $min;
-        $self->{max} = $max;
-        $self->{allowOnEmpty} = $allowOnEmpty;
-    return $self;
-}
+    constructor {textFieldItem min max allowOnEmpty} {
+        next
+        my initFields_TextFieldItemValidator
+        my jset textFieldItem $textFieldItem
+        my jset min $min
+        my jset max $max
+        my jset allowOnEmpty $allowOnEmpty
+    }
+    
 
-
-sub isValid {
-    my ($self) = @_;
-        my $booleanFactory = 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance();
-        my $result = $booleanFactory->{TRUE};
-        my $string = $self->{textFieldItem}->getString();
-        my $textLength = length($string);
-        if (($textLength == 0 && $self->{allowOnEmpty}) || $textLength > $self->{min} && $textLength < $self->{max}) {
+    method isValid {} {
+        set booleanFactory [::BooleanFactory::getInstance]
+        set result [$booleanFactory jget TRUE]
+        set string [[my jget textFieldItem] getString]
+        set textLength [string length $string]
+        if {[expr {([expr {[expr {$textLength == 0}] && [my jget allowOnEmpty]}]) || [expr {[expr {$textLength > [my jget min]}] && [expr {$textLength < [my jget max]}]}]}]} {
         } else {
-            if ($textLength < $self->{min}) {
-                $result = $booleanFactory->{FALSE};
-            } elsif ($textLength > $self->{max}) {
-                $result = $booleanFactory->{FALSE};
+            if {[expr {$textLength < [my jget min]}]} {
+                set result [$booleanFactory jget FALSE]
+            } elseif {[expr {$textLength > [my jget max]}]} {
+                set result [$booleanFactory jget FALSE]
             }
         }
-        return $result;
-}
+        return $result
+    }
+    
 
-
-sub toList {
-    my ($self) = @_;
-        my $list = 'org::allbinary::util::BasicArrayListD'->new();
-        my $string = $self->{textFieldItem}->getString();
-        my $textLength = length($string);
-        if ($textLength > $self->{min} && $textLength < $self->{max}) {
+    method toList {} {
+        set list [::BasicArrayListD new]
+        set string [[my jget textFieldItem] getString]
+        set textLength [string length $string]
+        if {[expr {[expr {$textLength > [my jget min]}] && [expr {$textLength < [my jget max]}]}]} {
         } else {
-            my $label = $self->{textFieldItem}->getLabel();
-            my $name = substr($label, 0, (length($label) - 2) - (0));
-            if ($textLength < $self->{min}) {
-                $list->add('org::allbinary::logic::string::StringMaker'->new()->append($name)->append(" is to short")->toString());
-            } elsif ($textLength > $self->{max}) {
-                $list->add('org::allbinary::logic::string::StringMaker'->new()->append($name)->append(" is to long")->toString());
+            set label [[my jget textFieldItem] getLabel]
+            set name [jsubstring $label 0 [jint [expr {[string length $label] - 2}]]]
+            if {[expr {$textLength < [my jget min]}]} {
+                $list add [[[[::StringMaker new] append $name] append " is to short"] toString]
+            } elseif {[expr {$textLength > [my jget max]}]} {
+                $list add [[[[::StringMaker new] append $name] append " is to long"] toString]
             }
         }
-        return $list;
+        return $list
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::form::item::ABTextFieldItem ();
-use org::allbinary::logic::control::validate::ValidatorBase ();
-use org::allbinary::logic::java::bool::BooleanFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
+namespace eval ::TextFieldItemValidator {
+}
 
-1;
 

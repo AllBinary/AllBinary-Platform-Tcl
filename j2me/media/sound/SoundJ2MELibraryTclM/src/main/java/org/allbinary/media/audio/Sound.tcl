@@ -11,77 +11,64 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-package org::allbinary::media::audio::Sound;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::media::audio::SoundInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{resource} = undef;
-    $self->{player} = $org::allbinary::media::audio::NoPlayer::NO_PLAYER;
+oo::class create ::Sound {
+    superclass ::JObject
 }
 
+oo::define ::Sound {
+    method initFields_Sound {} {
+        my jset resource {}
+        my jset player {}
+        
+        my jset player [::NoPlayer::staticGet_NO_PLAYER]
+        return
+    }
+    
 
-sub new {
-    my ($class, $resource) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{resource} = $resource;
-    return $self;
-}
+    constructor {resource} {
+        next
+        my initFields_Sound
+        my jset resource $resource
+    }
+    
 
+    method getResource {} {
+        return [my jget resource]
+    }
+    
 
-sub getResource {
-    my ($self) = @_;
-        return $self->{resource};
-}
+    method getPlayerP {} {
+        return [my jget player]
+    }
+    
 
+    method setPlayerP {player} {
+        my jset player $player
+    }
+    
 
-sub getPlayerP {
-    my ($self) = @_;
-        return $self->{player};
-}
+    method init {} {
+    }
+    
 
+    method getDuration {} {
+        return [expr {-1}]
+    }
+    
 
-sub setPlayerP {
-    my ($self, $player) = @_;
-        $self->{player} = $player;
-}
-
-
-# throws Exception
-sub init {
-    my ($self) = @_;
-}
-
-
-sub getDuration {
-    my ($self) = @_;
-        return -1;
-}
-
-
-sub run {
-    my ($self) = @_;
+    method run {} {
         try {
-            $self->{player}->start();
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            'org::allbinary::logic::communication::log::PreLogUtil'->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{RUN});
+            [my jget player] start
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            ::PreLogUtil::put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget RUN]
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::media::Player ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::media::audio::SoundInterface ();
-use org::allbinary::media::audio::NoPlayer ();
+namespace eval ::Sound {
+}
 
-1;
 

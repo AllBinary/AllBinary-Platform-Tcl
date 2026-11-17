@@ -1,43 +1,36 @@
 # Generated Code Do Not Modify
+# package org.allbinary.animation.vector
 
-package org::allbinary::animation::vector::ARectangleFilledAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::vector::RectangleFilledAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{x} = 0;
-    $self->{y} = 0;
+oo::class create ::ARectangleFilledAnimation {
+    superclass ::RectangleFilledAnimation
 }
 
+oo::define ::ARectangleFilledAnimation {
+    method initFields_ARectangleFilledAnimation {} {
+        my jset x 0
+        my jset y 0
+        my jset x 0
+        my jset y 0
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new(0, 0, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{BLACK});
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
+    constructor {} {
+        next 0 0 [[::BasicColorFactory::getInstance] jget BLACK]
+        my initFields_ARectangleFilledAnimation
+    }
+    
+
+    method nextFrame {} {
+    }
+    
+
+    method paintXY {graphics unusedX unusedY} {
+        next $graphics [my jget x] [my jget y]
+    }
 }
 
-
-sub nextFrame {
-    my ($self) = @_;
+namespace eval ::ARectangleFilledAnimation {
 }
 
-
-sub paintXY {
-    my ($self, $graphics, $unusedX, $unusedY) = @_;
-        $self->SUPER::paintXY($graphics, $self->{x}, $self->{y});
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::animation::vector::RectangleFilledAnimation ();
-
-1;
 

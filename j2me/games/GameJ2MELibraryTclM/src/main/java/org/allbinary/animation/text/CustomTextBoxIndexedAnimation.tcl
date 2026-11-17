@@ -11,117 +11,95 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.text
 
-package org::allbinary::animation::text::CustomTextBoxIndexedAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::IndexedAnimation','org::allbinary::game::input::event::RawKeyEventListener','org::allbinary::graphics::font::UpdateMyFontInterface','org::allbinary::animation::text::TextInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{customTextBox} = undef;
-    $self->{lastText} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{INIT_STRING};
-    $self->{hasChanged} = 1;
-    $self->{textChangeListener} = 'org::allbinary::animation::text::TextChangeListener'->getInstance();
+oo::class create ::CustomTextBoxIndexedAnimation {
+    superclass ::IndexedAnimation
 }
 
+oo::define ::CustomTextBoxIndexedAnimation {
+    method initFields_CustomTextBoxIndexedAnimation {} {
+        my jset customTextBox {}
+        my jset lastText {}
+        my jset hasChanged false
+        my jset textChangeListener {}
+        
+        my jset lastText [[::StringUtil::getInstance] jget INIT_STRING]
+        my jset hasChanged true
+        my jset textChangeListener [::TextChangeListener::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $customTextBox) = @_;
-    my $self = $class->SUPER::new('org::allbinary::animation::AnimationBehavior'->getInstance());
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{customTextBox} = $customTextBox;
-    return $self;
-}
+    constructor {customTextBox} {
+        next [::AnimationBehavior::getInstance]
+        my initFields_CustomTextBoxIndexedAnimation
+        my jset customTextBox $customTextBox
+    }
+    
 
+    method setBasicColorP {basicColor} {
+        [[my jget customTextBox] getTextFieldItem] setForegroundBasicColorP $basicColor
+    }
+    
 
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
-        $self->{customTextBox}->getTextFieldItem()->setForegroundBasicColorP($basicColor);
-}
+    method setBackgroundBasicColorP {basicColor} {
+        [[my jget customTextBox] getTextFieldItem] setBackgroundBasicColorP $basicColor
+    }
+    
 
+    method setTextWithOnMeasure {text textChangeListener} {
+        my setText $text
+        my jset textChangeListener $textChangeListener
+    }
+    
 
-sub setBackgroundBasicColorP {
-    my ($self, $basicColor) = @_;
-        $self->{customTextBox}->getTextFieldItem()->setBackgroundBasicColorP($basicColor);
-}
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        [my jget textChangeListener] onMeasure
+        my jset textChangeListener [::TextChangeListener::getInstance]
+    }
+    
 
-
-sub setTextWithOnMeasure {
-    my ($self, $text, $textChangeListener) = @_;
-        $self->setText($text);
-        $self->{textChangeListener} = $textChangeListener;
-}
-
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->{textChangeListener}->onMeasure();
-        $self->{textChangeListener} = 'org::allbinary::animation::text::TextChangeListener'->getInstance();
-}
-
-
-sub setText {
-    my ($self, $text) = @_;
-        if ($self->{lastText} ne $text) {
-            $self->{hasChanged} = 1;
-            $self->{lastText} = $text;
-            $self->{customTextBox}->getTextFieldItem()->setString($text);
+    method setText {text} {
+        if {[expr {[my jget lastText] ne $text}]} {
+            my jset hasChanged true
+            my jset lastText $text
+            [[my jget customTextBox] getTextFieldItem] setString $text
         }
+    }
+    
+
+    method getText {} {
+        return [[[my jget customTextBox] getTextFieldItem] getString]
+    }
+    
+
+    method onEventRaw {keyCode deviceId repeated} {
+        [my jget customTextBox] onEventRaw $keyCode $deviceId $repeated
+    }
+    
+
+    method getFontHeight {} {
+        return [[[my jget customTextBox] getTextFieldItem] getFontHeight]
+    }
+    
+
+    method paintXY {graphics x y} {
+        [my jget customTextBox] paintXY $graphics $x $y
+    }
+    
+
+    method paintThreedXYZ {graphics x y z} {
+    }
+    
+
+    method getWidth {} {
+        return [next]
+    }
 }
 
-
-sub getText {
-    my ($self) = @_;
-        return $self->{customTextBox}->getTextFieldItem()->getString();
+namespace eval ::CustomTextBoxIndexedAnimation {
 }
 
-
-sub onEventRaw {
-    my ($self, $keyCode, $deviceId, $repeated) = @_;
-        $self->{customTextBox}->onEventRaw($keyCode, $deviceId, $repeated);
-}
-
-
-sub getFontHeight {
-    my ($self) = @_;
-        return $self->{customTextBox}->getTextFieldItem()->getFontHeight();
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->{customTextBox}->paintXY($graphics, $x, $y);
-}
-
-
-sub paintThreedXYZ {
-    my ($self, $graphics, $x, $y, $z) = @_;
-}
-
-
-sub getWidth {
-    my ($self) = @_;
-        return $self->SUPER::getWidth();
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::game::input::event::RawKeyEventListener ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::form::item::CustomTextBox ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::animation::text::TextInterface ();
-use org::allbinary::animation::text::TextChangeListener ();
-
-1;
 

@@ -11,27 +11,28 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.threed
 
-package org::allbinary::graphics::threed::RatioProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::RatioProcessor {
+    superclass ::JObject
 }
 
+oo::define ::RatioProcessor {
+    method initFields_RatioProcessor {} {
+        return
+    }
 
-sub setCustom {
-    my ($self, $width, $height, $ratio) = @_;
+    constructor {} {
+        next
+        my initFields_RatioProcessor
+    }
+    
+
+    method setCustom {width height ratio} {
+    }
 }
 
-use java::lang::Object ();
+namespace eval ::RatioProcessor {
+}
 
-1;
 

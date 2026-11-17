@@ -11,74 +11,61 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
-package org::allbinary::graphics::form::item::CommandTextItemArrayFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{visitorInterface} = undef;
+oo::class create ::CommandTextItemArrayFactory {
+    superclass ::JObject
 }
 
+oo::define ::CommandTextItemArrayFactory {
+    method initFields_CommandTextItemArrayFactory {} {
+        my jset list {}
+        my jset visitorInterface {}
+        my jset list [::BasicArrayListD new]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $visitorInterface) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{visitorInterface} = $visitorInterface;
-    return $self;
-}
+    constructor {visitorInterface} {
+        next
+        my initFields_CommandTextItemArrayFactory
+        my jset visitorInterface $visitorInterface
+    }
+    
 
-
-sub getInstance {
-    my ($self, $vector, $backgroundBasicColor, $foregroundBasicColor) = @_;
-        my $vectorUtil = 'org::allbinary::logic::VectorUtil'->getInstance();
-        my $size = $vectorUtil->getSize($vector);
-        $self->{list}->clear();
-        my $textItem = undef;
-        my $priorityLimit = 7;
-        my $displayInfo = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-        my $isLargeEnoughDisplayForBigMenu = ($displayInfo->isPortrait() && $displayInfo->getLastHeight() >= 'org::allbinary::graphics::form::ScreenInfo'->getInstance()->{MEDIUM_WIDTH}) || (!$displayInfo->isPortrait() && $displayInfo->getLastWidth() >= 'org::allbinary::graphics::form::ScreenInfo'->getInstance()->{MEDIUM_WIDTH});
-        if (!$isLargeEnoughDisplayForBigMenu && $size > 3) {
-            $priorityLimit = 3;
+    method getInstance {vector backgroundBasicColor foregroundBasicColor} {
+        set vectorUtil [::VectorUtil::getInstance]
+        set size [$vectorUtil getSize $vector]
+        [my jget list] clear
+        set textItem {}
+        set priorityLimit 7
+        set displayInfo [::DisplayInfoSingleton::getInstance]
+        set isLargeEnoughDisplayForBigMenu [expr {([expr {[$displayInfo isPortrait] && [expr {[$displayInfo getLastHeight] >= [[::ScreenInfo::getInstance] jget MEDIUM_WIDTH]}]}]) || ([expr {[expr {![$displayInfo isPortrait]}] && [expr {[$displayInfo getLastWidth] >= [[::ScreenInfo::getInstance] jget MEDIUM_WIDTH]}]}])}]
+        if {[expr {[expr {!$isLargeEnoughDisplayForBigMenu}] && [expr {$size > 3}]}]} {
+            set priorityLimit 3
         }
-        my $command = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $command = $vectorUtil->elementAt($vector, $index);
-            if ($command->getPriority() < $priorityLimit) {
-                my $aBoolean = $self->{visitorInterface}->visit($command);
-                if ($aBoolean) {
-                    $textItem = 'org::allbinary::graphics::form::item::CommandTextItem'->new($command, $javax::microedition::lcdui::ImageItem::LAYOUT_DEFAULT, 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $backgroundBasicColor, $foregroundBasicColor);
-                    $self->{list}->add($textItem);
+        set command {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set command [$vectorUtil elementAt $vector $index]
+            if {[expr {[$command getPriority] < $priorityLimit}]} {
+                set aBoolean [[my jget visitorInterface] visit $command]
+                if {[$aBoolean booleanValue]} {
+                    set textItem [::CommandTextItem new $command [::ImageItem::staticGet_LAYOUT_DEFAULT] [[::StringUtil::getInstance] jget EMPTY_STRING] $backgroundBasicColor $foregroundBasicColor]
+                    [my jget list] add $textItem
                 }
             }
         }
-        my $textItemArray = [(undef) x ($self->{list}->size())];
-        my $size2 = scalar(@{$textItemArray});
-        for (my $index = 0; $index < $size2; $index++) {
-            $textItemArray->[$index] = $self->{list}->{objectArray}->[$index];
+        set textItemArray [jarray [[my jget list] size] {}]
+        set size2 [$textItemArray length]
+        for {set index 0} {[expr {$index < $size2}]} {jpostincr index 1} {
+            $textItemArray set $index [[[my jget list] jget objectArray] get $index]
         }
-        return $textItemArray;
+        return $textItemArray
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::ImageItem ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::graphics::form::ScreenInfo ();
-use org::allbinary::logic::VectorUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::util::visitor::Visitor ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::graphics::form::item::CommandTextItem ();
+namespace eval ::CommandTextItemArrayFactory {
+}
 
-1;
 

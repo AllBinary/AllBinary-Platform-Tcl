@@ -11,36 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-package org::allbinary::game::midlet::LicenseLevelUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::midlet::LicenseLevelUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::LicenseLevelUtil {
+    superclass ::JObject
 }
 
+oo::define ::LicenseLevelUtil {
+    method initFields_LicenseLevelUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::midlet::LicenseLevelUtil::instance;
+    constructor {} {
+        next
+        my initFields_LicenseLevelUtil
+    }
+    
+    
+
+    method getMaxLevel {maxLevel demoLevel} {
+        return $demoLevel
+    }
 }
 
-
-sub getMaxLevel {
-    my ($self, $maxLevel, $demoLevel) = @_;
-        return $demoLevel;
+namespace eval ::LicenseLevelUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LicenseLevelUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LicenseLevelUtil::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

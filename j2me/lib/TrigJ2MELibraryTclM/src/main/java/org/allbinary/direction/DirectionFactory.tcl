@@ -11,63 +11,83 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.direction
 
-package org::allbinary::direction::DirectionFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::direction::DirectionFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NAME} = "DIRECTION";
-    $self->{LEFT} = 'org::allbinary::direction::Direction'->new('org::allbinary::string::CommonPhoneStrings'->getInstance()->{LEFT}, "WEST", 0, 1);
-    $self->{RIGHT} = 'org::allbinary::direction::Direction'->new('org::allbinary::string::CommonPhoneStrings'->getInstance()->{RIGHT}, "EAST", 1, 0);
-    $self->{DOWN} = 'org::allbinary::direction::Direction'->new('org::allbinary::string::CommonPhoneStrings'->getInstance()->{DOWN}, "SOUTH", 2, 0);
-    $self->{UP} = 'org::allbinary::direction::Direction'->new('org::allbinary::string::CommonPhoneStrings'->getInstance()->{UP}, "NORTH", 3, 0);
-    $self->{UP_LEFT} = undef;
-    $self->{UP_RIGHT} = undef;
-    $self->{DOWN_LEFT} = undef;
-    $self->{DOWN_RIGHT} = undef;
-    $self->{NOT_BORDERED_WITH} = 'org::allbinary::direction::Direction'->new("NOT_BORDERED_WITH", "NOT_BORDERED_WITH", 8, 0);
-    $self->{NO_DIRECTION} = 'org::allbinary::direction::Direction'->new("NO_DIRECTION", "NO_DIRECTION", 9, 0);
-    $self->{TOP} = 'org::allbinary::direction::Direction'->new("TOP", "TOP", 10, 0);
-    $self->{BOTTOM} = 'org::allbinary::direction::Direction'->new("BOTTOM", "BOTTOM", 11, 0);
-    $self->{ALL_DIRECTION} = 'org::allbinary::direction::Direction'->new("ALL_DIRECTION", "ALL_DIRECTION", 12, 0);
+oo::class create ::DirectionFactory {
+    superclass ::JObject
 }
 
+oo::define ::DirectionFactory {
+    method initFields_DirectionFactory {} {
+        my jset NAME {}
+        my jset LEFT {}
+        my jset RIGHT {}
+        my jset DOWN {}
+        my jset UP {}
+        my jset UP_LEFT {}
+        my jset UP_RIGHT {}
+        my jset DOWN_LEFT {}
+        my jset DOWN_RIGHT {}
+        my jset NOT_BORDERED_WITH {}
+        my jset NO_DIRECTION {}
+        my jset TOP {}
+        my jset BOTTOM {}
+        my jset ALL_DIRECTION {}
+        my jset NAME "DIRECTION"
+        my jset LEFT [::Direction new [[::CommonPhoneStrings::getInstance] jget LEFT] "WEST" 0 1]
+        my jset RIGHT [::Direction new [[::CommonPhoneStrings::getInstance] jget RIGHT] "EAST" 1 0]
+        my jset DOWN [::Direction new [[::CommonPhoneStrings::getInstance] jget DOWN] "SOUTH" 2 0]
+        my jset UP [::Direction new [[::CommonPhoneStrings::getInstance] jget UP] "NORTH" 3 0]
+        
+        
+        
+        
+        my jset NOT_BORDERED_WITH [::Direction new "NOT_BORDERED_WITH" "NOT_BORDERED_WITH" 8 0]
+        my jset NO_DIRECTION [::Direction new "NO_DIRECTION" "NO_DIRECTION" 9 0]
+        my jset TOP [::Direction new "TOP" "TOP" 10 0]
+        my jset BOTTOM [::Direction new "BOTTOM" "BOTTOM" 11 0]
+        my jset ALL_DIRECTION [::Direction new "ALL_DIRECTION" "ALL_DIRECTION" 12 0]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::direction::DirectionFactory::instance;
+    constructor {} {
+        next
+        my initFields_DirectionFactory
+        set stringBuffer [::StringMaker new]
+        set commonSeps [::CommonSeps::getInstance]
+        my jset UP_LEFT [::Direction new "UP LEFT" [[[[$stringBuffer append [[my jget UP] getOtherName]] append [$commonSeps jget SPACE]] append [[my jget LEFT] getOtherName]] toString] 4 0]
+        $stringBuffer delete 0 [$stringBuffer length]
+        my jset UP_RIGHT [::Direction new "UP RIGHT" [[[[$stringBuffer append [[my jget UP] getOtherName]] append [$commonSeps jget SPACE]] append [[my jget RIGHT] getOtherName]] toString] 5 0]
+        $stringBuffer delete 0 [$stringBuffer length]
+        my jset DOWN_LEFT [::Direction new "DOWN LEFT" [[[[$stringBuffer append [[my jget DOWN] getOtherName]] append [$commonSeps jget SPACE]] append [[my jget LEFT] getOtherName]] toString] 6 0]
+        $stringBuffer delete 0 [$stringBuffer length]
+        my jset DOWN_RIGHT [::Direction new "DOWN RIGHT" [[[[$stringBuffer append [[my jget DOWN] getOtherName]] append [$commonSeps jget SPACE]] append [[my jget RIGHT] getOtherName]] toString] 7 0]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $commonSeps = 'org::allbinary::string::CommonSeps'->getInstance();
-        $self->{UP_LEFT} = 'org::allbinary::direction::Direction'->new("UP LEFT", $stringBuffer->append($self->{UP}->getOtherName())->append($commonSeps->{SPACE})->append($self->{LEFT}->getOtherName())->toString(), 4, 0);
-        $stringBuffer->delete(0, $stringBuffer->length());
-        $self->{UP_RIGHT} = 'org::allbinary::direction::Direction'->new("UP RIGHT", $stringBuffer->append($self->{UP}->getOtherName())->append($commonSeps->{SPACE})->append($self->{RIGHT}->getOtherName())->toString(), 5, 0);
-        $stringBuffer->delete(0, $stringBuffer->length());
-        $self->{DOWN_LEFT} = 'org::allbinary::direction::Direction'->new("DOWN LEFT", $stringBuffer->append($self->{DOWN}->getOtherName())->append($commonSeps->{SPACE})->append($self->{LEFT}->getOtherName())->toString(), 6, 0);
-        $stringBuffer->delete(0, $stringBuffer->length());
-        $self->{DOWN_RIGHT} = 'org::allbinary::direction::Direction'->new("DOWN RIGHT", $stringBuffer->append($self->{DOWN}->getOtherName())->append($commonSeps->{SPACE})->append($self->{RIGHT}->getOtherName())->toString(), 7, 0);
-    return $self;
+namespace eval ::DirectionFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::DirectionFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::DirectionFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonPhoneStrings ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::direction::Direction ();
-
-1;
 

@@ -11,42 +11,54 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
-package org::allbinary::image::opengles::OpenGLESImageTranslate;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::image::opengles::OpenGLESImageTranslate'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::OpenGLESImageTranslate {
+    superclass ::JObject
 }
 
+oo::define ::OpenGLESImageTranslate {
+    method initFields_OpenGLESImageTranslate {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::image::opengles::OpenGLESImageTranslate::instance;
+    constructor {} {
+        next
+        my initFields_OpenGLESImageTranslate
+    }
+    
+    
+
+    method translate {gl openGLESImage x y} {
+        [$openGLESImage jget imageProcessor] translate $gl $x $y
+    }
+    
+
+    method translate2 {gl openGLESImage} {
+    }
 }
 
-
-sub translate {
-    my ($self, $gl, $openGLESImage, $x, $y) = @_;
-        $openGLESImage->{imageProcessor}->translate($gl, $x, $y);
+namespace eval ::OpenGLESImageTranslate {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::OpenGLESImageTranslate new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::OpenGLESImageTranslate::staticGet_instance]
+    }
 }
 
-
-sub translate2 {
-    my ($self, $gl, $openGLESImage) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::khronos::opengles::GL10 ();
-
-1;
 

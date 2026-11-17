@@ -11,41 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-package org::allbinary::game::midlet::DemoGameMidletStateFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $STATE, 'java::lang::LazyStatic', sub { 'org::allbinary::game::midlet::DemoGameMidletStateFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NONE} = 'org::allbinary::game::midlet::DemoGameMidletState'->new();
-    $self->{START_DEMO} = 'org::allbinary::game::midlet::DemoGameMidletState'->new();
-    $self->{START_GAME} = 'org::allbinary::game::midlet::DemoGameMidletState'->new();
-    $self->{START_INPUT_MAPPING} = 'org::allbinary::game::midlet::DemoGameMidletState'->new();
+oo::class create ::DemoGameMidletStateFactory {
+    superclass ::JObject
 }
 
+oo::define ::DemoGameMidletStateFactory {
+    method initFields_DemoGameMidletStateFactory {} {
+        my jset NONE {}
+        my jset START_DEMO {}
+        my jset START_GAME {}
+        my jset START_INPUT_MAPPING {}
+        my jset NONE [::DemoGameMidletState new]
+        my jset START_DEMO [::DemoGameMidletState new]
+        my jset START_GAME [::DemoGameMidletState new]
+        my jset START_INPUT_MAPPING [::DemoGameMidletState new]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_DemoGameMidletStateFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::midlet::DemoGameMidletStateFactory::STATE;
+namespace eval ::DemoGameMidletStateFactory {
+    variable STATEValue {}
+    variable STATESet 0
+    proc staticGet_STATE {} {
+        variable STATEValue
+        variable STATESet
+        if {!$STATESet} {
+            set STATESet 1
+            set STATEValue [::DemoGameMidletStateFactory new]
+        }
+        return $STATEValue
+    }
+    proc staticSet_STATE {value} {
+        variable STATEValue
+        variable STATESet
+        set STATESet 1
+        set STATEValue $value
+    }
+    proc getInstance {} {
+        return [::DemoGameMidletStateFactory::staticGet_STATE]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::midlet::DemoGameMidletState ();
-
-1;
 

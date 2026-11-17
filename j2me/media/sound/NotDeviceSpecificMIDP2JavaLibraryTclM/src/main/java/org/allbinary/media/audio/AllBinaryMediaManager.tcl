@@ -11,102 +11,87 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
 #NotDeviceSpecificMIDP2JavaLibrary
-package org::allbinary::media::audio::AllBinaryMediaManager;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $THIS = "AllBinaryMediaManagerNoMIPD2";
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AllBinaryMediaManager {
+    superclass ::JObject
 }
 
+oo::define ::AllBinaryMediaManager {
+    method initFields_AllBinaryMediaManager {} {
+        return
+    }
+    
 
-sub isMuted {
-    my ($class) = @_;
-        return 0;
+    constructor {} {
+        next
+        my initFields_AllBinaryMediaManager
+    }
+    
+    
+    
+    
+    
+    
+    
 }
 
-
-sub setMuted {
-    my ($class, $aMuted) = @_;
-}
-
-
-sub update {
-    my ($class) = @_;
-        return 1;
-}
-
-
-# throws Exception
-sub init {
-    my ($class, $soundsFactoryInterface) = @_;
-        my $logUtil = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-        my $commonString = 'org::allbinary::string::CommonStrings'->getInstance();
-        $logUtil->putF($commonString->{START}, $org::allbinary::media::audio::AllBinaryMediaManager::THIS, $commonString->{INIT});
-        'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance()->addNormalPortion(50, "Media Manager");
-        'org::allbinary::media::audio::Sounds'->new($soundsFactoryInterface)->init();
-}
-
-
-# throws Exception
-sub shutdown {
-    my ($class, $soundsFactoryInterface) = @_;
-        'org::allbinary::media::audio::Sounds'->new($soundsFactoryInterface)->stopAll();
-        'org::allbinary::media::audio::Sounds'->new($soundsFactoryInterface)->closeAll();
-        'org::allbinary::TsUtil'->getInstance()->gc();
-}
-
-
-# throws Exception
-sub createPlayer {
-    my ($class, $resource) = @_;
-        if ('org::allbinary::game::configuration::feature::Features'->getInstance()->isFeature('org::allbinary::game::configuration::feature::GameFeatureFactory'->getInstance()->{SOUND})) {
-            if ('org::allbinary::TsUtil'->getInstance()->compareTo($resource, $javax::microedition::media::Manager::TONE_DEVICE_LOCATOR) == 0) {
-                return 'javax::microedition::media::Manager'->createPlayer($resource);
+namespace eval ::AllBinaryMediaManager {
+    variable THISValue {}
+    variable THISSet 0
+    proc staticGet_THIS {} {
+        variable THISValue
+        variable THISSet
+        if {!$THISSet} {
+            set THISSet 1
+            set THISValue "AllBinaryMediaManagerNoMIPD2"
+        }
+        return $THISValue
+    }
+    proc staticSet_THIS {value} {
+        variable THISValue
+        variable THISSet
+        set THISSet 1
+        set THISValue $value
+    }
+    proc isMuted {} {
+        return false
+    }
+    proc setMuted {aMuted} {
+    }
+    proc update {} {
+        return true
+    }
+    proc init {soundsFactoryInterface} {
+        set logUtil [::LogUtil::getInstance]
+        set commonString [::CommonStrings::getInstance]
+        $logUtil putF [$commonString jget START] [::AllBinaryMediaManager::staticGet_THIS] [$commonString jget INIT]
+        [::ProgressCanvasFactory::getInstance] addNormalPortion 50 "Media Manager"
+        [::Sounds new $soundsFactoryInterface] init
+    }
+    proc shutdown {soundsFactoryInterface} {
+        [::Sounds new $soundsFactoryInterface] stopAll
+        [::Sounds new $soundsFactoryInterface] closeAll
+        [::TsUtil::getInstance] gc
+    }
+    proc createPlayer {resource} {
+        if {[[::Features::getInstance] isFeature [[::GameFeatureFactory::getInstance] jget SOUND]]} {
+            if {[expr {[[::TsUtil::getInstance] compareTo $resource [::Manager::staticGet_TONE_DEVICE_LOCATOR]] == 0}]} {
+                return [::Manager::createPlayer $resource]
             } else {
-                my $inputStream = 'org::allbinary::data::resource::ResourceUtil'->getInstance()->getResourceAsStream($resource);
-                return 'org::allbinary::MIDPUtil'->getInstance()->createPlayerFromInputStream($inputStream, 'org::allbinary::audio::AudioContentTypeDataFactory'->getInstance()->{MIME_AUDIO_WAV}->getName());
+                set inputStream [[::ResourceUtil::getInstance] getResourceAsStream $resource]
+                return [[::MIDPUtil::getInstance] createPlayerFromInputStream $inputStream [[[::AudioContentTypeDataFactory::getInstance] jget MIME_AUDIO_WAV] getName]]
             }
         } else {
-            return $org::allbinary::media::audio::NoPlayer::NO_PLAYER;
+            return [::NoPlayer::staticGet_NO_PLAYER]
         }
+    }
+    proc playTone {frequency time volume} {
+        if {[[::Features::getInstance] isFeature [[::GameFeatureFactory::getInstance] jget SOUND]]} {
+            ::Manager::playTone $frequency $time $volume
+        }
+    }
 }
 
-
-# throws MediaException
-sub playTone {
-    my ($class, $frequency, $time, $volume) = @_;
-        if ('org::allbinary::game::configuration::feature::Features'->getInstance()->isFeature('org::allbinary::game::configuration::feature::GameFeatureFactory'->getInstance()->{SOUND})) {
-            'javax::microedition::media::Manager'->playTone($frequency, $time, $volume);
-        }
-}
-
-use java::lang::Object ();
-# use java::io::InputStream ();
-use javax::microedition::media::Manager ();
-use javax::microedition::media::MediaException ();
-use javax::microedition::media::Player ();
-use org::allbinary::MIDPUtil ();
-use org::allbinary::TsUtil ();
-use org::allbinary::audio::AudioContentTypeDataFactory ();
-use org::allbinary::data::resource::ResourceUtil ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::GameFeatureFactory ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::media::audio::Sounds ();
-use org::allbinary::media::audio::NoPlayer ();
-
-1;
 

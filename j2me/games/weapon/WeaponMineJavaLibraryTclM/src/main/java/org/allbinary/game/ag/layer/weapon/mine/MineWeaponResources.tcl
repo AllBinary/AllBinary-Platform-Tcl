@@ -11,52 +11,63 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.weapon.mine
 
-package org::allbinary::game::ag::layer::weapon::mine::MineWeaponResources;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::resources::BasicGameResources';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{DROP_TEXT_RESOURCE} = "/mine_drop_text_20_by_20.png";
-    $self->{DROP_RESOURCE} = "/mine_drop_20_by_20.png";
-    $self->{DROP_ICON_RESOURCE} = "/mine_drop_icon_20_by_20.png";
+oo::class create ::MineWeaponResources {
+    superclass ::BasicGameResources
 }
 
+oo::define ::MineWeaponResources {
+    method initFields_MineWeaponResources {} {
+        my jset DROP_TEXT_RESOURCE {}
+        my jset DROP_RESOURCE {}
+        my jset DROP_ICON_RESOURCE {}
+        my jset DROP_TEXT_RESOURCE "/mine_drop_text_20_by_20.png"
+        my jset DROP_RESOURCE "/mine_drop_20_by_20.png"
+        my jset DROP_ICON_RESOURCE "/mine_drop_icon_20_by_20.png"
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::ag::layer::weapon::mine::MineWeaponResources::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::ag::layer::weapon::mine::MineWeaponResources::instance = 'org::allbinary::game::ag::layer::weapon::mine::MineWeaponResources'->new();
+    constructor {} {
+        next
+        my initFields_MineWeaponResources
+        set ROOT "/mine"
+        set SMALL "_20_by_20.png"
+        set MEDIUM $SMALL
+        set SIZE_FOUR $SMALL
+        set SIZE_FIVE $SMALL
+        set SIZE_SIX $SMALL
+        set SIZE [jarrayfrom [list $SMALL $MEDIUM $SIZE_FOUR $SIZE_FIVE $SIZE_SIX]]
+        next $ROOT $SIZE
+    }
+}
+
+namespace eval ::MineWeaponResources {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::game::ag::layer::weapon::mine::MineWeaponResources::instance;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::MineWeaponResources::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::MineWeaponResources::staticSet_instance [::MineWeaponResources new]
+        }
+        return [::MineWeaponResources::staticGet_instance]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        my $ROOT = "/mine";
-        my $SMALL = "_20_by_20.png";
-        my $MEDIUM = $SMALL;
-        my $SIZE_FOUR = $SMALL;
-        my $SIZE_FIVE = $SMALL;
-        my $SIZE_SIX = $SMALL;
-        my $SIZE = [$SMALL, $MEDIUM, $SIZE_FOUR, $SIZE_FIVE, $SIZE_SIX];
-        $self->SUPER::init($ROOT, $SIZE);
-    return $self;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::layer::resources::BasicGameResources ();
-use org::allbinary::logic::NullUtil ();
-
-1;
 

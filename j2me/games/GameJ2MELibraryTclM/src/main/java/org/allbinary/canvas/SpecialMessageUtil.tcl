@@ -11,53 +11,61 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.canvas
 
-package org::allbinary::canvas::SpecialMessageUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::canvas::SpecialMessageUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::SpecialMessageUtil {
+    superclass ::JObject
 }
 
+oo::define ::SpecialMessageUtil {
+    method initFields_SpecialMessageUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::canvas::SpecialMessageUtil::SINGLETON;
-}
+    constructor {} {
+        next
+        my initFields_SpecialMessageUtil
+    }
+    
+    
 
-
-sub get {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append('org::allbinary::system::Memory'->getInfo());
-        $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
-        $stringBuffer->append('org::allbinary::canvas::GameStatisticsFactory'->getInstance()->toString());
-        $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
-        $stringBuffer->append(" Option: ");
-        if ('org::allbinary::game::configuration::feature::Features'->getInstance()->isDefault('org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance()->{OPENGL_AUTO_SELECT})) {
-            $stringBuffer->append('org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance()->{OPENGL_AUTO_SELECT}->getName());
+    method get {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append [::Memory::getInfo]
+        $stringBuffer append [[::CommonSeps::getInstance] jget SPACE]
+        $stringBuffer append [[::GameStatisticsFactory::getInstance] toString]
+        $stringBuffer append [[::CommonSeps::getInstance] jget SPACE]
+        $stringBuffer append " Option: "
+        if {[[::Features::getInstance] isDefault [[::OpenGLFeatureFactory::getInstance] jget OPENGL_AUTO_SELECT]]} {
+            $stringBuffer append [[[::OpenGLFeatureFactory::getInstance] jget OPENGL_AUTO_SELECT] getName]
         } else {
-            $stringBuffer->append('org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance()->{OPENGL_MINIMUM}->getName());
+            $stringBuffer append [[[::OpenGLFeatureFactory::getInstance] jget OPENGL_MINIMUM] getName]
         }
-        return $stringBuffer->toString();
+        return [$stringBuffer toString]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::graphics::opengles::OpenGLFeatureFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::system::Memory ();
-use org::allbinary::canvas::GameStatisticsFactory ();
+namespace eval ::SpecialMessageUtil {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::SpecialMessageUtil new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::SpecialMessageUtil::staticGet_SINGLETON]
+    }
+}
 
-1;
 

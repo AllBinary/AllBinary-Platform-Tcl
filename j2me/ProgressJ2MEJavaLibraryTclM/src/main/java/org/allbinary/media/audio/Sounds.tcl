@@ -11,112 +11,98 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-package org::allbinary::media::audio::Sounds;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{soundStrings} = 'org::allbinary::media::audio::SoundStrings'->getInstance();
-    $self->{soundsFactoryInterface} = undef;
+oo::class create ::Sounds {
+    superclass ::JObject
 }
 
+oo::define ::Sounds {
+    method initFields_Sounds {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset soundStrings {}
+        my jset soundsFactoryInterface {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset soundStrings [::SoundStrings::getInstance]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $soundsFactoryInterface) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{soundsFactoryInterface} = $soundsFactoryInterface;
-    return $self;
-}
+    constructor {soundsFactoryInterface} {
+        next
+        my initFields_Sounds
+        my jset soundsFactoryInterface $soundsFactoryInterface
+    }
+    
 
-
-# throws Exception
-sub init {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{INIT});
-        my $commonLabels = 'org::allbinary::string::CommonLabels'->getInstance();
-        my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-        $self->{soundsFactoryInterface}->init();
-        my $soundInterfaceArray = $self->{soundsFactoryInterface}->getSoundInterfaceArray();
-        my $smallIntegerSingletonFactory = 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance();
-        my $indexInteger = undef;
-        my $indexString = undef;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        for (my $i = 0; $i < scalar(@{$soundInterfaceArray}); $i++) {
-            my $soundInterface = $soundInterfaceArray->[$i];
-            if (defined($soundInterface)) {
-                $indexInteger = $smallIntegerSingletonFactory->getAt($i);
-                $indexString = ("" . ($indexInteger));
-                $stringBuffer->delete(0, $stringBuffer->length());
-                $stringBuffer->append($commonLabels->{INDEX_LABEL});
-                $stringBuffer->append($indexString);
-                $stringBuffer->append($self->{soundStrings}->{SOUND});
-                $stringBuffer->append(ref($soundInterface));
-                $self->{logUtil}->putF($stringBuffer->toString(), $self, $self->{commonStrings}->{INIT});
-                $soundInterface->init();
-                $progressCanvas->addNormalPortion(100, 'org::allbinary::logic::string::StringMaker'->new()->append($self->{soundStrings}->{INIT_SOUND})->append($indexString)->toString());
+    method init {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget INIT]
+        set commonLabels [::CommonLabels::getInstance]
+        set progressCanvas [::ProgressCanvasFactory::getInstance]
+        [my jget soundsFactoryInterface] init
+        set soundInterfaceArray [[my jget soundsFactoryInterface] getSoundInterfaceArray]
+        set smallIntegerSingletonFactory [::SmallIntegerSingletonFactory::getInstance]
+        set indexInteger {}
+        set indexString {}
+        set stringBuffer [::StringMaker new]
+        for {set i 0} {[expr {$i < [$soundInterfaceArray length]}]} {jpostincr i 1} {
+            set soundInterface [$soundInterfaceArray get $i]
+            if {[expr {$soundInterface ne {}}]} {
+                set indexInteger [$smallIntegerSingletonFactory getAt $i]
+                set indexString [$indexInteger toString]
+                $stringBuffer delete 0 [$stringBuffer length]
+                $stringBuffer append [$commonLabels jget INDEX_LABEL]
+                $stringBuffer append $indexString
+                $stringBuffer append [[my jget soundStrings] jget SOUND]
+                $stringBuffer append [jclassname $soundInterface]
+                [my jget logUtil] putF [$stringBuffer toString] [self] [[my jget commonStrings] jget INIT]
+                $soundInterface init
+                $progressCanvas addNormalPortion 100 [[[[::StringMaker new] append [[my jget soundStrings] jget INIT_SOUND]] append $indexString] toString]
             }
         }
-        $self->{soundsFactoryInterface}->setInitialized(1);
-        $self->{logUtil}->putF($self->{commonStrings}->{END}, $self, $self->{commonStrings}->{INIT});
-}
+        [my jget soundsFactoryInterface] setInitialized true
+        [my jget logUtil] putF [[my jget commonStrings] jget END] [self] [[my jget commonStrings] jget INIT]
+    }
+    
 
-
-# throws Exception
-sub stopAll {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{soundStrings}->{STOP_ALL});
-        my $soundInterfaceArray = $self->{soundsFactoryInterface}->getSoundInterfaceArray();
-        my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-        my $player = undef;
-        for (my $index = 0; $index < scalar(@{$soundInterfaceArray}); $index++) {
-            if (defined($soundInterfaceArray->[$index])) {
-                $player = $soundInterfaceArray->[$index]->getPlayerP();
-                if (defined($player)) {
-                    $player->stop();
-                    $progressCanvas->addPortion(100, $self->{soundStrings}->{STOPPING_SOUND}, $index);
+    method stopAll {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget soundStrings] jget STOP_ALL]
+        set soundInterfaceArray [[my jget soundsFactoryInterface] getSoundInterfaceArray]
+        set progressCanvas [::ProgressCanvasFactory::getInstance]
+        set player {}
+        for {set index 0} {[expr {$index < [$soundInterfaceArray length]}]} {jpostincr index 1} {
+            if {[expr {[$soundInterfaceArray get $index] ne {}}]} {
+                set player [[$soundInterfaceArray get $index] getPlayerP]
+                if {[expr {$player ne {}}]} {
+                    $player stop
+                    $progressCanvas addPortion 100 [[my jget soundStrings] jget STOPPING_SOUND] $index
                 }
             }
         }
-}
+    }
+    
 
-
-# throws Exception
-sub closeAll {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{soundStrings}->{CLOSE_ALL});
-        my $soundInterfaceArray = $self->{soundsFactoryInterface}->getSoundInterfaceArray();
-        my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-        my $player = undef;
-        for (my $index = 0; $index < scalar(@{$soundInterfaceArray}); $index++) {
-            if (defined($soundInterfaceArray->[$index])) {
-                $player = $soundInterfaceArray->[$index]->getPlayerP();
-                if (defined($player)) {
-                    $player->close();
-                    $progressCanvas->addPortion(100, $self->{soundStrings}->{CLOSING_SOUND}, $index);
+    method closeAll {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget soundStrings] jget CLOSE_ALL]
+        set soundInterfaceArray [[my jget soundsFactoryInterface] getSoundInterfaceArray]
+        set progressCanvas [::ProgressCanvasFactory::getInstance]
+        set player {}
+        for {set index 0} {[expr {$index < [$soundInterfaceArray length]}]} {jpostincr index 1} {
+            if {[expr {[$soundInterfaceArray get $index] ne {}}]} {
+                set player [[$soundInterfaceArray get $index] getPlayerP]
+                if {[expr {$player ne {}}]} {
+                    $player close
+                    $progressCanvas addPortion 100 [[my jget soundStrings] jget CLOSING_SOUND] $index
                 }
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::media::Player ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvas ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::media::audio::SoundStrings ();
+namespace eval ::Sounds {
+}
 
-1;
 

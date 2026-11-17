@@ -11,45 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.midlet
 
-package org::allbinary::midlet::MidletExitProcessorFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::midlet::MidletExitProcessorFactory'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::MidletExitProcessorFactory {
+    superclass ::JObject
 }
 
+oo::define ::MidletExitProcessorFactory {
+    method initFields_MidletExitProcessorFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::midlet::MidletExitProcessorFactory::instance;
-}
+    constructor {} {
+        next
+        my initFields_MidletExitProcessorFactory
+    }
+    
+    
 
-
-sub getExitInstance {
-    my ($self, $midlet) = @_;
-        if ('org::allbinary::AppletUtil'->isAppletLoader($midlet) || 'org::allbinary::J2MEUtil'->isJ2ME()) {
-            return 'org::allbinary::canvas::Processor'->getInstance();
+    method getExitInstance {midlet} {
+        if {[expr {[::AppletUtil::isAppletLoader $midlet] || [::J2MEUtil::isJ2ME]}]} {
+            return [::Processor::getInstance]
         } else {
-            return 'org::allbinary::midlet::MidletExitProcessor'->new($midlet);
+            return [::MidletExitProcessor new $midlet]
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::midlet::MIDlet ();
-use org::allbinary::AppletUtil ();
-use org::allbinary::J2MEUtil ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::midlet::MidletExitProcessor ();
+namespace eval ::MidletExitProcessorFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::MidletExitProcessorFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::MidletExitProcessorFactory::staticGet_instance]
+    }
+}
 
-1;
 

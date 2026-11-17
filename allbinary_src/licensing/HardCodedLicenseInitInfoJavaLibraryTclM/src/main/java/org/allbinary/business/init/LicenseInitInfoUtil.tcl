@@ -11,69 +11,75 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.business.init
 
-package org::allbinary::business::init::LicenseInitInfoUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::business::init::LicenseInitInfoUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{INITFILENAME} = "licenseinitdata.dat";
-    $self->{ABOUT} = "about";
-    $self->{PRIVACY_POLICY} = "privacy_policy";
-    $self->{OFFICIAL_ALLBINARY_SERVICES_SERVER} = "https://services.allbinary.com/LicServ/serverssl.php";
+oo::class create ::LicenseInitInfoUtil {
+    superclass ::JObject
 }
 
+oo::define ::LicenseInitInfoUtil {
+    method initFields_LicenseInitInfoUtil {} {
+        my jset INITFILENAME {}
+        my jset ABOUT {}
+        my jset PRIVACY_POLICY {}
+        my jset OFFICIAL_ALLBINARY_SERVICES_SERVER {}
+        my jset INITFILENAME "licenseinitdata.dat"
+        my jset ABOUT "about"
+        my jset PRIVACY_POLICY "privacy_policy"
+        my jset OFFICIAL_ALLBINARY_SERVICES_SERVER "https://services.allbinary.com/LicServ/serverssl.php"
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::business::init::LicenseInitInfoUtil::instance;
+    method setFilePath {filePath} {
+    }
+    
+
+    constructor {} {
+        next
+        my initFields_LicenseInitInfoUtil
+    }
+    
+
+    method write {initData} {
+    }
+    
+
+    method read {} {
+        return [my readAgain 0]
+    }
+    
+
+    method readAgain {initializeCounter} {
+        set licenseInitInfo [::LicenseInitInfo new]
+        $licenseInitInfo clearServers
+        $licenseInitInfo addServer [my jget OFFICIAL_ALLBINARY_SERVICES_SERVER]
+        return $licenseInitInfo
+    }
 }
 
-
-sub setFilePath {
-    my ($self, $filePath) = @_;
+namespace eval ::LicenseInitInfoUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LicenseInitInfoUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LicenseInitInfoUtil::staticGet_instance]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-# throws Exception
-sub write {
-    my ($self, $initData) = @_;
-}
-
-
-# throws Exception
-sub read {
-    my ($self) = @_;
-        return $self->readAgain(0);
-}
-
-
-# throws Exception
-sub readAgain {
-    my ($self, $initializeCounter) = @_;
-        my $licenseInitInfo = 'org::allbinary::business::init::LicenseInitInfo'->new();
-        $licenseInitInfo->clearServers();
-        $licenseInitInfo->addServer($self->{OFFICIAL_ALLBINARY_SERVICES_SERVER});
-        return $licenseInitInfo;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::business::init::LicenseInitInfo ();
-
-1;
 

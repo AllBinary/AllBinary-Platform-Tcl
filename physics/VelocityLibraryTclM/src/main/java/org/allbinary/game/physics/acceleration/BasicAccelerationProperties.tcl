@@ -11,56 +11,51 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.physics.acceleration
 
-package org::allbinary::game::physics::acceleration::BasicAccelerationProperties;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{forward} = 0;
-    $self->{reverse} = 0;
+oo::class create ::BasicAccelerationProperties {
+    superclass ::JObject
 }
 
+oo::define ::BasicAccelerationProperties {
+    method initFields_BasicAccelerationProperties {} {
+        my jset forward 0
+        my jset reverse 0
+        my jset forward 0
+        my jset reverse 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $forward, $reverse) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->setForward($forward);
-        $self->setReverse($reverse);
-    return $self;
+    constructor {forward reverse} {
+        next
+        my initFields_BasicAccelerationProperties
+        my setForward $forward
+        my setReverse $reverse
+    }
+    
+
+    method setReverse {reverse} {
+        my jset reverse $reverse
+    }
+    
+
+    method getReverse {} {
+        return [my jget reverse]
+    }
+    
+
+    method setForward {forward} {
+        my jset forward $forward
+    }
+    
+
+    method getForward {} {
+        return [my jget forward]
+    }
 }
 
-
-sub setReverse {
-    my ($self, $reverse) = @_;
-        $self->{reverse} = $reverse;
+namespace eval ::BasicAccelerationProperties {
 }
 
-
-sub getReverse {
-    my ($self) = @_;
-        return $self->{reverse};
-}
-
-
-sub setForward {
-    my ($self, $forward) = @_;
-        $self->{forward} = $forward;
-}
-
-
-sub getForward {
-    my ($self) = @_;
-        return $self->{forward};
-}
-
-use java::lang::Object ();
-
-1;
 

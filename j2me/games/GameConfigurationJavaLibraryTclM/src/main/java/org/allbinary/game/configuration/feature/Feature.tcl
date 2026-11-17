@@ -11,61 +11,65 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
-package org::allbinary::game::configuration::feature::Feature;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $hashtable, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{name} = undef;
+oo::class create ::Feature {
+    superclass ::JObject
 }
 
+oo::define ::Feature {
+    method initFields_Feature {} {
+        my jset name {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $name) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{name} = $name;
-        'org::allbinary::game::configuration::feature::Feature'->add($name, $self);
-        'org::allbinary::game::configuration::event::ChangedGameFeatureListener'->getInstance()->add($self);
-    return $self;
+    constructor {name} {
+        next
+        my initFields_Feature
+        my jset name $name
+        ::Feature::add $name [self]
+        [::ChangedGameFeatureListener::getInstance] add [self]
+    }
+    
+    
+    
+
+    method toString {} {
+        return [my getName]
+    }
+    
+
+    method getName {} {
+        return [my jget name]
+    }
 }
 
-
-sub getInstance {
-    my ($class, $name) = @_;
-        return $org::allbinary::game::configuration::feature::Feature::hashtable->get($name);
+namespace eval ::Feature {
+    variable hashtableValue {}
+    variable hashtableSet 0
+    proc staticGet_hashtable {} {
+        variable hashtableValue
+        variable hashtableSet
+        if {!$hashtableSet} {
+            set hashtableSet 1
+            set hashtableValue [[::StdUtil::getInstance] createHashtable]
+        }
+        return $hashtableValue
+    }
+    proc staticSet_hashtable {value} {
+        variable hashtableValue
+        variable hashtableSet
+        set hashtableSet 1
+        set hashtableValue $value
+    }
+    proc getInstance {name} {
+        return [[::Feature::staticGet_hashtable] get $name]
+    }
+    proc add {name gameFeature} {
+        [::Feature::staticGet_hashtable] put $name $gameFeature
+    }
 }
 
-
-sub add {
-    my ($class, $name, $gameFeature) = @_;
-        $org::allbinary::game::configuration::feature::Feature::hashtable->put($name, $gameFeature);
-}
-
-
-sub toString {
-    my ($self) = @_;
-        return $self->getName();
-}
-
-
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::configuration::event::ChangedGameFeatureListener ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::util::ABHashtable ();
-
-1;
 

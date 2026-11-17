@@ -11,27 +11,25 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
-package org::allbinary::graphics::opengles::shader::PlatformShaderComposite;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::opengles::shader::ShaderComposite';
-
-
-
-sub new {
-    my ($class, $requiresOpenGLVersion, $shaderArray, $compositeShaderUpdater, $shaderInitializer, $modelViewProjection, $colorOpenGLProcessor, $vertexOpenGLProcessor) = @_;
-    my $self = $class->SUPER::new($requiresOpenGLVersion, $shaderArray, $compositeShaderUpdater, $shaderInitializer, $modelViewProjection, $colorOpenGLProcessor, $vertexOpenGLProcessor, 'org::allbinary::graphics::opengles::NullOpenGLProcessorFactory'->getInstance());
-        # super(...) made $self above
-    return $self;
+oo::class create ::PlatformShaderComposite {
+    superclass ::ShaderComposite
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::opengles::NullOpenGLProcessorFactory ();
-use org::allbinary::graphics::opengles::OpenGLProcessor ();
-use org::allbinary::graphics::opengles::shader::ShaderComposite ();
+oo::define ::PlatformShaderComposite {
+    method initFields_PlatformShaderComposite {} {
+        return
+    }
+    
 
-1;
+    constructor {requiresOpenGLVersion shaderArray compositeShaderUpdater shaderInitializer modelViewProjection colorOpenGLProcessor vertexOpenGLProcessor} {
+        next $requiresOpenGLVersion $shaderArray $compositeShaderUpdater $shaderInitializer $modelViewProjection $colorOpenGLProcessor $vertexOpenGLProcessor [::NullOpenGLProcessorFactory::getInstance]
+        my initFields_PlatformShaderComposite
+    }
+}
+
+namespace eval ::PlatformShaderComposite {
+}
+
 

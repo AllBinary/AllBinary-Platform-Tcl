@@ -11,39 +11,50 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::ItemIndexPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::form::ItemIndexPaintable'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ItemIndexPaintable {
+    superclass ::JObject
 }
 
+oo::define ::ItemIndexPaintable {
+    method initFields_ItemIndexPaintable {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::form::ItemIndexPaintable::instance;
+    constructor {} {
+        next
+        my initFields_ItemIndexPaintable
+    }
+    
+    
+
+    method paint {graphics index item dx dy} {
+        return 0
+    }
 }
 
-
-# throws Exception
-sub paint {
-    my ($self, $graphics, $index, $item, $dx, $dy) = @_;
-        return 0;
+namespace eval ::ItemIndexPaintable {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ItemIndexPaintable new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ItemIndexPaintable::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
-
-1;
 

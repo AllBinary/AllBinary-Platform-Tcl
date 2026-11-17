@@ -11,25 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.drop
 
-# Java interface
-package org::allbinary::game::layer::drop::DropLayerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::LayerInterface';
-
-
-
-# throws Exception
-sub getDroppedLayer {
-    my ($self) = @_;
-    die "abstract method getDroppedLayer";
+oo::class create ::DropLayerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::game::layer::pickup::PickedUpLayerInterface ();
-use org::allbinary::layer::LayerInterface ();
+oo::define ::DropLayerInterface {
+    method initFields_DropLayerInterface {} {
+        return
+    }
+    
 
-1;
+    method getDroppedLayer {} {
+        error [jexception AbstractMethodError getDroppedLayer]
+    }
+}
+
+namespace eval ::DropLayerInterface {
+}
+
 

@@ -11,47 +11,41 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::GameRunnable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Time::HiRes ();
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{WAIT} = 240;
-    $self->{FAST} = 60;
-    $self->{waitInMillis} = $self->{WAIT};
+oo::class create ::GameRunnable {
+    superclass ::JObject
 }
 
+oo::define ::GameRunnable {
+    method initFields_GameRunnable {} {
+        my jset WAIT 0
+        my jset FAST 0
+        my jset waitInMillis 0
+        my jset WAIT 240
+        my jset FAST 60
+        my jset waitInMillis [my jget WAIT]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_GameRunnable
+    }
+    
+
+    method run {} {
+        [::DisplayInfoSingleton::getInstance] process
+    }
+    
+
+    method processLoopSleep {} {
+        ::Thread::sleep [my jget waitInMillis]
+    }
 }
 
-
-sub run {
-    my ($self) = @_;
-        'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance()->process();
+namespace eval ::GameRunnable {
 }
 
-
-# throws Exception
-sub processLoopSleep {
-    my ($self) = @_;
-        Time::HiRes::sleep(($self->{waitInMillis}) / 1000);
-}
-
-use java::lang::Object ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use java::lang::Thread ();
-
-1;
 

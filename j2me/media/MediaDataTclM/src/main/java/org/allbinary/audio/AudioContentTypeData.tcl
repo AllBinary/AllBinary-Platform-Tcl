@@ -11,36 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.audio
 
-package org::allbinary::audio::AudioContentTypeData;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{name} = undef;
+oo::class create ::AudioContentTypeData {
+    superclass ::JObject
 }
 
+oo::define ::AudioContentTypeData {
+    method initFields_AudioContentTypeData {} {
+        my jset name {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $name) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{name} = $name;
-    return $self;
+    constructor {name} {
+        next
+        my initFields_AudioContentTypeData
+        my jset name $name
+    }
+    
+
+    method getName {} {
+        return [my jget name]
+    }
 }
 
-
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
+namespace eval ::AudioContentTypeData {
 }
 
-use java::lang::Object ();
-
-1;
 

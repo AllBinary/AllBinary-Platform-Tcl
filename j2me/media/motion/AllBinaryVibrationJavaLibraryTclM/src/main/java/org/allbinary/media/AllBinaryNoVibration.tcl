@@ -11,30 +11,45 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media
 
-package org::allbinary::media::AllBinaryNoVibration;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::media::AllBinaryVibrationME';
-
-tie our $NO_VIBRATION, 'java::lang::LazyStatic', sub { 'org::allbinary::media::AllBinaryNoVibration'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::AllBinaryNoVibration {
+    superclass ::AllBinaryVibrationME
 }
 
+oo::define ::AllBinaryNoVibration {
+    method initFields_AllBinaryNoVibration {} {
+        return
+    }
 
-sub vibrate {
-    my ($self, $duration, $type, $volume) = @_;
+    constructor {} {
+        next
+        my initFields_AllBinaryNoVibration
+    }
+    
+
+    method vibrate {duration type volume} {
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::media::AllBinaryVibrationME ();
+namespace eval ::AllBinaryNoVibration {
+    variable NO_VIBRATIONValue {}
+    variable NO_VIBRATIONSet 0
+    proc staticGet_NO_VIBRATION {} {
+        variable NO_VIBRATIONValue
+        variable NO_VIBRATIONSet
+        if {!$NO_VIBRATIONSet} {
+            set NO_VIBRATIONSet 1
+            set NO_VIBRATIONValue [::AllBinaryNoVibration new]
+        }
+        return $NO_VIBRATIONValue
+    }
+    proc staticSet_NO_VIBRATION {value} {
+        variable NO_VIBRATIONValue
+        variable NO_VIBRATIONSet
+        set NO_VIBRATIONSet 1
+        set NO_VIBRATIONValue $value
+    }
+}
 
-1;
 

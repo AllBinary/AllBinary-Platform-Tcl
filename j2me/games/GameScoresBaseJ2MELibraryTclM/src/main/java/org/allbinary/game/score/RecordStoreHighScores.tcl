@@ -11,266 +11,249 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::RecordStoreHighScores;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::score::HighScores';
-
-tie our $hashTable, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{platformRecordIdUtil} = 'org::allbinary::persistance::PlatformRecordIdUtil'->getInstance();
-    $self->{tsUtil} = 'org::allbinary::TsUtil'->getInstance();
-    $self->{RECORD_ID} = "_HS";
-    $self->{MAXHIGHSCORES} = 100;
-    $self->{gameInfo} = undef;
-    $self->{abeClientInformation} = undef;
-    $self->{recordComparatorInterface} = undef;
+oo::class create ::RecordStoreHighScores {
+    superclass ::HighScores
 }
 
+oo::define ::RecordStoreHighScores {
+    method initFields_RecordStoreHighScores {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset platformRecordIdUtil {}
+        my jset tsUtil {}
+        my jset RECORD_ID {}
+        my jset MAXHIGHSCORES 0
+        my jset gameInfo {}
+        my jset abeClientInformation {}
+        my jset recordComparatorInterface {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset platformRecordIdUtil [::PlatformRecordIdUtil::getInstance]
+        my jset tsUtil [::TsUtil::getInstance]
+        my jset RECORD_ID "_HS"
+        my jset MAXHIGHSCORES 100
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $abeClientInformation, $gameInfo, $name, $heading, $columnTwoHeading, $recordComparatorInterface) = @_;
-    my $self = $class->SUPER::new($name, $heading, $columnTwoHeading);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{abeClientInformation} = $abeClientInformation;
-        $self->{gameInfo} = $gameInfo;
-        $self->{recordComparatorInterface} = $recordComparatorInterface;
-        $self->load();
-    return $self;
-}
+    constructor {abeClientInformation gameInfo name heading columnTwoHeading recordComparatorInterface} {
+        next $name $heading $columnTwoHeading
+        my initFields_RecordStoreHighScores
+        my jset abeClientInformation $abeClientInformation
+        my jset gameInfo $gameInfo
+        my jset recordComparatorInterface $recordComparatorInterface
+        my load
+    }
+    
+    
 
+    method getRecordId {abeClientInformation} {
+        return [[my jget platformRecordIdUtil] getRecordId $abeClientInformation [[[[[::StringMaker new] append [[::CommonSeps::getInstance] jget UNDERSCORE]] append [my getName]] append [my jget RECORD_ID]] toString]]
+    }
+    
 
-sub getInstance {
-    my ($class, $abeClientInformation, $gameInfo, $highScoreName, $heading, $columnTwoHeading, $recordComparatorInterface) = @_;
-        my $highScoresCanBeNull = $org::allbinary::game::score::RecordStoreHighScores::hashTable->get($highScoreName);
-        if (!defined($highScoresCanBeNull)) {
-            my $highScores = 'org::allbinary::game::score::RecordStoreHighScores'->new($abeClientInformation, $gameInfo, $highScoreName, $heading, $columnTwoHeading, $recordComparatorInterface);
-            $org::allbinary::game::score::RecordStoreHighScores::hashTable->put($highScores->getName(), $highScores);
-            return $highScores;
-        }
-        return $highScoresCanBeNull;
-}
-
-
-sub getRecordId {
-    my ($self, $abeClientInformation) = @_;
-        return $self->{platformRecordIdUtil}->getRecordId($abeClientInformation, 'org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonSeps'->getInstance()->{UNDERSCORE})->append($self->getName())->append($self->{RECORD_ID})->toString());
-}
-
-
-sub addHighScore {
-    my ($self, $newHighScore) = @_;
-        my $recordStore = $org::allbinary::game::configuration::persistance::NullRecordStore::NULL_RECORD_STORE;
+    method addHighScore {newHighScore} {
+        set recordStore [::NullRecordStore::staticGet_NULL_RECORD_STORE]
         try {
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Adding HighScore: ")->appendlong(int($newHighScore->getScore()))->toString(), $self, $self->{commonStrings}->{ADD});
-            if ($self->isTooManyHighScores()) {
-                $self->{logUtil}->putF("Removing Lowest Score", $self, $self->{commonStrings}->{ADD});
-                $self->removeLowestHighScore();
+            [my jget logUtil] putF [[[[::StringMaker new] append "Adding HighScore: "] appendlong [$newHighScore getScore]] toString] [self] [[my jget commonStrings] jget ADD]
+            if {[my isTooManyHighScores]} {
+                [my jget logUtil] putF "Removing Lowest Score" [self] [[my jget commonStrings] jget ADD]
+                my removeLowestHighScore
             }
-            $recordStore = 'javax::microedition::rms::RecordStore'->openRecordStore($self->getRecordId($self->{abeClientInformation}), 1);
-            my $highScoreBytes = $newHighScore->getAsBytes();
-            my $recordId = $recordStore->addRecord($highScoreBytes, 0, scalar(@{$highScoreBytes}));
-            $self->load();
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{ADD}, $e);
+            set recordStore [::RecordStore::openRecordStore [my getRecordId [my jget abeClientInformation]] true]
+            set highScoreBytes [$newHighScore getAsBytes]
+            set recordId [$recordStore addRecord $highScoreBytes 0 [$highScoreBytes length]]
+            my load
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget ADD] $e
         } finally {
             try {
-                if (defined($recordStore)) {
-                    'org::allbinary::logic::communication::log::PreLogUtil'->put("Closing RecordStore", $self, $self->{commonStrings}->{ADD});
-                    $recordStore->closeRecordStore();
+                if {[expr {$recordStore ne {}}]} {
+                    ::PreLogUtil::put "Closing RecordStore" [self] [[my jget commonStrings] jget ADD]
+                    $recordStore closeRecordStore
                 }
-            } catch ($e) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{ADD}, $e);
+            } on error {e} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget ADD] $e
             }
         }
-}
+    }
+    
 
-
-sub removeLowestHighScore {
-    my ($self) = @_;
-        my $recordStore = $org::allbinary::game::configuration::persistance::NullRecordStore::NULL_RECORD_STORE;
+    method removeLowestHighScore {} {
+        set recordStore [::NullRecordStore::staticGet_NULL_RECORD_STORE]
         try {
-            $recordStore = 'javax::microedition::rms::RecordStore'->openRecordStore($self->getRecordId($self->{abeClientInformation}), 1);
-            my $recordEnum = $recordStore->enumerateRecords($org::allbinary::game::configuration::persistance::NullRecordFilter::NULL_RECORD_FILTER, $org::allbinary::game::configuration::persistance::NullRecordComparator::NULL_RECORD_COMPARATOR, 1);
-            my $scoreComparator = ($self->{recordComparatorInterface});
-            my $bestHighScore = 'org::allbinary::game::score::HighScore'->new(-1, "none", $org::allbinary::game::GameInfo::NONE, $scoreComparator->getBestScore());
-            my $recordAsBytes = undef;
-            my $byteArrayInputStream = undef;
-            my $inputStream = undef;
-            while ($recordEnum->hasNextElement()) {
-                my $id = $recordEnum->nextRecordId();
-                $recordAsBytes = $self->{tsUtil}->getRecord($recordStore, $id);
-                if (defined($recordAsBytes)) {
-                    $byteArrayInputStream = 'java::io::ByteArrayInputStream'->new($recordAsBytes);
-                    $inputStream = 'java::io::DataInputStream'->new($byteArrayInputStream);
-                    my $name = $inputStream->readUTF();
-                    my $nextScore = $inputStream->readLong();
-                    my $nextCurrentHighScore = 'org::allbinary::game::score::HighScore'->new($id, $name, $org::allbinary::game::GameInfo::NONE, $nextScore);
-                    if ($self->{recordComparatorInterface}->compare($nextCurrentHighScore->getAsBytes(), $bestHighScore->getAsBytes()) == $javax::microedition::rms::RecordComparator::FOLLOWS) {
-                        $bestHighScore = $nextCurrentHighScore;
+            set recordStore [::RecordStore::openRecordStore [my getRecordId [my jget abeClientInformation]] true]
+            set recordEnum [$recordStore enumerateRecords [::NullRecordFilter::staticGet_NULL_RECORD_FILTER] [::NullRecordComparator::staticGet_NULL_RECORD_COMPARATOR] true]
+            set scoreComparator ([my jget recordComparatorInterface])
+            set bestHighScore [::HighScore new [expr {-1}] "none" [::GameInfo::staticGet_NONE] [$scoreComparator getBestScore]]
+            set recordAsBytes {}
+            set byteArrayInputStream {}
+            set inputStream {}
+            while {[$recordEnum hasNextElement]} {
+                set id [$recordEnum nextRecordId]
+                set recordAsBytes [[my jget tsUtil] getRecord $recordStore $id]
+                if {[expr {$recordAsBytes ne {}}]} {
+                    set byteArrayInputStream [::ByteArrayInputStream new $recordAsBytes]
+                    set inputStream [::DataInputStream new $byteArrayInputStream]
+                    set name [$inputStream readUTF]
+                    set nextScore [$inputStream readLong]
+                    set nextCurrentHighScore [::HighScore new $id $name [::GameInfo::staticGet_NONE] $nextScore]
+                    if {[expr {[[my jget recordComparatorInterface] compare [$nextCurrentHighScore getAsBytes] [$bestHighScore getAsBytes]] == [::RecordComparator::staticGet_FOLLOWS]}]} {
+                        set bestHighScore $nextCurrentHighScore
                     }
                 }
             }
-            if ($bestHighScore->getId() != -1) {
-                $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Removing Lowest HighScore: ")->appendlong(int($bestHighScore->getScore()))->toString(), $self, $self->{commonStrings}->{LOAD});
-                $recordStore->deleteRecord($bestHighScore->getId());
+            if {[expr {[$bestHighScore getId] != [expr {-1}]}]} {
+                [my jget logUtil] putF [[[[::StringMaker new] append "Removing Lowest HighScore: "] appendlong [$bestHighScore getScore]] toString] [self] [[my jget commonStrings] jget LOAD]
+                $recordStore deleteRecord [$bestHighScore getId]
             }
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "removeLowestHighScore", $e);
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "removeLowestHighScore" $e
         } finally {
             try {
-                if (defined($recordStore)) {
-                    'org::allbinary::logic::communication::log::PreLogUtil'->put("Closing RecordStore", $self, "removeLowestHighScore");
-                    $recordStore->closeRecordStore();
+                if {[expr {$recordStore ne {}}]} {
+                    ::PreLogUtil::put "Closing RecordStore" [self] "removeLowestHighScore"
+                    $recordStore closeRecordStore
                 }
-            } catch ($e) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "removeLowestHighScore", $e);
+            } on error {e} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "removeLowestHighScore" $e
             }
         }
-}
+    }
+    
 
-
-sub load {
-    my ($self) = @_;
-        my $recordStore = $org::allbinary::game::configuration::persistance::NullRecordStore::NULL_RECORD_STORE;
+    method load {} {
+        set recordStore [::NullRecordStore::staticGet_NULL_RECORD_STORE]
         try {
-            $recordStore = 'javax::microedition::rms::RecordStore'->openRecordStore($self->getRecordId($self->{abeClientInformation}), 1);
-            $self->setList('org::allbinary::util::BasicArrayListD'->new());
-            my $recordEnum = $recordStore->enumerateRecords($org::allbinary::game::configuration::persistance::NullRecordFilter::NULL_RECORD_FILTER, $org::allbinary::game::configuration::persistance::NullRecordComparator::NULL_RECORD_COMPARATOR, 1);
-            my $recordAsBytes = undef;
-            my $byteArrayInputStream = undef;
-            my $inputStream = undef;
-            while ($recordEnum->hasNextElement()) {
-                my $id = $recordEnum->nextRecordId();
-                $recordAsBytes = $self->{tsUtil}->getRecord($recordStore, $id);
-                if (defined($recordAsBytes)) {
-                    $byteArrayInputStream = 'java::io::ByteArrayInputStream'->new($recordAsBytes);
-                    $inputStream = 'java::io::DataInputStream'->new($byteArrayInputStream);
+            set recordStore [::RecordStore::openRecordStore [my getRecordId [my jget abeClientInformation]] true]
+            my setList [::BasicArrayListD new]
+            set recordEnum [$recordStore enumerateRecords [::NullRecordFilter::staticGet_NULL_RECORD_FILTER] [::NullRecordComparator::staticGet_NULL_RECORD_COMPARATOR] true]
+            set recordAsBytes {}
+            set byteArrayInputStream {}
+            set inputStream {}
+            while {[$recordEnum hasNextElement]} {
+                set id [$recordEnum nextRecordId]
+                set recordAsBytes [[my jget tsUtil] getRecord $recordStore $id]
+                if {[expr {$recordAsBytes ne {}}]} {
+                    set byteArrayInputStream [::ByteArrayInputStream new $recordAsBytes]
+                    set inputStream [::DataInputStream new $byteArrayInputStream]
                     try {
-                        my $name = $inputStream->readUTF();
-                        my $score = $inputStream->readLong();
-                        my $newHighScore = 'org::allbinary::game::score::HighScore'->new($id, $name, $org::allbinary::game::GameInfo::NONE, $score);
-                        my $list = $self->getList();
-                        my $size = $list->size();
-                        my $lastIndex = $size;
-                        for (my $index = 0; $index < $size; $index++) {
-                            my $highScore = $list->{objectArray}->[$index];
-                            if ($self->{recordComparatorInterface}->compare($newHighScore->getAsBytes(), $highScore->getAsBytes()) == $javax::microedition::rms::RecordComparator::PRECEDES) {
-                                $lastIndex = $index;
-                                last;
+                        set name [$inputStream readUTF]
+                        set score [$inputStream readLong]
+                        set newHighScore [::HighScore new $id $name [::GameInfo::staticGet_NONE] $score]
+                        set list [my getList]
+                        set size [$list size]
+                        set lastIndex $size
+                        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+                            set highScore [[$list jget objectArray] get $index]
+                            if {[expr {[[my jget recordComparatorInterface] compare [$newHighScore getAsBytes] [$highScore getAsBytes]] == [::RecordComparator::staticGet_PRECEDES]}]} {
+                                set lastIndex $index
+                                break
                             }
                         }
-                        $list->addAt($lastIndex, $newHighScore);
-                    } catch ($e) {
-                        $self->{logUtil}->put("EOF", $self, $self->{commonStrings}->{LOAD}, $e);
-                        die $e;
+                        $list addAt $lastIndex $newHighScore
+                    } on error {e} {
+                        [my jget logUtil] put "EOF" [self] [[my jget commonStrings] jget LOAD] $e
+                        error $e
                     }
                 }
             }
-        } catch ($e) {
-            $self->{logUtil}->put("No High Scores", $self, $self->{commonStrings}->{LOAD}, $e);
+        } on error {e} {
+            [my jget logUtil] put "No High Scores" [self] [[my jget commonStrings] jget LOAD] $e
         } finally {
             try {
-                if (defined($recordStore)) {
-                    'org::allbinary::logic::communication::log::PreLogUtil'->put("Closing RecordStore", $self, $self->{commonStrings}->{LOAD});
-                    $recordStore->closeRecordStore();
+                if {[expr {$recordStore ne {}}]} {
+                    ::PreLogUtil::put "Closing RecordStore" [self] [[my jget commonStrings] jget LOAD]
+                    $recordStore closeRecordStore
                 }
-            } catch ($e) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{LOAD}, $e);
+            } on error {e} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget LOAD] $e
             }
         }
-}
+    }
+    
 
-
-sub isTooManyHighScores {
-    my ($self) = @_;
-        if (defined($self->getList()) && $self->getList()->size() < $self->{MAXHIGHSCORES}) {
-            return 0;
+    method isTooManyHighScores {} {
+        if {[expr {[expr {[my getList] ne {}}] && [expr {[[my getList] size] < [my jget MAXHIGHSCORES]}]}]} {
+            return false
         } else {
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("HighScores RecordStore Max Reached: ")->appendint($self->{MAXHIGHSCORES})->toString(), $self, "isTooManyHighScores");
-            return 1;
+            [my jget logUtil] putF [[[[::StringMaker new] append "HighScores RecordStore Max Reached: "] appendint [my jget MAXHIGHSCORES]] toString] [self] "isTooManyHighScores"
+            return true
         }
-}
+    }
+    
 
-
-# throws Exception
-sub isBestScore {
-    my ($self, $newHighScore) = @_;
+    method isBestScore {newHighScore} {
         try {
-            if (!$self->isTooManyHighScores()) {
-                $self->{logUtil}->putF("Slot Available for a High Score", $self, "isBestScore");
-                return 1;
+            if {[expr {![my isTooManyHighScores]}]} {
+                [my jget logUtil] putF "Slot Available for a High Score" [self] "isBestScore"
+                return true
             } else {
-                my $list = $self->getList();
-                my $size = $list->size();
-                for (my $index = 0; $index < $size; $index++) {
-                    my $highScore = $list->{objectArray}->[$index];
-                    if ($self->{recordComparatorInterface}->compare($newHighScore->getAsBytes(), $highScore->getAsBytes()) == $javax::microedition::rms::RecordComparator::FOLLOWS) {
-                        $self->{logUtil}->putF("Obtained a High Score", $self, "isBestScore");
-                        return 1;
+                set list [my getList]
+                set size [$list size]
+                for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+                    set highScore [[$list jget objectArray] get $index]
+                    if {[expr {[[my jget recordComparatorInterface] compare [$newHighScore getAsBytes] [$highScore getAsBytes]] == [::RecordComparator::staticGet_FOLLOWS]}]} {
+                        [my jget logUtil] putF "Obtained a High Score" [self] "isBestScore"
+                        return true
                     }
                 }
             }
-            $self->{logUtil}->putF("Not a High Score", $self, "isBestScore");
-            return 0;
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{ADD}, $e);
-            die $e;
+            [my jget logUtil] putF "Not a High Score" [self] "isBestScore"
+            return false
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget ADD] $e
+            error $e
         }
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append [next]
+        set list [my getList]
+        set size [$list size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set highScore [[$list jget objectArray] get $index]
+            $stringBuffer append [$highScore getScoreString]
+            $stringBuffer append [[::CommonSeps::getInstance] jget COMMA_SEP]
+        }
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append($self->SUPER::toString());
-        my $list = $self->getList();
-        my $size = $list->size();
-        for (my $index = 0; $index < $size; $index++) {
-            my $highScore = $list->{objectArray}->[$index];
-            $stringBuffer->append($highScore->getScoreString());
-            $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{COMMA_SEP});
+namespace eval ::RecordStoreHighScores {
+    variable hashTableValue {}
+    variable hashTableSet 0
+    proc staticGet_hashTable {} {
+        variable hashTableValue
+        variable hashTableSet
+        if {!$hashTableSet} {
+            set hashTableSet 1
+            set hashTableValue [[::StdUtil::getInstance] createHashtable]
         }
-        return $stringBuffer->toString();
+        return $hashTableValue
+    }
+    proc staticSet_hashTable {value} {
+        variable hashTableValue
+        variable hashTableSet
+        set hashTableSet 1
+        set hashTableValue $value
+    }
+    proc getInstance {abeClientInformation gameInfo highScoreName heading columnTwoHeading recordComparatorInterface} {
+        set highScoresCanBeNull [[::RecordStoreHighScores::staticGet_hashTable] get $highScoreName]
+        if {[expr {$highScoresCanBeNull eq {}}]} {
+            set highScores [::RecordStoreHighScores new $abeClientInformation $gameInfo $highScoreName $heading $columnTwoHeading $recordComparatorInterface]
+            [::RecordStoreHighScores::staticGet_hashTable] put [$highScores getName] $highScores
+            return $highScores
+        }
+        return $highScoresCanBeNull
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::ByteArrayInputStream ();
-# use java::io::DataInputStream ();
-# use java::io::EOFException ();
-# use java::io::IOException ();
-use javax::microedition::rms::RecordComparator ();
-use javax::microedition::rms::RecordEnumeration ();
-use javax::microedition::rms::RecordStore ();
-use javax::microedition::rms::RecordStoreException ();
-use javax::microedition::rms::RecordStoreNotFoundException ();
-use org::allbinary::TsUtil ();
-use org::allbinary::game::GameInfo ();
-use org::allbinary::game::configuration::persistance::NullRecordComparator ();
-use org::allbinary::game::configuration::persistance::NullRecordFilter ();
-use org::allbinary::game::configuration::persistance::NullRecordStore ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::persistance::PlatformRecordIdUtil ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::game::score::HighScores ();
-use org::allbinary::game::score::HighScore ();
-
-1;
 

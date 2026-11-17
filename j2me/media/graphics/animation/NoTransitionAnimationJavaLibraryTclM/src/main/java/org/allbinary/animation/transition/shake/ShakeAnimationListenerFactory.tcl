@@ -11,29 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.transition.shake
 
-package org::allbinary::animation::transition::shake::ShakeAnimationListenerFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ShakeAnimationListenerFactory {
+    superclass ::JObject
 }
 
+oo::define ::ShakeAnimationListenerFactory {
+    method initFields_ShakeAnimationListenerFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return 'org::allbinary::animation::transition::shake::NoShakeAnimationListener'->new();
+    constructor {} {
+        next
+        my initFields_ShakeAnimationListenerFactory
+    }
+    
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::transition::shake::NoShakeAnimationListener ();
+namespace eval ::ShakeAnimationListenerFactory {
+    proc getInstance {} {
+        return [::NoShakeAnimationListener new]
+    }
+}
 
-1;
 

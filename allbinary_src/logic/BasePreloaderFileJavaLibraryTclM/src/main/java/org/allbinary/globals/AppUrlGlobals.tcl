@@ -11,67 +11,72 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.globals
 
 #implements
-package org::allbinary::globals::AppUrlGlobals;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::globals::UrlGlobalsInterface';
-
-tie our $NULL_APP_URL_GLOBALS, 'java::lang::LazyStatic', sub { 'org::allbinary::globals::AppUrlGlobals'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{path} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+oo::class create ::AppUrlGlobals {
+    superclass ::UrlGlobalsInterface
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+oo::define ::AppUrlGlobals {
+    method initFields_AppUrlGlobals {} {
+        my jset path {}
+        my jset path [[::StringUtil::getInstance] jget EMPTY_STRING]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_AppUrlGlobals
+    }
+    
 
-sub isTestingMode {
-    my ($self) = @_;
-        return 0;
-}
+    method isTestingMode {} {
+        return false
+    }
+    
 
+    method getWebappPath {} {
+        return [my jget path]
+    }
+    
 
-sub getWebappPath {
-    my ($self) = @_;
-        return $self->{path};
-}
-
-
-sub setWebappPath {
-    my ($self, $path) = @_;
-        $self->{path} = $path;
-        if (!((substr($self->{path}, -length("\\")) eq "\\") || (substr($self->{path}, -length("/")) eq "/"))) {
-            $self->{path} = $self->{path} . "\\";
+    method setWebappPath {path} {
+        my jset path $path
+        if {[expr {!([expr {[jendswith [my jget path] "\\"] || [jendswith [my jget path] "/"]}])}]} {
+            my jset path [string cat [my jget path] "\\"]
         }
+    }
+    
+
+    method getTestHtmlPath {} {
+        return [[::StringUtil::getInstance] jget EMPTY_STRING]
+    }
+    
+
+    method getMainPath {} {
+        return [my jget path]
+    }
 }
 
-
-sub getTestHtmlPath {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+namespace eval ::AppUrlGlobals {
+    variable NULL_APP_URL_GLOBALSValue {}
+    variable NULL_APP_URL_GLOBALSSet 0
+    proc staticGet_NULL_APP_URL_GLOBALS {} {
+        variable NULL_APP_URL_GLOBALSValue
+        variable NULL_APP_URL_GLOBALSSet
+        if {!$NULL_APP_URL_GLOBALSSet} {
+            set NULL_APP_URL_GLOBALSSet 1
+            set NULL_APP_URL_GLOBALSValue [::AppUrlGlobals new]
+        }
+        return $NULL_APP_URL_GLOBALSValue
+    }
+    proc staticSet_NULL_APP_URL_GLOBALS {value} {
+        variable NULL_APP_URL_GLOBALSValue
+        variable NULL_APP_URL_GLOBALSSet
+        set NULL_APP_URL_GLOBALSSet 1
+        set NULL_APP_URL_GLOBALSValue $value
+    }
 }
 
-
-# throws Exception
-sub getMainPath {
-    my ($self) = @_;
-        return $self->{path};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::globals::UrlGlobalsInterface ();
-
-1;
 

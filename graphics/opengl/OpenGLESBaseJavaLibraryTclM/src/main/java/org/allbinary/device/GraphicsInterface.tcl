@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.device
 
-# Java interface
-package org::allbinary::device::GraphicsInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub setFontDebug {
-    my ($self, $font, $fontDebug) = @_;
-    die "abstract method setFontDebug";
+oo::class create ::GraphicsInterface {
+    superclass ::JObject
 }
 
-use javax::microedition::lcdui::Font ();
-use org::allbinary::graphics::font::FontDebugBase ();
+oo::define ::GraphicsInterface {
+    method initFields_GraphicsInterface {} {
+        return
+    }
+    
 
-1;
+    method setFontDebug {font fontDebug} {
+        error [jexception AbstractMethodError setFontDebug]
+    }
+}
+
+namespace eval ::GraphicsInterface {
+}
+
 

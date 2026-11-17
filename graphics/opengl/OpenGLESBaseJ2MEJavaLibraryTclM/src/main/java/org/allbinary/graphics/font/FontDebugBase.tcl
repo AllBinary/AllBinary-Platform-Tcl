@@ -1,52 +1,58 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.font
 
 #OpenGLESBaseJ2MEJavaLibrary
-package org::allbinary::graphics::font::FontDebugBase;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instanceBase, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::font::FontDebugBase'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{SET_FONT} = "setFont";
+oo::class create ::FontDebugBase {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::FontDebugBase {
+    method initFields_FontDebugBase {} {
+        my jset SET_FONT {}
+        my jset SET_FONT "setFont"
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_FontDebugBase
+    }
+    
+    
+
+    method debugMetrics {currentFont convertedTextSize displayMetrics stringBuffer} {
+    }
+    
+
+    method debugDpi {densityDpi stringBuffer} {
+    }
+    
+
+    method debugDimension {currentFont convertedTextSize longestDimensionTotalPixels stringBuffer} {
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::font::FontDebugBase::instanceBase;
+namespace eval ::FontDebugBase {
+    variable instanceBaseValue {}
+    variable instanceBaseSet 0
+    proc staticGet_instanceBase {} {
+        variable instanceBaseValue
+        variable instanceBaseSet
+        if {!$instanceBaseSet} {
+            set instanceBaseSet 1
+            set instanceBaseValue [::FontDebugBase new]
+        }
+        return $instanceBaseValue
+    }
+    proc staticSet_instanceBase {value} {
+        variable instanceBaseValue
+        variable instanceBaseSet
+        set instanceBaseSet 1
+        set instanceBaseValue $value
+    }
+    proc getInstance {} {
+        return [::FontDebugBase::staticGet_instanceBase]
+    }
 }
 
-
-sub debugMetrics {
-    my ($self, $currentFont, $convertedTextSize, $displayMetrics, $stringBuffer) = @_;
-}
-
-
-sub debugDpi {
-    my ($self, $densityDpi, $stringBuffer) = @_;
-}
-
-
-sub debugDimension {
-    my ($self, $currentFont, $convertedTextSize, $longestDimensionTotalPixels, $stringBuffer) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Font ();
-use org::allbinary::logic::string::StringMaker ();
-
-1;
 

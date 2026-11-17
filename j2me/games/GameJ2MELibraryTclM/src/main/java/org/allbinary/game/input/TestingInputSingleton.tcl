@@ -11,174 +11,96 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::TestingInputSingleton;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::AllBinaryGameLayer','org::allbinary::game::input::GameInputInterface';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::TestingInputSingleton'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{inputProcessorArray} = [(undef) x ('org::allbinary::game::input::InputFactory'->getInstance()->{MAX})];
-    $self->{testInputPaintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
+oo::class create ::TestingInputSingleton {
+    superclass ::AllBinaryGameLayer
 }
 
+oo::define ::TestingInputSingleton {
+    method initFields_TestingInputSingleton {} {
+        my jset inputProcessorArray {}
+        my jset testInputPaintable {}
+        my jset inputProcessorArray [jarray [[::InputFactory::getInstance] jget MAX] {}]
+        my jset testInputPaintable [::NullPaintable::getInstance]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::TestingInputSingleton::instance;
-}
+    constructor {} {
+        next [[::StringUtil::getInstance] jget EMPTY_STRING] [::RectangleFactory::staticGet_SINGLETON] [::ViewPosition::getInstanceD]
+        my initFields_TestingInputSingleton
+        ::GameInputProcessorUtil::init [my jget inputProcessorArray]
+    }
+    
 
+    method initInputProcessors {} {
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $org::allbinary::graphics::RectangleFactory::SINGLETON, 'org::allbinary::view::ViewPosition'->getInstanceD());
-    _init_fields($self);
-        # super(...) made $self above
-        'org::allbinary::game::input::GameInputProcessorUtil'->init($self->{inputProcessorArray});
-    return $self;
-}
+    method initInputProcessorsForTestInput {aTestInputInterface} {
+        set testInputInterface $aTestInputInterface
+        my jset testInputPaintable $testInputInterface
+        [my jget inputProcessorArray] set [::Canvas::staticGet_UP] [::GameInputProcessor new]
+        [my jget inputProcessorArray] set [::Canvas::staticGet_DOWN] [::GameInputProcessor new]
+        [my jget inputProcessorArray] set [::Canvas::staticGet_LEFT] [::GameInputProcessor new]
+        [my jget inputProcessorArray] set [::Canvas::staticGet_RIGHT] [::GameInputProcessor new]
+        [my jget inputProcessorArray] set [::Canvas::staticGet_KEY_NUM7] [::GameInputProcessor new]
+        [my jget inputProcessorArray] set [::Canvas::staticGet_KEY_NUM9] [::GameInputProcessor new]
+        ::GameInputProcessorUtil::init [my jget inputProcessorArray]
+    }
+    
 
-
-sub initInputProcessors {
-    my ($self) = @_;
-}
-
-
-sub initInputProcessorsForTestInput {
-    my ($self, $aTestInputInterface) = @_;
-        my $testInputInterface = $aTestInputInterface;
-        $self->{testInputPaintable} = $testInputInterface;
-        $self->{inputProcessorArray}->[$javax::microedition::lcdui::Canvas::UP] = do {
-            package org::allbinary::game::input::GameInputProcessor::AnonymousN66410 { our @ISA = ('org::allbinary::game::input::GameInputProcessor', 'java::lang::Object');
-            
-
-            # throws Exception
-            sub processEvent {
-                my ($self, $allbinaryLayerManager, $gameKeyEvent) = @_;
-                $testInputInterface->up();
-            }
-            }
-            'org::allbinary::game::input::GameInputProcessor::AnonymousN66410'->can('new') ? 'org::allbinary::game::input::GameInputProcessor::AnonymousN66410'->new() : bless({}, 'org::allbinary::game::input::GameInputProcessor::AnonymousN66410')
-        };
-        $self->{inputProcessorArray}->[$javax::microedition::lcdui::Canvas::DOWN] = do {
-            package org::allbinary::game::input::GameInputProcessor::AnonymousN66558 { our @ISA = ('org::allbinary::game::input::GameInputProcessor', 'java::lang::Object');
-            
-
-            # throws Exception
-            sub processEvent {
-                my ($self, $allbinaryLayerManager, $gameKeyEvent) = @_;
-                $testInputInterface->down();
-            }
-            }
-            'org::allbinary::game::input::GameInputProcessor::AnonymousN66558'->can('new') ? 'org::allbinary::game::input::GameInputProcessor::AnonymousN66558'->new() : bless({}, 'org::allbinary::game::input::GameInputProcessor::AnonymousN66558')
-        };
-        $self->{inputProcessorArray}->[$javax::microedition::lcdui::Canvas::LEFT] = do {
-            package org::allbinary::game::input::GameInputProcessor::AnonymousN66706 { our @ISA = ('org::allbinary::game::input::GameInputProcessor', 'java::lang::Object');
-            
-
-            # throws Exception
-            sub processEvent {
-                my ($self, $allbinaryLayerManager, $gameKeyEvent) = @_;
-                $testInputInterface->left();
-            }
-            }
-            'org::allbinary::game::input::GameInputProcessor::AnonymousN66706'->can('new') ? 'org::allbinary::game::input::GameInputProcessor::AnonymousN66706'->new() : bless({}, 'org::allbinary::game::input::GameInputProcessor::AnonymousN66706')
-        };
-        $self->{inputProcessorArray}->[$javax::microedition::lcdui::Canvas::RIGHT] = do {
-            package org::allbinary::game::input::GameInputProcessor::AnonymousN66854 { our @ISA = ('org::allbinary::game::input::GameInputProcessor', 'java::lang::Object');
-            
-
-            # throws Exception
-            sub processEvent {
-                my ($self, $allbinaryLayerManager, $gameKeyEvent) = @_;
-                $testInputInterface->right();
-            }
-            }
-            'org::allbinary::game::input::GameInputProcessor::AnonymousN66854'->can('new') ? 'org::allbinary::game::input::GameInputProcessor::AnonymousN66854'->new() : bless({}, 'org::allbinary::game::input::GameInputProcessor::AnonymousN66854')
-        };
-        $self->{inputProcessorArray}->[$javax::microedition::lcdui::Canvas::KEY_NUM7] = do {
-            package org::allbinary::game::input::GameInputProcessor::AnonymousN67002 { our @ISA = ('org::allbinary::game::input::GameInputProcessor', 'java::lang::Object');
-            
-
-            # throws Exception
-            sub processEvent {
-                my ($self, $allbinaryLayerManager, $gameKeyEvent) = @_;
-                $testInputInterface->strafeLeft();
-            }
-            }
-            'org::allbinary::game::input::GameInputProcessor::AnonymousN67002'->can('new') ? 'org::allbinary::game::input::GameInputProcessor::AnonymousN67002'->new() : bless({}, 'org::allbinary::game::input::GameInputProcessor::AnonymousN67002')
-        };
-        $self->{inputProcessorArray}->[$javax::microedition::lcdui::Canvas::KEY_NUM9] = do {
-            package org::allbinary::game::input::GameInputProcessor::AnonymousN67150 { our @ISA = ('org::allbinary::game::input::GameInputProcessor', 'java::lang::Object');
-            
-
-            # throws Exception
-            sub processEvent {
-                my ($self, $allbinaryLayerManager, $gameKeyEvent) = @_;
-                $testInputInterface->strafeRight();
-            }
-            }
-            'org::allbinary::game::input::GameInputProcessor::AnonymousN67150'->can('new') ? 'org::allbinary::game::input::GameInputProcessor::AnonymousN67150'->new() : bless({}, 'org::allbinary::game::input::GameInputProcessor::AnonymousN67150')
-        };
-        'org::allbinary::game::input::GameInputProcessorUtil'->init($self->{inputProcessorArray});
-}
-
-
-# throws Exception
-sub processInputList {
-    my ($self, $allbinaryLayerManager, $list) = @_;
-        my $key = 0;
-        my $gameKeyEvent = undef;
-        my $size = $list->size();
-        for (my $index = 0; $index < $size; $index++) {
-            $gameKeyEvent = ($list->{objectArray}->[$index]);
-            $key = $gameKeyEvent->getKey();
-            $self->{inputProcessorArray}->[$key]->processEvent($allbinaryLayerManager, $org::allbinary::game::input::event::GameKeyEvent::NONE);
+    method processInputList {allbinaryLayerManager list} {
+        set key 0
+        set gameKeyEvent {}
+        set size [$list size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set gameKeyEvent ([[$list jget objectArray] get $index])
+            set key [$gameKeyEvent getKey]
+            [[my jget inputProcessorArray] get $key] processEvent $allbinaryLayerManager [::GameKeyEvent::staticGet_NONE]
         }
+    }
+    
+
+    method processInput {allbinaryLayerManager} {
+        my processInputList $allbinaryLayerManager [my getGameKeyEventList]
+        [my getGameKeyEventList] clear
+    }
+    
+
+    method paint {graphics} {
+        [my jget testInputPaintable] paint $graphics
+    }
+    
+
+    method implmentsGameInputInterface {} {
+        return true
+    }
 }
 
-
-# throws Exception
-sub processInput {
-    my ($self, $allbinaryLayerManager) = @_;
-        $self->processInputList($allbinaryLayerManager, $self->getGameKeyEventList());
-        $self->getGameKeyEventList()->clear();
+namespace eval ::TestingInputSingleton {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::TestingInputSingleton new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::TestingInputSingleton::staticGet_instance]
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{testInputPaintable}->paint($graphics);
-}
-
-
-sub implmentsGameInputInterface {
-    my ($self) = @_;
-        return 1;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Canvas ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::game::layer::AllBinaryGameLayer ();
-use org::allbinary::graphics::RectangleFactory ();
-use org::allbinary::graphics::paint::NullPaintable ();
-use org::allbinary::graphics::paint::PaintableInterface ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::view::ViewPosition ();
-use org::allbinary::game::input::GameInputInterface ();
-use org::allbinary::game::input::InputFactory ();
-use org::allbinary::game::input::GameInputProcessorUtil ();
-use org::allbinary::game::input::GameInputProcessor ();
-
-1;
 

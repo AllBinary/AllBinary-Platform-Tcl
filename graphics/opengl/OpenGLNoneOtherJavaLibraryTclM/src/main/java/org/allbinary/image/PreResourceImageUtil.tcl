@@ -11,49 +11,58 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.image
 
-package org::allbinary::image::PreResourceImageUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::image::PreResourceImageUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::PreResourceImageUtil {
+    superclass ::JObject
 }
 
+oo::define ::PreResourceImageUtil {
+    method initFields_PreResourceImageUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::image::PreResourceImageUtil::instance;
+    constructor {} {
+        next
+        my initFields_PreResourceImageUtil
+    }
+    
+    
+
+    method encapsulate {image} {
+        return $image
+    }
+    
+
+    method updateGL {gl image} {
+    }
+    
+
+    method update {graphics image} {
+    }
 }
 
-
-sub encapsulate {
-    my ($self, $image) = @_;
-        return $image;
+namespace eval ::PreResourceImageUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::PreResourceImageUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::PreResourceImageUtil::staticGet_instance]
+    }
 }
 
-
-sub updateGL {
-    my ($self, $gl, $image) = @_;
-}
-
-
-sub update {
-    my ($self, $graphics, $image) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::khronos::opengles::GL ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-
-1;
 

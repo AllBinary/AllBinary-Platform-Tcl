@@ -11,44 +11,52 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-package org::allbinary::game::collision::CollidableAlwaysPickupNeverCollideBehaviorFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::collision::CollidableBaseBehaviorFactory';
-
-tie our $instanceC, 'java::lang::LazyStatic', sub { 'org::allbinary::game::collision::CollidableAlwaysPickupNeverCollideBehaviorFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{instance} = 'org::allbinary::game::collision::CollidableAlwaysPickupNeverCollideBehavior'->new();
+oo::class create ::CollidableAlwaysPickupNeverCollideBehaviorFactory {
+    superclass ::CollidableBaseBehaviorFactory
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
+oo::define ::CollidableAlwaysPickupNeverCollideBehaviorFactory {
+    method initFields_CollidableAlwaysPickupNeverCollideBehaviorFactory {} {
+        my jset instance {}
+        my jset instance [::CollidableAlwaysPickupNeverCollideBehavior new]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_CollidableAlwaysPickupNeverCollideBehaviorFactory
+    }
+    
+    
+
+    method createBehavior {} {
+        return [my jget instance]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::collision::CollidableAlwaysPickupNeverCollideBehaviorFactory::instanceC;
+namespace eval ::CollidableAlwaysPickupNeverCollideBehaviorFactory {
+    variable instanceCValue {}
+    variable instanceCSet 0
+    proc staticGet_instanceC {} {
+        variable instanceCValue
+        variable instanceCSet
+        if {!$instanceCSet} {
+            set instanceCSet 1
+            set instanceCValue [::CollidableAlwaysPickupNeverCollideBehaviorFactory new]
+        }
+        return $instanceCValue
+    }
+    proc staticSet_instanceC {value} {
+        variable instanceCValue
+        variable instanceCSet
+        set instanceCSet 1
+        set instanceCValue $value
+    }
+    proc getInstance {} {
+        return [::CollidableAlwaysPickupNeverCollideBehaviorFactory::staticGet_instanceC]
+    }
 }
 
-
-sub createBehavior {
-    my ($self) = @_;
-        return $self->{instance};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::collision::CollidableBaseBehaviorFactory ();
-use org::allbinary::game::collision::CollidableAlwaysPickupNeverCollideBehavior ();
-
-1;
 

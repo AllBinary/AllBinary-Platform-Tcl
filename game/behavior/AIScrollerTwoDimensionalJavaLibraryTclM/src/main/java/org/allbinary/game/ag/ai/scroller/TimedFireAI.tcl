@@ -11,53 +11,56 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.scroller
 
-package org::allbinary::game::ag::ai::scroller::TimedFireAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ai::BasicAI';
-
-tie our $TIME, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt(1) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{maxFireDelayTimeHelper} = 'org::allbinary::time::TimeDelayHelper'->new(0);
-    $self->{delay} = undef;
+oo::class create ::TimedFireAI {
+    superclass ::BasicAI
 }
 
+oo::define ::TimedFireAI {
+    method initFields_TimedFireAI {} {
+        my jset maxFireDelayTimeHelper {}
+        my jset delay 0
+        my jset maxFireDelayTimeHelper [::TimeDelayHelper new 0]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $delay, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{delay} = $delay;
-    return $self;
-}
+    constructor {delay ownerLayerInterface gameInput} {
+        next $ownerLayerInterface $gameInput
+        my initFields_TimedFireAI
+        my jset delay $delay
+    }
+    
 
-
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        my $timeFiredInterface = $self->getOwnerLayerInterface();
-        if ($self->{maxFireDelayTimeHelper}->isTime('org::allbinary::time::GameTickTimeDelayHelperFactory'->getInstance()->{startTime}) && $timeFiredInterface->getLastFireTime() + $self->{maxFireDelayTimeHelper}->{delay} < $self->{maxFireDelayTimeHelper}->getStartTime()) {
-            $self->SUPER::processKeyAI($javax::microedition::lcdui::Canvas::KEY_NUM1);
-            $self->{maxFireDelayTimeHelper}->{delay} = $self->{delay};
+    method processAI {allBinaryLayerManager} {
+        set timeFiredInterface [my getOwnerLayerInterface]
+        if {[expr {[[my jget maxFireDelayTimeHelper] isTime [[::GameTickTimeDelayHelperFactory::getInstance] jget startTime]] && [expr {[expr {[$timeFiredInterface getLastFireTime] + [[my jget maxFireDelayTimeHelper] jget delay]}] < [[my jget maxFireDelayTimeHelper] getStartTime]}]}]} {
+            next [::Canvas::staticGet_KEY_NUM1]
+            [my jget maxFireDelayTimeHelper] jset delay [my jget delay]
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::game::ai::BasicAI ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::time::GameTickTimeDelayHelperFactory ();
-use org::allbinary::time::TimeDelayHelper ();
+namespace eval ::TimedFireAI {
+    variable TIMEValue {}
+    variable TIMESet 0
+    proc staticGet_TIME {} {
+        variable TIMEValue
+        variable TIMESet
+        if {!$TIMESet} {
+            set TIMESet 1
+            set TIMEValue [[::SmallIntegerSingletonFactory::getInstance] getAt 1]
+        }
+        return $TIMEValue
+    }
+    proc staticSet_TIME {value} {
+        variable TIMEValue
+        variable TIMESet
+        set TIMESet 1
+        set TIMEValue $value
+    }
+}
 
-1;
 

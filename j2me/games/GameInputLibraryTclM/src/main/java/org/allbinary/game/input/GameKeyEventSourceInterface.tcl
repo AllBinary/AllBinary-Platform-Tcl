@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-# Java interface
-package org::allbinary::game::input::GameKeyEventSourceInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getSourceId {
-    my ($self) = @_;
-    die "abstract method getSourceId";
+oo::class create ::GameKeyEventSourceInterface {
+    superclass ::JObject
 }
 
+oo::define ::GameKeyEventSourceInterface {
+    method initFields_GameKeyEventSourceInterface {} {
+        return
+    }
+    
 
-1;
+    method getSourceId {} {
+        error [jexception AbstractMethodError getSourceId]
+    }
+}
+
+namespace eval ::GameKeyEventSourceInterface {
+}
+
 

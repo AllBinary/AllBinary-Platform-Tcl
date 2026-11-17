@@ -11,73 +11,64 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input
 
 #TouchJ2ME
-package org::allbinary::input::TouchJ2ME;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{DEVICE_ID} = 0;
-    $self->{motionRecognizer} = 'org::allbinary::input::motion::AllMotionRecognizer'->new();
+oo::class create ::TouchJ2ME {
+    superclass ::JObject
 }
 
+oo::define ::TouchJ2ME {
+    method initFields_TouchJ2ME {} {
+        my jset logUtil {}
+        my jset DEVICE_ID 0
+        my jset motionRecognizer {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset DEVICE_ID 0
+        my jset motionRecognizer [::AllMotionRecognizer new]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $motionGesturesHandler = $self->{motionRecognizer}->getMotionGestureRecognizer()->getMotionGesturesHandler();
-        $motionGesturesHandler->addListenerInterface('org::allbinary::input::motion::gesture::observer::GameMotionGestureListener'->new('org::allbinary::input::motion::gesture::observer::MotionGestureReceiveInterfaceFactory'->getInstance()));
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_TouchJ2ME
+        set motionGesturesHandler [[[my jget motionRecognizer] getMotionGestureRecognizer] getMotionGesturesHandler]
+        $motionGesturesHandler addListenerInterface [::GameMotionGestureListener new [::MotionGestureReceiveInterfaceFactory::getInstance]]
+    }
+    
 
-
-sub pointerDragged {
-    my ($self, $x, $y) = @_;
+    method pointerDragged {x y} {
         try {
-            $self->{motionRecognizer}->processDraggedMotionEvent($x, $y, $self->{DEVICE_ID}, 0);
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, "pointerDragged", $e);
+            [my jget motionRecognizer] processDraggedMotionEvent $x $y [my jget DEVICE_ID] 0
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] "pointerDragged" $e
         }
-}
+    }
+    
 
-
-sub pointerPressed {
-    my ($self, $x, $y) = @_;
+    method pointerPressed {x y} {
         try {
-            $self->{motionRecognizer}->processStartMotionEvent($x, $y, $self->{DEVICE_ID}, 0);
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, "pointerPressed", $e);
+            [my jget motionRecognizer] processStartMotionEvent $x $y [my jget DEVICE_ID] 0
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] "pointerPressed" $e
         }
-}
+    }
+    
 
-
-sub pointerReleased {
-    my ($self, $x, $y) = @_;
+    method pointerReleased {x y} {
         try {
-            $self->{motionRecognizer}->processEndMotionEvent($x, $y, $self->{DEVICE_ID}, 0);
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, "pointerReleased", $e);
+            [my jget motionRecognizer] processEndMotionEvent $x $y [my jget DEVICE_ID] 0
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] "pointerReleased" $e
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::input::motion::AllMotionRecognizer ();
-use org::allbinary::input::motion::gesture::observer::BasicMotionGesturesHandler ();
-use org::allbinary::input::motion::gesture::observer::GameMotionGestureListener ();
-use org::allbinary::input::motion::gesture::observer::MotionGestureReceiveInterfaceFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::TouchJ2ME {
+}
 
-1;
 

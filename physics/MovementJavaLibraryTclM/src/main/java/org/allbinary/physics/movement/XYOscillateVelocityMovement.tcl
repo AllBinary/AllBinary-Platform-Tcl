@@ -11,60 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
-package org::allbinary::physics::movement::XYOscillateVelocityMovement;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::physics::movement::BasicConstantVelocityMovement';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{oscillateMin} = undef;
-    $self->{oscillateMax} = undef;
-    $self->{oscillate} = 0;
-    $self->{oscillatePositive} = 0;
+oo::class create ::XYOscillateVelocityMovement {
+    superclass ::BasicConstantVelocityMovement
 }
 
+oo::define ::XYOscillateVelocityMovement {
+    method initFields_XYOscillateVelocityMovement {} {
+        my jset oscillateMin 0
+        my jset oscillateMax 0
+        my jset oscillate 0
+        my jset oscillatePositive false
+        
+        
+        my jset oscillate 0
+        my jset oscillatePositive false
+        return
+    }
+    
 
-sub new {
-    my ($class, $speedBasicDecimal, $oscillateMin, $oscillateMax) = @_;
-    my $self = $class->SUPER::new($speedBasicDecimal, 'org::allbinary::game::physics::velocity::VelocityProperties'->new(int($speedBasicDecimal->getUnscaled()), int($speedBasicDecimal->getUnscaled())));
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{oscillateMin} = $oscillateMin;
-        $self->{oscillateMax} = $oscillateMax;
-    return $self;
-}
+    constructor {speedBasicDecimal oscillateMin oscillateMax} {
+        next $speedBasicDecimal [::VelocityProperties new [jint [$speedBasicDecimal getUnscaled]] [jint [$speedBasicDecimal getUnscaled]]]
+        my initFields_XYOscillateVelocityMovement
+        my jset oscillateMin $oscillateMin
+        my jset oscillateMax $oscillateMax
+    }
+    
 
-
-# throws Exception
-sub process {
-    my ($self, $layer) = @_;
-        $self->SUPER::process($layer);
-        if ($self->{oscillate} < $self->{oscillateMin}) {
-            $self->{oscillatePositive} = 1;
-            $self->getVelocityProperties()->getVelocityYBasicDecimalP()->addint(3000);
-        } elsif ($self->{oscillate} > $self->{oscillateMax}) {
-            $self->{oscillatePositive} = 0;
-            $self->getVelocityProperties()->getVelocityYBasicDecimalP()->subtractint(3000);
+    method process {layer} {
+        next $layer
+        if {[expr {[my jget oscillate] < [my jget oscillateMin]}]} {
+            my jset oscillatePositive true
+            [[my getVelocityProperties] getVelocityYBasicDecimalP] addint 3000
+        } elseif {[expr {[my jget oscillate] > [my jget oscillateMax]}]} {
+            my jset oscillatePositive false
+            [[my getVelocityProperties] getVelocityYBasicDecimalP] subtractint 3000
         }
-        if ($self->{oscillatePositive}) {
-            $self->{oscillate}++;
-            $self->getVelocityProperties()->getVelocityXBasicDecimalP()->addint(5000);
+        if {[my jget oscillatePositive]} {
+            my jpostinc oscillate 1
+            [[my getVelocityProperties] getVelocityXBasicDecimalP] addint 5000
         } else {
-            $self->{oscillate}--;
-            $self->getVelocityProperties()->getVelocityXBasicDecimalP()->subtractint(5000);
+            my jpostinc oscillate -1
+            [[my getVelocityProperties] getVelocityXBasicDecimalP] subtractint 5000
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::layer::AllBinaryGameLayer ();
-use org::allbinary::game::physics::velocity::VelocityProperties ();
-use org::allbinary::logic::math::BasicDecimal ();
-use org::allbinary::physics::movement::BasicConstantVelocityMovement ();
+namespace eval ::XYOscillateVelocityMovement {
+}
 
-1;
 

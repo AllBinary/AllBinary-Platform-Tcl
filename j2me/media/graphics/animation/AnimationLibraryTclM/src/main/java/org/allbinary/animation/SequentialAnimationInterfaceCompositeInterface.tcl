@@ -11,17 +11,19 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-# Java interface
-package org::allbinary::animation::SequentialAnimationInterfaceCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::IndexedAnimationInterfaceCompositeInterface';
+oo::class create ::SequentialAnimationInterfaceCompositeInterface {
+    superclass ::JObject
+}
 
+oo::define ::SequentialAnimationInterfaceCompositeInterface {
+    method initFields_SequentialAnimationInterfaceCompositeInterface {} {
+        return
+    }
+}
 
-use org::allbinary::animation::IndexedAnimationInterfaceCompositeInterface ();
+namespace eval ::SequentialAnimationInterfaceCompositeInterface {
+}
 
-1;
 

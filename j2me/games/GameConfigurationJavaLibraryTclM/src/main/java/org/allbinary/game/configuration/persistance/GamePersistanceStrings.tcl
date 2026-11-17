@@ -11,39 +11,53 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.persistance
 
-package org::allbinary::game::configuration::persistance::GamePersistanceStrings;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::persistance::GamePersistanceStrings'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{SAVED_GAME_RECORD_ID} = "_SG";
-    $self->{SAVED_GAME_CONFIGURATION_RECORD_ID} = "_SGC";
-    $self->{DEFAULT_INPUT_MAPPING_RECORD_ID} = "_DIM";
-    $self->{SAVED_INPUT_CONFIGURATION_RECORD_ID} = "_SIC";
+oo::class create ::GamePersistanceStrings {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::GamePersistanceStrings {
+    method initFields_GamePersistanceStrings {} {
+        my jset SAVED_GAME_RECORD_ID {}
+        my jset SAVED_GAME_CONFIGURATION_RECORD_ID {}
+        my jset DEFAULT_INPUT_MAPPING_RECORD_ID {}
+        my jset SAVED_INPUT_CONFIGURATION_RECORD_ID {}
+        my jset SAVED_GAME_RECORD_ID "_SG"
+        my jset SAVED_GAME_CONFIGURATION_RECORD_ID "_SGC"
+        my jset DEFAULT_INPUT_MAPPING_RECORD_ID "_DIM"
+        my jset SAVED_INPUT_CONFIGURATION_RECORD_ID "_SIC"
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_GamePersistanceStrings
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::persistance::GamePersistanceStrings::instance;
+namespace eval ::GamePersistanceStrings {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GamePersistanceStrings new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GamePersistanceStrings::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

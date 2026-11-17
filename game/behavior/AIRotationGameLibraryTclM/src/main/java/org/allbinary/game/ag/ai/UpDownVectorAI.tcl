@@ -11,62 +11,51 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::UpDownVectorAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ai::BasicAI';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{velocityInterface} = undef;
-    $self->{index} = 0;
+oo::class create ::UpDownVectorAI {
+    superclass ::BasicAI
 }
 
+oo::define ::UpDownVectorAI {
+    method initFields_UpDownVectorAI {} {
+        my jset velocityInterface {}
+        my jset index 0
+        
+        my jset index 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        my $velocityInterfaceCompositeInterface = $self->getOwnerLayerInterface();
-        $self->{velocityInterface} = $velocityInterfaceCompositeInterface->getVelocityProperties();
-        $self->{velocityInterface}->getVelocityYBasicDecimalP()->setint(0);
-    return $self;
-}
+    constructor {ownerLayerInterface gameInput} {
+        next $ownerLayerInterface $gameInput
+        my initFields_UpDownVectorAI
+        set velocityInterfaceCompositeInterface [my getOwnerLayerInterface]
+        my jset velocityInterface [$velocityInterfaceCompositeInterface getVelocityProperties]
+        [[my jget velocityInterface] getVelocityYBasicDecimalP] setint 0
+    }
+    
 
-
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        my $y = $self->getOwnerLayerInterface()->getHeight() * 270;
-        if ($self->{index} < 5) {
-            my $basicDecimal = $self->{velocityInterface}->getVelocityYBasicDecimalP();
-            $basicDecimal->setint(0);
-            $basicDecimal->addint($y);
-            $self->{index}++;
-        } elsif ($self->{index} < 10) {
-            my $basicDecimal = $self->{velocityInterface}->getVelocityYBasicDecimalP();
-            $basicDecimal->setint(0);
-            $basicDecimal->subtractint($y);
-            $self->{index}++;
+    method processAI {allBinaryLayerManager} {
+        set y [expr {[[my getOwnerLayerInterface] getHeight] * 270}]
+        if {[expr {[my jget index] < 5}]} {
+            set basicDecimal [[my jget velocityInterface] getVelocityYBasicDecimalP]
+            $basicDecimal setint 0
+            $basicDecimal addint $y
+            my jpostinc index 1
+        } elseif {[expr {[my jget index] < 10}]} {
+            set basicDecimal [[my jget velocityInterface] getVelocityYBasicDecimalP]
+            $basicDecimal setint 0
+            $basicDecimal subtractint $y
+            my jpostinc index 1
         } else {
-            $self->{index} = 0;
-            $self->processAI($allBinaryLayerManager);
+            my jset index 0
+            my processAI $allBinaryLayerManager
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::ai::BasicAI ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::game::physics::velocity::BasicVelocityProperties ();
-use org::allbinary::game::physics::velocity::VelocityInterfaceCompositeInterface ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::logic::math::BasicDecimal ();
+namespace eval ::UpDownVectorAI {
+}
 
-1;
 

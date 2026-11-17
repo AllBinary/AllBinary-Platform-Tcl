@@ -11,37 +11,31 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::TopToBottomImageAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::image::BaseImageAnimationFactory';
-
-
-
-sub new {
-    my ($class, $image, $sequenceArray, $animationBehaviorFactory) = @_;
-    my $self = $class->SUPER::new($image, $sequenceArray, $image->getWidth(), $image->getHeight(), 0, 0, $animationBehaviorFactory);
-        # super(...) made $self above
-    return $self;
+oo::class create ::TopToBottomImageAnimationFactory {
+    superclass ::BaseImageAnimationFactory
 }
 
+oo::define ::TopToBottomImageAnimationFactory {
+    method initFields_TopToBottomImageAnimationFactory {} {
+        return
+    }
+    
 
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        my $scaledImage = $self->{animationFactoryImageScaleUtil}->createImage($self->getImage(), $self->{animationFactoryInitializationVisitor}->{width}, $self->{animationFactoryInitializationVisitor}->{height}, $self->{scaleProperties}->{scaleWidth}, $self->{scaleProperties}->{scaleHeight});
-        return 'org::allbinary::animation::image::TopToBottomImageAnimation'->new($scaledImage, $self->getSequenceArray(), $self->{animationBehaviorFactory}->getOrCreateInstance());
+    constructor {image sequenceArray animationBehaviorFactory} {
+        next $image $sequenceArray [$image getWidth] [$image getHeight] 0 0 $animationBehaviorFactory
+        my initFields_TopToBottomImageAnimationFactory
+    }
+    
+
+    method getInstance {instanceId} {
+        set scaledImage [[my jget animationFactoryImageScaleUtil] createImage [my getImage] [[my jget animationFactoryInitializationVisitor] jget width] [[my jget animationFactoryInitializationVisitor] jget height] [[my jget scaleProperties] jget scaleWidth] [[my jget scaleProperties] jget scaleHeight]]
+        return [::TopToBottomImageAnimation new $scaledImage [my getSequenceArray] [[my jget animationBehaviorFactory] getOrCreateInstance]]
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::animation::image::BaseImageAnimationFactory ();
-use org::allbinary::animation::image::TopToBottomImageAnimation ();
+namespace eval ::TopToBottomImageAnimationFactory {
+}
 
-1;
 

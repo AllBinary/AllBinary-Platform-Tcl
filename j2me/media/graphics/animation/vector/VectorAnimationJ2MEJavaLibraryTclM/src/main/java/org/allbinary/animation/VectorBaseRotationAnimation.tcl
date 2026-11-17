@@ -11,141 +11,116 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::VectorBaseRotationAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::RotationAnimation','org::allbinary::animation::VectorAnimationInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{currentPoints} = 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_INT_ARRAY_ARRAY_ARRAY};
+oo::class create ::VectorBaseRotationAnimation {
+    superclass ::RotationAnimation
 }
 
+oo::define ::VectorBaseRotationAnimation {
+    method initFields_VectorBaseRotationAnimation {} {
+        my jset currentPoints {}
+        my jset currentPoints [[::NullUtil::getInstance] jget NULL_INT_ARRAY_ARRAY_ARRAY]
+        return
+    }
+    
 
-sub new {
-    my ($class, $angleInfo, $currentPoints, $basicColor, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($angleInfo, 'org::allbinary::util::CircularIndexUtil'->createInstance(360 / $angleInfo->getAngleIncrementInfo()->getAngleIncrement()), $animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->setPoints($currentPoints);
-        $self->setBasicColorP($basicColor);
-    return $self;
-}
+    constructor {angleInfo currentPoints basicColor animationBehavior} {
+        next $angleInfo [::CircularIndexUtil::createInstance [expr {360 / [[$angleInfo getAngleIncrementInfo] getAngleIncrement]}]] $animationBehavior
+        my initFields_VectorBaseRotationAnimation
+        my setPoints $currentPoints
+        my setBasicColorP $basicColor
+    }
+    
 
+    method getAnimationSize {} {
+        return [my getSize]
+    }
+    
 
-# throws Exception
-sub getAnimationSize {
-    my ($self) = @_;
-        return $self->getSize();
-}
+    method getFrame {} {
+        return [[my jget circularIndexUtil] getIndex]
+    }
+    
 
+    method setFrame {index} {
+        [my jget circularIndexUtil] setIndex $index
+    }
+    
 
-sub getFrame {
-    my ($self) = @_;
-        return $self->{circularIndexUtil}->getIndex();
-}
+    method nextFrame {} {
+        [my jget circularIndexUtil] next
+    }
+    
 
+    method previousFrame {} {
+        [my jget circularIndexUtil] previous
+    }
+    
 
-sub setFrame {
-    my ($self, $index) = @_;
-        $self->{circularIndexUtil}->setIndex($index);
-}
+    method getSize {} {
+        return [[my jget currentPoints] length]
+    }
+    
 
+    method setSequence {sequence} {
+    }
+    
 
-sub nextFrame {
-    my ($self) = @_;
-        $self->{circularIndexUtil}->next();
-}
+    method getSequence {} {
+        return [::PrimitiveIntUtil::getArrayInstance]
+    }
+    
 
-
-sub previousFrame {
-    my ($self) = @_;
-        $self->{circularIndexUtil}->previous();
-}
-
-
-sub getSize {
-    my ($self) = @_;
-        return scalar(@{$self->{currentPoints}});
-}
-
-
-sub setSequence {
-    my ($self, $sequence) = @_;
-}
-
-
-sub getSequence {
-    my ($self) = @_;
-        return 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance();
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->{basicSetColorUtil}->setBasicColorP($graphics, $self->{basicColor});
+    method paintXY {graphics x y} {
+        [my jget basicSetColorUtil] setBasicColorP $graphics [my jget basicColor]
         try {
-            my $nextPointX = 0;
-            my $nextPointY = 0;
-            my $nextPoint = undef;
-            my $point = undef;
-            my $currentPointsFrame = $self->{currentPoints}->[$self->{circularIndexUtil}->getIndex()];
-            my $size = scalar(@{$currentPointsFrame});
-            my $index = $size - 2;
-            while (--$index >= 0) {
-                $nextPoint = $currentPointsFrame->[$index];
-                $point = $currentPointsFrame->[$index + 1];
-                $nextPointX = $nextPoint->[0];
-                $nextPointY = $nextPoint->[1];
-                if ($nextPointX != 1000) {
-                    $graphics->drawLine($point->[0] + $x, $point->[1] + $y, $nextPointX + $x, $nextPointY + $y);
+            set nextPointX 0
+            set nextPointY 0
+            set nextPoint {}
+            set point {}
+            set currentPointsFrame [[my jget currentPoints] get [[my jget circularIndexUtil] getIndex]]
+            set size [$currentPointsFrame length]
+            set index [jint [expr {$size - 2}]]
+            while {[expr {[jpreincr index -1] >= 0}]} {
+                set nextPoint [$currentPointsFrame get $index]
+                set point [$currentPointsFrame get [jint [expr {$index + 1}]]]
+                set nextPointX [$nextPoint get 0]
+                set nextPointY [$nextPoint get 1]
+                if {[expr {$nextPointX != 1000}]} {
+                    $graphics drawLine [jint [expr {[$point get 0] + $x}]] [jint [expr {[$point get 1] + $y}]] [jint [expr {$nextPointX + $x}]] [jint [expr {$nextPointY + $y}]]
                 } else {
-                    $index--;
+                    jpostincr index -1
                 }
             }
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "paintVectors", $e);
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "paintVectors" $e
         }
+    }
+    
+
+    method getPoints {frame} {
+        return [[my jget currentPoints] get $frame]
+    }
+    
+
+    method setPoints {currentPoints} {
+        my jset currentPoints $currentPoints
+        my jset circularIndexUtil [::CircularIndexUtil::createInstance [[my jget currentPoints] length]]
+    }
+    
+
+    method getBasicColorP {} {
+        return [next]
+    }
+    
+
+    method setBasicColorP {basicColor} {
+        next $basicColor
+    }
 }
 
-
-sub getPoints {
-    my ($self, $frame) = @_;
-        return $self->{currentPoints}->[$frame];
+namespace eval ::VectorBaseRotationAnimation {
 }
 
-
-sub setPoints {
-    my ($self, $currentPoints) = @_;
-        $self->{currentPoints} = $currentPoints;
-        $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstance(scalar(@{$self->{currentPoints}}));
-}
-
-
-sub getBasicColorP {
-    my ($self) = @_;
-        return $self->SUPER::getBasicColorP();
-}
-
-
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
-        $self->SUPER::setBasicColorP($basicColor);
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::math::AngleInfo ();
-use org::allbinary::util::CircularIndexUtil ();
-use org::allbinary::animation::RotationAnimation ();
-use org::allbinary::animation::VectorAnimationInterface ();
-
-1;
 

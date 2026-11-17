@@ -11,38 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::MultipleScrollSelectionFormRectPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{multipleScrollSelectionForm} = undef;
+oo::class create ::MultipleScrollSelectionFormRectPaintable {
+    superclass ::Paintable
 }
 
+oo::define ::MultipleScrollSelectionFormRectPaintable {
+    method initFields_MultipleScrollSelectionFormRectPaintable {} {
+        my jset multipleScrollSelectionForm {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $multipleScrollSelectionForm) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{multipleScrollSelectionForm} = $multipleScrollSelectionForm;
-    return $self;
+    constructor {multipleScrollSelectionForm} {
+        next
+        my initFields_MultipleScrollSelectionFormRectPaintable
+        my jset multipleScrollSelectionForm $multipleScrollSelectionForm
+    }
+    
+
+    method paint {graphics} {
+        [my jget multipleScrollSelectionForm] fillRect $graphics
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{multipleScrollSelectionForm}->fillRect($graphics);
+namespace eval ::MultipleScrollSelectionFormRectPaintable {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::paint::Paintable ();
-
-1;
 

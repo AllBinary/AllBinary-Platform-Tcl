@@ -11,31 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-# Java interface
-package org::allbinary::animation::AnimationInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::LocationPaintableInterface';
-
-
-
-# throws Exception
-sub nextFrame {
-    my ($self) = @_;
-    die "abstract method nextFrame";
+oo::class create ::AnimationInterface {
+    superclass ::JObject
 }
 
+oo::define ::AnimationInterface {
+    method initFields_AnimationInterface {} {
+        return
+    }
+    
 
-sub paintThreedXYZ {
-    my ($self, $graphics, $x, $y, $z) = @_;
-    die "abstract method paintThreedXYZ";
+    method nextFrame {} {
+        error [jexception AbstractMethodError nextFrame]
+    }
+    
+
+    method paintThreedXYZ {graphics x y z} {
+        error [jexception AbstractMethodError paintThreedXYZ]
+    }
 }
 
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::paint::LocationPaintableInterface ();
+namespace eval ::AnimationInterface {
+}
 
-1;
 

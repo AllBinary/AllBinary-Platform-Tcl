@@ -11,52 +11,61 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.drop
 
-package org::allbinary::game::layer::drop::DropLayerProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::BasicLayerProcessor';
-
-tie our $LAYER_PROCESSOR, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::drop::DropLayerProcessor'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::DropLayerProcessor {
+    superclass ::BasicLayerProcessor
 }
 
+oo::define ::DropLayerProcessor {
+    method initFields_DropLayerProcessor {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::layer::drop::DropLayerProcessor::LAYER_PROCESSOR;
-}
+    constructor {} {
+        next
+        my initFields_DropLayerProcessor
+    }
+    
+    
 
-
-# throws Exception
-sub process {
-    my ($self, $allBinaryLayerManager) = @_;
-        my $list = $self->getList();
-        my $size = $list->size();
-        my $layerInterface = undef;
-        my $dropLayerInterface = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $layerInterface = $list->{objectArray}->[$index];
-            $dropLayerInterface = $layerInterface;
-            $layerInterface = $dropLayerInterface->getDroppedLayer();
-            $allBinaryLayerManager->append($layerInterface);
+    method process {allBinaryLayerManager} {
+        set list [my getList]
+        set size [$list size]
+        set layerInterface {}
+        set dropLayerInterface {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set layerInterface [[$list jget objectArray] get $index]
+            set dropLayerInterface $layerInterface
+            set layerInterface [$dropLayerInterface getDroppedLayer]
+            $allBinaryLayerManager append $layerInterface
         }
-        $list->clear();
+        $list clear
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::layer::BasicLayerProcessor ();
-use org::allbinary::util::BasicArrayList ();
+namespace eval ::DropLayerProcessor {
+    variable LAYER_PROCESSORValue {}
+    variable LAYER_PROCESSORSet 0
+    proc staticGet_LAYER_PROCESSOR {} {
+        variable LAYER_PROCESSORValue
+        variable LAYER_PROCESSORSet
+        if {!$LAYER_PROCESSORSet} {
+            set LAYER_PROCESSORSet 1
+            set LAYER_PROCESSORValue [::DropLayerProcessor new]
+        }
+        return $LAYER_PROCESSORValue
+    }
+    proc staticSet_LAYER_PROCESSOR {value} {
+        variable LAYER_PROCESSORValue
+        variable LAYER_PROCESSORSet
+        set LAYER_PROCESSORSet 1
+        set LAYER_PROCESSORValue $value
+    }
+    proc getInstance {} {
+        return [::DropLayerProcessor::staticGet_LAYER_PROCESSOR]
+    }
+}
 
-1;
 

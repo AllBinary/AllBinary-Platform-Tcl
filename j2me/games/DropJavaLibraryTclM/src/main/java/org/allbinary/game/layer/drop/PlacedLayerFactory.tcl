@@ -1,64 +1,68 @@
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.drop
 
-package org::allbinary::game::layer::drop::PlacedLayerFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::drop::PlacedLayerFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{basicArrayListUtil} = 'org::allbinary::util::BasicArrayListUtil'->getInstance();
+oo::class create ::PlacedLayerFactory {
+    superclass ::JObject
 }
 
+oo::define ::PlacedLayerFactory {
+    method initFields_PlacedLayerFactory {} {
+        my jset list {}
+        my jset basicArrayListUtil {}
+        my jset list [::BasicArrayListD new]
+        my jset basicArrayListUtil [::BasicArrayListUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_PlacedLayerFactory
+    }
+    
+
+    method clear {} {
+        [my jget list] clear
+    }
+    
+    
+
+    method getSize {} {
+        return [[my jget list] size]
+    }
+    
+
+    method getRandomInstance {} {
+        return [[my jget basicArrayListUtil] getRandom [my jget list]]
+    }
+    
+
+    method add {layerInterfaceFactoryInterface} {
+        [my jget list] add $layerInterfaceFactoryInterface
+    }
 }
 
-
-sub clear {
-    my ($self) = @_;
-        $self->{list}->clear();
+namespace eval ::PlacedLayerFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::PlacedLayerFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::PlacedLayerFactory::staticGet_instance]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::layer::drop::PlacedLayerFactory::instance;
-}
-
-
-sub getSize {
-    my ($self) = @_;
-        return $self->{list}->size();
-}
-
-
-sub getRandomInstance {
-    my ($self) = @_;
-        return $self->{basicArrayListUtil}->getRandom($self->{list});
-}
-
-
-sub add {
-    my ($self, $layerInterfaceFactoryInterface) = @_;
-        $self->{list}->add($layerInterfaceFactoryInterface);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::layer::AllBinaryLayerFactoryInterface ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::util::BasicArrayListUtil ();
-
-1;
 

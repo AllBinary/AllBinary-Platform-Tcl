@@ -11,184 +11,151 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.resource
 
-package org::allbinary::animation::resource::BaseResourceAnimationInterfaceFactoryInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::resource::FeatureResourceAnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{hashtable} = undef;
-    $self->{rectangleHashtable} = undef;
-    $self->{rectangleArrayOfArraysHashtable} = undef;
-    $self->{name} = undef;
-    $self->{initialized} = 0;
+oo::class create ::BaseResourceAnimationInterfaceFactoryInterfaceFactory {
+    superclass ::JObject
 }
 
+oo::define ::BaseResourceAnimationInterfaceFactoryInterfaceFactory {
+    method initFields_BaseResourceAnimationInterfaceFactoryInterfaceFactory {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset hashtable {}
+        my jset rectangleHashtable {}
+        my jset rectangleArrayOfArraysHashtable {}
+        my jset name {}
+        my jset initialized false
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        
+        
+        
+        
+        my jset initialized false
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $hashtable, $rectangleHashtable, $rectangleArrayHashtable) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{hashtable} = $hashtable;
-        $self->{rectangleHashtable} = $rectangleHashtable;
-        $self->{rectangleArrayOfArraysHashtable} = $rectangleArrayHashtable;
-        $self->{name} = $name;
-    return $self;
-}
+    constructor {name hashtable rectangleHashtable rectangleArrayHashtable} {
+        next
+        my initFields_BaseResourceAnimationInterfaceFactoryInterfaceFactory
+        my jset hashtable $hashtable
+        my jset rectangleHashtable $rectangleHashtable
+        my jset rectangleArrayOfArraysHashtable $rectangleArrayHashtable
+        my jset name $name
+    }
+    
 
+    method getName {} {
+        return [my jget name]
+    }
+    
 
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
-}
+    method init {level} {
+        set commonStrings [::CommonStrings::getInstance]
+        [my jget logUtil] putF [[[[::StringMaker new] append "Available List of Animations: "] append [[my jget hashtable] toString]] toString] [self] [$commonStrings jget INIT]
+        my setInitialized true
+    }
+    
 
+    method initImageCache {imageCache level} {
+    }
+    
 
-# throws Exception
-sub init {
-    my ($self, $level) = @_;
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Available List of Animations: ")->append($self->{hashtable}->toString())->toString(), $self, $commonStrings->{INIT});
-        $self->setInitialized(1);
-}
-
-
-# throws Exception
-sub initImageCache {
-    my ($self, $imageCache, $level) = @_;
-}
-
-
-# throws Exception
-sub add {
-    my ($self, $resource, $animationInterfaceFactoryInterface) = @_;
-        if ($self->{hashtable}->containsKey($resource)) {
-            die ('org::allbinary::logic::string::StringMaker'->new()->append("Resource Already Created: ")->append($resource)->toString());
+    method add {resource animationInterfaceFactoryInterface} {
+        if {[[my jget hashtable] containsKey $resource]} {
+            error [jexception Exception [[[[::StringMaker new] append "Resource Already Created: "] append $resource] toString]]
         }
-        $self->{hashtable}->put($resource, $animationInterfaceFactoryInterface);
-}
+        [my jget hashtable] put $resource $animationInterfaceFactoryInterface
+    }
+    
 
-
-# throws Exception
-sub getBasicAnimationInterfaceFactoryInstance {
-    my ($self, $resource) = @_;
-        my $basicAnimationInterfaceFactoryInterfaceCanBeNull = $self->{hashtable}->get($resource);
-        if (!defined($basicAnimationInterfaceFactoryInterfaceCanBeNull)) {
-            return $org::allbinary::animation::NullAnimationFactory::NULL_NOT_FOR_USE_ANIMATION_FACTORY;
+    method getBasicAnimationInterfaceFactoryInstance {resource} {
+        set basicAnimationInterfaceFactoryInterfaceCanBeNull [[my jget hashtable] get $resource]
+        if {[expr {$basicAnimationInterfaceFactoryInterfaceCanBeNull eq {}}]} {
+            return [::NullAnimationFactory::staticGet_NULL_NOT_FOR_USE_ANIMATION_FACTORY]
         }
-        return $basicAnimationInterfaceFactoryInterfaceCanBeNull;
-}
+        return $basicAnimationInterfaceFactoryInterfaceCanBeNull
+    }
+    
 
-
-# throws Exception
-sub getRectangle {
-    my ($self, $resource) = @_;
-        my $rectangleCanBeNull = $self->{rectangleHashtable}->get($resource);
-        if (!defined($rectangleCanBeNull)) {
-            return $org::allbinary::graphics::RectangleFactory::SINGLETON;
+    method getRectangle {resource} {
+        set rectangleCanBeNull [[my jget rectangleHashtable] get $resource]
+        if {[expr {$rectangleCanBeNull eq {}}]} {
+            return [::RectangleFactory::staticGet_SINGLETON]
         }
-        return $rectangleCanBeNull;
-}
+        return $rectangleCanBeNull
+    }
+    
 
+    method addRectangle {resource rectangle} {
+        [my jget rectangleHashtable] put $resource $rectangle
+    }
+    
 
-# throws Exception
-sub addRectangle {
-    my ($self, $resource, $rectangle) = @_;
-        $self->{rectangleHashtable}->put($resource, $rectangle);
-}
-
-
-# throws Exception
-sub getRectangleArrayOfArrays {
-    my ($self, $resource) = @_;
-        my $valueCanBeNull = $self->{rectangleArrayOfArraysHashtable}->get($resource);
-        if (defined($valueCanBeNull)) {
-            my $rectangleArrayOfArrays = $valueCanBeNull;
-            return $rectangleArrayOfArrays;
+    method getRectangleArrayOfArrays {resource} {
+        set valueCanBeNull [[my jget rectangleArrayOfArraysHashtable] get $resource]
+        if {[expr {$valueCanBeNull ne {}}]} {
+            set rectangleArrayOfArrays $valueCanBeNull
+            return $rectangleArrayOfArrays
         } else {
-            return $org::allbinary::graphics::RectangleFactory::ARRAY_OF_ARRAYS;
+            return [::RectangleFactory::staticGet_ARRAY_OF_ARRAYS]
         }
-}
+    }
+    
 
+    method addRectangleArrayOfArrays {resource rectangleArrayOfArrays} {
+        [my jget rectangleArrayOfArraysHashtable] put $resource $rectangleArrayOfArrays
+    }
+    
 
-# throws Exception
-sub addRectangleArrayOfArrays {
-    my ($self, $resource, $rectangleArrayOfArrays) = @_;
-        $self->{rectangleArrayOfArraysHashtable}->put($resource, $rectangleArrayOfArrays);
-}
+    method isFeature {} {
+        return false
+    }
+    
 
-
-sub isFeature {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub isLoadingLevel {
-    my ($self, $level) = @_;
-        my $resourceLoadingLevelFactory = 'org::allbinary::game::resource::ResourceLoadingLevelFactory'->getInstance();
-        if ($level == $resourceLoadingLevelFactory->{LOAD_ALL}->getLevel()) {
-            return 1;
+    method isLoadingLevel {level} {
+        set resourceLoadingLevelFactory [::ResourceLoadingLevelFactory::getInstance]
+        if {[expr {$level == [[$resourceLoadingLevelFactory jget LOAD_ALL] getLevel]}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
+    
+
+    method toString {} {
+        return [[[[[[::StringMaker new] append [jclassname [self]]] append [[::CommonSeps::getInstance] jget SEMICOLON]] append [[::CommonSeps::getInstance] jget SPACE]] append [my jget name]] toString]
+    }
+    
+
+    method getHashtable {} {
+        return [my jget hashtable]
+    }
+    
+
+    method getRectangleHashtable {} {
+        return [my jget rectangleHashtable]
+    }
+    
+
+    method getRectangleArrayOfArraysHashtable {} {
+        return [my jget rectangleArrayOfArraysHashtable]
+    }
+    
+
+    method setInitialized {initialized} {
+        my jset initialized $initialized
+    }
+    
+
+    method isInitialized {} {
+        return [my jget initialized]
+    }
 }
 
-
-sub toString {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringMaker'->new()->append(ref($self))->append('org::allbinary::string::CommonSeps'->getInstance()->{SEMICOLON})->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE})->append($self->{name})->toString();
+namespace eval ::BaseResourceAnimationInterfaceFactoryInterfaceFactory {
 }
 
-
-sub getHashtable {
-    my ($self) = @_;
-        return $self->{hashtable};
-}
-
-
-sub getRectangleHashtable {
-    my ($self) = @_;
-        return $self->{rectangleHashtable};
-}
-
-
-sub getRectangleArrayOfArraysHashtable {
-    my ($self) = @_;
-        return $self->{rectangleArrayOfArraysHashtable};
-}
-
-
-sub setInitialized {
-    my ($self, $initialized) = @_;
-        $self->{initialized} = $initialized;
-}
-
-
-sub isInitialized {
-    my ($self) = @_;
-        return $self->{initialized};
-}
-
-use java::lang::Object ();
-use org::allbinary::animation::BasicAnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::NullAnimationFactory ();
-use org::allbinary::game::resource::ResourceLoadingLevelFactory ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::RectangleFactory ();
-use org::allbinary::image::ImageCache ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::animation::resource::FeatureResourceAnimationInterfaceFactoryInterface ();
-
-1;
 

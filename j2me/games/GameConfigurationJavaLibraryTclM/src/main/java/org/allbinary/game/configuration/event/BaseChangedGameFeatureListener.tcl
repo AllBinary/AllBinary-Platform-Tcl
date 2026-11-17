@@ -11,99 +11,81 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.event
 
-package org::allbinary::game::configuration::event::BaseChangedGameFeatureListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::configuration::event::GameFeatureListenerInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{gameFeatureUtil} = 'org::allbinary::game::configuration::feature::GameFeatureUtil'->getInstance();
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{changed} = 1;
+oo::class create ::BaseChangedGameFeatureListener {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::BaseChangedGameFeatureListener {
+    method initFields_BaseChangedGameFeatureListener {} {
+        my jset logUtil {}
+        my jset gameFeatureUtil {}
+        my jset list {}
+        my jset changed false
+        my jset logUtil [::LogUtil::getInstance]
+        my jset gameFeatureUtil [::GameFeatureUtil::getInstance]
+        my jset list [::BasicArrayListD new]
+        my jset changed true
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_BaseChangedGameFeatureListener
+    }
+    
 
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::string::CommonStrings'->getInstance()->{NOT_IMPLEMENTED}, $self);
-}
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::CommonStrings::getInstance] jget NOT_IMPLEMENTED] [self]
+    }
+    
 
+    method onGameFeatureChange {gameFeatureEvent} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[my jget gameFeatureUtil] jget GAME_FEATURE_CHANGED]] append [$gameFeatureEvent getWhatChanged]] toString] [self] [[my jget gameFeatureUtil] jget ON_GAME_FEATURE_CHANGE]
+        [my jget list] add [$gameFeatureEvent getGameOption]
+        my setChanged true
+    }
+    
 
-sub onGameFeatureChange {
-    my ($self, $gameFeatureEvent) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{gameFeatureUtil}->{GAME_FEATURE_CHANGED})->append($gameFeatureEvent->getWhatChanged())->toString(), $self, $self->{gameFeatureUtil}->{ON_GAME_FEATURE_CHANGE});
-        $self->{list}->add($gameFeatureEvent->getGameOption());
-        $self->setChanged(1);
-}
+    method add {gameFeature} {
+        [my jget list] add $gameFeature
+    }
+    
 
+    method remove {gameFeature} {
+        [my jget list] remove $gameFeature
+    }
+    
 
-sub add {
-    my ($self, $gameFeature) = @_;
-        $self->{list}->add($gameFeature);
-}
-
-
-sub remove {
-    my ($self, $gameFeature) = @_;
-        $self->{list}->remove($gameFeature);
-}
-
-
-sub setChanged {
-    my ($self, $initialized) = @_;
-        $self->{changed} = $initialized;
-        if (!$self->isChanged()) {
-            $self->{list}->clear();
+    method setChanged {initialized} {
+        my jset changed $initialized
+        if {[expr {![my isChanged]}]} {
+            [my jget list] clear
         }
+    }
+    
+
+    method isChangedFeature {gameFeature} {
+        set isChanged [[my jget list] contains $gameFeature]
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "GameFeature: "
+        $stringBuffer append [[::StringUtil::getInstance] toString1 $gameFeature]
+        $stringBuffer append " isFeature: "
+        $stringBuffer appendboolean [[::Features::getInstance] isFeature $gameFeature]
+        $stringBuffer append " isChanged: "
+        $stringBuffer appendboolean $isChanged
+        [my jget logUtil] putF [$stringBuffer toString] [self] "isChanged"
+        return $isChanged
+    }
+    
+
+    method isChanged {} {
+        return [my jget changed]
+    }
 }
 
-
-sub isChangedFeature {
-    my ($self, $gameFeature) = @_;
-        my $isChanged = $self->{list}->contains($gameFeature);
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("GameFeature: ");
-        $stringBuffer->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($gameFeature));
-        $stringBuffer->append(" isFeature: ");
-        $stringBuffer->appendboolean('org::allbinary::game::configuration::feature::Features'->getInstance()->isFeature($gameFeature));
-        $stringBuffer->append(" isChanged: ");
-        $stringBuffer->appendboolean($isChanged);
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, "isChanged");
-        return $isChanged;
+namespace eval ::BaseChangedGameFeatureListener {
 }
 
-
-sub isChanged {
-    my ($self) = @_;
-        return $self->{changed};
-}
-
-use java::lang::Object ();
-use org::allbinary::game::configuration::feature::Feature ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::GameFeatureUtil ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::game::configuration::event::GameFeatureListenerInterface ();
-
-1;
 

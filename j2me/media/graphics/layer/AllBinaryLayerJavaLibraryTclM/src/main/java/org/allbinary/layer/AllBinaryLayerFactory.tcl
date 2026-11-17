@@ -11,41 +11,33 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-package org::allbinary::layer::AllBinaryLayerFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::layer::AllBinaryLayerFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{rectangle} = undef;
+oo::class create ::AllBinaryLayerFactory {
+    superclass ::JObject
 }
 
+oo::define ::AllBinaryLayerFactory {
+    method initFields_AllBinaryLayerFactory {} {
+        my jset rectangle {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $rectangle) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{rectangle} = $rectangle;
-    return $self;
+    constructor {rectangle} {
+        next
+        my initFields_AllBinaryLayerFactory
+        my jset rectangle $rectangle
+    }
+    
+
+    method getInstance {} {
+        return [::AllBinaryLayer new [[::StringUtil::getInstance] jget EMPTY_STRING] [my jget rectangle] [::ViewPosition::getInstanceD]]
+    }
 }
 
-
-sub getInstance {
-    my ($self) = @_;
-        return 'org::allbinary::layer::AllBinaryLayer'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $self->{rectangle}, 'org::allbinary::view::ViewPosition'->getInstanceD());
+namespace eval ::AllBinaryLayerFactory {
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::view::ViewPosition ();
-use org::allbinary::layer::AllBinaryLayerFactoryInterface ();
-use org::allbinary::layer::AllBinaryLayer ();
-
-1;
 

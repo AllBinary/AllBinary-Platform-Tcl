@@ -11,36 +11,49 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary
 
-package org::allbinary::PostGameCommandFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::PostGameCommandFactory'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::PostGameCommandFactory {
+    superclass ::JObject
 }
 
+oo::define ::PostGameCommandFactory {
+    method initFields_PostGameCommandFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        die ("RuntimeException");
+    constructor {} {
+        next
+        my initFields_PostGameCommandFactory
+    }
+    
+    
+
+    method addCommands {canvas} {
+    }
 }
 
-
-sub addCommands {
-    my ($self, $canvas) = @_;
+namespace eval ::PostGameCommandFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::PostGameCommandFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        error [jexception RuntimeException {}]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Canvas ();
-
-1;
 

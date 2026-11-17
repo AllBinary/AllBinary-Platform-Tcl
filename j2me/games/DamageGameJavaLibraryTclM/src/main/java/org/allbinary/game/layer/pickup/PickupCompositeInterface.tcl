@@ -11,27 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
-# Java interface
-package org::allbinary::game::layer::pickup::PickupCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getPickupBehavior {
-    my ($self) = @_;
-    die "abstract method getPickupBehavior";
+oo::class create ::PickupCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::PickupCompositeInterface {
+    method initFields_PickupCompositeInterface {} {
+        return
+    }
+    
 
-sub setPickupBehavior {
-    my ($self, $pickupBehavior) = @_;
-    die "abstract method setPickupBehavior";
+    method getPickupBehavior {} {
+        error [jexception AbstractMethodError getPickupBehavior]
+    }
+    
+
+    method setPickupBehavior {pickupBehavior} {
+        error [jexception AbstractMethodError setPickupBehavior]
+    }
 }
 
+namespace eval ::PickupCompositeInterface {
+}
 
-1;
 

@@ -11,28 +11,25 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
-package org::allbinary::logic::io::AbFileLocalInputStream;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::io::AbFileInputStream';
-
-
-
-sub new {
-    my ($class, $file) = @_;
-    my $self = $class->SUPER::new('org::allbinary::logic::io::file::AbFileNativeUtil'->get($file)->getPath());
-        # super(...) made $self above
-    return $self;
+oo::class create ::AbFileLocalInputStream {
+    superclass ::AbFileInputStream
 }
 
-use java::lang::Object ();
-# use java::io::FileNotFoundException ();
-use org::allbinary::logic::io::file::AbFile ();
-use org::allbinary::logic::io::file::AbFileNativeUtil ();
-use org::allbinary::logic::io::AbFileInputStream ();
+oo::define ::AbFileLocalInputStream {
+    method initFields_AbFileLocalInputStream {} {
+        return
+    }
+    
 
-1;
+    constructor {file} {
+        next [[::AbFileNativeUtil::get $file] getPath]
+        my initFields_AbFileLocalInputStream
+    }
+}
+
+namespace eval ::AbFileLocalInputStream {
+}
+
 

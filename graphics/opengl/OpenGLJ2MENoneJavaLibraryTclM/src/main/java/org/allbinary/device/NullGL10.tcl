@@ -11,25 +11,41 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.device
 
-package org::allbinary::device::NullGL10;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','javax::microedition::khronos::opengles::GL10';
-
-tie our $NULL_GL10, 'java::lang::LazyStatic', sub { 'org::allbinary::device::NullGL10'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullGL10 {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::khronos::opengles::GL10 ();
+oo::define ::NullGL10 {
+    method initFields_NullGL10 {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_NullGL10
+    }
+}
+
+namespace eval ::NullGL10 {
+    variable NULL_GL10Value {}
+    variable NULL_GL10Set 0
+    proc staticGet_NULL_GL10 {} {
+        variable NULL_GL10Value
+        variable NULL_GL10Set
+        if {!$NULL_GL10Set} {
+            set NULL_GL10Set 1
+            set NULL_GL10Value [::NullGL10 new]
+        }
+        return $NULL_GL10Value
+    }
+    proc staticSet_NULL_GL10 {value} {
+        variable NULL_GL10Value
+        variable NULL_GL10Set
+        set NULL_GL10Set 1
+        set NULL_GL10Value $value
+    }
+}
+
 

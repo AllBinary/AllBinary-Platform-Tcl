@@ -11,61 +11,70 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat
 
-package org::allbinary::game::combat::CombatBaseBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_COMBAT_BEHAVIOR, 'java::lang::LazyStatic', sub { 'org::allbinary::game::combat::CombatBaseBehavior'->new('org::allbinary::game::combat::damage::DamageableBaseBehavior'->getInstance(), 'org::allbinary::game::combat::destroy::DestroyableBaseBehavior'->getInstance()) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{damageableBaseBehavior} = undef;
-    $self->{destroyableBaseBehavior} = undef;
-    $self->{readyForExplosion} = 0;
+oo::class create ::CombatBaseBehavior {
+    superclass ::JObject
 }
 
+oo::define ::CombatBaseBehavior {
+    method initFields_CombatBaseBehavior {} {
+        my jset damageableBaseBehavior {}
+        my jset destroyableBaseBehavior {}
+        my jset readyForExplosion false
+        
+        
+        my jset readyForExplosion false
+        return
+    }
+    
 
-sub new {
-    my ($class, $damageableBaseBehavior, $destroyableBaseBehavior) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{damageableBaseBehavior} = $damageableBaseBehavior;
-        $self->{destroyableBaseBehavior} = $destroyableBaseBehavior;
-    return $self;
+    constructor {damageableBaseBehavior destroyableBaseBehavior} {
+        next
+        my initFields_CombatBaseBehavior
+        my jset damageableBaseBehavior $damageableBaseBehavior
+        my jset destroyableBaseBehavior $destroyableBaseBehavior
+    }
+    
+
+    method getDamageableBaseBehavior {} {
+        return [my jget damageableBaseBehavior]
+    }
+    
+
+    method getDestroyableBaseBehavior {} {
+        return [my jget destroyableBaseBehavior]
+    }
+    
+
+    method isReadyForExplosion {} {
+        return [my jget readyForExplosion]
+    }
+    
+
+    method setReadyForExplosion {readyForExplosion} {
+        my jset readyForExplosion $readyForExplosion
+    }
 }
 
-
-sub getDamageableBaseBehavior {
-    my ($self) = @_;
-        return $self->{damageableBaseBehavior};
+namespace eval ::CombatBaseBehavior {
+    variable NULL_COMBAT_BEHAVIORValue {}
+    variable NULL_COMBAT_BEHAVIORSet 0
+    proc staticGet_NULL_COMBAT_BEHAVIOR {} {
+        variable NULL_COMBAT_BEHAVIORValue
+        variable NULL_COMBAT_BEHAVIORSet
+        if {!$NULL_COMBAT_BEHAVIORSet} {
+            set NULL_COMBAT_BEHAVIORSet 1
+            set NULL_COMBAT_BEHAVIORValue [::CombatBaseBehavior new [::DamageableBaseBehavior::getInstance] [::DestroyableBaseBehavior::getInstance]]
+        }
+        return $NULL_COMBAT_BEHAVIORValue
+    }
+    proc staticSet_NULL_COMBAT_BEHAVIOR {value} {
+        variable NULL_COMBAT_BEHAVIORValue
+        variable NULL_COMBAT_BEHAVIORSet
+        set NULL_COMBAT_BEHAVIORSet 1
+        set NULL_COMBAT_BEHAVIORValue $value
+    }
 }
 
-
-sub getDestroyableBaseBehavior {
-    my ($self) = @_;
-        return $self->{destroyableBaseBehavior};
-}
-
-
-sub isReadyForExplosion {
-    my ($self) = @_;
-        return $self->{readyForExplosion};
-}
-
-
-sub setReadyForExplosion {
-    my ($self, $readyForExplosion) = @_;
-        $self->{readyForExplosion} = $readyForExplosion;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::combat::damage::DamageableBaseBehavior ();
-use org::allbinary::game::combat::destroy::DestroyableBaseBehavior ();
-
-1;
 

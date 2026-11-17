@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.event
 
-# Java interface
-package org::allbinary::game::configuration::event::GameInitializedListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-sub onGameInitialized {
-    my ($self, $gameInitializedEvent) = @_;
-    die "abstract method onGameInitialized";
+oo::class create ::GameInitializedListenerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::GameInitializedListenerInterface {
+    method initFields_GameInitializedListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onGameInitialized {gameInitializedEvent} {
+        error [jexception AbstractMethodError onGameInitialized]
+    }
+}
+
+namespace eval ::GameInitializedListenerInterface {
+}
+
 

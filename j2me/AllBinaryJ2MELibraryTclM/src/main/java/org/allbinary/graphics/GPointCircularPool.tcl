@@ -11,31 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-package org::allbinary::graphics::GPointCircularPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::cache::BaseCircularPool';
-
-
-
-sub new {
-    my ($class, $size) = @_;
-    my $self = $class->SUPER::new();
-        $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstance($size);
-        $self->{OBJECT_ARRAY} = [(undef) x ($size)];
-        for (my $index = $size - 1; $index >= 0; $index--) {
-            $self->{OBJECT_ARRAY}->[$index] = 'org::allbinary::graphics::CustomGPoint'->getInstance3(0, 0);
-        }
-    return $self;
+oo::class create ::GPointCircularPool {
+    superclass ::BaseCircularPool
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::util::cache::BaseCircularPool ();
-use org::allbinary::util::CircularIndexUtil ();
-use org::allbinary::graphics::CustomGPoint ();
+oo::define ::GPointCircularPool {
+    method initFields_GPointCircularPool {} {
+        return
+    }
+    
 
-1;
+    constructor {size} {
+        next
+        my initFields_GPointCircularPool
+        my jset circularIndexUtil [::CircularIndexUtil::createInstance $size]
+        my jset OBJECT_ARRAY [jarray $size {}]
+        for {set index [jint [expr {$size - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            [my jget OBJECT_ARRAY] set $index [::CustomGPoint::getInstance3 0 0]
+        }
+    }
+}
+
+namespace eval ::GPointCircularPool {
+}
+
 

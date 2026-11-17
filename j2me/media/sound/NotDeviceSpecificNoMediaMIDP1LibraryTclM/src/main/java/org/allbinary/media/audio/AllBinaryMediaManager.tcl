@@ -11,106 +11,93 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
 #NotDeviceSpecificNoMediaMIDP1Library
-package org::allbinary::media::audio::AllBinaryMediaManager;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $THIS = "AllBinaryMediaManagerNoMediaMIDP1";
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AllBinaryMediaManager {
+    superclass ::JObject
 }
 
+oo::define ::AllBinaryMediaManager {
+    method initFields_AllBinaryMediaManager {} {
+        return
+    }
+    
 
-sub isMuted {
-    my ($class) = @_;
-        return 0;
+    constructor {} {
+        next
+        my initFields_AllBinaryMediaManager
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
-
-sub setMuted {
-    my ($class, $aMuted) = @_;
+namespace eval ::AllBinaryMediaManager {
+    variable THISValue {}
+    variable THISSet 0
+    proc staticGet_THIS {} {
+        variable THISValue
+        variable THISSet
+        if {!$THISSet} {
+            set THISSet 1
+            set THISValue "AllBinaryMediaManagerNoMediaMIDP1"
+        }
+        return $THISValue
+    }
+    proc staticSet_THIS {value} {
+        variable THISValue
+        variable THISSet
+        set THISSet 1
+        set THISValue $value
+    }
+    proc isMuted {} {
+        return false
+    }
+    proc setMuted {aMuted} {
+    }
+    proc update {} {
+        return true
+    }
+    proc init {soundsFactoryInterface} {
+        set logUtil [::LogUtil::getInstance]
+        set commonString [::CommonStrings::getInstance]
+        $logUtil putF [$commonString jget START] [::AllBinaryMediaManager::staticGet_THIS] [$commonString jget INIT]
+        [::ProgressCanvasFactory::getInstance] addNormalPortion 50 "Media Manager"
+        [::Sounds new $soundsFactoryInterface] init
+    }
+    proc shutdown {soundsFactoryInterface} {
+        [::Sounds new $soundsFactoryInterface] stopAll
+        [::Sounds new $soundsFactoryInterface] closeAll
+        [::TsUtil::getInstance] gc
+    }
+    proc createPlayerFromInputStream {stream type} {
+        set logUtil [::LogUtil::getInstance]
+        set commonString [::CommonStrings::getInstance]
+        $logUtil putF [$commonString jget START] [::AllBinaryMediaManager::staticGet_THIS] "creatPlayer(InputStream)"
+        return [::NoPlayer::staticGet_NO_PLAYER]
+    }
+    proc createPlayer {locator} {
+        set logUtil [::LogUtil::getInstance]
+        set commonString [::CommonStrings::getInstance]
+        $logUtil putF [$commonString jget START] [::AllBinaryMediaManager::staticGet_THIS] "creatPlayer(locator)"
+        return [::NoPlayer::staticGet_NO_PLAYER]
+    }
+    proc playTone {frequency time volume} {
+    }
+    proc getSupportedContentTypes {protocol} {
+        return [[::StringUtil::getInstance] getArrayInstance]
+    }
+    proc getSupportedProtocols {content_type} {
+        return [[::StringUtil::getInstance] getArrayInstance]
+    }
 }
 
-
-sub update {
-    my ($class) = @_;
-        return 1;
-}
-
-
-# throws Exception
-sub init {
-    my ($class, $soundsFactoryInterface) = @_;
-        my $logUtil = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-        my $commonString = 'org::allbinary::string::CommonStrings'->getInstance();
-        $logUtil->putF($commonString->{START}, $org::allbinary::media::audio::AllBinaryMediaManager::THIS, $commonString->{INIT});
-        'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance()->addNormalPortion(50, "Media Manager");
-        'org::allbinary::media::audio::Sounds'->new($soundsFactoryInterface)->init();
-}
-
-
-# throws Exception
-sub shutdown {
-    my ($class, $soundsFactoryInterface) = @_;
-        'org::allbinary::media::audio::Sounds'->new($soundsFactoryInterface)->stopAll();
-        'org::allbinary::media::audio::Sounds'->new($soundsFactoryInterface)->closeAll();
-        'org::allbinary::TsUtil'->getInstance()->gc();
-}
-
-
-sub createPlayerFromInputStream {
-    my ($class, $stream, $type) = @_;
-        my $logUtil = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-        my $commonString = 'org::allbinary::string::CommonStrings'->getInstance();
-        $logUtil->putF($commonString->{START}, $org::allbinary::media::audio::AllBinaryMediaManager::THIS, "creatPlayer(InputStream)");
-        return $org::allbinary::media::audio::NoPlayer::NO_PLAYER;
-}
-
-
-sub createPlayer {
-    my ($class, $locator) = @_;
-        my $logUtil = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-        my $commonString = 'org::allbinary::string::CommonStrings'->getInstance();
-        $logUtil->putF($commonString->{START}, $org::allbinary::media::audio::AllBinaryMediaManager::THIS, "creatPlayer(locator)");
-        return $org::allbinary::media::audio::NoPlayer::NO_PLAYER;
-}
-
-
-sub playTone {
-    my ($class, $frequency, $time, $volume) = @_;
-}
-
-
-sub getSupportedContentTypes {
-    my ($class, $protocol) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->getArrayInstance();
-}
-
-
-sub getSupportedProtocols {
-    my ($class, $content_type) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->getArrayInstance();
-}
-
-use java::lang::Object ();
-# use java::io::InputStream ();
-use javax::microedition::media::Player ();
-use org::allbinary::TsUtil ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::media::audio::Sounds ();
-use org::allbinary::media::audio::NoPlayer ();
-
-1;
 

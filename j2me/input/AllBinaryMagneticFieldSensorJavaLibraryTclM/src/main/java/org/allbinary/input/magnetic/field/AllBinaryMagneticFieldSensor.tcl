@@ -11,24 +11,25 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.magnetic.field
 
-package org::allbinary::input::magnetic::field::AllBinaryMagneticFieldSensor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::AllBinarySensor';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::AllBinaryMagneticFieldSensor {
+    superclass ::AllBinarySensor
 }
 
-use java::lang::Object ();
-use org::allbinary::input::AllBinarySensor ();
+oo::define ::AllBinaryMagneticFieldSensor {
+    method initFields_AllBinaryMagneticFieldSensor {} {
+        return
+    }
+    
 
-1;
+    constructor {} {
+        next
+        my initFields_AllBinaryMagneticFieldSensor
+    }
+}
+
+namespace eval ::AllBinaryMagneticFieldSensor {
+}
+
 

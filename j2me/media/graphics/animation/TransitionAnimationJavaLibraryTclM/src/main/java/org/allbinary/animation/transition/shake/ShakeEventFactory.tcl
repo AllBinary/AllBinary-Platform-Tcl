@@ -11,45 +11,57 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.transition.shake
 
-package org::allbinary::animation::transition::shake::ShakeEventFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::animation::transition::shake::ShakeEventFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{MICRO} = 'org::allbinary::animation::transition::shake::ShakeEvent'->new();
-    $self->{SMALL} = 'org::allbinary::animation::transition::shake::ShakeEvent'->new();
-    $self->{MEDIUM} = 'org::allbinary::animation::transition::shake::ShakeEvent'->new();
-    $self->{LARGE} = 'org::allbinary::animation::transition::shake::ShakeEvent'->new();
+oo::class create ::ShakeEventFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::ShakeEventFactory {
+    method initFields_ShakeEventFactory {} {
+        my jset MICRO {}
+        my jset SMALL {}
+        my jset MEDIUM {}
+        my jset LARGE {}
+        my jset MICRO [::ShakeEvent new]
+        my jset SMALL [::ShakeEvent new]
+        my jset MEDIUM [::ShakeEvent new]
+        my jset LARGE [::ShakeEvent new]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_ShakeEventFactory
+    }
+    
+    
+
+    method init {} {
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::animation::transition::shake::ShakeEventFactory::instance;
+namespace eval ::ShakeEventFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ShakeEventFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ShakeEventFactory::staticGet_instance]
+    }
 }
 
-
-sub init {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::animation::transition::shake::ShakeEvent ();
-
-1;
 

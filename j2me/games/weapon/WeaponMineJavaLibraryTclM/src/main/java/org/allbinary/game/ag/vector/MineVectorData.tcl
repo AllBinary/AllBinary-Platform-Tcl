@@ -11,24 +11,42 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.vector
 
-package org::allbinary::game::ag::vector::MineVectorData;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $points = [[[10, 5], [2, 6], [1000, 1000], [2, 2], [10, 9], [1000, 1000], [10, 2], [2, 9], [1000, 1000], [2, 5], [10, 6], [1000, 1000], [7, 9], [5, 2], [1000, 1000], [7, 2], [5, 9], [1000, 1000]]];
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::MineVectorData {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
+oo::define ::MineVectorData {
+    method initFields_MineVectorData {} {
+        return
+    }
+    
 
-1;
+    constructor {} {
+        next
+        my initFields_MineVectorData
+    }
+}
+
+namespace eval ::MineVectorData {
+    variable pointsValue {}
+    variable pointsSet 0
+    proc staticGet_points {} {
+        variable pointsValue
+        variable pointsSet
+        if {!$pointsSet} {
+            set pointsSet 1
+            set pointsValue [jarrayfrom [list [jarrayfrom [list [jarrayfrom [list 10 5]] [jarrayfrom [list 2 6]] [jarrayfrom [list 1000 1000]] [jarrayfrom [list 2 2]] [jarrayfrom [list 10 9]] [jarrayfrom [list 1000 1000]] [jarrayfrom [list 10 2]] [jarrayfrom [list 2 9]] [jarrayfrom [list 1000 1000]] [jarrayfrom [list 2 5]] [jarrayfrom [list 10 6]] [jarrayfrom [list 1000 1000]] [jarrayfrom [list 7 9]] [jarrayfrom [list 5 2]] [jarrayfrom [list 1000 1000]] [jarrayfrom [list 7 2]] [jarrayfrom [list 5 9]] [jarrayfrom [list 1000 1000]]]]]]
+        }
+        return $pointsValue
+    }
+    proc staticSet_points {value} {
+        variable pointsValue
+        variable pointsSet
+        set pointsSet 1
+        set pointsValue $value
+    }
+}
+
 

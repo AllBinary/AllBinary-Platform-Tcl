@@ -11,62 +11,65 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ai
 
-package org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterfaceFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance();
+oo::class create ::ArtificialIntelligenceInterfaceFactoryInterfaceFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::ArtificialIntelligenceInterfaceFactoryInterfaceFactory {
+    method initFields_ArtificialIntelligenceInterfaceFactoryInterfaceFactory {} {
+        my jset list {}
+        my jset list [[::BasicArrayListUtil::getInstance] getImmutableInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_ArtificialIntelligenceInterfaceFactoryInterfaceFactory
+    }
+    
+
+    method clear {} {
+        my jset list [::BasicArrayListD new]
+    }
+    
+    
+
+    method getInstanceFromCollection {hashtable} {
+        set typeInteger [$hashtable get [::BasicAI::staticGet_ID]]
+        set type [$typeInteger intValue]
+        set artificialIntelligenceInterfaceFactoryInterface [[[my jget list] jget objectArray] get [jint [expr {$type - 1}]]]
+        return $artificialIntelligenceInterfaceFactoryInterface
+    }
+    
+
+    method add {artificialIntelligenceInterfaceFactoryInterface} {
+        [my jget list] add $artificialIntelligenceInterfaceFactoryInterface
+    }
 }
 
-
-sub clear {
-    my ($self) = @_;
-        $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+namespace eval ::ArtificialIntelligenceInterfaceFactoryInterfaceFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::ArtificialIntelligenceInterfaceFactoryInterfaceFactory new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::ArtificialIntelligenceInterfaceFactoryInterfaceFactory::staticGet_SINGLETON]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterfaceFactory::SINGLETON;
-}
-
-
-sub getInstanceFromCollection {
-    my ($self, $hashtable) = @_;
-        my $typeInteger = $hashtable->get($org::allbinary::game::ai::BasicAI::ID);
-        my $type = int($typeInteger);
-        my $artificialIntelligenceInterfaceFactoryInterface = $self->{list}->{objectArray}->[$type - 1];
-        return $artificialIntelligenceInterfaceFactoryInterface;
-}
-
-
-sub add {
-    my ($self, $artificialIntelligenceInterfaceFactoryInterface) = @_;
-        $self->{list}->add($artificialIntelligenceInterfaceFactoryInterface);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::util::BasicArrayListUtil ();
-use org::allbinary::game::ai::BasicAI ();
-
-1;
 

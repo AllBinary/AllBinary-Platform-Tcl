@@ -11,107 +11,99 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.resource
 
-package org::allbinary::game::resource::FeaturedResourceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{ANIMATION_FEATURES} = "Animation Features: Vector: ";
-    $self->{IMAGE_LABEL} = " Image: ";
-    $self->{IMAGE_GRAPHICS_ARRAY} = "Image Array: ";
-    $self->{IMAGE_GRAPHICS_ROTATION} = "Image Rotate: ";
-    $self->{SPRITE_QUARTER} = " Sprite Quarter: ";
-    $self->{SPRITE_FULL} = " Sprite Full: ";
-    $self->{IS_LOADING_LEVEL_LABEL} = " isLoadingLevel ";
-    $self->{IS_FEATURE} = " isFeature: ";
-    $self->{GAME_FEATURE_CONTROLLED} = "GameFeatureControlledInterface: ";
+oo::class create ::FeaturedResourceFactory {
+    superclass ::JObject
 }
 
+oo::define ::FeaturedResourceFactory {
+    method initFields_FeaturedResourceFactory {} {
+        my jset logUtil {}
+        my jset list {}
+        my jset commonStrings {}
+        my jset ANIMATION_FEATURES {}
+        my jset IMAGE_LABEL {}
+        my jset IMAGE_GRAPHICS_ARRAY {}
+        my jset IMAGE_GRAPHICS_ROTATION {}
+        my jset SPRITE_QUARTER {}
+        my jset SPRITE_FULL {}
+        my jset IS_LOADING_LEVEL_LABEL {}
+        my jset IS_FEATURE {}
+        my jset GAME_FEATURE_CONTROLLED {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset list [::BasicArrayListD new]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset ANIMATION_FEATURES "Animation Features: Vector: "
+        my jset IMAGE_LABEL " Image: "
+        my jset IMAGE_GRAPHICS_ARRAY "Image Array: "
+        my jset IMAGE_GRAPHICS_ROTATION "Image Rotate: "
+        my jset SPRITE_QUARTER " Sprite Quarter: "
+        my jset SPRITE_FULL " Sprite Full: "
+        my jset IS_LOADING_LEVEL_LABEL " isLoadingLevel "
+        my jset IS_FEATURE " isFeature: "
+        my jset GAME_FEATURE_CONTROLLED "GameFeatureControlledInterface: "
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_FeaturedResourceFactory
+    }
+    
 
-
-# throws Exception
-sub init {
-    my ($self, $level) = @_;
-        my $size = $self->{list}->size();
-        for (my $index = 0; $index < $size; $index++) {
-            my $featureInterface = $self->{list}->{objectArray}->[$index];
-            my $isLoadingLevel = $featureInterface->isLoadingLevel($level);
-            my $isFeature = $featureInterface->isFeature();
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{GAME_FEATURE_CONTROLLED})->append($featureInterface->toString())->append($self->{IS_LOADING_LEVEL_LABEL})->append('org::allbinary::game::resource::ResourceLoadingLevelFactory'->getInstance()->getLevelString($level))->append('org::allbinary::string::CommonSeps'->getInstance()->{COLON_SEP})->appendboolean($isLoadingLevel)->append($self->{IS_FEATURE})->appendboolean($isFeature)->toString(), $self, $self->{commonStrings}->{INIT});
-            if ($isLoadingLevel && $isFeature) {
-                $featureInterface->init($level);
+    method init {level} {
+        set size [[my jget list] size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set featureInterface [[[my jget list] jget objectArray] get $index]
+            set isLoadingLevel [$featureInterface isLoadingLevel $level]
+            set isFeature [$featureInterface isFeature]
+            [my jget logUtil] putF [[[[[[[[[[::StringMaker new] append [my jget GAME_FEATURE_CONTROLLED]] append [$featureInterface toString]] append [my jget IS_LOADING_LEVEL_LABEL]] append [[::ResourceLoadingLevelFactory::getInstance] getLevelString $level]] append [[::CommonSeps::getInstance] jget COLON_SEP]] appendboolean $isLoadingLevel] append [my jget IS_FEATURE]] appendboolean $isFeature] toString] [self] [[my jget commonStrings] jget INIT]
+            if {[expr {$isLoadingLevel && $isFeature}]} {
+                $featureInterface init $level
             }
         }
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        my $graphicsFeatureFactory = 'org::allbinary::game::configuration::feature::GraphicsFeatureFactory'->getInstance();
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append($self->{ANIMATION_FEATURES});
-        $stringBuffer->appendboolean($features->isFeature($graphicsFeatureFactory->{VECTOR_GRAPHICS}));
-        $stringBuffer->append($self->{IMAGE_LABEL});
-        $stringBuffer->appendboolean($features->isFeature($graphicsFeatureFactory->{IMAGE_GRAPHICS}));
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, $self->{commonStrings}->{INIT});
-        if ($features->isFeature($graphicsFeatureFactory->{IMAGE_GRAPHICS})) {
-            $stringBuffer->delete(0, $stringBuffer->length());
-            $stringBuffer->append($self->{IMAGE_GRAPHICS_ARRAY});
-            $stringBuffer->appendboolean($features->isFeature($graphicsFeatureFactory->{IMAGE_TO_ARRAY_GRAPHICS}));
-            $stringBuffer->append($self->{IMAGE_GRAPHICS_ROTATION});
-            $stringBuffer->appendboolean($features->isFeature($graphicsFeatureFactory->{IMAGE_TO_ARRAY_GRAPHICS}));
-            $stringBuffer->append($self->{SPRITE_QUARTER});
-            $stringBuffer->appendboolean($features->isFeature($graphicsFeatureFactory->{SPRITE_QUARTER_ROTATION_GRAPHICS}));
-            $stringBuffer->append($self->{SPRITE_FULL});
-            $stringBuffer->appendboolean($features->isFeature($graphicsFeatureFactory->{SPRITE_FULL_GRAPHICS}));
-            $self->{logUtil}->putF($stringBuffer->toString(), $self, $self->{commonStrings}->{INIT});
+        set features [::Features::getInstance]
+        set graphicsFeatureFactory [::GraphicsFeatureFactory::getInstance]
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append [my jget ANIMATION_FEATURES]
+        $stringBuffer appendboolean [$features isFeature [$graphicsFeatureFactory jget VECTOR_GRAPHICS]]
+        $stringBuffer append [my jget IMAGE_LABEL]
+        $stringBuffer appendboolean [$features isFeature [$graphicsFeatureFactory jget IMAGE_GRAPHICS]]
+        [my jget logUtil] putF [$stringBuffer toString] [self] [[my jget commonStrings] jget INIT]
+        if {[$features isFeature [$graphicsFeatureFactory jget IMAGE_GRAPHICS]]} {
+            $stringBuffer delete 0 [$stringBuffer length]
+            $stringBuffer append [my jget IMAGE_GRAPHICS_ARRAY]
+            $stringBuffer appendboolean [$features isFeature [$graphicsFeatureFactory jget IMAGE_TO_ARRAY_GRAPHICS]]
+            $stringBuffer append [my jget IMAGE_GRAPHICS_ROTATION]
+            $stringBuffer appendboolean [$features isFeature [$graphicsFeatureFactory jget IMAGE_TO_ARRAY_GRAPHICS]]
+            $stringBuffer append [my jget SPRITE_QUARTER]
+            $stringBuffer appendboolean [$features isFeature [$graphicsFeatureFactory jget SPRITE_QUARTER_ROTATION_GRAPHICS]]
+            $stringBuffer append [my jget SPRITE_FULL]
+            $stringBuffer appendboolean [$features isFeature [$graphicsFeatureFactory jget SPRITE_FULL_GRAPHICS]]
+            [my jget logUtil] putF [$stringBuffer toString] [self] [[my jget commonStrings] jget INIT]
         }
+    }
+    
+
+    method clear {} {
+        [my jget list] clear
+    }
+    
+
+    method add {featureInterface} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[::CommonLabels::getInstance] jget START_LABEL]] append [[::StringUtil::getInstance] toString1 $featureInterface]] toString] [self] [[my jget commonStrings] jget ADD]
+        [my jget list] add $featureInterface
+    }
+    
+
+    method getList {} {
+        return [my jget list]
+    }
 }
 
-
-sub clear {
-    my ($self) = @_;
-        $self->{list}->clear();
+namespace eval ::FeaturedResourceFactory {
 }
 
-
-sub add {
-    my ($self, $featureInterface) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{START_LABEL})->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($featureInterface))->toString(), $self, $self->{commonStrings}->{ADD});
-        $self->{list}->add($featureInterface);
-}
-
-
-sub getList {
-    my ($self) = @_;
-        return $self->{list};
-}
-
-use java::lang::Object ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::GameFeatureControlledInterface ();
-use org::allbinary::game::configuration::feature::GraphicsFeatureFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::game::resource::ResourceLoadingLevelFactory ();
-
-1;
 

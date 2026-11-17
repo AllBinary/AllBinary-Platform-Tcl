@@ -11,44 +11,36 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
-package org::allbinary::logic::io::BufferedIOUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::BufferedIOUtil {
+    superclass ::JObject
 }
 
+oo::define ::BufferedIOUtil {
+    method initFields_BufferedIOUtil {} {
+        return
+    }
 
-# throws Exception
-sub copy {
-    my ($class, $backupFile, $backupFileBak) = @_;
-        my $line = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-        my $tmpOut = 'java::io::BufferedWriter'->new('java::io::FileWriter'->new('org::allbinary::logic::io::file::AbFileNativeUtil'->get($backupFileBak)));
-        my $tmpIn = 'java::io::BufferedReader'->new('java::io::FileReader'->new('org::allbinary::logic::io::file::AbFileNativeUtil'->get($backupFile)));
-        while ($tmpIn->ready()) {
-            $line = $tmpIn->readLine();
-            $tmpOut->write($line, 0, length($line));
-            $tmpOut->newLine();
+    constructor {} {
+        next
+        my initFields_BufferedIOUtil
+    }
+    
+}
+
+namespace eval ::BufferedIOUtil {
+    proc copy {backupFile backupFileBak} {
+        set line [[::StringUtil::getInstance] jget EMPTY_STRING]
+        set tmpOut [::BufferedWriter new [::FileWriter new [::AbFileNativeUtil::get $backupFileBak]]]
+        set tmpIn [::BufferedReader new [::FileReader new [::AbFileNativeUtil::get $backupFile]]]
+        while {[$tmpIn ready]} {
+            set line [$tmpIn readLine]
+            $tmpOut write $line 0 [string length $line]
+            $tmpOut newLine
         }
-        $tmpOut->flush();
+        $tmpOut flush
+    }
 }
 
-use java::lang::Object ();
-# use java::io::BufferedReader ();
-# use java::io::BufferedWriter ();
-# use java::io::FileReader ();
-# use java::io::FileWriter ();
-use org::allbinary::logic::io::file::AbFile ();
-use org::allbinary::logic::io::file::AbFileNativeUtil ();
-use org::allbinary::logic::string::StringUtil ();
-
-1;
 

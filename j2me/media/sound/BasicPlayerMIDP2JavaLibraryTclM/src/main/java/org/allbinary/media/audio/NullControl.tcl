@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-package org::allbinary::media::audio::NullControl;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','javax::microedition::media::Control';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullControl {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
-use javax::microedition::media::Control ();
+oo::define ::NullControl {
+    method initFields_NullControl {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_NullControl
+    }
+}
+
+namespace eval ::NullControl {
+}
+
 

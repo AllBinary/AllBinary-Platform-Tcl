@@ -11,50 +11,42 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::HighScoresBase;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::score::HighScoresFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
+oo::class create ::HighScoresBase {
+    superclass ::JObject
 }
 
+oo::define ::HighScoresBase {
+    method initFields_HighScoresBase {} {
+        my jset commonStrings {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_HighScoresBase
+    }
+    
+
+    method fetchHighScores {gameInfo highScoresResultsListener} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method fetchHighScoresPreload {gameInfo highScoresResultsListener preload} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method createHighScoresHelper {} {
+        error [jexception RuntimeException {}]
+    }
 }
 
-
-sub fetchHighScores {
-    my ($self, $gameInfo, $highScoresResultsListener) = @_;
-        die ("RuntimeException");
+namespace eval ::HighScoresBase {
 }
 
-
-sub fetchHighScoresPreload {
-    my ($self, $gameInfo, $highScoresResultsListener, $preload) = @_;
-        die ("RuntimeException");
-}
-
-
-sub createHighScoresHelper {
-    my ($self) = @_;
-        die ("RuntimeException");
-}
-
-use java::lang::Object ();
-use org::allbinary::game::GameInfo ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::score::HighScoresFactoryInterface ();
-
-1;
 

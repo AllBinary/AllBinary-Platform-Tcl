@@ -11,60 +11,73 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-package org::allbinary::media::audio::PlayerStateUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::media::audio::PlayerStateUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{UNREALIZED} = "UNREALIZED";
-    $self->{REALIZED} = "REALIZED";
-    $self->{PREFETCHED} = "PREFETCHED";
-    $self->{STARTED} = "STARTED";
-    $self->{CLOSED} = "CLOSED";
+oo::class create ::PlayerStateUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::PlayerStateUtil {
+    method initFields_PlayerStateUtil {} {
+        my jset commonStrings {}
+        my jset UNREALIZED {}
+        my jset REALIZED {}
+        my jset PREFETCHED {}
+        my jset STARTED {}
+        my jset CLOSED {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset UNREALIZED "UNREALIZED"
+        my jset REALIZED "REALIZED"
+        my jset PREFETCHED "PREFETCHED"
+        my jset STARTED "STARTED"
+        my jset CLOSED "CLOSED"
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_PlayerStateUtil
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::media::audio::PlayerStateUtil::instance;
-}
-
-
-sub convert {
-    my ($self, $state) = @_;
-        if ($state == $javax::microedition::media::Player::UNREALIZED) {
-            return $self->{UNREALIZED};
-        } elsif ($state == $javax::microedition::media::Player::REALIZED) {
-            return $self->{REALIZED};
-        } elsif ($state == $javax::microedition::media::Player::PREFETCHED) {
-            return $self->{PREFETCHED};
-        } elsif ($state == $javax::microedition::media::Player::STARTED) {
-            return $self->{STARTED};
-        } elsif ($state == $javax::microedition::media::Player::CLOSED) {
-            return $self->{CLOSED};
+    method convert {state} {
+        if {[expr {$state == [::Player::staticGet_UNREALIZED]}]} {
+            return [my jget UNREALIZED]
+        } elseif {[expr {$state == [::Player::staticGet_REALIZED]}]} {
+            return [my jget REALIZED]
+        } elseif {[expr {$state == [::Player::staticGet_PREFETCHED]}]} {
+            return [my jget PREFETCHED]
+        } elseif {[expr {$state == [::Player::staticGet_STARTED]}]} {
+            return [my jget STARTED]
+        } elseif {[expr {$state == [::Player::staticGet_CLOSED]}]} {
+            return [my jget CLOSED]
         }
-        return $self->{commonStrings}->{UNKNOWN};
+        return [[my jget commonStrings] jget UNKNOWN]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::media::Player ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::PlayerStateUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::PlayerStateUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::PlayerStateUtil::staticGet_instance]
+    }
+}
 
-1;
 

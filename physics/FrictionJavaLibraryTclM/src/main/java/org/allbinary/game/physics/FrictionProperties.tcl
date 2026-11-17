@@ -11,32 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.physics
 
-package org::allbinary::game::physics::FrictionProperties;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::FrictionProperties {
+    superclass ::JObject
 }
 
+oo::define ::FrictionProperties {
+    method initFields_FrictionProperties {} {
+        return
+    }
+    
 
-sub friction {
-    my ($self, $velocityProperties, $nominator) = @_;
-        $org::allbinary::game::physics::velocity::DragVelocityBehavior::instance->reduce($velocityProperties, $nominator, 'org::allbinary::game::physics::friction::FrictionData'->getFrictionDenominator());
+    constructor {} {
+        next
+        my initFields_FrictionProperties
+    }
+    
+
+    method friction {velocityProperties nominator} {
+        [::DragVelocityBehavior::staticGet_instance] reduce $velocityProperties $nominator [::FrictionData::getFrictionDenominator]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::physics::friction::FrictionData ();
-use org::allbinary::game::physics::velocity::DragVelocityBehavior ();
-use org::allbinary::game::physics::velocity::VelocityProperties ();
+namespace eval ::FrictionProperties {
+}
 
-1;
 

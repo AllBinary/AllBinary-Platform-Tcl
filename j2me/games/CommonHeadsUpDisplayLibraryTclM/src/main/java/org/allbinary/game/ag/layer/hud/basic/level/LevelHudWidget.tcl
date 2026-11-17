@@ -11,118 +11,103 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic.level
 
-package org::allbinary::game::ag::layer::hud::basic::level::LevelHudWidget;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::graphics::hud::BasicHud','org::allbinary::graphics::paint::PaintableInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{level} = undef;
-    $self->{maxlevel} = undef;
-    $self->{levelString} = undef;
-    $self->{levelNumberCharArray} = 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_CHAR_ARRAY};
-    $self->{levelNumberTotalDigits} = 0;
-    $self->{offset} = 0;
-    $self->{primitiveLongUtil} = undef;
+oo::class create ::LevelHudWidget {
+    superclass ::BasicHud
 }
 
+oo::define ::LevelHudWidget {
+    method initFields_LevelHudWidget {} {
+        my jset level 0
+        my jset maxlevel 0
+        my jset levelString {}
+        my jset levelNumberCharArray {}
+        my jset levelNumberTotalDigits 0
+        my jset offset 0
+        my jset primitiveLongUtil {}
+        
+        
+        
+        my jset levelNumberCharArray [[::NullUtil::getInstance] jget NULL_CHAR_ARRAY]
+        my jset levelNumberTotalDigits 0
+        my jset offset 0
+        
+        return
+    }
+    
+    
 
-# throws Exception
-sub createHud {
-    my ($class, $maxlevel, $location, $direction) = @_;
-        return 'org::allbinary::game::ag::layer::hud::basic::level::LevelHudWidget'->new($maxlevel, $location, $direction);
-}
+    constructor {maxlevel location direction} {
+        next $location $direction 2 [[::BasicColorFactory::getInstance] jget GREY]
+        my initFields_LevelHudWidget
+        my jset primitiveLongUtil [::PrimitiveLongUtil::createPowerOfTen 1000]
+        set LEVEL "Lv "
+        my jset levelString [jtochararray $LEVEL]
+        my jset maxlevel $maxlevel
+        my jset level $maxlevel
+        my update
+        my jset updateMaxHeight 14
+    }
+    
 
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        my jset updateMaxWidth [expr {[$font getSize] * 4}]
+        my jset offset [expr {[$font charsWidth [my jget levelString] 0 [[my jget levelString] length]] + [$font getSize]}]
+        next $graphics
+    }
+    
 
-sub new {
-    my ($class, $maxlevel, $location, $direction) = @_;
-    my $self = $class->SUPER::new($location, $direction, 2, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{GREY});
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{primitiveLongUtil} = 'org::allbinary::logic::math::PrimitiveLongUtil'->createPowerOfTen(1000);
-        my $LEVEL = "Lv ";
-        $self->{levelString} = [split(//, $LEVEL)];
-        $self->{maxlevel} = $maxlevel;
-        $self->{level} = $maxlevel;
-        $self->update();
-        $self->{updateMaxHeight} = 14;
-    return $self;
-}
+    method update {} {
+        my jset levelNumberCharArray [[my jget primitiveLongUtil] getCharArray [my jget level]]
+        my jset levelNumberTotalDigits [[my jget primitiveLongUtil] getCurrentTotalDigits]
+    }
+    
 
+    method setLevel {level} {
+        my jset level $level
+        my update
+    }
+    
 
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->{updateMaxWidth} = $font->getSize() * 4;
-        $self->{offset} = $font->charsWidth($self->{levelString}, 0, scalar(@{$self->{levelString}})) + $font->getSize();
-        $self->SUPER::updateMeasurement($graphics);
-}
+    method nextLevel {} {
+        my jpostinc level 1
+        my update
+    }
+    
 
-
-sub update {
-    my ($self) = @_;
-        $self->{levelNumberCharArray} = $self->{primitiveLongUtil}->getCharArray($self->{level});
-        $self->{levelNumberTotalDigits} = $self->{primitiveLongUtil}->getCurrentTotalDigits();
-}
-
-
-sub setLevel {
-    my ($self, $level) = @_;
-        $self->{level} = $level;
-        $self->update();
-}
-
-
-sub nextLevel {
-    my ($self) = @_;
-        $self->{level}++;
-        $self->update();
-}
-
-
-sub previousLevel {
-    my ($self) = @_;
-        $self->{level}--;
-        if ($self->{level} < 0) {
-            $self->{level} = 0;
+    method previousLevel {} {
+        my jpostinc level -1
+        if {[expr {[my jget level] < 0}]} {
+            my jset level 0
         }
-        $self->update();
-}
+        my update
+    }
+    
 
-
-sub isComplete {
-    my ($self) = @_;
-        if ($self->{level} <= $self->{maxlevel}) {
-            return 0;
+    method isComplete {} {
+        if {[expr {[my jget level] <= [my jget maxlevel]}]} {
+            return false
         } else {
-            return 1;
+            return true
         }
+    }
+    
+
+    method paint {graphics} {
+        next $graphics [my jget levelString] 0 [[my jget levelString] length] [my jget levelNumberCharArray] 0 [my jget levelNumberTotalDigits] [my jget offset]
+    }
+    
+
+    method paintThreed {graphics} {
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->SUPER::paintDX($graphics, $self->{levelString}, 0, scalar(@{$self->{levelString}}), $self->{levelNumberCharArray}, 0, $self->{levelNumberTotalDigits}, $self->{offset});
+namespace eval ::LevelHudWidget {
+    proc createHud {maxlevel location direction} {
+        return [::LevelHudWidget new $maxlevel $location $direction]
+    }
 }
 
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::graphics::hud::BasicHud ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::paint::PaintableInterface ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::math::PrimitiveLongUtil ();
-
-1;
 

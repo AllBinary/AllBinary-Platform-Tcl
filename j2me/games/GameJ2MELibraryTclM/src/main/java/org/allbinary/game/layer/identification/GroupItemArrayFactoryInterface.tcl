@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.identification
 
-# Java interface
-package org::allbinary::game::layer::identification::GroupItemArrayFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub getInstance {
-    my ($self, $groupInterface) = @_;
-    die "abstract method getInstance";
+oo::class create ::GroupItemArrayFactoryInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::game::identification::Group ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
+oo::define ::GroupItemArrayFactoryInterface {
+    method initFields_GroupItemArrayFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getInstance {groupInterface} {
+        error [jexception AbstractMethodError getInstance]
+    }
+}
+
+namespace eval ::GroupItemArrayFactoryInterface {
+}
+
 

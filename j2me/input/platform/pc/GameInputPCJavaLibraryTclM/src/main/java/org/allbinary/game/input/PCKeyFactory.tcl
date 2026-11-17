@@ -11,193 +11,271 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::PCKeyFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::PCKeyFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{keyEventWrapper} = 'org::allbinary::game::input::ABKeyEventWrapper'->getInstance();
-    $self->{UNKNOWN} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_UNDEFINED}, "UNKNOWN");
-    $self->{ENTER} = 'org::allbinary::game::input::PCGameKey'->new(5, "Enter");
-    $self->{_A} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_A}, "A");
-    $self->{_B} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_B}, "B");
-    $self->{_C} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_C}, "C");
-    $self->{_D} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_D}, "D");
-    $self->{_E} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_E}, "E");
-    $self->{_F} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_F}, "F");
-    $self->{_G} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_G}, "G");
-    $self->{_H} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_H}, "H");
-    $self->{_I} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_I}, "I");
-    $self->{_J} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_J}, "J");
-    $self->{_K} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_K}, "K");
-    $self->{_L} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_L}, "L");
-    $self->{_M} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_M}, "M");
-    $self->{_N} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_N}, "N");
-    $self->{_O} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_O}, "O");
-    $self->{_P} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_P}, "P");
-    $self->{_Q} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_Q}, "Q");
-    $self->{_R} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_R}, "R");
-    $self->{_S} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_S}, "S");
-    $self->{_T} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_T}, "T");
-    $self->{_U} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_U}, "U");
-    $self->{_V} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_V}, "V");
-    $self->{_W} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_W}, "W");
-    $self->{_X} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_X}, "X");
-    $self->{_Y} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_Y}, "Y");
-    $self->{_Z} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_Z}, "Z");
-    $self->{a} = 'org::allbinary::game::input::PCGameKey'->new(97, "a");
-    $self->{b} = 'org::allbinary::game::input::PCGameKey'->new(98, "b");
-    $self->{c} = 'org::allbinary::game::input::PCGameKey'->new(99, "c");
-    $self->{d} = 'org::allbinary::game::input::PCGameKey'->new(100, "d");
-    $self->{e} = 'org::allbinary::game::input::PCGameKey'->new(101, "e");
-    $self->{f} = 'org::allbinary::game::input::PCGameKey'->new(102, "f");
-    $self->{g} = 'org::allbinary::game::input::PCGameKey'->new(103, "g");
-    $self->{h} = 'org::allbinary::game::input::PCGameKey'->new(104, "h");
-    $self->{i} = 'org::allbinary::game::input::PCGameKey'->new(105, "i");
-    $self->{j} = 'org::allbinary::game::input::PCGameKey'->new(106, "j");
-    $self->{k} = 'org::allbinary::game::input::PCGameKey'->new(107, "k");
-    $self->{l} = 'org::allbinary::game::input::PCGameKey'->new(108, "l");
-    $self->{m} = 'org::allbinary::game::input::PCGameKey'->new(109, "m");
-    $self->{n} = 'org::allbinary::game::input::PCGameKey'->new(110, "n");
-    $self->{o} = 'org::allbinary::game::input::PCGameKey'->new(111, "o");
-    $self->{p} = 'org::allbinary::game::input::PCGameKey'->new(112, "p");
-    $self->{q} = 'org::allbinary::game::input::PCGameKey'->new(113, "q");
-    $self->{r} = 'org::allbinary::game::input::PCGameKey'->new(114, "r");
-    $self->{s} = 'org::allbinary::game::input::PCGameKey'->new(115, "s");
-    $self->{t} = 'org::allbinary::game::input::PCGameKey'->new(116, "t");
-    $self->{u} = 'org::allbinary::game::input::PCGameKey'->new(117, "u");
-    $self->{v} = 'org::allbinary::game::input::PCGameKey'->new(118, "v");
-    $self->{w} = 'org::allbinary::game::input::PCGameKey'->new(119, "w");
-    $self->{x} = 'org::allbinary::game::input::PCGameKey'->new(120, 'org::allbinary::math::PositionStrings'->getInstance()->{X});
-    $self->{y} = 'org::allbinary::game::input::PCGameKey'->new(121, 'org::allbinary::math::PositionStrings'->getInstance()->{Y});
-    $self->{z} = 'org::allbinary::game::input::PCGameKey'->new(122, "z");
-    $self->{ZERO} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_0}, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{ZERO});
-    $self->{ONE} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_1}, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{ONE});
-    $self->{TWO} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_2}, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{TWO});
-    $self->{THREE} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_3}, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{THREE});
-    $self->{FOUR} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_4}, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{FOUR});
-    $self->{FIVE} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_5}, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{FIVE});
-    $self->{SIX} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_6}, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{SIX});
-    $self->{SEVEN} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_7}, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{SEVEN});
-    $self->{EIGHT} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_8}, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{EIGHT});
-    $self->{NINE} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_9}, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{NINE});
-    $self->{DPAD_UP} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_UP}, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{UP});
-    $self->{DPAD_DOWN} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_DOWN}, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{DOWN});
-    $self->{DPAD_LEFT} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_LEFT}, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{LEFT});
-    $self->{DPAD_RIGHT} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_RIGHT}, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{RIGHT});
-    $self->{DPAD_UP2} = $self->{DPAD_UP};
-    $self->{DPAD_DOWN2} = $self->{DPAD_DOWN};
-    $self->{DPAD_LEFT2} = $self->{DPAD_LEFT};
-    $self->{DPAD_RIGHT2} = $self->{DPAD_RIGHT};
-    $self->{COMMA} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_COMMA}, "COMMA");
-    $self->{SPACE} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_SPACE}, "SPACE");
-    $self->{DEL} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_DELETE}, "DEL");
-    $self->{STAR} = 'org::allbinary::game::input::PCGameKey'->new(42, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{STAR});
-    $self->{QUESTION} = 'org::allbinary::game::input::PCGameKey'->new(47, "?");
-    $self->{PERIOD} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_PERIOD}, 'org::allbinary::string::CommonSeps'->getInstance()->{PERIOD});
-    $self->{ESCAPE} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_ESCAPE}, "Esc");
-    $self->{BACK_SPACE} = 'org::allbinary::game::input::PCGameKey'->new($self->{keyEventWrapper}->{VK_BACK_SPACE}, "Backspace");
+oo::class create ::PCKeyFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::PCKeyFactory {
+    method initFields_PCKeyFactory {} {
+        my jset keyEventWrapper {}
+        my jset UNKNOWN {}
+        my jset ENTER {}
+        my jset _A {}
+        my jset _B {}
+        my jset _C {}
+        my jset _D {}
+        my jset _E {}
+        my jset _F {}
+        my jset _G {}
+        my jset _H {}
+        my jset _I {}
+        my jset _J {}
+        my jset _K {}
+        my jset _L {}
+        my jset _M {}
+        my jset _N {}
+        my jset _O {}
+        my jset _P {}
+        my jset _Q {}
+        my jset _R {}
+        my jset _S {}
+        my jset _T {}
+        my jset _U {}
+        my jset _V {}
+        my jset _W {}
+        my jset _X {}
+        my jset _Y {}
+        my jset _Z {}
+        my jset a {}
+        my jset b {}
+        my jset c {}
+        my jset d {}
+        my jset e {}
+        my jset f {}
+        my jset g {}
+        my jset h {}
+        my jset i {}
+        my jset j {}
+        my jset k {}
+        my jset l {}
+        my jset m {}
+        my jset n {}
+        my jset o {}
+        my jset p {}
+        my jset q {}
+        my jset r {}
+        my jset s {}
+        my jset t {}
+        my jset u {}
+        my jset v {}
+        my jset w {}
+        my jset x {}
+        my jset y {}
+        my jset z {}
+        my jset ZERO {}
+        my jset ONE {}
+        my jset TWO {}
+        my jset THREE {}
+        my jset FOUR {}
+        my jset FIVE {}
+        my jset SIX {}
+        my jset SEVEN {}
+        my jset EIGHT {}
+        my jset NINE {}
+        my jset DPAD_UP {}
+        my jset DPAD_DOWN {}
+        my jset DPAD_LEFT {}
+        my jset DPAD_RIGHT {}
+        my jset DPAD_UP2 {}
+        my jset DPAD_DOWN2 {}
+        my jset DPAD_LEFT2 {}
+        my jset DPAD_RIGHT2 {}
+        my jset COMMA {}
+        my jset SPACE {}
+        my jset DEL {}
+        my jset STAR {}
+        my jset QUESTION {}
+        my jset PERIOD {}
+        my jset ESCAPE {}
+        my jset BACK_SPACE {}
+        my jset keyEventWrapper [::ABKeyEventWrapper::getInstance]
+        my jset UNKNOWN [::PCGameKey new [[my jget keyEventWrapper] jget VK_UNDEFINED] "UNKNOWN"]
+        my jset ENTER [::PCGameKey new 5 "Enter"]
+        my jset _A [::PCGameKey new [[my jget keyEventWrapper] jget VK_A] "A"]
+        my jset _B [::PCGameKey new [[my jget keyEventWrapper] jget VK_B] "B"]
+        my jset _C [::PCGameKey new [[my jget keyEventWrapper] jget VK_C] "C"]
+        my jset _D [::PCGameKey new [[my jget keyEventWrapper] jget VK_D] "D"]
+        my jset _E [::PCGameKey new [[my jget keyEventWrapper] jget VK_E] "E"]
+        my jset _F [::PCGameKey new [[my jget keyEventWrapper] jget VK_F] "F"]
+        my jset _G [::PCGameKey new [[my jget keyEventWrapper] jget VK_G] "G"]
+        my jset _H [::PCGameKey new [[my jget keyEventWrapper] jget VK_H] "H"]
+        my jset _I [::PCGameKey new [[my jget keyEventWrapper] jget VK_I] "I"]
+        my jset _J [::PCGameKey new [[my jget keyEventWrapper] jget VK_J] "J"]
+        my jset _K [::PCGameKey new [[my jget keyEventWrapper] jget VK_K] "K"]
+        my jset _L [::PCGameKey new [[my jget keyEventWrapper] jget VK_L] "L"]
+        my jset _M [::PCGameKey new [[my jget keyEventWrapper] jget VK_M] "M"]
+        my jset _N [::PCGameKey new [[my jget keyEventWrapper] jget VK_N] "N"]
+        my jset _O [::PCGameKey new [[my jget keyEventWrapper] jget VK_O] "O"]
+        my jset _P [::PCGameKey new [[my jget keyEventWrapper] jget VK_P] "P"]
+        my jset _Q [::PCGameKey new [[my jget keyEventWrapper] jget VK_Q] "Q"]
+        my jset _R [::PCGameKey new [[my jget keyEventWrapper] jget VK_R] "R"]
+        my jset _S [::PCGameKey new [[my jget keyEventWrapper] jget VK_S] "S"]
+        my jset _T [::PCGameKey new [[my jget keyEventWrapper] jget VK_T] "T"]
+        my jset _U [::PCGameKey new [[my jget keyEventWrapper] jget VK_U] "U"]
+        my jset _V [::PCGameKey new [[my jget keyEventWrapper] jget VK_V] "V"]
+        my jset _W [::PCGameKey new [[my jget keyEventWrapper] jget VK_W] "W"]
+        my jset _X [::PCGameKey new [[my jget keyEventWrapper] jget VK_X] "X"]
+        my jset _Y [::PCGameKey new [[my jget keyEventWrapper] jget VK_Y] "Y"]
+        my jset _Z [::PCGameKey new [[my jget keyEventWrapper] jget VK_Z] "Z"]
+        my jset a [::PCGameKey new 97 "a"]
+        my jset b [::PCGameKey new 98 "b"]
+        my jset c [::PCGameKey new 99 "c"]
+        my jset d [::PCGameKey new 100 "d"]
+        my jset e [::PCGameKey new 101 "e"]
+        my jset f [::PCGameKey new 102 "f"]
+        my jset g [::PCGameKey new 103 "g"]
+        my jset h [::PCGameKey new 104 "h"]
+        my jset i [::PCGameKey new 105 "i"]
+        my jset j [::PCGameKey new 106 "j"]
+        my jset k [::PCGameKey new 107 "k"]
+        my jset l [::PCGameKey new 108 "l"]
+        my jset m [::PCGameKey new 109 "m"]
+        my jset n [::PCGameKey new 110 "n"]
+        my jset o [::PCGameKey new 111 "o"]
+        my jset p [::PCGameKey new 112 "p"]
+        my jset q [::PCGameKey new 113 "q"]
+        my jset r [::PCGameKey new 114 "r"]
+        my jset s [::PCGameKey new 115 "s"]
+        my jset t [::PCGameKey new 116 "t"]
+        my jset u [::PCGameKey new 117 "u"]
+        my jset v [::PCGameKey new 118 "v"]
+        my jset w [::PCGameKey new 119 "w"]
+        my jset x [::PCGameKey new 120 [[::PositionStrings::getInstance] jget X]]
+        my jset y [::PCGameKey new 121 [[::PositionStrings::getInstance] jget Y]]
+        my jset z [::PCGameKey new 122 "z"]
+        my jset ZERO [::PCGameKey new [[my jget keyEventWrapper] jget VK_0] [[::CommonPhoneStrings::getInstance] jget ZERO]]
+        my jset ONE [::PCGameKey new [[my jget keyEventWrapper] jget VK_1] [[::CommonPhoneStrings::getInstance] jget ONE]]
+        my jset TWO [::PCGameKey new [[my jget keyEventWrapper] jget VK_2] [[::CommonPhoneStrings::getInstance] jget TWO]]
+        my jset THREE [::PCGameKey new [[my jget keyEventWrapper] jget VK_3] [[::CommonPhoneStrings::getInstance] jget THREE]]
+        my jset FOUR [::PCGameKey new [[my jget keyEventWrapper] jget VK_4] [[::CommonPhoneStrings::getInstance] jget FOUR]]
+        my jset FIVE [::PCGameKey new [[my jget keyEventWrapper] jget VK_5] [[::CommonPhoneStrings::getInstance] jget FIVE]]
+        my jset SIX [::PCGameKey new [[my jget keyEventWrapper] jget VK_6] [[::CommonPhoneStrings::getInstance] jget SIX]]
+        my jset SEVEN [::PCGameKey new [[my jget keyEventWrapper] jget VK_7] [[::CommonPhoneStrings::getInstance] jget SEVEN]]
+        my jset EIGHT [::PCGameKey new [[my jget keyEventWrapper] jget VK_8] [[::CommonPhoneStrings::getInstance] jget EIGHT]]
+        my jset NINE [::PCGameKey new [[my jget keyEventWrapper] jget VK_9] [[::CommonPhoneStrings::getInstance] jget NINE]]
+        my jset DPAD_UP [::PCGameKey new [[my jget keyEventWrapper] jget VK_UP] [[::CommonPhoneStrings::getInstance] jget UP]]
+        my jset DPAD_DOWN [::PCGameKey new [[my jget keyEventWrapper] jget VK_DOWN] [[::CommonPhoneStrings::getInstance] jget DOWN]]
+        my jset DPAD_LEFT [::PCGameKey new [[my jget keyEventWrapper] jget VK_LEFT] [[::CommonPhoneStrings::getInstance] jget LEFT]]
+        my jset DPAD_RIGHT [::PCGameKey new [[my jget keyEventWrapper] jget VK_RIGHT] [[::CommonPhoneStrings::getInstance] jget RIGHT]]
+        my jset DPAD_UP2 [my jget DPAD_UP]
+        my jset DPAD_DOWN2 [my jget DPAD_DOWN]
+        my jset DPAD_LEFT2 [my jget DPAD_LEFT]
+        my jset DPAD_RIGHT2 [my jget DPAD_RIGHT]
+        my jset COMMA [::PCGameKey new [[my jget keyEventWrapper] jget VK_COMMA] "COMMA"]
+        my jset SPACE [::PCGameKey new [[my jget keyEventWrapper] jget VK_SPACE] "SPACE"]
+        my jset DEL [::PCGameKey new [[my jget keyEventWrapper] jget VK_DELETE] "DEL"]
+        my jset STAR [::PCGameKey new 42 [[::CommonPhoneStrings::getInstance] jget STAR]]
+        my jset QUESTION [::PCGameKey new 47 "?"]
+        my jset PERIOD [::PCGameKey new [[my jget keyEventWrapper] jget VK_PERIOD] [[::CommonSeps::getInstance] jget PERIOD]]
+        my jset ESCAPE [::PCGameKey new [[my jget keyEventWrapper] jget VK_ESCAPE] "Esc"]
+        my jset BACK_SPACE [::PCGameKey new [[my jget keyEventWrapper] jget VK_BACK_SPACE] "Backspace"]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_PCKeyFactory
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::PCKeyFactory::SINGLETON;
-}
-
-
-sub isSubmission {
-    my ($self, $input) = @_;
-        if ($input == $self->{ENTER}) {
-            return 1;
+    method isSubmission {input} {
+        if {[expr {$input eq [my jget ENTER]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isDelete {
-    my ($self, $input) = @_;
-        if ($input == $self->{DEL}) {
-            return 1;
+    method isDelete {input} {
+        if {[expr {$input eq [my jget DEL]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isBackSpace {
-    my ($self, $input) = @_;
-        if ($input == $self->{BACK_SPACE}) {
-            return 1;
+    method isBackSpace {input} {
+        if {[expr {$input eq [my jget BACK_SPACE]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isUp {
-    my ($self, $input) = @_;
-        if ($input == $self->{DPAD_UP} || $input == $self->{DPAD_UP2}) {
-            return 1;
+    method isUp {input} {
+        if {[expr {[expr {$input eq [my jget DPAD_UP]}] || [expr {$input eq [my jget DPAD_UP2]}]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isDown {
-    my ($self, $input) = @_;
-        if ($input == $self->{DPAD_DOWN} || $input == $self->{DPAD_DOWN2}) {
-            return 1;
+    method isDown {input} {
+        if {[expr {[expr {$input eq [my jget DPAD_DOWN]}] || [expr {$input eq [my jget DPAD_DOWN2]}]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isLeft {
-    my ($self, $input) = @_;
-        if ($input == $self->{DPAD_LEFT} || $input == $self->{DPAD_LEFT2}) {
-            return 1;
+    method isLeft {input} {
+        if {[expr {[expr {$input eq [my jget DPAD_LEFT]}] || [expr {$input eq [my jget DPAD_LEFT2]}]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isRight {
-    my ($self, $input) = @_;
-        if ($input == $self->{DPAD_RIGHT} || $input == $self->{DPAD_RIGHT2}) {
-            return 1;
+    method isRight {input} {
+        if {[expr {[expr {$input eq [my jget DPAD_RIGHT]}] || [expr {$input eq [my jget DPAD_RIGHT2]}]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isEnter {
-    my ($self, $input) = @_;
-        if ($input == $self->{ENTER}) {
-            return 1;
+    method isEnter {input} {
+        if {[expr {$input eq [my jget ENTER]}]} {
+            return true
         }
-        return 0;
+        return false
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::math::PositionStrings ();
-use org::allbinary::string::CommonPhoneStrings ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::game::input::ABKeyEventWrapper ();
-use org::allbinary::game::input::PCGameKey ();
+namespace eval ::PCKeyFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::PCKeyFactory new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::PCKeyFactory::staticGet_SINGLETON]
+    }
+}
 
-1;
 

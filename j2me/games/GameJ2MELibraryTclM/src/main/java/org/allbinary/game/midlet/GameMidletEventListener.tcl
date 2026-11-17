@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-# Java interface
-package org::allbinary::game::midlet::GameMidletEventListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-sub onGameEnd {
-    my ($self, $eventObject) = @_;
-    die "abstract method onGameEnd";
+oo::class create ::GameMidletEventListener {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::GameMidletEventListener {
+    method initFields_GameMidletEventListener {} {
+        return
+    }
+    
 
-1;
+    method onGameEnd {eventObject} {
+        error [jexception AbstractMethodError onGameEnd]
+    }
+}
+
+namespace eval ::GameMidletEventListener {
+}
+
 

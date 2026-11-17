@@ -11,49 +11,57 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.font
 
-package org::allbinary::graphics::font::MyFontProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::font::MyFontProcessor'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::MyFontProcessor {
+    superclass ::JObject
 }
 
+oo::define ::MyFontProcessor {
+    method initFields_MyFontProcessor {} {
+        return
+    }
 
-sub defaultCharWidth {
-    my ($class, $font) = @_;
-        return $font->charWidth("C");
+    constructor {} {
+        next
+        my initFields_MyFontProcessor
+    }
+    
+    
+    
+    
+
+    method process {graphics} {
+    }
 }
 
-
-sub defaultStringWidth {
-    my ($class, $font, $size) = @_;
-        return 'org::allbinary::graphics::font::MyFontProcessor'->defaultCharWidth($font) * $size;
+namespace eval ::MyFontProcessor {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::MyFontProcessor new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc defaultCharWidth {font} {
+        return [$font charWidth [scan "C" %c]]
+    }
+    proc defaultStringWidth {font size} {
+        return [expr {[::MyFontProcessor::defaultCharWidth $font] * $size}]
+    }
+    proc getInstance {} {
+        return [::MyFontProcessor::staticGet_instance]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::font::MyFontProcessor::instance;
-}
-
-
-sub process {
-    my ($self, $graphics) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-
-1;
 

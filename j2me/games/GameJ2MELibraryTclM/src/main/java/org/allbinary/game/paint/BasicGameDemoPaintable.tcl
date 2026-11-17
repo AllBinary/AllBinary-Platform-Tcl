@@ -11,82 +11,73 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.paint
 
-package org::allbinary::game::paint::BasicGameDemoPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::StatePaintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{mainDemoStatePaintable} = undef;
-    $self->{ownershipPaintable} = undef;
-    $self->{helpPaintableInterface} = undef;
-    $self->{currentStatePaintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
+oo::class create ::BasicGameDemoPaintable {
+    superclass ::StatePaintable
 }
 
+oo::define ::BasicGameDemoPaintable {
+    method initFields_BasicGameDemoPaintable {} {
+        my jset mainDemoStatePaintable {}
+        my jset ownershipPaintable {}
+        my jset helpPaintableInterface {}
+        my jset currentStatePaintable {}
+        
+        
+        
+        my jset currentStatePaintable [::NullPaintable::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $mainDemoStatePaintable, $ownershipPaintable, $helpPaintableInterface) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{mainDemoStatePaintable} = $mainDemoStatePaintable;
-        $self->setCurrentStatePaintable('org::allbinary::graphics::paint::NullPaintable'->getInstance());
-        $self->{ownershipPaintable} = $ownershipPaintable;
-        $self->{helpPaintableInterface} = $helpPaintableInterface;
-    return $self;
-}
+    constructor {mainDemoStatePaintable ownershipPaintable helpPaintableInterface} {
+        next
+        my initFields_BasicGameDemoPaintable
+        my jset mainDemoStatePaintable $mainDemoStatePaintable
+        my setCurrentStatePaintable [::NullPaintable::getInstance]
+        my jset ownershipPaintable $ownershipPaintable
+        my jset helpPaintableInterface $helpPaintableInterface
+    }
+    
 
-
-sub setState {
-    my ($self, $state) = @_;
-        if ($state == 0) {
-            $self->setCurrentStatePaintable($self->getMainDemoStatePaintable());
-        } elsif ($state == 1) {
-            $self->setCurrentStatePaintable($self->{helpPaintableInterface});
+    method setState {state} {
+        if {[expr {$state == 0}]} {
+            my setCurrentStatePaintable [my getMainDemoStatePaintable]
+        } elseif {[expr {$state == 1}]} {
+            my setCurrentStatePaintable [my jget helpPaintableInterface]
         } else {
-            $self->setCurrentStatePaintable($self->{ownershipPaintable});
+            my setCurrentStatePaintable [my jget ownershipPaintable]
         }
+    }
+    
+
+    method paint {graphics} {
+        [my getCurrentStatePaintable] paint $graphics
+    }
+    
+
+    method getHelpPaintableInterface {} {
+        return [my jget helpPaintableInterface]
+    }
+    
+
+    method setCurrentStatePaintable {currentStatePaintable} {
+        my jset currentStatePaintable $currentStatePaintable
+    }
+    
+
+    method getCurrentStatePaintable {} {
+        return [my jget currentStatePaintable]
+    }
+    
+
+    method getMainDemoStatePaintable {} {
+        return [my jget mainDemoStatePaintable]
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->getCurrentStatePaintable()->paint($graphics);
+namespace eval ::BasicGameDemoPaintable {
 }
 
-
-sub getHelpPaintableInterface {
-    my ($self) = @_;
-        return $self->{helpPaintableInterface};
-}
-
-
-sub setCurrentStatePaintable {
-    my ($self, $currentStatePaintable) = @_;
-        $self->{currentStatePaintable} = $currentStatePaintable;
-}
-
-
-sub getCurrentStatePaintable {
-    my ($self) = @_;
-        return $self->{currentStatePaintable};
-}
-
-
-sub getMainDemoStatePaintable {
-    my ($self) = @_;
-        return $self->{mainDemoStatePaintable};
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::paint::NullPaintable ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::graphics::paint::StatePaintable ();
-
-1;
 

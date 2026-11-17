@@ -11,63 +11,55 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer.event
 
-package org::allbinary::layer::event::ScrollMapEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{dx} = 0;
-    $self->{dy} = 0;
+oo::class create ::ScrollMapEvent {
+    superclass ::AllBinaryEventObject
 }
 
+oo::define ::ScrollMapEvent {
+    method initFields_ScrollMapEvent {} {
+        my jset dx 0
+        my jset dy 0
+        my jset dx 0
+        my jset dy 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $anyType) = @_;
-    my $self = $class->SUPER::new($anyType);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
+    constructor {anyType} {
+        next $anyType
+        my initFields_ScrollMapEvent
+    }
+    
+
+    method setDx {dx} {
+        my jset dx $dx
+    }
+    
+
+    method getDx {} {
+        return [my jget dx]
+    }
+    
+
+    method setDy {dy} {
+        my jset dy $dy
+    }
+    
+
+    method getDy {} {
+        return [my jget dy]
+    }
+    
+
+    method setDxDy {dx dy} {
+        my jset dx $dx
+        my jset dy $dy
+    }
 }
 
-
-sub setDx {
-    my ($self, $dx) = @_;
-        $self->{dx} = $dx;
+namespace eval ::ScrollMapEvent {
 }
 
-
-sub getDx {
-    my ($self) = @_;
-        return $self->{dx};
-}
-
-
-sub setDy {
-    my ($self, $dy) = @_;
-        $self->{dy} = $dy;
-}
-
-
-sub getDy {
-    my ($self) = @_;
-        return $self->{dy};
-}
-
-
-sub setDxDy {
-    my ($self, $dx, $dy) = @_;
-        $self->{dx} = $dx;
-        $self->{dy} = $dy;
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-
-1;
 

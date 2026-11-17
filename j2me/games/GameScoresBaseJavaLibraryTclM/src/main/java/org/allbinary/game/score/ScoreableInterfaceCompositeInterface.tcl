@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-# Java interface
-package org::allbinary::game::score::ScoreableInterfaceCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getScoreableInterface {
-    my ($self) = @_;
-    die "abstract method getScoreableInterface";
+oo::class create ::ScoreableInterfaceCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::ScoreableInterfaceCompositeInterface {
+    method initFields_ScoreableInterfaceCompositeInterface {} {
+        return
+    }
+    
 
-1;
+    method getScoreableInterface {} {
+        error [jexception AbstractMethodError getScoreableInterface]
+    }
+}
+
+namespace eval ::ScoreableInterfaceCompositeInterface {
+}
+
 

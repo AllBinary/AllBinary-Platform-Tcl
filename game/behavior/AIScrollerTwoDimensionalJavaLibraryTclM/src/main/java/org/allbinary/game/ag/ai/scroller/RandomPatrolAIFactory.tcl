@@ -11,35 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.scroller
 
-package org::allbinary::game::ag::ai::scroller::RandomPatrolAIFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::RandomPatrolAIFactory {
+    superclass ::JObject
 }
 
+oo::define ::RandomPatrolAIFactory {
+    method initFields_RandomPatrolAIFactory {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($self, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-        return 'org::allbinary::game::ag::ai::scroller::RandomPatrolAI'->new($hashtable, $ownerLayerInterface, $gameInput);
+    constructor {} {
+        next
+        my initFields_RandomPatrolAIFactory
+    }
+    
+
+    method getInstance {hashtable ownerLayerInterface gameInput} {
+        return [::RandomPatrolAI new $hashtable $ownerLayerInterface $gameInput]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-use org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::ag::ai::scroller::RandomPatrolAI ();
+namespace eval ::RandomPatrolAIFactory {
+}
 
-1;
 

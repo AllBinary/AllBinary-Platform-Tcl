@@ -1,28 +1,44 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graph
 
-package org::allbinary::graph::E;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $e, 'java::lang::LazyStatic', sub { 'org::allbinary::graph::E'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::E {
+    superclass ::JObject
 }
 
+oo::define ::E {
+    method initFields_E {} {
+        return
+    }
 
-sub newInstance {
-    my ($self) = @_;
-        return $org::allbinary::graph::E::e;
+    constructor {} {
+        next
+        my initFields_E
+    }
+    
+
+    method newInstance {} {
+        return [::E::staticGet_e]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
+namespace eval ::E {
+    variable eValue {}
+    variable eSet 0
+    proc staticGet_e {} {
+        variable eValue
+        variable eSet
+        if {!$eSet} {
+            set eSet 1
+            set eValue [::E new]
+        }
+        return $eValue
+    }
+    proc staticSet_e {value} {
+        variable eValue
+        variable eSet
+        set eSet 1
+        set eValue $value
+    }
+}
 
-1;
 

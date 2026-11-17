@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.android.input.motion.event
 
-# Java interface
-package org::allbinary::android::input::motion::event::AnalogControllerConfigurationEventListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-# throws Exception
-sub onAnalogControllerConfigurationEvent {
-    my ($self, $analogControllerConfigurationEvent) = @_;
-    die "abstract method onAnalogControllerConfigurationEvent";
+oo::class create ::AnalogControllerConfigurationEventListenerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::AnalogControllerConfigurationEventListenerInterface {
+    method initFields_AnalogControllerConfigurationEventListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onAnalogControllerConfigurationEvent {analogControllerConfigurationEvent} {
+        error [jexception AbstractMethodError onAnalogControllerConfigurationEvent]
+    }
+}
+
+namespace eval ::AnalogControllerConfigurationEventListenerInterface {
+}
+
 

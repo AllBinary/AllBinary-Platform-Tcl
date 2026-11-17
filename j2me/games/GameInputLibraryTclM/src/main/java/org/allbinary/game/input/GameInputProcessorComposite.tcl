@@ -11,56 +11,48 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::GameInputProcessorComposite;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::PlayerGameInput';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{name} = undef;
-    $self->{gameInputProcessorInterface} = undef;
-    $self->{NAME_LABEL} = " GameInputProcessorInterface: ";
+oo::class create ::GameInputProcessorComposite {
+    superclass ::PlayerGameInput
 }
 
+oo::define ::GameInputProcessorComposite {
+    method initFields_GameInputProcessorComposite {} {
+        my jset name {}
+        my jset gameInputProcessorInterface {}
+        my jset NAME_LABEL {}
+        
+        
+        my jset NAME_LABEL " GameInputProcessorInterface: "
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $gameInputProcessorInterface) = @_;
-    my $self = $class->SUPER::new('org::allbinary::util::BasicArrayListD'->new(), 'org::allbinary::util::BasicArrayListD'->new(), -1);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{name} = $name;
-        $self->{gameInputProcessorInterface} = $gameInputProcessorInterface;
-    return $self;
-}
+    constructor {name gameInputProcessorInterface} {
+        next [::BasicArrayListD new] [::BasicArrayListD new] [expr {-1}]
+        my initFields_GameInputProcessorComposite
+        my jset name $name
+        my jset gameInputProcessorInterface $gameInputProcessorInterface
+    }
+    
 
-
-sub update {
-    my ($self) = @_;
+    method update {} {
         try {
-            my $list = $self->getGameKeyEventList();
-            $self->{gameInputProcessorInterface}->onInput($list);
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{UPDATE}, $e);
+            set list [my getGameKeyEventList]
+            [my jget gameInputProcessorInterface] onInput $list
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget UPDATE] $e
         }
+    }
+    
+
+    method toString {} {
+        return [[[[[::StringMaker new] append [next]] append [my jget NAME_LABEL]] append [my jget name]] toString]
+    }
 }
 
-
-sub toString {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringMaker'->new()->append($self->SUPER::toString())->append($self->{NAME_LABEL})->append($self->{name})->toString();
+namespace eval ::GameInputProcessorComposite {
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::game::input::PlayerGameInput ();
-
-1;
 

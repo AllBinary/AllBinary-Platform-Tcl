@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.event
 
-# Java interface
-package org::allbinary::game::input::event::PressGameKeyEventListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-# throws Exception
-sub onPressGameKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
-    die "abstract method onPressGameKeyEvent";
+oo::class create ::PressGameKeyEventListenerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::PressGameKeyEventListenerInterface {
+    method initFields_PressGameKeyEventListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onPressGameKeyEvent {gameKeyEvent} {
+        error [jexception AbstractMethodError onPressGameKeyEvent]
+    }
+}
+
+namespace eval ::PressGameKeyEventListenerInterface {
+}
+
 

@@ -11,64 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-package org::allbinary::layer::LayerProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::layer::LayerProcessorInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{layerManager} = undef;
+oo::class create ::LayerProcessor {
+    superclass ::JObject
 }
 
+oo::define ::LayerProcessor {
+    method initFields_LayerProcessor {} {
+        my jset commonStrings {}
+        my jset layerManager {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $layerManager) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{layerManager} = $layerManager;
-    return $self;
-}
+    constructor {layerManager} {
+        next
+        my initFields_LayerProcessor
+        my jset layerManager $layerManager
+    }
+    
 
+    method processAt {allBinaryLayerManager layerInterface index} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
 
-# throws Exception
-sub processAt {
-    my ($self, $allBinaryLayerManager, $layerInterface, $index) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
+    method isProcessorLayer {layerInterface} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
 
+    method getLayerManager {} {
+        return [my jget layerManager]
+    }
+    
 
-# throws Exception
-sub isProcessorLayer {
-    my ($self, $layerInterface) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
-
-
-sub getLayerManager {
-    my ($self) = @_;
-        return $self->{layerManager};
-}
-
-
-# throws Exception
-sub process {
-    my ($self, $allBinaryLayerManager) = @_;
-        my $layerManager = $self->getLayerManager();
-        my $size = $layerManager->getSize();
-        for (my $index = 0; $index < $size; $index++) {
-            $self->processAt($allBinaryLayerManager, $layerManager->getLayerAt($index), $index);
+    method process {allBinaryLayerManager} {
+        set layerManager [my getLayerManager]
+        set size [$layerManager getSize]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            my processAt $allBinaryLayerManager [$layerManager getLayerAt $index] $index
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::layer::LayerProcessorInterface ();
+namespace eval ::LayerProcessor {
+}
 
-1;
 

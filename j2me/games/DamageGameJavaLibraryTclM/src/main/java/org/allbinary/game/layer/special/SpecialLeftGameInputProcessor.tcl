@@ -11,34 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.special
 
-package org::allbinary::game::layer::special::SpecialLeftGameInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::special::SpecialGameInputProcessor';
-
-
-
-sub new {
-    my ($class, $collidableDestroyableDamageableLayer) = @_;
-    my $self = $class->SUPER::new($collidableDestroyableDamageableLayer);
-        # super(...) made $self above
-    return $self;
+oo::class create ::SpecialLeftGameInputProcessor {
+    superclass ::SpecialGameInputProcessor
 }
 
+oo::define ::SpecialLeftGameInputProcessor {
+    method initFields_SpecialLeftGameInputProcessor {} {
+        return
+    }
+    
 
-# throws Exception
-sub processEvent {
-    my ($self, $allbinaryLayerManager, $gameKeyEvent) = @_;
-        $self->{collidableDestroyableDamageableLayer}->left();
+    constructor {collidableDestroyableDamageableLayer} {
+        next $collidableDestroyableDamageableLayer
+        my initFields_SpecialLeftGameInputProcessor
+    }
+    
+
+    method processEvent {allbinaryLayerManager gameKeyEvent} {
+        [my jget collidableDestroyableDamageableLayer] left
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::game::layer::special::SpecialGameInputProcessor ();
+namespace eval ::SpecialLeftGameInputProcessor {
+}
 
-1;
 

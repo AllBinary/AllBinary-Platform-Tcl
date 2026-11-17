@@ -11,44 +11,52 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-package org::allbinary::game::collision::CollidableNeverCollideBehaviorFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::collision::CollidableBaseBehaviorFactory';
-
-tie our $instanceC, 'java::lang::LazyStatic', sub { 'org::allbinary::game::collision::CollidableNeverCollideBehaviorFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{instance} = 'org::allbinary::game::collision::CollidableNeverCollideBehavior'->new(0);
+oo::class create ::CollidableNeverCollideBehaviorFactory {
+    superclass ::CollidableBaseBehaviorFactory
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
+oo::define ::CollidableNeverCollideBehaviorFactory {
+    method initFields_CollidableNeverCollideBehaviorFactory {} {
+        my jset instance {}
+        my jset instance [::CollidableNeverCollideBehavior new false]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_CollidableNeverCollideBehaviorFactory
+    }
+    
+    
+
+    method createBehavior {} {
+        return [my jget instance]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::collision::CollidableNeverCollideBehaviorFactory::instanceC;
+namespace eval ::CollidableNeverCollideBehaviorFactory {
+    variable instanceCValue {}
+    variable instanceCSet 0
+    proc staticGet_instanceC {} {
+        variable instanceCValue
+        variable instanceCSet
+        if {!$instanceCSet} {
+            set instanceCSet 1
+            set instanceCValue [::CollidableNeverCollideBehaviorFactory new]
+        }
+        return $instanceCValue
+    }
+    proc staticSet_instanceC {value} {
+        variable instanceCValue
+        variable instanceCSet
+        set instanceCSet 1
+        set instanceCValue $value
+    }
+    proc getInstance {} {
+        return [::CollidableNeverCollideBehaviorFactory::staticGet_instanceC]
+    }
 }
 
-
-sub createBehavior {
-    my ($self) = @_;
-        return $self->{instance};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::collision::CollidableBaseBehaviorFactory ();
-use org::allbinary::game::collision::CollidableNeverCollideBehavior ();
-
-1;
 

@@ -11,82 +11,91 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.direction
 
-package org::allbinary::direction::Direction;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $directionArray = [(undef) x (13)];
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{name} = undef;
-    $self->{otherName} = undef;
-    $self->{value} = undef;
-    $self->{frameFactor} = undef;
+oo::class create ::Direction {
+    superclass ::JObject
 }
 
+oo::define ::Direction {
+    method initFields_Direction {} {
+        my jset name {}
+        my jset otherName {}
+        my jset value 0
+        my jset frameFactor 0
+        
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $otherName, $value, $frameFactor) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{name} = $name;
-        $self->{otherName} = $otherName;
-        $self->{value} = $value;
-        $self->{frameFactor} = $frameFactor;
-        $org::allbinary::direction::Direction::directionArray->[$value] = $self;
-    return $self;
+    constructor {name otherName value frameFactor} {
+        next
+        my initFields_Direction
+        my jset name $name
+        my jset otherName $otherName
+        my jset value $value
+        my jset frameFactor $frameFactor
+        [::Direction::staticGet_directionArray] set $value [self]
+    }
+    
+    
+
+    method getValue {} {
+        return [my jget value]
+    }
+    
+
+    method getFrameFactor {} {
+        return [my jget frameFactor]
+    }
+    
+
+    method getOtherName {} {
+        return [my jget otherName]
+    }
+    
+
+    method getName {} {
+        return [my jget name]
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "Direction: "
+        $stringBuffer append [my getName]
+        $stringBuffer append " Or: "
+        $stringBuffer append [my getOtherName]
+        $stringBuffer append " Value: "
+        $stringBuffer appendint [my jget value]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub getInstance {
-    my ($class, $direction) = @_;
-        return $org::allbinary::direction::Direction::directionArray->[$direction];
+namespace eval ::Direction {
+    variable directionArrayValue {}
+    variable directionArraySet 0
+    proc staticGet_directionArray {} {
+        variable directionArrayValue
+        variable directionArraySet
+        if {!$directionArraySet} {
+            set directionArraySet 1
+            set directionArrayValue [jarray 13 {}]
+        }
+        return $directionArrayValue
+    }
+    proc staticSet_directionArray {value} {
+        variable directionArrayValue
+        variable directionArraySet
+        set directionArraySet 1
+        set directionArrayValue $value
+    }
+    proc getInstance {direction} {
+        return [[::Direction::staticGet_directionArray] get $direction]
+    }
 }
 
-
-sub getValue {
-    my ($self) = @_;
-        return $self->{value};
-}
-
-
-sub getFrameFactor {
-    my ($self) = @_;
-        return $self->{frameFactor};
-}
-
-
-sub getOtherName {
-    my ($self) = @_;
-        return $self->{otherName};
-}
-
-
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("Direction: ");
-        $stringBuffer->append($self->getName());
-        $stringBuffer->append(" Or: ");
-        $stringBuffer->append($self->getOtherName());
-        $stringBuffer->append(" Value: ");
-        $stringBuffer->appendint($self->{value});
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::string::StringMaker ();
-
-1;
 

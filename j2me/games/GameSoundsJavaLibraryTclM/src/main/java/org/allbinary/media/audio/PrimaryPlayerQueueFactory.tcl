@@ -11,31 +11,45 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-package org::allbinary::media::audio::PrimaryPlayerQueueFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::media::audio::PlayerQueue'->new(4) };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::PrimaryPlayerQueueFactory {
+    superclass ::JObject
 }
 
+oo::define ::PrimaryPlayerQueueFactory {
+    method initFields_PrimaryPlayerQueueFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::media::audio::PrimaryPlayerQueueFactory::SINGLETON;
+    constructor {} {
+        next
+        my initFields_PrimaryPlayerQueueFactory
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::media::audio::PlayerQueue ();
+namespace eval ::PrimaryPlayerQueueFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::PlayerQueue new 4]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::PrimaryPlayerQueueFactory::staticGet_SINGLETON]
+    }
+}
 
-1;
 

@@ -11,37 +11,49 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.mapping.event
 
-package org::allbinary::game::input::mapping::event::NullInputMappingEventListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::input::mapping::event::InputMappingEventListenerInterface';
-
-tie our $NULL_INPUT_MAPPING_EVENT_LISTENER, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::mapping::event::NullInputMappingEventListener'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullInputMappingEventListener {
+    superclass ::JObject
 }
 
+oo::define ::NullInputMappingEventListener {
+    method initFields_NullInputMappingEventListener {} {
+        return
+    }
 
-# throws Exception
-sub onInputMappingEvent {
-    my ($self, $inputMappingEvent) = @_;
+    constructor {} {
+        next
+        my initFields_NullInputMappingEventListener
+    }
+    
+
+    method onInputMappingEvent {inputMappingEvent} {
+    }
+    
+
+    method onEvent {eventObject} {
+    }
 }
 
-
-sub onEvent {
-    my ($self, $eventObject) = @_;
+namespace eval ::NullInputMappingEventListener {
+    variable NULL_INPUT_MAPPING_EVENT_LISTENERValue {}
+    variable NULL_INPUT_MAPPING_EVENT_LISTENERSet 0
+    proc staticGet_NULL_INPUT_MAPPING_EVENT_LISTENER {} {
+        variable NULL_INPUT_MAPPING_EVENT_LISTENERValue
+        variable NULL_INPUT_MAPPING_EVENT_LISTENERSet
+        if {!$NULL_INPUT_MAPPING_EVENT_LISTENERSet} {
+            set NULL_INPUT_MAPPING_EVENT_LISTENERSet 1
+            set NULL_INPUT_MAPPING_EVENT_LISTENERValue [::NullInputMappingEventListener new]
+        }
+        return $NULL_INPUT_MAPPING_EVENT_LISTENERValue
+    }
+    proc staticSet_NULL_INPUT_MAPPING_EVENT_LISTENER {value} {
+        variable NULL_INPUT_MAPPING_EVENT_LISTENERValue
+        variable NULL_INPUT_MAPPING_EVENT_LISTENERSet
+        set NULL_INPUT_MAPPING_EVENT_LISTENERSet 1
+        set NULL_INPUT_MAPPING_EVENT_LISTENERValue $value
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::game::input::mapping::event::InputMappingEventListenerInterface ();
-
-1;
 

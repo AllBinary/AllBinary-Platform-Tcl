@@ -11,105 +11,108 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.image
 
-package org::allbinary::media::image::ImageCopyUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::media::image::ImageCopyUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{imageCreationUtil} = 'org::allbinary::media::image::ImageCreationUtil'->getInstance();
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
-    $self->{gameFeatureFactory} = 'org::allbinary::game::configuration::feature::GameFeatureFactory'->getInstance();
-    $self->{features} = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-    $self->{NO_COPY} = "J2ME does not need to copy images after initial loading";
+oo::class create ::ImageCopyUtil {
+    superclass ::JObject
 }
 
+oo::define ::ImageCopyUtil {
+    method initFields_ImageCopyUtil {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset imageCreationUtil {}
+        my jset anchor 0
+        my jset gameFeatureFactory {}
+        my jset features {}
+        my jset NO_COPY {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset imageCreationUtil [::ImageCreationUtil::getInstance]
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        my jset gameFeatureFactory [::GameFeatureFactory::getInstance]
+        my jset features [::Features::getInstance]
+        my jset NO_COPY "J2ME does not need to copy images after initial loading"
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::media::image::ImageCopyUtil::instance;
-}
+    constructor {} {
+        next
+        my initFields_ImageCopyUtil
+    }
+    
 
+    method createImageForRotation {originalImage} {
+        return [my createImage $originalImage]
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-# throws Exception
-sub createImageForRotation {
-    my ($self, $originalImage) = @_;
-        return $self->createImage($originalImage);
-}
-
-
-# throws Exception
-sub createImage {
-    my ($self, $originalImage) = @_;
-        if (!$self->{features}->isFeature($self->{gameFeatureFactory}->{POST_IMAGE_LOADING_MODIFICATION})) {
-            $self->{logUtil}->put($self->{NO_COPY}, $self, $self->{commonStrings}->{CONSTRUCTOR}, ("Exception"));
-            return $originalImage;
+    method createImage {originalImage} {
+        if {[expr {![[my jget features] isFeature [[my jget gameFeatureFactory] jget POST_IMAGE_LOADING_MODIFICATION]]}]} {
+            [my jget logUtil] put [my jget NO_COPY] [self] [[my jget commonStrings] jget CONSTRUCTOR] [jexception Exception {}]
+            return $originalImage
         }
-        my $image = $self->{imageCreationUtil}->createImageWH($originalImage->getWidth(), $originalImage->getHeight());
-        if ($image->isMutable()) {
-            $image->getGraphics()->drawImage($originalImage, 0, 0, $self->{anchor});
-            return $image;
+        set image [[my jget imageCreationUtil] createImageWH [$originalImage getWidth] [$originalImage getHeight]]
+        if {[$image isMutable]} {
+            [$image getGraphics] drawImage $originalImage 0 0 [my jget anchor]
+            return $image
         } else {
-            die ("Not Mutable");
+            error [jexception Exception "Not Mutable"]
         }
-}
+    }
+    
 
-
-# throws Exception
-sub createImageScale {
-    my ($self, $originalImage, $canvasScale, $resize) = @_;
-        if (!$self->{features}->isFeature($self->{gameFeatureFactory}->{POST_IMAGE_LOADING_MODIFICATION})) {
-            $self->{logUtil}->put($self->{NO_COPY}, $self, $self->{commonStrings}->{CONSTRUCTOR}, ("Exception"));
-            return $originalImage;
+    method createImageScale {originalImage canvasScale resize} {
+        if {[expr {![[my jget features] isFeature [[my jget gameFeatureFactory] jget POST_IMAGE_LOADING_MODIFICATION]]}]} {
+            [my jget logUtil] put [my jget NO_COPY] [self] [[my jget commonStrings] jget CONSTRUCTOR] [jexception Exception {}]
+            return $originalImage
         }
-        my $newWidth = int(($originalImage->getWidth() * $canvasScale));
-        my $newHeight = int(($originalImage->getHeight() * $canvasScale));
-        if ($resize) {
-            if ($newWidth < $newHeight) {
-                $newWidth = $newHeight;
+        set newWidth [jint ([expr {[$originalImage getWidth] * $canvasScale}])]
+        set newHeight [jint ([expr {[$originalImage getHeight] * $canvasScale}])]
+        if {$resize} {
+            if {[expr {$newWidth < $newHeight}]} {
+                set newWidth $newHeight
             }
-            if ($newHeight < $newWidth) {
-                $newHeight = $newWidth;
+            if {[expr {$newHeight < $newWidth}]} {
+                set newHeight $newWidth
             }
         }
-        my $image = $self->{imageCreationUtil}->createImageWH($newWidth, $newHeight);
-        if ($image->isMutable()) {
-            my $halfWidthDelta = ($newWidth - $originalImage->getWidth()) / 2;
-            my $halfHeightDelta = ($newHeight - $originalImage->getHeight()) / 2;
-            my $graphics = $image->getGraphics();
-            $graphics->drawImage($originalImage, $halfWidthDelta, $halfHeightDelta, $self->{anchor});
-            return $image;
+        set image [[my jget imageCreationUtil] createImageWH $newWidth $newHeight]
+        if {[$image isMutable]} {
+            set halfWidthDelta [expr {([expr {$newWidth - [$originalImage getWidth]}]) / 2}]
+            set halfHeightDelta [expr {([expr {$newHeight - [$originalImage getHeight]}]) / 2}]
+            set graphics [$image getGraphics]
+            $graphics drawImage $originalImage $halfWidthDelta $halfHeightDelta [my jget anchor]
+            return $image
         } else {
-            die ("Not Mutable");
+            error [jexception Exception "Not Mutable"]
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::GameFeatureFactory ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::media::image::ImageCreationUtil ();
+namespace eval ::ImageCopyUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ImageCopyUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ImageCopyUtil::staticGet_instance]
+    }
+}
 
-1;
 

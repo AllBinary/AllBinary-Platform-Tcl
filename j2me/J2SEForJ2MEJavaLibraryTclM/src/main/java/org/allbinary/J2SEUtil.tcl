@@ -11,55 +11,64 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary
 
 #J2SEForJ2ME
-package org::allbinary::J2SEUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::J2SEUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::J2SEUtil {
+    superclass ::JObject
 }
 
+oo::define ::J2SEUtil {
+    method initFields_J2SEUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::J2SEUtil::instance;
+    constructor {} {
+        next
+        my initFields_J2SEUtil
+    }
+    
+    
+
+    method getHashMapAsArray {hashMap} {
+        set objectArray [[$hashMap keySet] toArray]
+        return $objectArray
+    }
+    
+
+    method getMapAsArray {map} {
+        set objectArray [[$map keySet] toArray]
+        return $objectArray
+    }
+    
+
+    method getSetAsArray {set} {
+        set objectArray [$set toArray]
+        return $objectArray
+    }
 }
 
-
-sub getHashMapAsArray {
-    my ($self, $hashMap) = @_;
-        my $objectArray = $hashMap->keySet()->toArray();
-        return $objectArray;
+namespace eval ::J2SEUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::J2SEUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::J2SEUtil::staticGet_instance]
+    }
 }
 
-
-sub getMapAsArray {
-    my ($self, $map) = @_;
-        my $objectArray = $map->keySet()->toArray();
-        return $objectArray;
-}
-
-
-sub getSetAsArray {
-    my ($self, $set) = @_;
-        my $objectArray = $set->toArray();
-        return $objectArray;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use java::util::HashMap ();
-# use java::util::Map ();
-# use java::util::Set ();
-
-1;
 

@@ -11,28 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::BasicTouchButtonCellPositionFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::BasicTouchButtonCellPositionFactory {
+    superclass ::JObject
 }
 
+oo::define ::BasicTouchButtonCellPositionFactory {
+    method initFields_BasicTouchButtonCellPositionFactory {} {
+        return
+    }
+    
 
-sub init {
-    my ($class) = @_;
+    constructor {} {
+        next
+        my initFields_BasicTouchButtonCellPositionFactory
+    }
+    
 }
 
-use java::lang::Object ();
+namespace eval ::BasicTouchButtonCellPositionFactory {
+    proc init {} {
+    }
+}
 
-1;
 

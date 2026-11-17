@@ -11,220 +11,204 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.mapping
 
-package org::allbinary::game::input::mapping::InputToGameKeyMapping;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::mapping::InputMapping';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gameKeyFactory} = 'org::allbinary::game::input::GameKeyFactory'->getInstance();
-    $self->{mappedGameKeys} = [$self->{gameKeyFactory}->{UP}, $self->{gameKeyFactory}->{DOWN}, $self->{gameKeyFactory}->{LEFT}, $self->{gameKeyFactory}->{RIGHT}];
-    $self->{platformToGameKeyMapping} = [(undef) x ('org::allbinary::game::input::InputFactory'->getInstance()->{MAX})];
-    $self->{negativePlatformToGameKeyMapping} = [(undef) x (0)];
+oo::class create ::InputToGameKeyMapping {
+    superclass ::InputMapping
 }
 
+oo::define ::InputToGameKeyMapping {
+    method initFields_InputToGameKeyMapping {} {
+        my jset gameKeyFactory {}
+        my jset mappedGameKeys {}
+        my jset platformToGameKeyMapping {}
+        my jset negativePlatformToGameKeyMapping {}
+        my jset gameKeyFactory [::GameKeyFactory::getInstance]
+        my jset mappedGameKeys [jarrayfrom [list [[my jget gameKeyFactory] jget UP] [[my jget gameKeyFactory] jget DOWN] [[my jget gameKeyFactory] jget LEFT] [[my jget gameKeyFactory] jget RIGHT]]]
+        my jset platformToGameKeyMapping [jarray [[::InputFactory::getInstance] jget MAX] {}]
+        my jset negativePlatformToGameKeyMapping [jarray 0 {}]
+        return
+    }
+    
+    
 
-sub getNullInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::input::mapping::InputToGameKeyMapping::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::input::mapping::InputToGameKeyMapping::instance = 'org::allbinary::game::input::mapping::InputToGameKeyMapping'->new();
+    constructor {} {
+        next
+        my initFields_InputToGameKeyMapping
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+        my clear
+    }
+    
+
+    method clear {} {
+        for {set index [jint [expr {[[my jget platformToGameKeyMapping] length] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            [my jget platformToGameKeyMapping] set $index [[my jget gameKeyFactory] jget NONE]
         }
-        return $org::allbinary::game::input::mapping::InputToGameKeyMapping::instance;
-}
+    }
+    
 
+    method removeAll {} {
+        next
+        my clear
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{CONSTRUCTOR});
-        $self->clear();
-    return $self;
-}
-
-
-sub clear {
-    my ($self) = @_;
-        for (my $index = scalar(@{$self->{platformToGameKeyMapping}}) - 1; $index >= 0; $index--) {
-            $self->{platformToGameKeyMapping}->[$index] = $self->{gameKeyFactory}->{NONE};
-        }
-}
-
-
-sub removeAll {
-    my ($self) = @_;
-        $self->SUPER::removeAll();
-        $self->clear();
-}
-
-
-sub addMapping {
-    my ($self, $inputToGameKeyMapping) = @_;
-        for (my $index = $inputToGameKeyMapping->getMaxMappable() - 1; $index >= 0; $index--) {
-            my $input = $inputToGameKeyMapping->getInstance($index);
-            if ($input != $self->{gameKeyFactory}->{NONE}) {
-                $self->addAll($input, $inputToGameKeyMapping->getMappedInput($input));
+    method addMapping {inputToGameKeyMapping} {
+        for {set index [jint [expr {[$inputToGameKeyMapping getMaxMappable] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set input [$inputToGameKeyMapping getInstance $index]
+            if {[expr {$input ne [[my jget gameKeyFactory] jget NONE]}]} {
+                my addAll $input [$inputToGameKeyMapping getMappedInput $input]
             }
         }
-}
+    }
+    
 
-
-sub addAll {
-    my ($self, $input, $list) = @_;
-        for (my $index = $list->size() - 1; $index >= 0; $index--) {
-            my $mappedToInput = $list->{objectArray}->[$index];
-            $self->add($input, $mappedToInput);
+    method addAll {input list} {
+        for {set index [jint [expr {[$list size] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set mappedToInput [[$list jget objectArray] get $index]
+            my add $input $mappedToInput
         }
-}
+    }
+    
 
+    method add {input mappedToInput} {
+        next $input $mappedToInput
+        my set $input $mappedToInput
+    }
+    
 
-sub add {
-    my ($self, $input, $mappedToInput) = @_;
-        $self->SUPER::add($input, $mappedToInput);
-        $self->set($input, $mappedToInput);
-}
+    method remove {input mappedToInput} {
+        [my jget logUtil] putF [[[[[[::StringMaker new] append [[::CommonLabels::getInstance] jget START_LABEL]] append [[::StringUtil::getInstance] toString1 $input]] append " == "] append [[::StringUtil::getInstance] toString1 $mappedToInput]] toString] [self] "InputToGameKeyMapping::remove"
+        next $input $mappedToInput
+        my set $input [[my jget gameKeyFactory] jget NONE]
+    }
+    
 
-
-sub remove {
-    my ($self, $input, $mappedToInput) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{START_LABEL})->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($input))->append(" == ")->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($mappedToInput))->toString(), $self, "InputToGameKeyMapping::remove");
-        $self->SUPER::remove($input, $mappedToInput);
-        $self->set($input, $self->{gameKeyFactory}->{NONE});
-}
-
-
-sub set {
-    my ($self, $input, $mappedToInput) = @_;
-        my $id = $mappedToInput->getId();
-        if ($id >= 0 && $id < scalar(@{$self->{platformToGameKeyMapping}})) {
-            $self->{platformToGameKeyMapping}->[$id] = $input;
+    method set {input mappedToInput} {
+        set id [$mappedToInput getId]
+        if {[expr {[expr {$id >= 0}] && [expr {$id < [[my jget platformToGameKeyMapping] length]}]}]} {
+            [my jget platformToGameKeyMapping] set $id $input
         }
-}
+    }
+    
 
+    method getMaxMappable {} {
+        return [[my jget platformToGameKeyMapping] length]
+    }
+    
 
-sub getMaxMappable {
-    my ($self) = @_;
-        return scalar(@{$self->{platformToGameKeyMapping}});
-}
-
-
-sub getReverseInstance {
-    my ($self, $id) = @_;
-        my $list = 'org::allbinary::util::BasicArrayListD'->new();
-        my $inputFactory = 'org::allbinary::game::input::InputFactory'->getInstance();
-        for (my $index = 0; $index < scalar(@{$self->{platformToGameKeyMapping}}); $index++) {
-            if ($self->{platformToGameKeyMapping}->[$index]->getId() == $id) {
-                my $input = $inputFactory->getInstanceById($index);
-                if (defined($input)) {
-                    $list->add($input);
+    method getReverseInstance {id} {
+        set list [::BasicArrayListD new]
+        set inputFactory [::InputFactory::getInstance]
+        for {set index 0} {[expr {$index < [[my jget platformToGameKeyMapping] length]}]} {jpostincr index 1} {
+            if {[expr {[[[my jget platformToGameKeyMapping] get $index] getId] == $id}]} {
+                set input [$inputFactory getInstanceById $index]
+                if {[expr {$input ne {}}]} {
+                    $list add $input
                 }
             }
         }
-        return $list;
-}
+        return $list
+    }
+    
 
-
-# throws Exception
-sub initGameKey {
-    my ($self, $canvas, $gameKey) = @_;
-        my $key = $canvas->getKeyCode($gameKey->getId());
-        if ($key < 0 && -$key < scalar(@{$self->{negativePlatformToGameKeyMapping}})) {
-            $self->{negativePlatformToGameKeyMapping}->[-$key] = $gameKey;
-        } elsif ($key > 0) {
-            if ($self->{platformToGameKeyMapping}->[$key] == $self->{gameKeyFactory}->{NONE}) {
-                $self->{platformToGameKeyMapping}->[$key] = $gameKey;
+    method initGameKey {canvas gameKey} {
+        set key [$canvas getKeyCode [$gameKey getId]]
+        if {[expr {[expr {$key < 0}] && [expr {[expr {-$key}] < [[my jget negativePlatformToGameKeyMapping] length]}]}]} {
+            [my jget negativePlatformToGameKeyMapping] set [expr {-$key}] $gameKey
+        } elseif {[expr {$key > 0}]} {
+            if {[expr {[[my jget platformToGameKeyMapping] get $key] eq [[my jget gameKeyFactory] jget NONE]}]} {
+                [my jget platformToGameKeyMapping] set $key $gameKey
             }
         } else {
-            'org::allbinary::logic::communication::log::PreLogUtil'->putOE('org::allbinary::logic::string::StringMaker'->new()->append($gameKey->toString())->append('org::allbinary::string::CommonSeps'->getInstance()->{COLON_SEP})->appendint($key)->toString(), $self, $self->{commonStrings}->{INIT}, ("Exception"));
+            ::PreLogUtil::putOE [[[[[::StringMaker new] append [$gameKey toString]] append [[::CommonSeps::getInstance] jget COLON_SEP]] appendint $key] toString] [self] [[my jget commonStrings] jget INIT] [jexception Exception {}]
         }
-}
+    }
+    
 
-
-# throws Exception
-sub getSmallestCanvasGameKeyCode {
-    my ($self, $canvas) = @_;
-        my $nextKey = 0;
-        my $smallestKey = 0;
-        for (my $index = scalar(@{$self->{mappedGameKeys}}); --$index >= 0; ) {
-            $nextKey = $canvas->getKeyCode($self->{mappedGameKeys}->[$index]->getId());
-            if ($nextKey < $smallestKey) {
-                $smallestKey = $nextKey;
+    method getSmallestCanvasGameKeyCode {canvas} {
+        set nextKey 0
+        set smallestKey 0
+        for {set index [[my jget mappedGameKeys] length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            set nextKey [$canvas getKeyCode [[[my jget mappedGameKeys] get $index] getId]]
+            if {[expr {$nextKey < $smallestKey}]} {
+                set smallestKey $nextKey
             }
         }
-        return $smallestKey;
-}
+        return $smallestKey
+    }
+    
 
-
-sub init {
-    my ($self, $canvas) = @_;
+    method init {canvas} {
         try {
-            my $negativePlatformToGameKeyMapping = [(undef) x (0)];
-            my $smallestKey = $self->getSmallestCanvasGameKeyCode($canvas);
-            if ($smallestKey < 0) {
-                $smallestKey--;
-                if ($smallestKey < -256) {
-                    $smallestKey = -256;
+            set negativePlatformToGameKeyMapping [jarray 0 {}]
+            set smallestKey [my getSmallestCanvasGameKeyCode $canvas]
+            if {[expr {$smallestKey < 0}]} {
+                jpostincr smallestKey -1
+                if {[expr {$smallestKey < [expr {-256}]}]} {
+                    set smallestKey [expr {-256}]
                 }
-                $negativePlatformToGameKeyMapping = [(undef) x (-$smallestKey)];
-                for (my $index = scalar(@{$negativePlatformToGameKeyMapping}); --$index >= 0; ) {
-                    $negativePlatformToGameKeyMapping->[$index] = $self->{gameKeyFactory}->{NONE};
+                set negativePlatformToGameKeyMapping [jarray [expr {-$smallestKey}] {}]
+                for {set index [$negativePlatformToGameKeyMapping length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+                    $negativePlatformToGameKeyMapping set $index [[my jget gameKeyFactory] jget NONE]
                 }
-                $self->{negativePlatformToGameKeyMapping} = $negativePlatformToGameKeyMapping;
+                my jset negativePlatformToGameKeyMapping $negativePlatformToGameKeyMapping
             }
-            for (my $index = scalar(@{$self->{mappedGameKeys}}); --$index >= 0; ) {
-                $self->initGameKey($canvas, $self->{mappedGameKeys}->[$index]);
+            for {set index [[my jget mappedGameKeys] length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+                my initGameKey $canvas [[my jget mappedGameKeys] get $index]
             }
-        } catch ($t) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{INIT}, $t);
+        } on error {t} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget INIT] $t
         }
-}
+    }
+    
 
-
-sub getInstanceForCanvas {
-    my ($self, $canvas, $id) = @_;
-        if ($id >= 0 && $id < scalar(@{$self->{platformToGameKeyMapping}})) {
-            return $self->{platformToGameKeyMapping}->[$id];
-        } elsif ($id < 0 && -$id < scalar(@{$self->{negativePlatformToGameKeyMapping}})) {
-            return $self->{negativePlatformToGameKeyMapping}->[-$id];
+    method getInstanceForCanvas {canvas id} {
+        if {[expr {[expr {$id >= 0}] && [expr {$id < [[my jget platformToGameKeyMapping] length]}]}]} {
+            return [[my jget platformToGameKeyMapping] get $id]
+        } elseif {[expr {[expr {$id < 0}] && [expr {[expr {-$id}] < [[my jget negativePlatformToGameKeyMapping] length]}]}]} {
+            return [[my jget negativePlatformToGameKeyMapping] get [expr {-$id}]]
         } else {
-            return $self->{gameKeyFactory}->{NONE};
+            return [[my jget gameKeyFactory] jget NONE]
         }
-}
+    }
+    
 
-
-sub getInstance {
-    my ($self, $id) = @_;
-        if ($id >= 0 && $id < scalar(@{$self->{platformToGameKeyMapping}})) {
-            return $self->{platformToGameKeyMapping}->[$id];
-        } elsif ($id < 0 && -$id < scalar(@{$self->{negativePlatformToGameKeyMapping}})) {
-            return $self->{negativePlatformToGameKeyMapping}->[-$id];
+    method getInstance {id} {
+        if {[expr {[expr {$id >= 0}] && [expr {$id < [[my jget platformToGameKeyMapping] length]}]}]} {
+            return [[my jget platformToGameKeyMapping] get $id]
+        } elseif {[expr {[expr {$id < 0}] && [expr {[expr {-$id}] < [[my jget negativePlatformToGameKeyMapping] length]}]}]} {
+            return [[my jget negativePlatformToGameKeyMapping] get [expr {-$id}]]
         } else {
-            return $self->{gameKeyFactory}->{NONE};
+            return [[my jget gameKeyFactory] jget NONE]
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::game::input::GameKey ();
-use org::allbinary::game::input::GameKeyFactory ();
-use org::allbinary::game::input::Input ();
-use org::allbinary::game::input::InputFactory ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::game::input::mapping::InputMapping ();
+namespace eval ::InputToGameKeyMapping {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getNullInstance {} {
+        if {[expr {[::InputToGameKeyMapping::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::InputToGameKeyMapping::staticSet_instance [::InputToGameKeyMapping new]
+        }
+        return [::InputToGameKeyMapping::staticGet_instance]
+    }
+}
 
-1;
 

@@ -11,55 +11,61 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::NoHighScoresFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::score::HighScoresBase';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::score::NoHighScoresFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{NO_HIGH_SCORES} = [(undef) x (0)];
+oo::class create ::NoHighScoresFactory {
+    superclass ::HighScoresBase
 }
 
+oo::define ::NoHighScoresFactory {
+    method initFields_NoHighScoresFactory {} {
+        my jset logUtil {}
+        my jset NO_HIGH_SCORES {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset NO_HIGH_SCORES [jarray 0 {}]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::score::NoHighScoresFactory::instance;
+    constructor {} {
+        next
+        my initFields_NoHighScoresFactory
+    }
+    
+
+    method fetchHighScores {gameInfo highScoresResultsListener} {
+        [my jget logUtil] putF "Getting No HighScores" [self] "fetchHighScores"
+        $highScoresResultsListener setHighScoresArray [my jget NO_HIGH_SCORES]
+    }
+    
+
+    method createHighScoresHelper {} {
+        return [::HighScoresHelperBase new]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
+namespace eval ::NoHighScoresFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::NoHighScoresFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::NoHighScoresFactory::staticGet_instance]
+    }
 }
 
-
-sub fetchHighScores {
-    my ($self, $gameInfo, $highScoresResultsListener) = @_;
-        $self->{logUtil}->putF("Getting No HighScores", $self, "fetchHighScores");
-        $highScoresResultsListener->setHighScoresArray($self->{NO_HIGH_SCORES});
-}
-
-
-sub createHighScoresHelper {
-    my ($self) = @_;
-        return 'org::allbinary::game::score::HighScoresHelperBase'->new();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::GameInfo ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::game::score::HighScoresBase ();
-use org::allbinary::game::score::HighScoresHelperBase ();
-
-1;
 

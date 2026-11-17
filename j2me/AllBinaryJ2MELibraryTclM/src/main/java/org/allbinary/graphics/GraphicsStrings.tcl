@@ -11,43 +11,61 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-package org::allbinary::graphics::GraphicsStrings;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::GraphicsStrings'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{ANIMATION} = "animation";
-    $self->{ANGLE} = "angle";
-    $self->{MOVEMENT_ANGLE} = "movement_angle";
-    $self->{ROTATION} = "rotation";
-    $self->{OPACITY} = "opacity";
-    $self->{HTML} = "HTML";
-    $self->{WIDTH} = "width";
-    $self->{HEIGHT} = "height";
+oo::class create ::GraphicsStrings {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::GraphicsStrings {
+    method initFields_GraphicsStrings {} {
+        my jset ANIMATION {}
+        my jset ANGLE {}
+        my jset MOVEMENT_ANGLE {}
+        my jset ROTATION {}
+        my jset OPACITY {}
+        my jset HTML {}
+        my jset WIDTH {}
+        my jset HEIGHT {}
+        my jset ANIMATION "animation"
+        my jset ANGLE "angle"
+        my jset MOVEMENT_ANGLE "movement_angle"
+        my jset ROTATION "rotation"
+        my jset OPACITY "opacity"
+        my jset HTML "HTML"
+        my jset WIDTH "width"
+        my jset HEIGHT "height"
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_GraphicsStrings
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::GraphicsStrings::instance;
+namespace eval ::GraphicsStrings {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GraphicsStrings new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GraphicsStrings::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

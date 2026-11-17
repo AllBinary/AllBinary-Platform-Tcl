@@ -11,67 +11,71 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.damage
 
-package org::allbinary::game::combat::damage::DamageUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::combat::damage::DamageUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{COLLIDE} = "collide";
+oo::class create ::DamageUtil {
+    superclass ::JObject
 }
 
+oo::define ::DamageUtil {
+    method initFields_DamageUtil {} {
+        my jset logUtil {}
+        my jset COLLIDE {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset COLLIDE "collide"
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::combat::damage::DamageUtil::instance;
-}
+    constructor {} {
+        next
+        my initFields_DamageUtil
+    }
+    
 
+    method process {damageableInterface damageableInterface2} {
+        $damageableInterface damage [$damageableInterface2 getDamage 0] 0
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-# throws Exception
-sub process {
-    my ($self, $damageableInterface, $damageableInterface2) = @_;
-        $damageableInterface->damage($damageableInterface2->getDamage(0), 0);
-}
-
-
-# throws Exception
-sub debugDamage {
-    my ($self, $collidableInterfaceCompositeInterface1, $collidableInterfaceCompositeInterface) = @_;
-        my $collidableDestroyableDamageableLayer = $collidableInterfaceCompositeInterface;
-        my $damage = $collidableDestroyableDamageableLayer->getDamage(0);
-        if ($damage > 20000) {
-            my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-            $stringBuffer->append("Collision ");
-            $stringBuffer->append($collidableInterfaceCompositeInterface1->toString());
-            $stringBuffer->append(" with: ");
-            $stringBuffer->append($collidableInterfaceCompositeInterface->toString());
-            $stringBuffer->append(" damage: ");
-            $stringBuffer->appendint($damage);
-            $self->{logUtil}->putF($stringBuffer->toString(), $collidableInterfaceCompositeInterface1, $self->{COLLIDE});
+    method debugDamage {collidableInterfaceCompositeInterface1 collidableInterfaceCompositeInterface} {
+        set collidableDestroyableDamageableLayer $collidableInterfaceCompositeInterface
+        set damage [$collidableDestroyableDamageableLayer getDamage 0]
+        if {[expr {$damage > 20000}]} {
+            set stringBuffer [::StringMaker new]
+            $stringBuffer append "Collision "
+            $stringBuffer append [$collidableInterfaceCompositeInterface1 toString]
+            $stringBuffer append " with: "
+            $stringBuffer append [$collidableInterfaceCompositeInterface toString]
+            $stringBuffer append " damage: "
+            $stringBuffer appendint $damage
+            [my jget logUtil] putF [$stringBuffer toString] $collidableInterfaceCompositeInterface1 [my jget COLLIDE]
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::layer::CollidableCompositeLayer ();
-use org::allbinary::game::layer::special::CollidableDestroyableDamageableLayer ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
+namespace eval ::DamageUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::DamageUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::DamageUtil::staticGet_instance]
+    }
+}
 
-1;
 

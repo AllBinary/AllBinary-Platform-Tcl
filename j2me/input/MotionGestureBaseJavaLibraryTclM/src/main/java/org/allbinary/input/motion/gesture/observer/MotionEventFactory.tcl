@@ -11,53 +11,60 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
-package org::allbinary::input::motion::gesture::observer::MotionEventFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::logic::util::event::AllBinaryEventObjectFactoryInterface';
-
-our $index = 0;
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{source} = undef;
-    $self->{id} = undef;
+oo::class create ::MotionEventFactory {
+    superclass ::JObject
 }
 
+oo::define ::MotionEventFactory {
+    method initFields_MotionEventFactory {} {
+        my jset source {}
+        my jset id 0
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $source, $id) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{source} = $source;
-        $self->{id} = $id;
-        $org::allbinary::input::motion::gesture::observer::MotionEventFactory::index = 'org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance()->{LAST_MOTION}->getId();
-    return $self;
-}
+    constructor {source id} {
+        next
+        my initFields_MotionEventFactory
+        my jset source $source
+        my jset id $id
+        ::MotionEventFactory::staticSet_index [[[::TouchMotionGestureFactory::getInstance] jget LAST_MOTION] getId]
+    }
+    
 
-
-sub getInstance {
-    my ($self) = @_;
-        my $inputFactory = 'org::allbinary::game::input::InputFactory'->getInstance();
-        my $input = $inputFactory->getInstanceById($org::allbinary::input::motion::gesture::observer::MotionEventFactory::index++);
-        if ($input == $inputFactory->{NO_INPUT}) {
-            return 'org::allbinary::input::motion::gesture::observer::MotionGestureEvent'->new($self->{source}, $self->{id}, 'org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance()->{NO_MOTION});
+    method getInstance {} {
+        set inputFactory [::InputFactory::getInstance]
+        set input [$inputFactory getInstanceById [MotionEventFactory jpostinc index 1]]
+        if {[expr {$input eq [$inputFactory jget NO_INPUT]}]} {
+            return [::MotionGestureEvent new [my jget source] [my jget id] [[::TouchMotionGestureFactory::getInstance] jget NO_MOTION]]
         } else {
-            return 'org::allbinary::input::motion::gesture::observer::MotionGestureEvent'->new($self->{source}, $self->{id}, $input);
+            return [::MotionGestureEvent new [my jget source] [my jget id] $input]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::Input ();
-use org::allbinary::game::input::InputFactory ();
-use org::allbinary::input::motion::gesture::MotionGestureInput ();
-use org::allbinary::input::motion::gesture::TouchMotionGestureFactory ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::AllBinaryEventObjectFactoryInterface ();
-use org::allbinary::input::motion::gesture::observer::MotionGestureEvent ();
+namespace eval ::MotionEventFactory {
+    variable indexValue {}
+    variable indexSet 0
+    proc staticGet_index {} {
+        variable indexValue
+        variable indexSet
+        if {!$indexSet} {
+            set indexSet 1
+            set indexValue 0
+        }
+        return $indexValue
+    }
+    proc staticSet_index {value} {
+        variable indexValue
+        variable indexSet
+        set indexSet 1
+        set indexValue $value
+    }
+}
 
-1;
 

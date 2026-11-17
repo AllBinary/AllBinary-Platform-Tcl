@@ -11,100 +11,106 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-package org::allbinary::graphics::CellPositionFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::CellPositionFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{NONE} = 'org::allbinary::graphics::CellPosition'->new(-1, -1, -1, -1);
-    $self->{cellPositionArray} = [map { [(undef) x (0)] } 1 .. (0)];
-    $self->{columns} = 0;
-    $self->{rows} = 0;
+oo::class create ::CellPositionFactory {
+    superclass ::JObject
 }
 
+oo::define ::CellPositionFactory {
+    method initFields_CellPositionFactory {} {
+        my jset logUtil {}
+        my jset NONE {}
+        my jset cellPositionArray {}
+        my jset columns 0
+        my jset rows 0
+        my jset logUtil [::LogUtil::getInstance]
+        my jset NONE [::CellPosition new [expr {-1}] [expr {-1}] [expr {-1}] [expr {-1}]]
+        my jset cellPositionArray [jarrayof 0 {jarray 0 {}}]
+        my jset columns 0
+        my jset rows 0
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::CellPositionFactory::SINGLETON;
-}
+    constructor {} {
+        next
+        my initFields_CellPositionFactory
+    }
+    
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-sub init {
-    my ($self, $columns, $rows) = @_;
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("Init: columns: ");
-        $stringBuffer->appendint($columns);
-        $stringBuffer->append(" rows: ");
-        $stringBuffer->appendint($rows);
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, $commonStrings->{INIT});
-        $self->{cellPositionArray} = [map { [(undef) x ($rows)] } 1 .. ($columns)];
-        $self->{columns} = $columns;
-        $self->{rows} = $rows;
-        for (my $column = 0; $column < $columns; $column++) {
-            for (my $row = 0; $row < $rows; $row++) {
-                $self->createInstance($column, $row);
+    method init {columns rows} {
+        set commonStrings [::CommonStrings::getInstance]
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "Init: columns: "
+        $stringBuffer appendint $columns
+        $stringBuffer append " rows: "
+        $stringBuffer appendint $rows
+        [my jget logUtil] putF [$stringBuffer toString] [self] [$commonStrings jget INIT]
+        my jset cellPositionArray [jarrayof $columns {jarray $rows {}}]
+        my jset columns $columns
+        my jset rows $rows
+        for {set column 0} {[expr {$column < $columns}]} {jpostincr column 1} {
+            for {set row 0} {[expr {$row < $rows}]} {jpostincr row 1} {
+                my createInstance $column $row
             }
         }
-}
+    }
+    
 
-
-sub getInstanceColRow {
-    my ($self, $i_column, $i_row) = @_;
+    method getInstanceColRow {i_column i_row} {
         try {
-            return $self->{cellPositionArray}->[$i_column]->[$i_row];
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put('org::allbinary::logic::string::StringMaker'->new()->append("columns: ")->appendint($self->getColumns())->append(" rows: ")->appendint($self->getRows())->append(" col: ")->appendint($i_column)->append(" row: ")->appendint($i_row)->toString(), $self, $commonStrings->{GET_INSTANCE}, $e);
-            return $self->{NONE};
+            return [[[my jget cellPositionArray] get $i_column] get $i_row]
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [[[[[[[[[[::StringMaker new] append "columns: "] appendint [my getColumns]] append " rows: "] appendint [my getRows]] append " col: "] appendint $i_column] append " row: "] appendint $i_row] toString] [self] [$commonStrings jget GET_INSTANCE] $e
+            return [my jget NONE]
         }
-}
+    }
+    
 
-
-sub createInstance {
-    my ($self, $i_column, $i_row) = @_;
-        my $cellPositionCanBeNull = $self->{cellPositionArray}->[$i_column]->[$i_row];
-        if (!defined($cellPositionCanBeNull)) {
-            $cellPositionCanBeNull = 'org::allbinary::graphics::CellPosition'->new($i_column, $i_row, $self->{columns}, $self->{rows});
-            $self->{cellPositionArray}->[$i_column]->[$i_row] = $cellPositionCanBeNull;
+    method createInstance {i_column i_row} {
+        set cellPositionCanBeNull [[[my jget cellPositionArray] get $i_column] get $i_row]
+        if {[expr {$cellPositionCanBeNull eq {}}]} {
+            set cellPositionCanBeNull [::CellPosition new $i_column $i_row [my jget columns] [my jget rows]]
+            [[my jget cellPositionArray] get $i_column] set $i_row $cellPositionCanBeNull
         }
-        return $cellPositionCanBeNull;
+        return $cellPositionCanBeNull
+    }
+    
+
+    method getColumns {} {
+        return [my jget columns]
+    }
+    
+
+    method getRows {} {
+        return [my jget rows]
+    }
 }
 
-
-sub getColumns {
-    my ($self) = @_;
-        return $self->{columns};
+namespace eval ::CellPositionFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::CellPositionFactory new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::CellPositionFactory::staticGet_SINGLETON]
+    }
 }
 
-
-sub getRows {
-    my ($self) = @_;
-        return $self->{rows};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::graphics::CellPosition ();
-
-1;
 

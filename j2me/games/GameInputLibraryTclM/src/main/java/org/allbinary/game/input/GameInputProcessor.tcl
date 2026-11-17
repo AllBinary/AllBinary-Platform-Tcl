@@ -11,63 +11,66 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::GameInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::GameInputProcessor'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::GameInputProcessor::instance;
+oo::class create ::GameInputProcessor {
+    superclass ::JObject
 }
 
+oo::define ::GameInputProcessor {
+    method initFields_GameInputProcessor {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+    constructor {} {
+        next
+        my initFields_GameInputProcessor
+    }
+    
+
+    method processEvent {allbinaryLayerManager gameKeyEvent} {
+    }
+    
+
+    method processReleasedEvent {allbinaryLayerManager gameKeyEvent} {
+    }
+    
+
+    method processAnalog {allbinaryLayerManager gameKeyEvent analogValue} {
+    }
+    
+
+    method process {allbinaryLayerManager keyAsInteger} {
+    }
+    
+
+    method processReleased {allbinaryLayerManager keyAsInteger} {
+    }
 }
 
-
-# throws Exception
-sub processEvent {
-    my ($self, $allbinaryLayerManager, $gameKeyEvent) = @_;
+namespace eval ::GameInputProcessor {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameInputProcessor new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameInputProcessor::staticGet_instance]
+    }
 }
 
-
-# throws Exception
-sub processReleasedEvent {
-    my ($self, $allbinaryLayerManager, $gameKeyEvent) = @_;
-}
-
-
-# throws Exception
-sub processAnalog {
-    my ($self, $allbinaryLayerManager, $gameKeyEvent, $analogValue) = @_;
-}
-
-
-# throws Exception
-sub process {
-    my ($self, $allbinaryLayerManager, $keyAsInteger) = @_;
-}
-
-
-# throws Exception
-sub processReleased {
-    my ($self, $allbinaryLayerManager, $keyAsInteger) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-
-1;
 

@@ -11,63 +11,52 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.terrain
 
-package org::allbinary::game::terrain::TerrainEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{basicTerrainInfo} = $org::allbinary::game::terrain::BasicTerrainInfo::NULL_BASIC_TERRAIN_INFO;
+oo::class create ::TerrainEvent {
+    superclass ::AllBinaryEventObject
 }
 
+oo::define ::TerrainEvent {
+    method initFields_TerrainEvent {} {
+        my jset basicTerrainInfo {}
+        my jset basicTerrainInfo [::BasicTerrainInfo::staticGet_NULL_BASIC_TERRAIN_INFO]
+        return
+    }
+    
 
-sub new {
-    my ($class, $basicTerrainInfo) = @_;
-    my $self = $class->SUPER::new($basicTerrainInfo);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->setBasicTerrainInfo($self->{basicTerrainInfo});
-    return $self;
+    constructor {basicTerrainInfo} {
+        next $basicTerrainInfo
+        my initFields_TerrainEvent
+        my setBasicTerrainInfo [my jget basicTerrainInfo]
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "TerrainEvent: \n"
+        $stringBuffer append "LayerInterface: "
+        $stringBuffer append [[my jget basicTerrainInfo] toString]
+        return [$stringBuffer toString]
+    }
+    
+
+    method getBasicTerrainInfo {} {
+        return [my jget basicTerrainInfo]
+    }
+    
+
+    method setBasicTerrainInfo {basicTerrainInfo} {
+        my jset basicTerrainInfo $basicTerrainInfo
+    }
+    
+
+    method setBasicTerrainInfoForCircularStaticPool {basicTerrainInfo} {
+        my jset basicTerrainInfo $basicTerrainInfo
+    }
 }
 
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("TerrainEvent: \n");
-        $stringBuffer->append("LayerInterface: ");
-        $stringBuffer->append($self->{basicTerrainInfo}->toString());
-        return $stringBuffer->toString();
+namespace eval ::TerrainEvent {
 }
 
-
-sub getBasicTerrainInfo {
-    my ($self) = @_;
-        return $self->{basicTerrainInfo};
-}
-
-
-sub setBasicTerrainInfo {
-    my ($self, $basicTerrainInfo) = @_;
-        $self->{basicTerrainInfo} = $basicTerrainInfo;
-}
-
-
-sub setBasicTerrainInfoForCircularStaticPool {
-    my ($self, $basicTerrainInfo) = @_;
-        $self->{basicTerrainInfo} = $basicTerrainInfo;
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::game::terrain::BasicTerrainInfo ();
-
-1;
 

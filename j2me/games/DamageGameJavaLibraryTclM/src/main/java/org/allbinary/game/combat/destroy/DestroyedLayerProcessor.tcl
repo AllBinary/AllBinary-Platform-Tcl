@@ -11,71 +11,72 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.destroy
 
-package org::allbinary::game::combat::destroy::DestroyedLayerProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::BasicLayerProcessor';
-
-tie our $DESTROYED_LAYER_PROCESSOR, 'java::lang::LazyStatic', sub { $org::allbinary::layer::BasicLayerProcessor::NULL_LAYER_PROCESSOR };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::DestroyedLayerProcessor {
+    superclass ::BasicLayerProcessor
 }
 
+oo::define ::DestroyedLayerProcessor {
+    method initFields_DestroyedLayerProcessor {} {
+        return
+    }
+    
 
-sub init {
-    my ($class) = @_;
-        $org::allbinary::game::combat::destroy::DestroyedLayerProcessor::DESTROYED_LAYER_PROCESSOR = 'org::allbinary::game::combat::destroy::DestroyedLayerProcessor'->new();
-}
+    constructor {} {
+        next
+        my initFields_DestroyedLayerProcessor
+    }
+    
+    
+    
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::combat::destroy::DestroyedLayerProcessor::DESTROYED_LAYER_PROCESSOR;
-}
-
-
-# throws Exception
-sub process {
-    my ($self, $allBinaryLayerManager) = @_;
-        my $list = $self->getList();
-        my $size = $list->size();
-        my $destroyedEventHandler = 'org::allbinary::game::combat::destroy::event::DestroyedEventHandler'->getInstance();
-        my $destroyEventCircularStaticPool = 'org::allbinary::game::combat::destroy::event::DestroyEventCircularStaticPool'->getInstance();
-        my $destroyedEvent = undef;
-        my $layerInterface = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            my $layerInterfaceCanBeNull = $list->{objectArray}->[$index];
-            if (defined($layerInterfaceCanBeNull)) {
-                $layerInterface = $layerInterfaceCanBeNull;
-                $allBinaryLayerManager->remove($layerInterface);
-                $destroyedEvent = $destroyEventCircularStaticPool->getInstanceForLayer($layerInterface);
-                $destroyedEventHandler->fireEvent($destroyedEvent);
+    method process {allBinaryLayerManager} {
+        set list [my getList]
+        set size [$list size]
+        set destroyedEventHandler [::DestroyedEventHandler::getInstance]
+        set destroyEventCircularStaticPool [::DestroyEventCircularStaticPool::getInstance]
+        set destroyedEvent {}
+        set layerInterface {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set layerInterfaceCanBeNull [[$list jget objectArray] get $index]
+            if {[expr {$layerInterfaceCanBeNull ne {}}]} {
+                set layerInterface $layerInterfaceCanBeNull
+                $allBinaryLayerManager remove $layerInterface
+                set destroyedEvent [$destroyEventCircularStaticPool getInstanceForLayer $layerInterface]
+                $destroyedEventHandler fireEvent $destroyedEvent
             } else {
-                my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
+                set commonStrings [::CommonStrings::getInstance]
             }
         }
-        $list->clear();
+        $list clear
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::combat::destroy::event::DestroyEventCircularStaticPool ();
-use org::allbinary::game::combat::destroy::event::DestroyedEvent ();
-use org::allbinary::game::combat::destroy::event::DestroyedEventHandler ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::layer::BasicLayerProcessor ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
+namespace eval ::DestroyedLayerProcessor {
+    variable DESTROYED_LAYER_PROCESSORValue {}
+    variable DESTROYED_LAYER_PROCESSORSet 0
+    proc staticGet_DESTROYED_LAYER_PROCESSOR {} {
+        variable DESTROYED_LAYER_PROCESSORValue
+        variable DESTROYED_LAYER_PROCESSORSet
+        if {!$DESTROYED_LAYER_PROCESSORSet} {
+            set DESTROYED_LAYER_PROCESSORSet 1
+            set DESTROYED_LAYER_PROCESSORValue [::BasicLayerProcessor::staticGet_NULL_LAYER_PROCESSOR]
+        }
+        return $DESTROYED_LAYER_PROCESSORValue
+    }
+    proc staticSet_DESTROYED_LAYER_PROCESSOR {value} {
+        variable DESTROYED_LAYER_PROCESSORValue
+        variable DESTROYED_LAYER_PROCESSORSet
+        set DESTROYED_LAYER_PROCESSORSet 1
+        set DESTROYED_LAYER_PROCESSORValue $value
+    }
+    proc init {} {
+        ::DestroyedLayerProcessor::staticSet_DESTROYED_LAYER_PROCESSOR [::DestroyedLayerProcessor new]
+    }
+    proc getInstance {} {
+        return [::DestroyedLayerProcessor::staticGet_DESTROYED_LAYER_PROCESSOR]
+    }
+}
 
-1;
 

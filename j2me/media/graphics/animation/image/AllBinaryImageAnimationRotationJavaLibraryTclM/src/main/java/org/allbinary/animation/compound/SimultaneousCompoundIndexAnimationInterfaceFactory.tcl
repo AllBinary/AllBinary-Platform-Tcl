@@ -11,68 +11,55 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.compound
 
-package org::allbinary::animation::compound::SimultaneousCompoundIndexAnimationInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::AnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{basicAnimationInterfaceFactoryInterfaceArray} = undef;
-    $self->{animationBehaviorFactory} = undef;
+oo::class create ::SimultaneousCompoundIndexAnimationInterfaceFactory {
+    superclass ::JObject
 }
 
+oo::define ::SimultaneousCompoundIndexAnimationInterfaceFactory {
+    method initFields_SimultaneousCompoundIndexAnimationInterfaceFactory {} {
+        my jset basicAnimationInterfaceFactoryInterfaceArray {}
+        my jset animationBehaviorFactory {}
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $basicAnimationInterfaceFactoryInterfaceArray, $animationBehaviorFactory) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{basicAnimationInterfaceFactoryInterfaceArray} = $basicAnimationInterfaceFactoryInterfaceArray;
-        $self->{animationBehaviorFactory} = $animationBehaviorFactory;
-    return $self;
-}
+    constructor {basicAnimationInterfaceFactoryInterfaceArray animationBehaviorFactory} {
+        next
+        my initFields_SimultaneousCompoundIndexAnimationInterfaceFactory
+        my jset basicAnimationInterfaceFactoryInterfaceArray $basicAnimationInterfaceFactoryInterfaceArray
+        my jset animationBehaviorFactory $animationBehaviorFactory
+    }
+    
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        my $size = scalar(@{$self->{basicAnimationInterfaceFactoryInterfaceArray}});
-        my $animationInterfaceArray = [(undef) x ($size)];
-        for (my $index = 0; $index < $size; $index++) {
-            $animationInterfaceArray->[$index] = $self->{basicAnimationInterfaceFactoryInterfaceArray}->[$index]->getInstance($instanceId);
+    method getInstance {instanceId} {
+        set size [[my jget basicAnimationInterfaceFactoryInterfaceArray] length]
+        set animationInterfaceArray [jarray $size {}]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            $animationInterfaceArray set $index [[[my jget basicAnimationInterfaceFactoryInterfaceArray] get $index] getInstance $instanceId]
         }
-        return $self->getOrCreate($animationInterfaceArray);
+        return [my getOrCreate $animationInterfaceArray]
+    }
+    
+
+    method getOrCreate {animationInterfaceArray} {
+        return [::SimultaneousCompoundIndexAnimation new $animationInterfaceArray [[my jget animationBehaviorFactory] getOrCreateInstance]]
+    }
+    
+
+    method getBasicAnimationInterfaceFactoryInterfaceArray {} {
+        return [my jget basicAnimationInterfaceFactoryInterfaceArray]
+    }
+    
+
+    method setInitialScale {scaleProperties} {
+    }
 }
 
-
-sub getOrCreate {
-    my ($self, $animationInterfaceArray) = @_;
-        return 'org::allbinary::animation::compound::SimultaneousCompoundIndexAnimation'->new($animationInterfaceArray, $self->{animationBehaviorFactory}->getOrCreateInstance());
+namespace eval ::SimultaneousCompoundIndexAnimationInterfaceFactory {
 }
 
-
-sub getBasicAnimationInterfaceFactoryInterfaceArray {
-    my ($self) = @_;
-        return $self->{basicAnimationInterfaceFactoryInterfaceArray};
-}
-
-
-sub setInitialScale {
-    my ($self, $scaleProperties) = @_;
-}
-
-use java::lang::Object ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::media::ScaleProperties ();
-use org::allbinary::animation::compound::SimultaneousCompoundIndexAnimation ();
-
-1;
 

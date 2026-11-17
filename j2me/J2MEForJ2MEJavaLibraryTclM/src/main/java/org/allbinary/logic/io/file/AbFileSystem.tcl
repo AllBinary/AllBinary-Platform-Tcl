@@ -11,90 +11,90 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io.file
 
 #J2MEForJ2ME
-package org::allbinary::logic::io::file::AbFileSystem;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::io::file::AbFileSystem'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
+oo::class create ::AbFileSystem {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::AbFileSystem {
+    method initFields_AbFileSystem {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_AbFileSystem
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::io::file::AbFileSystem::instance;
-}
+    method isDirectoryOrFile {path} {
+        return false
+    }
+    
 
+    method isDirectory {path} {
+        return false
+    }
+    
 
-sub isDirectoryOrFile {
-    my ($self, $path) = @_;
-        return 0;
-}
+    method getFilesAsStringArrayForPath {currentDirPath} {
+        return [[::StringUtil::getInstance] getArrayInstance]
+    }
+    
 
+    method readAsString {fileName} {
+        set bytes [jarray 1000000 0]
+        return [my readAsString $fileName $bytes]
+    }
+    
 
-sub isDirectory {
-    my ($self, $path) = @_;
-        return 0;
-}
+    method readAsString {fileName bytes} {
+        return [[::StringUtil::getInstance] jget EMPTY_STRING]
+    }
+    
 
-
-sub getFilesAsStringArrayForPath {
-    my ($self, $currentDirPath) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->getArrayInstance();
-}
-
-
-sub readAsString {
-    my ($self, $fileName) = @_;
-        my $bytes = [(0) x (1000000)];
-        return $self->readAsString($fileName, $bytes);
-}
-
-
-# Java overloaded method: Perl keeps the last definition
-sub readAsString {
-    my ($self, $fileName, $bytes) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-}
-
-
-sub close {
-    my ($self, $closeable) = @_;
+    method close {closeable} {
         try {
-            if (defined($closeable)) {
-                my $inputStream = ($closeable);
-                $inputStream->close();
+            if {[expr {$closeable ne {}}]} {
+                set inputStream ($closeable)
+                $inputStream close
             }
-            return 1;
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{CLOSE}, $e);
-            return 0;
+            return true
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget CLOSE] $e
+            return false
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::InputStream ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::AbFileSystem {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AbFileSystem new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AbFileSystem::staticGet_instance]
+    }
+}
 
-1;
 

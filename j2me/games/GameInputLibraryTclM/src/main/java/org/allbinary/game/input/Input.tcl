@@ -11,69 +11,61 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::Input;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{id} = 0;
-    $self->{name} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+oo::class create ::Input {
+    superclass ::JObject
 }
 
+oo::define ::Input {
+    method initFields_Input {} {
+        my jset id 0
+        my jset name {}
+        my jset id 0
+        my jset name [[::StringUtil::getInstance] jget EMPTY_STRING]
+        return
+    }
+    
 
-sub new {
-    my ($class, $id, $name) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->setId($id);
-        $self->setName($name);
-    return $self;
+    constructor {id name} {
+        next
+        my initFields_Input
+        my setId $id
+        my setName $name
+    }
+    
+
+    method getId {} {
+        return [my jget id]
+    }
+    
+
+    method setId {key} {
+        my jset id $key
+    }
+    
+
+    method getName {} {
+        return [my jget name]
+    }
+    
+
+    method setName {keyName} {
+        my jset name $keyName
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "Name: "
+        $stringBuffer append [my getName]
+        $stringBuffer append " Id: "
+        $stringBuffer appendint [my getId]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub getId {
-    my ($self) = @_;
-        return $self->{id};
+namespace eval ::Input {
 }
 
-
-sub setId {
-    my ($self, $key) = @_;
-        $self->{id} = $key;
-}
-
-
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
-}
-
-
-sub setName {
-    my ($self, $keyName) = @_;
-        $self->{name} = $keyName;
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("Name: ");
-        $stringBuffer->append($self->getName());
-        $stringBuffer->append(" Id: ");
-        $stringBuffer->appendint($self->getId());
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-
-1;
 

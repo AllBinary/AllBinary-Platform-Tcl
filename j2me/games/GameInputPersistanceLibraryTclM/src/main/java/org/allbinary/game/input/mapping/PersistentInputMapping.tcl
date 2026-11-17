@@ -11,181 +11,163 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.mapping
 
 #GameInputPersistanceLibrary
-package org::allbinary::game::input::mapping::PersistentInputMapping;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{enumerationUtil} = 'org::allbinary::util::EnumerationUtil'->getInstance();
-    $self->{inputMapping} = 'org::allbinary::game::input::mapping::InputToGameKeyMapping'->new();
-    $self->{inputMappingEventListenerInterface} = $org::allbinary::game::input::mapping::event::NullInputMappingEventListener::NULL_INPUT_MAPPING_EVENT_LISTENER;
-    $self->{inputPersistance} = undef;
-    $self->{inputMappingEvent} = 'org::allbinary::game::input::mapping::event::InputMappingEvent'->new($self);
+oo::class create ::PersistentInputMapping {
+    superclass ::JObject
 }
 
+oo::define ::PersistentInputMapping {
+    method initFields_PersistentInputMapping {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset enumerationUtil {}
+        my jset inputMapping {}
+        my jset inputMappingEventListenerInterface {}
+        my jset inputPersistance {}
+        my jset inputMappingEvent {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset enumerationUtil [::EnumerationUtil::getInstance]
+        my jset inputMapping [::InputToGameKeyMapping new]
+        my jset inputMappingEventListenerInterface [::NullInputMappingEventListener::staticGet_NULL_INPUT_MAPPING_EVENT_LISTENER]
+        
+        my jset inputMappingEvent [::InputMappingEvent new [self]]
+        return
+    }
+    
+    
 
-sub getNullInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::input::mapping::PersistentInputMapping::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::input::mapping::PersistentInputMapping::instance = 'org::allbinary::game::input::mapping::PersistentInputMapping'->new('org::allbinary::game::configuration::persistance::GamePersistanceStrings'->getInstance()->{SAVED_INPUT_CONFIGURATION_RECORD_ID});
+    constructor {name} {
+        next
+        my initFields_PersistentInputMapping
+        my jset inputPersistance [::InputPersistance new $name]
+    }
+    
+
+    method getTotalMapped {} {
+        return [[[my getInputMapping] getHashtable] size]
+    }
+    
+
+    method isDefaultNew {} {
+        return false
+    }
+    
+
+    method getDefault {} {
+        return [::InputToGameKeyMapping::getNullInstance]
+    }
+    
+
+    method setDefault {abeClientInformation} {
+        [my getInputMapping] removeAll
+        [my getInputMapping] addMapping [my getDefault]
+        my save $abeClientInformation
+    }
+    
+
+    method update {abeClientInformation} {
+        [my jget inputPersistance] deleteAll $abeClientInformation
+        my save $abeClientInformation
+    }
+    
+
+    method save {abeClientInformation} {
+        [my jget inputPersistance] save $abeClientInformation [[my getInputMapping] getHashtable]
+        [my jget inputMappingEvent] setInputToGameKeyMapping [my getInputMapping]
+        if {[expr {[my getInputMappingEventListenerInterface] ne {}}]} {
+            [my getInputMappingEventListenerInterface] onInputMappingEvent [my jget inputMappingEvent]
         }
-        return $org::allbinary::game::input::mapping::PersistentInputMapping::instance;
-}
+    }
+    
 
-
-sub new {
-    my ($class, $name) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{inputPersistance} = 'org::allbinary::game::input::InputPersistance'->new($name);
-    return $self;
-}
-
-
-sub getTotalMapped {
-    my ($self) = @_;
-        return $self->getInputMapping()->getHashtable()->size();
-}
-
-
-sub isDefaultNew {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub getDefault {
-    my ($self) = @_;
-        return 'org::allbinary::game::input::mapping::InputToGameKeyMapping'->getNullInstance();
-}
-
-
-# throws Exception
-sub setDefault {
-    my ($self, $abeClientInformation) = @_;
-        $self->getInputMapping()->removeAll();
-        $self->getInputMapping()->addMapping($self->getDefault());
-        $self->save($abeClientInformation);
-}
-
-
-# throws Exception
-sub update {
-    my ($self, $abeClientInformation) = @_;
-        $self->{inputPersistance}->deleteAll($abeClientInformation);
-        $self->save($abeClientInformation);
-}
-
-
-# throws Exception
-sub save {
-    my ($self, $abeClientInformation) = @_;
-        $self->{inputPersistance}->save($abeClientInformation, $self->getInputMapping()->getHashtable());
-        $self->{inputMappingEvent}->setInputToGameKeyMapping($self->getInputMapping());
-        if (defined($self->getInputMappingEventListenerInterface())) {
-            $self->getInputMappingEventListenerInterface()->onInputMappingEvent($self->{inputMappingEvent});
-        }
-}
-
-
-# throws Exception
-sub init {
-    my ($self, $abeClientInformation) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{INIT});
+    method init {abeClientInformation} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget INIT]
         try {
-            $self->{inputPersistance}->loadAll($abeClientInformation);
-        } catch ($e) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->putOE($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{INIT}, $e);
-            $self->{inputPersistance}->deleteRecoreStore($abeClientInformation);
-            $self->setDefault($abeClientInformation);
-            $self->{inputPersistance}->loadAll($abeClientInformation);
+            [my jget inputPersistance] loadAll $abeClientInformation
+        } on error {e} {
+            ::PreLogUtil::putOE [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget INIT] $e
+            [my jget inputPersistance] deleteRecoreStore $abeClientInformation
+            my setDefault $abeClientInformation
+            [my jget inputPersistance] loadAll $abeClientInformation
         }
-        my $list = $self->{inputPersistance}->getList();
-        my $totalMappedTo = 0;
-        my $size = $list->size();
-        my $hashtable = undef;
-        my $enumeration = undef;
-        my $mappedToInput = undef;
-        my $gameActionInput = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $hashtable = $list->{objectArray}->[$index];
-            $enumeration = $hashtable->keys();
-            while ($self->{enumerationUtil}->hasMoreElements($enumeration)) {
-                $mappedToInput = $self->{enumerationUtil}->nextElement($enumeration);
-                $gameActionInput = $hashtable->get($mappedToInput);
-                $totalMappedTo++;
-                $self->getInputMapping()->add($gameActionInput, $mappedToInput);
+        set list [[my jget inputPersistance] getList]
+        set totalMappedTo 0
+        set size [$list size]
+        set hashtable {}
+        set enumeration {}
+        set mappedToInput {}
+        set gameActionInput {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set hashtable [[$list jget objectArray] get $index]
+            set enumeration [$hashtable keys]
+            while {[[my jget enumerationUtil] hasMoreElements $enumeration]} {
+                set mappedToInput [[my jget enumerationUtil] nextElement $enumeration]
+                set gameActionInput [$hashtable get $mappedToInput]
+                jpostincr totalMappedTo 1
+                [my getInputMapping] add $gameActionInput $mappedToInput
             }
         }
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("End - Total Loaded Keys Mapped: ");
-        $stringBuffer->appendint($self->getTotalMapped());
-        $stringBuffer->append(" to: ");
-        $stringBuffer->appendint($totalMappedTo);
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, $self->{commonStrings}->{INIT});
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "End - Total Loaded Keys Mapped: "
+        $stringBuffer appendint [my getTotalMapped]
+        $stringBuffer append " to: "
+        $stringBuffer appendint $totalMappedTo
+        [my jget logUtil] putF [$stringBuffer toString] [self] [[my jget commonStrings] jget INIT]
+    }
+    
+
+    method setInputMappingEventListenerInterface {inputMappingEventListenerInterface} {
+        my jset inputMappingEventListenerInterface $inputMappingEventListenerInterface
+    }
+    
+
+    method getInputMappingEventListenerInterface {} {
+        return [my jget inputMappingEventListenerInterface]
+    }
+    
+
+    method getInputMapping {} {
+        return [my jget inputMapping]
+    }
+    
+
+    method isDelete {input} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
+
+    method isSystemInput {input} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
 }
 
-
-sub setInputMappingEventListenerInterface {
-    my ($self, $inputMappingEventListenerInterface) = @_;
-        $self->{inputMappingEventListenerInterface} = $inputMappingEventListenerInterface;
+namespace eval ::PersistentInputMapping {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getNullInstance {} {
+        if {[expr {[::PersistentInputMapping::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::PersistentInputMapping::staticSet_instance [::PersistentInputMapping new [[::GamePersistanceStrings::getInstance] jget SAVED_INPUT_CONFIGURATION_RECORD_ID]]
+        }
+        return [::PersistentInputMapping::staticGet_instance]
+    }
 }
 
-
-sub getInputMappingEventListenerInterface {
-    my ($self) = @_;
-        return $self->{inputMappingEventListenerInterface};
-}
-
-
-sub getInputMapping {
-    my ($self) = @_;
-        return $self->{inputMapping};
-}
-
-
-# throws Exception
-sub isDelete {
-    my ($self, $input) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
-
-
-# throws Exception
-sub isSystemInput {
-    my ($self, $input) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use java::util::Enumeration ();
-use org::allbinary::game::configuration::persistance::GamePersistanceStrings ();
-use org::allbinary::game::input::Input ();
-use org::allbinary::game::input::InputPersistance ();
-use org::allbinary::game::input::mapping::event::InputMappingEvent ();
-use org::allbinary::game::input::mapping::event::InputMappingEventListenerInterface ();
-use org::allbinary::game::input::mapping::event::NullInputMappingEventListener ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::EnumerationUtil ();
-use org::allbinary::game::input::mapping::InputToGameKeyMapping ();
-
-1;
 

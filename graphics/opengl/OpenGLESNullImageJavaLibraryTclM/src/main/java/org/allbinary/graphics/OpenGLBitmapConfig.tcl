@@ -11,30 +11,28 @@
 # Created By: Travis Berthelot 
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-package org::allbinary::graphics::OpenGLBitmapConfig;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{bitmapConfig} = undef;
+oo::class create ::OpenGLBitmapConfig {
+    superclass ::JObject
 }
 
+oo::define ::OpenGLBitmapConfig {
+    method initFields_OpenGLBitmapConfig {} {
+        my jset bitmapConfig {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $bitmapConfig) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{bitmapConfig} = $bitmapConfig;
-    return $self;
+    constructor {bitmapConfig} {
+        next
+        my initFields_OpenGLBitmapConfig
+        my jset bitmapConfig $bitmapConfig
+    }
 }
 
-use java::lang::Object ();
+namespace eval ::OpenGLBitmapConfig {
+}
 
-1;
 

@@ -11,42 +11,39 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.compound
 
-# Java interface
-package org::allbinary::animation::compound::CompoundAnimationInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::AnimationInterface';
-
-
-
-sub nextAnimation {
-    my ($self) = @_;
-    die "abstract method nextAnimation";
+oo::class create ::CompoundAnimationInterface {
+    superclass ::JObject
 }
 
+oo::define ::CompoundAnimationInterface {
+    method initFields_CompoundAnimationInterface {} {
+        return
+    }
+    
 
-sub previousAnimation {
-    my ($self) = @_;
-    die "abstract method previousAnimation";
+    method nextAnimation {} {
+        error [jexception AbstractMethodError nextAnimation]
+    }
+    
+
+    method previousAnimation {} {
+        error [jexception AbstractMethodError previousAnimation]
+    }
+    
+
+    method setAnimation {index} {
+        error [jexception AbstractMethodError setAnimation]
+    }
+    
+
+    method getCurrentAnimation {} {
+        error [jexception AbstractMethodError getCurrentAnimation]
+    }
 }
 
-
-sub setAnimation {
-    my ($self, $index) = @_;
-    die "abstract method setAnimation";
+namespace eval ::CompoundAnimationInterface {
 }
 
-
-sub getCurrentAnimation {
-    my ($self) = @_;
-    die "abstract method getCurrentAnimation";
-}
-
-use org::allbinary::animation::AnimationInterface ();
-use org::allbinary::animation::IndexedAnimation ();
-
-1;
 

@@ -11,82 +11,69 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::LeftToRightImageAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::image::ImageSegmentAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{currentWidth} = undef;
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
+oo::class create ::LeftToRightImageAnimation {
+    superclass ::ImageSegmentAnimation
 }
 
+oo::define ::LeftToRightImageAnimation {
+    method initFields_LeftToRightImageAnimation {} {
+        my jset currentWidth 0
+        my jset anchor 0
+        
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        return
+    }
+    
 
-sub new {
-    my ($class, $image, $sequenceArray, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($image, $sequenceArray, $animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{currentWidth} = 0;
-        if ($self->getSequence()->[0] == -1) {
-            $self->setFrame($self->getSize() - 1);
+    constructor {image sequenceArray animationBehavior} {
+        next $image $sequenceArray $animationBehavior
+        my initFields_LeftToRightImageAnimation
+        my jset currentWidth 0
+        if {[expr {[[my getSequence] get 0] == [expr {-1}]}]} {
+            my setFrame [expr {[my getSize] - 1}]
         }
-    return $self;
-}
+    }
+    
 
-
-sub nextFrame {
-    my ($self) = @_;
-        if ($self->getSequence()->[0] == -1) {
-            $self->SUPER::previousFrame();
+    method nextFrame {} {
+        if {[expr {[[my getSequence] get 0] == [expr {-1}]}]} {
+            next
         } else {
-            $self->SUPER::nextFrame();
+            next
         }
-        $self->update();
-}
+        my update
+    }
+    
 
-
-sub previousFrame {
-    my ($self) = @_;
-        if ($self->getSequence()->[0] == -1) {
-            $self->SUPER::nextFrame();
+    method previousFrame {} {
+        if {[expr {[[my getSequence] get 0] == [expr {-1}]}]} {
+            next
         } else {
-            $self->SUPER::previousFrame();
+            next
         }
-        $self->update();
+        my update
+    }
+    
+
+    method setFrame {index} {
+        next $index
+        my update
+    }
+    
+
+    method update {} {
+        my jset currentWidth [expr {[expr {[my getDrawWidth] * [my getFrame]}] / [my getSize]}]
+    }
+    
+
+    method paintXY {graphics x y} {
+        $graphics drawRegion [my getImage] [my getStartX] [my getStartY] [my jget currentWidth] [my getDrawHeight] [::Sprite::staticGet_TRANS_NONE] $x $y [my jget anchor]
+    }
 }
 
-
-sub setFrame {
-    my ($self, $index) = @_;
-        $self->SUPER::setFrame($index);
-        $self->update();
+namespace eval ::LeftToRightImageAnimation {
 }
 
-
-sub update {
-    my ($self) = @_;
-        $self->{currentWidth} = $self->getDrawWidth() * $self->getFrame() / $self->getSize();
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $graphics->drawRegion($self->getImage(), $self->getStartX(), $self->getStartY(), $self->{currentWidth}, $self->getDrawHeight(), $javax::microedition::lcdui::game::Sprite::TRANS_NONE, $x, $y, $self->{anchor});
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::game::Sprite ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::animation::image::ImageSegmentAnimation ();
-
-1;
 

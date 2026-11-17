@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic.notification
 
-# Java interface
-package org::allbinary::game::ag::layer::hud::basic::notification::GameNotificationHudCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getGameNotificationHud {
-    my ($self) = @_;
-    die "abstract method getGameNotificationHud";
+oo::class create ::GameNotificationHudCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::GameNotificationHudCompositeInterface {
+    method initFields_GameNotificationHudCompositeInterface {} {
+        return
+    }
+    
 
-1;
+    method getGameNotificationHud {} {
+        error [jexception AbstractMethodError getGameNotificationHud]
+    }
+}
+
+namespace eval ::GameNotificationHudCompositeInterface {
+}
+
 

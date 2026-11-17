@@ -11,41 +11,39 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-# Java interface
-package org::allbinary::game::layer::LayerPlacementInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getWidth {
-    my ($self) = @_;
-    die "abstract method getWidth";
+oo::class create ::LayerPlacementInterface {
+    superclass ::JObject
 }
 
+oo::define ::LayerPlacementInterface {
+    method initFields_LayerPlacementInterface {} {
+        return
+    }
+    
 
-sub getHeight {
-    my ($self) = @_;
-    die "abstract method getHeight";
+    method getWidth {} {
+        error [jexception AbstractMethodError getWidth]
+    }
+    
+
+    method getHeight {} {
+        error [jexception AbstractMethodError getHeight]
+    }
+    
+
+    method getLayerType {} {
+        error [jexception AbstractMethodError getLayerType]
+    }
+    
+
+    method getInstance {} {
+        error [jexception AbstractMethodError getInstance]
+    }
 }
 
-
-sub getLayerType {
-    my ($self) = @_;
-    die "abstract method getLayerType";
+namespace eval ::LayerPlacementInterface {
 }
 
-
-# throws Exception
-sub getInstance {
-    my ($self) = @_;
-    die "abstract method getInstance";
-}
-
-use org::allbinary::util::ABHashtable ();
-
-1;
 

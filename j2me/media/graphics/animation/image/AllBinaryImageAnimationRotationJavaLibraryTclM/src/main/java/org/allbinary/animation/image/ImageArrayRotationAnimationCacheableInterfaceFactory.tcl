@@ -11,33 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::ImageArrayRotationAnimationCacheableInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::logic::util::cache::CacheableInterfaceFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ImageArrayRotationAnimationCacheableInterfaceFactory {
+    superclass ::JObject
 }
 
+oo::define ::ImageArrayRotationAnimationCacheableInterfaceFactory {
+    method initFields_ImageArrayRotationAnimationCacheableInterfaceFactory {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($self, $key) = @_;
-        return 'org::allbinary::animation::image::ImageArrayRotationAnimationCacheable'->new($key, 'org::allbinary::animation::AnimationBehavior'->getInstance());
+    constructor {} {
+        next
+        my initFields_ImageArrayRotationAnimationCacheableInterfaceFactory
+    }
+    
+
+    method getInstance {key} {
+        return [::ImageArrayRotationAnimationCacheable new $key [::AnimationBehavior::getInstance]]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::logic::util::cache::CacheableInterface ();
-use org::allbinary::logic::util::cache::CacheableInterfaceFactoryInterface ();
-use org::allbinary::animation::image::ImageArrayRotationAnimationCacheable ();
+namespace eval ::ImageArrayRotationAnimationCacheableInterfaceFactory {
+}
 
-1;
 

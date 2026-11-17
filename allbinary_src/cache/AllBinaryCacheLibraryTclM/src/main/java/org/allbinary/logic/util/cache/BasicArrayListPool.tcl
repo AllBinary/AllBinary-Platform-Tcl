@@ -11,68 +11,60 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-package org::allbinary::logic::util::cache::BasicArrayListPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::cache::AbstractArrayListPool';
-
-
-
-sub new {
-    my ($class, $cacheableInterfaceFactoryInterface) = @_;
-    my $self = $class->SUPER::new($cacheableInterfaceFactoryInterface);
-        # super(...) made $self above
-    return $self;
+oo::class create ::BasicArrayListPool {
+    superclass ::AbstractArrayListPool
 }
 
+oo::define ::BasicArrayListPool {
+    method initFields_BasicArrayListPool {} {
+        return
+    }
+    
 
-sub clear {
-    my ($self) = @_;
-        $self->{buffers}->clear();
-}
+    constructor {cacheableInterfaceFactoryInterface} {
+        next $cacheableInterfaceFactoryInterface
+        my initFields_BasicArrayListPool
+    }
+    
 
+    method clear {} {
+        [my jget buffers] clear
+    }
+    
 
-# throws Exception
-sub remove {
-    my ($self, $key) = @_;
-        my $size = $self->{buffers}->size();
-        if ($size > 0) {
-            return $self->{buffers}->removeAt($size - 1);
+    method remove {key} {
+        set size [[my jget buffers] size]
+        if {[expr {$size > 0}]} {
+            return [[my jget buffers] removeAt [jint [expr {$size - 1}]]]
         } else {
-            return $self->{cacheableInterfaceFactoryInterface}->getInstance($key);
+            return [[my jget cacheableInterfaceFactoryInterface] getInstance $key]
         }
-}
+    }
+    
 
-
-# throws Exception
-sub addAll {
-    my ($self, $usedList) = @_;
-        for (my $index = $usedList->size(); --$index >= 0; ) {
-            my $anyType = $usedList->{objectArray}->[$index];
-            $self->add($anyType);
+    method addAll {usedList} {
+        for {set index [$usedList size]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            set anyType [[$usedList jget objectArray] get $index]
+            my add $anyType
         }
-        $usedList->clear();
-}
+        $usedList clear
+    }
+    
 
-
-# throws Exception
-sub releaseUsedBackToPool {
-    my ($self, $usedList) = @_;
-        for (my $index = $usedList->size(); --$index >= 0; ) {
-            my $list = $usedList->{objectArray}->[$index];
-            if ($list->size() == 0) {
-                $usedList->removeAt($index);
-                $self->add($list);
+    method releaseUsedBackToPool {usedList} {
+        for {set index [$usedList size]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            set list [[$usedList jget objectArray] get $index]
+            if {[expr {[$list size] == 0}]} {
+                $usedList removeAt $index
+                my add $list
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::logic::util::cache::AbstractArrayListPool ();
+namespace eval ::BasicArrayListPool {
+}
 
-1;
 

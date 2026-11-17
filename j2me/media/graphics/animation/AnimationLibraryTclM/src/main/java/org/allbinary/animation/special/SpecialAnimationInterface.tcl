@@ -11,29 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.special
 
-# Java interface
-package org::allbinary::animation::special::SpecialAnimationInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::IndexedAnimationInterface';
-
-
-
-sub setLastFrame {
-    my ($self) = @_;
-    die "abstract method setLastFrame";
+oo::class create ::SpecialAnimationInterface {
+    superclass ::JObject
 }
 
+oo::define ::SpecialAnimationInterface {
+    method initFields_SpecialAnimationInterface {} {
+        return
+    }
+    
 
-sub isComplete {
-    my ($self) = @_;
-    die "abstract method isComplete";
+    method setLastFrame {} {
+        error [jexception AbstractMethodError setLastFrame]
+    }
+    
+
+    method isComplete {} {
+        error [jexception AbstractMethodError isComplete]
+    }
 }
 
-use org::allbinary::animation::IndexedAnimationInterface ();
+namespace eval ::SpecialAnimationInterface {
+}
 
-1;
 

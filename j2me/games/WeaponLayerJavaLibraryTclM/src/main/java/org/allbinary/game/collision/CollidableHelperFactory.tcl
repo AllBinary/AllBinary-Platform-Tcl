@@ -11,37 +11,32 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-package org::allbinary::game::collision::CollidableHelperFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::CollidableHelperFactory {
+    superclass ::JObject
 }
 
+oo::define ::CollidableHelperFactory {
+    method initFields_CollidableHelperFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        if ('org::allbinary::game::configuration::feature::Features'->getInstance()->isFeature('org::allbinary::game::configuration::feature::GameFeatureFactory'->getInstance()->{COLLISIONS_WITH_SOURCE})) {
-            return 'org::allbinary::game::collision::CollisionHelper'->new($org::allbinary::layer::AllBinaryLayer::NULL_ALLBINARY_LAYER);
+    constructor {} {
+        next
+        my initFields_CollidableHelperFactory
+    }
+    
+}
+
+namespace eval ::CollidableHelperFactory {
+    proc getInstance {} {
+        if {[[::Features::getInstance] isFeature [[::GameFeatureFactory::getInstance] jget COLLISIONS_WITH_SOURCE]]} {
+            return [::CollisionHelper new [::AllBinaryLayer::staticGet_NULL_ALLBINARY_LAYER]]
         } else {
-            return 'org::allbinary::game::collision::SourceCollisionHelper'->new($org::allbinary::layer::AllBinaryLayer::NULL_ALLBINARY_LAYER);
+            return [::SourceCollisionHelper new [::AllBinaryLayer::staticGet_NULL_ALLBINARY_LAYER]]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::GameFeatureFactory ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::game::collision::SourceCollisionHelper ();
-use org::allbinary::game::collision::CollisionHelper ();
-
-1;
 

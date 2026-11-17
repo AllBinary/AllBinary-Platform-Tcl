@@ -11,194 +11,166 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic
 
-package org::allbinary::game::ag::layer::hud::basic::PlayerGameNotificationHud;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::game::ag::layer::hud::basic::notification::GameNotificationHud','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gameTickTimeDelayHelper} = 'org::allbinary::time::GameTickTimeDelayHelperFactory'->getInstance();
-    $self->{EMPTY_STRING} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{displayInfo} = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-    $self->{timeDelayHelper} = 'org::allbinary::time::TimeDelayHelper'->new(0);
-    $self->{circularIndexUtil} = undef;
-    $self->{gameNotification} = 'org::allbinary::game::ag::layer::hud::basic::notification::GameNotification'->new();
-    $self->{permanentGameNotification} = 'org::allbinary::game::ag::layer::hud::basic::notification::GameNotification'->new();
-    $self->{setAndRemoveProcessor} = 'org::allbinary::game::ag::layer::hud::basic::SetAndRemoveProcessor'->new($self);
-    $self->{nextUnremoveableProcessor} = 'org::allbinary::game::ag::layer::hud::basic::NextUnremoveableProcessor'->new($self);
-    $self->{processor} = 'org::allbinary::canvas::Processor'->getInstance();
-    $self->{PERMANENT_GAME_NOTIFICATION} = "Permanent Game Notification: ";
-    $self->{lastString} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{string} = $self->{EMPTY_STRING};
-    $self->{point} = $org::allbinary::graphics::CustomGPoint::NULL_CUSTOM_POINT;
-    $self->{width} = 0;
+oo::class create ::PlayerGameNotificationHud {
+    superclass ::GameNotificationHud
 }
 
+oo::define ::PlayerGameNotificationHud {
+    method initFields_PlayerGameNotificationHud {} {
+        my jset gameTickTimeDelayHelper {}
+        my jset EMPTY_STRING {}
+        my jset displayInfo {}
+        my jset timeDelayHelper {}
+        my jset circularIndexUtil {}
+        my jset gameNotification {}
+        my jset permanentGameNotification {}
+        my jset setAndRemoveProcessor {}
+        my jset nextUnremoveableProcessor {}
+        my jset processor {}
+        my jset PERMANENT_GAME_NOTIFICATION {}
+        my jset lastString {}
+        my jset string {}
+        my jset point {}
+        my jset width 0
+        my jset gameTickTimeDelayHelper [::GameTickTimeDelayHelperFactory::getInstance]
+        my jset EMPTY_STRING [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset displayInfo [::DisplayInfoSingleton::getInstance]
+        my jset timeDelayHelper [::TimeDelayHelper new 0]
+        
+        my jset gameNotification [::GameNotification new]
+        my jset permanentGameNotification [::GameNotification new]
+        my jset setAndRemoveProcessor [::SetAndRemoveProcessor new [self]]
+        my jset nextUnremoveableProcessor [::NextUnremoveableProcessor new [self]]
+        my jset processor [::Processor::getInstance]
+        my jset PERMANENT_GAME_NOTIFICATION "Permanent Game Notification: "
+        my jset lastString [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset string [my jget EMPTY_STRING]
+        my jset point [::CustomGPoint::staticGet_NULL_CUSTOM_POINT]
+        my jset width 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $location, $direction, $bufferZone, $basicColor) = @_;
-    my $self = $class->SUPER::new($location, $direction, $bufferZone, $basicColor);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstance(0);
-        my $gameNotificationEventHandler = 'org::allbinary::game::layer::hud::event::GameNotificationEventHandler'->getInstance();
-        $gameNotificationEventHandler->removeAllListeners();
-        $gameNotificationEventHandler->addListenerInterface($self);
-    return $self;
-}
+    constructor {location direction bufferZone basicColor} {
+        next $location $direction $bufferZone $basicColor
+        my initFields_PlayerGameNotificationHud
+        my jset circularIndexUtil [::CircularIndexUtil::createInstance 0]
+        set gameNotificationEventHandler [::GameNotificationEventHandler::getInstance]
+        $gameNotificationEventHandler removeAllListeners
+        $gameNotificationEventHandler addListenerInterface [self]
+    }
+    
 
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
+    method updateMeasurement {graphics} {
         try {
-            $self->SUPER::updateMeasurement($graphics);
-            my $font = $graphics->getFont();
-            $self->{width} = $font->stringWidth($self->{string});
-            $self->{processor}->process();
-            $self->{processor} = 'org::allbinary::canvas::Processor'->getInstance();
-        } catch ($e) {
-            my $logUtil = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $logUtil->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{UPDATE}, $e);
+            next $graphics
+            set font [$graphics getFont]
+            my jset width [$font stringWidth [my jget string]]
+            [my jget processor] process
+            my jset processor [::Processor::getInstance]
+        } on error {e} {
+            set logUtil [::LogUtil::getInstance]
+            set commonStrings [::CommonStrings::getInstance]
+            $logUtil put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget UPDATE] $e
         }
-}
+    }
+    
 
+    method getPoint {x y} {
+        my jset point [::CustomGPoint::getInstance3 0 0]
+        [my jget point] setX $x
+        [my jget point] setY $y
+        return [my jget point]
+    }
+    
 
-sub getPoint {
-    my ($self, $x, $y) = @_;
-        $self->{point} = 'org::allbinary::graphics::CustomGPoint'->getInstance3(0, 0);
-        $self->{point}->setX($x);
-        $self->{point}->setY($y);
-        return $self->{point};
-}
-
-
-sub add {
-    my ($self, $string, $seconds, $basicColor, $permanent) = @_;
-        if ($permanent) {
-            if ($self->{lastString} ne $string) {
-                $self->{lastString} = $string;
-                $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{PERMANENT_GAME_NOTIFICATION})->append($string)->toString(), $self, $self->{commonStrings}->{ADD});
+    method add {string seconds basicColor permanent} {
+        if {[$permanent booleanValue]} {
+            if {[expr {[my jget lastString] ne $string}]} {
+                my jset lastString $string
+                [my jget logUtil] putF [[[[::StringMaker new] append [my jget PERMANENT_GAME_NOTIFICATION]] append $string] toString] [self] [[my jget commonStrings] jget ADD]
             }
-            $self->{permanentGameNotification}->add($string, $seconds, $basicColor);
-            $self->{circularIndexUtil}->setSize($self->{permanentGameNotification}->getSize());
+            [my jget permanentGameNotification] add $string $seconds $basicColor
+            [my jget circularIndexUtil] setSize [[my jget permanentGameNotification] getSize]
         } else {
-            $self->{gameNotification}->add($string, $seconds, $basicColor);
+            [my jget gameNotification] add $string $seconds $basicColor
         }
-}
+    }
+    
 
-
-# throws Exception
-sub processTick {
-    my ($self) = @_;
-        if ($self->{timeDelayHelper}->isTime($self->{gameTickTimeDelayHelper}->{startTime})) {
-            my $gameAdState = 'org::allbinary::business::advertisement::GameAdStateFactory'->getInstance()->getCurrentInstance();
-            if ($gameAdState->isShowingAtLocation($self->getLocation())) {
-                $self->{offsetY} = -54;
+    method processTick {} {
+        if {[[my jget timeDelayHelper] isTime [[my jget gameTickTimeDelayHelper] jget startTime]]} {
+            set gameAdState [[::GameAdStateFactory::getInstance] getCurrentInstance]
+            if {[$gameAdState isShowingAtLocation [my getLocation]]} {
+                my jset offsetY [expr {-54}]
             } else {
-                $self->{offsetY} = 0;
+                my jset offsetY 0
             }
-            if ($self->{gameNotification}->getSize() > 0) {
-                $self->setAndRemove();
-            } elsif ($self->{permanentGameNotification}->getSize() > 0) {
-                $self->setNextUnremoveable();
+            if {[expr {[[my jget gameNotification] getSize] > 0}]} {
+                my setAndRemove
+            } elseif {[expr {[[my jget permanentGameNotification] getSize] > 0}]} {
+                my setNextUnremoveable
             } else {
-                $self->{string} = $self->{EMPTY_STRING};
+                my jset string [my jget EMPTY_STRING]
             }
         }
-}
+    }
+    
 
+    method setAndRemove {} {
+        my jset string [[[my jget gameNotification] jget stringList] removeAt 0]
+        my jset processor [my jget setAndRemoveProcessor]
+    }
+    
 
-# throws Exception
-sub setAndRemove {
-    my ($self) = @_;
-        $self->{string} = $self->{gameNotification}->{stringList}->removeAt(0);
-        $self->{processor} = $self->{setAndRemoveProcessor};
-}
-
-
-# throws Exception
-sub setAndRemoveProcess {
-    my ($self) = @_;
-        $self->setX(POSIX::floor((($self->{displayInfo}->getLastWidth() - $self->{width})) / (2 ** (1))));
-        $self->{point}->setX($self->getX());
-        $self->{point}->setY($self->getY());
-        my $time = $self->{gameNotification}->{timeList}->removeAt(0);
-        my $iTime = int($time) * 1000;
-        if ($iTime == 0) {
-            $iTime = 500;
+    method setAndRemoveProcess {} {
+        my setX [expr {([expr {[[my jget displayInfo] getLastWidth] - [my jget width]}]) >> 1}]
+        [my jget point] setX [my getX]
+        [my jget point] setY [my getY]
+        set time [[[my jget gameNotification] jget timeList] removeAt 0]
+        set iTime [expr {[$time intValue] * 1000}]
+        if {[expr {$iTime == 0}]} {
+            set iTime 500
         }
-        $self->{timeDelayHelper}->{delay} = $iTime;
-        $self->setBasicColorP($self->{gameNotification}->{colorList}->removeAt(0));
+        [my jget timeDelayHelper] jset delay $iTime
+        my setBasicColorP [[[my jget gameNotification] jget colorList] removeAt 0]
+    }
+    
+
+    method setNextUnremoveable {} {
+        set index [[my jget circularIndexUtil] getIndex]
+        my jset string [[[[my jget permanentGameNotification] jget stringList] jget objectArray] get $index]
+        my jset processor [my jget nextUnremoveableProcessor]
+    }
+    
+
+    method setNextUnremoveableProcess {} {
+        set index [[my jget circularIndexUtil] getIndex]
+        my setX [expr {([expr {[[my jget displayInfo] getLastWidth] - [my jget width]}]) >> 1}]
+        [my jget point] setX [my getX]
+        [my jget point] setY [my getY]
+        set time [[[[my jget permanentGameNotification] jget timeList] jget objectArray] get $index]
+        [my jget timeDelayHelper] jset delay [expr {[$time intValue] * 1000}]
+        my setBasicColorP [[[[my jget permanentGameNotification] jget colorList] jget objectArray] get $index]
+        [my jget circularIndexUtil] next
+    }
+    
+
+    method clear {} {
+        [my jget gameNotification] clear
+        [my jget permanentGameNotification] clear
+    }
+    
+
+    method paint {graphics} {
+        [my jget myFontProcessor] process $graphics
+        next $graphics [my jget string]
+    }
 }
 
-
-# throws Exception
-sub setNextUnremoveable {
-    my ($self) = @_;
-        my $index = $self->{circularIndexUtil}->getIndex();
-        $self->{string} = $self->{permanentGameNotification}->{stringList}->{objectArray}->[$index];
-        $self->{processor} = $self->{nextUnremoveableProcessor};
+namespace eval ::PlayerGameNotificationHud {
 }
 
-
-# throws Exception
-sub setNextUnremoveableProcess {
-    my ($self) = @_;
-        my $index = $self->{circularIndexUtil}->getIndex();
-        $self->setX(POSIX::floor((($self->{displayInfo}->getLastWidth() - $self->{width})) / (2 ** (1))));
-        $self->{point}->setX($self->getX());
-        $self->{point}->setY($self->getY());
-        my $time = $self->{permanentGameNotification}->{timeList}->{objectArray}->[$index];
-        $self->{timeDelayHelper}->{delay} = int($time) * 1000;
-        $self->setBasicColorP($self->{permanentGameNotification}->{colorList}->{objectArray}->[$index]);
-        $self->{circularIndexUtil}->next();
-}
-
-
-sub clear {
-    my ($self) = @_;
-        $self->{gameNotification}->clear();
-        $self->{permanentGameNotification}->clear();
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        $self->SUPER::paintString($graphics, $self->{string});
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::business::advertisement::GameAdStateFactory ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::game::GameAdState ();
-use org::allbinary::game::ag::layer::hud::basic::notification::GameNotification ();
-use org::allbinary::game::ag::layer::hud::basic::notification::GameNotificationHud ();
-use org::allbinary::game::layer::hud::event::GameNotificationEventHandler ();
-use org::allbinary::graphics::CustomGPoint ();
-use org::allbinary::graphics::GPoint ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::time::GameTickTimeDelayHelper ();
-use org::allbinary::time::GameTickTimeDelayHelperFactory ();
-use org::allbinary::time::TimeDelayHelper ();
-use org::allbinary::util::CircularIndexUtil ();
-use org::allbinary::game::ag::layer::hud::basic::SetAndRemoveProcessor ();
-use org::allbinary::game::ag::layer::hud::basic::NextUnremoveableProcessor ();
-
-1;
 

@@ -11,31 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchButtonsPaintableFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::TouchButtonsPaintableFactory {
+    superclass ::JObject
 }
 
+oo::define ::TouchButtonsPaintableFactory {
+    method initFields_TouchButtonsPaintableFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class, $basicColor) = @_;
-        return 'org::allbinary::input::motion::button::TouchButtonsPaintable'->new($basicColor);
+    constructor {} {
+        next
+        my initFields_TouchButtonsPaintableFactory
+    }
+    
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::input::motion::button::TouchButtonsPaintable ();
+namespace eval ::TouchButtonsPaintableFactory {
+    proc getInstance {basicColor} {
+        return [::TouchButtonsPaintable new $basicColor]
+    }
+}
 
-1;
 

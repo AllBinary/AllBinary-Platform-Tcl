@@ -11,41 +11,39 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.control.validate
 
-# Java interface
-package org::allbinary::logic::control::validate::ValidatorBaseInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub isValid {
-    my ($self) = @_;
-    die "abstract method isValid";
+oo::class create ::ValidatorBaseInterface {
+    superclass ::JObject
 }
 
+oo::define ::ValidatorBaseInterface {
+    method initFields_ValidatorBaseInterface {} {
+        return
+    }
+    
 
-sub validationInfo {
-    my ($self) = @_;
-    die "abstract method validationInfo";
+    method isValid {} {
+        error [jexception AbstractMethodError isValid]
+    }
+    
+
+    method validationInfo {} {
+        error [jexception AbstractMethodError validationInfo]
+    }
+    
+
+    method toHashtable {} {
+        error [jexception AbstractMethodError toHashtable]
+    }
+    
+
+    method toList {} {
+        error [jexception AbstractMethodError toList]
+    }
 }
 
-
-sub toHashtable {
-    my ($self) = @_;
-    die "abstract method toHashtable";
+namespace eval ::ValidatorBaseInterface {
 }
 
-
-sub toList {
-    my ($self) = @_;
-    die "abstract method toList";
-}
-
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-
-1;
 

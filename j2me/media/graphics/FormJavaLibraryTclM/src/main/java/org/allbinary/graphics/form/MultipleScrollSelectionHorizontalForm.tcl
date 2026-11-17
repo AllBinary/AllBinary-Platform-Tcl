@@ -1,151 +1,119 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::MultipleScrollSelectionHorizontalForm;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::ScrollSelectionForm','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{rectPaintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-    $self->{multipleScrollSelectionHorizontalFormTypeItemIndexPaintable} = 'org::allbinary::graphics::form::ItemIndexPaintable'->getInstance();
-    $self->{backgroundColor} = int('org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{TRANSPARENT_GREY});
-    $self->{myFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{logged} = 0;
-    $self->{fontHeight} = 0;
+oo::class create ::MultipleScrollSelectionHorizontalForm {
+    superclass ::ScrollSelectionForm
 }
 
+oo::define ::MultipleScrollSelectionHorizontalForm {
+    method initFields_MultipleScrollSelectionHorizontalForm {} {
+        my jset rectPaintable {}
+        my jset multipleScrollSelectionHorizontalFormTypeItemIndexPaintable {}
+        my jset backgroundColor 0
+        my jset myFontProcessor {}
+        my jset logged false
+        my jset fontHeight 0
+        my jset rectPaintable [::NullPaintable::getInstance]
+        my jset multipleScrollSelectionHorizontalFormTypeItemIndexPaintable [::ItemIndexPaintable::getInstance]
+        my jset backgroundColor [[[::BasicColorFactory::getInstance] jget TRANSPARENT_GREY] intValue]
+        my jset myFontProcessor [::UpdateMyFontProcessor new [self]]
+        my jset logged false
+        my jset fontHeight 0
+        return
+    }
+    
+    
 
-# throws Exception
-sub createForm {
-    my ($class, $title, $items, $rectangle, $formType, $border, $backgroundBasicColor, $foregroundBasicColor) = @_;
-        my $scrollSelectionForm = 'org::allbinary::graphics::form::MultipleScrollSelectionHorizontalForm'->new($title, $items, 'org::allbinary::graphics::form::ItemPaintableFactory'->getInstance(), $border, $backgroundBasicColor, $foregroundBasicColor);
-        $scrollSelectionForm->init($rectangle, $formType);
-        return $scrollSelectionForm;
-}
-
-
-sub new {
-    my ($class, $title, $items, $formPaintableFactory, $border, $backgroundBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($title, $items, $formPaintableFactory, $border, 3, $backgroundBasicColor, $foregroundBasicColor);
-    _init_fields($self);
-        # super(...) made $self above
-        if ('org::allbinary::J2MEUtil'->isJ2ME() || 'org::allbinary::J2MEUtil'->isHTML()) {
+    constructor {title items formPaintableFactory border backgroundBasicColor foregroundBasicColor} {
+        next $title $items $formPaintableFactory $border 3 $backgroundBasicColor $foregroundBasicColor
+        my initFields_MultipleScrollSelectionHorizontalForm
+        if {[expr {[::J2MEUtil::isJ2ME] || [::J2MEUtil::isHTML]}]} {
         } else {
-            $self->{rectPaintable} = 'org::allbinary::graphics::form::MultipleScrollSelectionFormRectPaintable'->new($self);
+            my jset rectPaintable [::MultipleScrollSelectionFormRectPaintable new [self]]
         }
-    return $self;
-}
+    }
+    
 
+    method fillRect {graphics} {
+        $graphics setColor [my jget backgroundColor]
+        $graphics fillRect [my jget x] [my jget y] [[my jget rectangle] getWidth] [[my jget rectangle] getHeight]
+    }
+    
 
-sub fillRect {
-    my ($self, $graphics) = @_;
-        $graphics->setColor($self->{backgroundColor});
-        $graphics->fillRect($self->{x}, $self->{y}, $self->{rectangle}->getWidth(), $self->{rectangle}->getHeight());
-}
-
-
-# throws Exception
-sub init {
-    my ($self, $rectangle, $formType) = @_;
-        $self->SUPER::init($rectangle, $formType);
-        my $formTypeFactory = 'org::allbinary::graphics::form::FormTypeFactory'->getInstance();
-        if ($formType == $formTypeFactory->{HORIZONTAL_FORM}) {
-            $self->{multipleScrollSelectionHorizontalFormTypeItemIndexPaintable} = 'org::allbinary::graphics::form::MultipleScrollSelectionFormHorizontalPaintable'->new($self);
-        } elsif ($formType == $formTypeFactory->{VERTICAL_CENTER_FORM}) {
-            $self->{multipleScrollSelectionHorizontalFormTypeItemIndexPaintable} = 'org::allbinary::graphics::form::MultipleScrollSelectionFormVerticalPaintable'->new($self);
-        } elsif ($formType == $formTypeFactory->{NULL_FORM_TYPE}) {
+    method init {rectangle formType} {
+        next $rectangle $formType
+        set formTypeFactory [::FormTypeFactory::getInstance]
+        if {[expr {$formType eq [$formTypeFactory jget HORIZONTAL_FORM]}]} {
+            my jset multipleScrollSelectionHorizontalFormTypeItemIndexPaintable [::MultipleScrollSelectionFormHorizontalPaintable new [self]]
+        } elseif {[expr {$formType eq [$formTypeFactory jget VERTICAL_CENTER_FORM]}]} {
+            my jset multipleScrollSelectionHorizontalFormTypeItemIndexPaintable [::MultipleScrollSelectionFormVerticalPaintable new [self]]
+        } elseif {[expr {$formType eq [$formTypeFactory jget NULL_FORM_TYPE]}]} {
         } else {
-            die ($formTypeFactory->{UNK});
+            error [jexception Exception [$formTypeFactory jget UNK]]
         }
-}
+    }
+    
 
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        my jset fontHeight [$font getHeight]
+        my jset myFontProcessor [::MyFontProcessor::getInstance]
+    }
+    
 
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->{fontHeight} = $font->getHeight();
-        $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
-}
+    method paintHorizontal {graphics index item dx dy} {
+        set dx2 [expr {[my paintItem $graphics $index $item $dx $dy] + [my jget border]}]
+        [my jget paintable] paint $graphics $index $dx $dy
+        set dx $dx2
+        return $dx
+    }
+    
 
+    method paintVertical {graphics index item dx dy} {
+        my paintItem $graphics $index $item $dx $dy
+        [my jget paintable] paint $graphics $index $dx $dy
+        return $dx
+    }
+    
 
-# throws Exception
-sub paintHorizontal {
-    my ($self, $graphics, $index, $item, $dx, $dy) = @_;
-        my $dx2 = $self->paintItem($graphics, $index, $item, $dx, $dy) + $self->{border};
-        $self->{paintable}->paint($graphics, $index, $dx, $dy);
-        $dx = $dx2;
-        return $dx;
-}
+    method getStartIndex {} {
+        return [my getSelectedIndex]
+    }
+    
 
-
-# throws Exception
-sub paintVertical {
-    my ($self, $graphics, $index, $item, $dx, $dy) = @_;
-        $self->paintItem($graphics, $index, $item, $dx, $dy);
-        $self->{paintable}->paint($graphics, $index, $dx, $dy);
-        return $dx;
-}
-
-
-sub getStartIndex {
-    my ($self) = @_;
-        return $self->getSelectedIndex();
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
+    method paint {graphics} {
         try {
-            $self->{myFontProcessor}->process($graphics);
-            my $start = $self->getStartIndex();
-            my $size = $self->size();
-            my $dx = $self->{x};
-            my $dy = $self->{y};
-            $self->{rectPaintable}->paint($graphics);
-            $graphics->drawString($self->getTitle(), $self->{x}, $self->{y} - $self->{fontHeight}, 0);
-            my $item = undef;
-            for (my $index = $start; $index < $size; $index++) {
-                $item = $self->get($index);
-                if ($dx >= $self->{rectangle}->getMaxX()) {
-                    if ($self->{logged}) {
+            [my jget myFontProcessor] process $graphics
+            set start [my getStartIndex]
+            set size [my size]
+            set dx [my jget x]
+            set dy [my jget y]
+            [my jget rectPaintable] paint $graphics
+            $graphics drawString [my getTitle] [my jget x] [expr {[my jget y] - [my jget fontHeight]}] 0
+            set item {}
+            for {set index $start} {[expr {$index < $size}]} {jpostincr index 1} {
+                set item [my get $index]
+                if {[expr {$dx >= [[my jget rectangle] getMaxX]}]} {
+                    if {[my jget logged]} {
                     } else {
-                        $self->{logged} = 1;
-                        'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append("painting beyond maxx: ")->appendint(int($self->{rectangle}->getMaxX()))->toString(), $self, $self->{canvasStrings}->{PAINT});
+                        my jset logged true
+                        ::PreLogUtil::put [[[[::StringMaker new] append "painting beyond maxx: "] appendint [jint [[my jget rectangle] getMaxX]]] toString] [self] [[my jget canvasStrings] jget PAINT]
                     }
                 }
-                $dx = $self->{multipleScrollSelectionHorizontalFormTypeItemIndexPaintable}->paint($graphics, $index, $item, $dx, $dy);
+                set dx [[my jget multipleScrollSelectionHorizontalFormTypeItemIndexPaintable] paint $graphics $index $item $dx $dy]
             }
-        } catch ($e) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{canvasStrings}->{PAINT});
+        } on error {e} {
+            ::PreLogUtil::put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget canvasStrings] jget PAINT]
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::J2MEUtil ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
-use org::allbinary::graphics::paint::NullPaintable ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::graphics::form::ScrollSelectionForm ();
-use org::allbinary::graphics::form::ItemPaintableFactory ();
-use org::allbinary::graphics::form::ItemIndexPaintable ();
-use org::allbinary::graphics::form::MultipleScrollSelectionFormRectPaintable ();
-use org::allbinary::graphics::form::FormTypeFactory ();
-use org::allbinary::graphics::form::MultipleScrollSelectionFormVerticalPaintable ();
-use org::allbinary::graphics::form::MultipleScrollSelectionFormHorizontalPaintable ();
+namespace eval ::MultipleScrollSelectionHorizontalForm {
+    proc createForm {title items rectangle formType border backgroundBasicColor foregroundBasicColor} {
+        set scrollSelectionForm [::MultipleScrollSelectionHorizontalForm new $title $items [::ItemPaintableFactory::getInstance] $border $backgroundBasicColor $foregroundBasicColor]
+        $scrollSelectionForm init $rectangle $formType
+        return $scrollSelectionForm
+    }
+}
 
-1;
 

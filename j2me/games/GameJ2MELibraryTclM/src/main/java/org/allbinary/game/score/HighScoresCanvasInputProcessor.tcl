@@ -11,79 +11,63 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::HighScoresCanvasInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::PlayerGameInput';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{highScoresCanvas} = undef;
+oo::class create ::HighScoresCanvasInputProcessor {
+    superclass ::PlayerGameInput
 }
 
+oo::define ::HighScoresCanvasInputProcessor {
+    method initFields_HighScoresCanvasInputProcessor {} {
+        my jset highScoresCanvas {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $highScoresCanvas) = @_;
-    my $self = $class->SUPER::new('org::allbinary::util::BasicArrayListD'->new(), 'org::allbinary::util::BasicArrayListD'->new(), -1);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{highScoresCanvas} = $highScoresCanvas;
-    return $self;
+    constructor {highScoresCanvas} {
+        next [::BasicArrayListD new] [::BasicArrayListD new] [expr {-1}]
+        my initFields_HighScoresCanvasInputProcessor
+        my jset highScoresCanvas $highScoresCanvas
+    }
+    
+
+    method open {} {
+    }
+    
+
+    method close {} {
+    }
+    
+
+    method onPressGameKeyEvent {gameKeyEvent} {
+        next $gameKeyEvent
+        my update
+    }
+    
+
+    method onDownGameKeyEvent {gameKeyEvent} {
+        next $gameKeyEvent
+        my update
+    }
+    
+
+    method onUpGameKeyEvent {gameKeyEvent} {
+        next $gameKeyEvent
+        my update
+    }
+    
+
+    method paint {graphics} {
+    }
+    
+
+    method getHighScoresCanvas {} {
+        return [my jget highScoresCanvas]
+    }
 }
 
-
-sub open {
-    my ($self) = @_;
+namespace eval ::HighScoresCanvasInputProcessor {
 }
 
-
-sub close {
-    my ($self) = @_;
-}
-
-
-sub onPressGameKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
-        $self->SUPER::onPressGameKeyEvent($gameKeyEvent);
-        $self->update();
-}
-
-
-sub onDownGameKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
-        $self->SUPER::onDownGameKeyEvent($gameKeyEvent);
-        $self->update();
-}
-
-
-sub onUpGameKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
-        $self->SUPER::onUpGameKeyEvent($gameKeyEvent);
-        $self->update();
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-}
-
-
-sub getHighScoresCanvas {
-    my ($self) = @_;
-        return $self->{highScoresCanvas};
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::input::PlayerGameInput ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::game::score::displayable::HighScoresCanvas ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

@@ -11,107 +11,99 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
-package org::allbinary::game::configuration::feature::GameFeatureFormUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Scalar::Util ();
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::feature::GameFeatureFormUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{meUtil} = 'org::allbinary::MIDPUtil'->getInstance();
+oo::class create ::GameFeatureFormUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::GameFeatureFormUtil {
+    method initFields_GameFeatureFormUtil {} {
+        my jset logUtil {}
+        my jset meUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset meUtil [::MIDPUtil::getInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_GameFeatureFormUtil
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::feature::GameFeatureFormUtil::instance;
-}
-
-
-sub getChoiceGroup {
-    my ($self, $hashtable, $name, $option) = @_;
-        my $stringMaker = 'org::allbinary::logic::string::StringMaker'->new();
-        my $choiceGroup = 'javax::microedition::lcdui::ChoiceGroup'->new($name, $option, 'org::allbinary::logic::string::StringUtil'->getInstance()->getArrayInstance(), $javax::microedition::lcdui::NullImage::NULL_IMAGE_ARRAY);
-        my $list = $hashtable->get($name);
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        my $ADD_CHOICE = ": Adding Choice: ";
-        my $GET_CHOICE_GROUP = "getChoiceGroup";
-        my $size = $list->size();
-        for (my $index = 0; $index < $size; $index++) {
-            my $gameFeature = $list->{objectArray}->[$index];
-            $stringMaker->delete(0, $stringMaker->length());
-            $self->{logUtil}->putF($stringMaker->append($name)->append($ADD_CHOICE)->append($gameFeature->toString())->toString(), $self, $GET_CHOICE_GROUP);
-            $choiceGroup->append($gameFeature->toString(), $javax::microedition::lcdui::NullImage::NULL_IMAGE);
-            if ($features->isFeature($gameFeature)) {
-                $choiceGroup->setSelectedIndex($index, 1);
+    method getChoiceGroup {hashtable name option} {
+        set stringMaker [::StringMaker new]
+        set choiceGroup [::ChoiceGroup new $name $option [[::StringUtil::getInstance] getArrayInstance] [::NullImage::staticGet_NULL_IMAGE_ARRAY]]
+        set list [$hashtable get $name]
+        set features [::Features::getInstance]
+        set ADD_CHOICE ": Adding Choice: "
+        set GET_CHOICE_GROUP "getChoiceGroup"
+        set size [$list size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set gameFeature [[$list jget objectArray] get $index]
+            $stringMaker delete 0 [$stringMaker length]
+            [my jget logUtil] putF [[[[$stringMaker append $name] append $ADD_CHOICE] append [$gameFeature toString]] toString] [self] $GET_CHOICE_GROUP
+            $choiceGroup append [$gameFeature toString] [::NullImage::staticGet_NULL_IMAGE]
+            if {[$features isFeature $gameFeature]} {
+                $choiceGroup setSelectedIndex $index true
             }
         }
-        return $choiceGroup;
-}
+        return $choiceGroup
+    }
+    
 
-
-sub addChoiceGroup {
-    my ($self, $form, $hashtable, $option) = @_;
-        my $stringMaker = 'org::allbinary::logic::string::StringMaker'->new();
-        my $ADDING_CHOICE_GROUP = "Adding Choice Group: ";
-        my $ADD_CHOICE_GROUP = "addChoiceGroup";
-        my $size = $hashtable->size();
-        my $objectArray = 'org::allbinary::util::HashtableUtil'->getInstance()->getKeysAsArray($hashtable);
-        my $name = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $name = $objectArray->[$index];
-            $stringMaker->delete(0, $stringMaker->length());
-            $self->{logUtil}->putF($stringMaker->append($ADDING_CHOICE_GROUP)->append($name)->toString(), $self, $ADD_CHOICE_GROUP);
-            $self->{meUtil}->appendItem($form, $self->getChoiceGroup($hashtable, $name, $option));
+    method addChoiceGroup {form hashtable option} {
+        set stringMaker [::StringMaker new]
+        set ADDING_CHOICE_GROUP "Adding Choice Group: "
+        set ADD_CHOICE_GROUP "addChoiceGroup"
+        set size [$hashtable size]
+        set objectArray [[::HashtableUtil::getInstance] getKeysAsArray $hashtable]
+        set name {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set name [$objectArray get $index]
+            $stringMaker delete 0 [$stringMaker length]
+            [my jget logUtil] putF [[[$stringMaker append $ADDING_CHOICE_GROUP] append $name] toString] [self] $ADD_CHOICE_GROUP
+            [my jget meUtil] appendItem $form [my getChoiceGroup $hashtable $name $option]
         }
-}
+    }
+    
 
-
-# throws Exception
-sub setDefault {
-    my ($self, $form) = @_;
-        my $size = $form->size();
-        for (my $index = 0; $index < $size; $index++) {
-            my $item = $form->get($index);
-            if ((Scalar::Util::blessed($item) && $item->isa('org::allbinary::game::configuration::GameConfigurationGauge'))) {
-                'org::allbinary::game::configuration::GameConfigurationUtil'->getInstance()->setDefault($item);
-            } elsif ((Scalar::Util::blessed($item) && $item->isa('javax::microedition::lcdui::ChoiceGroup'))) {
-                'org::allbinary::game::configuration::feature::GameFeatureUtil'->getInstance()->setDefault($item);
+    method setDefault {form} {
+        set size [$form size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set item [$form get $index]
+            if {[jinstanceof $item ::GameConfigurationGauge]} {
+                [::GameConfigurationUtil::getInstance] setDefault $item
+            } elseif {[jinstanceof $item ::ChoiceGroup]} {
+                [::GameFeatureUtil::getInstance] setDefault $item
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::ChoiceGroup ();
-use javax::microedition::lcdui::Item ();
-use javax::microedition::lcdui::NullImage ();
-use org::allbinary::MIDPUtil ();
-use org::allbinary::game::configuration::GameConfigurationGauge ();
-use org::allbinary::game::configuration::GameConfigurationUtil ();
-use org::allbinary::graphics::displayable::screen::CommandForm ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::HashtableUtil ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::GameFeatureUtil ();
+namespace eval ::GameFeatureFormUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameFeatureFormUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameFeatureFormUtil::staticGet_instance]
+    }
+}
 
-1;
 

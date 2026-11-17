@@ -11,77 +11,65 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
-package org::allbinary::physics::movement::ConstantVelocityNotifyViewChangeMovement;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::physics::movement::Movement';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{basicVelocityProperties} = undef;
-    $self->{speedBasicDecimal} = undef;
-    $self->{axisMathVectorUtil} = 'org::allbinary::logic::math::vector::AxisMathVectorUtil'->getInstance();
+oo::class create ::ConstantVelocityNotifyViewChangeMovement {
+    superclass ::Movement
 }
 
+oo::define ::ConstantVelocityNotifyViewChangeMovement {
+    method initFields_ConstantVelocityNotifyViewChangeMovement {} {
+        my jset basicVelocityProperties {}
+        my jset speedBasicDecimal {}
+        my jset axisMathVectorUtil {}
+        
+        
+        my jset axisMathVectorUtil [::AxisMathVectorUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{speedBasicDecimal} = $org::allbinary::logic::math::BasicDecimal::ZERO_BIGDECIMAL;
-        $self->{basicVelocityProperties} = 'org::allbinary::game::physics::velocity::BasicVelocityProperties'->new();
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_ConstantVelocityNotifyViewChangeMovement
+        my jset speedBasicDecimal [::BasicDecimal::staticGet_ZERO_BIGDECIMAL]
+        my jset basicVelocityProperties [::BasicVelocityProperties new]
+    }
+    
 
+    method init {speedBasicDecimal angle otherAngle} {
+        my jset speedBasicDecimal $speedBasicDecimal
+        set angleFactory [::AngleFactory::getInstance]
+        [my jget basicVelocityProperties] setVelocityWithBigDecimal $speedBasicDecimal [$angleFactory getAt $angle] [$angleFactory getAt $otherAngle]
+    }
+    
 
-sub init {
-    my ($self, $speedBasicDecimal, $angle, $otherAngle) = @_;
-        $self->{speedBasicDecimal} = $speedBasicDecimal;
-        my $angleFactory = 'org::allbinary::math::AngleFactory'->getInstance();
-        $self->{basicVelocityProperties}->setVelocityWithBigDecimal($speedBasicDecimal, $angleFactory->getAt($angle), $angleFactory->getAt($otherAngle));
-}
+    method moveOutsideRadius {layer radius angle otherAngle} {
+        set scaleFactorValue [[my jget speedBasicDecimal] getScaledFactorValue]
+        set xVector [jint ([expr {[[my jget axisMathVectorUtil] calculateX $radius $angle] / $scaleFactorValue}])]
+        set yVector [jint ([expr {[[my jget axisMathVectorUtil] calculateY $radius $angle] / $scaleFactorValue}])]
+        set zVector [jint ([expr {[[my jget axisMathVectorUtil] calculateZ $radius $otherAngle] / $scaleFactorValue}])]
+        $layer moveDXYZ $xVector $yVector $zVector
+    }
+    
 
-
-sub moveOutsideRadius {
-    my ($self, $layer, $radius, $angle, $otherAngle) = @_;
-        my $scaleFactorValue = $self->{speedBasicDecimal}->getScaledFactorValue();
-        my $xVector = int(($self->{axisMathVectorUtil}->calculateX($radius, $angle) / $scaleFactorValue));
-        my $yVector = int(($self->{axisMathVectorUtil}->calculateY($radius, $angle) / $scaleFactorValue));
-        my $zVector = int(($self->{axisMathVectorUtil}->calculateZ($radius, $otherAngle) / $scaleFactorValue));
-        $layer->moveDXYZ($xVector, $yVector, $zVector);
-}
-
-
-# throws Exception
-sub process {
-    my ($self, $layer) = @_;
-        my $x = $self->{basicVelocityProperties}->getVelocityXBasicDecimalP()->getScaled();
-        my $y = $self->{basicVelocityProperties}->getVelocityYBasicDecimalP()->getScaled();
-        my $z = $self->{basicVelocityProperties}->getVelocityZBasicDecimalP()->getScaled();
-        $layer->moveDXYZ($x, $y, $z);
-        if ($x != 0 || $y != 0 || $z != 0) {
-            $layer->onViewPositionChangeEvent();
+    method process {layer} {
+        set x [[[my jget basicVelocityProperties] getVelocityXBasicDecimalP] getScaled]
+        set y [[[my jget basicVelocityProperties] getVelocityYBasicDecimalP] getScaled]
+        set z [[[my jget basicVelocityProperties] getVelocityZBasicDecimalP] getScaled]
+        $layer moveDXYZ $x $y $z
+        if {[expr {[expr {[expr {$x != 0}] || [expr {$y != 0}]}] || [expr {$z != 0}]}]} {
+            $layer onViewPositionChangeEvent
         }
+    }
+    
+
+    method stop {} {
+        [my jget basicVelocityProperties] zero
+    }
 }
 
-
-sub stop {
-    my ($self) = @_;
-        $self->{basicVelocityProperties}->zero();
+namespace eval ::ConstantVelocityNotifyViewChangeMovement {
 }
 
-use java::lang::Object ();
-use org::allbinary::game::layer::AllBinaryGameLayer ();
-use org::allbinary::game::physics::velocity::BasicVelocityProperties ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::logic::math::BasicDecimal ();
-use org::allbinary::logic::math::vector::AxisMathVectorUtil ();
-use org::allbinary::math::AngleFactory ();
-use org::allbinary::physics::movement::Movement ();
-
-1;
 

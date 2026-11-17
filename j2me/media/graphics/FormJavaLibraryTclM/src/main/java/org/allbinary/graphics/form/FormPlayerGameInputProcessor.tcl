@@ -11,39 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::FormPlayerGameInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::canvas::Processor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{playerGameInputCompositeInterface} = undef;
+oo::class create ::FormPlayerGameInputProcessor {
+    superclass ::Processor
 }
 
+oo::define ::FormPlayerGameInputProcessor {
+    method initFields_FormPlayerGameInputProcessor {} {
+        my jset playerGameInputCompositeInterface {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $playerGameInputCompositeInterface) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{playerGameInputCompositeInterface} = $playerGameInputCompositeInterface;
-    return $self;
+    constructor {playerGameInputCompositeInterface} {
+        next
+        my initFields_FormPlayerGameInputProcessor
+        my jset playerGameInputCompositeInterface $playerGameInputCompositeInterface
+    }
+    
+
+    method process {} {
+        [[my jget playerGameInputCompositeInterface] getPlayerGameInput] update
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self) = @_;
-        $self->{playerGameInputCompositeInterface}->getPlayerGameInput()->update();
+namespace eval ::FormPlayerGameInputProcessor {
 }
 
-use java::lang::Object ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::game::input::PlayerGameInputCompositeInterface ();
-
-1;
 

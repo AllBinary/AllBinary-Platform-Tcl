@@ -11,38 +11,48 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.image
 
-package org::allbinary::image::PaintableToImageUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::image::PaintableToImageUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::PaintableToImageUtil {
+    superclass ::JObject
 }
 
+oo::define ::PaintableToImageUtil {
+    method initFields_PaintableToImageUtil {} {
+        return
+    }
 
-# throws Exception
-sub getImage {
-    my ($class, $paintableInterface, $width, $height) = @_;
-        my $image = 'org::allbinary::image::GameFeatureImageCacheFactory'->getInstance()->get(ref($org::allbinary::image::PaintableToImageUtil::instance), $width, $height);
-        my $graphics = $image->getGraphics();
-        $paintableInterface->paint($graphics);
-        return $image;
+    constructor {} {
+        next
+        my initFields_PaintableToImageUtil
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::graphics::paint::PaintableInterface ();
-use org::allbinary::image::GameFeatureImageCacheFactory ();
+namespace eval ::PaintableToImageUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::PaintableToImageUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getImage {paintableInterface width height} {
+        set image [[::GameFeatureImageCacheFactory::getInstance] get [jclassname [::PaintableToImageUtil::staticGet_instance]] $width $height]
+        set graphics [$image getGraphics]
+        $paintableInterface paint $graphics
+        return $image
+    }
+}
 
-1;
 

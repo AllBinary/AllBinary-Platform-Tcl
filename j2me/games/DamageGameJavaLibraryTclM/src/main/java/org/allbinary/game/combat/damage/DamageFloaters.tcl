@@ -11,36 +11,49 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.damage
 
-package org::allbinary::game::combat::damage::DamageFloaters;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::combat::damage::DamageFloaters'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::DamageFloaters {
+    superclass ::Paintable
 }
 
+oo::define ::DamageFloaters {
+    method initFields_DamageFloaters {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::combat::damage::DamageFloaters::SINGLETON;
+    constructor {} {
+        next
+        my initFields_DamageFloaters
+    }
+    
+    
+
+    method add {damage} {
+    }
 }
 
-
-sub add {
-    my ($self, $damage) = @_;
+namespace eval ::DamageFloaters {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::DamageFloaters new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::DamageFloaters::staticGet_SINGLETON]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::paint::Paintable ();
-
-1;
 

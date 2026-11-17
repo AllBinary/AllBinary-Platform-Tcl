@@ -11,75 +11,61 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::resource::BaseResourceAnimationInterfaceFactoryInterfaceFactory';
-
-
-
-sub createFactory {
-    my ($class) = @_;
-        return 'org::allbinary::input::motion::button::TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory'->new("TouchButton Animations");
+oo::class create ::TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory {
+    superclass ::BaseResourceAnimationInterfaceFactoryInterfaceFactory
 }
 
+oo::define ::TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory {
+    method initFields_TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class, $name) = @_;
-    my $self = $class->SUPER::new($name, 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable(), 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable(), 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable());
-        # super(...) made $self above
-    return $self;
-}
+    constructor {name} {
+        next $name [[::StdUtil::getInstance] createHashtable] [[::StdUtil::getInstance] createHashtable] [[::StdUtil::getInstance] createHashtable]
+        my initFields_TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory
+    }
+    
 
+    method init {level} {
+        my initImageCache [::ImageCacheFactory::getInstance] $level
+    }
+    
 
-# throws Exception
-sub init {
-    my ($self, $level) = @_;
-        $self->initImageCache('org::allbinary::image::ImageCacheFactory'->getInstance(), $level);
-}
-
-
-# throws Exception
-sub initImageCache {
-    my ($self, $imageCache, $level) = @_;
-        if ($self->isInitialized()) {
-            return;
+    method initImageCache {imageCache level} {
+        if {[my isInitialized]} {
+            return
         }
-        $self->SUPER::init($level);
-}
+        next $level
+    }
+    
 
-
-sub isLoadingLevel {
-    my ($self, $level) = @_;
-        my $resourceLoadingLevelFactory = 'org::allbinary::game::resource::ResourceLoadingLevelFactory'->getInstance();
-        if ($level == $resourceLoadingLevelFactory->{LOAD_TOUCH}->getLevel()) {
-            return 1;
+    method isLoadingLevel {level} {
+        set resourceLoadingLevelFactory [::ResourceLoadingLevelFactory::getInstance]
+        if {[expr {$level == [[$resourceLoadingLevelFactory jget LOAD_TOUCH] getLevel]}]} {
+            return true
         } else {
-            return $self->SUPER::isLoadingLevel($level);
+            return [next $level]
         }
-}
+    }
+    
 
-
-sub isFeature {
-    my ($self) = @_;
-        if (!'org::allbinary::game::configuration::feature::Features'->getInstance()->isDefault('org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance()->{OPENGL})) {
-            return 1;
+    method isFeature {} {
+        if {[expr {![[::Features::getInstance] isDefault [[::OpenGLFeatureFactory::getInstance] jget OPENGL]]}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::resource::BaseResourceAnimationInterfaceFactoryInterfaceFactory ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::resource::ResourceLoadingLevelFactory ();
-use org::allbinary::graphics::opengles::OpenGLFeatureFactory ();
-use org::allbinary::image::ImageCache ();
-use org::allbinary::image::ImageCacheFactory ();
-use org::allbinary::logic::StdUtil ();
+namespace eval ::TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory {
+    proc createFactory {} {
+        return [::TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory new "TouchButton Animations"]
+    }
+}
 
-1;
 

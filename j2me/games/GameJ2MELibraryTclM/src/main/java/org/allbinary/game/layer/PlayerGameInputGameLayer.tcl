@@ -11,66 +11,47 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-package org::allbinary::game::layer::PlayerGameInputGameLayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::AllBinaryGameLayer','org::allbinary::game::input::PlayerGameInputCompositeInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{playerGameInput} = undef;
+oo::class create ::PlayerGameInputGameLayer {
+    superclass ::AllBinaryGameLayer
 }
 
+oo::define ::PlayerGameInputGameLayer {
+    method initFields_PlayerGameInputGameLayer {} {
+        my jset playerGameInput {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $playerInputId) = @_;
-    my $self = $class->SUPER::new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, 'org::allbinary::graphics::Rectangle'->new('org::allbinary::graphics::PointFactory'->getInstance()->{ZERO_ZERO}, 0, 0), 'org::allbinary::view::StaticViewPosition'->new(0, 0, 0));
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{playerGameInput} = 'org::allbinary::game::input::PlayerGameInput'->new($self->getGameKeyEventList(), 'org::allbinary::util::BasicArrayListD'->new(), $playerInputId);
-        my $canvasStrings = 'org::allbinary::graphics::displayable::CanvasStrings'->getInstance();
-        $self->{logUtil}->putF("Danger Danger Danger: Should Not Be Called Except For Testing Input", $self, $canvasStrings->{PAINT});
-    return $self;
+    constructor {playerInputId} {
+        next [[::StringUtil::getInstance] jget EMPTY_STRING] [::Rectangle new [[::PointFactory::getInstance] jget ZERO_ZERO] 0 0] [::StaticViewPosition new 0 0 0]
+        my initFields_PlayerGameInputGameLayer
+        my jset playerGameInput [::PlayerGameInput new [my getGameKeyEventList] [::BasicArrayListD new] $playerInputId]
+        set canvasStrings [::CanvasStrings::getInstance]
+        [my jget logUtil] putF "Danger Danger Danger: Should Not Be Called Except For Testing Input" [self] [$canvasStrings jget PAINT]
+    }
+    
+
+    method getPlayerGameInput {} {
+        return [my jget playerGameInput]
+    }
+    
+
+    method initInputProcessors {} {
+    }
+    
+
+    method processInput {myManager} {
+    }
+    
+
+    method paint {graphics} {
+    }
 }
 
-
-sub getPlayerGameInput {
-    my ($self) = @_;
-        return $self->{playerGameInput};
+namespace eval ::PlayerGameInputGameLayer {
 }
 
-
-sub initInputProcessors {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub processInput {
-    my ($self, $myManager) = @_;
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::input::PlayerGameInput ();
-use org::allbinary::game::input::PlayerGameInputCompositeInterface ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::displayable::CanvasStrings ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::view::StaticViewPosition ();
-use org::allbinary::game::layer::AllBinaryGameLayer ();
-
-1;
 

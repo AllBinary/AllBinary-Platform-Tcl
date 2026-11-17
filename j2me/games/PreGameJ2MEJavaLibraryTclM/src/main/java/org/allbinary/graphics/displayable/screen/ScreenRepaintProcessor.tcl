@@ -11,40 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.screen
 
-package org::allbinary::graphics::displayable::screen::ScreenRepaintProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::canvas::Processor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{displayable} = undef;
+oo::class create ::ScreenRepaintProcessor {
+    superclass ::Processor
 }
 
+oo::define ::ScreenRepaintProcessor {
+    method initFields_ScreenRepaintProcessor {} {
+        my jset displayable {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $displayable) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{displayable} = $displayable;
-    return $self;
+    constructor {displayable} {
+        next
+        my initFields_ScreenRepaintProcessor
+        my jset displayable $displayable
+    }
+    
+
+    method process {} {
+        ::ScreenRepaintUtil::repaint [my jget displayable]
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self) = @_;
-        'org::allbinary::graphics::displayable::screen::ScreenRepaintUtil'->repaint($self->{displayable});
+namespace eval ::ScreenRepaintProcessor {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Displayable ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::graphics::displayable::screen::ScreenRepaintUtil ();
-
-1;
 

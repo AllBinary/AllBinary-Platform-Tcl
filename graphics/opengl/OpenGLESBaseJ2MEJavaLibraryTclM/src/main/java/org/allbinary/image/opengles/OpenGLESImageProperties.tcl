@@ -11,37 +11,44 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
-package org::allbinary::image::opengles::OpenGLESImageProperties;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{textureID} = -1;
-    $self->{scaleX} = 1.0;
-    $self->{scaleY} = 1.0;
-    $self->{scaleX2} = 1.0;
-    $self->{scaleY2} = 1.0;
-    $self->{angle} = 0;
-    $self->{redf} = 1.0;
-    $self->{greenf} = 1.0;
-    $self->{bluef} = 1.0;
-    $self->{alphaf} = 0.0;
+oo::class create ::OpenGLESImageProperties {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::OpenGLESImageProperties {
+    method initFields_OpenGLESImageProperties {} {
+        my jset textureID 0
+        my jset scaleX 0.0
+        my jset scaleY 0.0
+        my jset scaleX2 0.0
+        my jset scaleY2 0.0
+        my jset angle 0
+        my jset redf 0.0
+        my jset greenf 0.0
+        my jset bluef 0.0
+        my jset alphaf 0.0
+        my jset textureID [expr {-1}]
+        my jset scaleX 1.0
+        my jset scaleY 1.0
+        my jset scaleX2 1.0
+        my jset scaleY2 1.0
+        my jset angle 0
+        my jset redf 1.0
+        my jset greenf 1.0
+        my jset bluef 1.0
+        my jset alphaf 0.0
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_OpenGLESImageProperties
+    }
 }
 
-use java::lang::Object ();
+namespace eval ::OpenGLESImageProperties {
+}
 
-1;
 

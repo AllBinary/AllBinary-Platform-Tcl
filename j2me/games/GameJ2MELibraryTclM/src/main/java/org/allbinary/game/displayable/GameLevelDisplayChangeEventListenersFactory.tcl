@@ -11,60 +11,64 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable
 
-package org::allbinary::game::displayable::GameLevelDisplayChangeEventListenersFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::displayable::GameLevelDisplayChangeEventListenersFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::GameLevelDisplayChangeEventListenersFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::GameLevelDisplayChangeEventListenersFactory {
+    method initFields_GameLevelDisplayChangeEventListenersFactory {} {
+        my jset list {}
+        my jset list [::BasicArrayListD new]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_GameLevelDisplayChangeEventListenersFactory
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::displayable::GameLevelDisplayChangeEventListenersFactory::instance;
-}
+    method add {displayChangeEventListener} {
+        [my jget list] add $displayChangeEventListener
+        [::DisplayChangeEventHandler::getInstance] addListenerInterface $displayChangeEventListener
+    }
+    
 
-
-sub add {
-    my ($self, $displayChangeEventListener) = @_;
-        $self->{list}->add($displayChangeEventListener);
-        'org::allbinary::graphics::displayable::event::DisplayChangeEventHandler'->getInstance()->addListenerInterface($displayChangeEventListener);
-}
-
-
-sub clear {
-    my ($self) = @_;
-        my $displayChangeEventHandler = 'org::allbinary::graphics::displayable::event::DisplayChangeEventHandler'->getInstance();
-        my $displayChangeEventListener = undef;
-        for (my $index = $self->{list}->size(); --$index >= 0; ) {
-            $displayChangeEventListener = $self->{list}->{objectArray}->[$index];
-            $displayChangeEventHandler->removeListener($displayChangeEventListener);
+    method clear {} {
+        set displayChangeEventHandler [::DisplayChangeEventHandler::getInstance]
+        set displayChangeEventListener {}
+        for {set index [[my jget list] size]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            set displayChangeEventListener [[[my jget list] jget objectArray] get $index]
+            $displayChangeEventHandler removeListener $displayChangeEventListener
         }
-        $self->{list}->clear();
+        [my jget list] clear
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::displayable::event::DisplayChangeEventHandler ();
-use org::allbinary::graphics::displayable::event::DisplayChangeEventListener ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
+namespace eval ::GameLevelDisplayChangeEventListenersFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameLevelDisplayChangeEventListenersFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameLevelDisplayChangeEventListenersFactory::staticGet_instance]
+    }
+}
 
-1;
 

@@ -11,47 +11,65 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
-package org::allbinary::game::layer::pickup::PickedUpLayerTypeFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::pickup::PickedUpLayerTypeFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NONE} = 'org::allbinary::game::layer::pickup::PickedUpLayerType'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{NULL_STRING});
-    $self->{BEAM} = 'org::allbinary::game::layer::pickup::PickedUpLayerType'->new("BEAM");
-    $self->{MINE} = 'org::allbinary::game::layer::pickup::PickedUpLayerType'->new("MINE");
-    $self->{PROJECTILE} = 'org::allbinary::game::layer::pickup::PickedUpLayerType'->new("PROJECTILE");
-    $self->{ENHANCEMENT} = 'org::allbinary::game::layer::pickup::PickedUpLayerType'->new("Enhancement");
-    $self->{MORPH} = 'org::allbinary::game::layer::pickup::PickedUpLayerType'->new("Morph");
-    $self->{PART} = 'org::allbinary::game::layer::pickup::PickedUpLayerType'->new("Part");
-    $self->{HEAL} = 'org::allbinary::game::layer::pickup::PickedUpLayerType'->new("Heal");
-    $self->{LIFE} = 'org::allbinary::game::layer::pickup::PickedUpLayerType'->new("Life");
-    $self->{POINTS} = 'org::allbinary::game::layer::pickup::PickedUpLayerType'->new("Points");
+oo::class create ::PickedUpLayerTypeFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::PickedUpLayerTypeFactory {
+    method initFields_PickedUpLayerTypeFactory {} {
+        my jset NONE {}
+        my jset BEAM {}
+        my jset MINE {}
+        my jset PROJECTILE {}
+        my jset ENHANCEMENT {}
+        my jset MORPH {}
+        my jset PART {}
+        my jset HEAL {}
+        my jset LIFE {}
+        my jset POINTS {}
+        my jset NONE [::PickedUpLayerType new [[::StringUtil::getInstance] jget NULL_STRING]]
+        my jset BEAM [::PickedUpLayerType new "BEAM"]
+        my jset MINE [::PickedUpLayerType new "MINE"]
+        my jset PROJECTILE [::PickedUpLayerType new "PROJECTILE"]
+        my jset ENHANCEMENT [::PickedUpLayerType new "Enhancement"]
+        my jset MORPH [::PickedUpLayerType new "Morph"]
+        my jset PART [::PickedUpLayerType new "Part"]
+        my jset HEAL [::PickedUpLayerType new "Heal"]
+        my jset LIFE [::PickedUpLayerType new "Life"]
+        my jset POINTS [::PickedUpLayerType new "Points"]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_PickedUpLayerTypeFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::layer::pickup::PickedUpLayerTypeFactory::instance;
+namespace eval ::PickedUpLayerTypeFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::PickedUpLayerTypeFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::PickedUpLayerTypeFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::game::layer::pickup::PickedUpLayerType ();
-
-1;
 

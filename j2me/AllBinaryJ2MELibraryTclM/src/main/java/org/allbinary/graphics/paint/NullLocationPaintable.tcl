@@ -11,31 +11,45 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-package org::allbinary::graphics::paint::NullLocationPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::LocationPaintable';
-
-tie our $instanceC, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::paint::NullLocationPaintable'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::NullLocationPaintable {
+    superclass ::LocationPaintable
 }
 
+oo::define ::NullLocationPaintable {
+    method initFields_NullLocationPaintable {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::paint::NullLocationPaintable::instanceC;
+    constructor {} {
+        next
+        my initFields_NullLocationPaintable
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::paint::LocationPaintable ();
+namespace eval ::NullLocationPaintable {
+    variable instanceCValue {}
+    variable instanceCSet 0
+    proc staticGet_instanceC {} {
+        variable instanceCValue
+        variable instanceCSet
+        if {!$instanceCSet} {
+            set instanceCSet 1
+            set instanceCValue [::NullLocationPaintable new]
+        }
+        return $instanceCValue
+    }
+    proc staticSet_instanceC {value} {
+        variable instanceCValue
+        variable instanceCSet
+        set instanceCSet 1
+        set instanceCValue $value
+    }
+    proc getInstance {} {
+        return [::NullLocationPaintable::staticGet_instanceC]
+    }
+}
 
-1;
 

@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-# Java interface
-package org::allbinary::game::layer::SpriteFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub createSprite {
-    my ($self, $image, $frameWidth, $frameHeight) = @_;
-    die "abstract method createSprite";
+oo::class create ::SpriteFactoryInterface {
+    superclass ::JObject
 }
 
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::game::Sprite ();
+oo::define ::SpriteFactoryInterface {
+    method initFields_SpriteFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method createSprite {image frameWidth frameHeight} {
+        error [jexception AbstractMethodError createSprite]
+    }
+}
+
+namespace eval ::SpriteFactoryInterface {
+}
+
 

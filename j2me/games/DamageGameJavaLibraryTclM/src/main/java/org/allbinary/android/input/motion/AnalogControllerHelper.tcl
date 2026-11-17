@@ -11,79 +11,70 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.android.input.motion
 
-package org::allbinary::android::input::motion::AnalogControllerHelper;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{reduceTimeFactor} = undef;
-    $self->{SCALE_VALUE} = 'org::allbinary::android::input::motion::AnalogControllerConfigurationFactory'->getInstance()->{SCALE_VALUE};
-    $self->{rightTimeElapsedHelper} = 'org::allbinary::time::TimeDelayHelper'->new(0);
-    $self->{leftTimeElapsedHelper} = 'org::allbinary::time::TimeDelayHelper'->new(0);
-    $self->{downTimeElapsedHelper} = 'org::allbinary::time::TimeDelayHelper'->new(0);
-    $self->{upTimeElapsedHelper} = 'org::allbinary::time::TimeDelayHelper'->new(0);
+oo::class create ::AnalogControllerHelper {
+    superclass ::JObject
 }
 
+oo::define ::AnalogControllerHelper {
+    method initFields_AnalogControllerHelper {} {
+        my jset reduceTimeFactor 0
+        my jset SCALE_VALUE 0
+        my jset rightTimeElapsedHelper {}
+        my jset leftTimeElapsedHelper {}
+        my jset downTimeElapsedHelper {}
+        my jset upTimeElapsedHelper {}
+        
+        my jset SCALE_VALUE [[::AnalogControllerConfigurationFactory::getInstance] jget SCALE_VALUE]
+        my jset rightTimeElapsedHelper [::TimeDelayHelper new 0]
+        my jset leftTimeElapsedHelper [::TimeDelayHelper new 0]
+        my jset downTimeElapsedHelper [::TimeDelayHelper new 0]
+        my jset upTimeElapsedHelper [::TimeDelayHelper new 0]
+        return
+    }
+    
 
-sub new {
-    my ($class, $reduceTimeFactor) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{reduceTimeFactor} = $reduceTimeFactor;
-    return $self;
-}
+    constructor {reduceTimeFactor} {
+        next
+        my initFields_AnalogControllerHelper
+        my jset reduceTimeFactor $reduceTimeFactor
+    }
+    
 
-
-# throws Exception
-sub right {
-    my ($self, $collidableDestroyableDamageableLayer, $xAnalogValue) = @_;
-        $self->{rightTimeElapsedHelper}->{delay} = (POSIX::floor((($self->{SCALE_VALUE} - $xAnalogValue)) / (2 ** ($self->{reduceTimeFactor}))));
-        if ($self->{rightTimeElapsedHelper}->isTimeTNT()) {
-            $collidableDestroyableDamageableLayer->right();
+    method right {collidableDestroyableDamageableLayer xAnalogValue} {
+        [my jget rightTimeElapsedHelper] jset delay ([expr {([jint [expr {[my jget SCALE_VALUE] - $xAnalogValue}]]) >> [my jget reduceTimeFactor]}])
+        if {[[my jget rightTimeElapsedHelper] isTimeTNT]} {
+            $collidableDestroyableDamageableLayer right
         }
-}
+    }
+    
 
-
-# throws Exception
-sub left {
-    my ($self, $collidableDestroyableDamageableLayer, $xAnalogValue) = @_;
-        $self->{leftTimeElapsedHelper}->{delay} = (POSIX::floor((($self->{SCALE_VALUE} + $xAnalogValue)) / (2 ** ($self->{reduceTimeFactor}))));
-        if ($self->{leftTimeElapsedHelper}->isTimeTNT()) {
-            $collidableDestroyableDamageableLayer->left();
+    method left {collidableDestroyableDamageableLayer xAnalogValue} {
+        [my jget leftTimeElapsedHelper] jset delay ([expr {([jint [expr {[my jget SCALE_VALUE] + $xAnalogValue}]]) >> [my jget reduceTimeFactor]}])
+        if {[[my jget leftTimeElapsedHelper] isTimeTNT]} {
+            $collidableDestroyableDamageableLayer left
         }
-}
+    }
+    
 
-
-# throws Exception
-sub up {
-    my ($self, $collidableDestroyableDamageableLayer, $xAnalogValue) = @_;
-        $self->{upTimeElapsedHelper}->{delay} = (POSIX::floor((($self->{SCALE_VALUE} - $xAnalogValue)) / (2 ** ($self->{reduceTimeFactor}))));
-        if ($self->{upTimeElapsedHelper}->isTimeTNT()) {
-            $collidableDestroyableDamageableLayer->up();
+    method up {collidableDestroyableDamageableLayer xAnalogValue} {
+        [my jget upTimeElapsedHelper] jset delay ([expr {([jint [expr {[my jget SCALE_VALUE] - $xAnalogValue}]]) >> [my jget reduceTimeFactor]}])
+        if {[[my jget upTimeElapsedHelper] isTimeTNT]} {
+            $collidableDestroyableDamageableLayer up
         }
-}
+    }
+    
 
-
-# throws Exception
-sub down {
-    my ($self, $collidableDestroyableDamageableLayer, $xAnalogValue) = @_;
-        $self->{downTimeElapsedHelper}->{delay} = (POSIX::floor((($self->{SCALE_VALUE} + $xAnalogValue)) / (2 ** ($self->{reduceTimeFactor}))));
-        if ($self->{downTimeElapsedHelper}->isTimeTNT()) {
-            $collidableDestroyableDamageableLayer->down();
+    method down {collidableDestroyableDamageableLayer xAnalogValue} {
+        [my jget downTimeElapsedHelper] jset delay ([expr {([jint [expr {[my jget SCALE_VALUE] + $xAnalogValue}]]) >> [my jget reduceTimeFactor]}])
+        if {[[my jget downTimeElapsedHelper] isTimeTNT]} {
+            $collidableDestroyableDamageableLayer down
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::layer::special::CollidableDestroyableDamageableLayer ();
-use org::allbinary::time::TimeDelayHelper ();
-use org::allbinary::android::input::motion::AnalogControllerConfigurationFactory ();
+namespace eval ::AnalogControllerHelper {
+}
 
-1;
 

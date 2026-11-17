@@ -11,208 +11,176 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::VectorAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::IndexedAnimation','org::allbinary::animation::VectorAnimationInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{currentPoints} = 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_INT_ARRAY_ARRAY_ARRAY};
-    $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstance(0);
+oo::class create ::VectorAnimation {
+    superclass ::IndexedAnimation
 }
 
+oo::define ::VectorAnimation {
+    method initFields_VectorAnimation {} {
+        my jset currentPoints {}
+        my jset circularIndexUtil {}
+        my jset currentPoints [[::NullUtil::getInstance] jget NULL_INT_ARRAY_ARRAY_ARRAY]
+        my jset circularIndexUtil [::CircularIndexUtil::createInstance 0]
+        return
+    }
+    
+    
 
-sub createVectorAnimation {
-    my ($class, $currentPoints2, $basicColor, $animationBehavior) = @_;
-        my $currentPoints = [map { [map { [(0) x (2)] } 1 .. (scalar(@{$currentPoints2}))] } 1 .. (1)];
-        my $size = scalar(@{$currentPoints2});
-        for (my $index = 0; $index < $size; $index++) {
-            $currentPoints->[0]->[$index]->[0] = $currentPoints2->[$index]->[0];
-            $currentPoints->[0]->[$index]->[1] = $currentPoints2->[$index]->[1];
+    constructor {currentPoints basicColor animationBehavior} {
+        next $animationBehavior
+        my initFields_VectorAnimation
+        my setPoints $currentPoints
+        my setBasicColorP $basicColor
+    }
+    
+
+    method setBasicColorP {basicColor} {
+        set changed false
+        if {[expr {[expr {[my getBasicColorP] eq {}}] || [expr {[[my getBasicColorP] intValue] != [$basicColor intValue]}]}]} {
+            set changed true
         }
-        return 'org::allbinary::animation::VectorAnimation'->new($currentPoints, $basicColor, $animationBehavior);
-}
-
-
-sub new {
-    my ($class, $currentPoints, $basicColor, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->setPoints($currentPoints);
-        $self->setBasicColorP($basicColor);
-    return $self;
-}
-
-
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
-        my $changed = 0;
-        if (!defined($self->getBasicColorP()) || int($self->getBasicColorP()) != int($basicColor)) {
-            $changed = 1;
+        next $basicColor
+        if {$changed} {
+            my updateModifiers
         }
-        $self->SUPER::setBasicColorP($basicColor);
-        if ($changed) {
-            $self->updateModifiers();
+    }
+    
+
+    method changeBasicColor {basicColor} {
+        set changed false
+        if {[expr {[expr {[my getChangeBasicColor] eq {}}] || [expr {[[my getChangeBasicColor] intValue] != [$basicColor intValue]}]}]} {
+            set changed true
         }
-}
-
-
-sub changeBasicColor {
-    my ($self, $basicColor) = @_;
-        my $changed = 0;
-        if (!defined($self->getChangeBasicColor()) || int($self->getChangeBasicColor()) != int($basicColor)) {
-            $changed = 1;
+        next $basicColor
+        if {$changed} {
+            my updateModifiers
         }
-        $self->SUPER::changeBasicColor($basicColor);
-        if ($changed) {
-            $self->updateModifiers();
+    }
+    
+
+    method setAlpha {alpha} {
+        set changed false
+        if {[expr {[my jget alphaP] != $alpha}]} {
+            set changed true
         }
-}
-
-
-sub setAlpha {
-    my ($self, $alpha) = @_;
-        my $changed = 0;
-        if ($self->{alphaP} != $alpha) {
-            $changed = 1;
+        next $alpha
+        if {$changed} {
+            my updateModifiers
         }
-        $self->SUPER::setAlpha($alpha);
-        if ($changed) {
-            $self->updateModifiers();
-        }
-}
+    }
+    
 
+    method setScale {scaleX scaleY} {
+    }
+    
 
-sub setScale {
-    my ($self, $scaleX, $scaleY) = @_;
-}
+    method setMaxScale {maxScaleX maxScaleY} {
+    }
+    
 
+    method updateModifiers {} {
+    }
+    
 
-sub setMaxScale {
-    my ($self, $maxScaleX, $maxScaleY) = @_;
-}
+    method getAnimationSize {} {
+        return [my getSize]
+    }
+    
 
+    method getSize {} {
+        return [[my jget currentPoints] length]
+    }
+    
 
-sub updateModifiers {
-    my ($self) = @_;
-}
+    method setSequence {sequence} {
+    }
+    
 
+    method getSequence {} {
+        return [::PrimitiveIntUtil::getArrayInstance]
+    }
+    
 
-# throws Exception
-sub getAnimationSize {
-    my ($self) = @_;
-        return $self->getSize();
-}
+    method nextFrame {} {
+        [my jget circularIndexUtil] next
+    }
+    
 
+    method previousFrame {} {
+        [my jget circularIndexUtil] previous
+    }
+    
 
-sub getSize {
-    my ($self) = @_;
-        return scalar(@{$self->{currentPoints}});
-}
-
-
-sub setSequence {
-    my ($self, $sequence) = @_;
-}
-
-
-sub getSequence {
-    my ($self) = @_;
-        return 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance();
-}
-
-
-sub nextFrame {
-    my ($self) = @_;
-        $self->{circularIndexUtil}->next();
-}
-
-
-sub previousFrame {
-    my ($self) = @_;
-        $self->{circularIndexUtil}->previous();
-}
-
-
-sub paintVectors {
-    my ($self, $graphics, $x, $y) = @_;
+    method paintVectors {graphics x y} {
         try {
-            my $nextPointX = 0;
-            my $nextPointY = 0;
-            my $nextPoint = undef;
-            my $point = undef;
-            my $currentPointsFrame = $self->{currentPoints}->[$self->{circularIndexUtil}->getIndex()];
-            my $size = scalar(@{$currentPointsFrame});
-            my $index = $size - 2;
-            while (--$index >= 0) {
-                $nextPoint = $currentPointsFrame->[$index];
-                $point = $currentPointsFrame->[$index + 1];
-                $nextPointX = $nextPoint->[0];
-                $nextPointY = $nextPoint->[1];
-                if ($nextPointX != 1000) {
-                    $graphics->drawLine($point->[0] + $x, $point->[1] + $y, $nextPointX + $x, $nextPointY + $y);
+            set nextPointX 0
+            set nextPointY 0
+            set nextPoint {}
+            set point {}
+            set currentPointsFrame [[my jget currentPoints] get [[my jget circularIndexUtil] getIndex]]
+            set size [$currentPointsFrame length]
+            set index [jint [expr {$size - 2}]]
+            while {[expr {[jpreincr index -1] >= 0}]} {
+                set nextPoint [$currentPointsFrame get $index]
+                set point [$currentPointsFrame get [jint [expr {$index + 1}]]]
+                set nextPointX [$nextPoint get 0]
+                set nextPointY [$nextPoint get 1]
+                if {[expr {$nextPointX != 1000}]} {
+                    $graphics drawLine [jint [expr {[$point get 0] + $x}]] [jint [expr {[$point get 1] + $y}]] [jint [expr {$nextPointX + $x}]] [jint [expr {$nextPointY + $y}]]
                 } else {
-                    $index--;
+                    jpostincr index -1
                 }
             }
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "paintVectors", $e);
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "paintVectors" $e
         }
+    }
+    
+
+    method paintXY {graphics x y} {
+        [my jget basicSetColorUtil] setBasicColorP $graphics [my jget basicColor]
+        my paintVectors $graphics $x $y
+    }
+    
+
+    method getFrame {} {
+        return [[my jget circularIndexUtil] getIndex]
+    }
+    
+
+    method setFrame {index} {
+        [my jget circularIndexUtil] setIndex $index
+    }
+    
+
+    method getPoints {frame} {
+        return [[my jget currentPoints] get $frame]
+    }
+    
+
+    method setPoints {currentPoints} {
+        my jset currentPoints $currentPoints
+        my jset circularIndexUtil [::CircularIndexUtil::createInstance [$currentPoints length]]
+    }
+    
+
+    method getBasicColorP {} {
+        return [next]
+    }
 }
 
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->{basicSetColorUtil}->setBasicColorP($graphics, $self->{basicColor});
-        $self->paintVectors($graphics, $x, $y);
+namespace eval ::VectorAnimation {
+    proc createVectorAnimation {currentPoints2 basicColor animationBehavior} {
+        set currentPoints [jarrayof 1 {jarrayof [$currentPoints2 length] {jarray 2 0}}]
+        set size [$currentPoints2 length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            [[$currentPoints get 0] get $index] set 0 [[$currentPoints2 get $index] get 0]
+            [[$currentPoints get 0] get $index] set 1 [[$currentPoints2 get $index] get 1]
+        }
+        return [::VectorAnimation new $currentPoints $basicColor $animationBehavior]
+    }
 }
 
-
-sub getFrame {
-    my ($self) = @_;
-        return $self->{circularIndexUtil}->getIndex();
-}
-
-
-sub setFrame {
-    my ($self, $index) = @_;
-        $self->{circularIndexUtil}->setIndex($index);
-}
-
-
-sub getPoints {
-    my ($self, $frame) = @_;
-        return $self->{currentPoints}->[$frame];
-}
-
-
-sub setPoints {
-    my ($self, $currentPoints) = @_;
-        $self->{currentPoints} = $currentPoints;
-        $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstance(scalar(@{$currentPoints}));
-}
-
-
-sub getBasicColorP {
-    my ($self) = @_;
-        return $self->SUPER::getBasicColorP();
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::NullImage ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::util::CircularIndexUtil ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::animation::VectorAnimationInterface ();
-
-1;
 

@@ -11,104 +11,102 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
-package org::allbinary::logic::io::BufferedWriterUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::io::BufferedWriterUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{commonLabels} = 'org::allbinary::string::CommonLabels'->getInstance();
-    $self->{REMOVING_OLD} = "Remove old for overwriting: ";
+oo::class create ::BufferedWriterUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::BufferedWriterUtil {
+    method initFields_BufferedWriterUtil {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset commonLabels {}
+        my jset REMOVING_OLD {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset commonLabels [::CommonLabels::getInstance]
+        my jset REMOVING_OLD "Remove old for overwriting: "
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_BufferedWriterUtil
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::io::BufferedWriterUtil::instance;
-}
-
-
-# throws Exception
-sub overwrite {
-    my ($self, $path, $data) = @_;
-        my $abFile = 'org::allbinary::logic::io::file::AbFile'->createAbFile($path);
-        if ($abFile->exists()) {
-            $self->{logUtil}->putF($self->{REMOVING_OLD} . $path, $self, $self->{commonStrings}->{CREATE});
-            $abFile->delete();
+    method overwrite {path data} {
+        set abFile [::AbFile::createAbFile $path]
+        if {[$abFile exists]} {
+            [my jget logUtil] putF [string cat [my jget REMOVING_OLD] $path] [self] [[my jget commonStrings] jget CREATE]
+            $abFile delete
         } else {
-            my $name = 'org::allbinary::logic::io::path::AbPathData'->getInstance()->removeNameFromPath($path);
-            my $abFileDirectory = 'org::allbinary::logic::io::file::AbFile'->createAbFile($name);
-            if ($abFileDirectory->exists()) {
+            set name [[::AbPathData::getInstance] removeNameFromPath $path]
+            set abFileDirectory [::AbFile::createAbFile $name]
+            if {[$abFileDirectory exists]} {
             } else {
-                my $stringBuilder = 'org::allbinary::logic::string::StringMaker'->new();
-                $self->{logUtil}->putF($stringBuilder->append($self->{commonStrings}->{CREATE})->append($self->{commonLabels}->{COLON_SEP})->append($name)->toString(), $self, $self->{commonStrings}->{CREATE});
-                my $result = $abFileDirectory->mkdirs();
-                $stringBuilder->delete(0, $stringBuilder->length());
-                $self->{logUtil}->putF($stringBuilder->append($self->{commonLabels}->{RESULT_})->appendboolean($result)->toString(), $self, $self->{commonStrings}->{CREATE});
+                set stringBuilder [::StringMaker new]
+                [my jget logUtil] putF [[[[$stringBuilder append [[my jget commonStrings] jget CREATE]] append [[my jget commonLabels] jget COLON_SEP]] append $name] toString] [self] [[my jget commonStrings] jget CREATE]
+                set result [$abFileDirectory mkdirs]
+                $stringBuilder delete 0 [$stringBuilder length]
+                [my jget logUtil] putF [[[$stringBuilder append [[my jget commonLabels] jget RESULT_]] appendboolean $result] toString] [self] [[my jget commonStrings] jget CREATE]
             }
         }
-        $self->write($abFile, $data);
-}
+        my write $abFile $data
+    }
+    
 
-
-# throws Exception
-# Java overloaded method: Perl keeps the last definition
-sub overwrite {
-    my ($self, $abFile, $data) = @_;
-        if ($abFile->exists()) {
-            $self->{logUtil}->putF($self->{REMOVING_OLD} . $abFile->getPath(), $self, $self->{commonStrings}->{CREATE});
-            $abFile->delete();
+    method overwrite {abFile data} {
+        if {[$abFile exists]} {
+            [my jget logUtil] putF [string cat [my jget REMOVING_OLD] [jstr [$abFile getPath]]] [self] [[my jget commonStrings] jget CREATE]
+            $abFile delete
         } else {
-            my $name = 'org::allbinary::logic::io::path::AbPathData'->getInstance()->removeNameFromPath($abFile->getAbsolutePath());
-            my $abFileDirectory = 'org::allbinary::logic::io::file::AbFile'->createAbFile($name);
-            if ($abFileDirectory->exists()) {
+            set name [[::AbPathData::getInstance] removeNameFromPath [$abFile getAbsolutePath]]
+            set abFileDirectory [::AbFile::createAbFile $name]
+            if {[$abFileDirectory exists]} {
             } else {
-                my $stringBuilder = 'org::allbinary::logic::string::StringMaker'->new();
-                $self->{logUtil}->putF($stringBuilder->append($self->{commonStrings}->{CREATE})->append($self->{commonLabels}->{COLON_SEP})->append($name)->toString(), $self, $self->{commonStrings}->{CREATE});
-                my $result = $abFileDirectory->mkdirs();
-                $stringBuilder->delete(0, $stringBuilder->length());
-                $self->{logUtil}->putF($stringBuilder->append($self->{commonLabels}->{RESULT_})->appendboolean($result)->toString(), $self, $self->{commonStrings}->{CREATE});
+                set stringBuilder [::StringMaker new]
+                [my jget logUtil] putF [[[[$stringBuilder append [[my jget commonStrings] jget CREATE]] append [[my jget commonLabels] jget COLON_SEP]] append $name] toString] [self] [[my jget commonStrings] jget CREATE]
+                set result [$abFileDirectory mkdirs]
+                $stringBuilder delete 0 [$stringBuilder length]
+                [my jget logUtil] putF [[[$stringBuilder append [[my jget commonLabels] jget RESULT_]] appendboolean $result] toString] [self] [[my jget commonStrings] jget CREATE]
             }
         }
-        $self->write($abFile, $data);
+        my write $abFile $data
+    }
+    
+
+    method write {abFile data} {
+        set fileOut [::BufferedWriter new [::FileWriter new [::AbFileNativeUtil::get $abFile]]]
+        $fileOut write $data 0 [string length $data]
+        $fileOut newLine
+        $fileOut flush
+    }
 }
 
-
-# throws Exception
-sub write {
-    my ($self, $abFile, $data) = @_;
-        my $fileOut = 'java::io::BufferedWriter'->new('java::io::FileWriter'->new('org::allbinary::logic::io::file::AbFileNativeUtil'->get($abFile)));
-        $fileOut->write($data, 0, length($data));
-        $fileOut->newLine();
-        $fileOut->flush();
+namespace eval ::BufferedWriterUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::BufferedWriterUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::BufferedWriterUtil::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::BufferedWriter ();
-# use java::io::FileWriter ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::io::file::AbFile ();
-use org::allbinary::logic::io::file::AbFileNativeUtil ();
-use org::allbinary::logic::io::path::AbPathData ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

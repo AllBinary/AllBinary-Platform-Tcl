@@ -11,39 +11,49 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.touch.action
 
-package org::allbinary::input::motion::touch::action::DiagonalUpRightTouchInputToGameKeyEventAction;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::motion::action::GameKeyCompleteMotionGestureInputEvent';
+oo::class create ::DiagonalUpRightTouchInputToGameKeyEventAction {
+    superclass ::GameKeyCompleteMotionGestureInputEvent
+}
 
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
+oo::define ::DiagonalUpRightTouchInputToGameKeyEventAction {
+    method initFields_DiagonalUpRightTouchInputToGameKeyEventAction {} {
+        return
+    }
+    
+    
 
+    constructor {} {
+        next "Diagonal Up Right Action" [[::TouchMotionGestureFactory::getInstance] jget DIAGONAL_UP_RIGHT] [[[::PlatformInputMappingFactory::getInstance] getPersistentInputMappingInstance] getInputMapping]
+        my initFields_DiagonalUpRightTouchInputToGameKeyEventAction
+    }
+}
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::input::motion::touch::action::DiagonalUpRightTouchInputToGameKeyEventAction::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::input::motion::touch::action::DiagonalUpRightTouchInputToGameKeyEventAction::instance = 'org::allbinary::input::motion::touch::action::DiagonalUpRightTouchInputToGameKeyEventAction'->new();
+namespace eval ::DiagonalUpRightTouchInputToGameKeyEventAction {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::input::motion::touch::action::DiagonalUpRightTouchInputToGameKeyEventAction::instance;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::DiagonalUpRightTouchInputToGameKeyEventAction::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::DiagonalUpRightTouchInputToGameKeyEventAction::staticSet_instance [::DiagonalUpRightTouchInputToGameKeyEventAction new]
+        }
+        return [::DiagonalUpRightTouchInputToGameKeyEventAction::staticGet_instance]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new("Diagonal Up Right Action", 'org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance()->{DIAGONAL_UP_RIGHT}, 'org::allbinary::game::input::PlatformInputMappingFactory'->getInstance()->getPersistentInputMappingInstance()->getInputMapping());
-        # super(...) made $self above
-    return $self;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::PlatformInputMappingFactory ();
-use org::allbinary::game::input::motion::action::GameKeyCompleteMotionGestureInputEvent ();
-use org::allbinary::input::motion::gesture::TouchMotionGestureFactory ();
-use org::allbinary::logic::NullUtil ();
-
-1;
 

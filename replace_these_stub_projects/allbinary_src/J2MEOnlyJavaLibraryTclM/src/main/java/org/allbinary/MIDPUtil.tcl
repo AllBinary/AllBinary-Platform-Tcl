@@ -11,71 +11,71 @@
 # Created By: Travis Berthelot
 # 
 # Generated Code Do Not Modify
+# package org.allbinary
 
 #like microemu-playn, so the languages without overloading can be generated. J2ME uses the MIDP overloads.
-package org::allbinary::MIDPUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::MIDPUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::MIDPUtil {
+    superclass ::JObject
 }
 
+oo::define ::MIDPUtil {
+    method initFields_MIDPUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::MIDPUtil::instance;
+    constructor {} {
+        next
+        my initFields_MIDPUtil
+    }
+    
+    
+
+    method createImageWH {width height} {
+        return [::Image::createImage $width $height]
+    }
+    
+
+    method createImageFromByteArray {imageData imageOffset imageLength} {
+        return [::Image::createImage $imageData $imageOffset $imageLength]
+    }
+    
+
+    method createImageFromInputStream {inputStream} {
+        return [::Image::createImage $inputStream]
+    }
+    
+
+    method createPlayerFromInputStream {inputStream type} {
+        return [::Manager::createPlayer $inputStream $type]
+    }
+    
+
+    method appendItem {form item} {
+        return [$form append $item]
+    }
 }
 
-
-sub createImageWH {
-    my ($self, $width, $height) = @_;
-        return 'javax::microedition::lcdui::Image'->createImage($width, $height);
+namespace eval ::MIDPUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::MIDPUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::MIDPUtil::staticGet_instance]
+    }
 }
 
-
-sub createImageFromByteArray {
-    my ($self, $imageData, $imageOffset, $imageLength) = @_;
-        return 'javax::microedition::lcdui::Image'->createImage($imageData, $imageOffset, $imageLength);
-}
-
-
-# throws IOException
-sub createImageFromInputStream {
-    my ($self, $inputStream) = @_;
-        return 'javax::microedition::lcdui::Image'->createImage($inputStream);
-}
-
-
-# throws IOException, MediaException
-sub createPlayerFromInputStream {
-    my ($self, $inputStream, $type) = @_;
-        return 'javax::microedition::media::Manager'->createPlayer($inputStream, $type);
-}
-
-
-sub appendItem {
-    my ($self, $form, $item) = @_;
-        return $form->append($item);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::IOException ();
-# use java::io::InputStream ();
-use javax::microedition::lcdui::Form ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::Item ();
-use javax::microedition::media::Manager ();
-use javax::microedition::media::MediaException ();
-use javax::microedition::media::Player ();
-
-1;
 

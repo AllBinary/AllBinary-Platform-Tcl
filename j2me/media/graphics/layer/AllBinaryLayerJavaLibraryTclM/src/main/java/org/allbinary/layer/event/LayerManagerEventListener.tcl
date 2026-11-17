@@ -11,41 +11,36 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer.event
 
-package org::allbinary::layer::event::LayerManagerEventListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::layer::event::LayerManagerEventListenerInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::LayerManagerEventListener {
+    superclass ::JObject
 }
 
+oo::define ::LayerManagerEventListener {
+    method initFields_LayerManagerEventListener {} {
+        return
+    }
 
-sub onEvent {
-    my ($self, $eventObject) = @_;
+    constructor {} {
+        next
+        my initFields_LayerManagerEventListener
+    }
+    
+
+    method onEvent {eventObject} {
+    }
+    
+
+    method onCreateLayerManagerEvent {layerManagerEvent} {
+    }
+    
+
+    method onDeleteLayerManagerEvent {layerManagerEvent} {
+    }
 }
 
-
-# throws Exception
-sub onCreateLayerManagerEvent {
-    my ($self, $layerManagerEvent) = @_;
+namespace eval ::LayerManagerEventListener {
 }
 
-
-# throws Exception
-sub onDeleteLayerManagerEvent {
-    my ($self, $layerManagerEvent) = @_;
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::layer::event::LayerManagerEventListenerInterface ();
-
-1;
 

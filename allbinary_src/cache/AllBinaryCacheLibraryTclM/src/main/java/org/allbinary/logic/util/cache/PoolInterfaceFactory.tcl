@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-package org::allbinary::logic::util::cache::PoolInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::PoolInterfaceFactory {
+    superclass ::JObject
 }
 
+oo::define ::PoolInterfaceFactory {
+    method initFields_PoolInterfaceFactory {} {
+        return
+    }
+    
 
-# throws Exception
-sub getInstance {
-    my ($class, $cacheableInterfaceFactoryInterface, $poolType, $cachePolicy) = @_;
-        die ("No Such PoolType: " . $poolType->toString());
+    constructor {} {
+        next
+        my initFields_PoolInterfaceFactory
+    }
+    
 }
 
-use java::lang::Object ();
+namespace eval ::PoolInterfaceFactory {
+    proc getInstance {cacheableInterfaceFactoryInterface poolType cachePolicy} {
+        error [jexception Exception [string cat "No Such PoolType: " [$poolType toString]]]
+    }
+}
 
-1;
 

@@ -11,122 +11,129 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::LocalPlayerInputIdFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::LocalPlayerInputIdFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{MAX_NUMBER_OF_PLAYERS} = 6;
-    $self->{MAX_FAST_DEVICEID} = 65;
-    $self->{deviceIdToplayerId} = [(0) x ($self->{MAX_FAST_DEVICEID})];
-    $self->{playerIdToDeviceId} = [(0) x ($self->{MAX_NUMBER_OF_PLAYERS})];
-    $self->{playersInPlay} = [(0) x ($self->{MAX_NUMBER_OF_PLAYERS})];
-    $self->{totalDevicesMapped} = 0;
+oo::class create ::LocalPlayerInputIdFactory {
+    superclass ::JObject
 }
 
+oo::define ::LocalPlayerInputIdFactory {
+    method initFields_LocalPlayerInputIdFactory {} {
+        my jset logUtil {}
+        my jset MAX_NUMBER_OF_PLAYERS 0
+        my jset MAX_FAST_DEVICEID 0
+        my jset deviceIdToplayerId {}
+        my jset playerIdToDeviceId {}
+        my jset playersInPlay {}
+        my jset totalDevicesMapped 0
+        my jset logUtil [::LogUtil::getInstance]
+        my jset MAX_NUMBER_OF_PLAYERS 6
+        my jset MAX_FAST_DEVICEID 65
+        my jset deviceIdToplayerId [jarray [my jget MAX_FAST_DEVICEID] 0]
+        my jset playerIdToDeviceId [jarray [my jget MAX_NUMBER_OF_PLAYERS] 0]
+        my jset playersInPlay [jarray [my jget MAX_NUMBER_OF_PLAYERS] false]
+        my jset totalDevicesMapped 0
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        for (my $index = scalar(@{$self->{deviceIdToplayerId}}) - 1; $index >= 0; $index--) {
-            $self->{deviceIdToplayerId}->[$index] = -1;
+    constructor {} {
+        next
+        my initFields_LocalPlayerInputIdFactory
+        for {set index [jint [expr {[[my jget deviceIdToplayerId] length] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            [my jget deviceIdToplayerId] set $index [expr {-1}]
         }
-    return $self;
-}
+    }
+    
+    
 
+    method getDeviceId {playerInputId} {
+        return [[my jget playerIdToDeviceId] get $playerInputId]
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::LocalPlayerInputIdFactory::instance;
-}
-
-
-sub getDeviceId {
-    my ($self, $playerInputId) = @_;
-        return $self->{playerIdToDeviceId}->[$playerInputId];
-}
-
-
-sub getPlayerForDevice {
-    my ($self, $deviceId) = @_;
-        my $index = 0;
-        if ($deviceId < $self->{MAX_FAST_DEVICEID}) {
-            my $playerInputId = $self->{deviceIdToplayerId}->[$deviceId];
-            if ($playerInputId != -1) {
-                return $playerInputId;
+    method getPlayerForDevice {deviceId} {
+        set index 0
+        if {[expr {$deviceId < [my jget MAX_FAST_DEVICEID]}]} {
+            set playerInputId [[my jget deviceIdToplayerId] get $deviceId]
+            if {[expr {$playerInputId != [expr {-1}]}]} {
+                return $playerInputId
             }
         } else {
-            for ($index = $self->{totalDevicesMapped} - 1; $index >= 0; $index--) {
-                if ($self->{playerIdToDeviceId}->[$index] == $deviceId) {
-                    return $index;
+            for {set index [jint [expr {[my jget totalDevicesMapped] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+                if {[expr {[[my jget playerIdToDeviceId] get $index] == $deviceId}]} {
+                    return $index
                 }
             }
         }
-        $index = $self->{totalDevicesMapped};
-        if ($deviceId < $self->{MAX_FAST_DEVICEID}) {
-            $self->{deviceIdToplayerId}->[$deviceId] = $index;
+        set index [my jget totalDevicesMapped]
+        if {[expr {$deviceId < [my jget MAX_FAST_DEVICEID]}]} {
+            [my jget deviceIdToplayerId] set $deviceId $index
         } else {
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Added DeviceId: ")->appendint($deviceId)->append(" beyond fast Id list")->toString(), $self, "getPlayerForDevice");
+            [my jget logUtil] putF [[[[[::StringMaker new] append "Added DeviceId: "] appendint $deviceId] append " beyond fast Id list"] toString] [self] "getPlayerForDevice"
         }
-        $self->{playerIdToDeviceId}->[$index] = $deviceId;
-        'org::allbinary::game::input::analog::AnalogLocationInputFactory'->getInstance()->addPlayer($self->{totalDevicesMapped});
-        $self->{totalDevicesMapped}++;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Added DeviceId: ")->appendint($deviceId)->append(" at: ")->appendint($index)->append(" Total: ")->appendint($self->{totalDevicesMapped})->toString(), $self, "getPlayerForDevice");
-        return $index;
-}
+        [my jget playerIdToDeviceId] set $index $deviceId
+        [::AnalogLocationInputFactory::getInstance] addPlayer [my jget totalDevicesMapped]
+        my jpostinc totalDevicesMapped 1
+        [my jget logUtil] putF [[[[[[[[::StringMaker new] append "Added DeviceId: "] appendint $deviceId] append " at: "] appendint $index] append " Total: "] appendint [my jget totalDevicesMapped]] toString] [self] "getPlayerForDevice"
+        return $index
+    }
+    
 
-
-sub getTotalDevicesInPlay {
-    my ($self) = @_;
-        my $total = 0;
-        for (my $index = $self->{totalDevicesMapped} - 1; $index >= 0; $index--) {
-            if ($self->{playersInPlay}->[$index] == 1) {
-                $total++;
+    method getTotalDevicesInPlay {} {
+        set total 0
+        for {set index [jint [expr {[my jget totalDevicesMapped] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            if {[expr {[[my jget playersInPlay] get $index] == true}]} {
+                jpostincr total 1
             }
         }
-        return $total;
+        return $total
+    }
+    
+
+    method isPlayerInPlay {playerInputId} {
+        return [[my jget playersInPlay] get $playerInputId]
+    }
+    
+
+    method setPlayerInPlay {playerInputId} {
+        [my jget logUtil] putF [[[[::StringMaker new] append "Setting PlayerInPlay with playerInputId: "] appendint $playerInputId] toString] [self] "setPlayerInPlay"
+        [my jget playersInPlay] set $playerInputId true
+    }
+    
+
+    method setPlayerOutOfPlay {playerInputId} {
+        [my jget logUtil] putF [[[[::StringMaker new] append "Setting PlayerOutOfPlay with playerInputId: "] appendint $playerInputId] toString] [self] "setPlayerOutOfPlay"
+        [my jget playersInPlay] set $playerInputId false
+    }
+    
+
+    method getPlayersInPlay {} {
+        return [my jget playersInPlay]
+    }
 }
 
-
-sub isPlayerInPlay {
-    my ($self, $playerInputId) = @_;
-        return $self->{playersInPlay}->[$playerInputId];
+namespace eval ::LocalPlayerInputIdFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LocalPlayerInputIdFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LocalPlayerInputIdFactory::staticGet_instance]
+    }
 }
 
-
-sub setPlayerInPlay {
-    my ($self, $playerInputId) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Setting PlayerInPlay with playerInputId: ")->appendint($playerInputId)->toString(), $self, "setPlayerInPlay");
-        $self->{playersInPlay}->[$playerInputId] = 1;
-}
-
-
-sub setPlayerOutOfPlay {
-    my ($self, $playerInputId) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Setting PlayerOutOfPlay with playerInputId: ")->appendint($playerInputId)->toString(), $self, "setPlayerOutOfPlay");
-        $self->{playersInPlay}->[$playerInputId] = 0;
-}
-
-
-sub getPlayersInPlay {
-    my ($self) = @_;
-        return $self->{playersInPlay};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::analog::AnalogLocationInputFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-
-1;
 

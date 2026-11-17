@@ -1,96 +1,85 @@
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::FillAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::IndexedAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{pixelBuffer} = undef;
-    $self->{width} = undef;
-    $self->{height} = undef;
+oo::class create ::FillAnimation {
+    superclass ::IndexedAnimation
 }
 
+oo::define ::FillAnimation {
+    method initFields_FillAnimation {} {
+        my jset pixelBuffer {}
+        my jset width 0
+        my jset height 0
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $pixelBuffer, $width, $height, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{width} = 100;
-        $self->{height} = 100;
-        $self->{pixelBuffer} = $pixelBuffer;
-    return $self;
-}
+    constructor {pixelBuffer width height animationBehavior} {
+        next $animationBehavior
+        my initFields_FillAnimation
+        my jset width 100
+        my jset height 100
+        my jset pixelBuffer $pixelBuffer
+    }
+    
 
-
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
-        my $changed = 0;
-        if (!defined($self->getBasicColorP()) || int($self->getBasicColorP()) != int($basicColor)) {
-            $changed = 1;
+    method setBasicColorP {basicColor} {
+        set changed false
+        if {[expr {[expr {[my getBasicColorP] eq {}}] || [expr {[[my getBasicColorP] intValue] != [$basicColor intValue]}]}]} {
+            set changed true
         }
-        $self->SUPER::setBasicColorP($basicColor);
-        if ($changed) {
-            $self->updateModifiers();
+        next $basicColor
+        if {$changed} {
+            my updateModifiers
         }
-}
+    }
+    
 
-
-sub changeBasicColor {
-    my ($self, $basicColor) = @_;
-        my $changed = 0;
-        if (!defined($self->getChangeBasicColor()) || int($self->getChangeBasicColor()) != int($basicColor)) {
-            $changed = 1;
+    method changeBasicColor {basicColor} {
+        set changed false
+        if {[expr {[expr {[my getChangeBasicColor] eq {}}] || [expr {[[my getChangeBasicColor] intValue] != [$basicColor intValue]}]}]} {
+            set changed true
         }
-        $self->SUPER::changeBasicColor($basicColor);
-        if ($changed) {
-            $self->updateModifiers();
+        next $basicColor
+        if {$changed} {
+            my updateModifiers
         }
-}
+    }
+    
 
-
-sub setAlpha {
-    my ($self, $alpha) = @_;
-        my $changed = 0;
-        if ($self->{alphaP} != $alpha) {
-            $changed = 1;
+    method setAlpha {alpha} {
+        set changed false
+        if {[expr {[my jget alphaP] != $alpha}]} {
+            set changed true
         }
-        $self->SUPER::setAlpha($alpha);
-        if ($changed) {
-            $self->updateModifiers();
+        next $alpha
+        if {$changed} {
+            my updateModifiers
         }
+    }
+    
+
+    method setScale {scaleX scaleY} {
+    }
+    
+
+    method setMaxScale {maxScaleX maxScaleY} {
+    }
+    
+
+    method updateModifiers {} {
+    }
+    
+
+    method paint {g} {
+        $g drawRGB [my jget pixelBuffer] 0 [my jget width] 0 0 [my jget width] [my jget height] true
+    }
 }
 
-
-sub setScale {
-    my ($self, $scaleX, $scaleY) = @_;
+namespace eval ::FillAnimation {
 }
 
-
-sub setMaxScale {
-    my ($self, $maxScaleX, $maxScaleY) = @_;
-}
-
-
-sub updateModifiers {
-    my ($self) = @_;
-}
-
-
-sub paint {
-    my ($self, $g) = @_;
-        $g->drawRGB($self->{pixelBuffer}, 0, $self->{width}, 0, 0, $self->{width}, $self->{height}, 1);
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::animation::IndexedAnimation ();
-
-1;
 

@@ -11,15 +11,19 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-# Java interface
-package org::allbinary::animation::IndexedAnimationInterfaceCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
+oo::class create ::IndexedAnimationInterfaceCompositeInterface {
+    superclass ::JObject
+}
 
+oo::define ::IndexedAnimationInterfaceCompositeInterface {
+    method initFields_IndexedAnimationInterfaceCompositeInterface {} {
+        return
+    }
+}
 
+namespace eval ::IndexedAnimationInterfaceCompositeInterface {
+}
 
-1;
 

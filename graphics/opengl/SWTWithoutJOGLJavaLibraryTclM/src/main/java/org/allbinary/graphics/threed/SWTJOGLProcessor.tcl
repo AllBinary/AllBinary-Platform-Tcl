@@ -11,150 +11,130 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.threed
 
 #SWTWithoutJOGL
-package org::allbinary::graphics::threed::SWTJOGLProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
+oo::class create ::SWTJOGLProcessor {
+    superclass ::JObject
+}
 
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::threed::SWTJOGLProcessor'->new() };
+oo::define ::SWTJOGLProcessor {
+    method initFields_SWTJOGLProcessor {} {
+        my jset glHolder {}
+        my jset glHolder [::GLHolder new]
+        return
+    }
 
-sub _init_fields {
-    my ($self) = @_;
-    $self->{glHolder} = do {
-        package org::allbinary::graphics::threed::GLHolder::AnonymousN65771 { our @ISA = ('org::allbinary::graphics::threed::GLHolder', 'java::lang::Object');
-        
+    constructor {} {
+        next
+        my initFields_SWTJOGLProcessor
+    }
+    
+    
 
-        sub run {
-            my ($self, $renderer) = @_;
+    method init {display comp} {
+    }
+    
+
+    method isHolderCreated {} {
+        return [[my jget glHolder] jget isCreated]
+    }
+    
+
+    method setRenderer {renderer} {
+    }
+    
+
+    method isJOGL {} {
+        return false
+    }
+    
+
+    method createSurface {} {
+    }
+    
+
+    method onSurfaceCreated {} {
+    }
+    
+
+    method onSurfaceChangedForEvent {event} {
+    }
+    
+
+    method onSurfaceChanged {} {
+    }
+    
+
+    method onSurfaceChangedWH {width height} {
+    }
+    
+
+    method addListener {} {
+    }
+    
+
+    method addListeners {midlet} {
+    }
+    
+
+    method run {} {
+    }
+    
+
+    method clear {} {
+    }
+    
+
+    method setCustom {width height ratio} {
+    }
+    
+
+    method setRatioProcessor {ratioProcessor} {
+    }
+    
+
+    method charWidth {font ch} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method charsWidth {font ch offset length} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method stringWidth {font str} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method substringWidth {font str offset len} {
+        error [jexception RuntimeException {}]
+    }
+}
+
+namespace eval ::SWTJOGLProcessor {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::SWTJOGLProcessor new]
         }
-        }
-        'org::allbinary::graphics::threed::GLHolder::AnonymousN65771'->can('new') ? 'org::allbinary::graphics::threed::GLHolder::AnonymousN65771'->new() : bless({}, 'org::allbinary::graphics::threed::GLHolder::AnonymousN65771')
-    };
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::SWTJOGLProcessor::staticGet_instance]
+    }
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::threed::SWTJOGLProcessor::instance;
-}
-
-
-sub init {
-    my ($self, $display, $comp) = @_;
-}
-
-
-sub isHolderCreated {
-    my ($self) = @_;
-        return $self->{glHolder}->{isCreated};
-}
-
-
-sub setRenderer {
-    my ($self, $renderer) = @_;
-}
-
-
-sub isJOGL {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub createSurface {
-    my ($self) = @_;
-}
-
-
-sub onSurfaceCreated {
-    my ($self) = @_;
-}
-
-
-sub onSurfaceChangedForEvent {
-    my ($self, $event) = @_;
-}
-
-
-sub onSurfaceChanged {
-    my ($self) = @_;
-}
-
-
-sub onSurfaceChangedWH {
-    my ($self, $width, $height) = @_;
-}
-
-
-sub addListener {
-    my ($self) = @_;
-}
-
-
-sub addListeners {
-    my ($self, $midlet) = @_;
-}
-
-
-sub run {
-    my ($self) = @_;
-}
-
-
-sub clear {
-    my ($self) = @_;
-}
-
-
-sub setCustom {
-    my ($self, $width, $height, $ratio) = @_;
-}
-
-
-sub setRatioProcessor {
-    my ($self, $ratioProcessor) = @_;
-}
-
-
-sub charWidth {
-    my ($self, $font, $ch) = @_;
-        die ("RuntimeException");
-}
-
-
-sub charsWidth {
-    my ($self, $font, $ch, $offset, $length) = @_;
-        die ("RuntimeException");
-}
-
-
-sub stringWidth {
-    my ($self, $font, $str) = @_;
-        die ("RuntimeException");
-}
-
-
-sub substringWidth {
-    my ($self, $font, $str, $offset, $len) = @_;
-        die ("RuntimeException");
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::midlet::MIDlet ();
-use org::allbinary::graphics::threed::GLHolder ();
-
-1;
 

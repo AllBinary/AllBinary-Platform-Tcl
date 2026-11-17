@@ -11,67 +11,96 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::GameKeyFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NONE} = 'org::allbinary::game::input::GameKey'->new('org::allbinary::game::input::InputFactory'->getInstance()->{MAX} - 1, "None");
-    $self->{UP} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::UP, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{UP});
-    $self->{DOWN} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::DOWN, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{DOWN});
-    $self->{LEFT} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::LEFT, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{LEFT});
-    $self->{RIGHT} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::RIGHT, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{RIGHT});
-    $self->{KEY_POUND} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::KEY_POUND, "POUND");
-    $self->{KEY_STAR} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::KEY_STAR, "STAR");
-    $self->{KEY_NUM0} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::KEY_NUM0, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{ZERO});
-    $self->{KEY_NUM1} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::KEY_NUM1, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{ONE});
-    $self->{KEY_NUM2} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::KEY_NUM2, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{TWO});
-    $self->{KEY_NUM3} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::KEY_NUM3, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{THREE});
-    $self->{KEY_NUM4} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::KEY_NUM4, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{FOUR});
-    $self->{KEY_NUM5} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::KEY_NUM5, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{FIVE});
-    $self->{KEY_NUM6} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::KEY_NUM6, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{SIX});
-    $self->{KEY_NUM7} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::KEY_NUM7, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{SEVEN});
-    $self->{KEY_NUM8} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::KEY_NUM8, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{EIGHT});
-    $self->{KEY_NUM9} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::KEY_NUM9, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{NINE});
-    $self->{GAME_A} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::GAME_A, "Game A");
-    $self->{GAME_B} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::GAME_B, "Game B");
-    $self->{GAME_C} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::GAME_C, "Game C");
-    $self->{GAME_D} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::GAME_D, "Game D");
-    $self->{FIRE} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::FIRE, 'org::allbinary::string::CommonPhoneStrings'->getInstance()->{FIRE});
-    $self->{LEVEL_DOWN} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::KEY_NUM9 + 1, "Cheat Level Up");
-    $self->{LEVEL_UP} = 'org::allbinary::game::input::GameKey'->new($javax::microedition::lcdui::Canvas::KEY_NUM9 + 2, "Cheat Level Down");
+oo::class create ::GameKeyFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::GameKeyFactory {
+    method initFields_GameKeyFactory {} {
+        my jset NONE {}
+        my jset UP {}
+        my jset DOWN {}
+        my jset LEFT {}
+        my jset RIGHT {}
+        my jset KEY_POUND {}
+        my jset KEY_STAR {}
+        my jset KEY_NUM0 {}
+        my jset KEY_NUM1 {}
+        my jset KEY_NUM2 {}
+        my jset KEY_NUM3 {}
+        my jset KEY_NUM4 {}
+        my jset KEY_NUM5 {}
+        my jset KEY_NUM6 {}
+        my jset KEY_NUM7 {}
+        my jset KEY_NUM8 {}
+        my jset KEY_NUM9 {}
+        my jset GAME_A {}
+        my jset GAME_B {}
+        my jset GAME_C {}
+        my jset GAME_D {}
+        my jset FIRE {}
+        my jset LEVEL_DOWN {}
+        my jset LEVEL_UP {}
+        my jset NONE [::GameKey new [expr {[[::InputFactory::getInstance] jget MAX] - 1}] "None"]
+        my jset UP [::GameKey new [::Canvas::staticGet_UP] [[::CommonPhoneStrings::getInstance] jget UP]]
+        my jset DOWN [::GameKey new [::Canvas::staticGet_DOWN] [[::CommonPhoneStrings::getInstance] jget DOWN]]
+        my jset LEFT [::GameKey new [::Canvas::staticGet_LEFT] [[::CommonPhoneStrings::getInstance] jget LEFT]]
+        my jset RIGHT [::GameKey new [::Canvas::staticGet_RIGHT] [[::CommonPhoneStrings::getInstance] jget RIGHT]]
+        my jset KEY_POUND [::GameKey new [::Canvas::staticGet_KEY_POUND] "POUND"]
+        my jset KEY_STAR [::GameKey new [::Canvas::staticGet_KEY_STAR] "STAR"]
+        my jset KEY_NUM0 [::GameKey new [::Canvas::staticGet_KEY_NUM0] [[::CommonPhoneStrings::getInstance] jget ZERO]]
+        my jset KEY_NUM1 [::GameKey new [::Canvas::staticGet_KEY_NUM1] [[::CommonPhoneStrings::getInstance] jget ONE]]
+        my jset KEY_NUM2 [::GameKey new [::Canvas::staticGet_KEY_NUM2] [[::CommonPhoneStrings::getInstance] jget TWO]]
+        my jset KEY_NUM3 [::GameKey new [::Canvas::staticGet_KEY_NUM3] [[::CommonPhoneStrings::getInstance] jget THREE]]
+        my jset KEY_NUM4 [::GameKey new [::Canvas::staticGet_KEY_NUM4] [[::CommonPhoneStrings::getInstance] jget FOUR]]
+        my jset KEY_NUM5 [::GameKey new [::Canvas::staticGet_KEY_NUM5] [[::CommonPhoneStrings::getInstance] jget FIVE]]
+        my jset KEY_NUM6 [::GameKey new [::Canvas::staticGet_KEY_NUM6] [[::CommonPhoneStrings::getInstance] jget SIX]]
+        my jset KEY_NUM7 [::GameKey new [::Canvas::staticGet_KEY_NUM7] [[::CommonPhoneStrings::getInstance] jget SEVEN]]
+        my jset KEY_NUM8 [::GameKey new [::Canvas::staticGet_KEY_NUM8] [[::CommonPhoneStrings::getInstance] jget EIGHT]]
+        my jset KEY_NUM9 [::GameKey new [::Canvas::staticGet_KEY_NUM9] [[::CommonPhoneStrings::getInstance] jget NINE]]
+        my jset GAME_A [::GameKey new [::Canvas::staticGet_GAME_A] "Game A"]
+        my jset GAME_B [::GameKey new [::Canvas::staticGet_GAME_B] "Game B"]
+        my jset GAME_C [::GameKey new [::Canvas::staticGet_GAME_C] "Game C"]
+        my jset GAME_D [::GameKey new [::Canvas::staticGet_GAME_D] "Game D"]
+        my jset FIRE [::GameKey new [::Canvas::staticGet_FIRE] [[::CommonPhoneStrings::getInstance] jget FIRE]]
+        my jset LEVEL_DOWN [::GameKey new [expr {[::Canvas::staticGet_KEY_NUM9] + 1}] "Cheat Level Up"]
+        my jset LEVEL_UP [::GameKey new [expr {[::Canvas::staticGet_KEY_NUM9] + 2}] "Cheat Level Down"]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_GameKeyFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::input::GameKeyFactory::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::input::GameKeyFactory::instance = 'org::allbinary::game::input::GameKeyFactory'->new();
+namespace eval ::GameKeyFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::game::input::GameKeyFactory::instance;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::GameKeyFactory::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::GameKeyFactory::staticSet_instance [::GameKeyFactory new]
+        }
+        return [::GameKeyFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::string::CommonPhoneStrings ();
-use org::allbinary::game::input::GameKey ();
-use org::allbinary::game::input::InputFactory ();
-
-1;
 

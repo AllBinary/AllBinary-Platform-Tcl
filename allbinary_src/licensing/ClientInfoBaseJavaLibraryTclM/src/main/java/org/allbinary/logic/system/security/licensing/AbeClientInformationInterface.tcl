@@ -11,102 +11,89 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
-# Java interface
-package org::allbinary::logic::system::security::licensing::AbeClientInformationInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub init {
-    my ($self) = @_;
-    die "abstract method init";
+oo::class create ::AbeClientInformationInterface {
+    superclass ::JObject
 }
 
+oo::define ::AbeClientInformationInterface {
+    method initFields_AbeClientInformationInterface {} {
+        return
+    }
+    
 
-sub getOperatingSystemInterface {
-    my ($self) = @_;
-    die "abstract method getOperatingSystemInterface";
+    method init {} {
+        error [jexception AbstractMethodError init]
+    }
+    
+
+    method getOperatingSystemInterface {} {
+        error [jexception AbstractMethodError getOperatingSystemInterface]
+    }
+    
+
+    method getName {} {
+        error [jexception AbstractMethodError getName]
+    }
+    
+
+    method getSpecialName {} {
+        error [jexception AbstractMethodError getSpecialName]
+    }
+    
+
+    method getVersion {} {
+        error [jexception AbstractMethodError getVersion]
+    }
+    
+
+    method getLicenseId {} {
+        error [jexception AbstractMethodError getLicenseId]
+    }
+    
+
+    method getLicenseServers {} {
+        error [jexception AbstractMethodError getLicenseServers]
+    }
+    
+
+    method getLicenseServer {index} {
+        error [jexception AbstractMethodError getLicenseServer]
+    }
+    
+
+    method getNumberOfLicenseServers {} {
+        error [jexception AbstractMethodError getNumberOfLicenseServers]
+    }
+    
+
+    method toHashtable {} {
+        error [jexception AbstractMethodError toHashtable]
+    }
+    
+
+    method isSameId {alicenseId} {
+        error [jexception AbstractMethodError isSameId]
+    }
+    
+
+    method isLargerOrDifferentServerList {vector} {
+        error [jexception AbstractMethodError isLargerOrDifferentServerList]
+    }
+    
+
+    method isHardSale {} {
+        error [jexception AbstractMethodError isHardSale]
+    }
+    
+
+    method toShortString {} {
+        error [jexception AbstractMethodError toShortString]
+    }
 }
 
-
-sub getName {
-    my ($self) = @_;
-    die "abstract method getName";
+namespace eval ::AbeClientInformationInterface {
 }
 
-
-sub getSpecialName {
-    my ($self) = @_;
-    die "abstract method getSpecialName";
-}
-
-
-sub getVersion {
-    my ($self) = @_;
-    die "abstract method getVersion";
-}
-
-
-sub getLicenseId {
-    my ($self) = @_;
-    die "abstract method getLicenseId";
-}
-
-
-sub getLicenseServers {
-    my ($self) = @_;
-    die "abstract method getLicenseServers";
-}
-
-
-sub getLicenseServer {
-    my ($self, $index) = @_;
-    die "abstract method getLicenseServer";
-}
-
-
-sub getNumberOfLicenseServers {
-    my ($self) = @_;
-    die "abstract method getNumberOfLicenseServers";
-}
-
-
-sub toHashtable {
-    my ($self) = @_;
-    die "abstract method toHashtable";
-}
-
-
-sub isSameId {
-    my ($self, $alicenseId) = @_;
-    die "abstract method isSameId";
-}
-
-
-sub isLargerOrDifferentServerList {
-    my ($self, $vector) = @_;
-    die "abstract method isLargerOrDifferentServerList";
-}
-
-
-sub isHardSale {
-    my ($self) = @_;
-    die "abstract method isHardSale";
-}
-
-
-sub toShortString {
-    my ($self) = @_;
-    die "abstract method toShortString";
-}
-
-use org::allbinary::logic::system::os::GenericOperatingSystem ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-
-1;
 

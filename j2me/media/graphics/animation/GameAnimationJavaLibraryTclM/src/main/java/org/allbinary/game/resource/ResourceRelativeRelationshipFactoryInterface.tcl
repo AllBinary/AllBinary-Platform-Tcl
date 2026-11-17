@@ -11,33 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.resource
 
-# Java interface
-package org::allbinary::game::resource::ResourceRelativeRelationshipFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::configuration::feature::GameFeatureControlledInterface';
-
-
-
-# throws Exception
-sub getResourceRelativeRelationshipList {
-    my ($self, $resource) = @_;
-    die "abstract method getResourceRelativeRelationshipList";
+oo::class create ::ResourceRelativeRelationshipFactoryInterface {
+    superclass ::JObject
 }
 
+oo::define ::ResourceRelativeRelationshipFactoryInterface {
+    method initFields_ResourceRelativeRelationshipFactoryInterface {} {
+        return
+    }
+    
 
-# throws Exception
-sub addResourceRelativeRelationship {
-    my ($self, $resource, $relativeRelationship) = @_;
-    die "abstract method addResourceRelativeRelationship";
+    method getResourceRelativeRelationshipList {resource} {
+        error [jexception AbstractMethodError getResourceRelativeRelationshipList]
+    }
+    
+
+    method addResourceRelativeRelationship {resource relativeRelationship} {
+        error [jexception AbstractMethodError addResourceRelativeRelationship]
+    }
 }
 
-use org::allbinary::game::configuration::feature::GameFeatureControlledInterface ();
-use org::allbinary::graphics::RelativeRelationship ();
-use org::allbinary::util::BasicArrayList ();
+namespace eval ::ResourceRelativeRelationshipFactoryInterface {
+}
 
-1;
 

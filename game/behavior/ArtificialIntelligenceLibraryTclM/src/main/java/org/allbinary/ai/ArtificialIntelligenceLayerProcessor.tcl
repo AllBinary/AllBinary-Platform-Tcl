@@ -11,47 +11,40 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.ai
 
-package org::allbinary::ai::ArtificialIntelligenceLayerProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::LayerProcessor';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::ai::ArtificialIntelligenceLayerManager'->new());
-        # super(...) made $self above
-    return $self;
+oo::class create ::ArtificialIntelligenceLayerProcessor {
+    superclass ::LayerProcessor
 }
 
+oo::define ::ArtificialIntelligenceLayerProcessor {
+    method initFields_ArtificialIntelligenceLayerProcessor {} {
+        return
+    }
+    
 
-# throws Exception
-sub processAt {
-    my ($self, $allBinaryLayerManager, $layerInterface, $index) = @_;
-        my $artificialIntelligenceCompositeInterface = $layerInterface;
-        $artificialIntelligenceCompositeInterface->getArtificialIntelligenceInterface()->processAI($allBinaryLayerManager);
-}
+    constructor {} {
+        next [::ArtificialIntelligenceLayerManager new]
+        my initFields_ArtificialIntelligenceLayerProcessor
+    }
+    
 
+    method processAt {allBinaryLayerManager layerInterface index} {
+        set artificialIntelligenceCompositeInterface $layerInterface
+        [$artificialIntelligenceCompositeInterface getArtificialIntelligenceInterface] processAI $allBinaryLayerManager
+    }
+    
 
-# throws Exception
-sub isProcessorLayer {
-    my ($self, $layerInterface) = @_;
-        if ($layerInterface->implmentsArtificialIntelligenceCompositeInterface()) {
-            return 1;
+    method isProcessorLayer {layerInterface} {
+        if {[$layerInterface implmentsArtificialIntelligenceCompositeInterface]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::layer::LayerProcessor ();
-use org::allbinary::ai::ArtificialIntelligenceLayerManager ();
+namespace eval ::ArtificialIntelligenceLayerProcessor {
+}
 
-1;
 

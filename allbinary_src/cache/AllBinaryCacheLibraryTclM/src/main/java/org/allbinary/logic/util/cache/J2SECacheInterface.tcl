@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-# Java interface
-package org::allbinary::logic::util::cache::J2SECacheInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::cache::AutomaticCacheInterface';
-
-
-
-sub keySet {
-    my ($self) = @_;
-    die "abstract method keySet";
+oo::class create ::J2SECacheInterface {
+    superclass ::JObject
 }
 
-# use java::util::Set ();
-use org::allbinary::logic::util::cache::AutomaticCacheInterface ();
+oo::define ::J2SECacheInterface {
+    method initFields_J2SECacheInterface {} {
+        return
+    }
+    
 
-1;
+    method keySet {} {
+        error [jexception AbstractMethodError keySet]
+    }
+}
+
+namespace eval ::J2SECacheInterface {
+}
+
 

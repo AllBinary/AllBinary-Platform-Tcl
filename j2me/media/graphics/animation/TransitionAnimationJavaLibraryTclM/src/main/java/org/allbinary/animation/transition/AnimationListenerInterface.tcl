@@ -11,33 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.transition
 
-# Java interface
-package org::allbinary::animation::transition::AnimationListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub onPlatformAnimationStart {
-    my ($self) = @_;
-    die "abstract method onPlatformAnimationStart";
+oo::class create ::AnimationListenerInterface {
+    superclass ::JObject
 }
 
+oo::define ::AnimationListenerInterface {
+    method initFields_AnimationListenerInterface {} {
+        return
+    }
+    
 
-sub onPlatformAnimationEnd {
-    my ($self) = @_;
-    die "abstract method onPlatformAnimationEnd";
+    method onPlatformAnimationStart {} {
+        error [jexception AbstractMethodError onPlatformAnimationStart]
+    }
+    
+
+    method onPlatformAnimationEnd {} {
+        error [jexception AbstractMethodError onPlatformAnimationEnd]
+    }
+    
+
+    method onPlatformAnimationRepeat {} {
+        error [jexception AbstractMethodError onPlatformAnimationRepeat]
+    }
 }
 
-
-sub onPlatformAnimationRepeat {
-    my ($self) = @_;
-    die "abstract method onPlatformAnimationRepeat";
+namespace eval ::AnimationListenerInterface {
 }
 
-
-1;
 

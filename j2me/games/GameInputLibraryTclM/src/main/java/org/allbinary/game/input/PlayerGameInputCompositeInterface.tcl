@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-# Java interface
-package org::allbinary::game::input::PlayerGameInputCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::GameInputInterface';
-
-
-
-sub getPlayerGameInput {
-    my ($self) = @_;
-    die "abstract method getPlayerGameInput";
+oo::class create ::PlayerGameInputCompositeInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::game::input::GameInputInterface ();
+oo::define ::PlayerGameInputCompositeInterface {
+    method initFields_PlayerGameInputCompositeInterface {} {
+        return
+    }
+    
 
-1;
+    method getPlayerGameInput {} {
+        error [jexception AbstractMethodError getPlayerGameInput]
+    }
+}
+
+namespace eval ::PlayerGameInputCompositeInterface {
+}
+
 

@@ -11,35 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.midlet
 
-# Java interface
-package org::allbinary::midlet::MidletCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub setMidlet {
-    my ($self, $midlet) = @_;
-    die "abstract method setMidlet";
+oo::class create ::MidletCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::MidletCompositeInterface {
+    method initFields_MidletCompositeInterface {} {
+        return
+    }
+    
 
-sub getMidlet {
-    my ($self) = @_;
-    die "abstract method getMidlet";
+    method setMidlet {midlet} {
+        error [jexception AbstractMethodError setMidlet]
+    }
+    
+
+    method getMidlet {} {
+        error [jexception AbstractMethodError getMidlet]
+    }
+    
+
+    method getDisplayable {} {
+        error [jexception AbstractMethodError getDisplayable]
+    }
 }
 
-
-sub getDisplayable {
-    my ($self) = @_;
-    die "abstract method getDisplayable";
+namespace eval ::MidletCompositeInterface {
 }
 
-use javax::microedition::lcdui::Displayable ();
-use javax::microedition::midlet::MIDlet ();
-
-1;
 

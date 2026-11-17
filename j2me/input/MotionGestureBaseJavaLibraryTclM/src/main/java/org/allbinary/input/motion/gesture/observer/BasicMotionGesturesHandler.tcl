@@ -11,42 +11,52 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
-package org::allbinary::input::motion::gesture::observer::BasicMotionGesturesHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::handler::BasicEventHandler';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::input::motion::gesture::observer::BasicMotionGesturesHandler'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::motion::gesture::observer::BasicMotionGesturesHandler::SINGLETON;
+oo::class create ::BasicMotionGesturesHandler {
+    superclass ::BasicEventHandler
 }
 
+oo::define ::BasicMotionGesturesHandler {
+    method initFields_BasicMotionGesturesHandler {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+    constructor {} {
+        next
+        my initFields_BasicMotionGesturesHandler
+    }
+    
+
+    method process {eventObject eventListenerInterface} {
+        set baseMotionGestureEventListener $eventListenerInterface
+        $baseMotionGestureEventListener onMotionGestureEvent $eventObject
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $eventObject, $eventListenerInterface) = @_;
-        my $baseMotionGestureEventListener = $eventListenerInterface;
-        $baseMotionGestureEventListener->onMotionGestureEvent($eventObject);
+namespace eval ::BasicMotionGesturesHandler {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::BasicMotionGesturesHandler new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::BasicMotionGesturesHandler::staticGet_SINGLETON]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
-
-1;
 

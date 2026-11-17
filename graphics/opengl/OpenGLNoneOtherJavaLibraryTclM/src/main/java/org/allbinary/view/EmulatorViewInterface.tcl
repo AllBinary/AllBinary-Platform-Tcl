@@ -1,33 +1,32 @@
 # Generated Code Do Not Modify
+# package org.allbinary.view
 
-# Java interface
-package org::allbinary::view::EmulatorViewInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub setMidlet {
-    my ($self, $midlet) = @_;
-    die "abstract method setMidlet";
+oo::class create ::EmulatorViewInterface {
+    superclass ::JObject
 }
 
+oo::define ::EmulatorViewInterface {
+    method initFields_EmulatorViewInterface {} {
+        return
+    }
+    
 
-sub onEmulatorInitComplete {
-    my ($self, $midletActivity) = @_;
-    die "abstract method onEmulatorInitComplete";
+    method setMidlet {midlet} {
+        error [jexception AbstractMethodError setMidlet]
+    }
+    
+
+    method onEmulatorInitComplete {midletActivity} {
+        error [jexception AbstractMethodError onEmulatorInitComplete]
+    }
+    
+
+    method onSetDisplayable {displayable} {
+        error [jexception AbstractMethodError onSetDisplayable]
+    }
 }
 
-
-sub onSetDisplayable {
-    my ($self, $displayable) = @_;
-    die "abstract method onSetDisplayable";
+namespace eval ::EmulatorViewInterface {
 }
 
-use javax::microedition::lcdui::Displayable ();
-use javax::microedition::midlet::MIDlet ();
-
-1;
 

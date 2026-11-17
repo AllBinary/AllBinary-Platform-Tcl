@@ -11,39 +11,49 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.trackball.action
 
-package org::allbinary::input::motion::trackball::action::UpTrackballInputToGameKeyEventAction;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::motion::action::GameKeyCompleteMotionGestureInputEvent';
+oo::class create ::UpTrackballInputToGameKeyEventAction {
+    superclass ::GameKeyCompleteMotionGestureInputEvent
+}
 
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
+oo::define ::UpTrackballInputToGameKeyEventAction {
+    method initFields_UpTrackballInputToGameKeyEventAction {} {
+        return
+    }
+    
+    
 
+    constructor {} {
+        next "Up Action" [[::TrackballMotionGestureFactory::getInstance] jget UP] [[[::PlatformInputMappingFactory::getInstance] getPersistentInputMappingInstance] getInputMapping]
+        my initFields_UpTrackballInputToGameKeyEventAction
+    }
+}
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::input::motion::trackball::action::UpTrackballInputToGameKeyEventAction::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::input::motion::trackball::action::UpTrackballInputToGameKeyEventAction::instance = 'org::allbinary::input::motion::trackball::action::UpTrackballInputToGameKeyEventAction'->new();
+namespace eval ::UpTrackballInputToGameKeyEventAction {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::input::motion::trackball::action::UpTrackballInputToGameKeyEventAction::instance;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::UpTrackballInputToGameKeyEventAction::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::UpTrackballInputToGameKeyEventAction::staticSet_instance [::UpTrackballInputToGameKeyEventAction new]
+        }
+        return [::UpTrackballInputToGameKeyEventAction::staticGet_instance]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new("Up Action", 'org::allbinary::input::motion::gesture::TrackballMotionGestureFactory'->getInstance()->{UP}, 'org::allbinary::game::input::PlatformInputMappingFactory'->getInstance()->getPersistentInputMappingInstance()->getInputMapping());
-        # super(...) made $self above
-    return $self;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::PlatformInputMappingFactory ();
-use org::allbinary::game::input::motion::action::GameKeyCompleteMotionGestureInputEvent ();
-use org::allbinary::input::motion::gesture::TrackballMotionGestureFactory ();
-use org::allbinary::logic::NullUtil ();
-
-1;
 

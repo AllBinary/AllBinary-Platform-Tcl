@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
-# Java interface
-package org::allbinary::game::layer::pickup::PickupProcessorInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub process {
-    my ($self, $sourceLayerInterface) = @_;
-    die "abstract method process";
+oo::class create ::PickupProcessorInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::layer::AllBinaryLayer ();
+oo::define ::PickupProcessorInterface {
+    method initFields_PickupProcessorInterface {} {
+        return
+    }
+    
 
-1;
+    method process {sourceLayerInterface} {
+        error [jexception AbstractMethodError process]
+    }
+}
+
+namespace eval ::PickupProcessorInterface {
+}
+
 

@@ -11,53 +11,59 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.terrain
 
-package org::allbinary::game::terrain::TerrainEventCircularStaticPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::terrain::TerrainEventCircularStaticPool'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{EVENT_POOL} = 'org::allbinary::logic::util::event::AllBinaryEventCircularPool'->new(20);
+oo::class create ::TerrainEventCircularStaticPool {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::TerrainEventCircularStaticPool {
+    method initFields_TerrainEventCircularStaticPool {} {
+        my jset EVENT_POOL {}
+        my jset EVENT_POOL [::AllBinaryEventCircularPool new 20]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_TerrainEventCircularStaticPool
+    }
+    
+    
+
+    method init {} {
+        [my jget EVENT_POOL] initAllBinaryEventCircularPool [::TerrainEventFactory new]
+    }
+    
+
+    method getNext {basicTerrainInfo} {
+        set trackingEvent [[my jget EVENT_POOL] getNextInstance]
+        $trackingEvent setBasicTerrainInfoForCircularStaticPool $basicTerrainInfo
+        return $trackingEvent
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::terrain::TerrainEventCircularStaticPool::instance;
+namespace eval ::TerrainEventCircularStaticPool {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::TerrainEventCircularStaticPool new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::TerrainEventCircularStaticPool::staticGet_instance]
+    }
 }
 
-
-sub init {
-    my ($self) = @_;
-        $self->{EVENT_POOL}->initAllBinaryEventCircularPool('org::allbinary::game::terrain::TerrainEventFactory'->new());
-}
-
-
-# throws Exception
-sub getNext {
-    my ($self, $basicTerrainInfo) = @_;
-        my $trackingEvent = $self->{EVENT_POOL}->getNextInstance();
-        $trackingEvent->setBasicTerrainInfoForCircularStaticPool($basicTerrainInfo);
-        return $trackingEvent;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::util::event::AllBinaryEventCircularPool ();
-use org::allbinary::game::terrain::TerrainEventFactory ();
-
-1;
 

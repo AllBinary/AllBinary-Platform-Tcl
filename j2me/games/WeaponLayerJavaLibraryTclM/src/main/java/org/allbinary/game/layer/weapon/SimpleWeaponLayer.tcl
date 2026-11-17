@@ -11,42 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.weapon
 
-package org::allbinary::game::layer::weapon::SimpleWeaponLayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::weapon::WeaponLayer';
-
-
-
-# throws Exception
-sub createDestroyed {
-    my ($class) = @_;
-        return 'org::allbinary::animation::FeaturedAnimationInterfaceFactoryInterfaceFactory'->getInstance()->getProcedural('org::allbinary::game::combat::damage::ExplosionResources'->getInstance()->{THIRD_EXPLOSION_RESOURCE})->getInstanceAnimation('org::allbinary::animation::NullIndexedAnimationFactory'->getFactoryInstance()->getInstance(0));
+oo::class create ::SimpleWeaponLayer {
+    superclass ::WeaponLayer
 }
 
+oo::define ::SimpleWeaponLayer {
+    method initFields_SimpleWeaponLayer {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class, $name, $remoteInfo, $multiPlayerType, $movement, $animationInterface, $destroyedAnimationInterface, $rectangle, $viewPosition) = @_;
-    my $self = $class->SUPER::new($name, $remoteInfo, $multiPlayerType, $movement, $animationInterface, $destroyedAnimationInterface, $rectangle, $viewPosition);
-        # super(...) made $self above
-        $self->setCollidableInferface('org::allbinary::game::layer::weapon::CollidableWeaponBehavior'->new(1));
-    return $self;
+    constructor {name remoteInfo multiPlayerType movement animationInterface destroyedAnimationInterface rectangle viewPosition} {
+        next $name $remoteInfo $multiPlayerType $movement $animationInterface $destroyedAnimationInterface $rectangle $viewPosition
+        my initFields_SimpleWeaponLayer
+        my setCollidableInferface [::CollidableWeaponBehavior new true]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::FeaturedAnimationInterfaceFactoryInterfaceFactory ();
-use org::allbinary::animation::NullIndexedAnimationFactory ();
-use org::allbinary::game::combat::damage::ExplosionResources ();
-use org::allbinary::game::multiplayer::layer::RemoteInfo ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::physics::movement::Movement ();
-use org::allbinary::view::ViewPositionBase ();
-use org::allbinary::game::layer::weapon::WeaponLayer ();
-use org::allbinary::game::layer::weapon::CollidableWeaponBehavior ();
+namespace eval ::SimpleWeaponLayer {
+    proc createDestroyed {} {
+        return [[[::FeaturedAnimationInterfaceFactoryInterfaceFactory::getInstance] getProcedural [[::ExplosionResources::getInstance] jget THIRD_EXPLOSION_RESOURCE]] getInstanceAnimation [[::NullIndexedAnimationFactory::getFactoryInstance] getInstance 0]]
+    }
+}
 
-1;
 

@@ -11,98 +11,68 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image.sprite
 
-package org::allbinary::animation::image::sprite::SpriteIndexedAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::animation::image::BaseImageAnimationFactory','org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{animationFactorySpriteScaleUtil} = 'org::allbinary::image::sprite::AnimationFactorySpriteScaleUtil'->getInstance();
-    $self->{basicColorArray} = 'org::allbinary::graphics::color::BasicColorUtil'->getInstance()->{ZERO_ARRAY};
+oo::class create ::SpriteIndexedAnimationFactory {
+    superclass ::BaseImageAnimationFactory
 }
 
+oo::define ::SpriteIndexedAnimationFactory {
+    method initFields_SpriteIndexedAnimationFactory {} {
+        my jset animationFactorySpriteScaleUtil {}
+        my jset basicColorArray {}
+        my jset animationFactorySpriteScaleUtil [::AnimationFactorySpriteScaleUtil::getInstance]
+        my jset basicColorArray [[::BasicColorUtil::getInstance] jget ZERO_ARRAY]
+        return
+    }
+    
+    
+    
+    
 
-# throws Exception
-sub createCWHDXY {
-    my ($class, $image, $basicColorArray, $width, $height, $dx, $dy, $animationBehaviorFactory) = @_;
-        return 'org::allbinary::animation::image::sprite::SpriteIndexedAnimationFactory'->new($image, $basicColorArray, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $width, $height, $dx, $dy, $animationBehaviorFactory);
-}
+    constructor {image basicColorArray sequenceArray width height dx dy animationBehaviorFactory} {
+        next $image $sequenceArray $width $height $dx $dy $animationBehaviorFactory
+        my initFields_SpriteIndexedAnimationFactory
+        my jset basicColorArray $basicColorArray
+    }
+    
 
-
-# throws Exception
-sub createCWH {
-    my ($class, $image, $basicColorArray, $width, $height, $animationBehaviorFactory) = @_;
-        my $spriteIndexedAnimationFactory = 'org::allbinary::animation::image::sprite::SpriteIndexedAnimationFactory'->new($image, $basicColorArray, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $width, $height, 0, 0, $animationBehaviorFactory);
-        $spriteIndexedAnimationFactory->initHWH();
-        return $spriteIndexedAnimationFactory;
-}
-
-
-# throws Exception
-sub createWH {
-    my ($class, $image, $width, $height, $animationBehaviorFactory) = @_;
-        return 'org::allbinary::animation::image::sprite::SpriteIndexedAnimationFactory'->new($image, 'org::allbinary::graphics::color::BasicColorUtil'->getInstance()->{ZERO_ARRAY}, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $width, $height, 0, 0, $animationBehaviorFactory);
-}
-
-
-sub new {
-    my ($class, $image, $basicColorArray, $sequenceArray, $width, $height, $dx, $dy, $animationBehaviorFactory) = @_;
-    my $self = $class->SUPER::new($image, $sequenceArray, $width, $height, $dx, $dy, $animationBehaviorFactory);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{basicColorArray} = $basicColorArray;
-    return $self;
-}
-
-
-sub initHWH {
-    my ($self) = @_;
-        $self->{animationFactoryInitializationVisitor}->{dx} = -(POSIX::floor(($self->{animationFactoryInitializationVisitor}->{width}) / (2 ** (2))));
-        $self->{animationFactoryInitializationVisitor}->{dy} = -(POSIX::floor(($self->{animationFactoryInitializationVisitor}->{height}) / (2 ** (2))));
-        if ('org::allbinary::AndroidUtil'->isAndroid()) {
-            $self->{animationFactoryInitializationVisitor}->{dx} += 3;
+    method initHWH {} {
+        [my jget animationFactoryInitializationVisitor] jset dx [expr {-([expr {[[my jget animationFactoryInitializationVisitor] jget width] >> 2}])}]
+        [my jget animationFactoryInitializationVisitor] jset dy [expr {-([expr {[[my jget animationFactoryInitializationVisitor] jget height] >> 2}])}]
+        if {[::AndroidUtil::isAndroid]} {
+            [my jget animationFactoryInitializationVisitor] jset dx [expr {[[my jget animationFactoryInitializationVisitor] jget dx] + 3}]
         }
-}
+    }
+    
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        my $sprite = $self->{animationFactorySpriteScaleUtil}->createImage($self->getImage(), $self->{animationFactoryInitializationVisitor}->{width}, $self->{animationFactoryInitializationVisitor}->{height}, $self->{scaleProperties}->{scaleWidth}, $self->{scaleProperties}->{scaleHeight});
-        if ($self->{animationFactoryInitializationVisitor}->{dx} != 0 || $self->{animationFactoryInitializationVisitor}->{dy} != 0) {
-            return 'org::allbinary::animation::image::sprite::AdjustedSpriteIndexedAnimation'->new($sprite, $self->getImage(), $self->{basicColorArray}, $self->{animationFactoryInitializationVisitor}->{dx}, $self->{animationFactoryInitializationVisitor}->{dy}, $self->{animationBehaviorFactory}->getOrCreateInstance());
+    method getInstance {instanceId} {
+        set sprite [[my jget animationFactorySpriteScaleUtil] createImage [my getImage] [[my jget animationFactoryInitializationVisitor] jget width] [[my jget animationFactoryInitializationVisitor] jget height] [[my jget scaleProperties] jget scaleWidth] [[my jget scaleProperties] jget scaleHeight]]
+        if {[expr {[expr {[[my jget animationFactoryInitializationVisitor] jget dx] != 0}] || [expr {[[my jget animationFactoryInitializationVisitor] jget dy] != 0}]}]} {
+            return [::AdjustedSpriteIndexedAnimation new $sprite [my getImage] [my jget basicColorArray] [[my jget animationFactoryInitializationVisitor] jget dx] [[my jget animationFactoryInitializationVisitor] jget dy] [[my jget animationBehaviorFactory] getOrCreateInstance]]
         } else {
-            return 'org::allbinary::animation::image::sprite::SpriteIndexedAnimation'->new($sprite, $self->getImage(), $self->{basicColorArray}, $self->{animationBehaviorFactory}->getOrCreateInstance());
+            return [::SpriteIndexedAnimation new $sprite [my getImage] [my jget basicColorArray] [[my jget animationBehaviorFactory] getOrCreateInstance]]
         }
+    }
+    
+
+    method getInstanceAnimation {animationInterface} {
+        return [my getInstance 0]
+    }
 }
 
-
-# throws Exception
-sub getInstanceAnimation {
-    my ($self, $animationInterface) = @_;
-        return $self->getInstance(0);
+namespace eval ::SpriteIndexedAnimationFactory {
+    proc createCWHDXY {image basicColorArray width height dx dy animationBehaviorFactory} {
+        return [::SpriteIndexedAnimationFactory new $image $basicColorArray [::PrimitiveIntUtil::getArrayInstance] $width $height $dx $dy $animationBehaviorFactory]
+    }
+    proc createCWH {image basicColorArray width height animationBehaviorFactory} {
+        set spriteIndexedAnimationFactory [::SpriteIndexedAnimationFactory new $image $basicColorArray [::PrimitiveIntUtil::getArrayInstance] $width $height 0 0 $animationBehaviorFactory]
+        $spriteIndexedAnimationFactory initHWH
+        return $spriteIndexedAnimationFactory
+    }
+    proc createWH {image width height animationBehaviorFactory} {
+        return [::SpriteIndexedAnimationFactory new $image [[::BasicColorUtil::getInstance] jget ZERO_ARRAY] [::PrimitiveIntUtil::getArrayInstance] $width $height 0 0 $animationBehaviorFactory]
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::game::Sprite ();
-use org::allbinary::AndroidUtil ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::image::BaseImageAnimationFactory ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorUtil ();
-use org::allbinary::image::sprite::AnimationFactorySpriteScaleUtil ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::animation::image::sprite::SpriteIndexedAnimation ();
-use org::allbinary::animation::image::sprite::AdjustedSpriteIndexedAnimation ();
-
-1;
 

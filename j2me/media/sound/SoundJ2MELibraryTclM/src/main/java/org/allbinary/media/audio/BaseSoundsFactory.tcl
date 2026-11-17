@@ -11,53 +11,45 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-package org::allbinary::media::audio::BaseSoundsFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::media::audio::SoundsFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{initialized} = 0;
+oo::class create ::BaseSoundsFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::BaseSoundsFactory {
+    method initFields_BaseSoundsFactory {} {
+        my jset initialized false
+        my jset initialized false
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_BaseSoundsFactory
+    }
+    
+
+    method init {} {
+    }
+    
+
+    method getSoundInterfaceArray {} {
+        return [jarray 0 {}]
+    }
+    
+
+    method setInitialized {initialized} {
+        my jset initialized $initialized
+    }
+    
+
+    method isInitialized {} {
+        return [my jget initialized]
+    }
 }
 
-
-sub init {
-    my ($self) = @_;
+namespace eval ::BaseSoundsFactory {
 }
 
-
-# throws Exception
-sub getSoundInterfaceArray {
-    my ($self) = @_;
-        return [(undef) x (0)];
-}
-
-
-sub setInitialized {
-    my ($self, $initialized) = @_;
-        $self->{initialized} = $initialized;
-}
-
-
-sub isInitialized {
-    my ($self) = @_;
-        return $self->{initialized};
-}
-
-use java::lang::Object ();
-use org::allbinary::media::audio::SoundsFactoryInterface ();
-
-1;
 

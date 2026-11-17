@@ -11,31 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::LaptopGameInputMapping;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::PCGameInputMapping';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::LaptopGameInputMapping {
+    superclass ::PCGameInputMapping
 }
 
+oo::define ::LaptopGameInputMapping {
+    method initFields_LaptopGameInputMapping {} {
+        return
+    }
 
-sub getDefault {
-    my ($self) = @_;
-        return 'org::allbinary::game::input::LaptopDefaultGameInputMapping'->new()->getInputMapping();
+    constructor {} {
+        next
+        my initFields_LaptopGameInputMapping
+    }
+    
+
+    method getDefault {} {
+        return [[::LaptopDefaultGameInputMapping new] getInputMapping]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::mapping::InputToGameKeyMapping ();
-use org::allbinary::game::input::PCGameInputMapping ();
-use org::allbinary::game::input::LaptopDefaultGameInputMapping ();
+namespace eval ::LaptopGameInputMapping {
+}
 
-1;
 

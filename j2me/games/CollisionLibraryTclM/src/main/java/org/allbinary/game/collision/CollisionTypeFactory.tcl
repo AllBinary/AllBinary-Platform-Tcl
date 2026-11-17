@@ -11,40 +11,53 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-package org::allbinary::game::collision::CollisionTypeFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::collision::CollisionTypeFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NONE} = 'org::allbinary::game::collision::CollisionType'->new("None");
-    $self->{DAMAGE} = 'org::allbinary::game::collision::CollisionType'->new("Damage");
-    $self->{PICKUP} = 'org::allbinary::game::collision::CollisionType'->new("Pickup");
-    $self->{COLLISION} = 'org::allbinary::game::collision::CollisionType'->new("Collision");
+oo::class create ::CollisionTypeFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::CollisionTypeFactory {
+    method initFields_CollisionTypeFactory {} {
+        my jset NONE {}
+        my jset DAMAGE {}
+        my jset PICKUP {}
+        my jset COLLISION {}
+        my jset NONE [::CollisionType new "None"]
+        my jset DAMAGE [::CollisionType new "Damage"]
+        my jset PICKUP [::CollisionType new "Pickup"]
+        my jset COLLISION [::CollisionType new "Collision"]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_CollisionTypeFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::collision::CollisionTypeFactory::SINGLETON;
+namespace eval ::CollisionTypeFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::CollisionTypeFactory new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::CollisionTypeFactory::staticGet_SINGLETON]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::collision::CollisionType ();
-
-1;
 

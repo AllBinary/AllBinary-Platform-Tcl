@@ -11,39 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::LockableFormPaintableFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::ItemPaintableFactory';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{lockedIndex} = undef;
+oo::class create ::LockableFormPaintableFactory {
+    superclass ::ItemPaintableFactory
 }
 
+oo::define ::LockableFormPaintableFactory {
+    method initFields_LockableFormPaintableFactory {} {
+        my jset lockedIndex 0
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $lockedIndex) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{lockedIndex} = $lockedIndex;
-    return $self;
+    constructor {lockedIndex} {
+        next
+        my initFields_LockableFormPaintableFactory
+        my jset lockedIndex $lockedIndex
+    }
+    
+
+    method getInstanceItemPaintable {paintableForm} {
+        return [::LockablePaintable new [my jget lockedIndex]]
+    }
 }
 
-
-# throws Exception
-sub getInstanceItemPaintable {
-    my ($self, $paintableForm) = @_;
-        return 'org::allbinary::graphics::form::LockablePaintable'->new($self->{lockedIndex});
+namespace eval ::LockableFormPaintableFactory {
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::form::ItemPaintableFactory ();
-use org::allbinary::graphics::form::LockablePaintable ();
-
-1;
 

@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.tracking
 
-# Java interface
-package org::allbinary::game::tracking::TrackingEventListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-# throws Exception
-sub onMovement {
-    my ($self, $trackingEvent) = @_;
-    die "abstract method onMovement";
+oo::class create ::TrackingEventListenerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::TrackingEventListenerInterface {
+    method initFields_TrackingEventListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onMovement {trackingEvent} {
+        error [jexception AbstractMethodError onMovement]
+    }
+}
+
+namespace eval ::TrackingEventListenerInterface {
+}
+
 

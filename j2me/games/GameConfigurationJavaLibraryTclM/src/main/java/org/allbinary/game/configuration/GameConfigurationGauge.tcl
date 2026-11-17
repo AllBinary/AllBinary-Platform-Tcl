@@ -11,25 +11,25 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
-package org::allbinary::game::configuration::GameConfigurationGauge;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'javax::microedition::lcdui::Gauge';
-
-
-
-sub new {
-    my ($class, $gameConfiguration) = @_;
-    my $self = $class->SUPER::new($gameConfiguration->getName(), $gameConfiguration->isModifiable(), int($gameConfiguration->getMaxValue()) - int($gameConfiguration->getMinValue()), int($gameConfiguration->getValue()) - int($gameConfiguration->getMinValue()));
-        # super(...) made $self above
-    return $self;
+oo::class create ::GameConfigurationGauge {
+    superclass ::Gauge
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Gauge ();
+oo::define ::GameConfigurationGauge {
+    method initFields_GameConfigurationGauge {} {
+        return
+    }
+    
 
-1;
+    constructor {gameConfiguration} {
+        next [$gameConfiguration getName] [[$gameConfiguration isModifiable] booleanValue] [expr {[[$gameConfiguration getMaxValue] intValue] - [[$gameConfiguration getMinValue] intValue]}] [expr {[[$gameConfiguration getValue] intValue] - [[$gameConfiguration getMinValue] intValue]}]
+        my initFields_GameConfigurationGauge
+    }
+}
+
+namespace eval ::GameConfigurationGauge {
+}
+
 

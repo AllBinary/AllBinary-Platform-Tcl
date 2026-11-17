@@ -11,59 +11,65 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io.file
 
-package org::allbinary::logic::io::file::FileFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::io::file::FileFactory'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::FileFactory {
+    superclass ::JObject
 }
 
+oo::define ::FileFactory {
+    method initFields_FileFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::io::file::FileFactory::instance;
-}
+    constructor {} {
+        next
+        my initFields_FileFactory
+    }
+    
+    
 
+    method getInstance {filePath} {
+        return [::AbFile::createAbFileFromRawPath $filePath]
+    }
+    
 
-# throws Exception
-# Java overloaded method: Perl keeps the last definition
-sub getInstance {
-    my ($self, $filePath) = @_;
-        return 'org::allbinary::logic::io::file::AbFile'->createAbFileFromRawPath($filePath);
-}
+    method getInstance {file childFilePath} {
+        return [::AbFile::createAbFileWithChild $file $childFilePath]
+    }
+    
 
-
-# throws Exception
-# Java overloaded method: Perl keeps the last definition
-sub getInstance {
-    my ($self, $file, $childFilePath) = @_;
-        return 'org::allbinary::logic::io::file::AbFile'->createAbFileWithChild($file, $childFilePath);
-}
-
-
-# throws Exception
-sub isFile {
-    my ($self, $path) = @_;
-        my $file = 'org::allbinary::logic::io::file::AbFile'->createAbFile($path);
-        if ($file->exists()) {
-            return 1;
+    method isFile {path} {
+        set file [::AbFile::createAbFile $path]
+        if {[$file exists]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::io::file::AbFile ();
+namespace eval ::FileFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::FileFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::FileFactory::staticGet_instance]
+    }
+}
 
-1;
 

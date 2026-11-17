@@ -11,15 +11,19 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-# Java interface
-package org::allbinary::animation::BasicAnimationInterfaceFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
+oo::class create ::BasicAnimationInterfaceFactoryInterface {
+    superclass ::JObject
+}
 
+oo::define ::BasicAnimationInterfaceFactoryInterface {
+    method initFields_BasicAnimationInterfaceFactoryInterface {} {
+        return
+    }
+}
 
+namespace eval ::BasicAnimationInterfaceFactoryInterface {
+}
 
-1;
 

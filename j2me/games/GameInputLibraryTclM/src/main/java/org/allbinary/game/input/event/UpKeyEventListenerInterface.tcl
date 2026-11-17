@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.event
 
-# Java interface
-package org::allbinary::game::input::event::UpKeyEventListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-# throws Exception
-sub onUpKeyEvent {
-    my ($self, $keyAsInteger) = @_;
-    die "abstract method onUpKeyEvent";
+oo::class create ::UpKeyEventListenerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::UpKeyEventListenerInterface {
+    method initFields_UpKeyEventListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onUpKeyEvent {keyAsInteger} {
+        error [jexception AbstractMethodError onUpKeyEvent]
+    }
+}
+
+namespace eval ::UpKeyEventListenerInterface {
+}
+
 

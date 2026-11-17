@@ -11,101 +11,90 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-package org::allbinary::game::layer::CollidableCompositeLayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::AllBinaryGameLayer','org::allbinary::game::collision::CollidableInterfaceCompositeInterface';
-
-tie our $NULL_COLLIDABLE_COMPOSITE_LAYER, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{collidableInferface} = 'org::allbinary::game::collision::CollidableNeverCollideBehaviorFactory'->getInstance()->createBehavior();
+oo::class create ::CollidableCompositeLayer {
+    superclass ::AllBinaryGameLayer
 }
 
+oo::define ::CollidableCompositeLayer {
+    method initFields_CollidableCompositeLayer {} {
+        my jset collidableInferface {}
+        my jset collidableInferface [[::CollidableNeverCollideBehaviorFactory::getInstance] createBehavior]
+        return
+    }
+    
+    
 
-sub getNullInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::layer::CollidableCompositeLayer::NULL_COLLIDABLE_COMPOSITE_LAYER == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::layer::CollidableCompositeLayer::NULL_COLLIDABLE_COMPOSITE_LAYER = 'org::allbinary::game::layer::CollidableCompositeLayer'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $org::allbinary::graphics::RectangleFactory::SINGLETON, $org::allbinary::view::ViewPositionBase::NULL_VIEW_POSITION, 'org::allbinary::game::collision::CollidableNeverCollideBehaviorFactory'->getInstance());
+    constructor {name layerInfo viewPosition collidableBaseBehaviorFactory} {
+        next $name $layerInfo $viewPosition
+        my initFields_CollidableCompositeLayer
+        if {[expr {$collidableBaseBehaviorFactory ne [::CollidableNeverCollideBehaviorFactory::getInstance]}]} {
+            my setCollidableInferface [$collidableBaseBehaviorFactory createBehavior]
         }
-        return $org::allbinary::game::layer::CollidableCompositeLayer::NULL_COLLIDABLE_COMPOSITE_LAYER;
+    }
+    
+
+    method getArtificialIntelligenceInterface {} {
+        ::ForcedLogUtil::log [[my jget commonStrings] jget NOT_IMPLEMENTED] [self]
+        return [::ArtificialIntelligence::getInstance]
+    }
+    
+
+    method getCollidableInferface {} {
+        return [my jget collidableInferface]
+    }
+    
+
+    method setCollidableInferface {collidableInferface} {
+        my jset collidableInferface $collidableInferface
+    }
+    
+
+    method implmentsCollidableInterface {} {
+        return true
+    }
+    
+
+    method toStringAppend {stringBuffer} {
+        set commonSeps [::CommonSeps::getInstance]
+        next $stringBuffer
+        $stringBuffer append [$commonSeps jget NEW_LINE]
+        $stringBuffer append [[my getCollidableInferface] toString]
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        my toStringAppend $stringBuffer
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub new {
-    my ($class, $name, $layerInfo, $viewPosition, $collidableBaseBehaviorFactory) = @_;
-    my $self = $class->SUPER::new($name, $layerInfo, $viewPosition);
-    _init_fields($self);
-        # super(...) made $self above
-        if ($collidableBaseBehaviorFactory != 'org::allbinary::game::collision::CollidableNeverCollideBehaviorFactory'->getInstance()) {
-            $self->setCollidableInferface($collidableBaseBehaviorFactory->createBehavior());
+namespace eval ::CollidableCompositeLayer {
+    variable NULL_COLLIDABLE_COMPOSITE_LAYERValue {}
+    variable NULL_COLLIDABLE_COMPOSITE_LAYERSet 0
+    proc staticGet_NULL_COLLIDABLE_COMPOSITE_LAYER {} {
+        variable NULL_COLLIDABLE_COMPOSITE_LAYERValue
+        variable NULL_COLLIDABLE_COMPOSITE_LAYERSet
+        if {!$NULL_COLLIDABLE_COMPOSITE_LAYERSet} {
+            set NULL_COLLIDABLE_COMPOSITE_LAYERSet 1
+            set NULL_COLLIDABLE_COMPOSITE_LAYERValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-    return $self;
+        return $NULL_COLLIDABLE_COMPOSITE_LAYERValue
+    }
+    proc staticSet_NULL_COLLIDABLE_COMPOSITE_LAYER {value} {
+        variable NULL_COLLIDABLE_COMPOSITE_LAYERValue
+        variable NULL_COLLIDABLE_COMPOSITE_LAYERSet
+        set NULL_COLLIDABLE_COMPOSITE_LAYERSet 1
+        set NULL_COLLIDABLE_COMPOSITE_LAYERValue $value
+    }
+    proc getNullInstance {} {
+        if {[expr {[::CollidableCompositeLayer::staticGet_NULL_COLLIDABLE_COMPOSITE_LAYER] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::CollidableCompositeLayer::staticSet_NULL_COLLIDABLE_COMPOSITE_LAYER [::CollidableCompositeLayer new [[::StringUtil::getInstance] jget EMPTY_STRING] [::RectangleFactory::staticGet_SINGLETON] [::ViewPositionBase::staticGet_NULL_VIEW_POSITION] [::CollidableNeverCollideBehaviorFactory::getInstance]]
+        }
+        return [::CollidableCompositeLayer::staticGet_NULL_COLLIDABLE_COMPOSITE_LAYER]
+    }
 }
 
-
-sub getArtificialIntelligenceInterface {
-    my ($self) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log($self->{commonStrings}->{NOT_IMPLEMENTED}, $self);
-        return 'org::allbinary::ai::ArtificialIntelligence'->getInstance();
-}
-
-
-sub getCollidableInferface {
-    my ($self) = @_;
-        return $self->{collidableInferface};
-}
-
-
-sub setCollidableInferface {
-    my ($self, $collidableInferface) = @_;
-        $self->{collidableInferface} = $collidableInferface;
-}
-
-
-sub implmentsCollidableInterface {
-    my ($self) = @_;
-        return 1;
-}
-
-
-sub toStringAppend {
-    my ($self, $stringBuffer) = @_;
-        my $commonSeps = 'org::allbinary::string::CommonSeps'->getInstance();
-        $self->SUPER::toStringAppend($stringBuffer);
-        $stringBuffer->append($commonSeps->{NEW_LINE});
-        $stringBuffer->append($self->getCollidableInferface()->toString());
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $self->toStringAppend($stringBuffer);
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::ai::ArtificialIntelligence ();
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-use org::allbinary::game::collision::CollidableBaseBehavior ();
-use org::allbinary::game::collision::CollidableBaseBehaviorFactory ();
-use org::allbinary::game::collision::CollidableInterfaceCompositeInterface ();
-use org::allbinary::game::collision::CollidableNeverCollideBehaviorFactory ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::RectangleFactory ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::view::ViewPositionBase ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::game::layer::AllBinaryGameLayer ();
-
-1;
 

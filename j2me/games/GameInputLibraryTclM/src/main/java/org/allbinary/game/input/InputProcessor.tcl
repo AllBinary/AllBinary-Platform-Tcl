@@ -11,40 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::InputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gameInputStrings} = 'org::allbinary::game::input::GameInputStrings'->getInstance();
+oo::class create ::InputProcessor {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::InputProcessor {
+    method initFields_InputProcessor {} {
+        my jset gameInputStrings {}
+        my jset gameInputStrings [::GameInputStrings::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_InputProcessor
+    }
+    
+
+    method keyPressedByDevice {keyCode deviceId} {
+    }
+    
+
+    method keyReleasedByDevice {canvas keyCode deviceId} {
+    }
 }
 
-
-sub keyPressedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
+namespace eval ::InputProcessor {
 }
 
-
-sub keyReleasedByDevice {
-    my ($self, $canvas, $keyCode, $deviceId) = @_;
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::game::input::GameInputStrings ();
-
-1;
 

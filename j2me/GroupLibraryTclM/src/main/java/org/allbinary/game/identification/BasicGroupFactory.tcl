@@ -11,50 +11,68 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.identification
 
-package org::allbinary::game::identification::BasicGroupFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NAME} = "GROUP_NAME";
-    $self->{NO_SUCH_GROUP} = "No Such Group: ";
-    $self->{GOOD} = 'org::allbinary::game::identification::Group'->new("Good Guys", ((int(0) + 32768) % 65536 - 32768));
-    $self->{ENEMY} = 'org::allbinary::game::identification::Group'->new("Bad Guys", ((int(1) + 32768) % 65536 - 32768));
-    $self->{ENEMY_ON_LEVEL} = 'org::allbinary::game::identification::Group'->new("Bad Guys on Level", ((int(2) + 32768) % 65536 - 32768));
-    $self->{NONE} = 'org::allbinary::game::identification::Group'->new("Not On A Team", ((int(3) + 32768) % 65536 - 32768));
-    $self->{GOOD_ARRAY} = [$self->{GOOD}];
-    $self->{ENEMY_ARRAY} = [$self->{ENEMY}];
-    $self->{ENEMY_ON_LEVEL_ARRAY} = [$self->{ENEMY}, $self->{ENEMY_ON_LEVEL}];
-    $self->{NONE_ARRAY} = [$self->{NONE}];
+oo::class create ::BasicGroupFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::BasicGroupFactory {
+    method initFields_BasicGroupFactory {} {
+        my jset NAME {}
+        my jset NO_SUCH_GROUP {}
+        my jset GOOD {}
+        my jset ENEMY {}
+        my jset ENEMY_ON_LEVEL {}
+        my jset NONE {}
+        my jset GOOD_ARRAY {}
+        my jset ENEMY_ARRAY {}
+        my jset ENEMY_ON_LEVEL_ARRAY {}
+        my jset NONE_ARRAY {}
+        my jset NAME "GROUP_NAME"
+        my jset NO_SUCH_GROUP "No Such Group: "
+        my jset GOOD [::Group new "Good Guys" [jshort 0]]
+        my jset ENEMY [::Group new "Bad Guys" [jshort 1]]
+        my jset ENEMY_ON_LEVEL [::Group new "Bad Guys on Level" [jshort 2]]
+        my jset NONE [::Group new "Not On A Team" [jshort 3]]
+        my jset GOOD_ARRAY [jarrayfrom [list [my jget GOOD]]]
+        my jset ENEMY_ARRAY [jarrayfrom [list [my jget ENEMY]]]
+        my jset ENEMY_ON_LEVEL_ARRAY [jarrayfrom [list [my jget ENEMY] [my jget ENEMY_ON_LEVEL]]]
+        my jset NONE_ARRAY [jarrayfrom [list [my jget NONE]]]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_BasicGroupFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::identification::BasicGroupFactory::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::identification::BasicGroupFactory::instance = 'org::allbinary::game::identification::BasicGroupFactory'->new();
+namespace eval ::BasicGroupFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::game::identification::BasicGroupFactory::instance;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::BasicGroupFactory::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::BasicGroupFactory::staticSet_instance [::BasicGroupFactory new]
+        }
+        return [::BasicGroupFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::game::identification::Group ();
-
-1;
 

@@ -11,91 +11,80 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-package org::allbinary::graphics::paint::SimpleTextPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::graphics::paint::Paintable','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{displayInfoSingleton} = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-    $self->{updateMyFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-    $self->{text} = undef;
-    $self->{basicColor} = undef;
-    $self->{topScoresWidth} = 0;
-    $self->{fontHeight} = 0;
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
+oo::class create ::SimpleTextPaintable {
+    superclass ::Paintable
 }
 
+oo::define ::SimpleTextPaintable {
+    method initFields_SimpleTextPaintable {} {
+        my jset displayInfoSingleton {}
+        my jset updateMyFontProcessor {}
+        my jset myFontProcessor {}
+        my jset text {}
+        my jset basicColor {}
+        my jset topScoresWidth 0
+        my jset fontHeight 0
+        my jset anchor 0
+        my jset displayInfoSingleton [::DisplayInfoSingleton::getInstance]
+        my jset updateMyFontProcessor [::UpdateMyFontProcessor new [self]]
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+        
+        
+        my jset topScoresWidth 0
+        my jset fontHeight 0
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        return
+    }
+    
 
-sub new {
-    my ($class, $text, $basicColor) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{text} = $text;
-        $self->{basicColor} = $basicColor;
-    return $self;
+    constructor {text basicColor} {
+        next
+        my initFields_SimpleTextPaintable
+        my jset text $text
+        my jset basicColor $basicColor
+    }
+    
+
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        my jset topScoresWidth ([expr {[$font stringWidth [my jget text]] >> 1}])
+        my jset fontHeight [$font getHeight]
+        my jset myFontProcessor [::MyFontProcessor::getInstance]
+    }
+    
+
+    method paint {graphics} {
+        [my jget myFontProcessor] process $graphics
+        set width [[[my jget displayInfoSingleton] getLast] get [[my jget displayInfoSingleton] jget WIDTH]]
+        $graphics setColor [[my getBasicColorP] intValue]
+        $graphics drawString [my jget text] [jint [expr {([expr {$width >> 1}]) - [my jget topScoresWidth]}]] [my jget fontHeight] [my jget anchor]
+    }
+    
+
+    method setBasicColorP {basicColor} {
+        my jset basicColor $basicColor
+    }
+    
+
+    method getBasicColorP {} {
+        return [my jget basicColor]
+    }
+    
+
+    method setText {text} {
+        my jset text $text
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+    }
+    
+
+    method getText {} {
+        return [my jget text]
+    }
 }
 
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->{topScoresWidth} = (POSIX::floor(($font->stringWidth($self->{text})) / (2 ** (1))));
-        $self->{fontHeight} = $font->getHeight();
-        $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
+namespace eval ::SimpleTextPaintable {
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        my $width = $self->{displayInfoSingleton}->getLast()->[$self->{displayInfoSingleton}->{WIDTH}];
-        $graphics->setColor(int($self->getBasicColorP()));
-        $graphics->drawString($self->{text}, (POSIX::floor(($width) / (2 ** (1)))) - $self->{topScoresWidth}, $self->{fontHeight}, $self->{anchor});
-}
-
-
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
-        $self->{basicColor} = $basicColor;
-}
-
-
-sub getBasicColorP {
-    my ($self) = @_;
-        return $self->{basicColor};
-}
-
-
-sub setText {
-    my ($self, $text) = @_;
-        $self->{text} = $text;
-        $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-}
-
-
-sub getText {
-    my ($self) = @_;
-        return $self->{text};
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::graphics::paint::Paintable ();
-
-1;
 

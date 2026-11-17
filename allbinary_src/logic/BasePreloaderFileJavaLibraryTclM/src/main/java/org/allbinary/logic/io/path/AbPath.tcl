@@ -11,173 +11,174 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io.path
 
-package org::allbinary::logic::io::path::AbPath;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $NETWORK_SEP = ":/";
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonSeps} = 'org::allbinary::string::CommonSeps'->getInstance();
-    $self->{abPathData} = 'org::allbinary::logic::io::path::AbPathData'->getInstance();
-    $self->{abPathUtil} = 'org::allbinary::logic::io::path::PathUtil'->getInstance();
-    $self->{EMPTY_STRING} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{schema} = $self->{EMPTY_STRING};
-    $self->{path} = $self->{EMPTY_STRING};
-    $self->{nameP} = $self->{EMPTY_STRING};
-    $self->{hasSchemaP} = 0;
-    $self->{numberOfSeps} = 0;
+oo::class create ::AbPath {
+    superclass ::JObject
 }
 
+oo::define ::AbPath {
+    method initFields_AbPath {} {
+        my jset commonSeps {}
+        my jset abPathData {}
+        my jset abPathUtil {}
+        my jset EMPTY_STRING {}
+        my jset schema {}
+        my jset path {}
+        my jset nameP {}
+        my jset hasSchemaP false
+        my jset numberOfSeps 0
+        my jset commonSeps [::CommonSeps::getInstance]
+        my jset abPathData [::AbPathData::getInstance]
+        my jset abPathUtil [::PathUtil::getInstance]
+        my jset EMPTY_STRING [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset schema [my jget EMPTY_STRING]
+        my jset path [my jget EMPTY_STRING]
+        my jset nameP [my jget EMPTY_STRING]
+        my jset hasSchemaP false
+        my jset numberOfSeps 0
+        return
+    }
+    
+    
 
-sub createAbPath {
-    my ($class) = @_;
-        try {
-            my $EMPTY_STRING = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-            return 'org::allbinary::logic::io::path::AbPath'->new($EMPTY_STRING, $EMPTY_STRING);
-        } catch ($ex) {
-            die ("RuntimeException");
-        }
-}
-
-
-sub new {
-    my ($class, $aPath, $name) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $stringValidationUtil = 'org::allbinary::logic::string::StringValidationUtil'->getInstance();
-        if (!$stringValidationUtil->isEmpty($aPath)) {
-            $self->{schema} = $self->getSchema($aPath);
-            $self->{nameP} = $name;
-            $self->{path} = $self->{abPathUtil}->adjustEnd($self->{abPathUtil}->adjust($self->getPathFromPath($aPath)));
+    constructor {aPath name} {
+        next
+        my initFields_AbPath
+        set stringValidationUtil [::StringValidationUtil::getInstance]
+        if {[expr {![$stringValidationUtil isEmpty $aPath]}]} {
+            my jset schema [my getSchema $aPath]
+            my jset nameP $name
+            my jset path [[my jget abPathUtil] adjustEnd [[my jget abPathUtil] adjust [my getPathFromPath $aPath]]]
         } else {
-            $self->init();
-            if (!$stringValidationUtil->isEmpty($name)) {
-                $self->{nameP} = $name;
+            my init
+            if {[expr {![$stringValidationUtil isEmpty $name]}]} {
+                my jset nameP $name
             }
         }
-    return $self;
-}
+    }
+    
 
+    method init {} {
+        my jset schema [my jget EMPTY_STRING]
+        my setPath [[my jget abPathData] jget SEPARATOR]
+        my jset nameP [my jget EMPTY_STRING]
+    }
+    
 
-sub init {
-    my ($self) = @_;
-        $self->{schema} = $self->{EMPTY_STRING};
-        $self->setPath($self->{abPathData}->{SEPARATOR});
-        $self->{nameP} = $self->{EMPTY_STRING};
-}
-
-
-sub getSchema {
-    my ($self, $aPath) = @_;
-        my $beginIndex = index($aPath, $self->{commonSeps}->{COLON});
-        if ($beginIndex >= 0) {
-            $self->{hasSchemaP} = 1;
-            return substr($aPath, 0, ($beginIndex) - (0));
+    method getSchema {aPath} {
+        set beginIndex [string first [[my jget commonSeps] jget COLON] $aPath]
+        if {[expr {$beginIndex >= 0}]} {
+            my jset hasSchemaP true
+            return [jsubstring $aPath 0 $beginIndex]
         }
-        $self->{hasSchemaP} = 0;
-        return $self->{EMPTY_STRING};
-}
+        my jset hasSchemaP false
+        return [my jget EMPTY_STRING]
+    }
+    
 
+    method hasSchema {} {
+        return [my jget hasSchemaP]
+    }
+    
 
-sub hasSchema {
-    my ($self) = @_;
-        return $self->{hasSchemaP};
-}
-
-
-# throws Exception
-sub getPathFromPath {
-    my ($self, $aPath) = @_;
-        my $filePathData = 'org::allbinary::logic::io::file::FilePathData'->getInstance();
-        my $tempPath = $aPath;
-        if (!$self->hasSchema()) {
-            $tempPath = $self->{abPathUtil}->adjustStart($tempPath);
+    method getPathFromPath {aPath} {
+        set filePathData [::FilePathData::getInstance]
+        set tempPath $aPath
+        if {[expr {![my hasSchema]}]} {
+            set tempPath [[my jget abPathUtil] adjustStart $tempPath]
         } else {
-            my $beginIndex = index($tempPath, $self->{commonSeps}->{COLON});
-            if ($beginIndex >= 0) {
-                $beginIndex++;
-                while (substr($tempPath, $beginIndex, 1) == $self->{abPathData}->{SEPARATORCHAR} || substr($tempPath, $beginIndex, 1) == $filePathData->{SEPARATORCHAR}) {
-                    $beginIndex++;
-                    $self->{numberOfSeps}++;
-                    if ($self->{numberOfSeps} > 2) {
-                        die ("Should Not Have More Than Two Seps");
+            set beginIndex [string first [[my jget commonSeps] jget COLON] $tempPath]
+            if {[expr {$beginIndex >= 0}]} {
+                jpostincr beginIndex 1
+                while {[expr {[expr {[scan [string index $tempPath $beginIndex] %c] == [[my jget abPathData] jget SEPARATORCHAR]}] || [expr {[scan [string index $tempPath $beginIndex] %c] == [$filePathData jget SEPARATORCHAR]}]}]} {
+                    jpostincr beginIndex 1
+                    my jpostinc numberOfSeps 1
+                    if {[expr {[my jget numberOfSeps] > 2}]} {
+                        error [jexception Exception "Should Not Have More Than Two Seps"]
                     }
                 }
-                $tempPath = substr($tempPath, $beginIndex, (length($tempPath)) - ($beginIndex));
+                set tempPath [jsubstring $tempPath $beginIndex [string length $tempPath]]
             }
         }
-        return $tempPath;
-}
+        return $tempPath
+    }
+    
 
+    method setName {name} {
+        my jset nameP $name
+    }
+    
 
-sub setName {
-    my ($self, $name) = @_;
-        $self->{nameP} = $name;
-}
+    method getName {} {
+        return [my jget nameP]
+    }
+    
 
-
-sub getName {
-    my ($self) = @_;
-        return $self->{nameP};
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        if ($self->hasSchema()) {
-            $stringBuffer->append($self->{schema});
-            $stringBuffer->append($org::allbinary::logic::io::path::AbPath::NETWORK_SEP);
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        if {[my hasSchema]} {
+            $stringBuffer append [my jget schema]
+            $stringBuffer append [::AbPath::staticGet_NETWORK_SEP]
         }
-        $stringBuffer->append($self->getPath());
-        $stringBuffer->append($self->{nameP});
-        return $stringBuffer->toString();
-}
+        $stringBuffer append [my getPath]
+        $stringBuffer append [my jget nameP]
+        return [$stringBuffer toString]
+    }
+    
 
-
-sub toFileSystemString {
-    my ($self) = @_;
-        if ($self->hasSchema()) {
-            my $filePathData = 'org::allbinary::logic::io::file::FilePathData'->getInstance();
-            my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-            $stringBuffer->append($self->{schema});
-            $stringBuffer->append($self->{commonSeps}->{COLON});
-            $stringBuffer->append($filePathData->{PATH_START});
-            $stringBuffer->append('org::allbinary::logic::io::file::FilePathUtil'->adjust($self->getPath()));
-            $stringBuffer->append($self->{nameP});
-            return $stringBuffer->toString();
+    method toFileSystemString {} {
+        if {[my hasSchema]} {
+            set filePathData [::FilePathData::getInstance]
+            set stringBuffer [::StringMaker new]
+            $stringBuffer append [my jget schema]
+            $stringBuffer append [[my jget commonSeps] jget COLON]
+            $stringBuffer append [$filePathData jget PATH_START]
+            $stringBuffer append [::FilePathUtil::adjust [my getPath]]
+            $stringBuffer append [my jget nameP]
+            return [$stringBuffer toString]
         } else {
-            return 'org::allbinary::logic::io::file::FilePathUtil'->adjust($self->getPath()) . $self->{nameP};
+            return [string cat [jstr [::FilePathUtil::adjust [my getPath]]] [my jget nameP]]
         }
+    }
+    
+
+    method getPath {} {
+        return [my jget path]
+    }
+    
+
+    method setPath {path} {
+        my jset path $path
+    }
 }
 
-
-sub getPath {
-    my ($self) = @_;
-        return $self->{path};
+namespace eval ::AbPath {
+    variable NETWORK_SEPValue {}
+    variable NETWORK_SEPSet 0
+    proc staticGet_NETWORK_SEP {} {
+        variable NETWORK_SEPValue
+        variable NETWORK_SEPSet
+        if {!$NETWORK_SEPSet} {
+            set NETWORK_SEPSet 1
+            set NETWORK_SEPValue ":/"
+        }
+        return $NETWORK_SEPValue
+    }
+    proc staticSet_NETWORK_SEP {value} {
+        variable NETWORK_SEPValue
+        variable NETWORK_SEPSet
+        set NETWORK_SEPSet 1
+        set NETWORK_SEPValue $value
+    }
+    proc createAbPath {} {
+        try {
+            set EMPTY_STRING [[::StringUtil::getInstance] jget EMPTY_STRING]
+            return [::AbPath new $EMPTY_STRING $EMPTY_STRING]
+        } on error {ex} {
+            error [jexception RuntimeException {}]
+        }
+    }
 }
 
-
-sub setPath {
-    my ($self, $path) = @_;
-        $self->{path} = $path;
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::io::file::FilePathData ();
-use org::allbinary::logic::io::file::FilePathUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::string::StringValidationUtil ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::logic::io::path::AbPathData ();
-use org::allbinary::logic::io::path::PathUtil ();
-
-1;
 

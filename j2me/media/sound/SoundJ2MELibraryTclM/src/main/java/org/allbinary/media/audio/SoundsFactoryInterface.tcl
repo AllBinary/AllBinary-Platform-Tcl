@@ -11,40 +11,39 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-# Java interface
-package org::allbinary::media::audio::SoundsFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub init {
-    my ($self) = @_;
-    die "abstract method init";
+oo::class create ::SoundsFactoryInterface {
+    superclass ::JObject
 }
 
+oo::define ::SoundsFactoryInterface {
+    method initFields_SoundsFactoryInterface {} {
+        return
+    }
+    
 
-# throws Exception
-sub getSoundInterfaceArray {
-    my ($self) = @_;
-    die "abstract method getSoundInterfaceArray";
+    method init {} {
+        error [jexception AbstractMethodError init]
+    }
+    
+
+    method getSoundInterfaceArray {} {
+        error [jexception AbstractMethodError getSoundInterfaceArray]
+    }
+    
+
+    method setInitialized {initialized} {
+        error [jexception AbstractMethodError setInitialized]
+    }
+    
+
+    method isInitialized {} {
+        error [jexception AbstractMethodError isInitialized]
+    }
 }
 
-
-sub setInitialized {
-    my ($self, $initialized) = @_;
-    die "abstract method setInitialized";
+namespace eval ::SoundsFactoryInterface {
 }
 
-
-sub isInitialized {
-    my ($self) = @_;
-    die "abstract method isInitialized";
-}
-
-
-1;
 

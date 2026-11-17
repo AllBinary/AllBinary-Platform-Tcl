@@ -11,32 +11,46 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package javax.microedition.lcdui
 
 #PlatformNullImageJavaLibrary
-package javax::microedition::lcdui::PreLoadPlatformImage;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'javax::microedition::lcdui::PlatformImage';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'javax::microedition::lcdui::PreLoadPlatformImage'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::PreLoadPlatformImage {
+    superclass ::PlatformImage
 }
 
+oo::define ::PreLoadPlatformImage {
+    method initFields_PreLoadPlatformImage {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $javax::microedition::lcdui::PreLoadPlatformImage::instance;
+    constructor {} {
+        next
+        my initFields_PreLoadPlatformImage
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::PlatformImage ();
+namespace eval ::PreLoadPlatformImage {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::PreLoadPlatformImage new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::PreLoadPlatformImage::staticGet_instance]
+    }
+}
 
-1;
 

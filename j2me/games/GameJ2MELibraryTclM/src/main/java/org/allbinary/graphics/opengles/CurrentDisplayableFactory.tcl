@@ -11,174 +11,163 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles
 
-package org::allbinary::graphics::opengles::CurrentDisplayableFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Scalar::Util ();
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::opengles::CurrentDisplayableFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{canvasStrings} = 'org::allbinary::graphics::displayable::CanvasStrings'->getInstance();
-    $self->{stringUtil} = 'org::allbinary::logic::string::StringUtil'->getInstance();
-    $self->{SET_DISPLAYABLE} = "setDisplayable";
-    $self->{SET_RUNNABLE} = "setRunnable";
-    $self->{CLEAR_RUNNABLE} = "clearRunnable";
-    $self->{SET_USED_RUNNABLE} = "setUsedRunnable";
-    $self->{RUNNABLE} = "Runnable: ";
-    $self->{RUNNABLE_WAS_ALREADY_IN_USE} = "Runnable was already in use: ";
-    $self->{DEFAULT_CHILD_NAME_LIST} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{displayable} = 'org::allbinary::game::displayable::canvas::NullDisplayable'->getInstance();
-    $self->{openGlReadydisplayable} = 'org::allbinary::game::displayable::canvas::NullDisplayable'->getInstance();
-    $self->{runnable} = 'org::allbinary::game::displayable::canvas::NullWaitGameRunnable'->getInstance();
-    $self->{usedRunnable} = 'org::allbinary::game::displayable::canvas::NullWaitGameRunnable'->getInstance();
+oo::class create ::CurrentDisplayableFactory {
+    superclass ::JObject
 }
 
+oo::define ::CurrentDisplayableFactory {
+    method initFields_CurrentDisplayableFactory {} {
+        my jset commonStrings {}
+        my jset canvasStrings {}
+        my jset stringUtil {}
+        my jset SET_DISPLAYABLE {}
+        my jset SET_RUNNABLE {}
+        my jset CLEAR_RUNNABLE {}
+        my jset SET_USED_RUNNABLE {}
+        my jset RUNNABLE {}
+        my jset RUNNABLE_WAS_ALREADY_IN_USE {}
+        my jset DEFAULT_CHILD_NAME_LIST {}
+        my jset displayable {}
+        my jset openGlReadydisplayable {}
+        my jset runnable {}
+        my jset usedRunnable {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset canvasStrings [::CanvasStrings::getInstance]
+        my jset stringUtil [::StringUtil::getInstance]
+        my jset SET_DISPLAYABLE "setDisplayable"
+        my jset SET_RUNNABLE "setRunnable"
+        my jset CLEAR_RUNNABLE "clearRunnable"
+        my jset SET_USED_RUNNABLE "setUsedRunnable"
+        my jset RUNNABLE "Runnable: "
+        my jset RUNNABLE_WAS_ALREADY_IN_USE "Runnable was already in use: "
+        my jset DEFAULT_CHILD_NAME_LIST [::BasicArrayListD new]
+        my jset displayable [::NullDisplayable::getInstance]
+        my jset openGlReadydisplayable [::NullDisplayable::getInstance]
+        my jset runnable [::NullWaitGameRunnable::getInstance]
+        my jset usedRunnable [::NullWaitGameRunnable::getInstance]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::opengles::CurrentDisplayableFactory::instance;
-}
+    constructor {} {
+        next
+        my initFields_CurrentDisplayableFactory
+        [my jget DEFAULT_CHILD_NAME_LIST] add [[my jget canvasStrings] jget ABOUT]
+        [my jget DEFAULT_CHILD_NAME_LIST] add [[my jget canvasStrings] jget OPTIONS]
+        [my jget DEFAULT_CHILD_NAME_LIST] add [::GameInputMappingCanvas::staticGet_NAME]
+        [my jget DEFAULT_CHILD_NAME_LIST] add [::GameInputMappingInstructionsCanvas::staticGet_NAME]
+        [my jget DEFAULT_CHILD_NAME_LIST] add [::HighScoresCanvas::staticGet_NAME]
+    }
+    
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{DEFAULT_CHILD_NAME_LIST}->add($self->{canvasStrings}->{ABOUT});
-        $self->{DEFAULT_CHILD_NAME_LIST}->add($self->{canvasStrings}->{OPTIONS});
-        $self->{DEFAULT_CHILD_NAME_LIST}->add($org::allbinary::game::displayable::canvas::GameInputMappingCanvas::NAME);
-        $self->{DEFAULT_CHILD_NAME_LIST}->add($org::allbinary::game::displayable::canvas::GameInputMappingInstructionsCanvas::NAME);
-        $self->{DEFAULT_CHILD_NAME_LIST}->add($org::allbinary::game::score::displayable::HighScoresCanvas::NAME);
-    return $self;
-}
-
-
-sub setMyCanvas {
-    my ($self, $displayable) = @_;
-        if ((Scalar::Util::blessed($self->{displayable}) && $self->{displayable}->isa('org::allbinary::graphics::displayable::MyCanvas'))) {
-            if ($displayable->hasChild($self->{displayable})) {
-                'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append("Child Displayable is already set for: ")->append($self->{stringUtil}->toString($displayable))->toString(), $self, $self->{SET_DISPLAYABLE});
-                return;
+    method setMyCanvas {displayable} {
+        if {[jinstanceof [my jget displayable] ::MyCanvas]} {
+            if {[$displayable hasChild [my jget displayable]]} {
+                ::PreLogUtil::put [[[[::StringMaker new] append "Child Displayable is already set for: "] append [[my jget stringUtil] toString1 $displayable]] toString] [self] [my jget SET_DISPLAYABLE]
+                return
             }
         }
-        $self->setDisplayable($displayable);
-}
+        my setDisplayable $displayable
+    }
+    
 
+    method setDisplayable {displayable} {
+        my jset displayable $displayable
+        my setOpenGlReadydisplayable $displayable
+    }
+    
 
-sub setDisplayable {
-    my ($self, $displayable) = @_;
-        $self->{displayable} = $displayable;
-        $self->setOpenGlReadydisplayable($displayable);
-}
+    method setOpenGlReadydisplayable {openGlReadydisplayable} {
+        my jset openGlReadydisplayable $openGlReadydisplayable
+        my update
+    }
+    
 
+    method getOpenGlReadydisplayable {} {
+        return [my jget openGlReadydisplayable]
+    }
+    
 
-sub setOpenGlReadydisplayable {
-    my ($self, $openGlReadydisplayable) = @_;
-        $self->{openGlReadydisplayable} = $openGlReadydisplayable;
-        $self->update();
-}
-
-
-sub getOpenGlReadydisplayable {
-    my ($self) = @_;
-        return $self->{openGlReadydisplayable};
-}
-
-
-sub setRunnable {
-    my ($self, $runnable) = @_;
-        'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append($self->{RUNNABLE})->append($self->{stringUtil}->toString($runnable))->toString(), $self, $self->{SET_RUNNABLE});
-        $self->{runnable} = $runnable;
-        if ($self->{usedRunnable} != $self->{runnable}) {
-            $self->update();
+    method setRunnable {runnable} {
+        ::PreLogUtil::put [[[[::StringMaker new] append [my jget RUNNABLE]] append [[my jget stringUtil] toString1 $runnable]] toString] [self] [my jget SET_RUNNABLE]
+        my jset runnable $runnable
+        if {[expr {[my jget usedRunnable] ne [my jget runnable]}]} {
+            my update
         } else {
-            'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append($self->{RUNNABLE_WAS_ALREADY_IN_USE})->append($self->{stringUtil}->toString($runnable))->toString(), $self, $self->{SET_RUNNABLE});
+            ::PreLogUtil::put [[[[::StringMaker new] append [my jget RUNNABLE_WAS_ALREADY_IN_USE]] append [[my jget stringUtil] toString1 $runnable]] toString] [self] [my jget SET_RUNNABLE]
         }
-}
+    }
+    
 
+    method clearRunnable {} {
+        ::PreLogUtil::put [[[[::StringMaker new] append [my jget RUNNABLE]] append [[my jget stringUtil] toString1 [::NullRunnable::getInstance]]] toString] [self] [my jget CLEAR_RUNNABLE]
+        my setUsedRunnable [::NullWaitGameRunnable::getInstance]
+    }
+    
 
-sub clearRunnable {
-    my ($self) = @_;
-        'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append($self->{RUNNABLE})->append($self->{stringUtil}->toString('org::allbinary::thread::NullRunnable'->getInstance()))->toString(), $self, $self->{CLEAR_RUNNABLE});
-        $self->setUsedRunnable('org::allbinary::game::displayable::canvas::NullWaitGameRunnable'->getInstance());
-}
-
-
-sub update {
-    my ($self) = @_;
-        {; # synchronized ($self)
-            my $commonSeps = 'org::allbinary::string::CommonSeps'->getInstance();
-            my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-            my $stringMaker = 'org::allbinary::logic::string::StringMaker'->new();
-            $stringMaker->append($self->{stringUtil}->toString($self->{openGlReadydisplayable}));
-            if ($org::allbinary::game::layer::SWTUtil::isSWT && !$features->isDefault('org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance()->{OPENGL})) {
-                'org::allbinary::logic::communication::log::PreLogUtil'->put($stringMaker->append($commonSeps->{SPACE})->append($org::allbinary::game::layer::SWTUtil::SWT)->append($commonSeps->{SPACE})->append($self->{RUNNABLE})->append($self->{stringUtil}->toString('org::allbinary::thread::NullRunnable'->getInstance()))->toString(), $self, $self->{commonStrings}->{UPDATE});
-                $self->setUsedRunnable('org::allbinary::game::displayable::canvas::NullWaitGameRunnable'->getInstance());
-            } elsif ('org::allbinary::J2MEUtil'->isHTML()) {
-                'org::allbinary::logic::communication::log::PreLogUtil'->put($stringMaker->append($commonSeps->{SPACE})->append('org::allbinary::graphics::GraphicsStrings'->getInstance()->{HTML})->append($commonSeps->{SPACE})->append($self->{RUNNABLE})->append($self->{stringUtil}->toString($self->{runnable}))->toString(), $self, $self->{commonStrings}->{UPDATE});
-                $self->setUsedRunnable($self->{runnable});
-            } elsif ((Scalar::Util::blessed($self->{openGlReadydisplayable}) && $self->{openGlReadydisplayable}->isa('org::allbinary::game::displayable::canvas::DemoCanvas')) || (Scalar::Util::blessed($self->{openGlReadydisplayable}) && $self->{openGlReadydisplayable}->isa('org::allbinary::game::displayable::canvas::AllBinaryGameCanvas')) || $features->isDefault('org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance()->{OPENGL})) {
-                'org::allbinary::logic::communication::log::PreLogUtil'->put($stringMaker->append($commonSeps->{SPACE})->append('org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance()->{OPENGL}->toString())->append($commonSeps->{SPACE})->append($self->{RUNNABLE})->append($self->{stringUtil}->toString($self->{runnable}))->toString(), $self, $self->{commonStrings}->{UPDATE});
-                $self->setUsedRunnable($self->{runnable});
+    method update {} {
+        if {1} {
+            set commonSeps [::CommonSeps::getInstance]
+            set features [::Features::getInstance]
+            set stringMaker [::StringMaker new]
+            $stringMaker append [[my jget stringUtil] toString1 [my jget openGlReadydisplayable]]
+            if {[expr {[::SWTUtil::staticGet_isSWT] && [expr {![$features isDefault [[::OpenGLFeatureFactory::getInstance] jget OPENGL]]}]}]} {
+                ::PreLogUtil::put [[[[[[$stringMaker append [$commonSeps jget SPACE]] append [::SWTUtil::staticGet_SWT]] append [$commonSeps jget SPACE]] append [my jget RUNNABLE]] append [[my jget stringUtil] toString1 [::NullRunnable::getInstance]]] toString] [self] [[my jget commonStrings] jget UPDATE]
+                my setUsedRunnable [::NullWaitGameRunnable::getInstance]
+            } elseif {[::J2MEUtil::isHTML]} {
+                ::PreLogUtil::put [[[[[[$stringMaker append [$commonSeps jget SPACE]] append [[::GraphicsStrings::getInstance] jget HTML]] append [$commonSeps jget SPACE]] append [my jget RUNNABLE]] append [[my jget stringUtil] toString1 [my jget runnable]]] toString] [self] [[my jget commonStrings] jget UPDATE]
+                my setUsedRunnable [my jget runnable]
+            } elseif {[expr {[expr {[jinstanceof [my jget openGlReadydisplayable] ::DemoCanvas] || [jinstanceof [my jget openGlReadydisplayable] ::AllBinaryGameCanvas]}] || [$features isDefault [[::OpenGLFeatureFactory::getInstance] jget OPENGL]]}]} {
+                ::PreLogUtil::put [[[[[[$stringMaker append [$commonSeps jget SPACE]] append [[[::OpenGLFeatureFactory::getInstance] jget OPENGL] toString]] append [$commonSeps jget SPACE]] append [my jget RUNNABLE]] append [[my jget stringUtil] toString1 [my jget runnable]]] toString] [self] [[my jget commonStrings] jget UPDATE]
+                my setUsedRunnable [my jget runnable]
             } else {
-                'org::allbinary::logic::communication::log::PreLogUtil'->put($stringMaker->append($self->{RUNNABLE})->append($self->{stringUtil}->toString('org::allbinary::thread::NullRunnable'->getInstance()))->toString(), $self, $self->{commonStrings}->{UPDATE});
-                $self->setUsedRunnable('org::allbinary::game::displayable::canvas::NullWaitGameRunnable'->getInstance());
+                ::PreLogUtil::put [[[$stringMaker append [my jget RUNNABLE]] append [[my jget stringUtil] toString1 [::NullRunnable::getInstance]]] toString] [self] [[my jget commonStrings] jget UPDATE]
+                my setUsedRunnable [::NullWaitGameRunnable::getInstance]
             }
         }
+    }
+    
+
+    method getDisplayable {} {
+        return [my jget displayable]
+    }
+    
+
+    method getUsedRunnable {} {
+        return [my jget usedRunnable]
+    }
+    
+
+    method setUsedRunnable {usedRunnable} {
+        ::PreLogUtil::put [[[[[[::StringMaker new] append [my jget RUNNABLE]] append [[my jget stringUtil] toString1 [my jget runnable]]] append [[::CommonSeps::getInstance] jget COLON_SEP]] append [[my jget stringUtil] toString1 $usedRunnable]] toString] [self] [my jget SET_USED_RUNNABLE]
+        my jset usedRunnable $usedRunnable
+    }
 }
 
-
-sub getDisplayable {
-    my ($self) = @_;
-        return $self->{displayable};
+namespace eval ::CurrentDisplayableFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::CurrentDisplayableFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::CurrentDisplayableFactory::staticGet_instance]
+    }
 }
 
-
-sub getUsedRunnable {
-    my ($self) = @_;
-        return $self->{usedRunnable};
-}
-
-
-sub setUsedRunnable {
-    my ($self, $usedRunnable) = @_;
-        'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append($self->{RUNNABLE})->append($self->{stringUtil}->toString($self->{runnable}))->append('org::allbinary::string::CommonSeps'->getInstance()->{COLON_SEP})->append($self->{stringUtil}->toString($usedRunnable))->toString(), $self, $self->{SET_USED_RUNNABLE});
-        $self->{usedRunnable} = $usedRunnable;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Displayable ();
-use org::allbinary::J2MEUtil ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::displayable::canvas::AllBinaryGameCanvas ();
-use org::allbinary::game::displayable::canvas::DemoCanvas ();
-use org::allbinary::game::displayable::canvas::GameInputMappingCanvas ();
-use org::allbinary::game::displayable::canvas::GameInputMappingInstructionsCanvas ();
-use org::allbinary::game::displayable::canvas::GameRunnable ();
-use org::allbinary::game::displayable::canvas::NullDisplayable ();
-use org::allbinary::game::displayable::canvas::NullWaitGameRunnable ();
-use org::allbinary::game::layer::SWTUtil ();
-use org::allbinary::game::score::displayable::HighScoresCanvas ();
-use org::allbinary::graphics::GraphicsStrings ();
-use org::allbinary::graphics::displayable::CanvasStrings ();
-use org::allbinary::graphics::displayable::MyCanvas ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::thread::NullRunnable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::graphics::opengles::OpenGLFeatureFactory ();
-
-1;
 

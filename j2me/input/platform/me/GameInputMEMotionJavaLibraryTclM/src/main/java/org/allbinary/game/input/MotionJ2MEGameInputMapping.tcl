@@ -11,31 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::MotionJ2MEGameInputMapping;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::J2MEGameInputMapping';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::MotionJ2MEGameInputMapping {
+    superclass ::J2MEGameInputMapping
 }
 
+oo::define ::MotionJ2MEGameInputMapping {
+    method initFields_MotionJ2MEGameInputMapping {} {
+        return
+    }
 
-sub getDefault {
-    my ($self) = @_;
-        return 'org::allbinary::game::input::MotionJ2MEDefaultGameInputMapping'->new()->getInputMapping();
+    constructor {} {
+        next
+        my initFields_MotionJ2MEGameInputMapping
+    }
+    
+
+    method getDefault {} {
+        return [[::MotionJ2MEDefaultGameInputMapping new] getInputMapping]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::mapping::InputToGameKeyMapping ();
-use org::allbinary::game::input::J2MEGameInputMapping ();
-use org::allbinary::game::input::MotionJ2MEDefaultGameInputMapping ();
+namespace eval ::MotionJ2MEGameInputMapping {
+}
 
-1;
 

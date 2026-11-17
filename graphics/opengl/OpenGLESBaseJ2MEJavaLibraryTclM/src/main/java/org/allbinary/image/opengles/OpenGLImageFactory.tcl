@@ -11,33 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
-package org::allbinary::image::opengles::OpenGLImageFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_OPENGL_IMAGE_FACTORY, 'java::lang::LazyStatic', sub { 'org::allbinary::image::opengles::OpenGLImageFactory'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::OpenGLImageFactory {
+    superclass ::JObject
 }
 
+oo::define ::OpenGLImageFactory {
+    method initFields_OpenGLImageFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($self, $image, $bitmapFactory, $textureFactory) = @_;
-        die ("RuntimeException");
+    constructor {} {
+        next
+        my initFields_OpenGLImageFactory
+    }
+    
+
+    method getInstance {image bitmapFactory textureFactory} {
+        error [jexception RuntimeException {}]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::platform::graphics::PlatformBitmapBaseFactory ();
-use org::allbinary::platform::opengles::PlatformTextureBaseFactory ();
+namespace eval ::OpenGLImageFactory {
+    variable NULL_OPENGL_IMAGE_FACTORYValue {}
+    variable NULL_OPENGL_IMAGE_FACTORYSet 0
+    proc staticGet_NULL_OPENGL_IMAGE_FACTORY {} {
+        variable NULL_OPENGL_IMAGE_FACTORYValue
+        variable NULL_OPENGL_IMAGE_FACTORYSet
+        if {!$NULL_OPENGL_IMAGE_FACTORYSet} {
+            set NULL_OPENGL_IMAGE_FACTORYSet 1
+            set NULL_OPENGL_IMAGE_FACTORYValue [::OpenGLImageFactory new]
+        }
+        return $NULL_OPENGL_IMAGE_FACTORYValue
+    }
+    proc staticSet_NULL_OPENGL_IMAGE_FACTORY {value} {
+        variable NULL_OPENGL_IMAGE_FACTORYValue
+        variable NULL_OPENGL_IMAGE_FACTORYSet
+        set NULL_OPENGL_IMAGE_FACTORYSet 1
+        set NULL_OPENGL_IMAGE_FACTORYValue $value
+    }
+}
 
-1;
 

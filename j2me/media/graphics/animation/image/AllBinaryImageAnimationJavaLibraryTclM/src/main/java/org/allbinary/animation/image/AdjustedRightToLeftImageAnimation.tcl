@@ -11,50 +11,41 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::AdjustedRightToLeftImageAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::image::RightToLeftImageAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{dx} = 0;
-    $self->{dy} = 0;
+oo::class create ::AdjustedRightToLeftImageAnimation {
+    superclass ::RightToLeftImageAnimation
 }
 
+oo::define ::AdjustedRightToLeftImageAnimation {
+    method initFields_AdjustedRightToLeftImageAnimation {} {
+        my jset dx 0
+        my jset dy 0
+        my jset dx 0
+        my jset dy 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $image, $dx, $dy, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($image, $animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->init($dx, $dy);
-    return $self;
+    constructor {image dx dy animationBehavior} {
+        next $image $animationBehavior
+        my initFields_AdjustedRightToLeftImageAnimation
+        my init $dx $dy
+    }
+    
+
+    method init {dx dy} {
+        my jset dx $dx
+        my jset dy $dy
+    }
+    
+
+    method paintXY {graphics x y} {
+        next $graphics [jint [expr {$x + [my jget dx]}]] [jint [expr {$y + [my jget dy]}]]
+    }
 }
 
-
-# throws Exception
-sub init {
-    my ($self, $dx, $dy) = @_;
-        $self->{dx} = $dx;
-        $self->{dy} = $dy;
+namespace eval ::AdjustedRightToLeftImageAnimation {
 }
 
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->SUPER::paintXY($graphics, $x + $self->{dx}, $y + $self->{dy});
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::animation::image::RightToLeftImageAnimation ();
-
-1;
 

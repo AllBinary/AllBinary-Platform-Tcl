@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-# Java interface
-package org::allbinary::game::displayable::canvas::AllBinaryGameCanvasInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::displayable::DisplayableInterface';
-
-
-
-sub getLayerManager {
-    my ($self) = @_;
-    die "abstract method getLayerManager";
+oo::class create ::AllBinaryGameCanvasInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::game::layer::AllBinaryGameLayerManager ();
-use org::allbinary::graphics::displayable::DisplayableInterface ();
+oo::define ::AllBinaryGameCanvasInterface {
+    method initFields_AllBinaryGameCanvasInterface {} {
+        return
+    }
+    
 
-1;
+    method getLayerManager {} {
+        error [jexception AbstractMethodError getLayerManager]
+    }
+}
+
+namespace eval ::AllBinaryGameCanvasInterface {
+}
+
 

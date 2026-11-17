@@ -11,41 +11,55 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
-package org::allbinary::game::configuration::feature::MainFeatureFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::feature::MainFeatureFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{FULL_SCREEN} = 'org::allbinary::game::configuration::feature::Feature'->new("Full Screen");
-    $self->{TITLE_BAR} = 'org::allbinary::game::configuration::feature::Feature'->new("Title Bar");
-    $self->{STATIC} = 'org::allbinary::game::configuration::feature::Feature'->new("Static Dependent Feature");
-    $self->{LOAD_ONDEMAND} = 'org::allbinary::game::configuration::feature::Feature'->new("Load OnDemand");
-    $self->{LOAD_ALL} = 'org::allbinary::game::configuration::feature::Feature'->new("Load All");
+oo::class create ::MainFeatureFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::MainFeatureFactory {
+    method initFields_MainFeatureFactory {} {
+        my jset FULL_SCREEN {}
+        my jset TITLE_BAR {}
+        my jset STATIC {}
+        my jset LOAD_ONDEMAND {}
+        my jset LOAD_ALL {}
+        my jset FULL_SCREEN [::Feature new "Full Screen"]
+        my jset TITLE_BAR [::Feature new "Title Bar"]
+        my jset STATIC [::Feature new "Static Dependent Feature"]
+        my jset LOAD_ONDEMAND [::Feature new "Load OnDemand"]
+        my jset LOAD_ALL [::Feature new "Load All"]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_MainFeatureFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::feature::MainFeatureFactory::instance;
+namespace eval ::MainFeatureFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::MainFeatureFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::MainFeatureFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::configuration::feature::Feature ();
-
-1;
 

@@ -11,28 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.android.input.motion.button
 
-package org::allbinary::android::input::motion::button::TouchButtonAndroidResources;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::init::Init';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::TouchButtonAndroidResources {
+    superclass ::Init
 }
 
+oo::define ::TouchButtonAndroidResources {
+    method initFields_TouchButtonAndroidResources {} {
+        return
+    }
 
-sub init {
-    my ($self) = @_;
+    constructor {} {
+        next
+        my initFields_TouchButtonAndroidResources
+    }
+    
+
+    method init {} {
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::init::Init ();
+namespace eval ::TouchButtonAndroidResources {
+}
 
-1;
 

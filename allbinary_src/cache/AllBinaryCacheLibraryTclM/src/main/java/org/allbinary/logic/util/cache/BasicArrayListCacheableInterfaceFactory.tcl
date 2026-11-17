@@ -11,31 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-package org::allbinary::logic::util::cache::BasicArrayListCacheableInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::logic::util::cache::CacheableInterfaceFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::BasicArrayListCacheableInterfaceFactory {
+    superclass ::JObject
 }
 
+oo::define ::BasicArrayListCacheableInterfaceFactory {
+    method initFields_BasicArrayListCacheableInterfaceFactory {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($self, $key) = @_;
-        return 'org::allbinary::logic::util::cache::BasicArrayListCacheable'->new();
+    constructor {} {
+        next
+        my initFields_BasicArrayListCacheableInterfaceFactory
+    }
+    
+
+    method getInstance {key} {
+        return [::BasicArrayListCacheable new]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::util::cache::CacheableInterfaceFactoryInterface ();
-use org::allbinary::logic::util::cache::BasicArrayListCacheable ();
+namespace eval ::BasicArrayListCacheableInterfaceFactory {
+}
 
-1;
 

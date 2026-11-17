@@ -11,100 +11,80 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::MultiKeyPressesAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ag::ai::KeyPressesAI';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{toggleTimeHelper} = 'org::allbinary::time::TimeDelayHelper'->new(600);
-    $self->{gameTickTimeDelayHelper} = 'org::allbinary::time::GameTickTimeDelayHelperFactory'->getInstance();
+oo::class create ::MultiKeyPressesAI {
+    superclass ::KeyPressesAI
 }
 
+oo::define ::MultiKeyPressesAI {
+    method initFields_MultiKeyPressesAI {} {
+        my jset toggleTimeHelper {}
+        my jset gameTickTimeDelayHelper {}
+        my jset toggleTimeHelper [::TimeDelayHelper new 600]
+        my jset gameTickTimeDelayHelper [::GameTickTimeDelayHelperFactory::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($hashtable, $ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->update();
-    return $self;
-}
+    constructor {hashtable ownerLayerInterface gameInput} {
+        next $hashtable $ownerLayerInterface $gameInput
+        my initFields_MultiKeyPressesAI
+        my update
+    }
+    
 
+    method processAI {allBinaryLayerManager} {
+    }
+    
 
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-}
-
-
-# throws Exception
-sub update {
-    my ($self) = @_;
-        my $gameInput = $self->getGameInput();
-        my $keys = $self->{keys};
-        my $size = scalar(@{$keys});
-        if ($self->isOn()) {
-            for (my $index = 0; $index < $size; $index++) {
-                my $key = int($keys->[$index]);
-                if ($key != -1) {
-                    $gameInput->add($self->{gameKeyEventFactory}->getInstanceForKey($self, $key));
+    method update {} {
+        set gameInput [my getGameInput]
+        set keys [my jget keys]
+        set size [$keys length]
+        if {[my isOn]} {
+            for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+                set key [[$keys get $index] intValue]
+                if {[expr {$key != [expr {-1}]}]} {
+                    $gameInput add [[my jget gameKeyEventFactory] getInstanceForKey [self] $key]
                 }
             }
         } else {
-            for (my $index = 0; $index < $size; $index++) {
-                my $key = int($keys->[$index]);
-                if ($key != -1) {
-                    $gameInput->addForRemoval($self->{gameKeyEventFactory}->getInstanceForKey($self, $key));
+            for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+                set key [[$keys get $index] intValue]
+                if {[expr {$key != [expr {-1}]}]} {
+                    $gameInput addForRemoval [[my jget gameKeyEventFactory] getInstanceForKey [self] $key]
                 }
             }
         }
-}
+    }
+    
 
-
-# throws Exception
-sub toggle {
-    my ($self) = @_;
-        if ($self->{toggleTimeHelper}->isTime($self->{gameTickTimeDelayHelper}->{startTime})) {
-            $self->SUPER::toggle();
-            $self->update();
+    method toggle {} {
+        if {[[my jget toggleTimeHelper] isTime [[my jget gameTickTimeDelayHelper] jget startTime]]} {
+            next
+            my update
         }
-}
+    }
+    
 
-
-# throws Exception
-sub disable {
-    my ($self) = @_;
-        if ($self->{toggleTimeHelper}->isTime($self->{gameTickTimeDelayHelper}->{startTime})) {
-            $self->SUPER::disable();
-            $self->update();
+    method disable {} {
+        if {[[my jget toggleTimeHelper] isTime [[my jget gameTickTimeDelayHelper] jget startTime]]} {
+            next
+            my update
         }
-}
+    }
+    
 
-
-# throws Exception
-sub enable {
-    my ($self) = @_;
-        if ($self->{toggleTimeHelper}->isTime($self->{gameTickTimeDelayHelper}->{startTime})) {
-            $self->SUPER::enable();
-            $self->update();
+    method enable {} {
+        if {[[my jget toggleTimeHelper] isTime [[my jget gameTickTimeDelayHelper] jget startTime]]} {
+            next
+            my update
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::time::GameTickTimeDelayHelper ();
-use org::allbinary::time::GameTickTimeDelayHelperFactory ();
-use org::allbinary::time::TimeDelayHelper ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::ag::ai::KeyPressesAI ();
+namespace eval ::MultiKeyPressesAI {
+}
 
-1;
 

@@ -11,58 +11,55 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::AnimationFactoryInitializationVisitor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{width} = 0;
-    $self->{height} = 0;
-    $self->{dx} = 0;
-    $self->{dy} = 0;
-    $self->{originalDx} = 0;
-    $self->{originalDy} = 0;
+oo::class create ::AnimationFactoryInitializationVisitor {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::AnimationFactoryInitializationVisitor {
+    method initFields_AnimationFactoryInitializationVisitor {} {
+        my jset width 0
+        my jset height 0
+        my jset dx 0
+        my jset dy 0
+        my jset originalDx 0
+        my jset originalDy 0
+        my jset width 0
+        my jset height 0
+        my jset dx 0
+        my jset dy 0
+        my jset originalDx 0
+        my jset originalDy 0
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_AnimationFactoryInitializationVisitor
+    }
+    
+
+    method visit {} {
+    }
+    
+
+    method toString {} {
+        set commonSeps [::CommonSeps::getInstance]
+        set commonLabels [::CommonLabels::getInstance]
+        set stringBuffer [::StringMaker new]
+        [$stringBuffer append [[::PositionStrings::getInstance] jget DX_LABEL]] appendfloat [expr {double([my jget dx])}]
+        [$stringBuffer append [[::PositionStrings::getInstance] jget DY_LABEL]] appendfloat [expr {double([my jget dy])}]
+        $stringBuffer append [$commonLabels jget WIDTH_LABEL]
+        $stringBuffer appendint [my jget width]
+        $stringBuffer append [$commonSeps jget SPACE]
+        $stringBuffer append [$commonLabels jget HEIGHT_LABEL]
+        $stringBuffer appendint [my jget height]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub visit {
-    my ($self) = @_;
+namespace eval ::AnimationFactoryInitializationVisitor {
 }
 
-
-sub toString {
-    my ($self) = @_;
-        my $commonSeps = 'org::allbinary::string::CommonSeps'->getInstance();
-        my $commonLabels = 'org::allbinary::string::CommonLabels'->getInstance();
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append('org::allbinary::math::PositionStrings'->getInstance()->{DX_LABEL})->appendfloat($self->{dx});
-        $stringBuffer->append('org::allbinary::math::PositionStrings'->getInstance()->{DY_LABEL})->appendfloat($self->{dy});
-        $stringBuffer->append($commonLabels->{WIDTH_LABEL});
-        $stringBuffer->appendint($self->{width});
-        $stringBuffer->append($commonSeps->{SPACE});
-        $stringBuffer->append($commonLabels->{HEIGHT_LABEL});
-        $stringBuffer->appendint($self->{height});
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::math::PositionStrings ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonSeps ();
-
-1;
 

@@ -11,62 +11,49 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
 # This is the information sent to the license server
-package org::allbinary::logic::system::security::licensing::AbeClientInformation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::system::security::licensing::ClientInformation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::AbeClientInformation {
+    superclass ::ClientInformation
 }
 
+oo::define ::AbeClientInformation {
+    method initFields_AbeClientInformation {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $version, $specialName, $shortName) = @_;
-    my $self = $class->SUPER::new($name, $version, $specialName, $shortName);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
-}
+    constructor {name version specialName shortName} {
+        next $name $version $specialName $shortName
+        my initFields_AbeClientInformation
+    }
+    
 
-
-sub init {
-    my ($self) = @_;
+    method init {} {
         try {
-            $self->setOperatingSystemInterface('org::allbinary::logic::system::os::OperatingSystemFactory'->getInstance()->getOperatingSystemInstance());
-            my $licenseInitInfo = 'org::allbinary::business::init::LicenseInitInfoUtil'->getInstance()->read();
-            $self->setLicenseId($licenseInitInfo->getLicenseId());
-            $self->setLicenseServers($licenseInitInfo->getServerList());
-            my $stringValidationUtil = 'org::allbinary::logic::string::StringValidationUtil'->getInstance();
-            if ($stringValidationUtil->isEmpty($self->getLicenseId())) {
-                my $NONE = "No License Id";
-                $self->setLicenseId($NONE);
+            my setOperatingSystemInterface [[::OperatingSystemFactory::getInstance] getOperatingSystemInstance]
+            set licenseInitInfo [[::LicenseInitInfoUtil::getInstance] read]
+            my setLicenseId [$licenseInitInfo getLicenseId]
+            my setLicenseServers [$licenseInitInfo getServerList]
+            set stringValidationUtil [::StringValidationUtil::getInstance]
+            if {[$stringValidationUtil isEmpty [my getLicenseId]]} {
+                set NONE "No License Id"
+                my setLicenseId $NONE
             }
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append("Special Name: ")->append($self->getSpecialName())->toString(), $self, $commonStrings->{CONSTRUCTOR});
-        } catch ($e) {
-            my $logUtil = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $logUtil->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{CONSTRUCTOR}, $e);
+            set commonStrings [::CommonStrings::getInstance]
+            ::PreLogUtil::put [[[[::StringMaker new] append "Special Name: "] append [my getSpecialName]] toString] [self] [$commonStrings jget CONSTRUCTOR]
+        } on error {e} {
+            set logUtil [::LogUtil::getInstance]
+            set commonStrings [::CommonStrings::getInstance]
+            $logUtil put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget CONSTRUCTOR] $e
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::business::init::LicenseInitInfo ();
-use org::allbinary::business::init::LicenseInitInfoUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringValidationUtil ();
-use org::allbinary::logic::system::os::OperatingSystemFactory ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::logic::system::security::licensing::ClientInformation ();
+namespace eval ::AbeClientInformation {
+}
 
-1;
 

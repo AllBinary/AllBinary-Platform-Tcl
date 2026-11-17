@@ -11,73 +11,62 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.vector
 
-package org::allbinary::animation::vector::RectangleAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::Animation','org::allbinary::graphics::color::ColorCompositeInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{width} = undef;
-    $self->{height} = undef;
+oo::class create ::RectangleAnimation {
+    superclass ::Animation
 }
 
+oo::define ::RectangleAnimation {
+    method initFields_RectangleAnimation {} {
+        my jset width 0
+        my jset height 0
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $width, $height, $basicColor) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{width} = $width;
-        $self->{height} = $height;
-        $self->setBasicColorP($basicColor);
-    return $self;
+    constructor {width height basicColor} {
+        next
+        my initFields_RectangleAnimation
+        my jset width $width
+        my jset height $height
+        my setBasicColorP $basicColor
+    }
+    
+
+    method nextFrame {} {
+    }
+    
+
+    method paintXY {graphics x y} {
+        [my jget basicSetColorUtil] setBasicColorP3 $graphics [my getBasicColorP] [my getColor]
+        $graphics drawRect $x $y [my jget width] [my jget height]
+    }
+    
+
+    method setWidth {width} {
+        my jset width $width
+    }
+    
+
+    method setHeight {height} {
+        my jset height $height
+    }
+    
+
+    method getBasicColorP {} {
+        return [next]
+    }
+    
+
+    method setBasicColorP {basicColor} {
+        next $basicColor
+    }
 }
 
-
-sub nextFrame {
-    my ($self) = @_;
+namespace eval ::RectangleAnimation {
 }
 
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->{basicSetColorUtil}->setBasicColorP3($graphics, $self->getBasicColorP(), $self->getColor());
-        $graphics->drawRect($x, $y, $self->{width}, $self->{height});
-}
-
-
-sub setWidth {
-    my ($self, $width) = @_;
-        $self->{width} = $width;
-}
-
-
-sub setHeight {
-    my ($self, $height) = @_;
-        $self->{height} = $height;
-}
-
-
-sub getBasicColorP {
-    my ($self) = @_;
-        return $self->SUPER::getBasicColorP();
-}
-
-
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
-        $self->SUPER::setBasicColorP($basicColor);
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::ColorCompositeInterface ();
-
-1;
 

@@ -11,66 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.paint
 
-package org::allbinary::game::paint::GameScrollMenuPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::paint::BasicGameDemoPaintable','org::allbinary::graphics::color::ColorChangeListener';
-
-
-
-sub new {
-    my ($class, $mainDemoStatePaintable, $ownershipPaintable, $helpPaintableInterface, $basicColor) = @_;
-    my $self = $class->SUPER::new($mainDemoStatePaintable, $ownershipPaintable, $helpPaintableInterface);
-        # super(...) made $self above
-        $self->setColor($basicColor);
-        'org::allbinary::graphics::color::ColorChangeEventHandler'->getInstance()->addListenerInterface($self);
-    return $self;
+oo::class create ::GameScrollMenuPaintable {
+    superclass ::BasicGameDemoPaintable
 }
 
+oo::define ::GameScrollMenuPaintable {
+    method initFields_GameScrollMenuPaintable {} {
+        return
+    }
+    
 
-sub setState {
-    my ($self, $state) = @_;
-        $self->setCurrentStatePaintable($self->getMainDemoStatePaintable());
-}
+    constructor {mainDemoStatePaintable ownershipPaintable helpPaintableInterface basicColor} {
+        next $mainDemoStatePaintable $ownershipPaintable $helpPaintableInterface
+        my initFields_GameScrollMenuPaintable
+        my setColor $basicColor
+        [::ColorChangeEventHandler::getInstance] addListenerInterface [self]
+    }
+    
 
+    method setState {state} {
+        my setCurrentStatePaintable [my getMainDemoStatePaintable]
+    }
+    
 
-sub onEvent {
-    my ($self, $eventObject) = @_;
-}
+    method onEvent {eventObject} {
+    }
+    
 
-
-sub setColor {
-    my ($self, $basicColor) = @_;
-        my $mainGameDemoStatePaintable = $self->getMainDemoStatePaintable();
-        my $formPaintable = $mainGameDemoStatePaintable->getMenuPaintableInterface();
-        my $scrollSelectionForm = $formPaintable->getForm();
-        $mainGameDemoStatePaintable->getOwnershipPaintableInterface()->setBasicColorP($basicColor);
-        $scrollSelectionForm->setButtonBasicColor($basicColor);
-        my $item = undef;
-        my $stringComponent = undef;
-        for (my $index = $scrollSelectionForm->size() - 1; $index >= 0; $index--) {
-            $item = $scrollSelectionForm->get($index);
-            $stringComponent = $item->getLabelStringComponent();
-            if (defined($stringComponent)) {
-                $stringComponent->setForegroundBasicColor($basicColor);
+    method setColor {basicColor} {
+        set mainGameDemoStatePaintable [my getMainDemoStatePaintable]
+        set formPaintable [$mainGameDemoStatePaintable getMenuPaintableInterface]
+        set scrollSelectionForm [$formPaintable getForm]
+        [$mainGameDemoStatePaintable getOwnershipPaintableInterface] setBasicColorP $basicColor
+        $scrollSelectionForm setButtonBasicColor $basicColor
+        set item {}
+        set stringComponent {}
+        for {set index [jint [expr {[$scrollSelectionForm size] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set item [$scrollSelectionForm get $index]
+            set stringComponent [$item getLabelStringComponent]
+            if {[expr {$stringComponent ne {}}]} {
+                $stringComponent setForegroundBasicColor $basicColor
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::ColorChangeEventHandler ();
-use org::allbinary::graphics::color::ColorChangeListener ();
-use org::allbinary::graphics::form::FormPaintable ();
-use org::allbinary::graphics::form::ScrollSelectionForm ();
-use org::allbinary::graphics::form::item::ABStringComponent ();
-use org::allbinary::graphics::form::item::ABTextItem ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::game::paint::BasicGameDemoPaintable ();
+namespace eval ::GameScrollMenuPaintable {
+}
 
-1;
 

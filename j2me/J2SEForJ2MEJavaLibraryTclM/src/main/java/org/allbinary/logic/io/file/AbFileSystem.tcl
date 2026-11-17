@@ -11,120 +11,114 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io.file
 
 #J2SEForJ2ME
-package org::allbinary::logic::io::file::AbFileSystem;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::io::file::AbFileSystem'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
+oo::class create ::AbFileSystem {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::AbFileSystem {
+    method initFields_AbFileSystem {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_AbFileSystem
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::io::file::AbFileSystem::instance;
-}
+    method isDirectoryOrFile {path} {
+        set file [::File new $path]
+        return [expr {[$file isDirectory] || [$file isFile]}]
+    }
+    
 
+    method isDirectory {path} {
+        return [[::File new $path] isDirectory]
+    }
+    
 
-sub isDirectoryOrFile {
-    my ($self, $path) = @_;
-        my $file = 'java::io::File'->new($path);
-        return $file->isDirectory() || $file->isFile();
-}
-
-
-sub isDirectory {
-    my ($self, $path) = @_;
-        return 'java::io::File'->new($path)->isDirectory();
-}
-
-
-sub getFilesAsStringArrayForPath {
-    my ($self, $currentDirPath) = @_;
-        my $file = 'java::io::File'->new($currentDirPath);
-        if ($file->exists()) {
-            return $file->list();
+    method getFilesAsStringArrayForPath {currentDirPath} {
+        set file [::File new $currentDirPath]
+        if {[$file exists]} {
+            return [$file list]
         } else {
-            return 'org::allbinary::logic::string::StringUtil'->getInstance()->getArrayInstance();
+            return [[::StringUtil::getInstance] getArrayInstance]
         }
-}
+    }
+    
 
+    method readAsString {fileName} {
+        set bytes [jarray 1000000 0]
+        return [my readAsString $fileName $bytes]
+    }
+    
 
-sub readAsString {
-    my ($self, $fileName) = @_;
-        my $bytes = [(0) x (1000000)];
-        return $self->readAsString($fileName, $bytes);
-}
-
-
-# Java overloaded method: Perl keeps the last definition
-sub readAsString {
-    my ($self, $fileName, $bytes) = @_;
-        my $closeable = 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT};
+    method readAsString {fileName bytes} {
+        set closeable [[::NullUtil::getInstance] jget NULL_OBJECT]
         try {
-            my $idFile = 'java::io::FileInputStream'->new($fileName);
-            $closeable = $idFile;
-            my $size = $idFile->read($bytes);
-            if ($size > 0) {
-                return pack("C*", @{$bytes}[0 .. 0 + ($size) - 1]);
+            set idFile [::FileInputStream new $fileName]
+            set closeable $idFile
+            set size [$idFile read $bytes]
+            if {[expr {$size > 0}]} {
+                return [jfromchars $bytes 0 $size]
             }
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "readAsString", $e);
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "readAsString" $e
         } finally {
-            $self->close($closeable);
+            my close $closeable
         }
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-}
+        return [[::StringUtil::getInstance] jget EMPTY_STRING]
+    }
+    
 
-
-sub close {
-    my ($self, $closeable) = @_;
+    method close {closeable} {
         try {
-            if (defined($closeable)) {
-                my $inputStream = ($closeable);
-                $inputStream->close();
+            if {[expr {$closeable ne {}}]} {
+                set inputStream ($closeable)
+                $inputStream close
             }
-            return 1;
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{CLOSE}, $e);
-            return 0;
+            return true
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget CLOSE] $e
+            return false
         }
+    }
+    
 }
 
-
-# throws Exception
-sub main {
-    my ($class, $args) = @_;
-        my $isDirectory = 'org::allbinary::logic::io::file::AbFileSystem'->getInstance()->isDirectory("c:");
-        print("isDirectory: " . $isDirectory, "\n");
+namespace eval ::AbFileSystem {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AbFileSystem new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AbFileSystem::staticGet_instance]
+    }
+    proc main {args} {
+        set isDirectory [[::AbFileSystem::getInstance] isDirectory "c:"]
+        puts [jstr [string cat "isDirectory: " [jstr $isDirectory]]]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use java::io::File ();
-# use java::io::FileInputStream ();
-# use java::io::InputStream ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-use java::lang::System ();
-
-1;
 

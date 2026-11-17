@@ -1,39 +1,51 @@
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-package org::allbinary::logic::util::cache::CacheTypeFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::util::cache::CacheTypeFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NO_CACHE} = 'org::allbinary::logic::util::cache::CacheType'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING});
-    $self->{CACHE} = 'org::allbinary::logic::util::cache::CacheType'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING});
-    $self->{SET} = 'org::allbinary::logic::util::cache::CacheType'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, "Set");
-    $self->{CACHE_VECTOR} = 'org::allbinary::logic::util::cache::CacheType'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING});
+oo::class create ::CacheTypeFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::CacheTypeFactory {
+    method initFields_CacheTypeFactory {} {
+        my jset NO_CACHE {}
+        my jset CACHE {}
+        my jset SET {}
+        my jset CACHE_VECTOR {}
+        my jset NO_CACHE [::CacheType new [[::StringUtil::getInstance] jget EMPTY_STRING] [[::StringUtil::getInstance] jget EMPTY_STRING]]
+        my jset CACHE [::CacheType new [[::StringUtil::getInstance] jget EMPTY_STRING] [[::StringUtil::getInstance] jget EMPTY_STRING]]
+        my jset SET [::CacheType new [[::StringUtil::getInstance] jget EMPTY_STRING] "Set"]
+        my jset CACHE_VECTOR [::CacheType new [[::StringUtil::getInstance] jget EMPTY_STRING] [[::StringUtil::getInstance] jget EMPTY_STRING]]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_CacheTypeFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::util::cache::CacheTypeFactory::instance;
+namespace eval ::CacheTypeFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::CacheTypeFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::CacheTypeFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::util::cache::CacheType ();
-
-1;
 

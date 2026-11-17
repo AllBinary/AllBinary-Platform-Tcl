@@ -11,56 +11,43 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.motion.action
 
-package org::allbinary::game::input::motion::action::SingleKeyPressGameKeyFromMotionGestureEventListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::CompleteMotionGestureInputEventListener';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::SingleKeyPressGameKeyFromMotionGestureEventListener {
+    superclass ::CompleteMotionGestureInputEventListener
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+oo::define ::SingleKeyPressGameKeyFromMotionGestureEventListener {
+    method initFields_SingleKeyPressGameKeyFromMotionGestureEventListener {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_SingleKeyPressGameKeyFromMotionGestureEventListener
+    }
+    
 
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
-}
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
 
-
-sub onCompleteMotionGestureInputEvent {
-    my ($self, $completeMotionGestureInputEvent) = @_;
+    method onCompleteMotionGestureInputEvent {completeMotionGestureInputEvent} {
         try {
-            my $gameKeyCompleteMotionGestureInputEvent = $completeMotionGestureInputEvent;
-            my $gameKeyEvent = $gameKeyCompleteMotionGestureInputEvent->getGameKeyEvent();
-            'org::allbinary::game::input::event::PressGameKeyEventHandler'->getInstance()->fireEvent($gameKeyEvent);
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, "onCompleteMotionGestureInputEvent", $e);
+            set gameKeyCompleteMotionGestureInputEvent $completeMotionGestureInputEvent
+            set gameKeyEvent [$gameKeyCompleteMotionGestureInputEvent getGameKeyEvent]
+            [::PressGameKeyEventHandler::getInstance] fireEvent $gameKeyEvent
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] "onCompleteMotionGestureInputEvent" $e
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::CompleteMotionGestureInputEvent ();
-use org::allbinary::game::input::CompleteMotionGestureInputEventListener ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::game::input::event::PressGameKeyEventHandler ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::SingleKeyPressGameKeyFromMotionGestureEventListener {
+}
 
-1;
 

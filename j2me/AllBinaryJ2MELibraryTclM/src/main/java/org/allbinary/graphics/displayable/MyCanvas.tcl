@@ -11,240 +11,201 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable
 
-package org::allbinary::graphics::displayable::MyCanvas;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'javax::microedition::lcdui::Canvas','org::allbinary::graphics::displayable::DisplayableInterface','org::allbinary::graphics::displayable::command::MyCommandInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{canvasStrings} = 'org::allbinary::graphics::displayable::CanvasStrings'->getInstance();
-    $self->{stringUtil} = 'org::allbinary::logic::string::StringUtil'->getInstance();
-    $self->{displayInfo} = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-    $self->{name} = undef;
-    $self->{childNameList} = undef;
-    $self->{commandStack} = undef;
-    $self->{commandListener} = $javax::microedition::lcdui::NullCommandListener::NULL_COMMAND_LISTENER;
-    $self->{paused} = 0;
-    $self->{touchME} = 'org::allbinary::input::TouchJ2ME'->new();
+oo::class create ::MyCanvas {
+    superclass ::Canvas
 }
 
+oo::define ::MyCanvas {
+    method initFields_MyCanvas {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset canvasStrings {}
+        my jset stringUtil {}
+        my jset displayInfo {}
+        my jset name {}
+        my jset childNameList {}
+        my jset commandStack {}
+        my jset commandListener {}
+        my jset paused false
+        my jset touchME {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset canvasStrings [::CanvasStrings::getInstance]
+        my jset stringUtil [::StringUtil::getInstance]
+        my jset displayInfo [::DisplayInfoSingleton::getInstance]
+        
+        
+        
+        my jset commandListener [::NullCommandListener::staticGet_NULL_COMMAND_LISTENER]
+        my jset paused false
+        my jset touchME [::TouchJ2ME new]
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $childNameList) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{logUtil}->putF($self->{commonStrings}->{CONSTRUCTOR}, $self, $self->{commonStrings}->{CONSTRUCTOR});
-        $self->{displayInfo}->update($self, $self->{canvasStrings}->{CONSTRUCTOR});
-        $self->{name} = $name;
-        $self->{childNameList} = $childNameList;
-        $self->{commandStack} = 'org::allbinary::logic::StdUtil'->getInstance()->createStack();
-    return $self;
-}
+    constructor {name childNameList} {
+        next
+        my initFields_MyCanvas
+        [my jget logUtil] putF [[my jget commonStrings] jget CONSTRUCTOR] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+        [my jget displayInfo] update [self] [[my jget canvasStrings] jget CONSTRUCTOR]
+        my jset name $name
+        my jset childNameList $childNameList
+        my jset commandStack [[::StdUtil::getInstance] createStack]
+    }
+    
 
+    method getWidth {} {
+        return [next]
+    }
+    
 
-sub getWidth {
-    my ($self) = @_;
-        return $self->SUPER::getWidth();
-}
+    method getHeight {} {
+        return [next]
+    }
+    
 
+    method setFullScreenMode {mode} {
+        next $mode
+        [my jget displayInfo] update [self] [[my jget canvasStrings] jget SET_FULL_SCREEN_MODE]
+    }
+    
 
-sub getHeight {
-    my ($self) = @_;
-        return $self->SUPER::getHeight();
-}
+    method sizeChanged {w h} {
+        [my jget displayInfo] update [self] [[my jget canvasStrings] jget SIZE_CHANGED]
+    }
+    
 
+    method getCommandStack {} {
+        return [my jget commandStack]
+    }
+    
 
-sub setFullScreenMode {
-    my ($self, $mode) = @_;
-        $self->SUPER::setFullScreenMode($mode);
-        $self->{displayInfo}->update($self, $self->{canvasStrings}->{SET_FULL_SCREEN_MODE});
-}
+    method isCommand {command} {
+        return [[my jget commandStack] contains $command]
+    }
+    
 
-
-sub sizeChanged {
-    my ($self, $w, $h) = @_;
-        $self->{displayInfo}->update($self, $self->{canvasStrings}->{SIZE_CHANGED});
-}
-
-
-sub getCommandStack {
-    my ($self) = @_;
-        return $self->{commandStack};
-}
-
-
-sub isCommand {
-    my ($self, $command) = @_;
-        return $self->{commandStack}->contains($command);
-}
-
-
-sub addCommand {
-    my ($self, $command) = @_;
-        if (!$self->{commandStack}->contains($command)) {
-            $self->{commandStack}->push($command);
-            $self->SUPER::addCommand($command);
+    method addCommand {command} {
+        if {[expr {![[my jget commandStack] contains $command]}]} {
+            [my jget commandStack] push $command
+            next $command
         }
-}
+    }
+    
 
+    method removeCommand {command} {
+        [my jget commandStack] removeElement $command
+        next $command
+    }
+    
 
-sub removeCommand {
-    my ($self, $command) = @_;
-        $self->{commandStack}->removeElement($command);
-        $self->SUPER::removeCommand($command);
-}
-
-
-sub removeAllCommands {
-    my ($self) = @_;
-        my $size = $self->{commandStack}->size();
-        for (my $index = 0; $index < $size; $index++) {
-            $self->SUPER::removeCommand($self->{commandStack}->pop());
+    method removeAllCommands {} {
+        set size [[my jget commandStack] size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            next [[my jget commandStack] pop]
         }
+    }
+    
+
+    method setCommandListener {l} {
+        next $l
+        my jset commandListener $l
+    }
+    
+
+    method getCustomCommandListener {} {
+        return [my jget commandListener]
+    }
+    
+
+    method isPaused {} {
+        return [my jget paused]
+    }
+    
+
+    method removePauseCommand {} {
+        my removeCommand [[::MyCommandsFactory::getInstance] jget PAUSE_COMMAND]
+    }
+    
+
+    method pause {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget canvasStrings] jget PAUSE]
+        my removePauseCommand
+        my addCommand [[::MyCommandsFactory::getInstance] jget RESUME_COMMAND]
+        my setPaused true
+    }
+    
+
+    method unPause {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget canvasStrings] jget UN_PAUSE]
+        my removeCommand [[::MyCommandsFactory::getInstance] jget RESUME_COMMAND]
+        my addCommand [[::MyCommandsFactory::getInstance] jget PAUSE_COMMAND]
+        my setPaused false
+    }
+    
+
+    method process {} {
+        [my jget displayInfo] process
+    }
+    
+
+    method paint {graphics} {
+    }
+    
+
+    method draw {graphics} {
+    }
+    
+
+    method hasChild {displayable} {
+        return [[my jget childNameList] contains [$displayable jget name]]
+    }
+    
+
+    method destroy {} {
+        [my jget logUtil] putF "Destroyed MyCanvas" [self] "destroy"
+    }
+    
+
+    method setPaused {isPaused} {
+        my jset paused $isPaused
+    }
+    
+
+    method keyPressedByDevice {keyCode deviceId} {
+    }
+    
+
+    method keyRepeatedByDevice {keyCode deviceId} {
+    }
+    
+
+    method keyReleasedByDevice {keyCode deviceId} {
+    }
+    
+
+    method pointerDragged {x y} {
+        [my jget touchME] pointerDragged $x $y
+    }
+    
+
+    method pointerPressed {x y} {
+        [my jget touchME] pointerPressed $x $y
+    }
+    
+
+    method pointerReleased {x y} {
+        [my jget touchME] pointerReleased $x $y
+    }
+    
+
+    method nextSong {nextSongSound leftVolume rightVolume} {
+    }
 }
 
-
-sub setCommandListener {
-    my ($self, $l) = @_;
-        $self->SUPER::setCommandListener($l);
-        $self->{commandListener} = $l;
+namespace eval ::MyCanvas {
 }
 
-
-sub getCustomCommandListener {
-    my ($self) = @_;
-        return $self->{commandListener};
-}
-
-
-sub isPaused {
-    my ($self) = @_;
-        return $self->{paused};
-}
-
-
-sub removePauseCommand {
-    my ($self) = @_;
-        $self->removeCommand('org::allbinary::graphics::displayable::command::MyCommandsFactory'->getInstance()->{PAUSE_COMMAND});
-}
-
-
-sub pause {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{canvasStrings}->{PAUSE});
-        $self->removePauseCommand();
-        $self->addCommand('org::allbinary::graphics::displayable::command::MyCommandsFactory'->getInstance()->{RESUME_COMMAND});
-        $self->setPaused(1);
-}
-
-
-sub unPause {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{canvasStrings}->{UN_PAUSE});
-        $self->removeCommand('org::allbinary::graphics::displayable::command::MyCommandsFactory'->getInstance()->{RESUME_COMMAND});
-        $self->addCommand('org::allbinary::graphics::displayable::command::MyCommandsFactory'->getInstance()->{PAUSE_COMMAND});
-        $self->setPaused(0);
-}
-
-
-# throws Exception
-sub process {
-    my ($self) = @_;
-        $self->{displayInfo}->process();
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-}
-
-
-sub draw {
-    my ($self, $graphics) = @_;
-}
-
-
-sub hasChild {
-    my ($self, $displayable) = @_;
-        return $self->{childNameList}->contains($displayable->{name});
-}
-
-
-sub destroy {
-    my ($self) = @_;
-        $self->{logUtil}->putF("Destroyed MyCanvas", $self, "destroy");
-}
-
-
-sub setPaused {
-    my ($self, $isPaused) = @_;
-        $self->{paused} = $isPaused;
-}
-
-
-sub keyPressedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
-}
-
-
-sub keyRepeatedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
-}
-
-
-sub keyReleasedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
-}
-
-
-sub pointerDragged {
-    my ($self, $x, $y) = @_;
-        $self->{touchME}->pointerDragged($x, $y);
-}
-
-
-sub pointerPressed {
-    my ($self, $x, $y) = @_;
-        $self->{touchME}->pointerPressed($x, $y);
-}
-
-
-sub pointerReleased {
-    my ($self, $x, $y) = @_;
-        $self->{touchME}->pointerReleased($x, $y);
-}
-
-
-sub nextSong {
-    my ($self, $nextSongSound, $leftVolume, $rightVolume) = @_;
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::CommandListener ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::NullCommandListener ();
-use org::allbinary::graphics::displayable::command::MyCommandInterface ();
-use org::allbinary::graphics::displayable::command::MyCommandsFactory ();
-use org::allbinary::input::TouchJ2ME ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::media::audio::Sound ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::util::ABStack ();
-use org::allbinary::graphics::displayable::DisplayableInterface ();
-use org::allbinary::graphics::displayable::CanvasStrings ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-
-1;
 

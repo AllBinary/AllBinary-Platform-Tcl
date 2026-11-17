@@ -11,51 +11,61 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
-package org::allbinary::image::opengles::OpenGLESImageProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::image::opengles::OpenGLESImageProcessor'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::OpenGLESImageProcessor {
+    superclass ::JObject
 }
 
+oo::define ::OpenGLESImageProcessor {
+    method initFields_OpenGLESImageProcessor {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::image::opengles::OpenGLESImageProcessor::instance;
+    constructor {} {
+        next
+        my initFields_OpenGLESImageProcessor
+    }
+    
+    
+
+    method translate {gl translateX translateY} {
+    }
+    
+
+    method rotate {gl angle} {
+    }
+    
+
+    method scale {gl scaleX scaleY} {
+    }
+    
+
+    method colorMask {gl red green blue alpha} {
+    }
 }
 
-
-sub translate {
-    my ($self, $gl, $translateX, $translateY) = @_;
+namespace eval ::OpenGLESImageProcessor {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::OpenGLESImageProcessor new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::OpenGLESImageProcessor::staticGet_instance]
+    }
 }
 
-
-sub rotate {
-    my ($self, $gl, $angle) = @_;
-}
-
-
-sub scale {
-    my ($self, $gl, $scaleX, $scaleY) = @_;
-}
-
-
-sub colorMask {
-    my ($self, $gl, $red, $green, $blue, $alpha) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::khronos::opengles::GL10 ();
-
-1;
 

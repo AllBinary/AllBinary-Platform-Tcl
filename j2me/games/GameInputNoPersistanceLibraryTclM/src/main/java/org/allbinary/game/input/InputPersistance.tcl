@@ -11,87 +11,66 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
 #GameInputNoPersistanceLibrary
-package org::allbinary::game::input::InputPersistance;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::configuration::persistance::BasicPersitance';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{hashtableUtil} = 'org::allbinary::util::HashtableUtil'->getInstance();
+oo::class create ::InputPersistance {
+    superclass ::BasicPersitance
 }
 
+oo::define ::InputPersistance {
+    method initFields_InputPersistance {} {
+        my jset hashtableUtil {}
+        my jset hashtableUtil [::HashtableUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $name) = @_;
-    my $self = $class->SUPER::new($name);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
-}
+    constructor {name} {
+        next $name
+        my initFields_InputPersistance
+    }
+    
 
-
-# throws Exception
-sub loadAll {
-    my ($self, $abeClientInformation) = @_;
-        my $recordStore = 'javax::microedition::rms::RecordStore'->openRecordStore($self->getRecordId($abeClientInformation), 1);
-        my $recordEnum = $recordStore->enumerateRecords($org::allbinary::game::configuration::persistance::NullRecordFilter::NULL_RECORD_FILTER, $org::allbinary::game::configuration::persistance::NullRecordComparator::NULL_RECORD_COMPARATOR, 1);
-        my $hashtable = undef;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $smallIntegerSingletonFactory = 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance();
-        my $id = 0;
-        while ($recordEnum->hasNextElement()) {
-            $id = $recordEnum->nextRecordId();
-            $stringBuffer->delete(0, $stringBuffer->length());
-            $self->{logUtil}->putF($stringBuffer->append($self->{persistanceStrings}->{LOADING_ID})->appendint($id)->toString(), $self, $self->{persistanceStrings}->{LOAD_ALL});
-            $hashtable = 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable();
-            $self->{valueList}->add($hashtable);
-            $self->{idList}->add($smallIntegerSingletonFactory->getAt($id));
+    method loadAll {abeClientInformation} {
+        set recordStore [::RecordStore::openRecordStore [my getRecordId $abeClientInformation] true]
+        set recordEnum [$recordStore enumerateRecords [::NullRecordFilter::staticGet_NULL_RECORD_FILTER] [::NullRecordComparator::staticGet_NULL_RECORD_COMPARATOR] true]
+        set hashtable {}
+        set stringBuffer [::StringMaker new]
+        set smallIntegerSingletonFactory [::SmallIntegerSingletonFactory::getInstance]
+        set id 0
+        while {[$recordEnum hasNextElement]} {
+            set id [$recordEnum nextRecordId]
+            $stringBuffer delete 0 [$stringBuffer length]
+            [my jget logUtil] putF [[[$stringBuffer append [[my jget persistanceStrings] jget LOADING_ID]] appendint $id] toString] [self] [[my jget persistanceStrings] jget LOAD_ALL]
+            set hashtable [[::StdUtil::getInstance] createHashtable]
+            [my jget valueList] add $hashtable
+            [my jget idList] add [$smallIntegerSingletonFactory getAt $id]
         }
-        $recordStore->closeRecordStore();
-}
+        $recordStore closeRecordStore
+    }
+    
 
-
-# throws Exception
-sub save {
-    my ($self, $abeClientInformation, $hashtable) = @_;
-        'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append($self->{persistanceStrings}->{NOT_SAVING})->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($hashtable))->toString(), $self, $self->{commonStrings}->{SAVE});
-        my $recordStore = 'javax::microedition::rms::RecordStore'->openRecordStore($self->getRecordId($abeClientInformation), 1);
-        my $gameActionInput = undef;
-        my $list = undef;
-        my $input = undef;
-        my $inputObjectArray = $self->{hashtableUtil}->getKeysAsArray($hashtable);
-        my $size = scalar(@{$inputObjectArray});
-        for (my $index = 0; $index < $size; $index++) {
-            $gameActionInput = $inputObjectArray->[$index];
-            $list = $hashtable->get($inputObjectArray->[$index]);
-            for (my $index2 = 0; $index2 < $list->size(); $index2++) {
-                $input = $list->get($index2);
+    method save {abeClientInformation hashtable} {
+        ::PreLogUtil::put [[[[::StringMaker new] append [[my jget persistanceStrings] jget NOT_SAVING]] append [[::StringUtil::getInstance] toString1 $hashtable]] toString] [self] [[my jget commonStrings] jget SAVE]
+        set recordStore [::RecordStore::openRecordStore [my getRecordId $abeClientInformation] true]
+        set gameActionInput {}
+        set list {}
+        set input {}
+        set inputObjectArray [[my jget hashtableUtil] getKeysAsArray $hashtable]
+        set size [$inputObjectArray length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set gameActionInput [$inputObjectArray get $index]
+            set list [$hashtable get [$inputObjectArray get $index]]
+            for {set index2 0} {[expr {$index2 < [$list size]}]} {jpostincr index2 1} {
+                set input [$list get $index2]
             }
         }
-        $recordStore->closeRecordStore();
+        $recordStore closeRecordStore
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::rms::RecordEnumeration ();
-use javax::microedition::rms::RecordStore ();
-use org::allbinary::game::configuration::persistance::BasicPersitance ();
-use org::allbinary::game::configuration::persistance::NullRecordComparator ();
-use org::allbinary::game::configuration::persistance::NullRecordFilter ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::HashtableUtil ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::util::ABHashtable ();
+namespace eval ::InputPersistance {
+}
 
-1;
 

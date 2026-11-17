@@ -11,64 +11,68 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic.notification
 
-package org::allbinary::game::ag::layer::hud::basic::notification::GameNotification;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_GAME_NOTIFICATION_EVENT, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::hud::event::GameNotificationEvent'->new('org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}, 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, 0, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{RED}, 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{FALSE}) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{stringList} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{timeList} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{colorList} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::GameNotification {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::GameNotification {
+    method initFields_GameNotification {} {
+        my jset stringList {}
+        my jset timeList {}
+        my jset colorList {}
+        my jset stringList [::BasicArrayListD new]
+        my jset timeList [::BasicArrayListD new]
+        my jset colorList [::BasicArrayListD new]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_GameNotification
+    }
+    
 
-sub add {
-    my ($self, $string, $seconds, $basicColor) = @_;
-        if (!$self->{stringList}->contains($string)) {
-            $self->{stringList}->add($string);
-            $self->{timeList}->add($seconds);
-            $self->{colorList}->add($basicColor);
+    method add {string seconds basicColor} {
+        if {[expr {![[my jget stringList] contains $string]}]} {
+            [my jget stringList] add $string
+            [my jget timeList] add $seconds
+            [my jget colorList] add $basicColor
         }
+    }
+    
+
+    method clear {} {
+        [my jget stringList] clear
+        [my jget timeList] clear
+        [my jget colorList] clear
+    }
+    
+
+    method getSize {} {
+        return [[my jget stringList] size]
+    }
 }
 
-
-sub clear {
-    my ($self) = @_;
-        $self->{stringList}->clear();
-        $self->{timeList}->clear();
-        $self->{colorList}->clear();
+namespace eval ::GameNotification {
+    variable NULL_GAME_NOTIFICATION_EVENTValue {}
+    variable NULL_GAME_NOTIFICATION_EVENTSet 0
+    proc staticGet_NULL_GAME_NOTIFICATION_EVENT {} {
+        variable NULL_GAME_NOTIFICATION_EVENTValue
+        variable NULL_GAME_NOTIFICATION_EVENTSet
+        if {!$NULL_GAME_NOTIFICATION_EVENTSet} {
+            set NULL_GAME_NOTIFICATION_EVENTSet 1
+            set NULL_GAME_NOTIFICATION_EVENTValue [::GameNotificationEvent new [[::NullUtil::getInstance] jget NULL_OBJECT] [[::StringUtil::getInstance] jget EMPTY_STRING] 0 [[::BasicColorFactory::getInstance] jget RED] [[::BooleanFactory::getInstance] jget FALSE]]
+        }
+        return $NULL_GAME_NOTIFICATION_EVENTValue
+    }
+    proc staticSet_NULL_GAME_NOTIFICATION_EVENT {value} {
+        variable NULL_GAME_NOTIFICATION_EVENTValue
+        variable NULL_GAME_NOTIFICATION_EVENTSet
+        set NULL_GAME_NOTIFICATION_EVENTSet 1
+        set NULL_GAME_NOTIFICATION_EVENTValue $value
+    }
 }
 
-
-sub getSize {
-    my ($self) = @_;
-        return $self->{stringList}->size();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::layer::hud::event::GameNotificationEvent ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::java::bool::BooleanFactory ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

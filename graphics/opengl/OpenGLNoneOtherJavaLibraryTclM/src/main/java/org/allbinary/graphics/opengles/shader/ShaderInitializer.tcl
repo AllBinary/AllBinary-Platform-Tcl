@@ -11,44 +11,52 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
-package org::allbinary::graphics::opengles::shader::ShaderInitializer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::opengles::shader::ShaderInitializer'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
+oo::class create ::ShaderInitializer {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::ShaderInitializer {
+    method initFields_ShaderInitializer {} {
+        my jset commonStrings {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_ShaderInitializer
+    }
+    
+    
+
+    method init {gl shader attributeArray} {
+        return [expr {-1}]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::opengles::shader::ShaderInitializer::instance;
+namespace eval ::ShaderInitializer {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ShaderInitializer new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ShaderInitializer::staticGet_instance]
+    }
 }
 
-
-sub init {
-    my ($self, $gl, $shader, $attributeArray) = @_;
-        return -1;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::khronos::opengles::GL10 ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

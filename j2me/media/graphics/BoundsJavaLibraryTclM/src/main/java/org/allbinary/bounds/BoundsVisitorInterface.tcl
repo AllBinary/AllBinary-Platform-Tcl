@@ -11,51 +11,49 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.bounds
 
-# Java interface
-package org::allbinary::bounds::BoundsVisitorInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getX {
-    my ($self) = @_;
-    die "abstract method getX";
+oo::class create ::BoundsVisitorInterface {
+    superclass ::JObject
 }
 
+oo::define ::BoundsVisitorInterface {
+    method initFields_BoundsVisitorInterface {} {
+        return
+    }
+    
 
-sub getY {
-    my ($self) = @_;
-    die "abstract method getY";
+    method getX {} {
+        error [jexception AbstractMethodError getX]
+    }
+    
+
+    method getY {} {
+        error [jexception AbstractMethodError getY]
+    }
+    
+
+    method maxX {} {
+        error [jexception AbstractMethodError maxX]
+    }
+    
+
+    method maxY {} {
+        error [jexception AbstractMethodError maxY]
+    }
+    
+
+    method minX {} {
+        error [jexception AbstractMethodError minX]
+    }
+    
+
+    method minY {} {
+        error [jexception AbstractMethodError minY]
+    }
 }
 
-
-sub maxX {
-    my ($self) = @_;
-    die "abstract method maxX";
+namespace eval ::BoundsVisitorInterface {
 }
 
-
-sub maxY {
-    my ($self) = @_;
-    die "abstract method maxY";
-}
-
-
-sub minX {
-    my ($self) = @_;
-    die "abstract method minX";
-}
-
-
-sub minY {
-    my ($self) = @_;
-    die "abstract method minY";
-}
-
-
-1;
 

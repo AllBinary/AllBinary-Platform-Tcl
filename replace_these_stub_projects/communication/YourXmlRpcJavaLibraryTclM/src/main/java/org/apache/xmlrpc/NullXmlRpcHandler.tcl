@@ -11,35 +11,46 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.apache.xmlrpc
 
-package org::apache::xmlrpc::NullXmlRpcHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::apache::xmlrpc::XmlRpcHandler';
-
-tie our $NULL_XML_RPC_HANDLER, 'java::lang::LazyStatic', sub { 'org::apache::xmlrpc::NullXmlRpcHandler'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullXmlRpcHandler {
+    superclass ::JObject
 }
 
+oo::define ::NullXmlRpcHandler {
+    method initFields_NullXmlRpcHandler {} {
+        return
+    }
 
-# throws Exception
-sub execute {
-    my ($self, $method, $params) = @_;
-        return 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT};
+    constructor {} {
+        next
+        my initFields_NullXmlRpcHandler
+    }
+    
+
+    method execute {method params} {
+        return [[::NullUtil::getInstance] jget NULL_OBJECT]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::logic::NullUtil ();
-use org::apache::xmlrpc::XmlRpcHandler ();
+namespace eval ::NullXmlRpcHandler {
+    variable NULL_XML_RPC_HANDLERValue {}
+    variable NULL_XML_RPC_HANDLERSet 0
+    proc staticGet_NULL_XML_RPC_HANDLER {} {
+        variable NULL_XML_RPC_HANDLERValue
+        variable NULL_XML_RPC_HANDLERSet
+        if {!$NULL_XML_RPC_HANDLERSet} {
+            set NULL_XML_RPC_HANDLERSet 1
+            set NULL_XML_RPC_HANDLERValue [::NullXmlRpcHandler new]
+        }
+        return $NULL_XML_RPC_HANDLERValue
+    }
+    proc staticSet_NULL_XML_RPC_HANDLER {value} {
+        variable NULL_XML_RPC_HANDLERValue
+        variable NULL_XML_RPC_HANDLERSet
+        set NULL_XML_RPC_HANDLERSet 1
+        set NULL_XML_RPC_HANDLERValue $value
+    }
+}
 
-1;
 

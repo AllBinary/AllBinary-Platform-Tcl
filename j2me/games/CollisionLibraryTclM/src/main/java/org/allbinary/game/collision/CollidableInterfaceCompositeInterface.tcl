@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-# Java interface
-package org::allbinary::game::collision::CollidableInterfaceCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getCollidableInferface {
-    my ($self) = @_;
-    die "abstract method getCollidableInferface";
+oo::class create ::CollidableInterfaceCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::CollidableInterfaceCompositeInterface {
+    method initFields_CollidableInterfaceCompositeInterface {} {
+        return
+    }
+    
 
-1;
+    method getCollidableInferface {} {
+        error [jexception AbstractMethodError getCollidableInferface]
+    }
+}
+
+namespace eval ::CollidableInterfaceCompositeInterface {
+}
+
 

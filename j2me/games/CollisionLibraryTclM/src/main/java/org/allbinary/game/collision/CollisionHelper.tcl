@@ -11,50 +11,43 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-package org::allbinary::game::collision::CollisionHelper;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{sourceLayerInterface} = undef;
+oo::class create ::CollisionHelper {
+    superclass ::JObject
 }
 
+oo::define ::CollisionHelper {
+    method initFields_CollisionHelper {} {
+        my jset sourceLayerInterface {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $sourceLayerInterface) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{sourceLayerInterface} = $sourceLayerInterface;
-    return $self;
+    constructor {sourceLayerInterface} {
+        next
+        my initFields_CollisionHelper
+        my jset sourceLayerInterface $sourceLayerInterface
+    }
+    
+
+    method isCollidable {layerInterface} {
+        return true
+    }
+    
+
+    method getOwnerLayerInterface {} {
+        return [my jget sourceLayerInterface]
+    }
+    
+
+    method setOwnerLayerInterface {sourceLayerInterface} {
+        my jset sourceLayerInterface $sourceLayerInterface
+    }
 }
 
-
-sub isCollidable {
-    my ($self, $layerInterface) = @_;
-        return 1;
+namespace eval ::CollisionHelper {
 }
 
-
-sub getOwnerLayerInterface {
-    my ($self) = @_;
-        return $self->{sourceLayerInterface};
-}
-
-
-sub setOwnerLayerInterface {
-    my ($self, $sourceLayerInterface) = @_;
-        $self->{sourceLayerInterface} = $sourceLayerInterface;
-}
-
-use java::lang::Object ();
-use org::allbinary::game::layer::CollidableCompositeLayer ();
-use org::allbinary::layer::AllBinaryLayer ();
-
-1;
 

@@ -11,48 +11,45 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.transition.shake
 
-package org::allbinary::animation::transition::shake::ShakeAnimationListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ShakeAnimationListener {
+    superclass ::JObject
 }
 
+oo::define ::ShakeAnimationListener {
+    method initFields_ShakeAnimationListener {} {
+        return
+    }
 
-sub onSmallShakeEvent {
-    my ($self) = @_;
+    constructor {} {
+        next
+        my initFields_ShakeAnimationListener
+    }
+    
+
+    method onSmallShakeEvent {} {
+    }
+    
+
+    method onMediumShakeEvent {} {
+    }
+    
+
+    method onLargeShakeEvent {} {
+    }
+    
+
+    method onShakeEvent {shakeEvent} {
+    }
+    
+
+    method getType {} {
+        return 0
+    }
 }
 
-
-sub onMediumShakeEvent {
-    my ($self) = @_;
+namespace eval ::ShakeAnimationListener {
 }
 
-
-sub onLargeShakeEvent {
-    my ($self) = @_;
-}
-
-
-sub onShakeEvent {
-    my ($self, $shakeEvent) = @_;
-}
-
-
-sub getType {
-    my ($self) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-
-1;
 

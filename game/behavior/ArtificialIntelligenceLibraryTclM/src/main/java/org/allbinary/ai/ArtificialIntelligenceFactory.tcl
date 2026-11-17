@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.ai
 
-package org::allbinary::ai::ArtificialIntelligenceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::ai::ArtificialIntelligenceFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ArtificialIntelligenceFactory {
+    superclass ::JObject
 }
 
+oo::define ::ArtificialIntelligenceFactory {
+    method initFields_ArtificialIntelligenceFactory {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($self, $anyType) = @_;
-        die ("RuntimeException");
+    constructor {} {
+        next
+        my initFields_ArtificialIntelligenceFactory
+    }
+    
+
+    method getInstance {anyType} {
+        error [jexception RuntimeException {}]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::ai::ArtificialIntelligenceFactoryInterface ();
+namespace eval ::ArtificialIntelligenceFactory {
+}
 
-1;
 

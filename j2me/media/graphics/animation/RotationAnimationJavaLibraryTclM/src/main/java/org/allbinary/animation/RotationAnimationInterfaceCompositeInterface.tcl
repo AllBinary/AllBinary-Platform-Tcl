@@ -11,29 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-# Java interface
-package org::allbinary::animation::RotationAnimationInterfaceCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::IndexedAnimationInterfaceCompositeInterface';
-
-
-
-sub getRotationAnimationInterface {
-    my ($self) = @_;
-    die "abstract method getRotationAnimationInterface";
+oo::class create ::RotationAnimationInterfaceCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::RotationAnimationInterfaceCompositeInterface {
+    method initFields_RotationAnimationInterfaceCompositeInterface {} {
+        return
+    }
+    
 
-sub setFrame {
-    my ($self, $index) = @_;
-    die "abstract method setFrame";
+    method getRotationAnimationInterface {} {
+        error [jexception AbstractMethodError getRotationAnimationInterface]
+    }
+    
+
+    method setFrame {index} {
+        error [jexception AbstractMethodError setFrame]
+    }
 }
 
-use org::allbinary::animation::IndexedAnimationInterfaceCompositeInterface ();
+namespace eval ::RotationAnimationInterfaceCompositeInterface {
+}
 
-1;
 

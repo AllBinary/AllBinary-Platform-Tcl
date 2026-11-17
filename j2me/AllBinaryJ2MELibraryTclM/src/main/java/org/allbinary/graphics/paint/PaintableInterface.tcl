@@ -11,28 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-# Java interface
-package org::allbinary::graphics::paint::PaintableInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-    die "abstract method paint";
+oo::class create ::PaintableInterface {
+    superclass ::JObject
 }
 
+oo::define ::PaintableInterface {
+    method initFields_PaintableInterface {} {
+        return
+    }
+    
 
-sub paintThreed {
-    my ($self, $graphics) = @_;
-    die "abstract method paintThreed";
+    method paint {graphics} {
+        error [jexception AbstractMethodError paint]
+    }
+    
+
+    method paintThreed {graphics} {
+        error [jexception AbstractMethodError paintThreed]
+    }
 }
 
-use javax::microedition::lcdui::Graphics ();
+namespace eval ::PaintableInterface {
+}
 
-1;
 

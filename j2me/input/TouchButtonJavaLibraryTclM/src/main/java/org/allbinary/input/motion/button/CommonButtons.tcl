@@ -11,60 +11,69 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::CommonButtons;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::input::motion::button::CommonButtons'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{STANDARD_BUTTON_SIZE} = undef;
-    $self->{NORMAL_BUTTON} = undef;
-    $self->{LARGE_BUTTON} = undef;
+oo::class create ::CommonButtons {
+    superclass ::JObject
 }
 
+oo::define ::CommonButtons {
+    method initFields_CommonButtons {} {
+        my jset STANDARD_BUTTON_SIZE 0
+        my jset NORMAL_BUTTON {}
+        my jset LARGE_BUTTON {}
+        
+        
+        
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::motion::button::CommonButtons::instance;
-}
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $displayInfo = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-        my $commonButtonSize = 128;
-        while ($commonButtonSize > 64) {
-            my $totalColumns = $displayInfo->getLastWidth() / $commonButtonSize;
-            my $totalRows = $displayInfo->getLastHeight() / $commonButtonSize;
-            my $max = $totalColumns;
-            if ($totalRows > $max) {
-                $max = $totalRows;
+    constructor {} {
+        next
+        my initFields_CommonButtons
+        set displayInfo [::DisplayInfoSingleton::getInstance]
+        set commonButtonSize 128
+        while {[expr {$commonButtonSize > 64}]} {
+            set totalColumns [expr {[$displayInfo getLastWidth] / $commonButtonSize}]
+            set totalRows [expr {[$displayInfo getLastHeight] / $commonButtonSize}]
+            set max $totalColumns
+            if {[expr {$totalRows > $max}]} {
+                set max $totalRows
             }
-            if ($max > 9) {
-                last;
+            if {[expr {$max > 9}]} {
+                break
             }
-            $commonButtonSize = POSIX::floor(($commonButtonSize) / (2 ** (1)));
+            set commonButtonSize [expr {$commonButtonSize >> 1}]
         }
-        $self->{STANDARD_BUTTON_SIZE} = $commonButtonSize;
-        $self->{NORMAL_BUTTON} = 'org::allbinary::graphics::Rectangle'->new('org::allbinary::graphics::PointFactory'->getInstance()->{ZERO_ZERO}, $self->{STANDARD_BUTTON_SIZE}, $self->{STANDARD_BUTTON_SIZE});
-        $self->{LARGE_BUTTON} = 'org::allbinary::graphics::Rectangle'->new('org::allbinary::graphics::PointFactory'->getInstance()->{ZERO_ZERO}, $self->{STANDARD_BUTTON_SIZE} << 1, $self->{STANDARD_BUTTON_SIZE} << 1);
-    return $self;
+        my jset STANDARD_BUTTON_SIZE $commonButtonSize
+        my jset NORMAL_BUTTON [::Rectangle new [[::PointFactory::getInstance] jget ZERO_ZERO] [my jget STANDARD_BUTTON_SIZE] [my jget STANDARD_BUTTON_SIZE]]
+        my jset LARGE_BUTTON [::Rectangle new [[::PointFactory::getInstance] jget ZERO_ZERO] [jint [expr {[my jget STANDARD_BUTTON_SIZE] << 1}]] [jint [expr {[my jget STANDARD_BUTTON_SIZE] << 1}]]]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
+namespace eval ::CommonButtons {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::CommonButtons new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::CommonButtons::staticGet_instance]
+    }
+}
 
-1;
 

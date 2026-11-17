@@ -11,38 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::GameCanvasNonBotPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gameCanvas} = undef;
+oo::class create ::GameCanvasNonBotPaintable {
+    superclass ::Paintable
 }
 
+oo::define ::GameCanvasNonBotPaintable {
+    method initFields_GameCanvasNonBotPaintable {} {
+        my jset gameCanvas {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{gameCanvas} = $gameCanvas;
-    return $self;
+    constructor {gameCanvas} {
+        next
+        my initFields_GameCanvasNonBotPaintable
+        my jset gameCanvas $gameCanvas
+    }
+    
+
+    method paint {graphics} {
+        [my jget gameCanvas] nonBotPaint $graphics
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{gameCanvas}->nonBotPaint($graphics);
+namespace eval ::GameCanvasNonBotPaintable {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::paint::Paintable ();
-
-1;
 

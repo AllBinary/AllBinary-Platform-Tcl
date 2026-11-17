@@ -11,42 +11,39 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-package org::allbinary::logic::util::cache::BasicArrayListResetablePool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::cache::AbstractArrayListPool';
-
-
-
-sub new {
-    my ($class, $cacheableInterfaceFactoryInterface) = @_;
-    my $self = $class->SUPER::new($cacheableInterfaceFactoryInterface);
-        # super(...) made $self above
-    return $self;
+oo::class create ::BasicArrayListResetablePool {
+    superclass ::AbstractArrayListPool
 }
 
+oo::define ::BasicArrayListResetablePool {
+    method initFields_BasicArrayListResetablePool {} {
+        return
+    }
+    
 
-sub clear {
-    my ($self) = @_;
-}
+    constructor {cacheableInterfaceFactoryInterface} {
+        next $cacheableInterfaceFactoryInterface
+        my initFields_BasicArrayListResetablePool
+    }
+    
 
+    method clear {} {
+    }
+    
 
-# throws Exception
-sub remove {
-    my ($self, $key) = @_;
-        my $size = $self->{buffers}->size();
-        if ($size > 0) {
-            return $self->{buffers}->removeAt($size - 1);
+    method remove {key} {
+        set size [[my jget buffers] size]
+        if {[expr {$size > 0}]} {
+            return [[my jget buffers] removeAt [jint [expr {$size - 1}]]]
         } else {
-            return $self->{cacheableInterfaceFactoryInterface}->getInstance($key);
+            return [[my jget cacheableInterfaceFactoryInterface] getInstance $key]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::util::cache::AbstractArrayListPool ();
+namespace eval ::BasicArrayListResetablePool {
+}
 
-1;
 

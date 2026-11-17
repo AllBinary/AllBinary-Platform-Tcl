@@ -11,61 +11,79 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::NullIndexedAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::AnimationInterfaceFactoryInterface','org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface';
-
-our $NULL_INDEXED_ANIMATION_ARRAY = [(undef) x (0)];
-tie our $NULL_INDEXED_ANIMATION_FACTORY, 'java::lang::LazyStatic', sub { 'org::allbinary::animation::NullIndexedAnimationFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NULL_ANIMATION} = 'org::allbinary::animation::NullIndexedAnimationInner'->new();
+oo::class create ::NullIndexedAnimationFactory {
+    superclass ::JObject
 }
 
+oo::define ::NullIndexedAnimationFactory {
+    method initFields_NullIndexedAnimationFactory {} {
+        my jset NULL_ANIMATION {}
+        my jset NULL_ANIMATION [::NullIndexedAnimationInner new]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_NullIndexedAnimationFactory
+    }
+    
+    
+
+    method getInstance {instanceId} {
+        return [my jget NULL_ANIMATION]
+    }
+    
+
+    method getInstanceAnimation {animationInterface} {
+        return [my jget NULL_ANIMATION]
+    }
+    
+
+    method setInitialScale {scaleProperties} {
+    }
 }
 
-
-sub getFactoryInstance {
-    my ($class) = @_;
-        return $org::allbinary::animation::NullIndexedAnimationFactory::NULL_INDEXED_ANIMATION_FACTORY;
+namespace eval ::NullIndexedAnimationFactory {
+    variable NULL_INDEXED_ANIMATION_ARRAYValue {}
+    variable NULL_INDEXED_ANIMATION_ARRAYSet 0
+    proc staticGet_NULL_INDEXED_ANIMATION_ARRAY {} {
+        variable NULL_INDEXED_ANIMATION_ARRAYValue
+        variable NULL_INDEXED_ANIMATION_ARRAYSet
+        if {!$NULL_INDEXED_ANIMATION_ARRAYSet} {
+            set NULL_INDEXED_ANIMATION_ARRAYSet 1
+            set NULL_INDEXED_ANIMATION_ARRAYValue [jarray 0 {}]
+        }
+        return $NULL_INDEXED_ANIMATION_ARRAYValue
+    }
+    proc staticSet_NULL_INDEXED_ANIMATION_ARRAY {value} {
+        variable NULL_INDEXED_ANIMATION_ARRAYValue
+        variable NULL_INDEXED_ANIMATION_ARRAYSet
+        set NULL_INDEXED_ANIMATION_ARRAYSet 1
+        set NULL_INDEXED_ANIMATION_ARRAYValue $value
+    }
+    variable NULL_INDEXED_ANIMATION_FACTORYValue {}
+    variable NULL_INDEXED_ANIMATION_FACTORYSet 0
+    proc staticGet_NULL_INDEXED_ANIMATION_FACTORY {} {
+        variable NULL_INDEXED_ANIMATION_FACTORYValue
+        variable NULL_INDEXED_ANIMATION_FACTORYSet
+        if {!$NULL_INDEXED_ANIMATION_FACTORYSet} {
+            set NULL_INDEXED_ANIMATION_FACTORYSet 1
+            set NULL_INDEXED_ANIMATION_FACTORYValue [::NullIndexedAnimationFactory new]
+        }
+        return $NULL_INDEXED_ANIMATION_FACTORYValue
+    }
+    proc staticSet_NULL_INDEXED_ANIMATION_FACTORY {value} {
+        variable NULL_INDEXED_ANIMATION_FACTORYValue
+        variable NULL_INDEXED_ANIMATION_FACTORYSet
+        set NULL_INDEXED_ANIMATION_FACTORYSet 1
+        set NULL_INDEXED_ANIMATION_FACTORYValue $value
+    }
+    proc getFactoryInstance {} {
+        return [::NullIndexedAnimationFactory::staticGet_NULL_INDEXED_ANIMATION_FACTORY]
+    }
 }
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        return $self->{NULL_ANIMATION};
-}
-
-
-# throws Exception
-sub getInstanceAnimation {
-    my ($self, $animationInterface) = @_;
-        return $self->{NULL_ANIMATION};
-}
-
-
-sub setInitialScale {
-    my ($self, $scaleProperties) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::media::ScaleProperties ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::NullIndexedAnimationInner ();
-
-1;
 

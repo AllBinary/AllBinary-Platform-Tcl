@@ -11,31 +11,45 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::ThrustAIVisitorFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::ag::ai::ThrustAIVisitor'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ThrustAIVisitorFactory {
+    superclass ::JObject
 }
 
+oo::define ::ThrustAIVisitorFactory {
+    method initFields_ThrustAIVisitorFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::ag::ai::ThrustAIVisitorFactory::instance;
+    constructor {} {
+        next
+        my initFields_ThrustAIVisitorFactory
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::ag::ai::ThrustAIVisitor ();
+namespace eval ::ThrustAIVisitorFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ThrustAIVisitor new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ThrustAIVisitorFactory::staticGet_instance]
+    }
+}
 
-1;
 

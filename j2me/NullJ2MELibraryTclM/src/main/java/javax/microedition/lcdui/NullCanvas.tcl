@@ -1,131 +1,125 @@
 # Generated Code Do Not Modify
+# package javax.microedition.lcdui
 
-package javax::microedition::lcdui::NullCanvas;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'javax::microedition::lcdui::Canvas';
-
-tie our $NULL_CANVAS, 'java::lang::LazyStatic', sub { 'javax::microedition::lcdui::NullCanvas'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::NullCanvas {
+    superclass ::Canvas
 }
 
+oo::define ::NullCanvas {
+    method initFields_NullCanvas {} {
+        return
+    }
+    
 
-sub setFullScreenMode {
-    my ($self, $mode) = @_;
+    constructor {} {
+        next
+        my initFields_NullCanvas
+    }
+    
+
+    method setFullScreenMode {mode} {
+    }
+    
+
+    method sizeChanged {w h} {
+    }
+    
+
+    method getCommandStack {} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method isCommand {command} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method addCommand {command} {
+    }
+    
+
+    method removeCommand {command} {
+    }
+    
+
+    method removeAllCommands {} {
+    }
+    
+
+    method setCommandListener {l} {
+    }
+    
+
+    method getCustomCommandListener {} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method isPaused {} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method removePauseCommand {} {
+    }
+    
+
+    method pause {} {
+    }
+    
+
+    method unPause {} {
+    }
+    
+
+    method process {} {
+    }
+    
+
+    method paint {graphics} {
+    }
+    
+
+    method destroy {} {
+    }
+    
+
+    method setPaused {isPaused} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method pointerDragged {x y} {
+    }
+    
+
+    method pointerPressed {x y} {
+    }
+    
+
+    method pointerReleased {x y} {
+    }
 }
 
-
-sub sizeChanged {
-    my ($self, $w, $h) = @_;
+namespace eval ::NullCanvas {
+    variable NULL_CANVASValue {}
+    variable NULL_CANVASSet 0
+    proc staticGet_NULL_CANVAS {} {
+        variable NULL_CANVASValue
+        variable NULL_CANVASSet
+        if {!$NULL_CANVASSet} {
+            set NULL_CANVASSet 1
+            set NULL_CANVASValue [::NullCanvas new]
+        }
+        return $NULL_CANVASValue
+    }
+    proc staticSet_NULL_CANVAS {value} {
+        variable NULL_CANVASValue
+        variable NULL_CANVASSet
+        set NULL_CANVASSet 1
+        set NULL_CANVASValue $value
+    }
 }
 
-
-sub getCommandStack {
-    my ($self) = @_;
-        die ("RuntimeException");
-}
-
-
-sub isCommand {
-    my ($self, $command) = @_;
-        die ("RuntimeException");
-}
-
-
-sub addCommand {
-    my ($self, $command) = @_;
-}
-
-
-sub removeCommand {
-    my ($self, $command) = @_;
-}
-
-
-sub removeAllCommands {
-    my ($self) = @_;
-}
-
-
-sub setCommandListener {
-    my ($self, $l) = @_;
-}
-
-
-sub getCustomCommandListener {
-    my ($self) = @_;
-        die ("RuntimeException");
-}
-
-
-sub isPaused {
-    my ($self) = @_;
-        die ("RuntimeException");
-}
-
-
-sub removePauseCommand {
-    my ($self) = @_;
-}
-
-
-sub pause {
-    my ($self) = @_;
-}
-
-
-sub unPause {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub process {
-    my ($self) = @_;
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-}
-
-
-sub destroy {
-    my ($self) = @_;
-}
-
-
-sub setPaused {
-    my ($self, $isPaused) = @_;
-        die ("RuntimeException");
-}
-
-
-sub pointerDragged {
-    my ($self, $x, $y) = @_;
-}
-
-
-sub pointerPressed {
-    my ($self, $x, $y) = @_;
-}
-
-
-sub pointerReleased {
-    my ($self, $x, $y) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use java::util::Stack ();
-use javax::microedition::lcdui::Canvas ();
-
-1;
 

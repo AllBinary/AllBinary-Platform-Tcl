@@ -11,72 +11,57 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.scroller
 
-package org::allbinary::game::ag::ai::scroller::TerrainPatrolAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ag::ai::scroller::PacePatrolAI';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{terrainEventListener} = 'org::allbinary::game::terrain::TerrainEventListener'->new();
-    $self->{DOWN} = 'org::allbinary::math::AngleFactory'->getInstance()->{DOWN};
-    $self->{CLIFF} = 'org::allbinary::game::terrain::BasicTerrainInfo'->new($self->{DOWN});
+oo::class create ::TerrainPatrolAI {
+    superclass ::PacePatrolAI
 }
 
+oo::define ::TerrainPatrolAI {
+    method initFields_TerrainPatrolAI {} {
+        my jset terrainEventListener {}
+        my jset DOWN {}
+        my jset CLIFF {}
+        my jset terrainEventListener [::TerrainEventListener new]
+        my jset DOWN [[::AngleFactory::getInstance] jget DOWN]
+        my jset CLIFF [::BasicTerrainInfo new [my jget DOWN]]
+        return
+    }
+    
 
-sub new {
-    my ($class, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($hashtable, $ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        'org::allbinary::game::terrain::TerrainEventHandler'->getInstance($ownerLayerInterface)->addListener($self->{terrainEventListener});
-        $self->{terrainEventListener}->onTerrainEvent('org::allbinary::game::terrain::TerrainEventCircularStaticPool'->getInstance()->getNext($self->{CLIFF}));
-    return $self;
-}
+    constructor {hashtable ownerLayerInterface gameInput} {
+        next $hashtable $ownerLayerInterface $gameInput
+        my initFields_TerrainPatrolAI
+        [::TerrainEventHandler::getInstance $ownerLayerInterface] addListener [my jget terrainEventListener]
+        [my jget terrainEventListener] onTerrainEvent [[::TerrainEventCircularStaticPool::getInstance] getNext [my jget CLIFF]]
+    }
+    
 
+    method update {} {
+        next
+        my changeDirectionIfCliffReached
+    }
+    
 
-sub update {
-    my ($self) = @_;
-        $self->SUPER::update();
-        $self->changeDirectionIfCliffReached();
-}
-
-
-sub changeDirectionIfCliffReached {
-    my ($self) = @_;
-        my $list = $self->{terrainEventListener}->getList();
-        my $size = $list->size();
-        for (my $index = 0; $index < $size; $index++) {
-            my $terrainEvent = $list->removeAt($index);
-            my $basicTerrainInfo = $terrainEvent->getBasicTerrainInfo();
-            my $angle = $basicTerrainInfo->getAngle();
-            if ($angle == $self->{DOWN}) {
-                $self->nextDirection();
-                if (!$self->{isFollowLimitedByTerrain}) {
-                    $self->{logUtil}->putF("Following Limited", $self, "onTerrainEvent");
-                    $self->{isFollowLimitedByTerrain} = 1;
+    method changeDirectionIfCliffReached {} {
+        set list [[my jget terrainEventListener] getList]
+        set size [$list size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set terrainEvent [$list removeAt $index]
+            set basicTerrainInfo [$terrainEvent getBasicTerrainInfo]
+            set angle [$basicTerrainInfo getAngle]
+            if {[expr {$angle eq [my jget DOWN]}]} {
+                my nextDirection
+                if {[expr {![my jget isFollowLimitedByTerrain]}]} {
+                    [my jget logUtil] putF "Following Limited" [self] "onTerrainEvent"
+                    my jset isFollowLimitedByTerrain true
                 }
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::game::terrain::BasicTerrainInfo ();
-use org::allbinary::game::terrain::TerrainEvent ();
-use org::allbinary::game::terrain::TerrainEventCircularStaticPool ();
-use org::allbinary::game::terrain::TerrainEventHandler ();
-use org::allbinary::game::terrain::TerrainEventListener ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::math::Angle ();
-use org::allbinary::math::AngleFactory ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::game::ag::ai::scroller::PacePatrolAI ();
+namespace eval ::TerrainPatrolAI {
+}
 
-1;
 

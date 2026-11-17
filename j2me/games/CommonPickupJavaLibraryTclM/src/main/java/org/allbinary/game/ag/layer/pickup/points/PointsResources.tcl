@@ -11,40 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.pickup.points
 
-package org::allbinary::game::ag::layer::pickup::points::PointsResources;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::ag::layer::pickup::points::PointsResources'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{RESOURCE} = "points_drop_20_by_20.png";
-    $self->{RESOURCE_2} = "points_2_drop_20_by_20.png";
-    $self->{RESOURCE_3} = "points_3_drop_20_by_20.png";
-    $self->{RESOURCE_4} = "points_4_drop_20_by_20.png";
+oo::class create ::PointsResources {
+    superclass ::JObject
 }
 
+oo::define ::PointsResources {
+    method initFields_PointsResources {} {
+        my jset RESOURCE {}
+        my jset RESOURCE_2 {}
+        my jset RESOURCE_3 {}
+        my jset RESOURCE_4 {}
+        my jset RESOURCE "points_drop_20_by_20.png"
+        my jset RESOURCE_2 "points_2_drop_20_by_20.png"
+        my jset RESOURCE_3 "points_3_drop_20_by_20.png"
+        my jset RESOURCE_4 "points_4_drop_20_by_20.png"
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_PointsResources
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::ag::layer::pickup::points::PointsResources::SINGLETON;
+namespace eval ::PointsResources {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::PointsResources new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::PointsResources::staticGet_SINGLETON]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

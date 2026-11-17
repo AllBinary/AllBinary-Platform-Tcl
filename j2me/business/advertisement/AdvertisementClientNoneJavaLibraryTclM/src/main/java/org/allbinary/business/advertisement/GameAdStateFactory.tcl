@@ -1,59 +1,63 @@
 # Generated Code Do Not Modify
+# package org.allbinary.business.advertisement
 
-package org::allbinary::business::advertisement::GameAdStateFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::business::advertisement::GameAdStateFactoryInterface';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::business::advertisement::GameAdStateFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gameAdStateArray} = ['org::allbinary::game::GameAdState'->new('org::allbinary::business::advertisement::AppNameLicensingAdConfiguration'->new())];
-    $self->{gameAdState} = $self->{gameAdStateArray}->[0];
+oo::class create ::GameAdStateFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::GameAdStateFactory {
+    method initFields_GameAdStateFactory {} {
+        my jset gameAdStateArray {}
+        my jset gameAdState {}
+        my jset gameAdStateArray [jarrayfrom [list [::GameAdState new [::AppNameLicensingAdConfiguration new]]]]
+        my jset gameAdState [[my jget gameAdStateArray] get 0]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_GameAdStateFactory
+    }
+    
+    
+
+    method getCurrentInstance {} {
+        return [my jget gameAdState]
+    }
+    
+
+    method getInstanceForApp {softwareInformation} {
+        my jset gameAdState [[my jget gameAdStateArray] get 0]
+        return [[my jget gameAdStateArray] get 0]
+    }
+    
+
+    method isEnabled {} {
+        return false
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::business::advertisement::GameAdStateFactory::instance;
+namespace eval ::GameAdStateFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameAdStateFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameAdStateFactory::staticGet_instance]
+    }
 }
 
-
-sub getCurrentInstance {
-    my ($self) = @_;
-        return $self->{gameAdState};
-}
-
-
-# throws Exception
-sub getInstanceForApp {
-    my ($self, $softwareInformation) = @_;
-        $self->{gameAdState} = $self->{gameAdStateArray}->[0];
-        return $self->{gameAdStateArray}->[0];
-}
-
-
-sub isEnabled {
-    my ($self) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::GameAdState ();
-use org::allbinary::logic::system::SoftwareInformation ();
-use org::allbinary::business::advertisement::GameAdStateFactoryInterface ();
-use org::allbinary::business::advertisement::AppNameLicensingAdConfiguration ();
-
-1;
 

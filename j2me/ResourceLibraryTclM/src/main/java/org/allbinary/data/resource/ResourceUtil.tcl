@@ -11,101 +11,114 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.data.resource
 
 #J2SE - J2ME
-package org::allbinary::data::resource::ResourceUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $classLoader, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::data::resource::ResourceUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::ResourceUtil {
+    superclass ::JObject
 }
 
+oo::define ::ResourceUtil {
+    method initFields_ResourceUtil {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::data::resource::ResourceUtil::instance;
-}
+    constructor {} {
+        next
+        my initFields_ResourceUtil
+    }
+    
 
+    method setLoadingPaths {path ext} {
+        [my jget logUtil] putF [[::CommonStrings::getInstance] jget NOT_IMPLEMENTED] [self] "setLoadingPaths"
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+    method setClassLoader {classLoader} {
+        [my jget logUtil] putF [[[[::StringMaker new] append "Resource Loader: "] append [jclassname $classLoader]] toString] [self] "setClassLoader"
+        ::ResourceUtil::staticSet_classLoader $classLoader
+    }
+    
 
-
-sub setLoadingPaths {
-    my ($self, $path, $ext) = @_;
-        $self->{logUtil}->putF('org::allbinary::string::CommonStrings'->getInstance()->{NOT_IMPLEMENTED}, $self, "setLoadingPaths");
-}
-
-
-sub setClassLoader {
-    my ($self, $classLoader) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Resource Loader: ")->append(ref($classLoader))->toString(), $self, "setClassLoader");
-        $org::allbinary::data::resource::ResourceUtil::classLoader = $classLoader;
-}
-
-
-# throws Exception
-sub getResourceAsStream {
-    my ($self, $resource) = @_;
-        my $inputStream = $self->getResourceAsStreamAtStart($resource, 2);
-        if (!defined($inputStream)) {
-            $inputStream = $self->getResourceAsStreamAtStart($resource, 1);
-            if (!defined($inputStream)) {
-                die ('org::allbinary::logic::string::StringMaker'->new()->append("Unable to obtain: ")->append($resource)->toString());
+    method getResourceAsStream {resource} {
+        set inputStream [my getResourceAsStreamAtStart $resource 2]
+        if {[expr {$inputStream eq {}}]} {
+            set inputStream [my getResourceAsStreamAtStart $resource 1]
+            if {[expr {$inputStream eq {}}]} {
+                error [jexception Exception [[[[::StringMaker new] append "Unable to obtain: "] append $resource] toString]]
             }
         }
-        return $inputStream;
+        return $inputStream
+    }
+    
+
+    method getResourceAsStreamAtStart {resource startIndex} {
+        set commonSeps [::CommonSeps::getInstance]
+        set index [string first [$commonSeps jget COLON] $resource]
+        set resourcePath [jsubstring $resource [jint [expr {$index + $startIndex}]]]
+        set inputStream [[jclassname $resource] getResourceAsStream $resourcePath]
+        if {[expr {$inputStream ne {}}]} {
+            return $inputStream
+        }
+        set classLoader [::ResourceUtil::staticGet_classLoader]
+        set inputStream [$classLoader getResourceAsStream $resourcePath]
+        if {[expr {$inputStream ne {}}]} {
+            return $inputStream
+        }
+        set inputStream [[[::Thread::currentThread] getContextClassLoader] getResourceAsStream $resourcePath]
+        if {[expr {$inputStream ne {}}]} {
+            return $inputStream
+        }
+        return $inputStream
+    }
+    
+
+    method addResource {resource value} {
+    }
 }
 
-
-# throws Exception
-sub getResourceAsStreamAtStart {
-    my ($self, $resource, $startIndex) = @_;
-        my $commonSeps = 'org::allbinary::string::CommonSeps'->getInstance();
-        my $index = index($resource, $commonSeps->{COLON});
-        my $resourcePath = substr($resource, $index + $startIndex);
-        my $inputStream = ref($resource)->getResourceAsStream($resourcePath);
-        if (defined($inputStream)) {
-            return $inputStream;
+namespace eval ::ResourceUtil {
+    variable classLoaderValue {}
+    variable classLoaderSet 0
+    proc staticGet_classLoader {} {
+        variable classLoaderValue
+        variable classLoaderSet
+        if {!$classLoaderSet} {
+            set classLoaderSet 1
+            set classLoaderValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        my $classLoader = $org::allbinary::data::resource::ResourceUtil::classLoader;
-        $inputStream = $classLoader->getResourceAsStream($resourcePath);
-        if (defined($inputStream)) {
-            return $inputStream;
+        return $classLoaderValue
+    }
+    proc staticSet_classLoader {value} {
+        variable classLoaderValue
+        variable classLoaderSet
+        set classLoaderSet 1
+        set classLoaderValue $value
+    }
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ResourceUtil new]
         }
-        $inputStream = 'java::lang::Thread'->currentThread()->getContextClassLoader()->getResourceAsStream($resourcePath);
-        if (defined($inputStream)) {
-            return $inputStream;
-        }
-        return $inputStream;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ResourceUtil::staticGet_instance]
+    }
 }
 
-
-sub addResource {
-    my ($self, $resource, $value) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::InputStream ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::string::CommonStrings ();
-use java::lang::Thread ();
-
-1;
 

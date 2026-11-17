@@ -11,27 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game
 
-# Java interface
-package org::allbinary::game::IntermissionCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getStartIntermissionInterface {
-    my ($self) = @_;
-    die "abstract method getStartIntermissionInterface";
+oo::class create ::IntermissionCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::IntermissionCompositeInterface {
+    method initFields_IntermissionCompositeInterface {} {
+        return
+    }
+    
 
-sub getEndLevelIntermissionInterface {
-    my ($self) = @_;
-    die "abstract method getEndLevelIntermissionInterface";
+    method getStartIntermissionInterface {} {
+        error [jexception AbstractMethodError getStartIntermissionInterface]
+    }
+    
+
+    method getEndLevelIntermissionInterface {} {
+        error [jexception AbstractMethodError getEndLevelIntermissionInterface]
+    }
 }
 
+namespace eval ::IntermissionCompositeInterface {
+}
 
-1;
 

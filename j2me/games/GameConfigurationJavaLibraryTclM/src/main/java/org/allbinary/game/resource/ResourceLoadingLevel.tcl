@@ -11,44 +11,41 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.resource
 
-package org::allbinary::game::resource::ResourceLoadingLevel;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{name} = undef;
-    $self->{level} = undef;
+oo::class create ::ResourceLoadingLevel {
+    superclass ::JObject
 }
 
+oo::define ::ResourceLoadingLevel {
+    method initFields_ResourceLoadingLevel {} {
+        my jset name {}
+        my jset level 0
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $level) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{name} = $name;
-        $self->{level} = $level;
-    return $self;
+    constructor {name level} {
+        next
+        my initFields_ResourceLoadingLevel
+        my jset name $name
+        my jset level $level
+    }
+    
+
+    method getLevel {} {
+        return [my jget level]
+    }
+    
+
+    method getName {} {
+        return [my jget name]
+    }
 }
 
-
-sub getLevel {
-    my ($self) = @_;
-        return $self->{level};
+namespace eval ::ResourceLoadingLevel {
 }
 
-
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
-}
-
-use java::lang::Object ();
-
-1;
 

@@ -11,90 +11,86 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.event
 
-package org::allbinary::game::input::event::PressGameKeyEventHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::handler::BasicEventHandler';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::event::PressGameKeyEventHandler'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::PressGameKeyEventHandler {
+    superclass ::BasicEventHandler
 }
 
+oo::define ::PressGameKeyEventHandler {
+    method initFields_PressGameKeyEventHandler {} {
+        my jset list {}
+        my jset list [::BasicArrayListD new]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::event::PressGameKeyEventHandler::instance;
-}
+    constructor {} {
+        next
+        my initFields_PressGameKeyEventHandler
+    }
+    
 
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
-
-
-sub addListener {
-    my ($self, $playerGameInput) = @_;
-        if (!$self->{list}->contains($playerGameInput)) {
-            $self->{list}->add($playerGameInput);
+    method addListener {playerGameInput} {
+        if {[expr {![[my jget list] contains $playerGameInput]}]} {
+            [my jget list] add $playerGameInput
         }
-}
+    }
+    
 
+    method removeAllListeners {} {
+        [my jget list] clear
+        next
+    }
+    
 
-sub removeAllListeners {
-    my ($self) = @_;
-        $self->{list}->clear();
-        $self->SUPER::removeAllListeners();
-}
+    method removeListener {eventListenerInterface} {
+        [my jget list] remove $eventListenerInterface
+        next $eventListenerInterface
+    }
+    
 
-
-sub removeListener {
-    my ($self, $eventListenerInterface) = @_;
-        $self->{list}->remove($eventListenerInterface);
-        $self->SUPER::removeListener($eventListenerInterface);
-}
-
-
-# throws Exception
-sub fireEvent {
-    my ($self, $eventObject) = @_;
-        for (my $index = $self->{list}->size(); --$index >= 0; ) {
+    method fireEvent {eventObject} {
+        for {set index [[my jget list] size]} {[expr {[jpreincr index -1] >= 0}]} {} {
             try {
-                my $playerGameInput = $self->{list}->{objectArray}->[$index];
-                $playerGameInput->onPressGameKeyEvent($eventObject);
-            } catch ($e) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, 'org::allbinary::logic::util::event::EventStrings'->getInstance()->{FIRE_EVENT}, $e);
+                set playerGameInput [[[my jget list] jget objectArray] get $index]
+                $playerGameInput onPressGameKeyEvent $eventObject
+            } on error {e} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[::EventStrings::getInstance] jget FIRE_EVENT] $e
             }
         }
-        $self->SUPER::fireEvent($eventObject);
+        next $eventObject
+    }
+    
+
+    method process {eventObject eventListenerInterface} {
+        set pressGameKeyEventListenerInterface ($eventListenerInterface)
+        $pressGameKeyEventListenerInterface onPressGameKeyEvent $eventObject
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $eventObject, $eventListenerInterface) = @_;
-        my $pressGameKeyEventListenerInterface = ($eventListenerInterface);
-        $pressGameKeyEventListenerInterface->onPressGameKeyEvent($eventObject);
+namespace eval ::PressGameKeyEventHandler {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::PressGameKeyEventHandler new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::PressGameKeyEventHandler::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::PlayerGameInput ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

@@ -11,89 +11,78 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.vector
 
-package org::allbinary::animation::vector::RectangleAdjustedAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::Animation','org::allbinary::graphics::color::ColorCompositeInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{width} = undef;
-    $self->{height} = undef;
-    $self->{offsetX} = undef;
-    $self->{offsetY} = undef;
+oo::class create ::RectangleAdjustedAnimation {
+    superclass ::Animation
 }
 
+oo::define ::RectangleAdjustedAnimation {
+    method initFields_RectangleAdjustedAnimation {} {
+        my jset width 0
+        my jset height 0
+        my jset offsetX 0
+        my jset offsetY 0
+        
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $width, $height, $offsetX, $offsetY, $basicColor) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{width} = $width;
-        $self->{height} = $height;
-        $self->{offsetX} = $offsetX;
-        $self->{offsetY} = $offsetY;
-        $self->setBasicColorP($basicColor);
-    return $self;
+    constructor {width height offsetX offsetY basicColor} {
+        next
+        my initFields_RectangleAdjustedAnimation
+        my jset width $width
+        my jset height $height
+        my jset offsetX $offsetX
+        my jset offsetY $offsetY
+        my setBasicColorP $basicColor
+    }
+    
+
+    method nextFrame {} {
+    }
+    
+
+    method paintXY {graphics x y} {
+        [my jget basicSetColorUtil] setBasicColorP3 $graphics [my getBasicColorP] [my getColor]
+        $graphics drawRect [jint [expr {$x + [my jget offsetX]}]] [jint [expr {$y + [my jget offsetY]}]] [my jget width] [my jget height]
+    }
+    
+
+    method setWidth {width} {
+        my jset width $width
+    }
+    
+
+    method setHeight {height} {
+        my jset height $height
+    }
+    
+
+    method setOffsetX {offsetX} {
+        my jset offsetX $offsetX
+    }
+    
+
+    method setOffsetY {offsetY} {
+        my jset offsetY $offsetY
+    }
+    
+
+    method getBasicColorP {} {
+        return [next]
+    }
+    
+
+    method setBasicColorP {basicColor} {
+        next $basicColor
+    }
 }
 
-
-sub nextFrame {
-    my ($self) = @_;
+namespace eval ::RectangleAdjustedAnimation {
 }
 
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->{basicSetColorUtil}->setBasicColorP3($graphics, $self->getBasicColorP(), $self->getColor());
-        $graphics->drawRect($x + $self->{offsetX}, $y + $self->{offsetY}, $self->{width}, $self->{height});
-}
-
-
-sub setWidth {
-    my ($self, $width) = @_;
-        $self->{width} = $width;
-}
-
-
-sub setHeight {
-    my ($self, $height) = @_;
-        $self->{height} = $height;
-}
-
-
-sub setOffsetX {
-    my ($self, $offsetX) = @_;
-        $self->{offsetX} = $offsetX;
-}
-
-
-sub setOffsetY {
-    my ($self, $offsetY) = @_;
-        $self->{offsetY} = $offsetY;
-}
-
-
-sub getBasicColorP {
-    my ($self) = @_;
-        return $self->SUPER::getBasicColorP();
-}
-
-
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
-        $self->SUPER::setBasicColorP($basicColor);
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::ColorCompositeInterface ();
-
-1;
 

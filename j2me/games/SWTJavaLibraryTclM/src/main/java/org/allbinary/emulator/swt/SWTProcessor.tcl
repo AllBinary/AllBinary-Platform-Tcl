@@ -11,46 +11,53 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.emulator.swt
 
-package org::allbinary::emulator::swt::SWTProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Time::HiRes ();
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::emulator::swt::SWTProcessor'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{runnable} = 'org::allbinary::thread::NullRunnable'->getInstance();
+oo::class create ::SWTProcessor {
+    superclass ::JObject
 }
 
+oo::define ::SWTProcessor {
+    method initFields_SWTProcessor {} {
+        my jset runnable {}
+        my jset runnable [::NullRunnable::getInstance]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::emulator::swt::SWTProcessor::instance;
+    constructor {} {
+        next
+        my initFields_SWTProcessor
+    }
+    
+
+    method process {display} {
+        $display sleep
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+namespace eval ::SWTProcessor {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::SWTProcessor new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::SWTProcessor::staticGet_instance]
+    }
 }
 
-
-sub process {
-    my ($self, $display) = @_;
-        $display->sleep();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::thread::NullRunnable ();
-use org::eclipse::swt::widgets::Display ();
-
-1;
 

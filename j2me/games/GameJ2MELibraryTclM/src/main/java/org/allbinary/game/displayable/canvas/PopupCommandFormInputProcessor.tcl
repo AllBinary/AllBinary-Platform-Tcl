@@ -11,43 +11,35 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::PopupCommandFormInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::displayable::canvas::CommandFormInputProcessor';
-
-
-
-sub new {
-    my ($class, $gameKeyEventList, $playerInputId, $gameCanvas, $form, $popupMenuInputProcessor) = @_;
-    my $self = $class->SUPER::new($gameKeyEventList, $playerInputId, $gameCanvas, $form);
-        # super(...) made $self above
-    return $self;
+oo::class create ::PopupCommandFormInputProcessor {
+    superclass ::CommandFormInputProcessor
 }
 
+oo::define ::PopupCommandFormInputProcessor {
+    method initFields_PopupCommandFormInputProcessor {} {
+        return
+    }
+    
 
-# throws Exception
-sub processInput {
-    my ($self, $key) = @_;
-        return $self->SUPER::processInput($key);
+    constructor {gameKeyEventList playerInputId gameCanvas form popupMenuInputProcessor} {
+        next $gameKeyEventList $playerInputId $gameCanvas $form
+        my initFields_PopupCommandFormInputProcessor
+    }
+    
+
+    method processInput {key} {
+        return [next $key]
+    }
+    
+
+    method processMotionInput {motionGestureEvent} {
+        next $motionGestureEvent
+    }
 }
 
-
-# throws Exception
-sub processMotionInput {
-    my ($self, $motionGestureEvent) = @_;
-        $self->SUPER::processMotionInput($motionGestureEvent);
+namespace eval ::PopupCommandFormInputProcessor {
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::displayable::MyCanvas ();
-use org::allbinary::graphics::form::ScrollSelectionForm ();
-use org::allbinary::input::motion::gesture::observer::MotionGestureEvent ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::game::displayable::canvas::CommandFormInputProcessor ();
-
-1;
 

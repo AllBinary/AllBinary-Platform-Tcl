@@ -11,27 +11,58 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-package org::allbinary::graphics::RectangleFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::Rectangle'->new('org::allbinary::graphics::PointFactory'->getInstance()->{ZERO_ZERO}, 0, 0) };
-our $ARRAY_OF_ARRAYS = [map { [(undef) x (0)] } 1 .. (0)];
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::RectangleFactory {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::PointFactory ();
+oo::define ::RectangleFactory {
+    method initFields_RectangleFactory {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_RectangleFactory
+    }
+}
+
+namespace eval ::RectangleFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::Rectangle new [[::PointFactory::getInstance] jget ZERO_ZERO] 0 0]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    variable ARRAY_OF_ARRAYSValue {}
+    variable ARRAY_OF_ARRAYSSet 0
+    proc staticGet_ARRAY_OF_ARRAYS {} {
+        variable ARRAY_OF_ARRAYSValue
+        variable ARRAY_OF_ARRAYSSet
+        if {!$ARRAY_OF_ARRAYSSet} {
+            set ARRAY_OF_ARRAYSSet 1
+            set ARRAY_OF_ARRAYSValue [jarrayof 0 {jarray 0 {}}]
+        }
+        return $ARRAY_OF_ARRAYSValue
+    }
+    proc staticSet_ARRAY_OF_ARRAYS {value} {
+        variable ARRAY_OF_ARRAYSValue
+        variable ARRAY_OF_ARRAYSSet
+        set ARRAY_OF_ARRAYSSet 1
+        set ARRAY_OF_ARRAYSValue $value
+    }
+}
+
 

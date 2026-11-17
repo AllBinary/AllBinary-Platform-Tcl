@@ -11,38 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-package org::allbinary::graphics::paint::StringLocationPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::LocationPaintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{value} = undef;
+oo::class create ::StringLocationPaintable {
+    superclass ::LocationPaintable
 }
 
+oo::define ::StringLocationPaintable {
+    method initFields_StringLocationPaintable {} {
+        my jset value {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $value) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{value} = $value;
-    return $self;
+    constructor {value} {
+        next
+        my initFields_StringLocationPaintable
+        my jset value $value
+    }
+    
+
+    method paintXY {graphics x y} {
+        $graphics drawString [my jget value] $x $y 0
+    }
 }
 
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $graphics->drawString($self->{value}, $x, $y, 0);
+namespace eval ::StringLocationPaintable {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::paint::LocationPaintable ();
-
-1;
 

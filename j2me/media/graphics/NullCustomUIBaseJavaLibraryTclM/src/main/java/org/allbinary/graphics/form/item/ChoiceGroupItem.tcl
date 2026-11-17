@@ -1,20 +1,22 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
-package org::allbinary::graphics::form::item::ChoiceGroupItem;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ChoiceGroupItem {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
+oo::define ::ChoiceGroupItem {
+    method initFields_ChoiceGroupItem {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_ChoiceGroupItem
+    }
+}
+
+namespace eval ::ChoiceGroupItem {
+}
+
 

@@ -11,28 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-# Java interface
-package org::allbinary::game::layer::LayerPlacementInterfaceBasicArrayListFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getInstance {
-    my ($self) = @_;
-    die "abstract method getInstance";
+oo::class create ::LayerPlacementInterfaceBasicArrayListFactoryInterface {
+    superclass ::JObject
 }
 
+oo::define ::LayerPlacementInterfaceBasicArrayListFactoryInterface {
+    method initFields_LayerPlacementInterfaceBasicArrayListFactoryInterface {} {
+        return
+    }
+    
 
-sub getOnDemandResources {
-    my ($self) = @_;
-    die "abstract method getOnDemandResources";
+    method getInstance {} {
+        error [jexception AbstractMethodError getInstance]
+    }
+    
+
+    method getOnDemandResources {} {
+        error [jexception AbstractMethodError getOnDemandResources]
+    }
 }
 
-use org::allbinary::util::BasicArrayList ();
+namespace eval ::LayerPlacementInterfaceBasicArrayListFactoryInterface {
+}
 
-1;
 

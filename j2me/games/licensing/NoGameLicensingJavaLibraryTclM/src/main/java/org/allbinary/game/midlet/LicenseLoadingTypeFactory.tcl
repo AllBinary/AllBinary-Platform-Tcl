@@ -11,40 +11,53 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-package org::allbinary::game::midlet::LicenseLoadingTypeFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::midlet::LicenseLoadingTypeFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{INITIAL_LOADING} = 'org::allbinary::game::midlet::LicenseLoadingType'->new("Initial Loading");
-    $self->{GAME_START} = 'org::allbinary::game::midlet::LicenseLoadingType'->new("Game Start");
-    $self->{LOGIN} = 'org::allbinary::game::midlet::LicenseLoadingType'->new("Login");
-    $self->{OTHER} = 'org::allbinary::game::midlet::LicenseLoadingType'->new("Other/Usually The First Non Demo Level");
+oo::class create ::LicenseLoadingTypeFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::LicenseLoadingTypeFactory {
+    method initFields_LicenseLoadingTypeFactory {} {
+        my jset INITIAL_LOADING {}
+        my jset GAME_START {}
+        my jset LOGIN {}
+        my jset OTHER {}
+        my jset INITIAL_LOADING [::LicenseLoadingType new "Initial Loading"]
+        my jset GAME_START [::LicenseLoadingType new "Game Start"]
+        my jset LOGIN [::LicenseLoadingType new "Login"]
+        my jset OTHER [::LicenseLoadingType new "Other/Usually The First Non Demo Level"]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_LicenseLoadingTypeFactory
+    }
+    
 }
 
-
-sub getIntance {
-    my ($class) = @_;
-        return $org::allbinary::game::midlet::LicenseLoadingTypeFactory::instance;
+namespace eval ::LicenseLoadingTypeFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LicenseLoadingTypeFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getIntance {} {
+        return [::LicenseLoadingTypeFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::midlet::LicenseLoadingType ();
-
-1;
 

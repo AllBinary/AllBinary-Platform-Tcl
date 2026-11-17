@@ -11,1756 +11,1498 @@
 # Created By: Travis Berthelot
 # 
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::AllBinaryGameCanvas;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Time::HiRes ();
-use Scalar::Util ();
-use parent -norequire,'org::allbinary::canvas::RunnableCanvas','org::allbinary::game::displayable::canvas::AllBinaryGameCanvasInterface','org::allbinary::game::displayable::canvas::GameCanvasRunnableInterface','org::allbinary::game::displayable::canvas::MenuListener','org::allbinary::game::IntermissionCompositeInterface','org::allbinary::game::IntermissionEnableListenerInterface','org::allbinary::game::displayable::canvas::PopupMenuInterface','org::allbinary::graphics::displayable::event::DisplayChangeEventListener','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-our $id = 0;
-our $TYPE = 2;
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{basicColorFactory} = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance();
-    $self->{basicSetColorUtil} = 'org::allbinary::graphics::color::BasicColorSetUtil'->getInstance();
-    $self->{touchFeatureFactory} = 'org::allbinary::game::configuration::feature::TouchFeatureFactory'->getInstance();
-    $self->{openGLFeatureFactory} = 'org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance();
-    $self->{touchButtonFactory} = 'org::allbinary::input::motion::button::TouchButtonFactory'->getInstance();
-    $self->{gameAdStateFactory} = 'org::allbinary::business::advertisement::GameAdStateFactory'->getInstance();
-    $self->{gameStrings} = 'org::allbinary::game::GameStrings'->getInstance();
-    $self->{gameInputStrings} = 'org::allbinary::game::input::GameInputStrings'->getInstance();
-    $self->{gameStateFactory} = 'org::allbinary::game::state::GameStateFactory'->getInstance();
-    $self->{gameTickTimeDelayHelper} = 'org::allbinary::time::GameTickTimeDelayHelperFactory'->getInstance();
-    $self->{gameTickDisplayInfoSingleton} = 'org::allbinary::graphics::displayable::GameTickDisplayInfoSingleton'->getInstance();
-    $self->{gameRunnable} = 'org::allbinary::game::displayable::canvas::GameCanvasRunnable'->new($self);
-    $self->{gamePauseRunnable} = 'org::allbinary::game::displayable::canvas::GameCanvasPauseRunnable'->new($self);
-    $self->{formUtil} = 'org::allbinary::game::displayable::canvas::FormUtil'->getInstance();
-    $self->{myFormUtil} = 'org::allbinary::game::displayable::canvas::MyFormUtil'->getInstance();
-    $self->{updateMyFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-    $self->{gameSpecificPaintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-    $self->{sensorGameUpdateProcessor} = 'org::allbinary::input::gyro::SingleSensorGameUpdateProcessor'->new();
-    $self->{endGameInfo} = 'org::allbinary::game::displayable::canvas::EndGameInfo'->new();
-    $self->{startIntermissionInterface} = 'org::allbinary::game::Intermission'->new();
-    $self->{endLevelIntermissionInterface} = 'org::allbinary::game::Intermission'->new();
-    $self->{gameLayerManager} = 'org::allbinary::game::layer::AllBinaryGameLayerManager'->getNullInstance();
-    $self->{gameState} = $self->{gameStateFactory}->{NO_GAME_STATE};
-    $self->{gameOver} = 0;
-    $self->{initialized} = 0;
-    $self->{gameStateTimeHelper} = 'org::allbinary::time::TimeDelayHelper'->new(0);
-    $self->{highScoresHelper} = undef;
-    $self->{highScoreSubmitted} = 0;
-    $self->{realHighScoresPaintable} = 'org::allbinary::game::score::HighScoresPaintable'->new();
-    $self->{highScoresPaintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-    $self->{localPlayerGameInputList} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{isCheating} = 0;
-    $self->{hashtable} = $self->{stdUtil}->{NULL_TABLE};
-    $self->{isSingleKeyRepeatableProcessing} = 0;
-    $self->{gameInitializationInterfaceFactoryInterface} = $org::allbinary::game::init::BasicBuildGameInitializerFactory::NULL_BASE_BUILD_GMAE_INITIALIZER_FACTORY;
-    $self->{touchButtonsPaintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-    $self->{touchPaintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-    $self->{cheatProcessor} = 'org::allbinary::game::input::NoPlayerGameInput'->getInstance();
-    $self->{gameInputProcessor} = 'org::allbinary::canvas::Processor'->getInstance();
-    $self->{endGameProcessor} = 'org::allbinary::canvas::Processor'->getInstance();
-    $self->{realEndGameProcessor} = 'org::allbinary::canvas::Processor'->getInstance();
-    $self->{startIntermissionProcessor} = 'org::allbinary::canvas::Processor'->getInstance();
-    $self->{realStartIntermissionProcessor} = 'org::allbinary::canvas::Processor'->getInstance();
-    $self->{endGamePaintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-    $self->{endGameStatePaintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-    $self->{nonBotPaintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-    $self->{intermissionPaintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-    $self->{startIntermissionPaintable} = 'org::allbinary::graphics::paint::NullInitUpdatePaintable'->getInstance();
-    $self->{mainStateProcessor} = 'org::allbinary::canvas::Processor'->getInstance();
-    $self->{processGameProcessor} = 'org::allbinary::canvas::Processor'->getInstance();
-    $self->{highScoresFactoryInterface} = undef;
-    $self->{startLevel} = 0;
-    $self->{mainMenuInputProcessor} = 'org::allbinary::game::displayable::canvas::NoMenuInputProcessor'->getInstance();
-    $self->{popupMenuInputProcessor} = 'org::allbinary::game::displayable::canvas::NoMenuInputProcessor'->getInstance();
-    $self->{menuInputProcessor} = 'org::allbinary::game::displayable::canvas::NoMenuInputProcessor'->getInstance();
-    $self->{menuForm} = 'org::allbinary::graphics::form::ScrollSelectionForm'->getNullScrollSelectionForm();
-    $self->{formPaintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-    $self->{openMenuPaintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-    $self->{menuPaintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-    $self->{currentTouchInputFactory} = 'org::allbinary::input::motion::button::NoButtonsTouchInputFactory'->getInstance();
-    $self->{colorFillPaintable} = 'org::allbinary::game::paint::ColorFillPaintableFactory'->getInstance()->getInstance($self->{basicColorFactory}->{BLACK}, 1);
-    $self->{baseGameStatistics} = 'org::allbinary::canvas::GameStatisticsFactory'->getInstance();
-    $self->{primaryPlayerQueue} = 'org::allbinary::media::audio::PrimaryPlayerQueueFactory'->getInstance();
-    $self->{secondaryPlayerQueue} = 'org::allbinary::media::audio::SecondaryPlayerQueueFactory'->getInstance();
-    $self->{BUILD_GAME} = "buildGame";
-    $self->{gameTypeFactory} = 'org::allbinary::game::GameTypeFactory'->getInstance();
-    $self->{screenCapture} = 'org::allbinary::graphics::ScreenCaptureFactory'->getInstance();
-    $self->{basicMotionGesturesHandler} = 'org::allbinary::input::motion::gesture::observer::BasicMotionGesturesHandler'->getInstance();
-    $self->{gameKeyEventHandler} = 'org::allbinary::game::input::event::GameKeyEventHandler'->getInstance();
-    $self->{gameBehavior} = undef;
-    $self->{menuBehavior} = undef;
-    $self->{progressPaintable} = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getLazyInstance();
-    $self->{fontHeightP} = 0;
-    $self->{gameCanvasStartListener} = $org::allbinary::game::displayable::canvas::NullDemoPaintable::NULL_DEMO_PAINTABLE;
-    $self->{rawGameInputProcessor} = 'org::allbinary::game::displayable::canvas::GameCanvasInputProcessor'->new($self);
-    $self->{rawInputProcessor} = 'org::allbinary::game::displayable::canvas::FormInputProcessor'->new($self);
-    $self->{inputProcessor} = $self->getRawGameInputProcessor();
-    $self->{YIELD_SLEEP} = 100;
+oo::class create ::AllBinaryGameCanvas {
+    superclass ::RunnableCanvas
 }
 
+oo::define ::AllBinaryGameCanvas {
+    method initFields_AllBinaryGameCanvas {} {
+        my jset basicColorFactory {}
+        my jset basicSetColorUtil {}
+        my jset touchFeatureFactory {}
+        my jset openGLFeatureFactory {}
+        my jset touchButtonFactory {}
+        my jset gameAdStateFactory {}
+        my jset gameStrings {}
+        my jset gameInputStrings {}
+        my jset gameStateFactory {}
+        my jset gameTickTimeDelayHelper {}
+        my jset gameTickDisplayInfoSingleton {}
+        my jset gameRunnable {}
+        my jset gamePauseRunnable {}
+        my jset formUtil {}
+        my jset myFormUtil {}
+        my jset updateMyFontProcessor {}
+        my jset myFontProcessor {}
+        my jset gameSpecificPaintable {}
+        my jset sensorGameUpdateProcessor {}
+        my jset endGameInfo {}
+        my jset startIntermissionInterface {}
+        my jset endLevelIntermissionInterface {}
+        my jset gameLayerManager {}
+        my jset gameState {}
+        my jset gameOver false
+        my jset initialized false
+        my jset gameStateTimeHelper {}
+        my jset highScoresHelper {}
+        my jset highScoreSubmitted false
+        my jset realHighScoresPaintable {}
+        my jset highScoresPaintable {}
+        my jset localPlayerGameInputList {}
+        my jset isCheating false
+        my jset hashtable {}
+        my jset isSingleKeyRepeatableProcessing false
+        my jset gameInitializationInterfaceFactoryInterface {}
+        my jset touchButtonsPaintable {}
+        my jset touchPaintable {}
+        my jset cheatProcessor {}
+        my jset gameInputProcessor {}
+        my jset endGameProcessor {}
+        my jset realEndGameProcessor {}
+        my jset startIntermissionProcessor {}
+        my jset realStartIntermissionProcessor {}
+        my jset endGamePaintable {}
+        my jset endGameStatePaintable {}
+        my jset nonBotPaintable {}
+        my jset intermissionPaintable {}
+        my jset startIntermissionPaintable {}
+        my jset mainStateProcessor {}
+        my jset processGameProcessor {}
+        my jset highScoresFactoryInterface {}
+        my jset startLevel 0
+        my jset mainMenuInputProcessor {}
+        my jset popupMenuInputProcessor {}
+        my jset menuInputProcessor {}
+        my jset menuForm {}
+        my jset formPaintable {}
+        my jset openMenuPaintable {}
+        my jset menuPaintable {}
+        my jset currentTouchInputFactory {}
+        my jset colorFillPaintable {}
+        my jset baseGameStatistics {}
+        my jset primaryPlayerQueue {}
+        my jset secondaryPlayerQueue {}
+        my jset BUILD_GAME {}
+        my jset gameTypeFactory {}
+        my jset screenCapture {}
+        my jset basicMotionGesturesHandler {}
+        my jset gameKeyEventHandler {}
+        my jset gameBehavior {}
+        my jset menuBehavior {}
+        my jset progressPaintable {}
+        my jset fontHeightP 0
+        my jset gameCanvasStartListener {}
+        my jset rawGameInputProcessor {}
+        my jset rawInputProcessor {}
+        my jset inputProcessor {}
+        my jset YIELD_SLEEP 0
+        my jset basicColorFactory [::BasicColorFactory::getInstance]
+        my jset basicSetColorUtil [::BasicColorSetUtil::getInstance]
+        my jset touchFeatureFactory [::TouchFeatureFactory::getInstance]
+        my jset openGLFeatureFactory [::OpenGLFeatureFactory::getInstance]
+        my jset touchButtonFactory [::TouchButtonFactory::getInstance]
+        my jset gameAdStateFactory [::GameAdStateFactory::getInstance]
+        my jset gameStrings [::GameStrings::getInstance]
+        my jset gameInputStrings [::GameInputStrings::getInstance]
+        my jset gameStateFactory [::GameStateFactory::getInstance]
+        my jset gameTickTimeDelayHelper [::GameTickTimeDelayHelperFactory::getInstance]
+        my jset gameTickDisplayInfoSingleton [::GameTickDisplayInfoSingleton::getInstance]
+        my jset gameRunnable [::GameCanvasRunnable new [self]]
+        my jset gamePauseRunnable [::GameCanvasPauseRunnable new [self]]
+        my jset formUtil [::FormUtil::getInstance]
+        my jset myFormUtil [::MyFormUtil::getInstance]
+        my jset updateMyFontProcessor [::UpdateMyFontProcessor new [self]]
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+        my jset gameSpecificPaintable [::NullPaintable::getInstance]
+        my jset sensorGameUpdateProcessor [::SingleSensorGameUpdateProcessor new]
+        my jset endGameInfo [::EndGameInfo new]
+        my jset startIntermissionInterface [::Intermission new]
+        my jset endLevelIntermissionInterface [::Intermission new]
+        my jset gameLayerManager [::AllBinaryGameLayerManager::getNullInstance]
+        my jset gameState [[my jget gameStateFactory] jget NO_GAME_STATE]
+        my jset gameOver false
+        my jset initialized false
+        my jset gameStateTimeHelper [::TimeDelayHelper new 0]
+        
+        my jset highScoreSubmitted false
+        my jset realHighScoresPaintable [::HighScoresPaintable new]
+        my jset highScoresPaintable [::NullPaintable::getInstance]
+        my jset localPlayerGameInputList [::BasicArrayListD new]
+        my jset isCheating false
+        my jset hashtable [[my jget stdUtil] jget NULL_TABLE]
+        my jset isSingleKeyRepeatableProcessing false
+        my jset gameInitializationInterfaceFactoryInterface [::BasicBuildGameInitializerFactory::staticGet_NULL_BASE_BUILD_GMAE_INITIALIZER_FACTORY]
+        my jset touchButtonsPaintable [::NullPaintable::getInstance]
+        my jset touchPaintable [::NullPaintable::getInstance]
+        my jset cheatProcessor [::NoPlayerGameInput::getInstance]
+        my jset gameInputProcessor [::Processor::getInstance]
+        my jset endGameProcessor [::Processor::getInstance]
+        my jset realEndGameProcessor [::Processor::getInstance]
+        my jset startIntermissionProcessor [::Processor::getInstance]
+        my jset realStartIntermissionProcessor [::Processor::getInstance]
+        my jset endGamePaintable [::NullPaintable::getInstance]
+        my jset endGameStatePaintable [::NullPaintable::getInstance]
+        my jset nonBotPaintable [::NullPaintable::getInstance]
+        my jset intermissionPaintable [::NullPaintable::getInstance]
+        my jset startIntermissionPaintable [::NullInitUpdatePaintable::getInstance]
+        my jset mainStateProcessor [::Processor::getInstance]
+        my jset processGameProcessor [::Processor::getInstance]
+        
+        my jset startLevel 0
+        my jset mainMenuInputProcessor [::NoMenuInputProcessor::getInstance]
+        my jset popupMenuInputProcessor [::NoMenuInputProcessor::getInstance]
+        my jset menuInputProcessor [::NoMenuInputProcessor::getInstance]
+        my jset menuForm [::ScrollSelectionForm::getNullScrollSelectionForm]
+        my jset formPaintable [::NullPaintable::getInstance]
+        my jset openMenuPaintable [::NullPaintable::getInstance]
+        my jset menuPaintable [::NullPaintable::getInstance]
+        my jset currentTouchInputFactory [::NoButtonsTouchInputFactory::getInstance]
+        my jset colorFillPaintable [[::ColorFillPaintableFactory::getInstance] getInstance [[my jget basicColorFactory] jget BLACK] true]
+        my jset baseGameStatistics [::GameStatisticsFactory::getInstance]
+        my jset primaryPlayerQueue [::PrimaryPlayerQueueFactory::getInstance]
+        my jset secondaryPlayerQueue [::SecondaryPlayerQueueFactory::getInstance]
+        my jset BUILD_GAME "buildGame"
+        my jset gameTypeFactory [::GameTypeFactory::getInstance]
+        my jset screenCapture [::ScreenCaptureFactory::getInstance]
+        my jset basicMotionGesturesHandler [::BasicMotionGesturesHandler::getInstance]
+        my jset gameKeyEventHandler [::GameKeyEventHandler::getInstance]
+        my jset gameBehavior {}
+        my jset menuBehavior {}
+        my jset progressPaintable [::ProgressCanvasFactory::getLazyInstance]
+        my jset fontHeightP 0
+        my jset gameCanvasStartListener [::NullDemoPaintable::staticGet_NULL_DEMO_PAINTABLE]
+        my jset rawGameInputProcessor [::GameCanvasInputProcessor new [self]]
+        my jset rawInputProcessor [::FormInputProcessor new [self]]
+        my jset inputProcessor [my getRawGameInputProcessor]
+        my jset YIELD_SLEEP 100
+        return
+    }
+    
 
-sub new {
-    my ($class, $commandListener, $gameLayerManager, $highScoresFactoryInterface, $gameInitializationInterfaceFactoryInterface, $buffered) = @_;
-    my $self = $class->SUPER::new($commandListener, 'org::allbinary::graphics::displayable::CanvasStrings'->getInstance()->{EMPTY_CHILD_NAME_LIST}, 1);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{highScoresHelper} = $highScoresFactoryInterface->createHighScoresHelper();
-        $self->{gameInitializationInterfaceFactoryInterface} = $gameInitializationInterfaceFactoryInterface;
-        $self->init($gameLayerManager, $buffered);
-        $self->{highScoresFactoryInterface} = $highScoresFactoryInterface;
-        if ($self->{gameLayerManager}->getGameInfo()->getGameType() == $self->{gameTypeFactory}->{BOT} || $self->{gameLayerManager}->getGameInfo()->getGameType() == $self->{gameTypeFactory}->{NONE}) {
-            $self->{gameBehavior} = 'org::allbinary::game::displayable::canvas::DemoGameBehavior'->getInstance();
-            $self->{menuBehavior} = 'org::allbinary::game::displayable::canvas::BaseMenuBehavior'->getInstance();
+    constructor {commandListener gameLayerManager highScoresFactoryInterface gameInitializationInterfaceFactoryInterface buffered} {
+        next $commandListener [[::CanvasStrings::getInstance] jget EMPTY_CHILD_NAME_LIST] true
+        my initFields_AllBinaryGameCanvas
+        my jset highScoresHelper [$highScoresFactoryInterface createHighScoresHelper]
+        my jset gameInitializationInterfaceFactoryInterface $gameInitializationInterfaceFactoryInterface
+        my init $gameLayerManager $buffered
+        my jset highScoresFactoryInterface $highScoresFactoryInterface
+        if {[expr {[expr {[[[my jget gameLayerManager] getGameInfo] getGameType] == [[my jget gameTypeFactory] jget BOT]}] || [expr {[[[my jget gameLayerManager] getGameInfo] getGameType] == [[my jget gameTypeFactory] jget NONE]}]}]} {
+            my jset gameBehavior [::DemoGameBehavior::getInstance]
+            my jset menuBehavior [::BaseMenuBehavior::getInstance]
         } else {
-            $self->{gameBehavior} = 'org::allbinary::game::displayable::canvas::BaseGameBehavior'->getInstance();
-            $self->{menuBehavior} = $self->getInGameMenuBehavior();
+            my jset gameBehavior [::BaseGameBehavior::getInstance]
+            my jset menuBehavior [my getInGameMenuBehavior]
         }
-        $self->initPopupMenu();
-        $self->initMenu();
-        $self->initSpecialPaint();
-        'org::allbinary::graphics::displayable::event::DisplayChangeEventHandler'->getInstance()->addListenerInterface($self);
-    return $self;
-}
+        my initPopupMenu
+        my initMenu
+        my initSpecialPaint
+        [::DisplayChangeEventHandler::getInstance] addListenerInterface [self]
+    }
+    
 
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
+    method updateMeasurement {graphics} {
         try {
-            my $font = $graphics->getFont();
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonStrings}->{START})->append($self->{canvasStrings}->{FD_WIDTH})->appendint(int('org::allbinary::graphics::font::MyFontProcessor'->defaultCharWidth($font)))->append($self->{canvasStrings}->{FD_HEIGHT})->appendint(int($font->getHeight()))->toString(), $self, $self->{canvasStrings}->{UPDATE_MEASUREMENT});
-            $self->{fontHeightP} = $font->getHeight();
-            $self->{myFormUtil}->updateMeasurement($graphics);
-            my $popupMenuRectangle = $self->{myFormUtil}->getPopupMenuRectangle();
-            my $basicPopupMenuPaintable = ($self->getOpenMenuPaintable());
-            $basicPopupMenuPaintable->init($popupMenuRectangle);
-            if ($self->getPopupMenuInputProcessor() != 'org::allbinary::game::displayable::canvas::NoMenuInputProcessor'->getInstance()) {
-                my $popupMenuInputProcessor = ($self->getPopupMenuInputProcessor());
-                $popupMenuInputProcessor->init($popupMenuRectangle);
+            set font [$graphics getFont]
+            [my jget logUtil] putF [[[[[[[::StringMaker new] append [[my jget commonStrings] jget START]] append [[my jget canvasStrings] jget FD_WIDTH]] appendint [jint [::MyFontProcessor::defaultCharWidth $font]]] append [[my jget canvasStrings] jget FD_HEIGHT]] appendint [jint [$font getHeight]]] toString] [self] [[my jget canvasStrings] jget UPDATE_MEASUREMENT]
+            my jset fontHeightP [$font getHeight]
+            [my jget myFormUtil] updateMeasurement $graphics
+            set popupMenuRectangle [[my jget myFormUtil] getPopupMenuRectangle]
+            set basicPopupMenuPaintable ([my getOpenMenuPaintable])
+            $basicPopupMenuPaintable init $popupMenuRectangle
+            if {[expr {[my getPopupMenuInputProcessor] ne [::NoMenuInputProcessor::getInstance]}]} {
+                set popupMenuInputProcessor ([my getPopupMenuInputProcessor])
+                $popupMenuInputProcessor init $popupMenuRectangle
             }
-            $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{canvasStrings}->{ON_DISPLAY_CHANGE_EVENT}, $e);
+            my jset myFontProcessor [::MyFontProcessor::getInstance]
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget canvasStrings] jget ON_DISPLAY_CHANGE_EVENT] $e
         }
-}
+    }
+    
 
+    method getInGameMenuBehavior {} {
+        return [::InGameMenuBehavior::getInstance]
+    }
+    
 
-sub getInGameMenuBehavior {
-    my ($self) = @_;
-        return 'org::allbinary::game::displayable::canvas::InGameMenuBehavior'->getInstance();
-}
-
-
-sub setCurrentThread {
-    my ($self) = @_;
-        if ('org::allbinary::J2MEUtil'->isHTML()) {
-            $self->SUPER::setCurrentThreadFake();
+    method setCurrentThread {} {
+        if {[::J2MEUtil::isHTML]} {
+            next
         } else {
-            $self->SUPER::setCurrentThread();
+            next
         }
-}
+    }
+    
 
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
 
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
-}
-
-
-sub onDisplayChangeEvent {
-    my ($self, $displayChangeEvent) = @_;
+    method onDisplayChangeEvent {displayChangeEvent} {
         try {
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonStrings}->{START})->append('org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance()->toString())->toString(), $self, $self->{canvasStrings}->{UPDATE_MEASUREMENT});
-            $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-            $self->{menuBehavior}->onDisplayChangeEvent($self, $displayChangeEvent);
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{canvasStrings}->{ON_DISPLAY_CHANGE_EVENT}, $e);
+            [my jget logUtil] putF [[[[::StringMaker new] append [[my jget commonStrings] jget START]] append [[::DisplayInfoSingleton::getInstance] toString]] toString] [self] [[my jget canvasStrings] jget UPDATE_MEASUREMENT]
+            my jset myFontProcessor [my jget updateMyFontProcessor]
+            [my jget menuBehavior] onDisplayChangeEvent [self] $displayChangeEvent
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget canvasStrings] jget ON_DISPLAY_CHANGE_EVENT] $e
         }
-}
+    }
+    
 
-
-# throws Exception
-sub updateMenuFromEvent {
-    my ($self, $displayChangeEvent) = @_;
-        my $formType = 'org::allbinary::graphics::form::FormTypeFactory'->getInstance()->getFormType();
-        my $rectangle = $self->{formUtil}->createFormRectangle();
-        $self->{menuForm}->init($rectangle, $formType);
-        if ($self->{currentTouchInputFactory} != 'org::allbinary::input::motion::button::NoButtonsTouchInputFactory'->getInstance()) {
-            $self->{touchButtonFactory}->toggle($self->isPaused(), $self->{currentTouchInputFactory}->getList());
+    method updateMenuFromEvent {displayChangeEvent} {
+        set formType [[::FormTypeFactory::getInstance] getFormType]
+        set rectangle [[my jget formUtil] createFormRectangle]
+        [my jget menuForm] init $rectangle $formType
+        if {[expr {[my jget currentTouchInputFactory] ne [::NoButtonsTouchInputFactory::getInstance]}]} {
+            [my jget touchButtonFactory] toggle [my isPaused] [[my jget currentTouchInputFactory] getList]
         }
-        $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-}
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+    }
+    
 
-
-# throws Exception
-sub processSleep {
-    my ($self) = @_;
-        $self->SUPER::processSleep();
-        if ('org::allbinary::media::audio::AllBinaryMediaManager'->update()) {
-            if (!$self->{primaryPlayerQueue}->process()) {
-                $self->{secondaryPlayerQueue}->process();
-            }
-        }
-        if ($self->{menuInputProcessor}->processInputList() != -1) {
-            $self->{runnableCanvasRefreshHelper}->process();
-        }
-}
-
-
-# throws Exception
-sub initPopupMenu {
-    my ($self) = @_;
-        if ($self->{popupMenuInputProcessor} == 'org::allbinary::game::displayable::canvas::NoMenuInputProcessor'->getInstance()) {
-            my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-            my $popupMenuRectangle = $self->{myFormUtil}->getPopupMenuRectangle();
-            if ($features->isFeature($self->{touchFeatureFactory}->{TOUCH_ENABLED})) {
-                $self->setOpenMenuPaintable('org::allbinary::game::displayable::canvas::BasicPopupMenuPaintable'->new($popupMenuRectangle, $self->{gameLayerManager}->getBackgroundBasicColor(), $self->{gameLayerManager}->getForegroundBasicColor()));
-                $self->setPopupMenuInputProcessor('org::allbinary::game::displayable::canvas::PopupMenuInputProcessor'->new('org::allbinary::util::BasicArrayListD'->new(), -1, $self, $popupMenuRectangle));
-            }
-        } else {
-        }
-}
-
-
-sub initMenu {
-    my ($self) = @_;
-        try {
-            $self->{menuBehavior}->initMenu($self);
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "initMenu", $e);
-        }
-}
-
-
-# throws Exception
-sub initMenu2 {
-    my ($self) = @_;
-        $self->closeMenu();
-        my $formType = 'org::allbinary::graphics::form::FormTypeFactory'->getInstance()->getFormType();
-        my $gameLimitedCommandTextItemArrayFactory = 'org::allbinary::game::displayable::canvas::GameLimitedCommandTextItemArrayFactory'->getInstance();
-        my $commandTextItemArrayFactory = $gameLimitedCommandTextItemArrayFactory->getCommandTextItemArrayFactory();
-        my $items = $commandTextItemArrayFactory->getInstance($self->getCommandStack(), $self->{gameLayerManager}->getBackgroundBasicColor(), $self->{gameLayerManager}->getForegroundBasicColor());
-        my $rectangle = $self->{formUtil}->createFormRectangle();
-        $self->setMenuForm('org::allbinary::graphics::form::CommandCurrentSelectionFormFactory'->getInstance('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $items, $rectangle, $formType, 25, 0, $self->{gameLayerManager}->getBackgroundBasicColor(), $self->{gameLayerManager}->getForegroundBasicColor()));
-        my $scrollSelectionForm = $self->getMenuForm();
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        if ($features->isFeature($self->{touchFeatureFactory}->{TOUCH_ENABLED})) {
-            $self->{mainMenuInputProcessor} = 'org::allbinary::game::displayable::canvas::PopupCommandFormInputProcessor'->new('org::allbinary::util::BasicArrayListD'->new(), -1, $self, $scrollSelectionForm, $self->getPopupMenuInputProcessor());
-        } else {
-        }
-        $self->setMenuInputProcessor($self->getPopupMenuInputProcessor());
-        if ($scrollSelectionForm != 'org::allbinary::graphics::form::ScrollSelectionFormNoneFactory'->getInstance()) {
-            $self->setFormPaintable('org::allbinary::graphics::form::FormPaintable'->new($scrollSelectionForm));
-        } else {
-        }
-        $self->closeMenu();
-}
-
-
-sub updateMenu {
-    my ($self) = @_;
-        try {
-            $self->{menuBehavior}->updateMenu($self);
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "initMenu", $e);
-        }
-}
-
-
-# throws Exception
-sub updateMenu2 {
-    my ($self) = @_;
-        my $scrollSelectionForm = $self->getMenuForm();
-        $scrollSelectionForm->deleteAll();
-        my $gameLimitedCommandTextItemArrayFactory = 'org::allbinary::game::displayable::canvas::GameLimitedCommandTextItemArrayFactory'->getInstance();
-        my $commandTextItemArrayFactory = $gameLimitedCommandTextItemArrayFactory->getCommandTextItemArrayFactory();
-        my $items = $commandTextItemArrayFactory->getInstance($self->getCommandStack(), $self->{gameLayerManager}->getBackgroundBasicColor(), $self->{gameLayerManager}->getForegroundBasicColor());
-        my $size = scalar(@{$items});
-        for (my $index = 0; $index < $size; $index++) {
-            $scrollSelectionForm->append($items->[$index]);
-        }
-        my $formType = 'org::allbinary::graphics::form::FormTypeFactory'->getInstance()->getFormType();
-        my $rectangle = $self->{formUtil}->createFormRectangle();
-        $scrollSelectionForm->init($rectangle, $formType);
-}
-
-
-sub pause {
-    my ($self) = @_;
-        $self->{gameBehavior}->pause($self);
-        $self->closeMenu();
-        $self->SUPER::pause();
-        $self->{touchButtonFactory}->toggle($self->isPaused(), 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance());
-        $self->{tsUtil}->gc();
-}
-
-
-sub unPause {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{gameStrings}->{UNPAUSE});
-        $self->closeMenu();
-        $self->{tsUtil}->gc();
-        $self->SUPER::unPause();
-        $self->{touchButtonFactory}->toggle($self->isPaused(), 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance());
-        $self->{gameBehavior}->unPause($self);
-}
-
-
-sub isPausable {
-    my ($self) = @_;
-        if ('org::allbinary::graphics::opengles::CurrentDisplayableFactory'->getInstance()->getUsedRunnable() == 'org::allbinary::game::displayable::canvas::NullWaitGameRunnable'->getInstance()) {
-            return 1;
-        } else {
-            return 0;
-        }
-}
-
-
-# throws Exception
-sub popupMenu {
-    my ($self) = @_;
-        $self->{menuBehavior}->popupMenu($self);
-}
-
-
-# throws Exception
-sub popupMenu2 {
-    my ($self) = @_;
-        $self->{primaryPlayerQueue}->add('org::allbinary::media::audio::SelectSound'->getInstance());
-        $self->setMenuPaintable($self->getFormPaintable());
-        $self->setMenuInputProcessor($self->{mainMenuInputProcessor});
-        $self->{basicMotionGesturesHandler}->addListenerInterface($self->{mainMenuInputProcessor});
-        $self->{gameKeyEventHandler}->addListener($self->{mainMenuInputProcessor});
-}
-
-
-# throws Exception
-sub toggleMenu {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{gameStrings}->{TOGGLE_MENU});
-        if ($self->getMenuPaintable() == $self->getOpenMenuPaintable()) {
-            $self->pause();
-            $self->updateMenu();
-            $self->popupMenu();
-        } elsif ($self->getMenuPaintable() == $self->getFormPaintable()) {
-            $self->{primaryPlayerQueue}->add('org::allbinary::media::audio::SelectSound'->getInstance());
-            $self->unPause();
-        }
-}
-
-
-sub closeMenu {
-    my ($self) = @_;
-        $self->{menuBehavior}->closeMenu($self);
-}
-
-
-sub closeMenu2 {
-    my ($self) = @_;
-        $self->setMenuPaintable($self->getOpenMenuPaintable());
-        $self->{basicMotionGesturesHandler}->removeListener($self->{mainMenuInputProcessor});
-        $self->{gameKeyEventHandler}->removeListener($self->{mainMenuInputProcessor});
-        $self->setMenuInputProcessor($self->getPopupMenuInputProcessor());
-}
-
-
-sub open {
-    my ($self) = @_;
-        $self->{basicMotionGesturesHandler}->addListenerInterface($self->{menuInputProcessor});
-        $self->{gameKeyEventHandler}->addListener($self->{menuInputProcessor});
-}
-
-
-sub close {
-    my ($self) = @_;
-        $self->{basicMotionGesturesHandler}->removeListener($self->{menuInputProcessor});
-        $self->{gameKeyEventHandler}->removeListener($self->{menuInputProcessor});
-        $self->{primaryPlayerQueue}->clear();
-        $self->{secondaryPlayerQueue}->clear();
-}
-
-
-# throws Exception
-sub processorInit {
-    my ($self) = @_;
-        $self->setMainStateProcessor('org::allbinary::canvas::Processor'->getInstance());
-        $self->setProcessGameProcessorInit();
-}
-
-
-sub setProcessGameProcessorInit {
-    my ($self) = @_;
-        $self->setProcessGameProcessor('org::allbinary::game::displayable::canvas::GameProcessor'->new($self));
-}
-
-
-sub initSpecialPaint {
-    my ($self) = @_;
-        $self->{menuBehavior}->initSpecialPaint($self);
-}
-
-
-# throws Exception
-sub init {
-    my ($self, $gameLayerManager, $buffered) = @_;
-        $self->{gameStateTimeHelper}->setStartTimeTNT();
-        $self->setHighScoreSubmitted(0);
-        $self->setLayerManager($gameLayerManager);
-        if (!$buffered) {
-            my $BUFF_MESSAGE = "XXX Not Buffering Causes Concurrency Issues XXX";
-            $self->{logUtil}->putF($BUFF_MESSAGE, $self, $self->{commonStrings}->{CONSTRUCTOR});
-        } else {
-            die ("Buffering is disabled");
-        }
-        $self->setGameInputProcessor('org::allbinary::canvas::Processor'->getInstance());
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        if ($features->isFeature('org::allbinary::game::configuration::feature::GameFeatureFactory'->getInstance()->{CHEATING})) {
-            $self->{isCheating} = 1;
-            $self->{cheatProcessor} = 'org::allbinary::game::displayable::canvas::CheatGameInputProcessor'->new($self);
-            $self->{gameKeyEventHandler}->addListener($self->{cheatProcessor});
-        } else {
-            $self->{isCheating} = 0;
-            $self->{cheatProcessor} = 'org::allbinary::game::input::NoPlayerGameInput'->getInstance();
-        }
-        $self->{realEndGameProcessor} = 'org::allbinary::game::displayable::canvas::EndGameProcessor'->new($self);
-        $self->setEndGameProcessor('org::allbinary::canvas::Processor'->getInstance());
-        $self->{realStartIntermissionProcessor} = 'org::allbinary::game::displayable::canvas::StartIntermissionProcessor'->new($self);
-        $self->{startIntermissionProcessor} = 'org::allbinary::canvas::Processor'->getInstance();
-        $self->setEndGameStatePaintable('org::allbinary::game::displayable::canvas::EndGamePaintable'->new($self));
-        $self->setEndGamePaintable('org::allbinary::graphics::paint::NullPaintable'->getInstance());
-        $self->setIntermissionPaintable('org::allbinary::graphics::paint::NullPaintable'->getInstance());
-        $self->getStartIntermissionInterface()->setListener($self);
-}
-
-
-sub notifyIntermission {
-    my ($self, $enable) = @_;
-        if ($enable) {
-            $self->{startIntermissionProcessor} = $self->{realStartIntermissionProcessor};
-        } else {
-            $self->{startIntermissionProcessor} = 'org::allbinary::canvas::Processor'->getInstance();
-        }
-        if ($enable) {
-            $self->setIntermissionPaintable($self->getStartIntermissionPaintable());
-        } else {
-            $self->setIntermissionPaintable('org::allbinary::graphics::paint::NullPaintable'->getInstance());
-        }
-}
-
-
-# throws Exception
-sub mediaInit {
-    my ($self) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log($self->{commonStrings}->{NOT_IMPLEMENTED}, $self);
-}
-
-
-# throws Exception
-sub initConfigurable {
-    my ($self, $abeClientInformation) = @_;
-        my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-        $progressCanvas->addNormalPortion(50, "Setting Configurables");
-        'org::allbinary::game::init::GameInitializationUtil'->getInstance()->initGame($abeClientInformation, $self, $self->{gameInitializationInterfaceFactoryInterface});
-        my $gameFeatureFactory = 'org::allbinary::game::configuration::feature::GameFeatureFactory'->getInstance();
-        my $changedGameFeatureListener = 'org::allbinary::game::configuration::event::ChangedGameFeatureListener'->getInstance();
-        if ($changedGameFeatureListener->isChangedFeature($gameFeatureFactory->{SOUND})) {
-            my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Sound Changing To: ")->appendboolean($features->isFeature($gameFeatureFactory->{SOUND}))->toString(), $self, "initConfigurable");
-            $self->mediaInit();
-            $changedGameFeatureListener->remove($gameFeatureFactory->{SOUND});
-        }
-        my $sensorFeatureFactory = 'org::allbinary::game::configuration::feature::SensorFeatureFactory'->getInstance();
-        if ($changedGameFeatureListener->isChangedFeature($sensorFeatureFactory->{ORIENTATION_SENSORS}) || $changedGameFeatureListener->isChangedFeature($sensorFeatureFactory->{NO_ORIENTATION}) || $changedGameFeatureListener->isChangedFeature($sensorFeatureFactory->{SIMULATED_ORIENTATION_SENSORS})) {
-            $changedGameFeatureListener->remove($sensorFeatureFactory->{NO_ORIENTATION});
-            $changedGameFeatureListener->remove($sensorFeatureFactory->{ORIENTATION_SENSORS});
-            $changedGameFeatureListener->remove($sensorFeatureFactory->{SIMULATED_ORIENTATION_SENSORS});
-        }
-        my $resourceLoadingLevelFactory = 'org::allbinary::game::resource::ResourceLoadingLevelFactory'->getInstance();
-        $self->loadResourceLoadingLevel($resourceLoadingLevelFactory->{LOAD_GAME});
-}
-
-
-# throws Exception
-sub initApp {
-    my ($self, $abeClientInformation) = @_;
-        $self->initConfigurable($abeClientInformation);
-        $self->processorInit();
-        $self->{sensorGameUpdateProcessor}->process($self->{gameLayerManager});
-        $self->{sensorGameUpdateProcessor}->sendNotifications($self->{gameLayerManager});
-        $self->initTouch();
-}
-
-
-# throws Exception
-sub initTouch {
-    my ($self) = @_;
-        my $gameInitializedEvent = 'org::allbinary::game::init::GameInitializationUtil'->getInstance()->{EVENT};
-        my $resourceLoadingLevelFactory = 'org::allbinary::game::resource::ResourceLoadingLevelFactory'->getInstance();
-        $gameInitializedEvent->setResourceLoadingLevel($resourceLoadingLevelFactory->{LOAD_TOUCH});
-        'org::allbinary::game::configuration::event::GameInitializedEventHandler'->getInstance()->fireEvent($gameInitializedEvent);
-        $self->{touchButtonFactory}->defaultList();
-        $self->updateTouch();
-        $self->postInitTouch();
-}
-
-
-# throws Exception
-sub updateCurrentTouchInputFactory {
-    my ($self, $nextTouchInput) = @_;
-        if ($nextTouchInput != $self->{currentTouchInputFactory}) {
-            $self->{currentTouchInputFactory} = $nextTouchInput;
-            'org::allbinary::logic::communication::log::PreLogUtil'->put($self->{currentTouchInputFactory}->toString(), $self, $self->{gameInputStrings}->{UDPATE_CURRENT_TOUCH_INPUT_FACTORY});
-            $self->{touchButtonFactory}->toggle($self->isPaused(), $self->{currentTouchInputFactory}->getList());
-        }
-}
-
-
-# throws Exception
-sub updateTouch {
-    my ($self) = @_;
-        $self->{gameBehavior}->updateTouch($self);
-}
-
-
-# throws Exception
-sub updateTouch2 {
-    my ($self) = @_;
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        if ($features->isFeature($self->{touchFeatureFactory}->{AUTO_HIDE_SHOW_SCREEN_BUTTONS})) {
-            if ($self->{gameLayerManager}->getGameInfo()->getCurrentLevel() - $self->getStartLevel() == 1) {
-                $self->setTouchPaintableP('org::allbinary::graphics::paint::NullPaintable'->getInstance());
+    method processSleep {} {
+        next
+        if {[::AllBinaryMediaManager::update]} {
+            if {[expr {![[my jget primaryPlayerQueue] process]}]} {
+                [my jget secondaryPlayerQueue] process
             }
         }
-}
-
-
-# throws Exception
-sub postInitTouch {
-    my ($self) = @_;
-        $self->setTouchButtonsPaintable('org::allbinary::input::motion::button::TouchButtonsPaintableFactory'->getInstance($self->{gameLayerManager}->getForegroundBasicColor()));
-        $self->updateScreenButtonPaintable();
-}
-
-
-sub initCommands {
-    my ($self, $cmdListener) = @_;
-        $self->removeAllCommands();
-        $self->addCommands();
-        $self->setCommandListener($cmdListener);
-}
-
-
-sub addCommands {
-    my ($self) = @_;
-        my $gameCommandsFactory = 'org::allbinary::game::commands::GameCommandsFactory'->getInstance();
-        my $myCommandsFactory = 'org::allbinary::graphics::displayable::command::MyCommandsFactory'->getInstance();
-        if ('org::allbinary::debug::DebugFactory'->getInstance() != 'org::allbinary::debug::NoDebug'->getInstance()) {
-            $self->addCommand($gameCommandsFactory->{START_TRACE});
+        if {[expr {[[my jget menuInputProcessor] processInputList] != [expr {-1}]}]} {
+            [my jget runnableCanvasRefreshHelper] process
         }
-        $self->addCommand($gameCommandsFactory->{RESTART_COMMAND});
-        $self->addCommand($myCommandsFactory->{PAUSE_COMMAND});
-        $self->addCommand($gameCommandsFactory->{QUIT_COMMAND});
-        my $isOverScan = 'org::allbinary::logic::system::os::OperatingSystemFactory'->getInstance()->getOperatingSystemInstance()->isOverScan();
-        if ('org::allbinary::J2MEUtil'->isHTML()) {
-        } elsif ($org::allbinary::game::layer::SWTUtil::isSWT) {
-        } elsif (!$isOverScan) {
-            if ('org::allbinary::input::motion::button::TouchScreenFactory'->getInstance()->isTouch() && 'org::allbinary::game::configuration::InGameFeatures'->new()->isAny()) {
-                $self->addCommand($org::allbinary::game::configuration::InGameOptionsForm::DISPLAY);
+    }
+    
+
+    method initPopupMenu {} {
+        if {[expr {[my jget popupMenuInputProcessor] eq [::NoMenuInputProcessor::getInstance]}]} {
+            set features [::Features::getInstance]
+            set popupMenuRectangle [[my jget myFormUtil] getPopupMenuRectangle]
+            if {[$features isFeature [[my jget touchFeatureFactory] jget TOUCH_ENABLED]]} {
+                my setOpenMenuPaintable [::BasicPopupMenuPaintable new $popupMenuRectangle [[my jget gameLayerManager] getBackgroundBasicColor] [[my jget gameLayerManager] getForegroundBasicColor]]
+                my setPopupMenuInputProcessor [::PopupMenuInputProcessor new [::BasicArrayListD new] [expr {-1}] [self] $popupMenuRectangle]
             }
-            $self->addCommand($gameCommandsFactory->{SAVE});
-            $self->addCommand($gameCommandsFactory->{DISPLAY_LOAD_FORM});
+        } else {
         }
-}
+    }
+    
 
-
-sub itemStateChanged {
-    my ($self, $item) = @_;
+    method initMenu {} {
         try {
-            my $itemLabel = $item->getLabel();
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonLabels}->{ITEM_LABEL})->append($itemLabel)->toString(), $self, "itemStateChanged");
-            if ((Scalar::Util::blessed($item) && $item->isa('javax::microedition::lcdui::ChoiceGroup'))) {
-                my $gameFeatureUtil = 'org::allbinary::game::configuration::feature::GameFeatureUtil'->getInstance();
-                if ($gameFeatureUtil->isExclusive($itemLabel)) {
-                    $gameFeatureUtil->updateExclusiveForChoiceGroup($item);
+            [my jget menuBehavior] initMenu [self]
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "initMenu" $e
+        }
+    }
+    
+
+    method initMenu2 {} {
+        my closeMenu
+        set formType [[::FormTypeFactory::getInstance] getFormType]
+        set gameLimitedCommandTextItemArrayFactory [::GameLimitedCommandTextItemArrayFactory::getInstance]
+        set commandTextItemArrayFactory [$gameLimitedCommandTextItemArrayFactory getCommandTextItemArrayFactory]
+        set items [$commandTextItemArrayFactory getInstance [my getCommandStack] [[my jget gameLayerManager] getBackgroundBasicColor] [[my jget gameLayerManager] getForegroundBasicColor]]
+        set rectangle [[my jget formUtil] createFormRectangle]
+        my setMenuForm [::CommandCurrentSelectionFormFactory::getInstance [[::StringUtil::getInstance] jget EMPTY_STRING] $items $rectangle $formType 25 false [[my jget gameLayerManager] getBackgroundBasicColor] [[my jget gameLayerManager] getForegroundBasicColor]]
+        set scrollSelectionForm [my getMenuForm]
+        set features [::Features::getInstance]
+        if {[$features isFeature [[my jget touchFeatureFactory] jget TOUCH_ENABLED]]} {
+            my jset mainMenuInputProcessor [::PopupCommandFormInputProcessor new [::BasicArrayListD new] [expr {-1}] [self] $scrollSelectionForm [my getPopupMenuInputProcessor]]
+        } else {
+        }
+        my setMenuInputProcessor [my getPopupMenuInputProcessor]
+        if {[expr {$scrollSelectionForm ne [::ScrollSelectionFormNoneFactory::getInstance]}]} {
+            my setFormPaintable [::FormPaintable new $scrollSelectionForm]
+        } else {
+        }
+        my closeMenu
+    }
+    
+
+    method updateMenu {} {
+        try {
+            [my jget menuBehavior] updateMenu [self]
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "initMenu" $e
+        }
+    }
+    
+
+    method updateMenu2 {} {
+        set scrollSelectionForm [my getMenuForm]
+        $scrollSelectionForm deleteAll
+        set gameLimitedCommandTextItemArrayFactory [::GameLimitedCommandTextItemArrayFactory::getInstance]
+        set commandTextItemArrayFactory [$gameLimitedCommandTextItemArrayFactory getCommandTextItemArrayFactory]
+        set items [$commandTextItemArrayFactory getInstance [my getCommandStack] [[my jget gameLayerManager] getBackgroundBasicColor] [[my jget gameLayerManager] getForegroundBasicColor]]
+        set size [$items length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            $scrollSelectionForm append [$items get $index]
+        }
+        set formType [[::FormTypeFactory::getInstance] getFormType]
+        set rectangle [[my jget formUtil] createFormRectangle]
+        $scrollSelectionForm init $rectangle $formType
+    }
+    
+
+    method pause {} {
+        [my jget gameBehavior] pause [self]
+        my closeMenu
+        next
+        [my jget touchButtonFactory] toggle [my isPaused] [[::BasicArrayListUtil::getInstance] getImmutableInstance]
+        [my jget tsUtil] gc
+    }
+    
+
+    method unPause {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget gameStrings] jget UNPAUSE]
+        my closeMenu
+        [my jget tsUtil] gc
+        next
+        [my jget touchButtonFactory] toggle [my isPaused] [[::BasicArrayListUtil::getInstance] getImmutableInstance]
+        [my jget gameBehavior] unPause [self]
+    }
+    
+
+    method isPausable {} {
+        if {[expr {[[::CurrentDisplayableFactory::getInstance] getUsedRunnable] == [::NullWaitGameRunnable::getInstance]}]} {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+
+    method popupMenu {} {
+        [my jget menuBehavior] popupMenu [self]
+    }
+    
+
+    method popupMenu2 {} {
+        [my jget primaryPlayerQueue] add [::SelectSound::getInstance]
+        my setMenuPaintable [my getFormPaintable]
+        my setMenuInputProcessor [my jget mainMenuInputProcessor]
+        [my jget basicMotionGesturesHandler] addListenerInterface [my jget mainMenuInputProcessor]
+        [my jget gameKeyEventHandler] addListener [my jget mainMenuInputProcessor]
+    }
+    
+
+    method toggleMenu {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget gameStrings] jget TOGGLE_MENU]
+        if {[expr {[my getMenuPaintable] eq [my getOpenMenuPaintable]}]} {
+            my pause
+            my updateMenu
+            my popupMenu
+        } elseif {[expr {[my getMenuPaintable] eq [my getFormPaintable]}]} {
+            [my jget primaryPlayerQueue] add [::SelectSound::getInstance]
+            my unPause
+        }
+    }
+    
+
+    method closeMenu {} {
+        [my jget menuBehavior] closeMenu [self]
+    }
+    
+
+    method closeMenu2 {} {
+        my setMenuPaintable [my getOpenMenuPaintable]
+        [my jget basicMotionGesturesHandler] removeListener [my jget mainMenuInputProcessor]
+        [my jget gameKeyEventHandler] removeListener [my jget mainMenuInputProcessor]
+        my setMenuInputProcessor [my getPopupMenuInputProcessor]
+    }
+    
+
+    method open {} {
+        [my jget basicMotionGesturesHandler] addListenerInterface [my jget menuInputProcessor]
+        [my jget gameKeyEventHandler] addListener [my jget menuInputProcessor]
+    }
+    
+
+    method close {} {
+        [my jget basicMotionGesturesHandler] removeListener [my jget menuInputProcessor]
+        [my jget gameKeyEventHandler] removeListener [my jget menuInputProcessor]
+        [my jget primaryPlayerQueue] clear
+        [my jget secondaryPlayerQueue] clear
+    }
+    
+
+    method processorInit {} {
+        my setMainStateProcessor [::Processor::getInstance]
+        my setProcessGameProcessorInit
+    }
+    
+
+    method setProcessGameProcessorInit {} {
+        my setProcessGameProcessor [::GameProcessor new [self]]
+    }
+    
+
+    method initSpecialPaint {} {
+        [my jget menuBehavior] initSpecialPaint [self]
+    }
+    
+
+    method init {gameLayerManager buffered} {
+        [my jget gameStateTimeHelper] setStartTimeTNT
+        my setHighScoreSubmitted false
+        my setLayerManager $gameLayerManager
+        if {[expr {!$buffered}]} {
+            set BUFF_MESSAGE "XXX Not Buffering Causes Concurrency Issues XXX"
+            [my jget logUtil] putF $BUFF_MESSAGE [self] [[my jget commonStrings] jget CONSTRUCTOR]
+        } else {
+            error [jexception Exception "Buffering is disabled"]
+        }
+        my setGameInputProcessor [::Processor::getInstance]
+        set features [::Features::getInstance]
+        if {[$features isFeature [[::GameFeatureFactory::getInstance] jget CHEATING]]} {
+            my jset isCheating true
+            my jset cheatProcessor [::CheatGameInputProcessor new [self]]
+            [my jget gameKeyEventHandler] addListener [my jget cheatProcessor]
+        } else {
+            my jset isCheating false
+            my jset cheatProcessor [::NoPlayerGameInput::getInstance]
+        }
+        my jset realEndGameProcessor [::EndGameProcessor new [self]]
+        my setEndGameProcessor [::Processor::getInstance]
+        my jset realStartIntermissionProcessor [::StartIntermissionProcessor new [self]]
+        my jset startIntermissionProcessor [::Processor::getInstance]
+        my setEndGameStatePaintable [::EndGamePaintable new [self]]
+        my setEndGamePaintable [::NullPaintable::getInstance]
+        my setIntermissionPaintable [::NullPaintable::getInstance]
+        [my getStartIntermissionInterface] setListener [self]
+    }
+    
+
+    method notifyIntermission {enable} {
+        if {$enable} {
+            my jset startIntermissionProcessor [my jget realStartIntermissionProcessor]
+        } else {
+            my jset startIntermissionProcessor [::Processor::getInstance]
+        }
+        if {$enable} {
+            my setIntermissionPaintable [my getStartIntermissionPaintable]
+        } else {
+            my setIntermissionPaintable [::NullPaintable::getInstance]
+        }
+    }
+    
+
+    method mediaInit {} {
+        ::ForcedLogUtil::log [[my jget commonStrings] jget NOT_IMPLEMENTED] [self]
+    }
+    
+
+    method initConfigurable {abeClientInformation} {
+        set progressCanvas [::ProgressCanvasFactory::getInstance]
+        $progressCanvas addNormalPortion 50 "Setting Configurables"
+        [::GameInitializationUtil::getInstance] initGame $abeClientInformation [self] [my jget gameInitializationInterfaceFactoryInterface]
+        set gameFeatureFactory [::GameFeatureFactory::getInstance]
+        set changedGameFeatureListener [::ChangedGameFeatureListener::getInstance]
+        if {[$changedGameFeatureListener isChangedFeature [$gameFeatureFactory jget SOUND]]} {
+            set features [::Features::getInstance]
+            [my jget logUtil] putF [[[[::StringMaker new] append "Sound Changing To: "] appendboolean [$features isFeature [$gameFeatureFactory jget SOUND]]] toString] [self] "initConfigurable"
+            my mediaInit
+            $changedGameFeatureListener remove [$gameFeatureFactory jget SOUND]
+        }
+        set sensorFeatureFactory [::SensorFeatureFactory::getInstance]
+        if {[expr {[expr {[$changedGameFeatureListener isChangedFeature [$sensorFeatureFactory jget ORIENTATION_SENSORS]] || [$changedGameFeatureListener isChangedFeature [$sensorFeatureFactory jget NO_ORIENTATION]]}] || [$changedGameFeatureListener isChangedFeature [$sensorFeatureFactory jget SIMULATED_ORIENTATION_SENSORS]]}]} {
+            $changedGameFeatureListener remove [$sensorFeatureFactory jget NO_ORIENTATION]
+            $changedGameFeatureListener remove [$sensorFeatureFactory jget ORIENTATION_SENSORS]
+            $changedGameFeatureListener remove [$sensorFeatureFactory jget SIMULATED_ORIENTATION_SENSORS]
+        }
+        set resourceLoadingLevelFactory [::ResourceLoadingLevelFactory::getInstance]
+        my loadResourceLoadingLevel [$resourceLoadingLevelFactory jget LOAD_GAME]
+    }
+    
+
+    method initApp {abeClientInformation} {
+        my initConfigurable $abeClientInformation
+        my processorInit
+        [my jget sensorGameUpdateProcessor] process [my jget gameLayerManager]
+        [my jget sensorGameUpdateProcessor] sendNotifications [my jget gameLayerManager]
+        my initTouch
+    }
+    
+
+    method initTouch {} {
+        set gameInitializedEvent [[::GameInitializationUtil::getInstance] jget EVENT]
+        set resourceLoadingLevelFactory [::ResourceLoadingLevelFactory::getInstance]
+        $gameInitializedEvent setResourceLoadingLevel [$resourceLoadingLevelFactory jget LOAD_TOUCH]
+        [::GameInitializedEventHandler::getInstance] fireEvent $gameInitializedEvent
+        [my jget touchButtonFactory] defaultList
+        my updateTouch
+        my postInitTouch
+    }
+    
+
+    method updateCurrentTouchInputFactory {nextTouchInput} {
+        if {[expr {$nextTouchInput ne [my jget currentTouchInputFactory]}]} {
+            my jset currentTouchInputFactory $nextTouchInput
+            ::PreLogUtil::put [[my jget currentTouchInputFactory] toString] [self] [[my jget gameInputStrings] jget UDPATE_CURRENT_TOUCH_INPUT_FACTORY]
+            [my jget touchButtonFactory] toggle [my isPaused] [[my jget currentTouchInputFactory] getList]
+        }
+    }
+    
+
+    method updateTouch {} {
+        [my jget gameBehavior] updateTouch [self]
+    }
+    
+
+    method updateTouch2 {} {
+        set features [::Features::getInstance]
+        if {[$features isFeature [[my jget touchFeatureFactory] jget AUTO_HIDE_SHOW_SCREEN_BUTTONS]]} {
+            if {[expr {[expr {[[[my jget gameLayerManager] getGameInfo] getCurrentLevel] - [my getStartLevel]}] == 1}]} {
+                my setTouchPaintableP [::NullPaintable::getInstance]
+            }
+        }
+    }
+    
+
+    method postInitTouch {} {
+        my setTouchButtonsPaintable [::TouchButtonsPaintableFactory::getInstance [[my jget gameLayerManager] getForegroundBasicColor]]
+        my updateScreenButtonPaintable
+    }
+    
+
+    method initCommands {cmdListener} {
+        my removeAllCommands
+        my addCommands
+        my setCommandListener $cmdListener
+    }
+    
+
+    method addCommands {} {
+        set gameCommandsFactory [::GameCommandsFactory::getInstance]
+        set myCommandsFactory [::MyCommandsFactory::getInstance]
+        if {[expr {[::DebugFactory::getInstance] != [::NoDebug::getInstance]}]} {
+            my addCommand [$gameCommandsFactory jget START_TRACE]
+        }
+        my addCommand [$gameCommandsFactory jget RESTART_COMMAND]
+        my addCommand [$myCommandsFactory jget PAUSE_COMMAND]
+        my addCommand [$gameCommandsFactory jget QUIT_COMMAND]
+        set isOverScan [[[::OperatingSystemFactory::getInstance] getOperatingSystemInstance] isOverScan]
+        if {[::J2MEUtil::isHTML]} {
+        } elseif {[::SWTUtil::staticGet_isSWT]} {
+        } elseif {[expr {!$isOverScan}]} {
+            if {[expr {[[::TouchScreenFactory::getInstance] isTouch] && [[::InGameFeatures new] isAny]}]} {
+                my addCommand [::InGameOptionsForm::staticGet_DISPLAY]
+            }
+            my addCommand [$gameCommandsFactory jget SAVE]
+            my addCommand [$gameCommandsFactory jget DISPLAY_LOAD_FORM]
+        }
+    }
+    
+
+    method itemStateChanged {item} {
+        try {
+            set itemLabel [$item getLabel]
+            [my jget logUtil] putF [[[[::StringMaker new] append [[my jget commonLabels] jget ITEM_LABEL]] append $itemLabel] toString] [self] "itemStateChanged"
+            if {[jinstanceof $item ::ChoiceGroup]} {
+                set gameFeatureUtil [::GameFeatureUtil::getInstance]
+                if {[$gameFeatureUtil isExclusive $itemLabel]} {
+                    $gameFeatureUtil updateExclusiveForChoiceGroup $item
                 } else {
-                    $gameFeatureUtil->updateMultiple($item);
+                    $gameFeatureUtil updateMultiple $item
                 }
             }
-            $self->{sensorGameUpdateProcessor}->process($self->{gameLayerManager});
-            $self->updateTouch();
-            $self->updateScreenButtonPaintable();
-            $self->{sensorGameUpdateProcessor}->sendNotifications($self->{gameLayerManager});
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "itemStateChanged", $e);
+            [my jget sensorGameUpdateProcessor] process [my jget gameLayerManager]
+            my updateTouch
+            my updateScreenButtonPaintable
+            [my jget sensorGameUpdateProcessor] sendNotifications [my jget gameLayerManager]
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "itemStateChanged" $e
         }
-}
+    }
+    
 
+    method updateScreenButtonPaintable {} {
+        [my jget gameBehavior] updateScreenButtonPaintable [self]
+    }
+    
 
-# throws Exception
-sub updateScreenButtonPaintable {
-    my ($self) = @_;
-        $self->{gameBehavior}->updateScreenButtonPaintable($self);
-}
-
-
-sub updateScreenButtonPaintable2 {
-    my ($self) = @_;
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        if ($features->isFeature($self->{touchFeatureFactory}->{AUTO_HIDE_SHOW_SCREEN_BUTTONS})) {
-            $self->setTouchPaintableP($self->getTouchButtonsPaintable());
-            $self->setStartLevel($self->{gameLayerManager}->getGameInfo()->getCurrentLevel());
-        } elsif ($features->isFeature($self->{touchFeatureFactory}->{SHOW_SCREEN_BUTTONS})) {
-            $self->setTouchPaintableP($self->getTouchButtonsPaintable());
-        } elsif ($features->isFeature($self->{touchFeatureFactory}->{HIDE_SCREEN_BUTTONS})) {
-            $self->setTouchPaintableP('org::allbinary::graphics::paint::NullPaintable'->getInstance());
+    method updateScreenButtonPaintable2 {} {
+        set features [::Features::getInstance]
+        if {[$features isFeature [[my jget touchFeatureFactory] jget AUTO_HIDE_SHOW_SCREEN_BUTTONS]]} {
+            my setTouchPaintableP [my getTouchButtonsPaintable]
+            my setStartLevel [[[my jget gameLayerManager] getGameInfo] getCurrentLevel]
+        } elseif {[$features isFeature [[my jget touchFeatureFactory] jget SHOW_SCREEN_BUTTONS]]} {
+            my setTouchPaintableP [my getTouchButtonsPaintable]
+        } elseif {[$features isFeature [[my jget touchFeatureFactory] jget HIDE_SCREEN_BUTTONS]]} {
+            my setTouchPaintableP [::NullPaintable::getInstance]
         } else {
-            $self->setTouchPaintableP('org::allbinary::graphics::paint::NullPaintable'->getInstance());
+            my setTouchPaintableP [::NullPaintable::getInstance]
         }
-}
+    }
+    
 
+    method getLayerManager {} {
+        return [my jget gameLayerManager]
+    }
+    
 
-sub getLayerManager {
-    my ($self) = @_;
-        return $self->{gameLayerManager};
-}
+    method setLayerManager {layerManager} {
+        my jset gameLayerManager $layerManager
+    }
+    
 
+    method isGameOver {} {
+        return [my jget gameOver]
+    }
+    
 
-sub setLayerManager {
-    my ($self, $layerManager) = @_;
-        $self->{gameLayerManager} = $layerManager;
-}
+    method setGameOver {gameOver} {
+        my jset gameOver $gameOver
+    }
+    
 
+    method processGameOver {} {
+        ::PreLogUtil::put [[my jget commonStrings] jget START] [self] [[my jget gameStrings] jget SET_GAME_OVER]
+        my setGameOver true
+        my removePauseCommand
+        my setGameState [[my jget gameStateFactory] jget SHOW_END_RESULT_GAME_STATE]
+        my setEndGamePaintable [my getEndGameStatePaintable]
+    }
+    
 
-sub isGameOver {
-    my ($self) = @_;
-        return $self->{gameOver};
-}
+    method isHighScoreSubmitted {} {
+        return [my jget highScoreSubmitted]
+    }
+    
 
-
-sub setGameOver {
-    my ($self, $gameOver) = @_;
-        $self->{gameOver} = $gameOver;
-}
-
-
-# throws Exception
-sub processGameOver {
-    my ($self) = @_;
-        'org::allbinary::logic::communication::log::PreLogUtil'->put($self->{commonStrings}->{START}, $self, $self->{gameStrings}->{SET_GAME_OVER});
-        $self->setGameOver(1);
-        $self->removePauseCommand();
-        $self->setGameState($self->{gameStateFactory}->{SHOW_END_RESULT_GAME_STATE});
-        $self->setEndGamePaintable($self->getEndGameStatePaintable());
-}
-
-
-sub isHighScoreSubmitted {
-    my ($self) = @_;
-        return $self->{highScoreSubmitted};
-}
-
-
-# throws Exception
-sub setHighScoreSubmitted {
-    my ($self, $highScoreSubmitted) = @_;
-        $self->{highScoreSubmitted} = $highScoreSubmitted;
-        if ($highScoreSubmitted) {
-            $self->{highScoresHelper}->setSelectedHighScores('org::allbinary::game::score::NullHighScoresSingletonFactory'->getInstance());
+    method setHighScoreSubmitted {highScoreSubmitted} {
+        my jset highScoreSubmitted $highScoreSubmitted
+        if {$highScoreSubmitted} {
+            [my jget highScoresHelper] setSelectedHighScores [::NullHighScoresSingletonFactory::getInstance]
         }
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("isHighScoreSubmitted: ")->appendboolean($highScoreSubmitted)->toString(), $self, "setHighScoreSubmitted");
-}
+        [my jget logUtil] putF [[[[::StringMaker new] append "isHighScoreSubmitted: "] appendboolean $highScoreSubmitted] toString] [self] "setHighScoreSubmitted"
+    }
+    
 
+    method getGameState {} {
+        return [my jget gameState]
+    }
+    
 
-sub getGameState {
-    my ($self) = @_;
-        return $self->{gameState};
-}
+    method setGameState {gameState} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[my jget gameStrings] jget GAME_STATE]] append [[my jget stringUtil] toString1 $gameState]] toString] [self] [[my jget gameStrings] jget SET_GAME_STATE]
+        my jset gameState $gameState
+        [my jget gameStateTimeHelper] setStartTimeTNT
+        my updateEndGameProcessor
+        my updateGameKeyEventProcessor
+        [my jget gameBehavior] setGameState [self]
+    }
+    
 
-
-# throws Exception
-sub setGameState {
-    my ($self, $gameState) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{gameStrings}->{GAME_STATE})->append($self->{stringUtil}->toString($gameState))->toString(), $self, $self->{gameStrings}->{SET_GAME_STATE});
-        $self->{gameState} = $gameState;
-        $self->{gameStateTimeHelper}->setStartTimeTNT();
-        $self->updateEndGameProcessor();
-        $self->updateGameKeyEventProcessor();
-        $self->{gameBehavior}->setGameState($self);
-}
-
-
-# throws Exception
-sub updateGameState {
-    my ($self) = @_;
-        my $gameAdState = $self->{gameAdStateFactory}->getCurrentInstance();
-        $gameAdState->processAdState($self->{gameState}, $self->{gameLayerManager}->getGameInfo()->getGameType());
-        if ($self->{gameState} != $self->{gameStateFactory}->{PLAYING_GAME_STATE}) {
-            $gameAdState->processPageAdState();
+    method updateGameState {} {
+        set gameAdState [[my jget gameAdStateFactory] getCurrentInstance]
+        $gameAdState processAdState [my jget gameState] [[[my jget gameLayerManager] getGameInfo] getGameType]
+        if {[expr {[my jget gameState] ne [[my jget gameStateFactory] jget PLAYING_GAME_STATE]}]} {
+            $gameAdState processPageAdState
         }
-}
+    }
+    
 
-
-sub updateGameKeyEventProcessor {
-    my ($self) = @_;
-        if ($self->getGameState() != $self->{gameStateFactory}->{PLAYING_GAME_STATE} || $self->{isCheating}) {
+    method updateGameKeyEventProcessor {} {
+        if {[expr {[expr {[my getGameState] ne [[my jget gameStateFactory] jget PLAYING_GAME_STATE]}] || [my jget isCheating]}]} {
         } else {
         }
-}
+    }
+    
 
+    method removeAllGameKeyInputListenersOnBuild {} {
+        my removeAllGameKeyInputListeners
+    }
+    
 
-sub removeAllGameKeyInputListenersOnBuild {
-    my ($self) = @_;
-        $self->removeAllGameKeyInputListeners();
-}
+    method removeAllGameKeyInputListeners {} {
+        [my jget gameBehavior] removeAllGameKeyInputListeners [self]
+    }
+    
 
-
-sub removeAllGameKeyInputListeners {
-    my ($self) = @_;
-        $self->{gameBehavior}->removeAllGameKeyInputListeners($self);
-}
-
-
-sub removeAllGameKeyInputListeners2 {
-    my ($self) = @_;
-        $self->{logUtil}->putF("Remove PlayerInput Listeners", $self, "removeAllGameKeyInputListeners");
-        for (my $index = $self->{localPlayerGameInputList}->size() - 1; $index >= 0; $index--) {
-            my $playerGameInput = $self->{localPlayerGameInputList}->get($index);
-            $self->removeKeyInputListener($playerGameInput);
-            $playerGameInput->removeNonAIInputGameKeyEvents();
+    method removeAllGameKeyInputListeners2 {} {
+        [my jget logUtil] putF "Remove PlayerInput Listeners" [self] "removeAllGameKeyInputListeners"
+        for {set index [jint [expr {[[my jget localPlayerGameInputList] size] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set playerGameInput [[my jget localPlayerGameInputList] get $index]
+            my removeKeyInputListener $playerGameInput
+            $playerGameInput removeNonAIInputGameKeyEvents
         }
-}
+    }
+    
 
+    method removeKeyInputListener {playerGameInput} {
+        [my jget gameKeyEventHandler] removeListener $playerGameInput
+    }
+    
 
-sub removeKeyInputListener {
-    my ($self, $playerGameInput) = @_;
-        $self->{gameKeyEventHandler}->removeListener($playerGameInput);
-}
+    method updateEndGameProcessor {} {
+        [my jget gameBehavior] updateEndGameProcessor [self]
+    }
+    
 
-
-# throws Exception
-sub updateEndGameProcessor {
-    my ($self) = @_;
-        $self->{gameBehavior}->updateEndGameProcessor($self);
-}
-
-
-# throws Exception
-sub updateEndGameProcessor2 {
-    my ($self) = @_;
-        if ($self->getGameState() == $self->{gameStateFactory}->{SHOW_END_RESULT_GAME_STATE} || $self->getGameState() == $self->{gameStateFactory}->{SHOW_HIGH_SCORE_GAME_STATE}) {
-            $self->setEndGameProcessor($self->{realEndGameProcessor});
+    method updateEndGameProcessor2 {} {
+        if {[expr {[expr {[my getGameState] eq [[my jget gameStateFactory] jget SHOW_END_RESULT_GAME_STATE]}] || [expr {[my getGameState] eq [[my jget gameStateFactory] jget SHOW_HIGH_SCORE_GAME_STATE]}]}]} {
+            my setEndGameProcessor [my jget realEndGameProcessor]
         } else {
-            $self->setEndGameProcessor('org::allbinary::canvas::Processor'->getInstance());
+            my setEndGameProcessor [::Processor::getInstance]
         }
-}
+    }
+    
 
+    method buildGameInit {isPortion} {
+    }
+    
 
-# throws Exception
-sub buildGameInit {
-    my ($self, $isPortion) = @_;
-}
+    method cleanupGame {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget CLEANUP]
+        set progressCanvas [::ProgressCanvasFactory::getInstance]
+        $progressCanvas addNormalPortion 10 "Cleaning Up"
+        [my jget primaryPlayerQueue] clear
+        [my jget secondaryPlayerQueue] clear
+        [::GameLevelDisplayChangeEventListenersFactory::getInstance] clear
+    }
+    
 
+    method loadResourceLoadingLevel {resourceLoadingLevel} {
+        set gameInitializedEvent [[::GameInitializationUtil::getInstance] jget EVENT]
+        $gameInitializedEvent setResourceLoadingLevel $resourceLoadingLevel
+        [::GameInitializedEventHandler::getInstance] fireEvent $gameInitializedEvent
+    }
+    
 
-# throws Exception
-sub cleanupGame {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{CLEANUP});
-        my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-        $progressCanvas->addNormalPortion(10, "Cleaning Up");
-        $self->{primaryPlayerQueue}->clear();
-        $self->{secondaryPlayerQueue}->clear();
-        'org::allbinary::game::displayable::GameLevelDisplayChangeEventListenersFactory'->getInstance()->clear();
-}
+    method loadResources {level} {
+        set gameInitializedEvent [[::GameInitializationUtil::getInstance] jget EVENT]
+        $gameInitializedEvent setLevel $level
+        [::GameInitializedEventHandler::getInstance] fireEvent $gameInitializedEvent
+    }
+    
 
+    method updateColor {} {
+    }
+    
 
-# throws Exception
-sub loadResourceLoadingLevel {
-    my ($self, $resourceLoadingLevel) = @_;
-        my $gameInitializedEvent = 'org::allbinary::game::init::GameInitializationUtil'->getInstance()->{EVENT};
-        $gameInitializedEvent->setResourceLoadingLevel($resourceLoadingLevel);
-        'org::allbinary::game::configuration::event::GameInitializedEventHandler'->getInstance()->fireEvent($gameInitializedEvent);
-}
-
-
-# throws Exception
-sub loadResources {
-    my ($self, $level) = @_;
-        my $gameInitializedEvent = 'org::allbinary::game::init::GameInitializationUtil'->getInstance()->{EVENT};
-        $gameInitializedEvent->setLevel($level);
-        'org::allbinary::game::configuration::event::GameInitializedEventHandler'->getInstance()->fireEvent($gameInitializedEvent);
-}
-
-
-# throws Exception
-sub updateColor {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub buildGame {
-    my ($self, $portion) = @_;
-        $self->{screenCapture}->endRecording();
-        $self->{screenCapture}->startRecording();
-        my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        $progressCanvas->addNormalPortion($portion, "Generic Build");
-        $self->removeAllGameKeyInputListenersOnBuild();
-        $self->updateTouch();
-        $progressCanvas->addNormalPortion($portion, "High Scores");
-        $self->{highScoresFactoryInterface}->fetchHighScores($self->{gameLayerManager}->getGameInfo(), $self->{highScoresHelper});
-        $self->setHighScoresPaintable('org::allbinary::graphics::paint::NullPaintable'->getInstance());
-        $progressCanvas->addNormalPortion($portion, "Finishing.");
-        $self->getEndGameInfoP()->update($self->getLayerManager()->getGameInfo(), $self);
-        $self->{isSingleKeyRepeatableProcessing} = $features->isFeature('org::allbinary::game::configuration::feature::InputFeatureFactory'->getInstance()->{SINGLE_KEY_REPEAT_PRESS});
-        $self->setGameOver(0);
-        $progressCanvas->addNormalPortion($portion, "Finishing..");
-        $self->updateColor();
-        $self->getStartIntermissionPaintable()->update();
-        if (!$self->isRunningInAnotherThread()) {
-            return;
+    method buildGame {portion} {
+        [my jget screenCapture] endRecording
+        [my jget screenCapture] startRecording
+        set progressCanvas [::ProgressCanvasFactory::getInstance]
+        set features [::Features::getInstance]
+        $progressCanvas addNormalPortion $portion "Generic Build"
+        my removeAllGameKeyInputListenersOnBuild
+        my updateTouch
+        $progressCanvas addNormalPortion $portion "High Scores"
+        [my jget highScoresFactoryInterface] fetchHighScores [[my jget gameLayerManager] getGameInfo] [my jget highScoresHelper]
+        my setHighScoresPaintable [::NullPaintable::getInstance]
+        $progressCanvas addNormalPortion $portion "Finishing."
+        [my getEndGameInfoP] update [[my getLayerManager] getGameInfo] [self]
+        my jset isSingleKeyRepeatableProcessing [$features isFeature [[::InputFeatureFactory::getInstance] jget SINGLE_KEY_REPEAT_PRESS]]
+        my setGameOver false
+        $progressCanvas addNormalPortion $portion "Finishing.."
+        my updateColor
+        [my getStartIntermissionPaintable] update
+        if {[expr {![my isRunningInAnotherThread]}]} {
+            return
         }
-        $progressCanvas->addNormalPortion($portion, "Finishing...");
-        if ($self->isMainCanvas() || !$self->isInitialized()) {
-            if ($features->isFeature('org::allbinary::game::configuration::feature::MainFeatureFactory'->getInstance()->{LOAD_ONDEMAND})) {
-                if (defined($self->getCustomCommandListener())) {
-                    $progressCanvas->end();
+        $progressCanvas addNormalPortion $portion "Finishing..."
+        if {[expr {[my isMainCanvas] || [expr {![my isInitialized]}]}]} {
+            if {[$features isFeature [[::MainFeatureFactory::getInstance] jget LOAD_ONDEMAND]]} {
+                if {[expr {[my getCustomCommandListener] ne {}}]} {
+                    $progressCanvas end
                 }
             } else {
-                $progressCanvas->end();
+                $progressCanvas end
             }
-            $self->setInitialized(1);
+            my setInitialized true
         }
-        if ($self->getCustomCommandListener() == $javax::microedition::lcdui::NullCommandListener::NULL_COMMAND_LISTENER) {
-            $self->{logUtil}->putF("Show Game Paintable in DemoCanvas Thread", $self, $self->{BUILD_GAME});
-            $self->{gameCanvasStartListener}->showGamePaintable();
+        if {[expr {[my getCustomCommandListener] == [::NullCommandListener::staticGet_NULL_COMMAND_LISTENER]}]} {
+            [my jget logUtil] putF "Show Game Paintable in DemoCanvas Thread" [self] [my jget BUILD_GAME]
+            [my jget gameCanvasStartListener] showGamePaintable
         } else {
-            $self->{logUtil}->putF("No GameCanvasStartListener", $self, $self->{BUILD_GAME});
+            [my jget logUtil] putF "No GameCanvasStartListener" [self] [my jget BUILD_GAME]
         }
-        $self->{colorFillPaintable}->setBasicColorP($self->{gameLayerManager}->getBackgroundBasicColor());
-        $self->{gameBehavior}->buildGame($self);
-}
+        [my jget colorFillPaintable] setBasicColorP [[my jget gameLayerManager] getBackgroundBasicColor]
+        [my jget gameBehavior] buildGame [self]
+    }
+    
 
-
-sub buildGame2 {
-    my ($self) = @_;
-        'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append($self->{gameInputStrings}->{ENABLE_PLAYER_GAME_INPUTS})->appendint($self->{localPlayerGameInputList}->size())->toString(), $self, $self->{BUILD_GAME});
-        my $playerGameInput = undef;
-        for (my $index = $self->{localPlayerGameInputList}->size() - 1; $index >= 0; $index--) {
-            $playerGameInput = $self->{localPlayerGameInputList}->get($index);
-            'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append($self->{gameInputStrings}->{ENABLE_PLAYER_GAME_INPUT})->append($playerGameInput->toString())->toString(), $self, $self->{BUILD_GAME});
-            $playerGameInput->removeNonAIInputGameKeyEvents();
-            $self->addKeyInputListener($playerGameInput);
+    method buildGame2 {} {
+        ::PreLogUtil::put [[[[::StringMaker new] append [[my jget gameInputStrings] jget ENABLE_PLAYER_GAME_INPUTS]] appendint [[my jget localPlayerGameInputList] size]] toString] [self] [my jget BUILD_GAME]
+        set playerGameInput {}
+        for {set index [jint [expr {[[my jget localPlayerGameInputList] size] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set playerGameInput [[my jget localPlayerGameInputList] get $index]
+            ::PreLogUtil::put [[[[::StringMaker new] append [[my jget gameInputStrings] jget ENABLE_PLAYER_GAME_INPUT]] append [$playerGameInput toString]] toString] [self] [my jget BUILD_GAME]
+            $playerGameInput removeNonAIInputGameKeyEvents
+            my addKeyInputListener $playerGameInput
         }
-}
+    }
+    
 
+    method addKeyInputListener {playerGameInput} {
+        [::GameKeyEventHandler::getInstance] addListenerForPlayer $playerGameInput [$playerGameInput getPlayerInputId]
+    }
+    
 
-sub addKeyInputListener {
-    my ($self, $playerGameInput) = @_;
-        'org::allbinary::game::input::event::GameKeyEventHandler'->getInstance()->addListenerForPlayer($playerGameInput, $playerGameInput->getPlayerInputId());
-}
+    method setGameCanvasStartListener {gameCanvasStartListener} {
+        my jset gameCanvasStartListener $gameCanvasStartListener
+    }
+    
 
-
-sub setGameCanvasStartListener {
-    my ($self, $gameCanvasStartListener) = @_;
-        $self->{gameCanvasStartListener} = $gameCanvasStartListener;
-}
-
-
-# throws Exception
-sub loadState {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{LOAD});
-        my $hashtable = $self->getLoadStateHashtable();
-        if (defined($hashtable) && $hashtable->size() > 0) {
-            my $levelAsString = $hashtable->get($org::allbinary::game::GameInfo::LEVEL_NAME);
-            my $level = int(("" . ($levelAsString)));
-            my $gameInfo = $self->{gameLayerManager}->getGameInfo();
-            $gameInfo->setCurrentLevel($level);
+    method loadState {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget LOAD]
+        set hashtable [my getLoadStateHashtable]
+        if {[expr {[expr {$hashtable ne {}}] && [expr {[$hashtable size] > 0}]}]} {
+            set levelAsString [$hashtable get [::GameInfo::staticGet_LEVEL_NAME]]
+            set level [[jstr $levelAsString] intValue]
+            set gameInfo [[my jget gameLayerManager] getGameInfo]
+            $gameInfo setCurrentLevel $level
         }
-}
+    }
+    
 
+    method getLoadStateHashtable {} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[my jget commonLabels] jget START_LABEL]] append [[my jget stringUtil] toString1 [my jget hashtable]]] toString] [self] "getLoadStateHashtable"
+        return [my jget hashtable]
+    }
+    
 
-# throws Exception
-sub getLoadStateHashtable {
-    my ($self) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonLabels}->{START_LABEL})->append($self->{stringUtil}->toString($self->{hashtable}))->toString(), $self, "getLoadStateHashtable");
-        return $self->{hashtable};
-}
+    method setLoadStateHashtable {hashtable} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[my jget commonLabels] jget START_LABEL]] append [[my jget stringUtil] toString1 $hashtable]] toString] [self] "setLoadStateHashtable"
+        my jset hashtable $hashtable
+    }
+    
 
+    method getCurrentStateHashtable {} {
+        set hashtable [[my jget stdUtil] createHashtable]
+        set level [[[my jget gameLayerManager] getGameInfo] getCurrentLevel]
+        $hashtable put [[::GameInfo::staticGet_LEVEL_NAME] toString] [jstr $level]
+        [my jget logUtil] putF [[[[::StringMaker new] append "End: "] append [[my jget stringUtil] toString1 $hashtable]] toString] [self] "getCurrentStateHashtable"
+        return $hashtable
+    }
+    
 
-sub setLoadStateHashtable {
-    my ($self, $hashtable) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonLabels}->{START_LABEL})->append($self->{stringUtil}->toString($hashtable))->toString(), $self, "setLoadStateHashtable");
-        $self->{hashtable} = $hashtable;
-}
+    method paintGameOver {graphics} {
+        ::ForcedLogUtil::log [[my jget commonStrings] jget NOT_IMPLEMENTED] [self]
+    }
+    
 
+    method draw {graphics} {
+        [my jget colorFillPaintable] paint $graphics
+        [my jget basicSetColorUtil] setBasicColorP $graphics [[my jget gameLayerManager] getForegroundBasicColor]
+        [my jget gameSpecificPaintable] paint $graphics
+    }
+    
 
-sub getCurrentStateHashtable {
-    my ($self) = @_;
-        my $hashtable = $self->{stdUtil}->createHashtable();
-        my $level = $self->{gameLayerManager}->getGameInfo()->getCurrentLevel();
-        $hashtable->put($org::allbinary::game::GameInfo::LEVEL_NAME->toString(), ("" . ($level)));
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("End: ")->append($self->{stringUtil}->toString($hashtable))->toString(), $self, "getCurrentStateHashtable");
-        return $hashtable;
-}
+    method clear {graphics} {
+        [my jget colorFillPaintable] paint $graphics
+    }
+    
 
+    method paint {graphics} {
+        [my jget myFontProcessor] process $graphics
+        [my jget baseGameStatistics] nextRefresh
+        my draw $graphics
+        [my jget menuPaintable] paint $graphics
+        [my jget progressPaintable] paint $graphics
+    }
+    
 
-sub paintGameOver {
-    my ($self, $graphics) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log($self->{commonStrings}->{NOT_IMPLEMENTED}, $self);
-}
+    method paintThreed {graphics} {
+    }
+    
 
+    method processEndLevelIntermissionGameState {} {
+    }
+    
 
-sub draw {
-    my ($self, $graphics) = @_;
-        $self->{colorFillPaintable}->paint($graphics);
-        $self->{basicSetColorUtil}->setBasicColorP($graphics, $self->{gameLayerManager}->getForegroundBasicColor());
-        $self->{gameSpecificPaintable}->paint($graphics);
-}
+    method nonBotPaint {graphics} {
+        [my jget endGamePaintable] paint $graphics
+        [my jget intermissionPaintable] paint $graphics
+        my paintIntermission $graphics
+        [my jget touchPaintable] paint $graphics
+    }
+    
 
+    method paintIntermission {graphics} {
+    }
+    
 
-sub clear {
-    my ($self, $graphics) = @_;
-        $self->{colorFillPaintable}->paint($graphics);
-}
+    method keyPressed {keyCode} {
+        my keyPressedByDevice $keyCode 0
+    }
+    
 
+    method keyReleased {keyCode} {
+        my keyReleasedByDevice $keyCode 0
+    }
+    
 
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        $self->{baseGameStatistics}->nextRefresh();
-        $self->draw($graphics);
-        $self->{menuPaintable}->paint($graphics);
-        $self->{progressPaintable}->paint($graphics);
-}
+    method keyRepeated {keyCode} {
+        my keyRepeatedByDevice $keyCode 0
+    }
+    
 
+    method keyPressedByDevice {keyCode deviceId} {
+        [my jget inputProcessor] keyPressedByDevice $keyCode $deviceId
+    }
+    
 
-sub paintThreed {
-    my ($self, $graphics) = @_;
-}
-
-
-# throws Exception
-sub processEndLevelIntermissionGameState {
-    my ($self) = @_;
-}
-
-
-sub nonBotPaint {
-    my ($self, $graphics) = @_;
-        $self->{endGamePaintable}->paint($graphics);
-        $self->{intermissionPaintable}->paint($graphics);
-        $self->paintIntermission($graphics);
-        $self->{touchPaintable}->paint($graphics);
-}
-
-
-sub paintIntermission {
-    my ($self, $graphics) = @_;
-}
-
-
-sub keyPressed {
-    my ($self, $keyCode) = @_;
-        $self->keyPressedByDevice($keyCode, 0);
-}
-
-
-sub keyReleased {
-    my ($self, $keyCode) = @_;
-        $self->keyReleasedByDevice($keyCode, 0);
-}
-
-
-sub keyRepeated {
-    my ($self, $keyCode) = @_;
-        $self->keyRepeatedByDevice($keyCode, 0);
-}
-
-
-sub keyPressedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
-        $self->{inputProcessor}->keyPressedByDevice($keyCode, $deviceId);
-}
-
-
-sub keyRepeatedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
-        if ($self->{isSingleKeyRepeatableProcessing}) {
-            $self->{inputProcessor}->keyPressedByDevice($keyCode, $deviceId);
+    method keyRepeatedByDevice {keyCode deviceId} {
+        if {[my jget isSingleKeyRepeatableProcessing]} {
+            [my jget inputProcessor] keyPressedByDevice $keyCode $deviceId
         }
-}
+    }
+    
 
+    method keyReleasedByDevice {keyCode deviceId} {
+        [my jget inputProcessor] keyReleasedByDevice [self] $keyCode $deviceId
+    }
+    
 
-sub keyReleasedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
-        $self->{inputProcessor}->keyReleasedByDevice($self, $keyCode, $deviceId);
-}
+    method handleRawKey {keyCode deviceId repeated} {
+    }
+    
 
-
-# throws Exception
-sub handleRawKey {
-    my ($self, $keyCode, $deviceId, $repeated) = @_;
-}
-
-
-sub endProgress {
-    my ($self, $isProgress) = @_;
-        my $portion = 30;
-        if ($isProgress && $self->isMainCanvas()) {
-            my $myCommandsFactory = 'org::allbinary::graphics::displayable::command::MyCommandsFactory'->getInstance();
-            my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-            $progressCanvas->start();
-            $self->getCustomCommandListener()->commandAction($myCommandsFactory->{SET_DISPLAYABLE}, $progressCanvas);
-            $portion = 4;
+    method endProgress {isProgress} {
+        set portion 30
+        if {[expr {$isProgress && [my isMainCanvas]}]} {
+            set myCommandsFactory [::MyCommandsFactory::getInstance]
+            set progressCanvas [::ProgressCanvasFactory::getInstance]
+            $progressCanvas start
+            [my getCustomCommandListener] commandAction [$myCommandsFactory jget SET_DISPLAYABLE] $progressCanvas
+            set portion 4
         }
-        return $portion;
-}
+        return $portion
+    }
+    
 
+    method processPlayingGame {} {
+        [my jget cheatProcessor] update
+        [[my jget sensorGameUpdateProcessor] getInputSensor] update
+        [my jget gameInputProcessor] process
+        [my jget gameLayerManager] process
+        [my jget startIntermissionProcessor] process
+    }
+    
 
-# throws Exception
-sub processPlayingGame {
-    my ($self) = @_;
-        $self->{cheatProcessor}->update();
-        $self->{sensorGameUpdateProcessor}->getInputSensor()->update();
-        $self->{gameInputProcessor}->process();
-        $self->{gameLayerManager}->process();
-        $self->{startIntermissionProcessor}->process();
-}
+    method threadInit {} {
+    }
+    
 
-
-# throws Exception
-sub threadInit {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub processGame {
-    my ($self) = @_;
-        $self->SUPER::process();
-        if ('org::allbinary::media::audio::AllBinaryMediaManager'->update()) {
-            if (!$self->{primaryPlayerQueue}->process()) {
-                $self->{secondaryPlayerQueue}->process();
+    method processGame {} {
+        next
+        if {[::AllBinaryMediaManager::update]} {
+            if {[expr {![[my jget primaryPlayerQueue] process]}]} {
+                [my jget secondaryPlayerQueue] process
             }
         }
-        $self->{mainStateProcessor}->process();
-        $self->{menuInputProcessor}->processInputList();
-        $self->{endGameProcessor}->process();
-        $self->{baseGameStatistics}->nextFrame();
-}
+        [my jget mainStateProcessor] process
+        [my jget menuInputProcessor] processInputList
+        [my jget endGameProcessor] process
+        [my jget baseGameStatistics] nextFrame
+    }
+    
 
-
-sub notifyDonePainting {
-    my ($self) = @_;
-        {; # synchronized ($self)
-            $self->{threadObjectUtil}->notifyObject($self);
+    method notifyDonePainting {} {
+        if {1} {
+            [my jget threadObjectUtil] notifyObject [self]
         }
-}
+    }
+    
 
-
-# throws Exception
-sub shouldWait {
-    my ($self) = @_;
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        if ('org::allbinary::AndroidUtil'->isAndroid()) {
-        } elsif ($features->isFeature($self->{openGLFeatureFactory}->{OPENGL_2D})) {
+    method shouldWait {} {
+        set features [::Features::getInstance]
+        if {[::AndroidUtil::isAndroid]} {
+        } elseif {[$features isFeature [[my jget openGLFeatureFactory] jget OPENGL_2D]]} {
         } else {
-            if ($features->isDefault($self->{openGLFeatureFactory}->{OPENGL})) {
-                my $openGLImageSpecificFactory = 'org::allbinary::image::opengles::OpenGLImageSpecificFactory'->getInstance();
-                while ($openGLImageSpecificFactory->{updating}) {
-                    Time::HiRes::sleep(($self->{YIELD_SLEEP}) / 1000);
+            if {[$features isDefault [[my jget openGLFeatureFactory] jget OPENGL]]} {
+                set openGLImageSpecificFactory [::OpenGLImageSpecificFactory::getInstance]
+                while {[$openGLImageSpecificFactory jget updating]} {
+                    ::Thread::sleep [my jget YIELD_SLEEP]
                 }
             }
         }
-}
+    }
+    
 
-
-sub run {
-    my ($self) = @_;
+    method run {} {
         try {
-            $self->{logUtil}->putF($self->{commonStrings}->{START_RUNNABLE}, $self, $self->{commonStrings}->{RUN});
-            my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-            $progressCanvas->addNormalPortion(50, "Game Thread");
-            $self->setCurrentThread();
-            $self->setRunning(1);
-            if ($self->getCustomCommandListener() == $javax::microedition::lcdui::NullCommandListener::NULL_COMMAND_LISTENER) {
-                Time::HiRes::sleep(($self->{YIELD_SLEEP}) / 1000);
+            [my jget logUtil] putF [[my jget commonStrings] jget START_RUNNABLE] [self] [[my jget commonStrings] jget RUN]
+            set progressCanvas [::ProgressCanvasFactory::getInstance]
+            $progressCanvas addNormalPortion 50 "Game Thread"
+            my setCurrentThread
+            my setRunning true
+            if {[expr {[my getCustomCommandListener] == [::NullCommandListener::staticGet_NULL_COMMAND_LISTENER]}]} {
+                ::Thread::sleep [my jget YIELD_SLEEP]
             }
-            $self->shouldWait();
-            $self->threadInit();
-            if ($self->getCustomCommandListener() == $javax::microedition::lcdui::NullCommandListener::NULL_COMMAND_LISTENER) {
-                Time::HiRes::sleep(($self->{YIELD_SLEEP}) / 1000);
+            my shouldWait
+            my threadInit
+            if {[expr {[my getCustomCommandListener] == [::NullCommandListener::staticGet_NULL_COMMAND_LISTENER]}]} {
+                ::Thread::sleep [my jget YIELD_SLEEP]
             }
-            $self->open();
-            my $gameAdState = $self->{gameAdStateFactory}->getCurrentInstance();
-            $gameAdState->init();
-            $gameAdState->setGameIsReady(1);
-            $self->{gameBehavior}->run($self);
-            $self->{logUtil}->putF($self->{commonStrings}->{END_RUNNABLE}, $self, $self->{commonStrings}->{RUN});
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{RUN}, $e);
+            my open
+            set gameAdState [[my jget gameAdStateFactory] getCurrentInstance]
+            $gameAdState init
+            $gameAdState setGameIsReady true
+            [my jget gameBehavior] run [self]
+            [my jget logUtil] putF [[my jget commonStrings] jget END_RUNNABLE] [self] [[my jget commonStrings] jget RUN]
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget RUN] $e
         }
-}
+    }
+    
 
-
-# throws Exception
-sub run2 {
-    my ($self) = @_;
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        if ($features->isDefault($self->{openGLFeatureFactory}->{OPENGL_AS_GAME_THREAD}) || 'org::allbinary::J2MEUtil'->isHTML()) {
-            if ($features->isDefault($self->{openGLFeatureFactory}->{OPENGL_AS_GAME_THREAD})) {
-                $self->{logUtil}->putF($self->{openGLFeatureFactory}->{OPENGL_AS_GAME_THREAD}->getName(), $self, $self->{commonStrings}->{RUN});
+    method run2 {} {
+        set features [::Features::getInstance]
+        if {[expr {[$features isDefault [[my jget openGLFeatureFactory] jget OPENGL_AS_GAME_THREAD]] || [::J2MEUtil::isHTML]}]} {
+            if {[$features isDefault [[my jget openGLFeatureFactory] jget OPENGL_AS_GAME_THREAD]]} {
+                [my jget logUtil] putF [[[my jget openGLFeatureFactory] jget OPENGL_AS_GAME_THREAD] getName] [self] [[my jget commonStrings] jget RUN]
             }
-            if ('org::allbinary::J2MEUtil'->isHTML()) {
-                $self->{logUtil}->putF('org::allbinary::graphics::GraphicsStrings'->getInstance()->{HTML}, $self, $self->{commonStrings}->{RUN});
+            if {[::J2MEUtil::isHTML]} {
+                [my jget logUtil] putF [[::GraphicsStrings::getInstance] jget HTML] [self] [[my jget commonStrings] jget RUN]
             }
-            my $currentDisplayableFactory = 'org::allbinary::graphics::opengles::CurrentDisplayableFactory'->getInstance();
-            $currentDisplayableFactory->setRunnable($self->{gameRunnable});
-            $currentDisplayableFactory->setDisplayable($self);
-            'org::allbinary::graphics::opengles::OpenGLThreadUtil'->getInstance()->onResume();
-        } elsif ($features->isDefault($self->{openGLFeatureFactory}->{OPENGL_AND_GAME_HAVE_DIFFERENT_THREADS})) {
-            $self->{logUtil}->putF($self->{openGLFeatureFactory}->{OPENGL_AND_GAME_HAVE_DIFFERENT_THREADS}->getName(), $self, $self->{commonStrings}->{RUN});
-            'org::allbinary::graphics::opengles::OpenGLThreadUtil'->getInstance()->onResume();
-            while ($self->isRunning()) {
-                $self->run3();
+            set currentDisplayableFactory [::CurrentDisplayableFactory::getInstance]
+            $currentDisplayableFactory setRunnable [my jget gameRunnable]
+            $currentDisplayableFactory setDisplayable [self]
+            [::OpenGLThreadUtil::getInstance] onResume
+        } elseif {[$features isDefault [[my jget openGLFeatureFactory] jget OPENGL_AND_GAME_HAVE_DIFFERENT_THREADS]]} {
+            [my jget logUtil] putF [[[my jget openGLFeatureFactory] jget OPENGL_AND_GAME_HAVE_DIFFERENT_THREADS] getName] [self] [[my jget commonStrings] jget RUN]
+            [::OpenGLThreadUtil::getInstance] onResume
+            while {[my isRunning]} {
+                my run3
             }
-            $self->end();
+            my end
         } else {
-            $self->{logUtil}->putF("this thread", $self, $self->{commonStrings}->{RUN});
-            while ($self->isRunning()) {
-                $self->run3();
+            [my jget logUtil] putF "this thread" [self] [[my jget commonStrings] jget RUN]
+            while {[my isRunning]} {
+                my run3
             }
-            $self->end();
+            my end
         }
-}
+    }
+    
 
+    method run3 {} {
+        [my jget loopTimeHelper] setStartTime [[my jget gameTickTimeDelayHelper] setStartTime]
+        [my jget gameTickDisplayInfoSingleton] update
+        my processGame
+        my processLoopSleep
+    }
+    
 
-# throws Exception
-sub run3 {
-    my ($self) = @_;
-        $self->{loopTimeHelper}->setStartTime($self->{gameTickTimeDelayHelper}->setStartTime());
-        $self->{gameTickDisplayInfoSingleton}->update();
-        $self->processGame();
-        $self->processLoopSleep();
-}
-
-
-sub setRunning {
-    my ($self, $running) = @_;
-        $self->SUPER::setRunning($running);
+    method setRunning {running} {
+        next $running
         try {
-            my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-            if ($running) {
+            set features [::Features::getInstance]
+            if {$running} {
             } else {
-                if ($features->isDefault($self->{openGLFeatureFactory}->{OPENGL}) || $org::allbinary::game::layer::SWTUtil::isSWT) {
-                    if ($self->{gameLayerManager}->getGameInfo()->getGameType() != $self->{gameTypeFactory}->{BOT}) {
-                        my $currentDisplayableFactory = 'org::allbinary::graphics::opengles::CurrentDisplayableFactory'->getInstance();
-                        $currentDisplayableFactory->clearRunnable();
+                if {[expr {[$features isDefault [[my jget openGLFeatureFactory] jget OPENGL]] || [::SWTUtil::staticGet_isSWT]}]} {
+                    if {[expr {[[[my jget gameLayerManager] getGameInfo] getGameType] != [[my jget gameTypeFactory] jget BOT]}]} {
+                        set currentDisplayableFactory [::CurrentDisplayableFactory::getInstance]
+                        $currentDisplayableFactory clearRunnable
                     }
-                    $self->end();
+                    my end
                 }
             }
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{SET_RUNNING}, $e);
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [my jget SET_RUNNING] $e
         }
-}
+    }
+    
 
+    method end {} {
+        [my jget screenCapture] endRecording
+        [my jget baseGameStatistics] add [[[[::StringMaker new] append [[my jget baseGameStatistics] toString]] append [[::CommonSeps::getInstance] jget NEW_LINE]] toString]
+        [my jget baseGameStatistics] init
+        [my jget gameKeyEventHandler] removeListener [my jget cheatProcessor]
+        my close
+        my removeAllGameKeyInputListeners
+        my endGameThread
+    }
+    
 
-# throws Exception
-sub end {
-    my ($self) = @_;
-        $self->{screenCapture}->endRecording();
-        $self->{baseGameStatistics}->add('org::allbinary::logic::string::StringMaker'->new()->append($self->{baseGameStatistics}->toString())->append('org::allbinary::string::CommonSeps'->getInstance()->{NEW_LINE})->toString());
-        $self->{baseGameStatistics}->init();
-        $self->{gameKeyEventHandler}->removeListener($self->{cheatProcessor});
-        $self->close();
-        $self->removeAllGameKeyInputListeners();
-        $self->endGameThread();
-}
+    method endGameThread {} {
+        [::DisplayChangeEventHandler::getInstance] removeListener [self]
+        [::GameLevelDisplayChangeEventListenersFactory::getInstance] clear
+        set gameAdState [[my jget gameAdStateFactory] getCurrentInstance]
+        $gameAdState notPlayingAdState
+    }
+    
 
+    method createHighScore {score} {
+        set gameInfo [[my jget gameLayerManager] getGameInfo]
+        return [::HighScore new 0 "NONE" [::GameInfo new [$gameInfo getGameType] [$gameInfo getGameMode] [[::PlayerTypesFactory::getInstance] jget PLAYER_TYPE_ONE] 0 0] $score]
+    }
+    
 
-# throws Exception
-sub endGameThread {
-    my ($self) = @_;
-        'org::allbinary::graphics::displayable::event::DisplayChangeEventHandler'->getInstance()->removeListener($self);
-        'org::allbinary::game::displayable::GameLevelDisplayChangeEventListenersFactory'->getInstance()->clear();
-        my $gameAdState = $self->{gameAdStateFactory}->getCurrentInstance();
-        $gameAdState->notPlayingAdState();
-}
+    method setHighScore {abeClientInformation name score autoSubmit isLast} {
+        [my jget gameBehavior] setHighScore $abeClientInformation [self] $name $score $autoSubmit $isLast
+    }
+    
 
-
-sub createHighScore {
-    my ($self, $score) = @_;
-        my $gameInfo = $self->{gameLayerManager}->getGameInfo();
-        return 'org::allbinary::game::score::HighScore'->new(0, "NONE", 'org::allbinary::game::GameInfo'->new($gameInfo->getGameType(), $gameInfo->getGameMode(), 'org::allbinary::game::PlayerTypesFactory'->getInstance()->{PLAYER_TYPE_ONE}, 0, 0), $score);
-}
-
-
-# throws Exception
-sub setHighScore {
-    my ($self, $abeClientInformation, $name, $score, $autoSubmit, $isLast) = @_;
-        $self->{gameBehavior}->setHighScore($abeClientInformation, $self, $name, $score, $autoSubmit, $isLast);
-}
-
-
-# throws Exception
-sub setHighScore2 {
-    my ($self, $abeClientInformation, $name, $score, $autoSubmit, $isLast) = @_;
-        my $highScore = $self->createHighScore($score);
-        my $textBox = 'org::allbinary::game::score::displayable::HighScoreTextBox'->new($self->{highScoresFactoryInterface}, $self->{highScoresHelper}, $abeClientInformation, $self->{gameLayerManager}->getGameInfo(), $self->getCustomCommandListener(), $name, $highScore, $self->{gameLayerManager}->getBackgroundBasicColor(), $self->{gameLayerManager}->getForegroundBasicColor());
-        if ($isLast) {
-            $self->getCustomCommandListener()->commandAction('org::allbinary::game::commands::GameCommandsFactory'->getInstance()->{SET_MENU_DISPLAYABLE}, $textBox);
+    method setHighScore2 {abeClientInformation name score autoSubmit isLast} {
+        set highScore [my createHighScore $score]
+        set textBox [::HighScoreTextBox new [my jget highScoresFactoryInterface] [my jget highScoresHelper] $abeClientInformation [[my jget gameLayerManager] getGameInfo] [my getCustomCommandListener] $name $highScore [[my jget gameLayerManager] getBackgroundBasicColor] [[my jget gameLayerManager] getForegroundBasicColor]]
+        if {$isLast} {
+            [my getCustomCommandListener] commandAction [[::GameCommandsFactory::getInstance] jget SET_MENU_DISPLAYABLE] $textBox
         }
-        if ($autoSubmit) {
-            'org::allbinary::thread::SecondaryThreadPool'->getInstance()->runTask('org::allbinary::game::displayable::canvas::SaveHighScoreRunnable'->new($isLast, $textBox));
+        if {$autoSubmit} {
+            [::SecondaryThreadPool::getInstance] runTask [::SaveHighScoreRunnable new $isLast $textBox]
         }
-}
+    }
+    
 
+    method getGameStateTimeHelper {} {
+        return [my jget gameStateTimeHelper]
+    }
+    
 
-sub getGameStateTimeHelper {
-    my ($self) = @_;
-        return $self->{gameStateTimeHelper};
-}
+    method setInitialized {initialized} {
+        my jset initialized $initialized
+    }
+    
 
+    method isInitialized {} {
+        return [my jget initialized]
+    }
+    
 
-sub setInitialized {
-    my ($self, $initialized) = @_;
-        $self->{initialized} = $initialized;
-}
+    method getSourceId {} {
+        return [::AllBinaryGameCanvas::staticGet_id]
+    }
+    
 
+    method setProgressPaintable {paintable} {
+        my jset progressPaintable $paintable
+    }
+    
 
-sub isInitialized {
-    my ($self) = @_;
-        return $self->{initialized};
-}
+    method getStartIntermissionInterface {} {
+        return [my jget startIntermissionInterface]
+    }
+    
 
+    method getEndLevelIntermissionInterface {} {
+        return [my jget endLevelIntermissionInterface]
+    }
+    
 
-sub getSourceId {
-    my ($self) = @_;
-        return $org::allbinary::game::displayable::canvas::AllBinaryGameCanvas::id;
-}
+    method setTouchPaintableP {paintable} {
+        my jset touchPaintable $paintable
+    }
+    
 
+    method getTouchPaintableP {} {
+        return [my jget touchPaintable]
+    }
+    
 
-sub setProgressPaintable {
-    my ($self, $paintable) = @_;
-        $self->{progressPaintable} = $paintable;
-}
+    method setEndGamePaintable {endGamePaintable} {
+        my jset endGamePaintable $endGamePaintable
+    }
+    
 
+    method getEndGamePaintable {} {
+        return [my jget endGamePaintable]
+    }
+    
 
-sub getStartIntermissionInterface {
-    my ($self) = @_;
-        return $self->{startIntermissionInterface};
-}
+    method setIntermissionPaintable {intermissionPaintable} {
+        my jset intermissionPaintable $intermissionPaintable
+    }
+    
 
+    method getIntermissionPaintable {} {
+        return [my jget intermissionPaintable]
+    }
+    
 
-sub getEndLevelIntermissionInterface {
-    my ($self) = @_;
-        return $self->{endLevelIntermissionInterface};
-}
+    method getEndGameInfoP {} {
+        return [my jget endGameInfo]
+    }
+    
 
+    method setHighScoresPaintable {highScoresPaintable} {
+        my jset highScoresPaintable $highScoresPaintable
+    }
+    
 
-sub setTouchPaintableP {
-    my ($self, $paintable) = @_;
-        $self->{touchPaintable} = $paintable;
-}
+    method getHighScoresPaintable {} {
+        return [my jget highScoresPaintable]
+    }
+    
 
+    method getRealHighScoresPaintable {} {
+        return [my jget realHighScoresPaintable]
+    }
+    
 
-sub getTouchPaintableP {
-    my ($self) = @_;
-        return $self->{touchPaintable};
-}
-
-
-sub setEndGamePaintable {
-    my ($self, $endGamePaintable) = @_;
-        $self->{endGamePaintable} = $endGamePaintable;
-}
-
-
-sub getEndGamePaintable {
-    my ($self) = @_;
-        return $self->{endGamePaintable};
-}
-
-
-sub setIntermissionPaintable {
-    my ($self, $intermissionPaintable) = @_;
-        $self->{intermissionPaintable} = $intermissionPaintable;
-}
-
-
-sub getIntermissionPaintable {
-    my ($self) = @_;
-        return $self->{intermissionPaintable};
-}
-
-
-sub getEndGameInfoP {
-    my ($self) = @_;
-        return $self->{endGameInfo};
-}
-
-
-sub setHighScoresPaintable {
-    my ($self, $highScoresPaintable) = @_;
-        $self->{highScoresPaintable} = $highScoresPaintable;
-}
-
-
-sub getHighScoresPaintable {
-    my ($self) = @_;
-        return $self->{highScoresPaintable};
-}
-
-
-sub getRealHighScoresPaintable {
-    my ($self) = @_;
-        return $self->{realHighScoresPaintable};
-}
-
-
-sub clearPlayerGameInputList {
-    my ($self) = @_;
-        my $playerGameInput = undef;
-        for (my $index = $self->{localPlayerGameInputList}->size() - 1; $index >= 0; $index--) {
-            $playerGameInput = $self->{localPlayerGameInputList}->get($index);
-            $self->{gameKeyEventHandler}->removeListener($playerGameInput);
+    method clearPlayerGameInputList {} {
+        set playerGameInput {}
+        for {set index [jint [expr {[[my jget localPlayerGameInputList] size] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set playerGameInput [[my jget localPlayerGameInputList] get $index]
+            [my jget gameKeyEventHandler] removeListener $playerGameInput
         }
-        $self->{localPlayerGameInputList}->clear();
-}
-
-
-sub addPlayerGameInput {
-    my ($self, $playerGameInput) = @_;
-        $self->{localPlayerGameInputList}->add($playerGameInput);
-}
-
-
-sub setMenuInputProcessor {
-    my ($self, $menuInputProcessor) = @_;
-        $self->{menuInputProcessor} = $menuInputProcessor;
-}
-
-
-sub getMenuInputProcessor {
-    my ($self) = @_;
-        return $self->{menuInputProcessor};
-}
-
-
-sub getMenuForm {
-    my ($self) = @_;
-        return $self->{menuForm};
-}
-
-
-sub setMenuForm {
-    my ($self, $menuForm) = @_;
-        $self->{menuForm} = $menuForm;
-}
-
-
-sub getStartLevel {
-    my ($self) = @_;
-        return $self->{startLevel};
-}
-
-
-sub setStartLevel {
-    my ($self, $startLevel) = @_;
-        $self->{startLevel} = $startLevel;
-}
-
-
-sub setTouchButtonsPaintable {
-    my ($self, $touchButtonsPaintable) = @_;
-        $self->{touchButtonsPaintable} = $touchButtonsPaintable;
-}
-
-
-sub getTouchButtonsPaintable {
-    my ($self) = @_;
-        return $self->{touchButtonsPaintable};
-}
-
-
-sub setGameInputProcessor {
-    my ($self, $gameInputProcessor) = @_;
-        $self->{gameInputProcessor} = $gameInputProcessor;
-}
-
-
-sub getGameInputProcessor {
-    my ($self) = @_;
-        return $self->{gameInputProcessor};
-}
-
-
-sub setEndGameProcessor {
-    my ($self, $endGameProcessor) = @_;
-        $self->{endGameProcessor} = $endGameProcessor;
-}
-
-
-sub getEndGameProcessor {
-    my ($self) = @_;
-        return $self->{endGameProcessor};
-}
-
-
-sub setEndGameStatePaintable {
-    my ($self, $endGameStatePaintable) = @_;
-        $self->{endGameStatePaintable} = $endGameStatePaintable;
-}
-
-
-sub getEndGameStatePaintable {
-    my ($self) = @_;
-        return $self->{endGameStatePaintable};
-}
-
-
-sub setNonBotPaintableP {
-    my ($self, $nonBotPaintable) = @_;
-        $self->{nonBotPaintable} = $nonBotPaintable;
-}
-
-
-sub getNonBotPaintableP {
-    my ($self) = @_;
-        return $self->{nonBotPaintable};
-}
-
-
-sub setStartIntermissionPaintable {
-    my ($self, $startIntermissionPaintable) = @_;
-        $self->{startIntermissionPaintable} = $startIntermissionPaintable;
-}
-
-
-sub getStartIntermissionPaintable {
-    my ($self) = @_;
-        return $self->{startIntermissionPaintable};
-}
-
-
-sub setMainStateProcessor {
-    my ($self, $mainStateProcessor) = @_;
-        $self->{mainStateProcessor} = $mainStateProcessor;
-}
-
-
-sub getMainStateProcessor {
-    my ($self) = @_;
-        return $self->{mainStateProcessor};
-}
-
-
-sub setProcessGameProcessor {
-    my ($self, $processGameProcessor) = @_;
-        $self->{processGameProcessor} = $processGameProcessor;
-}
-
-
-sub getProcessGameProcessor {
-    my ($self) = @_;
-        return $self->{processGameProcessor};
-}
-
-
-sub setOpenMenuPaintable {
-    my ($self, $openMenuPaintable) = @_;
-        $self->{openMenuPaintable} = $openMenuPaintable;
-}
-
-
-sub getOpenMenuPaintable {
-    my ($self) = @_;
-        return $self->{openMenuPaintable};
-}
-
-
-sub setPopupMenuInputProcessor {
-    my ($self, $popupMenuInputProcessor) = @_;
-        $self->{popupMenuInputProcessor} = $popupMenuInputProcessor;
-}
-
-
-sub getPopupMenuInputProcessor {
-    my ($self) = @_;
-        return $self->{popupMenuInputProcessor};
-}
-
-
-sub getSensorGameUpdateProcessor {
-    my ($self) = @_;
-        return $self->{sensorGameUpdateProcessor};
-}
-
-
-sub getRawGameInputProcessor {
-    my ($self) = @_;
-        return $self->{rawGameInputProcessor};
-}
-
-
-sub getRawInputProcessor {
-    my ($self) = @_;
-        return $self->{rawInputProcessor};
-}
-
-
-sub setInputProcessor {
-    my ($self, $inputProcessor) = @_;
-        $self->{inputProcessor} = $inputProcessor;
-}
-
-
-sub getInputProcessor {
-    my ($self) = @_;
-        return $self->{inputProcessor};
-}
-
-
-sub setMenuPaintable {
-    my ($self, $menuPaintable) = @_;
-        $self->{menuPaintable} = $menuPaintable;
-}
-
-
-sub getMenuPaintable {
-    my ($self) = @_;
-        return $self->{menuPaintable};
-}
-
-
-sub setFormPaintable {
-    my ($self, $formPaintable) = @_;
-        $self->{formPaintable} = $formPaintable;
-}
-
-
-sub getFormPaintable {
-    my ($self) = @_;
-        return $self->{formPaintable};
-}
-
-
-sub setGameSpecificPaintableP {
-    my ($self, $gameSpecificPaintable) = @_;
-        $self->{gameSpecificPaintable} = $gameSpecificPaintable;
-}
-
-
-sub getGameSpecificPaintableP {
-    my ($self) = @_;
-        return $self->{gameSpecificPaintable};
-}
-
-
-sub isSingleThread {
-    my ($self) = @_;
-        return 'org::allbinary::graphics::opengles::OpenGLFeatureUtil'->getInstance()->isAnyThreed() || $org::allbinary::game::layer::SWTUtil::isSWT;
-}
-
-
-sub isRunningInAnotherThread {
-    my ($self) = @_;
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        my $openGLFeatureFactory = 'org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance();
-        if ($features->isDefault($openGLFeatureFactory->{OPENGL_AS_GAME_THREAD})) {
-            return 1;
+        [my jget localPlayerGameInputList] clear
+    }
+    
+
+    method addPlayerGameInput {playerGameInput} {
+        [my jget localPlayerGameInputList] add $playerGameInput
+    }
+    
+
+    method setMenuInputProcessor {menuInputProcessor} {
+        my jset menuInputProcessor $menuInputProcessor
+    }
+    
+
+    method getMenuInputProcessor {} {
+        return [my jget menuInputProcessor]
+    }
+    
+
+    method getMenuForm {} {
+        return [my jget menuForm]
+    }
+    
+
+    method setMenuForm {menuForm} {
+        my jset menuForm $menuForm
+    }
+    
+
+    method getStartLevel {} {
+        return [my jget startLevel]
+    }
+    
+
+    method setStartLevel {startLevel} {
+        my jset startLevel $startLevel
+    }
+    
+
+    method setTouchButtonsPaintable {touchButtonsPaintable} {
+        my jset touchButtonsPaintable $touchButtonsPaintable
+    }
+    
+
+    method getTouchButtonsPaintable {} {
+        return [my jget touchButtonsPaintable]
+    }
+    
+
+    method setGameInputProcessor {gameInputProcessor} {
+        my jset gameInputProcessor $gameInputProcessor
+    }
+    
+
+    method getGameInputProcessor {} {
+        return [my jget gameInputProcessor]
+    }
+    
+
+    method setEndGameProcessor {endGameProcessor} {
+        my jset endGameProcessor $endGameProcessor
+    }
+    
+
+    method getEndGameProcessor {} {
+        return [my jget endGameProcessor]
+    }
+    
+
+    method setEndGameStatePaintable {endGameStatePaintable} {
+        my jset endGameStatePaintable $endGameStatePaintable
+    }
+    
+
+    method getEndGameStatePaintable {} {
+        return [my jget endGameStatePaintable]
+    }
+    
+
+    method setNonBotPaintableP {nonBotPaintable} {
+        my jset nonBotPaintable $nonBotPaintable
+    }
+    
+
+    method getNonBotPaintableP {} {
+        return [my jget nonBotPaintable]
+    }
+    
+
+    method setStartIntermissionPaintable {startIntermissionPaintable} {
+        my jset startIntermissionPaintable $startIntermissionPaintable
+    }
+    
+
+    method getStartIntermissionPaintable {} {
+        return [my jget startIntermissionPaintable]
+    }
+    
+
+    method setMainStateProcessor {mainStateProcessor} {
+        my jset mainStateProcessor $mainStateProcessor
+    }
+    
+
+    method getMainStateProcessor {} {
+        return [my jget mainStateProcessor]
+    }
+    
+
+    method setProcessGameProcessor {processGameProcessor} {
+        my jset processGameProcessor $processGameProcessor
+    }
+    
+
+    method getProcessGameProcessor {} {
+        return [my jget processGameProcessor]
+    }
+    
+
+    method setOpenMenuPaintable {openMenuPaintable} {
+        my jset openMenuPaintable $openMenuPaintable
+    }
+    
+
+    method getOpenMenuPaintable {} {
+        return [my jget openMenuPaintable]
+    }
+    
+
+    method setPopupMenuInputProcessor {popupMenuInputProcessor} {
+        my jset popupMenuInputProcessor $popupMenuInputProcessor
+    }
+    
+
+    method getPopupMenuInputProcessor {} {
+        return [my jget popupMenuInputProcessor]
+    }
+    
+
+    method getSensorGameUpdateProcessor {} {
+        return [my jget sensorGameUpdateProcessor]
+    }
+    
+
+    method getRawGameInputProcessor {} {
+        return [my jget rawGameInputProcessor]
+    }
+    
+
+    method getRawInputProcessor {} {
+        return [my jget rawInputProcessor]
+    }
+    
+
+    method setInputProcessor {inputProcessor} {
+        my jset inputProcessor $inputProcessor
+    }
+    
+
+    method getInputProcessor {} {
+        return [my jget inputProcessor]
+    }
+    
+
+    method setMenuPaintable {menuPaintable} {
+        my jset menuPaintable $menuPaintable
+    }
+    
+
+    method getMenuPaintable {} {
+        return [my jget menuPaintable]
+    }
+    
+
+    method setFormPaintable {formPaintable} {
+        my jset formPaintable $formPaintable
+    }
+    
+
+    method getFormPaintable {} {
+        return [my jget formPaintable]
+    }
+    
+
+    method setGameSpecificPaintableP {gameSpecificPaintable} {
+        my jset gameSpecificPaintable $gameSpecificPaintable
+    }
+    
+
+    method getGameSpecificPaintableP {} {
+        return [my jget gameSpecificPaintable]
+    }
+    
+
+    method isSingleThread {} {
+        return [expr {[[::OpenGLFeatureUtil::getInstance] isAnyThreed] || [::SWTUtil::staticGet_isSWT]}]
+    }
+    
+
+    method isRunningInAnotherThread {} {
+        set features [::Features::getInstance]
+        set openGLFeatureFactory [::OpenGLFeatureFactory::getInstance]
+        if {[$features isDefault [$openGLFeatureFactory jget OPENGL_AS_GAME_THREAD]]} {
+            return true
         } else {
-            return $self->isRunning();
+            return [my isRunning]
         }
+    }
+    
+
+    method getType {} {
+        return [::AllBinaryGameCanvas::staticGet_TYPE]
+    }
+    
+
+    method getTitle {} {
+        return [next]
+    }
+    
+
+    method isPaused {} {
+        return [next]
+    }
 }
 
-
-sub getType {
-    my ($self) = @_;
-        return $org::allbinary::game::displayable::canvas::AllBinaryGameCanvas::TYPE;
+namespace eval ::AllBinaryGameCanvas {
+    variable idValue {}
+    variable idSet 0
+    proc staticGet_id {} {
+        variable idValue
+        variable idSet
+        if {!$idSet} {
+            set idSet 1
+            set idValue 0
+        }
+        return $idValue
+    }
+    proc staticSet_id {value} {
+        variable idValue
+        variable idSet
+        set idSet 1
+        set idValue $value
+    }
+    variable TYPEValue {}
+    variable TYPESet 0
+    proc staticGet_TYPE {} {
+        variable TYPEValue
+        variable TYPESet
+        if {!$TYPESet} {
+            set TYPESet 1
+            set TYPEValue 2
+        }
+        return $TYPEValue
+    }
+    proc staticSet_TYPE {value} {
+        variable TYPEValue
+        variable TYPESet
+        set TYPESet 1
+        set TYPEValue $value
+    }
 }
 
-
-sub getTitle {
-    my ($self) = @_;
-        return $self->SUPER::getTitle();
-}
-
-
-sub isPaused {
-    my ($self) = @_;
-        return $self->SUPER::isPaused();
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::ChoiceGroup ();
-use javax::microedition::lcdui::CommandListener ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Item ();
-use javax::microedition::lcdui::NullCommandListener ();
-use org::allbinary::AndroidUtil ();
-use org::allbinary::J2MEUtil ();
-use org::allbinary::business::advertisement::GameAdStateFactory ();
-use org::allbinary::canvas::BaseGameStatistics ();
-use org::allbinary::canvas::GameStatisticsFactory ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::canvas::RunnableCanvas ();
-use org::allbinary::debug::DebugFactory ();
-use org::allbinary::debug::NoDebug ();
-use org::allbinary::game::GameAdState ();
-use org::allbinary::game::GameInfo ();
-use org::allbinary::game::GameStrings ();
-use org::allbinary::game::GameTypeFactory ();
-use org::allbinary::game::Intermission ();
-use org::allbinary::game::IntermissionCompositeInterface ();
-use org::allbinary::game::IntermissionEnableListenerInterface ();
-use org::allbinary::game::IntermissionInterface ();
-use org::allbinary::game::PlayerTypesFactory ();
-use org::allbinary::game::commands::GameCommandsFactory ();
-use org::allbinary::game::configuration::InGameFeatures ();
-use org::allbinary::game::configuration::InGameOptionsForm ();
-use org::allbinary::game::configuration::event::ChangedGameFeatureListener ();
-use org::allbinary::game::configuration::event::GameInitializedEvent ();
-use org::allbinary::game::configuration::event::GameInitializedEventHandler ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::GameFeatureFactory ();
-use org::allbinary::game::configuration::feature::GameFeatureUtil ();
-use org::allbinary::game::configuration::feature::InputFeatureFactory ();
-use org::allbinary::game::configuration::feature::MainFeatureFactory ();
-use org::allbinary::game::configuration::feature::SensorFeatureFactory ();
-use org::allbinary::game::configuration::feature::TouchFeatureFactory ();
-use org::allbinary::game::displayable::GameLevelDisplayChangeEventListenersFactory ();
-use org::allbinary::game::init::BasicBuildGameInitializerFactory ();
-use org::allbinary::game::init::GameInitializationUtil ();
-use org::allbinary::game::input::GameInputStrings ();
-use org::allbinary::game::input::InputProcessor ();
-use org::allbinary::game::input::NoPlayerGameInput ();
-use org::allbinary::game::input::PlayerGameInput ();
-use org::allbinary::game::input::event::GameKeyEventHandler ();
-use org::allbinary::game::layer::AllBinaryGameLayerManager ();
-use org::allbinary::game::layer::SWTUtil ();
-use org::allbinary::game::paint::ColorFillBasePaintable ();
-use org::allbinary::game::paint::ColorFillPaintableFactory ();
-use org::allbinary::game::resource::ResourceLoadingLevel ();
-use org::allbinary::game::resource::ResourceLoadingLevelFactory ();
-use org::allbinary::game::score::HighScore ();
-use org::allbinary::game::score::HighScoresHelperBaseInterface ();
-use org::allbinary::game::score::HighScoresFactoryInterface ();
-use org::allbinary::game::score::HighScoresPaintable ();
-use org::allbinary::game::score::NullHighScoresSingletonFactory ();
-use org::allbinary::game::score::displayable::HighScoreTextBox ();
-use org::allbinary::game::state::GameState ();
-use org::allbinary::game::state::GameStateFactory ();
-use org::allbinary::graphics::GraphicsStrings ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::ScreenCapture ();
-use org::allbinary::graphics::ScreenCaptureFactory ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvas ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::color::BasicColorSetUtil ();
-use org::allbinary::graphics::displayable::CanvasStrings ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::graphics::displayable::GameTickDisplayInfoSingleton ();
-use org::allbinary::graphics::displayable::command::MyCommandsFactory ();
-use org::allbinary::graphics::displayable::event::DisplayChangeEvent ();
-use org::allbinary::graphics::displayable::event::DisplayChangeEventHandler ();
-use org::allbinary::graphics::displayable::event::DisplayChangeEventListener ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::graphics::form::CommandCurrentSelectionFormFactory ();
-use org::allbinary::graphics::form::FormPaintable ();
-use org::allbinary::graphics::form::FormType ();
-use org::allbinary::graphics::form::FormTypeFactory ();
-use org::allbinary::graphics::form::ScrollSelectionForm ();
-use org::allbinary::graphics::form::ScrollSelectionFormNoneFactory ();
-use org::allbinary::graphics::form::item::CommandTextItemArrayFactory ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
-use org::allbinary::graphics::opengles::CurrentDisplayableFactory ();
-use org::allbinary::graphics::opengles::OpenGLFeatureFactory ();
-use org::allbinary::graphics::opengles::OpenGLFeatureUtil ();
-use org::allbinary::graphics::opengles::OpenGLThreadUtil ();
-use org::allbinary::graphics::paint::InitUpdatePaintable ();
-use org::allbinary::graphics::paint::NullInitUpdatePaintable ();
-use org::allbinary::graphics::paint::NullPaintable ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::graphics::paint::PaintableInterface ();
-use org::allbinary::image::opengles::OpenGLImageSpecificFactory ();
-use org::allbinary::input::gyro::SensorGameUpdateProcessor ();
-use org::allbinary::input::gyro::SingleSensorGameUpdateProcessor ();
-use org::allbinary::input::motion::button::BaseTouchInput ();
-use org::allbinary::input::motion::button::NoButtonsTouchInputFactory ();
-use org::allbinary::input::motion::button::TouchButtonFactory ();
-use org::allbinary::input::motion::button::TouchButtonsPaintableFactory ();
-use org::allbinary::input::motion::button::TouchScreenFactory ();
-use org::allbinary::input::motion::gesture::observer::BasicMotionGesturesHandler ();
-use org::allbinary::logic::ABSystemWrapper ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::system::os::OperatingSystemFactory ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::media::audio::AllBinaryMediaManager ();
-use org::allbinary::media::audio::PlayerQueue ();
-use org::allbinary::media::audio::PrimaryPlayerQueueFactory ();
-use org::allbinary::media::audio::SecondaryPlayerQueueFactory ();
-use org::allbinary::media::audio::SelectSound ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::thread::SecondaryThreadPool ();
-use org::allbinary::time::GameTickTimeDelayHelper ();
-use org::allbinary::time::GameTickTimeDelayHelperFactory ();
-use org::allbinary::time::TimeDelayHelper ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::util::BasicArrayListUtil ();
-use org::allbinary::game::displayable::canvas::AllBinaryGameCanvasInterface ();
-use org::allbinary::game::displayable::canvas::GameCanvasRunnableInterface ();
-use org::allbinary::game::displayable::canvas::MenuListener ();
-use org::allbinary::game::displayable::canvas::PopupMenuInterface ();
-use org::allbinary::game::displayable::canvas::GameCanvasRunnable ();
-use org::allbinary::game::displayable::canvas::GameCanvasPauseRunnable ();
-use org::allbinary::game::displayable::canvas::FormUtil ();
-use org::allbinary::game::displayable::canvas::MyFormUtil ();
-use org::allbinary::game::displayable::canvas::EndGameInfo ();
-use org::allbinary::game::displayable::canvas::NoMenuInputProcessor ();
-use org::allbinary::game::displayable::canvas::BaseGameBehavior ();
-use org::allbinary::game::displayable::canvas::DemoGameBehavior ();
-use org::allbinary::game::displayable::canvas::BaseMenuBehavior ();
-use org::allbinary::game::displayable::canvas::InGameMenuBehavior ();
-use org::allbinary::game::displayable::canvas::BasicPopupMenuPaintable ();
-use org::allbinary::game::displayable::canvas::PopupMenuInputProcessor ();
-use org::allbinary::game::displayable::canvas::GameLimitedCommandTextItemArrayFactory ();
-use org::allbinary::game::displayable::canvas::PopupCommandFormInputProcessor ();
-use org::allbinary::game::displayable::canvas::NullWaitGameRunnable ();
-use org::allbinary::game::displayable::canvas::GameProcessor ();
-use org::allbinary::game::displayable::canvas::CheatGameInputProcessor ();
-use org::allbinary::game::displayable::canvas::EndGameProcessor ();
-use org::allbinary::game::displayable::canvas::StartIntermissionProcessor ();
-use org::allbinary::game::displayable::canvas::EndGamePaintable ();
-use org::allbinary::game::displayable::canvas::NullDemoPaintable ();
-use org::allbinary::game::displayable::canvas::GameCanvasInputProcessor ();
-use org::allbinary::game::displayable::canvas::FormInputProcessor ();
-use java::lang::Thread ();
-use org::allbinary::game::displayable::canvas::SaveHighScoreRunnable ();
-
-1;
 

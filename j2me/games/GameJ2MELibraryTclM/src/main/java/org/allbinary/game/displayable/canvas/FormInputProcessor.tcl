@@ -11,85 +11,71 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::FormInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::InputProcessor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{gameKeyEventFactory} = 'org::allbinary::game::input::event::GameKeyEventFactory'->getInstance();
-    $self->{downKeyEventHandler} = 'org::allbinary::game::input::event::DownKeyEventHandler'->getInstance();
-    $self->{upGameKeyEventHandler} = 'org::allbinary::game::input::event::UpGameKeyEventHandler'->getInstance();
-    $self->{inputFactory} = 'org::allbinary::game::input::InputFactory'->getInstance();
-    $self->{platformKeyFactory} = 'org::allbinary::game::input::PlatformKeyFactory'->getInstance();
-    $self->{allBinaryGameCanvas} = undef;
+oo::class create ::FormInputProcessor {
+    superclass ::InputProcessor
 }
 
+oo::define ::FormInputProcessor {
+    method initFields_FormInputProcessor {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset gameKeyEventFactory {}
+        my jset downKeyEventHandler {}
+        my jset upGameKeyEventHandler {}
+        my jset inputFactory {}
+        my jset platformKeyFactory {}
+        my jset allBinaryGameCanvas {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset gameKeyEventFactory [::GameKeyEventFactory::getInstance]
+        my jset downKeyEventHandler [::DownKeyEventHandler::getInstance]
+        my jset upGameKeyEventHandler [::UpGameKeyEventHandler::getInstance]
+        my jset inputFactory [::InputFactory::getInstance]
+        my jset platformKeyFactory [::PlatformKeyFactory::getInstance]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $allBinaryGameCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{allBinaryGameCanvas} = $allBinaryGameCanvas;
-    return $self;
-}
+    constructor {allBinaryGameCanvas} {
+        next
+        my initFields_FormInputProcessor
+        my jset allBinaryGameCanvas $allBinaryGameCanvas
+    }
+    
 
-
-sub keyPressedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
+    method keyPressedByDevice {keyCode deviceId} {
         try {
-            'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append($self->{inputFactory}->{KEY_CODE_LABEL})->appendint($keyCode)->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE})->append($self->{inputFactory}->{DEVICE_ID_LABEL})->appendint($deviceId)->toString(), $self, $self->{gameInputStrings}->{KEY_PRESSED});
-            my $input = $self->{inputFactory}->getInstanceById($keyCode);
-            my $gameKeyEvent = $self->{gameKeyEventFactory}->getInstanceForInput($self->{allBinaryGameCanvas}, $input);
-            $self->{downKeyEventHandler}->fireEventForGameKeyEvent($gameKeyEvent);
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{gameInputStrings}->{ADD_KEY_EVENT}, $e);
+            ::PreLogUtil::put [[[[[[[::StringMaker new] append [[my jget inputFactory] jget KEY_CODE_LABEL]] appendint $keyCode] append [[::CommonSeps::getInstance] jget SPACE]] append [[my jget inputFactory] jget DEVICE_ID_LABEL]] appendint $deviceId] toString] [self] [[my jget gameInputStrings] jget KEY_PRESSED]
+            set input [[my jget inputFactory] getInstanceById $keyCode]
+            set gameKeyEvent [[my jget gameKeyEventFactory] getInstanceForInput [my jget allBinaryGameCanvas] $input]
+            [my jget downKeyEventHandler] fireEventForGameKeyEvent $gameKeyEvent
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget gameInputStrings] jget ADD_KEY_EVENT] $e
         }
-}
+    }
+    
 
-
-sub keyReleasedByDevice {
-    my ($self, $canvas, $keyCode, $deviceId) = @_;
+    method keyReleasedByDevice {canvas keyCode deviceId} {
         try {
-            my $input = $self->{inputFactory}->getInstanceById($keyCode);
-            if ($self->{platformKeyFactory}->isEnter($input)) {
-                'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append($self->{inputFactory}->{KEY_CODE_LABEL})->appendint($keyCode)->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE})->append($self->{inputFactory}->{DEVICE_ID_LABEL})->appendint($deviceId)->toString(), $self, $self->{gameInputStrings}->{KEY_RELEASED});
-                my $gameKey = 'org::allbinary::game::input::GameKeyFactory'->getInstance()->{KEY_NUM0};
-                my $gameKeyEventSourceInterface = $canvas;
-                my $gameKeyEvent = $self->{gameKeyEventFactory}->getInstanceForInput($gameKeyEventSourceInterface, $gameKey);
-                $self->{upGameKeyEventHandler}->fireEvent($gameKeyEvent);
-                $self->{upGameKeyEventHandler}->getInstanceForDevice($deviceId)->fireEvent($gameKeyEvent);
+            set input [[my jget inputFactory] getInstanceById $keyCode]
+            if {[[my jget platformKeyFactory] isEnter $input]} {
+                ::PreLogUtil::put [[[[[[[::StringMaker new] append [[my jget inputFactory] jget KEY_CODE_LABEL]] appendint $keyCode] append [[::CommonSeps::getInstance] jget SPACE]] append [[my jget inputFactory] jget DEVICE_ID_LABEL]] appendint $deviceId] toString] [self] [[my jget gameInputStrings] jget KEY_RELEASED]
+                set gameKey [[::GameKeyFactory::getInstance] jget KEY_NUM0]
+                set gameKeyEventSourceInterface $canvas
+                set gameKeyEvent [[my jget gameKeyEventFactory] getInstanceForInput $gameKeyEventSourceInterface $gameKey]
+                [my jget upGameKeyEventHandler] fireEvent $gameKeyEvent
+                [[my jget upGameKeyEventHandler] getInstanceForDevice $deviceId] fireEvent $gameKeyEvent
             }
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{gameInputStrings}->{ADD_KEY_EVENT}, $e);
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget gameInputStrings] jget ADD_KEY_EVENT] $e
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::game::input::GameKey ();
-use org::allbinary::game::input::GameKeyEventSourceInterface ();
-use org::allbinary::game::input::GameKeyFactory ();
-use org::allbinary::game::input::Input ();
-use org::allbinary::game::input::InputFactory ();
-use org::allbinary::game::input::InputProcessor ();
-use org::allbinary::game::input::PlatformKeyFactory ();
-use org::allbinary::game::input::event::DownKeyEventHandler ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::game::input::event::GameKeyEventFactory ();
-use org::allbinary::game::input::event::UpGameKeyEventHandler ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::FormInputProcessor {
+}
 
-1;
 

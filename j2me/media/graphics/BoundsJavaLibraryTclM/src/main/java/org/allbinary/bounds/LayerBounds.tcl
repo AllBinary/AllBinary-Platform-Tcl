@@ -11,61 +11,49 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.bounds
 
-package org::allbinary::bounds::LayerBounds;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::bounds::event::BoundsChangeEventListener';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{rectangle} = undef;
+oo::class create ::LayerBounds {
+    superclass ::JObject
 }
 
+oo::define ::LayerBounds {
+    method initFields_LayerBounds {} {
+        my jset logUtil {}
+        my jset rectangle {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $rectangle) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{rectangle} = $rectangle;
-    return $self;
+    constructor {rectangle} {
+        next
+        my initFields_LayerBounds
+        my jset rectangle $rectangle
+    }
+    
+
+    method getRectangleP {} {
+        return [my jget rectangle]
+    }
+    
+
+    method visit {boundsVisitorInterface} {
+    }
+    
+
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
+
+    method onBoundsChangeEvent {boundsChangeEvent} {
+        my jset rectangle [$boundsChangeEvent getRectangle]
+    }
 }
 
-
-sub getRectangleP {
-    my ($self) = @_;
-        return $self->{rectangle};
+namespace eval ::LayerBounds {
 }
 
-
-sub visit {
-    my ($self, $boundsVisitorInterface) = @_;
-}
-
-
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
-}
-
-
-sub onBoundsChangeEvent {
-    my ($self, $boundsChangeEvent) = @_;
-        $self->{rectangle} = $boundsChangeEvent->getRectangle();
-}
-
-use java::lang::Object ();
-use org::allbinary::bounds::event::BoundsChangeEvent ();
-use org::allbinary::bounds::event::BoundsChangeEventListener ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventStrings ();
-
-1;
 

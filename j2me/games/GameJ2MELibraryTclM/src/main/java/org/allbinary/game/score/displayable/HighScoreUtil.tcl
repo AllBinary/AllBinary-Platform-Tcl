@@ -11,103 +11,105 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score.displayable
 
-package org::allbinary::game::score::displayable::HighScoreUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::score::HighScoresResultsListener';
-
-tie our $SUBMIT_TEXTBOX_COMMAND, 'java::lang::LazyStatic', sub { 'javax::microedition::lcdui::Command'->new("Submit", 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $javax::microedition::lcdui::Command::SCREEN, 1) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{highScoresFactoryInterface} = undef;
-    $self->{highScoresArray} = undef;
-    $self->{highScore} = undef;
-    $self->{abeClientInformation} = undef;
-    $self->{gameInfo} = undef;
-    $self->{highScoresHelper} = undef;
-    $self->{firstTime} = 1;
+oo::class create ::HighScoreUtil {
+    superclass ::JObject
 }
 
+oo::define ::HighScoreUtil {
+    method initFields_HighScoreUtil {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset highScoresFactoryInterface {}
+        my jset highScoresArray {}
+        my jset highScore {}
+        my jset abeClientInformation {}
+        my jset gameInfo {}
+        my jset highScoresHelper {}
+        my jset firstTime false
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        
+        
+        
+        
+        
+        
+        my jset firstTime true
+        return
+    }
+    
 
-sub new {
-    my ($class, $highScoresFactoryInterface, $highScoresHelper, $abeClientInformation, $gameInfo, $cmdListener, $name, $highScore) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{highScoresFactoryInterface} = $highScoresFactoryInterface;
-        $self->{highScoresHelper} = $highScoresHelper;
-        $self->{highScoresArray} = $self->{highScoresHelper}->getHighScoresArray();
-        $self->{highScore} = $highScore;
-        $self->{abeClientInformation} = $abeClientInformation;
-        $self->{gameInfo} = $gameInfo;
-    return $self;
-}
+    constructor {highScoresFactoryInterface highScoresHelper abeClientInformation gameInfo cmdListener name highScore} {
+        next
+        my initFields_HighScoreUtil
+        my jset highScoresFactoryInterface $highScoresFactoryInterface
+        my jset highScoresHelper $highScoresHelper
+        my jset highScoresArray [[my jget highScoresHelper] getHighScoresArray]
+        my jset highScore $highScore
+        my jset abeClientInformation $abeClientInformation
+        my jset gameInfo $gameInfo
+    }
+    
 
+    method setHighScoresArray {highScoresArray} {
+        my jset highScoresArray $highScoresArray
+        my jset firstTime false
+        my saveHighScore
+    }
+    
 
-sub setHighScoresArray {
-    my ($self, $highScoresArray) = @_;
-        $self->{highScoresArray} = $highScoresArray;
-        $self->{firstTime} = 0;
-        $self->saveHighScore();
-}
+    method update {name} {
+        [::HighScoreNamePersistanceSingleton::getInstance] save [my jget abeClientInformation] [my jget gameInfo] $name
+        [my jget highScore] setName $name
+    }
+    
 
-
-sub update {
-    my ($self, $name) = @_;
-        'org::allbinary::game::score::HighScoreNamePersistanceSingleton'->getInstance()->save($self->{abeClientInformation}, $self->{gameInfo}, $name);
-        $self->{highScore}->setName($name);
-}
-
-
-sub saveHighScore {
-    my ($self) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonStrings}->{START})->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($self->{highScore}))->toString(), $self, "saveHighScore");
-        my $size = scalar(@{$self->{highScoresArray}});
-        if ($self->{firstTime} && $size == 0) {
-            $self->{logUtil}->putF("Games canvas did not give us any HighScores", $self, "saveHighScore");
-            $self->{highScoresFactoryInterface}->fetchHighScores($self->{gameInfo}, $self);
-            return;
+    method saveHighScore {} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[my jget commonStrings] jget START]] append [[::StringUtil::getInstance] toString1 [my jget highScore]]] toString] [self] "saveHighScore"
+        set size [[my jget highScoresArray] length]
+        if {[expr {[my jget firstTime] && [expr {$size == 0}]}]} {
+            [my jget logUtil] putF "Games canvas did not give us any HighScores" [self] "saveHighScore"
+            [my jget highScoresFactoryInterface] fetchHighScores [my jget gameInfo] [self]
+            return
         }
-        my $highScores = undef;
-        my $highScoresAsString = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $highScores = $self->{highScoresArray}->[$index];
-            $highScores->addHighScore($self->{highScore});
-            $highScoresAsString = $highScores->toString();
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Added/Adding Score: ")->append($highScoresAsString)->toString(), $self, "saveHighScore");
+        set highScores {}
+        set highScoresAsString {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set highScores [[my jget highScoresArray] get $index]
+            $highScores addHighScore [my jget highScore]
+            set highScoresAsString [$highScores toString]
+            [my jget logUtil] putF [[[[::StringMaker new] append "Added/Adding Score: "] append $highScoresAsString] toString] [self] "saveHighScore"
         }
-        $self->{highScoresHelper}->setHighScoresArray($self->{highScoresArray});
+        [my jget highScoresHelper] setHighScoresArray [my jget highScoresArray]
+    }
+    
+
+    method submit {myCanvas} {
+        set commandListener [$myCanvas getCustomCommandListener]
+        $commandListener commandAction [::HighScoreUtil::staticGet_SUBMIT_TEXTBOX_COMMAND] $myCanvas
+    }
 }
 
-
-sub submit {
-    my ($self, $myCanvas) = @_;
-        my $commandListener = $myCanvas->getCustomCommandListener();
-        $commandListener->commandAction($org::allbinary::game::score::displayable::HighScoreUtil::SUBMIT_TEXTBOX_COMMAND, $myCanvas);
+namespace eval ::HighScoreUtil {
+    variable SUBMIT_TEXTBOX_COMMANDValue {}
+    variable SUBMIT_TEXTBOX_COMMANDSet 0
+    proc staticGet_SUBMIT_TEXTBOX_COMMAND {} {
+        variable SUBMIT_TEXTBOX_COMMANDValue
+        variable SUBMIT_TEXTBOX_COMMANDSet
+        if {!$SUBMIT_TEXTBOX_COMMANDSet} {
+            set SUBMIT_TEXTBOX_COMMANDSet 1
+            set SUBMIT_TEXTBOX_COMMANDValue [::Command new "Submit" [[::StringUtil::getInstance] jget EMPTY_STRING] [::Command::staticGet_SCREEN] 1]
+        }
+        return $SUBMIT_TEXTBOX_COMMANDValue
+    }
+    proc staticSet_SUBMIT_TEXTBOX_COMMAND {value} {
+        variable SUBMIT_TEXTBOX_COMMANDValue
+        variable SUBMIT_TEXTBOX_COMMANDSet
+        set SUBMIT_TEXTBOX_COMMANDSet 1
+        set SUBMIT_TEXTBOX_COMMANDValue $value
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::CommandListener ();
-use org::allbinary::game::GameInfo ();
-use org::allbinary::game::score::HighScore ();
-use org::allbinary::game::score::HighScoreNamePersistanceSingleton ();
-use org::allbinary::game::score::HighScores ();
-use org::allbinary::game::score::HighScoresFactoryInterface ();
-use org::allbinary::game::score::HighScoresHelperBaseInterface ();
-use org::allbinary::game::score::HighScoresResultsListener ();
-use org::allbinary::graphics::displayable::MyCanvas ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

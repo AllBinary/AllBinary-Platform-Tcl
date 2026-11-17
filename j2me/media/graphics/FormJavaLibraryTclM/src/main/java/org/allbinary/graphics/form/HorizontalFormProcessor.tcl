@@ -11,39 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::HorizontalFormProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::canvas::Processor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{scrollCurrentSelectionForm} = undef;
+oo::class create ::HorizontalFormProcessor {
+    superclass ::Processor
 }
 
+oo::define ::HorizontalFormProcessor {
+    method initFields_HorizontalFormProcessor {} {
+        my jset scrollCurrentSelectionForm {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $scrollCurrentSelectionForm) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{scrollCurrentSelectionForm} = $scrollCurrentSelectionForm;
-    return $self;
+    constructor {scrollCurrentSelectionForm} {
+        next
+        my initFields_HorizontalFormProcessor
+        my jset scrollCurrentSelectionForm $scrollCurrentSelectionForm
+    }
+    
+
+    method process {} {
+        [my jget scrollCurrentSelectionForm] processHorizontalForm
+        [my jget scrollCurrentSelectionForm] jset processor [::Processor::getInstance]
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self) = @_;
-        $self->{scrollCurrentSelectionForm}->processHorizontalForm();
-        $self->{scrollCurrentSelectionForm}->{processor} = 'org::allbinary::canvas::Processor'->getInstance();
+namespace eval ::HorizontalFormProcessor {
 }
 
-use java::lang::Object ();
-use org::allbinary::canvas::Processor ();
-
-1;
 

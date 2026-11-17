@@ -11,46 +11,42 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles
 
-package org::allbinary::graphics::opengles::OpenGLOptions;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::OpenGLOptions {
+    superclass ::JObject
 }
 
+oo::define ::OpenGLOptions {
+    method initFields_OpenGLOptions {} {
+        return
+    }
 
-sub init {
-    my ($self) = @_;
-        my $openGLFeatureFactory = 'org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance();
-        if ('org::allbinary::game::configuration::feature::Features'->getInstance()->isFeature($openGLFeatureFactory->{OPENGL_OPTIONS})) {
-            my $openGLMultipleList = 'org::allbinary::util::BasicArrayListD'->new();
-            $openGLMultipleList->add($openGLFeatureFactory->{OPENGL});
-            'org::allbinary::game::configuration::feature::GameFeatureChoiceGroups'->getMultipleInstance()->add("OpenGL (Complete Restart)", $openGLMultipleList);
-            my $openGLVersionSelectorMultipleList = 'org::allbinary::util::BasicArrayListD'->new();
-            $openGLVersionSelectorMultipleList->add($openGLFeatureFactory->{OPENGL_AUTO_SELECT});
-            $openGLVersionSelectorMultipleList->add($openGLFeatureFactory->{OPENGL_MINIMUM});
-            'org::allbinary::game::configuration::feature::GameFeatureChoiceGroups'->getExclusiveInstance()->add("OpenGL Version Selector", $openGLVersionSelectorMultipleList);
-            my $openGLImageColorMultipleList = 'org::allbinary::util::BasicArrayListD'->new();
-            $openGLImageColorMultipleList->add($openGLFeatureFactory->{IMAGE_COLOR_DEPTH_4444});
-            $openGLImageColorMultipleList->add($openGLFeatureFactory->{IMAGE_COLOR_DEPTH_8888});
-            'org::allbinary::game::configuration::feature::GameFeatureChoiceGroups'->getExclusiveInstance()->add("OpenGL Image Color RGBA", $openGLImageColorMultipleList);
+    constructor {} {
+        next
+        my initFields_OpenGLOptions
+    }
+    
+
+    method init {} {
+        set openGLFeatureFactory [::OpenGLFeatureFactory::getInstance]
+        if {[[::Features::getInstance] isFeature [$openGLFeatureFactory jget OPENGL_OPTIONS]]} {
+            set openGLMultipleList [::BasicArrayListD new]
+            $openGLMultipleList add [$openGLFeatureFactory jget OPENGL]
+            [::GameFeatureChoiceGroups::getMultipleInstance] add "OpenGL (Complete Restart)" $openGLMultipleList
+            set openGLVersionSelectorMultipleList [::BasicArrayListD new]
+            $openGLVersionSelectorMultipleList add [$openGLFeatureFactory jget OPENGL_AUTO_SELECT]
+            $openGLVersionSelectorMultipleList add [$openGLFeatureFactory jget OPENGL_MINIMUM]
+            [::GameFeatureChoiceGroups::getExclusiveInstance] add "OpenGL Version Selector" $openGLVersionSelectorMultipleList
+            set openGLImageColorMultipleList [::BasicArrayListD new]
+            $openGLImageColorMultipleList add [$openGLFeatureFactory jget IMAGE_COLOR_DEPTH_4444]
+            $openGLImageColorMultipleList add [$openGLFeatureFactory jget IMAGE_COLOR_DEPTH_8888]
+            [::GameFeatureChoiceGroups::getExclusiveInstance] add "OpenGL Image Color RGBA" $openGLImageColorMultipleList
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::GameFeatureChoiceGroups ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::graphics::opengles::OpenGLFeatureFactory ();
+namespace eval ::OpenGLOptions {
+}
 
-1;
 

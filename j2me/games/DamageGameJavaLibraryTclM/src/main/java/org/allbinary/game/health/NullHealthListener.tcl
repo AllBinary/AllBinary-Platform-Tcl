@@ -11,30 +11,45 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.health
 
-package org::allbinary::game::health::NullHealthListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::health::HealthListenerInterface';
-
-tie our $NULL_HEALTH_LISTENER, 'java::lang::LazyStatic', sub { 'org::allbinary::game::health::NullHealthListener'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullHealthListener {
+    superclass ::JObject
 }
 
+oo::define ::NullHealthListener {
+    method initFields_NullHealthListener {} {
+        return
+    }
 
-sub onHealthChange {
-    my ($self) = @_;
+    constructor {} {
+        next
+        my initFields_NullHealthListener
+    }
+    
+
+    method onHealthChange {} {
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::health::HealthListenerInterface ();
+namespace eval ::NullHealthListener {
+    variable NULL_HEALTH_LISTENERValue {}
+    variable NULL_HEALTH_LISTENERSet 0
+    proc staticGet_NULL_HEALTH_LISTENER {} {
+        variable NULL_HEALTH_LISTENERValue
+        variable NULL_HEALTH_LISTENERSet
+        if {!$NULL_HEALTH_LISTENERSet} {
+            set NULL_HEALTH_LISTENERSet 1
+            set NULL_HEALTH_LISTENERValue [::NullHealthListener new]
+        }
+        return $NULL_HEALTH_LISTENERValue
+    }
+    proc staticSet_NULL_HEALTH_LISTENER {value} {
+        variable NULL_HEALTH_LISTENERValue
+        variable NULL_HEALTH_LISTENERSet
+        set NULL_HEALTH_LISTENERSet 1
+        set NULL_HEALTH_LISTENERValue $value
+    }
+}
 
-1;
 

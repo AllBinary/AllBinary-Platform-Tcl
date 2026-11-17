@@ -11,147 +11,135 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.image
 
-package org::allbinary::image::ImageCache;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Time::HiRes ();
-use parent -norequire,'org::allbinary::image::ImageCacheBase';
-
-tie our $NULL_IMAGE_CACHE, 'java::lang::LazyStatic', sub { 'org::allbinary::image::ImageCache'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{tsUtil} = 'org::allbinary::TsUtil'->getInstance();
+oo::class create ::ImageCache {
+    superclass ::ImageCacheBase
 }
 
+oo::define ::ImageCache {
+    method initFields_ImageCache {} {
+        my jset commonStrings {}
+        my jset tsUtil {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset tsUtil [::TsUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_ImageCache
+    }
+    
 
+    method addListener {renderer} {
+    }
+    
 
-sub addListener {
-    my ($self, $renderer) = @_;
-}
-
-
-sub getIndex {
-    my ($self, $key) = @_;
-        my $gdResources = 'org::allbinary::game::gd::resource::GDResources'->getInstance();
-        my $resourceStringArray = $gdResources->{resourceStringArray};
-        my $size = scalar(@{$resourceStringArray});
-        for (my $index = 0; $index < $size; $index++) {
-            if ($resourceStringArray->[$index] == $key) {
-                return $index;
+    method getIndex {key} {
+        set gdResources [::GDResources::getInstance]
+        set resourceStringArray [$gdResources jget resourceStringArray]
+        set size [$resourceStringArray length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            if {[expr {[$resourceStringArray get $index] eq $key}]} {
+                return $index
             }
         }
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("unable to find key: ")->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($key))->toString(), $self, $self->{commonStrings}->{RUN});
-        die ("RuntimeException");
-}
+        [my jget logUtil] putF [[[[::StringMaker new] append "unable to find key: "] append [[::StringUtil::getInstance] toString1 $key]] toString] [self] [[my jget commonStrings] jget RUN]
+        error [jexception RuntimeException {}]
+    }
+    
 
-
-# throws Exception
-sub get {
-    my ($self, $caller, $width, $height) = @_;
-        my $foundIndex = $self->getIndexWH($width, $height);
-        my $image = $self->getFromAvailable($foundIndex, $width, $height);
-        if ($image == $javax::microedition::lcdui::NullImage::NULL_IMAGE) {
-            $self->{volume} += $width * $height;
-            if ($self->{volume} > 32000) {
-                $self->{tsUtil}->gc();
-                $self->{volume} = 0;
+    method get {caller width height} {
+        set foundIndex [my getIndexWH $width $height]
+        set image [my getFromAvailable $foundIndex $width $height]
+        if {[expr {$image eq [::NullImage::staticGet_NULL_IMAGE]}]} {
+            my jset volume [expr {[my jget volume] + [jint [expr {$width * $height}]]}]
+            if {[expr {[my jget volume] > 32000}]} {
+                [my jget tsUtil] gc
+                my jset volume 0
             }
-            $image = $self->createImage($caller, $width, $height);
-            my $widths = $self->{widths};
-            if ($self->{nextIndex} > scalar(@{$widths}) - 1) {
-                if ($foundIndex == -1) {
-                    $foundIndex = $self->{nextIndex};
-                    $widths->[$self->{nextIndex}] = $width;
-                    $self->{heights}->[$self->{nextIndex}] = $height;
-                    $self->{nextIndex}++;
+            set image [my createImage $caller $width $height]
+            set widths [my jget widths]
+            if {[expr {[my jget nextIndex] > [jint [expr {[$widths length] - 1}]]}]} {
+                if {[expr {$foundIndex == [expr {-1}]}]} {
+                    set foundIndex [my jget nextIndex]
+                    $widths set [my jget nextIndex] $width
+                    [my jget heights] set [my jget nextIndex] $height
+                    my jpostinc nextIndex 1
                 }
-                $self->{listOfList}->[$foundIndex]->add($image);
+                [[my jget listOfList] get $foundIndex] add $image
             }
         }
-        return $image;
-}
+        return $image
+    }
+    
 
-
-# throws Exception
-sub getWithKey {
-    my ($self, $key) = @_;
-        my $image = $self->getImage($key);
-        if ($image == $javax::microedition::lcdui::NullImage::NULL_IMAGE) {
-            my $resourceUtil = 'org::allbinary::data::resource::ResourceUtil'->getInstance();
-            my $resourceInputStream = $resourceUtil->getResourceAsStream($key);
-            if (!defined($resourceInputStream)) {
-                die ('org::allbinary::logic::string::StringMaker'->new()->append("Image resource is not available for key: ")->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($key))->toString());
+    method getWithKey {key} {
+        set image [my getImage $key]
+        if {[expr {$image eq [::NullImage::staticGet_NULL_IMAGE]}]} {
+            set resourceUtil [::ResourceUtil::getInstance]
+            set resourceInputStream [$resourceUtil getResourceAsStream $key]
+            if {[expr {$resourceInputStream eq {}}]} {
+                error [jexception RuntimeException [[[[::StringMaker new] append "Image resource is not available for key: "] append [[::StringUtil::getInstance] toString1 $key]] toString]]
             }
             try {
-                $image = $self->createImageFromInputStream($key, $resourceInputStream);
-            } catch ($e) {
-                $self->{logUtil}->put("Exception: Trying Again After GC", $self, $self->{commonStrings}->{GET}, $e);
-                $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("InputStream: ")->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($resourceInputStream))->toString(), $self, $self->{commonStrings}->{GET});
-                $self->{tsUtil}->gc();
-                $self->{tsUtil}->gc();
-                $self->{logUtil}->putF('org::allbinary::system::Memory'->getInfo(), $self, $self->{commonStrings}->{GET});
-                Time::HiRes::sleep((100) / 1000);
-                $image = $self->createImageFromInputStream($key, $resourceInputStream);
+                set image [my createImageFromInputStream $key $resourceInputStream]
+            } on error {e} {
+                [my jget logUtil] put "Exception: Trying Again After GC" [self] [[my jget commonStrings] jget GET] $e
+                [my jget logUtil] putF [[[[::StringMaker new] append "InputStream: "] append [[::StringUtil::getInstance] toString1 $resourceInputStream]] toString] [self] [[my jget commonStrings] jget GET]
+                [my jget tsUtil] gc
+                [my jget tsUtil] gc
+                [my jget logUtil] putF [::Memory::getInfo] [self] [[my jget commonStrings] jget GET]
+                ::Thread::sleep 100
+                set image [my createImageFromInputStream $key $resourceInputStream]
             }
-            if ('org::allbinary::J2MEUtil'->isHTML()) {
+            if {[::J2MEUtil::isHTML]} {
             } else {
-                $resourceInputStream->close();
+                $resourceInputStream close
             }
-            $self->{hashtable}->put($key, $image);
+            [my jget hashtable] put $key $image
         }
-        return $image;
+        return $image
+    }
+    
+
+    method loadImageForAnimation {} {
+    }
+    
+
+    method progressEnded {} {
+    }
+    
+
+    method runTask {} {
+    }
+    
+
+    method isLazy {} {
+        return false
+    }
 }
 
-
-# throws Exception
-sub loadImageForAnimation {
-    my ($self) = @_;
+namespace eval ::ImageCache {
+    variable NULL_IMAGE_CACHEValue {}
+    variable NULL_IMAGE_CACHESet 0
+    proc staticGet_NULL_IMAGE_CACHE {} {
+        variable NULL_IMAGE_CACHEValue
+        variable NULL_IMAGE_CACHESet
+        if {!$NULL_IMAGE_CACHESet} {
+            set NULL_IMAGE_CACHESet 1
+            set NULL_IMAGE_CACHEValue [::ImageCache new]
+        }
+        return $NULL_IMAGE_CACHEValue
+    }
+    proc staticSet_NULL_IMAGE_CACHE {value} {
+        variable NULL_IMAGE_CACHEValue
+        variable NULL_IMAGE_CACHESet
+        set NULL_IMAGE_CACHESet 1
+        set NULL_IMAGE_CACHEValue $value
+    }
 }
 
-
-sub progressEnded {
-    my ($self) = @_;
-}
-
-
-sub runTask {
-    my ($self) = @_;
-}
-
-
-sub isLazy {
-    my ($self) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::InputStream ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::NullImage ();
-use org::allbinary::J2MEUtil ();
-use org::allbinary::TsUtil ();
-use org::allbinary::data::resource::ResourceUtil ();
-use org::allbinary::game::gd::resource::GDResources ();
-use org::allbinary::logic::ABSystemWrapper ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::system::Memory ();
-use org::allbinary::image::ImageCacheBase ();
-use java::lang::Thread ();
-
-1;
 

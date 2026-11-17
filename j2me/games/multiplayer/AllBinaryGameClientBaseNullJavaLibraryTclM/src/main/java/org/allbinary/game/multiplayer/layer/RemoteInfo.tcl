@@ -3,27 +3,59 @@
 # To change this template file, choose Tools | Templates 
 # and open the template in the editor.  
 # Generated Code Do Not Modify
+# package org.allbinary.game.multiplayer.layer
 
-package org::allbinary::game::multiplayer::layer::RemoteInfo;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $NEW_PLAYER_ID = 0;
-tie our $REMOTE_INFO, 'java::lang::LazyStatic', sub { 'org::allbinary::game::multiplayer::layer::RemoteInfo'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, -1, -1, $org::allbinary::game::multiplayer::layer::RemoteInfo::NEW_PLAYER_ID) };
-
-
-sub new {
-    my ($class, $username, $actorSessionId, $playerInputId, $id) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::RemoteInfo {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringUtil ();
+oo::define ::RemoteInfo {
+    method initFields_RemoteInfo {} {
+        return
+    }
+    
 
-1;
+    constructor {username actorSessionId playerInputId id} {
+        next
+        my initFields_RemoteInfo
+    }
+}
+
+namespace eval ::RemoteInfo {
+    variable NEW_PLAYER_IDValue {}
+    variable NEW_PLAYER_IDSet 0
+    proc staticGet_NEW_PLAYER_ID {} {
+        variable NEW_PLAYER_IDValue
+        variable NEW_PLAYER_IDSet
+        if {!$NEW_PLAYER_IDSet} {
+            set NEW_PLAYER_IDSet 1
+            set NEW_PLAYER_IDValue 0
+        }
+        return $NEW_PLAYER_IDValue
+    }
+    proc staticSet_NEW_PLAYER_ID {value} {
+        variable NEW_PLAYER_IDValue
+        variable NEW_PLAYER_IDSet
+        set NEW_PLAYER_IDSet 1
+        set NEW_PLAYER_IDValue $value
+    }
+    variable REMOTE_INFOValue {}
+    variable REMOTE_INFOSet 0
+    proc staticGet_REMOTE_INFO {} {
+        variable REMOTE_INFOValue
+        variable REMOTE_INFOSet
+        if {!$REMOTE_INFOSet} {
+            set REMOTE_INFOSet 1
+            set REMOTE_INFOValue [::RemoteInfo new [[::StringUtil::getInstance] jget EMPTY_STRING] [expr {-1}] [expr {-1}] [::RemoteInfo::staticGet_NEW_PLAYER_ID]]
+        }
+        return $REMOTE_INFOValue
+    }
+    proc staticSet_REMOTE_INFO {value} {
+        variable REMOTE_INFOValue
+        variable REMOTE_INFOSet
+        set REMOTE_INFOSet 1
+        set REMOTE_INFOValue $value
+    }
+}
+
 

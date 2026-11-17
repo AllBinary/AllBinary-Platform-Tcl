@@ -11,45 +11,57 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
-package org::allbinary::game::configuration::GameSpeed;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::GameSpeed'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::GameSpeed {
+    superclass ::JObject
 }
 
+oo::define ::GameSpeed {
+    method initFields_GameSpeed {} {
+        return
+    }
 
-sub getSpeed {
-    my ($self) = @_;
-        my $speedGameConfiguration = 'org::allbinary::game::configuration::GameConfigurationCentral'->getInstance()->{SPEED};
-        return (int($speedGameConfiguration->getMaxValue()) - int($speedGameConfiguration->getValue()) + 1);
+    constructor {} {
+        next
+        my initFields_GameSpeed
+    }
+    
+
+    method getSpeed {} {
+        set speedGameConfiguration [[::GameConfigurationCentral::getInstance] jget SPEED]
+        return ([expr {[expr {[[$speedGameConfiguration getMaxValue] intValue] - [[$speedGameConfiguration getValue] intValue]}] + 1}])
+    }
+    
+
+    method getDelay {} {
+        set speedGameConfiguration [[::GameConfigurationCentral::getInstance] jget SPEED]
+        return [expr {19 * ([expr {[[$speedGameConfiguration getMaxValue] intValue] - [[$speedGameConfiguration getValue] intValue]}])}]
+    }
+    
 }
 
-
-sub getDelay {
-    my ($self) = @_;
-        my $speedGameConfiguration = 'org::allbinary::game::configuration::GameConfigurationCentral'->getInstance()->{SPEED};
-        return 19 * (int($speedGameConfiguration->getMaxValue()) - int($speedGameConfiguration->getValue()));
+namespace eval ::GameSpeed {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameSpeed new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameSpeed::staticGet_instance]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::GameSpeed::instance;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::configuration::GameConfigurationCentral ();
-
-1;
 

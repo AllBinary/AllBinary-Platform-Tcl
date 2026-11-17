@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.health
 
-# Java interface
-package org::allbinary::game::health::HealthInterfaceCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getHealthInterface {
-    my ($self) = @_;
-    die "abstract method getHealthInterface";
+oo::class create ::HealthInterfaceCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::HealthInterfaceCompositeInterface {
+    method initFields_HealthInterfaceCompositeInterface {} {
+        return
+    }
+    
 
-1;
+    method getHealthInterface {} {
+        error [jexception AbstractMethodError getHealthInterface]
+    }
+}
+
+namespace eval ::HealthInterfaceCompositeInterface {
+}
+
 

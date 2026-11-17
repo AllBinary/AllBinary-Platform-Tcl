@@ -11,66 +11,56 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.text
 
-package org::allbinary::animation::text::AdjustCustomTextAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::text::CustomTextAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{dx} = undef;
-    $self->{dy} = undef;
+oo::class create ::AdjustCustomTextAnimation {
+    superclass ::CustomTextAnimation
 }
 
+oo::define ::AdjustCustomTextAnimation {
+    method initFields_AdjustCustomTextAnimation {} {
+        my jset dx 0
+        my jset dy 0
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $text, $fontSize, $dx, $dy, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($text, $fontSize, $animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{dx} = $dx;
-        $self->{dy} = $dy;
-    return $self;
+    constructor {text fontSize dx dy animationBehavior} {
+        next $text $fontSize $animationBehavior
+        my initFields_AdjustCustomTextAnimation
+        my jset dx $dx
+        my jset dy $dy
+    }
+    
+
+    method getDx {} {
+        return [my jget dx]
+    }
+    
+
+    method setDx {dx} {
+        my jset dx $dx
+    }
+    
+
+    method getDy {} {
+        return [my jget dy]
+    }
+    
+
+    method setDy {dy} {
+        my jset dy $dy
+    }
+    
+
+    method paintXY {graphics x y} {
+        next $graphics [jint [expr {$x + [my jget dx]}]] [jint [expr {$y + [my jget dy]}]]
+    }
 }
 
-
-sub getDx {
-    my ($self) = @_;
-        return $self->{dx};
+namespace eval ::AdjustCustomTextAnimation {
 }
 
-
-sub setDx {
-    my ($self, $dx) = @_;
-        $self->{dx} = $dx;
-}
-
-
-sub getDy {
-    my ($self) = @_;
-        return $self->{dy};
-}
-
-
-sub setDy {
-    my ($self, $dy) = @_;
-        $self->{dy} = $dy;
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->SUPER::paintXY($graphics, $x + $self->{dx}, $y + $self->{dy});
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::animation::text::CustomTextAnimation ();
-
-1;
 

@@ -11,31 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
-package org::allbinary::game::layer::pickup::IconLayerFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::IconLayerFactory {
+    superclass ::JObject
 }
 
+oo::define ::IconLayerFactory {
+    method initFields_IconLayerFactory {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($class, $animationInterface, $width, $height) = @_;
-        return 'org::allbinary::game::layer::pickup::IconLayer'->new($animationInterface, $width, $height);
+    constructor {} {
+        next
+        my initFields_IconLayerFactory
+    }
+    
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::game::layer::pickup::IconLayer ();
+namespace eval ::IconLayerFactory {
+    proc getInstance {animationInterface width height} {
+        return [::IconLayer new $animationInterface $width $height]
+    }
+}
 
-1;
 

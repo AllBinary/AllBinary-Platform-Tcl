@@ -11,67 +11,57 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item.validation
 
-package org::allbinary::graphics::form::item::validation::TextItemUserIdentifierVisitor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::visitor::Visitor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::TextItemUserIdentifierVisitor {
+    superclass ::Visitor
 }
 
+oo::define ::TextItemUserIdentifierVisitor {
+    method initFields_TextItemUserIdentifierVisitor {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_TextItemUserIdentifierVisitor
+    }
+    
 
-
-sub visit {
-    my ($self, $anyType) = @_;
-        my $value = $anyType;
-        if (length($value) < 2) {
-            my $charValue = substr($value, 0, 1);
-            my $stringValidationUtil = 'org::allbinary::logic::string::StringValidationUtil'->getInstance();
-            if ($stringValidationUtil->isNumber($value)) {
-                return 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{TRUE};
-            } elsif ($self->isLetter($charValue)) {
-                return 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{TRUE};
+    method visit {anyType} {
+        set value $anyType
+        if {[expr {[string length $value] < 2}]} {
+            set charValue [scan [string index $value 0] %c]
+            set stringValidationUtil [::StringValidationUtil::getInstance]
+            if {[$stringValidationUtil isNumber $value]} {
+                return [[::BooleanFactory::getInstance] jget TRUE]
+            } elseif {[my isLetter $charValue]} {
+                return [[::BooleanFactory::getInstance] jget TRUE]
             } else {
                 try {
-                    'org::allbinary::game::input::TextNotificationUtil'->getInstance()->fireError("Only Letters & Numbers Allowed");
-                } catch ($e) {
-                    my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-                    $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{VISIT}, $e);
+                    [::TextNotificationUtil::getInstance] fireError "Only Letters & Numbers Allowed"
+                } on error {e} {
+                    set commonStrings [::CommonStrings::getInstance]
+                    [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget VISIT] $e
                 }
-                return 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{FALSE};
+                return [[::BooleanFactory::getInstance] jget FALSE]
             }
         } else {
-            return 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{FALSE};
+            return [[::BooleanFactory::getInstance] jget FALSE]
         }
+    }
+    
+
+    method isLetter {charValue} {
+        set value [jint $charValue]
+        return [expr {([expr {[expr {$value > 64}] && [expr {$value < 91}]}]) || ([expr {[expr {$value > 96}] && [expr {$value < 123}]}])}]
+    }
 }
 
-
-sub isLetter {
-    my ($self, $charValue) = @_;
-        my $value = ord($charValue);
-        return ($value > 64 && $value < 91) || ($value > 96 && $value < 123);
+namespace eval ::TextItemUserIdentifierVisitor {
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::TextNotificationUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::java::bool::BooleanFactory ();
-use org::allbinary::logic::string::StringValidationUtil ();
-use org::allbinary::logic::util::visitor::Visitor ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

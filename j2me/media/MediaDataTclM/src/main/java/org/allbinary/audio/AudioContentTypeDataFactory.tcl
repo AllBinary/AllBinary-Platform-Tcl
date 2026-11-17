@@ -11,43 +11,58 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.audio
 
-package org::allbinary::audio::AudioContentTypeDataFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::audio::AudioContentTypeDataFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{MIME_AUDIO_TONE} = 'org::allbinary::audio::AudioContentTypeData'->new("audio/x-tone-seq");
-    $self->{MIME_AUDIO_AMR} = 'org::allbinary::audio::AudioContentTypeData'->new("audio/amr");
-    $self->{MIME_AUDIO_AMR_WB} = 'org::allbinary::audio::AudioContentTypeData'->new("audio/amr-wb");
-    $self->{MIME_AUDIO_WAV} = 'org::allbinary::audio::AudioContentTypeData'->new("audio/x-wav");
-    $self->{MIME_AUDIO_MIDI} = 'org::allbinary::audio::AudioContentTypeData'->new("audio/midi");
-    $self->{MIME_AUDIO_SP_MIDI} = 'org::allbinary::audio::AudioContentTypeData'->new("audio/sp-midi");
+oo::class create ::AudioContentTypeDataFactory {
+    superclass ::JObject
 }
 
+oo::define ::AudioContentTypeDataFactory {
+    method initFields_AudioContentTypeDataFactory {} {
+        my jset MIME_AUDIO_TONE {}
+        my jset MIME_AUDIO_AMR {}
+        my jset MIME_AUDIO_AMR_WB {}
+        my jset MIME_AUDIO_WAV {}
+        my jset MIME_AUDIO_MIDI {}
+        my jset MIME_AUDIO_SP_MIDI {}
+        my jset MIME_AUDIO_TONE [::AudioContentTypeData new "audio/x-tone-seq"]
+        my jset MIME_AUDIO_AMR [::AudioContentTypeData new "audio/amr"]
+        my jset MIME_AUDIO_AMR_WB [::AudioContentTypeData new "audio/amr-wb"]
+        my jset MIME_AUDIO_WAV [::AudioContentTypeData new "audio/x-wav"]
+        my jset MIME_AUDIO_MIDI [::AudioContentTypeData new "audio/midi"]
+        my jset MIME_AUDIO_SP_MIDI [::AudioContentTypeData new "audio/sp-midi"]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::audio::AudioContentTypeDataFactory::instance;
+    constructor {} {
+        next
+        my initFields_AudioContentTypeDataFactory
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+namespace eval ::AudioContentTypeDataFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AudioContentTypeDataFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AudioContentTypeDataFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::audio::AudioContentTypeData ();
-
-1;
 

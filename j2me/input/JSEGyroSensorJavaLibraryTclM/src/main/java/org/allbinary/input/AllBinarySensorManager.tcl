@@ -11,61 +11,68 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input
 
-package org::allbinary::input::AllBinarySensorManager;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{ORIENTATION_SENSOR_INPUT} = "Orientation Sensor Input";
-    $self->{ORIENTATION_TYPE} = "Orientation Type";
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::AllBinarySensorManager {
+    superclass ::JObject
 }
 
+oo::define ::AllBinarySensorManager {
+    method initFields_AllBinarySensorManager {} {
+        my jset ORIENTATION_SENSOR_INPUT {}
+        my jset ORIENTATION_TYPE {}
+        my jset list {}
+        my jset ORIENTATION_SENSOR_INPUT "Orientation Sensor Input"
+        my jset ORIENTATION_TYPE "Orientation Type"
+        my jset list [::BasicArrayListD new]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::input::AllBinarySensorManager::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::input::AllBinarySensorManager::instance = 'org::allbinary::input::AllBinarySensorManager'->new();
+    constructor {} {
+        next
+        my initFields_AllBinarySensorManager
+    }
+    
+
+    method init {} {
+    }
+    
+
+    method getSensorNamesList {} {
+        return [my jget list]
+    }
+    
+
+    method shutdown {} {
+    }
+}
+
+namespace eval ::AllBinarySensorManager {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::input::AllBinarySensorManager::instance;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::AllBinarySensorManager::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::AllBinarySensorManager::staticSet_instance [::AllBinarySensorManager new]
+        }
+        return [::AllBinarySensorManager::staticGet_instance]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-sub init {
-    my ($self) = @_;
-}
-
-
-sub getSensorNamesList {
-    my ($self) = @_;
-        return $self->{list};
-}
-
-
-sub shutdown {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

@@ -11,42 +11,52 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer.event
 
-package org::allbinary::layer::event::ScrollMapEventHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::handler::BasicEventHandler';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::layer::event::ScrollMapEventHandler'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::ScrollMapEventHandler {
+    superclass ::BasicEventHandler
 }
 
+oo::define ::ScrollMapEventHandler {
+    method initFields_ScrollMapEventHandler {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::layer::event::ScrollMapEventHandler::SINGLETON;
+    constructor {} {
+        next
+        my initFields_ScrollMapEventHandler
+    }
+    
+    
+
+    method process {eventObject eventListenerInterface} {
+        set scrollMapEventListenerInterface ($eventListenerInterface)
+        $scrollMapEventListenerInterface onMoveEvent $eventObject
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $eventObject, $eventListenerInterface) = @_;
-        my $scrollMapEventListenerInterface = ($eventListenerInterface);
-        $scrollMapEventListenerInterface->onMoveEvent($eventObject);
+namespace eval ::ScrollMapEventHandler {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::ScrollMapEventHandler new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::ScrollMapEventHandler::staticGet_SINGLETON]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
-
-1;
 

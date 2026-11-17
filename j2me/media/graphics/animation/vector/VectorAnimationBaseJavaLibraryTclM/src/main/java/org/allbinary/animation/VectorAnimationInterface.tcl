@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-# Java interface
-package org::allbinary::animation::VectorAnimationInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::IndexedAnimationInterface','org::allbinary::graphics::color::ColorCompositeInterface';
-
-
-
-sub getPoints {
-    my ($self, $frame) = @_;
-    die "abstract method getPoints";
+oo::class create ::VectorAnimationInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::graphics::color::ColorCompositeInterface ();
-use org::allbinary::animation::IndexedAnimationInterface ();
+oo::define ::VectorAnimationInterface {
+    method initFields_VectorAnimationInterface {} {
+        return
+    }
+    
 
-1;
+    method getPoints {frame} {
+        error [jexception AbstractMethodError getPoints]
+    }
+}
+
+namespace eval ::VectorAnimationInterface {
+}
+
 

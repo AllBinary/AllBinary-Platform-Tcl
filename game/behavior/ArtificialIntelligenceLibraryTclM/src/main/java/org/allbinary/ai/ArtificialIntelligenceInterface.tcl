@@ -11,25 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.ai
 
-# Java interface
-package org::allbinary::ai::ArtificialIntelligenceInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::IdentifierInterface';
-
-
-
-# throws Exception
-sub processAI {
-    my ($self, $layerManager) = @_;
-    die "abstract method processAI";
+oo::class create ::ArtificialIntelligenceInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::graphics::IdentifierInterface ();
-use org::allbinary::layer::AllBinaryLayerManager ();
+oo::define ::ArtificialIntelligenceInterface {
+    method initFields_ArtificialIntelligenceInterface {} {
+        return
+    }
+    
 
-1;
+    method processAI {layerManager} {
+        error [jexception AbstractMethodError processAI]
+    }
+}
+
+namespace eval ::ArtificialIntelligenceInterface {
+}
+
 

@@ -11,32 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.bounds.event
 
-package org::allbinary::bounds::event::BoundsChangeEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject';
-
-
-
-sub new {
-    my ($class, $rectangle) = @_;
-    my $self = $class->SUPER::new($rectangle);
-        # super(...) made $self above
-    return $self;
+oo::class create ::BoundsChangeEvent {
+    superclass ::AllBinaryEventObject
 }
 
+oo::define ::BoundsChangeEvent {
+    method initFields_BoundsChangeEvent {} {
+        return
+    }
+    
 
-sub getRectangle {
-    my ($self) = @_;
-        return $self->getSource();
+    constructor {rectangle} {
+        next $rectangle
+        my initFields_BoundsChangeEvent
+    }
+    
+
+    method getRectangle {} {
+        return [my getSource]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
+namespace eval ::BoundsChangeEvent {
+}
 
-1;
 

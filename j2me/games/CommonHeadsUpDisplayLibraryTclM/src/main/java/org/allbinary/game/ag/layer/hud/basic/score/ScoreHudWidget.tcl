@@ -11,45 +11,37 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic.score
 
-package org::allbinary::game::ag::layer::hud::basic::score::ScoreHudWidget;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ag::layer::hud::basic::NumberStringHud';
-
-
-
-# throws Exception
-sub getInstance {
-    my ($class, $maxscore, $location, $direction) = @_;
-        return 'org::allbinary::game::ag::layer::hud::basic::score::ScoreHudWidget'->new($maxscore, $location, $direction, 2, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{GREY});
+oo::class create ::ScoreHudWidget {
+    superclass ::NumberStringHud
 }
 
+oo::define ::ScoreHudWidget {
+    method initFields_ScoreHudWidget {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class, $maxscore, $location, $direction, $bufferZone, $basicColor) = @_;
-    my $self = $class->SUPER::new("Pts ", $maxscore, $location, $direction, $bufferZone, $basicColor);
-        # super(...) made $self above
-        $self->{updateMaxHeight} = 14;
-    return $self;
+    constructor {maxscore location direction bufferZone basicColor} {
+        next "Pts " $maxscore $location $direction $bufferZone $basicColor
+        my initFields_ScoreHudWidget
+        my jset updateMaxHeight 14
+    }
+    
+
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        my jset updateMaxWidth [expr {[$font getSize] * 5}]
+        next $graphics
+    }
 }
 
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->{updateMaxWidth} = $font->getSize() * 5;
-        $self->SUPER::updateMeasurement($graphics);
+namespace eval ::ScoreHudWidget {
+    proc getInstance {maxscore location direction} {
+        return [::ScoreHudWidget new $maxscore $location $direction 2 [[::BasicColorFactory::getInstance] jget GREY]]
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::ag::layer::hud::basic::NumberStringHud ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-
-1;
 

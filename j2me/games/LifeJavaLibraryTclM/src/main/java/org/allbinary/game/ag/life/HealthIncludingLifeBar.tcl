@@ -11,71 +11,58 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.life
 
-package org::allbinary::game::ag::life::HealthIncludingLifeBar;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable','org::allbinary::game::health::HealthListenerInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{animationInterface} = undef;
-    $self->{life} = undef;
-    $self->{healthInterface} = undef;
-    $self->{allbinaryLayer} = undef;
+oo::class create ::HealthIncludingLifeBar {
+    superclass ::Paintable
 }
 
+oo::define ::HealthIncludingLifeBar {
+    method initFields_HealthIncludingLifeBar {} {
+        my jset animationInterface {}
+        my jset life {}
+        my jset healthInterface {}
+        my jset allbinaryLayer {}
+        
+        
+        
+        
+        return
+    }
+    
+    
 
-# throws Exception
-sub createHealthIncludingLifeBar {
-    my ($class, $layerInterface, $life, $healthInterface, $location, $direction) = @_;
-        return 'org::allbinary::game::ag::life::HealthIncludingLifeBar'->new($layerInterface, $life, $healthInterface, 'org::allbinary::game::health::HealthBarTwodAnimation'->new($layerInterface, $location), $direction);
+    constructor {layerInterface life healthInterface animationInterface direction} {
+        next
+        my initFields_HealthIncludingLifeBar
+        my jset allbinaryLayer $layerInterface
+        my jset animationInterface $animationInterface
+        my jset life $life
+        my jset healthInterface $healthInterface
+        [my jget healthInterface] addListener [self]
+        my onHealthChange
+    }
+    
+
+    method onHealthChange {} {
+        [my jget animationInterface] onHealthChange [expr {([expr {([expr {[[my jget healthInterface] getHealth] + ([expr {[[my jget healthInterface] getMaxHealth] * [[my jget life] get]}])}]) * [[my jget allbinaryLayer] getWidth]}]) / ([expr {[[my jget healthInterface] getMaxHealth] + ([expr {[[my jget healthInterface] getMaxHealth] * [[my jget life] getStartLives]}])}])}]
+    }
+    
+
+    method paint {graphics} {
+        [my jget animationInterface] paintXY $graphics 0 0
+    }
+    
+
+    method paintThreed {graphics} {
+        [my jget animationInterface] paintThreedXYZ $graphics 0 0 0
+    }
 }
 
-
-sub new {
-    my ($class, $layerInterface, $life, $healthInterface, $animationInterface, $direction) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{allbinaryLayer} = $layerInterface;
-        $self->{animationInterface} = $animationInterface;
-        $self->{life} = $life;
-        $self->{healthInterface} = $healthInterface;
-        $self->{healthInterface}->addListener($self);
-        $self->onHealthChange();
-    return $self;
+namespace eval ::HealthIncludingLifeBar {
+    proc createHealthIncludingLifeBar {layerInterface life healthInterface location direction} {
+        return [::HealthIncludingLifeBar new $layerInterface $life $healthInterface [::HealthBarTwodAnimation new $layerInterface $location] $direction]
+    }
 }
 
-
-sub onHealthChange {
-    my ($self) = @_;
-        $self->{animationInterface}->onHealthChange((($self->{healthInterface}->getHealth() + ($self->{healthInterface}->getMaxHealth() * $self->{life}->get())) * $self->{allbinaryLayer}->getWidth()) / ($self->{healthInterface}->getMaxHealth() + ($self->{healthInterface}->getMaxHealth() * $self->{life}->getStartLives())));
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{animationInterface}->paintXY($graphics, 0, 0);
-}
-
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
-        $self->{animationInterface}->paintThreedXYZ($graphics, 0, 0, 0);
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::health::Health ();
-use org::allbinary::game::health::HealthBarAnimation ();
-use org::allbinary::game::health::HealthBarTwodAnimation ();
-use org::allbinary::game::health::HealthInterface ();
-use org::allbinary::game::health::HealthListenerInterface ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::layer::AllBinaryLayer ();
-
-1;
 

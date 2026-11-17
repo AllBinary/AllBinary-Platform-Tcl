@@ -11,45 +11,38 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-package org::allbinary::graphics::paint::AnimationCompositePaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::InitUpdatePaintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{animationInterface} = undef;
+oo::class create ::AnimationCompositePaintable {
+    superclass ::InitUpdatePaintable
 }
 
+oo::define ::AnimationCompositePaintable {
+    method initFields_AnimationCompositePaintable {} {
+        my jset animationInterface {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $animationInterface) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{animationInterface} = $animationInterface;
-    return $self;
+    constructor {animationInterface} {
+        next
+        my initFields_AnimationCompositePaintable
+        my jset animationInterface $animationInterface
+    }
+    
+
+    method paint {graphics} {
+        [my jget animationInterface] paintXY $graphics 0 0
+    }
+    
+
+    method paintThreed {graphics} {
+        [my jget animationInterface] paintThreedXYZ $graphics 0 0 0
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{animationInterface}->paintXY($graphics, 0, 0);
+namespace eval ::AnimationCompositePaintable {
 }
 
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
-        $self->{animationInterface}->paintThreedXYZ($graphics, 0, 0, 0);
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::graphics::paint::InitUpdatePaintable ();
-
-1;
 

@@ -11,62 +11,66 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.control.validate
 
-package org::allbinary::logic::control::validate::ValidatorBase;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::logic::control::validate::ValidatorBaseInterface';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::control::validate::ValidatorBase'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::control::validate::ValidatorBase::instance;
+oo::class create ::ValidatorBase {
+    superclass ::JObject
 }
 
+oo::define ::ValidatorBase {
+    method initFields_ValidatorBase {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+    constructor {} {
+        next
+        my initFields_ValidatorBase
+    }
+    
+
+    method isValid {} {
+        return [[::BooleanFactory::getInstance] jget TRUE]
+    }
+    
+
+    method validationInfo {} {
+        return [[::StringUtil::getInstance] jget EMPTY_STRING]
+    }
+    
+
+    method toHashtable {} {
+        return [[::StdUtil::getInstance] jget NULL_TABLE]
+    }
+    
+
+    method toList {} {
+        return [[::BasicArrayListUtil::getInstance] getImmutableInstance]
+    }
 }
 
-
-sub isValid {
-    my ($self) = @_;
-        return 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{TRUE};
+namespace eval ::ValidatorBase {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ValidatorBase new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ValidatorBase::staticGet_instance]
+    }
 }
 
-
-sub validationInfo {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-}
-
-
-sub toHashtable {
-    my ($self) = @_;
-        return 'org::allbinary::logic::StdUtil'->getInstance()->{NULL_TABLE};
-}
-
-
-sub toList {
-    my ($self) = @_;
-        return 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::logic::java::bool::BooleanFactory ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListUtil ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::logic::control::validate::ValidatorBaseInterface ();
-
-1;
 

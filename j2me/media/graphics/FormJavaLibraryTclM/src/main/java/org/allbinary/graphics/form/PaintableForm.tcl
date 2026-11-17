@@ -1,72 +1,72 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::PaintableForm;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::ABCustomForm';
-
-tie our $NULL_PAINTABLE_FORM, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{canvasStrings} = 'org::allbinary::graphics::displayable::CanvasStrings'->getInstance();
-    $self->{rectangle} = $org::allbinary::graphics::RectangleFactory::SINGLETON;
-    $self->{x} = 0;
-    $self->{y} = 0;
-    $self->{formType} = 'org::allbinary::graphics::form::FormTypeFactory'->getInstance()->{NULL_FORM_TYPE};
+oo::class create ::PaintableForm {
+    superclass ::ABCustomForm
 }
 
+oo::define ::PaintableForm {
+    method initFields_PaintableForm {} {
+        my jset canvasStrings {}
+        my jset rectangle {}
+        my jset x 0
+        my jset y 0
+        my jset formType {}
+        my jset canvasStrings [::CanvasStrings::getInstance]
+        my jset rectangle [::RectangleFactory::staticGet_SINGLETON]
+        my jset x 0
+        my jset y 0
+        my jset formType [[::FormTypeFactory::getInstance] jget NULL_FORM_TYPE]
+        return
+    }
+    
+    
 
-sub getNullPaintableForm {
-    my ($class) = @_;
-        if ($org::allbinary::graphics::form::PaintableForm::NULL_PAINTABLE_FORM == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::graphics::form::PaintableForm::NULL_PAINTABLE_FORM = 'org::allbinary::graphics::form::PaintableForm'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, [(undef) x (0)], 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{BLACK}, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE});
+    constructor {title items backgroundBasicColor foregroundBasicColor} {
+        next $title $items $backgroundBasicColor $foregroundBasicColor
+        my initFields_PaintableForm
+        my setSelectedIndex 0
+    }
+    
+
+    method init {rectangle formType} {
+        my jset rectangle $rectangle
+        set point [[my jget rectangle] getPoint]
+        my jset x [$point getX]
+        my jset y [$point getY]
+        my jset formType $formType
+    }
+    
+
+    method getWidth {} {
+        return [[my jget rectangle] getWidth]
+    }
+}
+
+namespace eval ::PaintableForm {
+    variable NULL_PAINTABLE_FORMValue {}
+    variable NULL_PAINTABLE_FORMSet 0
+    proc staticGet_NULL_PAINTABLE_FORM {} {
+        variable NULL_PAINTABLE_FORMValue
+        variable NULL_PAINTABLE_FORMSet
+        if {!$NULL_PAINTABLE_FORMSet} {
+            set NULL_PAINTABLE_FORMSet 1
+            set NULL_PAINTABLE_FORMValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::graphics::form::PaintableForm::NULL_PAINTABLE_FORM;
+        return $NULL_PAINTABLE_FORMValue
+    }
+    proc staticSet_NULL_PAINTABLE_FORM {value} {
+        variable NULL_PAINTABLE_FORMValue
+        variable NULL_PAINTABLE_FORMSet
+        set NULL_PAINTABLE_FORMSet 1
+        set NULL_PAINTABLE_FORMValue $value
+    }
+    proc getNullPaintableForm {} {
+        if {[expr {[::PaintableForm::staticGet_NULL_PAINTABLE_FORM] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::PaintableForm::staticSet_NULL_PAINTABLE_FORM [::PaintableForm new [[::StringUtil::getInstance] jget EMPTY_STRING] [jarray 0 {}] [[::BasicColorFactory::getInstance] jget BLACK] [[::BasicColorFactory::getInstance] jget WHITE]]
+        }
+        return [::PaintableForm::staticGet_NULL_PAINTABLE_FORM]
+    }
 }
 
-
-sub new {
-    my ($class, $title, $items, $backgroundBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($title, $items, $backgroundBasicColor, $foregroundBasicColor);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->setSelectedIndex(0);
-    return $self;
-}
-
-
-# throws Exception
-sub init {
-    my ($self, $rectangle, $formType) = @_;
-        $self->{rectangle} = $rectangle;
-        my $point = $self->{rectangle}->getPoint();
-        $self->{x} = $point->getX();
-        $self->{y} = $point->getY();
-        $self->{formType} = $formType;
-}
-
-
-sub getWidth {
-    my ($self) = @_;
-        return $self->{rectangle}->getWidth();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::GPoint ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::RectangleFactory ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::displayable::CanvasStrings ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::graphics::form::ABCustomForm ();
-use org::allbinary::graphics::form::FormTypeFactory ();
-
-1;
 

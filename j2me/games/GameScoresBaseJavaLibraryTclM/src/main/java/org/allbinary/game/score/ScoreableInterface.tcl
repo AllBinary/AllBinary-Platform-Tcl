@@ -11,33 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-# Java interface
-package org::allbinary::game::score::ScoreableInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getPoints {
-    my ($self) = @_;
-    die "abstract method getPoints";
+oo::class create ::ScoreableInterface {
+    superclass ::JObject
 }
 
+oo::define ::ScoreableInterface {
+    method initFields_ScoreableInterface {} {
+        return
+    }
+    
 
-sub addPoints {
-    my ($self, $points) = @_;
-    die "abstract method addPoints";
+    method getPoints {} {
+        error [jexception AbstractMethodError getPoints]
+    }
+    
+
+    method addPoints {points} {
+        error [jexception AbstractMethodError addPoints]
+    }
+    
+
+    method removePoints {points} {
+        error [jexception AbstractMethodError removePoints]
+    }
 }
 
-
-sub removePoints {
-    my ($self, $points) = @_;
-    die "abstract method removePoints";
+namespace eval ::ScoreableInterface {
 }
 
-
-1;
 

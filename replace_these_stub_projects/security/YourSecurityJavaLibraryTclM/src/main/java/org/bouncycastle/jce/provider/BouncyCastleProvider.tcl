@@ -1,30 +1,61 @@
 # Generated Code Do Not Modify
+# package org.bouncycastle.jce.provider
 
-package org::bouncycastle::jce::provider::BouncyCastleProvider;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $info = "BouncyCastle Security Provider v1.41";
-our $PROVIDER_NAME = "BC";
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new($org::bouncycastle::jce::provider::BouncyCastleProvider::PROVIDER_NAME, 1.41, $org::bouncycastle::jce::provider::BouncyCastleProvider::info);
-        # super(...) made $self above
-    return $self;
+oo::class create ::BouncyCastleProvider {
+    superclass ::Provider
 }
 
+oo::define ::BouncyCastleProvider {
+    method initFields_BouncyCastleProvider {} {
+        return
+    }
+    
 
-sub setParameter {
-    my ($self, $parameterName, $parameter) = @_;
+    constructor {} {
+        next [::BouncyCastleProvider::staticGet_PROVIDER_NAME] 1.41 [::BouncyCastleProvider::staticGet_info]
+        my initFields_BouncyCastleProvider
+    }
+    
+
+    method setParameter {parameterName parameter} {
+    }
 }
 
-use java::lang::Object ();
-# use java::security::Provider ();
+namespace eval ::BouncyCastleProvider {
+    variable infoValue {}
+    variable infoSet 0
+    proc staticGet_info {} {
+        variable infoValue
+        variable infoSet
+        if {!$infoSet} {
+            set infoSet 1
+            set infoValue "BouncyCastle Security Provider v1.41"
+        }
+        return $infoValue
+    }
+    proc staticSet_info {value} {
+        variable infoValue
+        variable infoSet
+        set infoSet 1
+        set infoValue $value
+    }
+    variable PROVIDER_NAMEValue {}
+    variable PROVIDER_NAMESet 0
+    proc staticGet_PROVIDER_NAME {} {
+        variable PROVIDER_NAMEValue
+        variable PROVIDER_NAMESet
+        if {!$PROVIDER_NAMESet} {
+            set PROVIDER_NAMESet 1
+            set PROVIDER_NAMEValue "BC"
+        }
+        return $PROVIDER_NAMEValue
+    }
+    proc staticSet_PROVIDER_NAME {value} {
+        variable PROVIDER_NAMEValue
+        variable PROVIDER_NAMESet
+        set PROVIDER_NAMESet 1
+        set PROVIDER_NAMEValue $value
+    }
+}
 
-1;
 

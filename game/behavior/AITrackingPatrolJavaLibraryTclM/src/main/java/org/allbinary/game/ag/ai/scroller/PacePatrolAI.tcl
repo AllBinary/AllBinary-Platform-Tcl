@@ -11,145 +11,116 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.scroller
 
-package org::allbinary::game::ag::ai::scroller::PacePatrolAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use List::Util ();
-use parent -norequire,'org::allbinary::game::ag::ai::scroller::BasePatrolAI','org::allbinary::game::tracking::TrackingEventListenerInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{trackingList} = undef;
-    $self->{firingDistance} = 0;
-    $self->{isFollowLimitedByTerrain} = 0;
+oo::class create ::PacePatrolAI {
+    superclass ::BasePatrolAI
 }
 
+oo::define ::PacePatrolAI {
+    method initFields_PacePatrolAI {} {
+        my jset trackingList {}
+        my jset firingDistance 0
+        my jset isFollowLimitedByTerrain false
+        
+        my jset firingDistance 0
+        my jset isFollowLimitedByTerrain false
+        return
+    }
+    
 
-sub new {
-    my ($class, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($hashtable, $ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        'org::allbinary::game::tracking::TrackingEventHandler'->getInstance()->addListenerInterface($self);
-        $self->{trackingList} = 'org::allbinary::util::BasicArrayListD'->new();
-    return $self;
-}
+    constructor {hashtable ownerLayerInterface gameInput} {
+        next $hashtable $ownerLayerInterface $gameInput
+        my initFields_PacePatrolAI
+        [::TrackingEventHandler::getInstance] addListenerInterface [self]
+        my jset trackingList [::BasicArrayListD new]
+    }
+    
 
-
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        $self->update();
-        my $direction = $self->setFiringDirectionForTargetIfInRange();
-        my $directionFactory = 'org::allbinary::direction::DirectionFactory'->getInstance();
-        if ($direction == $directionFactory->{LEFT}) {
-            if ($self->{lastKeyDirection} != $self->{keyDirection} || !$self->{isFollowLimitedByTerrain}) {
-                $self->SUPER::processKeyAI($javax::microedition::lcdui::Canvas::LEFT);
+    method processAI {allBinaryLayerManager} {
+        my update
+        set direction [my setFiringDirectionForTargetIfInRange]
+        set directionFactory [::DirectionFactory::getInstance]
+        if {[expr {$direction eq [$directionFactory jget LEFT]}]} {
+            if {[expr {[expr {[my jget lastKeyDirection] != [my jget keyDirection]}] || [expr {![my jget isFollowLimitedByTerrain]}]}]} {
+                next [::Canvas::staticGet_LEFT]
             }
-            $self->{keyDirection} = $javax::microedition::lcdui::Canvas::LEFT;
-            $self->{lastKeyDirection} = $self->{keyDirection};
-            $self->{xTotalDistance} = 0;
-            $self->SUPER::processKeyAI($javax::microedition::lcdui::Canvas::KEY_NUM1);
-        } elsif ($direction == $directionFactory->{RIGHT}) {
-            if ($self->{lastKeyDirection} != $self->{keyDirection} || !$self->{isFollowLimitedByTerrain}) {
-                $self->SUPER::processKeyAI($javax::microedition::lcdui::Canvas::RIGHT);
+            my jset keyDirection [::Canvas::staticGet_LEFT]
+            my jset lastKeyDirection [my jget keyDirection]
+            my jset xTotalDistance 0
+            next [::Canvas::staticGet_KEY_NUM1]
+        } elseif {[expr {$direction eq [$directionFactory jget RIGHT]}]} {
+            if {[expr {[expr {[my jget lastKeyDirection] != [my jget keyDirection]}] || [expr {![my jget isFollowLimitedByTerrain]}]}]} {
+                next [::Canvas::staticGet_RIGHT]
             }
-            $self->{keyDirection} = $javax::microedition::lcdui::Canvas::RIGHT;
-            $self->{lastKeyDirection} = $self->{keyDirection};
-            $self->{xTotalDistance} = 0;
-            $self->SUPER::processKeyAI($javax::microedition::lcdui::Canvas::KEY_NUM1);
+            my jset keyDirection [::Canvas::staticGet_RIGHT]
+            my jset lastKeyDirection [my jget keyDirection]
+            my jset xTotalDistance 0
+            next [::Canvas::staticGet_KEY_NUM1]
         } else {
-            $self->SUPER::processKeyAI($self->{keyDirection});
+            next [my jget keyDirection]
         }
-}
+    }
+    
 
-
-sub setFiringDirectionForTargetIfInRange {
-    my ($self) = @_;
-        my $directionFactory = 'org::allbinary::direction::DirectionFactory'->getInstance();
-        my $ownerLayerInterface = $self->getOwnerLayerInterface();
-        my $direction = $directionFactory->{NOT_BORDERED_WITH};
-        my $lastTrackingEvent = undef;
-        my $lastTrackingLayerInterface = undef;
-        my $directionCompositeInterface = undef;
-        my $size = $self->{trackingList}->size();
-        for (my $index = 0; $index < $size; $index++) {
-            $lastTrackingEvent = $self->{trackingList}->get(0);
-            $lastTrackingLayerInterface = $lastTrackingEvent->getLayerInterface();
-            my $x = $lastTrackingLayerInterface->getXP();
-            my $y = $lastTrackingLayerInterface->getYP();
-            my $yDistance = $ownerLayerInterface->getYP() - $y - $ownerLayerInterface->getHeight();
-            my $xDistance = $ownerLayerInterface->getXP() - $x - $ownerLayerInterface->getWidth();
-            my $absXDistance = abs($xDistance);
-            my $absYDistance = abs($yDistance);
-            if ($absYDistance <= 100) {
-                if ($absXDistance < int($self->getFiringDistance() / 2)) {
-                    $directionCompositeInterface = $self->getOwnerLayerInterface();
-                    if ($xDistance < 0 && $directionCompositeInterface->getDirection() == $directionFactory->{RIGHT}) {
-                        $direction = $directionFactory->{RIGHT};
-                    } elsif ($xDistance > 0 && $directionCompositeInterface->getDirection() == $directionFactory->{LEFT}) {
-                        $direction = $directionFactory->{LEFT};
+    method setFiringDirectionForTargetIfInRange {} {
+        set directionFactory [::DirectionFactory::getInstance]
+        set ownerLayerInterface [my getOwnerLayerInterface]
+        set direction [$directionFactory jget NOT_BORDERED_WITH]
+        set lastTrackingEvent {}
+        set lastTrackingLayerInterface {}
+        set directionCompositeInterface {}
+        set size [[my jget trackingList] size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set lastTrackingEvent [[my jget trackingList] get 0]
+            set lastTrackingLayerInterface [$lastTrackingEvent getLayerInterface]
+            set x [$lastTrackingLayerInterface getXP]
+            set y [$lastTrackingLayerInterface getYP]
+            set yDistance [expr {[expr {[$ownerLayerInterface getYP] - $y}] - [$ownerLayerInterface getHeight]}]
+            set xDistance [expr {[expr {[$ownerLayerInterface getXP] - $x}] - [$ownerLayerInterface getWidth]}]
+            set absXDistance [expr {abs($xDistance)}]
+            set absYDistance [expr {abs($yDistance)}]
+            if {[expr {$absYDistance <= 100}]} {
+                if {[expr {$absXDistance < [jdiv [my getFiringDistance] 2]}]} {
+                    set directionCompositeInterface [my getOwnerLayerInterface]
+                    if {[expr {[expr {$xDistance < 0}] && [expr {[$directionCompositeInterface getDirection] == [$directionFactory jget RIGHT]}]}]} {
+                        set direction [$directionFactory jget RIGHT]
+                    } elseif {[expr {[expr {$xDistance > 0}] && [expr {[$directionCompositeInterface getDirection] == [$directionFactory jget LEFT]}]}]} {
+                        set direction [$directionFactory jget LEFT]
                     }
                 }
             }
         }
-        return $direction;
+        return $direction
+    }
+    
+
+    method disable {} {
+    }
+    
+
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
+
+    method onMovement {trackingEvent} {
+        [my jget trackingList] clear
+        [my jget trackingList] add $trackingEvent
+    }
+    
+
+    method getFiringDistance {} {
+        return [my jget firingDistance]
+    }
+    
+
+    method setFiringDistance {firingDistance} {
+        my jset firingDistance $firingDistance
+    }
 }
 
-
-sub disable {
-    my ($self) = @_;
+namespace eval ::PacePatrolAI {
 }
 
-
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
-}
-
-
-sub onMovement {
-    my ($self, $trackingEvent) = @_;
-        $self->{trackingList}->clear();
-        $self->{trackingList}->add($trackingEvent);
-}
-
-
-sub getFiringDistance {
-    my ($self) = @_;
-        return $self->{firingDistance};
-}
-
-
-sub setFiringDistance {
-    my ($self, $firingDistance) = @_;
-        $self->{firingDistance} = $firingDistance;
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::direction::Direction ();
-use org::allbinary::direction::DirectionCompositeInterface ();
-use org::allbinary::direction::DirectionFactory ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::game::tracking::TrackingEvent ();
-use org::allbinary::game::tracking::TrackingEventHandler ();
-use org::allbinary::game::tracking::TrackingEventListenerInterface ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::layer::LayerInterface ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::game::ag::ai::scroller::BasePatrolAI ();
-
-1;
 

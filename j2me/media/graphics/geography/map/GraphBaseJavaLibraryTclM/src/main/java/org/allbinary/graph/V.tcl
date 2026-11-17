@@ -1,26 +1,27 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graph
 
-package org::allbinary::graph::V;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::V {
+    superclass ::JObject
 }
 
+oo::define ::V {
+    method initFields_V {} {
+        return
+    }
 
-sub getId {
-    my ($self) = @_;
-        return 0;
+    constructor {} {
+        next
+        my initFields_V
+    }
+    
+
+    method getId {} {
+        return 0
+    }
 }
 
-use java::lang::Object ();
+namespace eval ::V {
+}
 
-1;
 

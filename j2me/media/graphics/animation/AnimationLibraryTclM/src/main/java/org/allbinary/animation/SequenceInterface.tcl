@@ -11,27 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-# Java interface
-package org::allbinary::animation::SequenceInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub setSequence {
-    my ($self, $sequence) = @_;
-    die "abstract method setSequence";
+oo::class create ::SequenceInterface {
+    superclass ::JObject
 }
 
+oo::define ::SequenceInterface {
+    method initFields_SequenceInterface {} {
+        return
+    }
+    
 
-sub getSequence {
-    my ($self) = @_;
-    die "abstract method getSequence";
+    method setSequence {sequence} {
+        error [jexception AbstractMethodError setSequence]
+    }
+    
+
+    method getSequence {} {
+        error [jexception AbstractMethodError getSequence]
+    }
 }
 
+namespace eval ::SequenceInterface {
+}
 
-1;
 

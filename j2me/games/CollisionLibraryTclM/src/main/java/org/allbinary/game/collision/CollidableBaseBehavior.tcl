@@ -11,103 +11,82 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-package org::allbinary::game::collision::CollidableBaseBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::collision::CollidableInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{layerCollisionUtil} = 'org::allbinary::game::collision::LayerCollisionUtil'->getInstance();
-    $self->{collidable} = 1;
+oo::class create ::CollidableBaseBehavior {
+    superclass ::JObject
 }
 
+oo::define ::CollidableBaseBehavior {
+    method initFields_CollidableBaseBehavior {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset layerCollisionUtil {}
+        my jset collidable false
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset layerCollisionUtil [::LayerCollisionUtil::getInstance]
+        my jset collidable true
+        return
+    }
+    
 
-sub new {
-    my ($class, $collidable) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{collidable} = $collidable;
-    return $self;
+    constructor {collidable} {
+        next
+        my initFields_CollidableBaseBehavior
+        my jset collidable $collidable
+    }
+    
+
+    method update {} {
+    }
+    
+
+    method getName {} {
+        return [jclassname [self]]
+    }
+    
+
+    method setCollidable {collidable} {
+        my jset collidable $collidable
+    }
+    
+
+    method isCollidable {ownerLayer} {
+        return [my jget collidable]
+    }
+    
+
+    method collide {ownerLayer allbinaryCollidableLayer} {
+        error [jexception Exception [[[[[::StringMaker new] append [[my jget commonStrings] jget NOT_IMPLEMENTED]] append [[::CommonLabels::getInstance] jget COLON_SEP]] append [jclassname [self]]] toString]]
+    }
+    
+
+    method isCollision {ownerLayer collisionLayer} {
+        return [[my jget layerCollisionUtil] isCollision $ownerLayer $collisionLayer]
+    }
+    
+
+    method isCollisionInterface {ownerLayer collidableInterfaceCompositeInterface} {
+        return [[my jget layerCollisionUtil] isCollision $ownerLayer $collidableInterfaceCompositeInterface]
+    }
+    
+
+    method collideInterface {ownerLayer collidableInterfaceCompositeInterface} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
+
+    method paint {ownerLayer graphics} {
+    }
+    
+
+    method getCollisionTypeWith {layerInterface} {
+        return [[::CollisionTypeFactory::getInstance] jget NONE]
+    }
 }
 
-
-sub update {
-    my ($self) = @_;
+namespace eval ::CollidableBaseBehavior {
 }
 
-
-sub getName {
-    my ($self) = @_;
-        return ref($self);
-}
-
-
-sub setCollidable {
-    my ($self, $collidable) = @_;
-        $self->{collidable} = $collidable;
-}
-
-
-sub isCollidable {
-    my ($self, $ownerLayer) = @_;
-        return $self->{collidable};
-}
-
-
-# throws Exception
-sub collide {
-    my ($self, $ownerLayer, $allbinaryCollidableLayer) = @_;
-        die ('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonStrings}->{NOT_IMPLEMENTED})->append('org::allbinary::string::CommonLabels'->getInstance()->{COLON_SEP})->append(ref($self))->toString());
-}
-
-
-sub isCollision {
-    my ($self, $ownerLayer, $collisionLayer) = @_;
-        return $self->{layerCollisionUtil}->isCollision($ownerLayer, $collisionLayer);
-}
-
-
-sub isCollisionInterface {
-    my ($self, $ownerLayer, $collidableInterfaceCompositeInterface) = @_;
-        return $self->{layerCollisionUtil}->isCollision($ownerLayer, $collidableInterfaceCompositeInterface);
-}
-
-
-# throws Exception
-sub collideInterface {
-    my ($self, $ownerLayer, $collidableInterfaceCompositeInterface) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
-
-
-sub paint {
-    my ($self, $ownerLayer, $graphics) = @_;
-}
-
-
-sub getCollisionTypeWith {
-    my ($self, $layerInterface) = @_;
-        return 'org::allbinary::game::collision::CollisionTypeFactory'->getInstance()->{NONE};
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::layer::CollidableCompositeLayer ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::collision::CollidableInterface ();
-use org::allbinary::game::collision::LayerCollisionUtil ();
-use org::allbinary::game::collision::CollisionTypeFactory ();
-
-1;
 

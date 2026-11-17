@@ -11,26 +11,58 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package javax.microedition.lcdui
 
-package javax::microedition::lcdui::NullImage;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $NULL_IMAGE_ARRAY = [(undef) x (0)];
-tie our $NULL_IMAGE, 'java::lang::LazyStatic', sub { 'javax::microedition::lcdui::Image'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullImage {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Image ();
+oo::define ::NullImage {
+    method initFields_NullImage {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_NullImage
+    }
+}
+
+namespace eval ::NullImage {
+    variable NULL_IMAGE_ARRAYValue {}
+    variable NULL_IMAGE_ARRAYSet 0
+    proc staticGet_NULL_IMAGE_ARRAY {} {
+        variable NULL_IMAGE_ARRAYValue
+        variable NULL_IMAGE_ARRAYSet
+        if {!$NULL_IMAGE_ARRAYSet} {
+            set NULL_IMAGE_ARRAYSet 1
+            set NULL_IMAGE_ARRAYValue [jarray 0 {}]
+        }
+        return $NULL_IMAGE_ARRAYValue
+    }
+    proc staticSet_NULL_IMAGE_ARRAY {value} {
+        variable NULL_IMAGE_ARRAYValue
+        variable NULL_IMAGE_ARRAYSet
+        set NULL_IMAGE_ARRAYSet 1
+        set NULL_IMAGE_ARRAYValue $value
+    }
+    variable NULL_IMAGEValue {}
+    variable NULL_IMAGESet 0
+    proc staticGet_NULL_IMAGE {} {
+        variable NULL_IMAGEValue
+        variable NULL_IMAGESet
+        if {!$NULL_IMAGESet} {
+            set NULL_IMAGESet 1
+            set NULL_IMAGEValue [::Image new]
+        }
+        return $NULL_IMAGEValue
+    }
+    proc staticSet_NULL_IMAGE {value} {
+        variable NULL_IMAGEValue
+        variable NULL_IMAGESet
+        set NULL_IMAGESet 1
+        set NULL_IMAGEValue $value
+    }
+}
+
 

@@ -11,44 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-package org::allbinary::media::audio::EarlySoundsFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::media::audio::BaseSoundsFactory';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::media::audio::EarlySoundsFactory'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::EarlySoundsFactory {
+    superclass ::BaseSoundsFactory
 }
 
+oo::define ::EarlySoundsFactory {
+    method initFields_EarlySoundsFactory {} {
+        return
+    }
 
-# throws Exception
-sub getSoundInterfaceArray {
-    my ($self) = @_;
-        my $soundInterfaceArray = [(undef) x (2)];
-        my $index = 0;
-        $soundInterfaceArray->[$index++] = 'org::allbinary::media::audio::SelectSound'->getInstance();
-        $soundInterfaceArray->[$index++] = 'org::allbinary::media::audio::ErrorSound'->getInstance();
-        return $soundInterfaceArray;
+    constructor {} {
+        next
+        my initFields_EarlySoundsFactory
+    }
+    
+
+    method getSoundInterfaceArray {} {
+        set soundInterfaceArray [jarray 2 {}]
+        set index 0
+        $soundInterfaceArray set [jpostincr index 1] [::SelectSound::getInstance]
+        $soundInterfaceArray set [jpostincr index 1] [::ErrorSound::getInstance]
+        return $soundInterfaceArray
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::media::audio::EarlySoundsFactory::instance;
+namespace eval ::EarlySoundsFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::EarlySoundsFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::EarlySoundsFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::media::audio::BaseSoundsFactory ();
-use org::allbinary::media::audio::SelectSound ();
-use org::allbinary::media::audio::ErrorSound ();
-
-1;
 

@@ -11,27 +11,29 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
-# Java interface
-package org::allbinary::logic::system::security::licensing::LockedUtilInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub isLocked {
-    my ($self) = @_;
-    die "abstract method isLocked";
+oo::class create ::LockedUtilInterface {
+    superclass ::JObject
 }
 
+oo::define ::LockedUtilInterface {
+    method initFields_LockedUtilInterface {} {
+        return
+    }
+    
 
-sub isLockedFeature {
-    my ($self, $lockableFeatrue) = @_;
-    die "abstract method isLockedFeature";
+    method isLocked {} {
+        error [jexception AbstractMethodError isLocked]
+    }
+    
+
+    method isLockedFeature {lockableFeatrue} {
+        error [jexception AbstractMethodError isLockedFeature]
+    }
 }
 
+namespace eval ::LockedUtilInterface {
+}
 
-1;
 

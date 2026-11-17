@@ -11,42 +11,52 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.tracking
 
-package org::allbinary::game::tracking::TrackingEventHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::handler::BasicEventHandler';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::tracking::TrackingEventHandler'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::tracking::TrackingEventHandler::instance;
+oo::class create ::TrackingEventHandler {
+    superclass ::BasicEventHandler
 }
 
+oo::define ::TrackingEventHandler {
+    method initFields_TrackingEventHandler {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+    constructor {} {
+        next
+        my initFields_TrackingEventHandler
+    }
+    
+
+    method process {eventObject eventListenerInterface} {
+        set trackingEventListenerInterface $eventListenerInterface
+        $trackingEventListenerInterface onMovement $eventObject
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $eventObject, $eventListenerInterface) = @_;
-        my $trackingEventListenerInterface = $eventListenerInterface;
-        $trackingEventListenerInterface->onMovement($eventObject);
+namespace eval ::TrackingEventHandler {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::TrackingEventHandler new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::TrackingEventHandler::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
-
-1;
 

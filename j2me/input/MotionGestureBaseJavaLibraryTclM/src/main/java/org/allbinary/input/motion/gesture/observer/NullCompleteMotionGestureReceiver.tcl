@@ -11,41 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
-package org::allbinary::input::motion::gesture::observer::NullCompleteMotionGestureReceiver;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::input::motion::gesture::observer::CompleteMotionGestureListenerInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::NullCompleteMotionGestureReceiver {
+    superclass ::JObject
 }
 
+oo::define ::NullCompleteMotionGestureReceiver {
+    method initFields_NullCompleteMotionGestureReceiver {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-        $self->{logUtil}->putF("Null Gesture Reciever", $self, $commonStrings->{CONSTRUCTOR});
-    return $self;
+    constructor {} {
+        next
+        my initFields_NullCompleteMotionGestureReceiver
+        set commonStrings [::CommonStrings::getInstance]
+        [my jget logUtil] putF "Null Gesture Reciever" [self] [$commonStrings jget CONSTRUCTOR]
+    }
+    
+
+    method onMotionGestureCompleted {list} {
+    }
 }
 
-
-# throws Exception
-sub onMotionGestureCompleted {
-    my ($self, $list) = @_;
+namespace eval ::NullCompleteMotionGestureReceiver {
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::input::motion::gesture::observer::CompleteMotionGestureListenerInterface ();
-
-1;
 

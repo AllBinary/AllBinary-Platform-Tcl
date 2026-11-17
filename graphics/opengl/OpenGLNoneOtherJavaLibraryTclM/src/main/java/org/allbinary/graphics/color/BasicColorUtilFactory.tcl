@@ -11,29 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.color
 
-package org::allbinary::graphics::color::BasicColorUtilFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::BasicColorUtilFactory {
+    superclass ::JObject
 }
 
+oo::define ::BasicColorUtilFactory {
+    method initFields_BasicColorUtilFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return 'org::allbinary::graphics::color::BasicColorUtil'->getInstance();
+    constructor {} {
+        next
+        my initFields_BasicColorUtilFactory
+    }
+    
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::color::BasicColorUtil ();
+namespace eval ::BasicColorUtilFactory {
+    proc getInstance {} {
+        return [::BasicColorUtil::getInstance]
+    }
+}
 
-1;
 

@@ -11,45 +11,52 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
-package org::allbinary::image::opengles::OpenGLESImageExclusionUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::image::opengles::OpenGLESImageExclusionUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::OpenGLESImageExclusionUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::OpenGLESImageExclusionUtil {
+    method initFields_OpenGLESImageExclusionUtil {} {
+        my jset list {}
+        my jset list [::BasicArrayListD new]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_OpenGLESImageExclusionUtil
+    }
+    
+    
+
+    method isCustomScaling {image} {
+        return false
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::image::opengles::OpenGLESImageExclusionUtil::instance;
+namespace eval ::OpenGLESImageExclusionUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::OpenGLESImageExclusionUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::OpenGLESImageExclusionUtil::staticGet_instance]
+    }
 }
 
-
-sub isCustomScaling {
-    my ($self, $image) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

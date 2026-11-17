@@ -11,77 +11,67 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.crypt.jcehelper
 
-package org::allbinary::logic::system::security::crypt::jcehelper::BasicCrypt;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::init::crypt::jcehelper::CryptInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{byteUtil} = 'org::allbinary::logic::java::byteutil::ByteUtil'->getInstance();
-    $self->{key} = undef;
+oo::class create ::BasicCrypt {
+    superclass ::JObject
 }
 
+oo::define ::BasicCrypt {
+    method initFields_BasicCrypt {} {
+        my jset byteUtil {}
+        my jset key {}
+        my jset byteUtil [::ByteUtil::getInstance]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $keyAsString) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $key = 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_BYTE_ARRAY};
+    constructor {keyAsString} {
+        next
+        my initFields_BasicCrypt
+        set key [[::NullUtil::getInstance] jget NULL_BYTE_ARRAY]
         try {
-            $key = 'org::allbinary::TsUtil'->getInstance()->getByteArray($keyAsString);
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            'org::allbinary::logic::communication::log::PreLogUtil'->putOE($commonStrings->{EXCEPTION}, $self, "AbCrypt(alg,key)", $e);
+            set key [[::TsUtil::getInstance] getByteArray $keyAsString]
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            ::PreLogUtil::putOE [$commonStrings jget EXCEPTION] [self] "AbCrypt(alg,key)" $e
         }
-        $self->{key} = $key;
-    return $self;
-}
+        my jset key $key
+    }
+    
 
-
-sub encrypt {
-    my ($self, $array) = @_;
+    method encrypt {array} {
         try {
-            return $self->mutilate($array);
-        } catch ($e) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->putOE("Encrypt Failed", $self, "encrypt", $e);
-            return 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_BYTE_ARRAY};
+            return [my mutilate $array]
+        } on error {e} {
+            ::PreLogUtil::putOE "Encrypt Failed" [self] "encrypt" $e
+            return [[::NullUtil::getInstance] jget NULL_BYTE_ARRAY]
         }
-}
+    }
+    
 
-
-sub decrypt {
-    my ($self, $array) = @_;
+    method decrypt {array} {
         try {
-            return $self->mutilate($array);
-        } catch ($e) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->putOE("decrypt Failed", $self, "decrypt", $e);
-            return 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_BYTE_ARRAY};
+            return [my mutilate $array]
+        } on error {e} {
+            ::PreLogUtil::putOE "decrypt Failed" [self] "decrypt" $e
+            return [[::NullUtil::getInstance] jget NULL_BYTE_ARRAY]
         }
+    }
+    
+
+    method mutilate {array} {
+        set value 0
+        for {set index 0} {[expr {$index < [[my jget key] length]}]} {jpostincr index 1} {
+            set value [[my jget key] get $index]
+            set array [[my jget byteUtil] xor $array $value]
+        }
+        return $array
+    }
 }
 
-
-sub mutilate {
-    my ($self, $array) = @_;
-        my $value = 0;
-        for (my $index = 0; $index < scalar(@{$self->{key}}); $index++) {
-            $value = $self->{key}->[$index];
-            $array = $self->{byteUtil}->xor($array, $value);
-        }
-        return $array;
+namespace eval ::BasicCrypt {
 }
 
-use java::lang::Object ();
-use org::allbinary::TsUtil ();
-use org::allbinary::init::crypt::jcehelper::CryptInterface ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::java::byteutil::ByteUtil ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

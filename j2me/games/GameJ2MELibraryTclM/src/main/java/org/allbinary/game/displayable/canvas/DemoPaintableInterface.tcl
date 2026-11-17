@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-# Java interface
-package org::allbinary::game::displayable::canvas::DemoPaintableInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub showGamePaintable {
-    my ($self) = @_;
-    die "abstract method showGamePaintable";
+oo::class create ::DemoPaintableInterface {
+    superclass ::JObject
 }
 
+oo::define ::DemoPaintableInterface {
+    method initFields_DemoPaintableInterface {} {
+        return
+    }
+    
 
-1;
+    method showGamePaintable {} {
+        error [jexception AbstractMethodError showGamePaintable]
+    }
+}
+
+namespace eval ::DemoPaintableInterface {
+}
+
 

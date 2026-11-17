@@ -11,32 +11,46 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.platform.graphics
 
-package org::allbinary::platform::graphics::PlatformBitmapBaseFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_PLATFORM_BITMAP_BASE_FACTORY, 'java::lang::LazyStatic', sub { 'org::allbinary::platform::graphics::PlatformBitmapBaseFactory'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::PlatformBitmapBaseFactory {
+    superclass ::JObject
 }
 
+oo::define ::PlatformBitmapBaseFactory {
+    method initFields_PlatformBitmapBaseFactory {} {
+        return
+    }
 
-sub createBitmap {
-    my ($self, $image) = @_;
-        return $org::allbinary::platform::graphics::PlatformBitmapBase::NULL_PLATFORM_BITMAP_BASE;
+    constructor {} {
+        next
+        my initFields_PlatformBitmapBaseFactory
+    }
+    
+
+    method createBitmap {image} {
+        return [::PlatformBitmapBase::staticGet_NULL_PLATFORM_BITMAP_BASE]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::platform::graphics::PlatformBitmapBase ();
+namespace eval ::PlatformBitmapBaseFactory {
+    variable NULL_PLATFORM_BITMAP_BASE_FACTORYValue {}
+    variable NULL_PLATFORM_BITMAP_BASE_FACTORYSet 0
+    proc staticGet_NULL_PLATFORM_BITMAP_BASE_FACTORY {} {
+        variable NULL_PLATFORM_BITMAP_BASE_FACTORYValue
+        variable NULL_PLATFORM_BITMAP_BASE_FACTORYSet
+        if {!$NULL_PLATFORM_BITMAP_BASE_FACTORYSet} {
+            set NULL_PLATFORM_BITMAP_BASE_FACTORYSet 1
+            set NULL_PLATFORM_BITMAP_BASE_FACTORYValue [::PlatformBitmapBaseFactory new]
+        }
+        return $NULL_PLATFORM_BITMAP_BASE_FACTORYValue
+    }
+    proc staticSet_NULL_PLATFORM_BITMAP_BASE_FACTORY {value} {
+        variable NULL_PLATFORM_BITMAP_BASE_FACTORYValue
+        variable NULL_PLATFORM_BITMAP_BASE_FACTORYSet
+        set NULL_PLATFORM_BITMAP_BASE_FACTORYSet 1
+        set NULL_PLATFORM_BITMAP_BASE_FACTORYValue $value
+    }
+}
 
-1;
 

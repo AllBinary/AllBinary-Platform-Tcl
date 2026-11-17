@@ -11,79 +11,78 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.init
 
-package org::allbinary::game::init::GameInitializationUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::init::GameInitializationUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{EVENT} = 'org::allbinary::game::configuration::event::GameInitializedEvent'->new($self);
+oo::class create ::GameInitializationUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::GameInitializationUtil {
+    method initFields_GameInitializationUtil {} {
+        my jset EVENT {}
+        my jset EVENT [::GameInitializedEvent new [self]]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_GameInitializationUtil
+    }
+    
 
-# throws Exception
-sub initDemo {
-    my ($self, $abeClientInformation, $canvas, $gameInitializationInterfaceFactoryInterface) = @_;
-        my $mainFeatureFactory = 'org::allbinary::game::configuration::feature::MainFeatureFactory'->getInstance();
-        if ('org::allbinary::game::configuration::event::ChangedGameFeatureListener'->getInstance()->isChangedFeature($mainFeatureFactory->{STATIC})) {
-            my $gameInitializationInterface = $gameInitializationInterfaceFactoryInterface->getInstance();
-            my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-            if ($features->isFeature($mainFeatureFactory->{LOAD_ALL})) {
-                $self->initGame($abeClientInformation, $canvas, $gameInitializationInterfaceFactoryInterface);
-            } elsif ($features->isFeature($mainFeatureFactory->{LOAD_ONDEMAND})) {
-                my $resourceLoadingLevelFactory = 'org::allbinary::game::resource::ResourceLoadingLevelFactory'->getInstance();
-                $gameInitializationInterface->init($abeClientInformation, $canvas->getCustomCommandListener(), $resourceLoadingLevelFactory->{LOAD_EARLY}->getLevel());
-                $self->{EVENT}->setResourceLoadingLevel($resourceLoadingLevelFactory->{LOAD_EARLY});
+    method initDemo {abeClientInformation canvas gameInitializationInterfaceFactoryInterface} {
+        set mainFeatureFactory [::MainFeatureFactory::getInstance]
+        if {[[::ChangedGameFeatureListener::getInstance] isChangedFeature [$mainFeatureFactory jget STATIC]]} {
+            set gameInitializationInterface [$gameInitializationInterfaceFactoryInterface getInstance]
+            set features [::Features::getInstance]
+            if {[$features isFeature [$mainFeatureFactory jget LOAD_ALL]]} {
+                my initGame $abeClientInformation $canvas $gameInitializationInterfaceFactoryInterface
+            } elseif {[$features isFeature [$mainFeatureFactory jget LOAD_ONDEMAND]]} {
+                set resourceLoadingLevelFactory [::ResourceLoadingLevelFactory::getInstance]
+                $gameInitializationInterface init $abeClientInformation [$canvas getCustomCommandListener] [[$resourceLoadingLevelFactory jget LOAD_EARLY] getLevel]
+                [my jget EVENT] setResourceLoadingLevel [$resourceLoadingLevelFactory jget LOAD_EARLY]
             } else {
-                die ("No Loading Feature Available");
+                error [jexception Exception "No Loading Feature Available"]
             }
-            'org::allbinary::game::configuration::event::GameInitializedEventHandler'->getInstance()->fireEvent($self->{EVENT});
+            [::GameInitializedEventHandler::getInstance] fireEvent [my jget EVENT]
         }
-}
+    }
+    
 
-
-# throws Exception
-sub initGame {
-    my ($self, $abeClientInformation, $canvas, $gameInitializationInterfaceFactoryInterface) = @_;
-        if ('org::allbinary::game::configuration::event::ChangedGameFeatureListener'->getInstance()->isChangedFeature('org::allbinary::game::configuration::feature::MainFeatureFactory'->getInstance()->{STATIC})) {
-            my $gameInitializationInterface = $gameInitializationInterfaceFactoryInterface->getInstance();
-            my $resourceLoadingLevelFactory = 'org::allbinary::game::resource::ResourceLoadingLevelFactory'->getInstance();
-            $gameInitializationInterface->init($abeClientInformation, $canvas->getCustomCommandListener(), $resourceLoadingLevelFactory->{LOAD_ALL}->getLevel());
-            $self->{EVENT}->setResourceLoadingLevel($resourceLoadingLevelFactory->{LOAD_ALL});
-            'org::allbinary::game::configuration::event::GameInitializedEventHandler'->getInstance()->fireEvent($self->{EVENT});
-            'org::allbinary::game::configuration::event::ChangedGameFeatureListener'->getInstance()->remove('org::allbinary::game::configuration::feature::MainFeatureFactory'->getInstance()->{STATIC});
+    method initGame {abeClientInformation canvas gameInitializationInterfaceFactoryInterface} {
+        if {[[::ChangedGameFeatureListener::getInstance] isChangedFeature [[::MainFeatureFactory::getInstance] jget STATIC]]} {
+            set gameInitializationInterface [$gameInitializationInterfaceFactoryInterface getInstance]
+            set resourceLoadingLevelFactory [::ResourceLoadingLevelFactory::getInstance]
+            $gameInitializationInterface init $abeClientInformation [$canvas getCustomCommandListener] [[$resourceLoadingLevelFactory jget LOAD_ALL] getLevel]
+            [my jget EVENT] setResourceLoadingLevel [$resourceLoadingLevelFactory jget LOAD_ALL]
+            [::GameInitializedEventHandler::getInstance] fireEvent [my jget EVENT]
+            [::ChangedGameFeatureListener::getInstance] remove [[::MainFeatureFactory::getInstance] jget STATIC]
         }
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::init::GameInitializationUtil::instance;
+namespace eval ::GameInitializationUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameInitializationUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameInitializationUtil::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::configuration::event::ChangedGameFeatureListener ();
-use org::allbinary::game::configuration::event::GameInitializedEvent ();
-use org::allbinary::game::configuration::event::GameInitializedEventHandler ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::MainFeatureFactory ();
-use org::allbinary::game::resource::ResourceLoadingLevelFactory ();
-use org::allbinary::graphics::displayable::MyCanvas ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-
-1;
 

@@ -11,49 +11,58 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media
 
-package org::allbinary::media::AllBinaryVibration;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::media::AllBinaryVibrationME';
-
-tie our $VIBRATION, 'java::lang::LazyStatic', sub { $org::allbinary::media::AllBinaryNoVibration::NO_VIBRATION };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::AllBinaryVibration {
+    superclass ::AllBinaryVibrationME
 }
 
+oo::define ::AllBinaryVibration {
+    method initFields_AllBinaryVibration {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::media::AllBinaryVibration::VIBRATION;
+    constructor {} {
+        next
+        my initFields_AllBinaryVibration
+    }
+    
+    
+    
+
+    method vibrate {duration type volume} {
+    }
 }
 
-
-sub init {
-    my ($class) = @_;
-        if (int('org::allbinary::game::configuration::GameConfigurationCentral'->getInstance()->{VIBRATION}->getValue()) == 0) {
-            $org::allbinary::media::AllBinaryVibration::VIBRATION = $org::allbinary::media::AllBinaryNoVibration::NO_VIBRATION;
-        } else {
-            $org::allbinary::media::AllBinaryVibration::VIBRATION = 'org::allbinary::media::AllBinaryVibration'->new();
+namespace eval ::AllBinaryVibration {
+    variable VIBRATIONValue {}
+    variable VIBRATIONSet 0
+    proc staticGet_VIBRATION {} {
+        variable VIBRATIONValue
+        variable VIBRATIONSet
+        if {!$VIBRATIONSet} {
+            set VIBRATIONSet 1
+            set VIBRATIONValue [::AllBinaryNoVibration::staticGet_NO_VIBRATION]
         }
+        return $VIBRATIONValue
+    }
+    proc staticSet_VIBRATION {value} {
+        variable VIBRATIONValue
+        variable VIBRATIONSet
+        set VIBRATIONSet 1
+        set VIBRATIONValue $value
+    }
+    proc getInstance {} {
+        return [::AllBinaryVibration::staticGet_VIBRATION]
+    }
+    proc init {} {
+        if {[expr {[[[[::GameConfigurationCentral::getInstance] jget VIBRATION] getValue] intValue] == 0}]} {
+            ::AllBinaryVibration::staticSet_VIBRATION [::AllBinaryNoVibration::staticGet_NO_VIBRATION]
+        } else {
+            ::AllBinaryVibration::staticSet_VIBRATION [::AllBinaryVibration new]
+        }
+    }
 }
 
-
-sub vibrate {
-    my ($self, $duration, $type, $volume) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::configuration::GameConfigurationCentral ();
-use org::allbinary::media::AllBinaryVibrationME ();
-use org::allbinary::media::AllBinaryNoVibration ();
-
-1;
 

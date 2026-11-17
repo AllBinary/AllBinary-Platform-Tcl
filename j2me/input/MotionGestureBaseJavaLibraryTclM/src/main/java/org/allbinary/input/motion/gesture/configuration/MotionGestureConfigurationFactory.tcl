@@ -11,32 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.configuration
 
-package org::allbinary::input::motion::gesture::configuration::MotionGestureConfigurationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $config, 'java::lang::LazyStatic', sub { 'org::allbinary::input::motion::gesture::configuration::MotionGestureConfiguration'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::MotionGestureConfigurationFactory {
+    superclass ::JObject
 }
 
+oo::define ::MotionGestureConfigurationFactory {
+    method initFields_MotionGestureConfigurationFactory {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::motion::gesture::configuration::MotionGestureConfigurationFactory::config;
+    constructor {} {
+        next
+        my initFields_MotionGestureConfigurationFactory
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::input::motion::gesture::configuration::MotionGestureConfiguration ();
+namespace eval ::MotionGestureConfigurationFactory {
+    variable configValue {}
+    variable configSet 0
+    proc staticGet_config {} {
+        variable configValue
+        variable configSet
+        if {!$configSet} {
+            set configSet 1
+            set configValue [::MotionGestureConfiguration new]
+        }
+        return $configValue
+    }
+    proc staticSet_config {value} {
+        variable configValue
+        variable configSet
+        set configSet 1
+        set configValue $value
+    }
+    proc getInstance {} {
+        return [::MotionGestureConfigurationFactory::staticGet_config]
+    }
+}
 
-1;
 

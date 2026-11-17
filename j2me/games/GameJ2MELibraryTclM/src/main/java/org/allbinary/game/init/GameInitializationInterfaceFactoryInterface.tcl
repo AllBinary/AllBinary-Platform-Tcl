@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.init
 
-# Java interface
-package org::allbinary::game::init::GameInitializationInterfaceFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getInstance {
-    my ($self) = @_;
-    die "abstract method getInstance";
+oo::class create ::GameInitializationInterfaceFactoryInterface {
+    superclass ::JObject
 }
 
+oo::define ::GameInitializationInterfaceFactoryInterface {
+    method initFields_GameInitializationInterfaceFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getInstance {} {
+        error [jexception AbstractMethodError getInstance]
+    }
+}
+
+namespace eval ::GameInitializationInterfaceFactoryInterface {
+}
+
 

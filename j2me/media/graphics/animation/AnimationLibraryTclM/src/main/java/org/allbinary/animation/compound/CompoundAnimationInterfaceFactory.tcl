@@ -11,77 +11,64 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.compound
 
-package org::allbinary::animation::compound::CompoundAnimationInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::AnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{basicAnimationInterfaceFactoryInterfaceArrayP} = undef;
-    $self->{animationBehaviorFactory} = undef;
+oo::class create ::CompoundAnimationInterfaceFactory {
+    superclass ::JObject
 }
 
+oo::define ::CompoundAnimationInterfaceFactory {
+    method initFields_CompoundAnimationInterfaceFactory {} {
+        my jset basicAnimationInterfaceFactoryInterfaceArrayP {}
+        my jset animationBehaviorFactory {}
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $basicAnimationInterfaceFactoryInterfaceArray, $animationBehaviorFactory) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{basicAnimationInterfaceFactoryInterfaceArrayP} = $basicAnimationInterfaceFactoryInterfaceArray;
-        $self->{animationBehaviorFactory} = $animationBehaviorFactory;
-    return $self;
-}
+    constructor {basicAnimationInterfaceFactoryInterfaceArray animationBehaviorFactory} {
+        next
+        my initFields_CompoundAnimationInterfaceFactory
+        my jset basicAnimationInterfaceFactoryInterfaceArrayP $basicAnimationInterfaceFactoryInterfaceArray
+        my jset animationBehaviorFactory $animationBehaviorFactory
+    }
+    
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        my $size = scalar(@{$self->{basicAnimationInterfaceFactoryInterfaceArrayP}});
-        my $animationInterfaceArray = $self->createArray($size);
-        for (my $index = 0; $index < $size; $index++) {
-            $animationInterfaceArray->[$index] = $self->{basicAnimationInterfaceFactoryInterfaceArrayP}->[$index]->getInstance($instanceId);
+    method getInstance {instanceId} {
+        set size [[my jget basicAnimationInterfaceFactoryInterfaceArrayP] length]
+        set animationInterfaceArray [my createArray $size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            $animationInterfaceArray set $index [[[my jget basicAnimationInterfaceFactoryInterfaceArrayP] get $index] getInstance $instanceId]
         }
-        return $self->createAnimation($animationInterfaceArray);
-}
+        return [my createAnimation $animationInterfaceArray]
+    }
+    
 
+    method createArray {size} {
+        return [[::NullAnimationFactory::getFactoryInstance] jget EMPTY_ARRAY]
+    }
+    
 
-sub createArray {
-    my ($self, $size) = @_;
-        return 'org::allbinary::animation::NullAnimationFactory'->getFactoryInstance()->{EMPTY_ARRAY};
-}
+    method createAnimation {animationInterfaceArray} {
+        return [[::NullAnimationFactory::getFactoryInstance] getInstance 0]
+    }
+    
 
+    method getBasicAnimationInterfaceFactoryInterfaceArray {} {
+        return [my jget basicAnimationInterfaceFactoryInterfaceArrayP]
+    }
+    
 
-sub createAnimation {
-    my ($self, $animationInterfaceArray) = @_;
-        return 'org::allbinary::animation::NullAnimationFactory'->getFactoryInstance()->getInstance(0);
-}
-
-
-sub getBasicAnimationInterfaceFactoryInterfaceArray {
-    my ($self) = @_;
-        return $self->{basicAnimationInterfaceFactoryInterfaceArrayP};
-}
-
-
-sub setInitialScale {
-    my ($self, $scaleProperties) = @_;
-        my $size = scalar(@{$self->{basicAnimationInterfaceFactoryInterfaceArrayP}});
-        for (my $index = 0; $index < $size; $index++) {
-            $self->{basicAnimationInterfaceFactoryInterfaceArrayP}->[$index]->setInitialScale($scaleProperties);
+    method setInitialScale {scaleProperties} {
+        set size [[my jget basicAnimationInterfaceFactoryInterfaceArrayP] length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            [[my jget basicAnimationInterfaceFactoryInterfaceArrayP] get $index] setInitialScale $scaleProperties
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::NullAnimationFactory ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::media::ScaleProperties ();
+namespace eval ::CompoundAnimationInterfaceFactory {
+}
 
-1;
 

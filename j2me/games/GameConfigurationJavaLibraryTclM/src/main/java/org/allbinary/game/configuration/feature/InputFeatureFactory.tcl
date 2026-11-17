@@ -11,54 +11,66 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
-package org::allbinary::game::configuration::feature::InputFeatureFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::feature::InputFeatureFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{REMOVE_DUPLICATE_KEY_PRESSES} = 'org::allbinary::game::configuration::feature::InputFeature'->new("Remove Duplicate Key Presses");
-    $self->{INPUT_MAPPING} = 'org::allbinary::game::configuration::feature::InputFeature'->new("Input Mapping");
-    $self->{MULTI_KEY_PRESS} = 'org::allbinary::game::configuration::feature::InputFeature'->new("Multi Key Press");
-    $self->{SINGLE_KEY_REPEAT_PRESS} = 'org::allbinary::game::configuration::feature::InputFeature'->new("Single Key Repeat Press");
-    $self->{SINGLE_KEY_PRESS} = 'org::allbinary::game::configuration::feature::InputFeature'->new("Single Key Press");
+oo::class create ::InputFeatureFactory {
+    superclass ::JObject
 }
 
+oo::define ::InputFeatureFactory {
+    method initFields_InputFeatureFactory {} {
+        my jset REMOVE_DUPLICATE_KEY_PRESSES {}
+        my jset INPUT_MAPPING {}
+        my jset MULTI_KEY_PRESS {}
+        my jset SINGLE_KEY_REPEAT_PRESS {}
+        my jset SINGLE_KEY_PRESS {}
+        my jset REMOVE_DUPLICATE_KEY_PRESSES [::InputFeature new "Remove Duplicate Key Presses"]
+        my jset INPUT_MAPPING [::InputFeature new "Input Mapping"]
+        my jset MULTI_KEY_PRESS [::InputFeature new "Multi Key Press"]
+        my jset SINGLE_KEY_REPEAT_PRESS [::InputFeature new "Single Key Repeat Press"]
+        my jset SINGLE_KEY_PRESS [::InputFeature new "Single Key Press"]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::feature::InputFeatureFactory::instance;
-}
+    constructor {} {
+        next
+        my initFields_InputFeatureFactory
+    }
+    
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-sub isSingleKeyProcessing {
-    my ($self) = @_;
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        if ($features->isFeature($self->{SINGLE_KEY_REPEAT_PRESS}) || $features->isFeature($self->{SINGLE_KEY_PRESS})) {
-            return 1;
+    method isSingleKeyProcessing {} {
+        set features [::Features::getInstance]
+        if {[expr {[$features isFeature [my jget SINGLE_KEY_REPEAT_PRESS]] || [$features isFeature [my jget SINGLE_KEY_PRESS]]}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::configuration::feature::InputFeature ();
-use org::allbinary::game::configuration::feature::Features ();
+namespace eval ::InputFeatureFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::InputFeatureFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::InputFeatureFactory::staticGet_instance]
+    }
+}
 
-1;
 

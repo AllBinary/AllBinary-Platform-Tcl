@@ -11,95 +11,97 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
-package org::allbinary::logic::system::security::licensing::InApplicationPurchaseFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::system::security::licensing::InApplicationPurchaseFactory'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::system::security::licensing::InApplicationPurchaseFactory::instance;
+oo::class create ::InApplicationPurchaseFactory {
+    superclass ::JObject
 }
 
+oo::define ::InApplicationPurchaseFactory {
+    method initFields_InApplicationPurchaseFactory {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+    constructor {} {
+        next
+        my initFields_InApplicationPurchaseFactory
+    }
+    
+
+    method init {anyType stateObject} {
+    }
+    
+
+    method onCreate {anyType stateObject} {
+    }
+    
+
+    method onStart {} {
+    }
+    
+
+    method onResult {requestCode resultCode data} {
+    }
+    
+
+    method onSaveState {anyType} {
+    }
+    
+
+    method onStop {} {
+    }
+    
+
+    method onDestroy {} {
+    }
+    
+
+    method purchase {lockableFeature} {
+    }
+    
+
+    method isPurchased {lockableFeature} {
+        return false
+    }
+    
+
+    method add {lockableFeature} {
+    }
+    
+
+    method getUserName {} {
+        return [[::StringUtil::getInstance] jget EMPTY_STRING]
+    }
+    
+
+    method isEnabled {} {
+        return false
+    }
 }
 
-
-sub init {
-    my ($self, $anyType, $stateObject) = @_;
+namespace eval ::InApplicationPurchaseFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::InApplicationPurchaseFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::InApplicationPurchaseFactory::staticGet_instance]
+    }
 }
 
-
-sub onCreate {
-    my ($self, $anyType, $stateObject) = @_;
-}
-
-
-sub onStart {
-    my ($self) = @_;
-}
-
-
-sub onResult {
-    my ($self, $requestCode, $resultCode, $data) = @_;
-}
-
-
-sub onSaveState {
-    my ($self, $anyType) = @_;
-}
-
-
-sub onStop {
-    my ($self) = @_;
-}
-
-
-sub onDestroy {
-    my ($self) = @_;
-}
-
-
-sub purchase {
-    my ($self, $lockableFeature) = @_;
-}
-
-
-sub isPurchased {
-    my ($self, $lockableFeature) = @_;
-        return 0;
-}
-
-
-sub add {
-    my ($self, $lockableFeature) = @_;
-}
-
-
-sub getUserName {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-}
-
-
-sub isEnabled {
-    my ($self) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringUtil ();
-
-1;
 

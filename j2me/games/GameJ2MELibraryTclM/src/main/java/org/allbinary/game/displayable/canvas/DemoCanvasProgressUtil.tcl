@@ -11,44 +11,38 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::DemoCanvasProgressUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::DemoCanvasProgressUtil {
+    superclass ::JObject
 }
 
+oo::define ::DemoCanvasProgressUtil {
+    method initFields_DemoCanvasProgressUtil {} {
+        return
+    }
 
-sub showProgress {
-    my ($class, $demoCanvas) = @_;
-        'org::allbinary::game::displayable::canvas::DemoCanvasProgressUtil'->showProgressOptionallyInTheBackground($demoCanvas, 0);
+    constructor {} {
+        next
+        my initFields_DemoCanvasProgressUtil
+    }
+    
+    
 }
 
-
-sub showProgressOptionallyInTheBackground {
-    my ($class, $demoCanvas, $background) = @_;
-        my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-        $progressCanvas->startBackground($background);
-        my $paintableArray = [(undef) x (2)];
-        $paintableArray->[0] = $progressCanvas;
-        $paintableArray->[1] = $demoCanvas->getDefaultPaintableInterface();
-        $demoCanvas->setDefaultPaintableInterface('org::allbinary::graphics::paint::PaintableComposite'->new($paintableArray));
-        $demoCanvas->setPaintableInterface($demoCanvas->getDefaultPaintableInterface());
+namespace eval ::DemoCanvasProgressUtil {
+    proc showProgress {demoCanvas} {
+        ::DemoCanvasProgressUtil::showProgressOptionallyInTheBackground $demoCanvas false
+    }
+    proc showProgressOptionallyInTheBackground {demoCanvas background} {
+        set progressCanvas [::ProgressCanvasFactory::getInstance]
+        $progressCanvas startBackground $background
+        set paintableArray [jarray 2 {}]
+        $paintableArray set 0 $progressCanvas
+        $paintableArray set 1 [$demoCanvas getDefaultPaintableInterface]
+        $demoCanvas setDefaultPaintableInterface [::PaintableComposite new $paintableArray]
+        $demoCanvas setPaintableInterface [$demoCanvas getDefaultPaintableInterface]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvas ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory ();
-use org::allbinary::graphics::paint::PaintableComposite ();
-use org::allbinary::graphics::paint::PaintableInterface ();
-
-1;
 

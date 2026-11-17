@@ -11,97 +11,85 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::HighScore;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{id} = undef;
-    $self->{name} = undef;
-    $self->{gameInfo} = undef;
-    $self->{score} = undef;
-    $self->{scoreString} = undef;
+oo::class create ::HighScore {
+    superclass ::JObject
 }
 
+oo::define ::HighScore {
+    method initFields_HighScore {} {
+        my jset id 0
+        my jset name {}
+        my jset gameInfo {}
+        my jset score 0
+        my jset scoreString {}
+        
+        
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $id, $name, $gameInfo, $score) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{id} = $id;
-        $self->{name} = $name;
-        $self->{gameInfo} = $gameInfo;
-        $self->{score} = $score;
-        $self->{scoreString} = ("" . ($self->{score}));
-    return $self;
+    constructor {id name gameInfo score} {
+        next
+        my initFields_HighScore
+        my jset id $id
+        my jset name $name
+        my jset gameInfo $gameInfo
+        my jset score $score
+        my jset scoreString [jstr [my jget score]]
+    }
+    
+
+    method getId {} {
+        return [my jget id]
+    }
+    
+
+    method getName {} {
+        return [my jget name]
+    }
+    
+
+    method getScore {} {
+        return [my jget score]
+    }
+    
+
+    method getAsBytes {} {
+        set byteArrayOutputStream [::ByteArrayOutputStream new]
+        set outputStream [::DataOutputStream new $byteArrayOutputStream]
+        $outputStream writeUTF [my getName]
+        $outputStream writeLong [my getScore]
+        return [$byteArrayOutputStream toByteArray]
+    }
+    
+
+    method getGameInfo {} {
+        return [my jget gameInfo]
+    }
+    
+
+    method getScoreString {} {
+        return [my jget scoreString]
+    }
+    
+
+    method setName {name} {
+        my jset name $name
+    }
+    
+
+    method toString {} {
+        set commonSeps [::CommonSeps::getInstance]
+        return [[[[[[[::StringMaker new] append [my jget name]] append [$commonSeps jget COLON]] appendlong [my jget score]] append [$commonSeps jget FORWARD_SLASH]] append [my jget scoreString]] toString]
+    }
 }
 
-
-sub getId {
-    my ($self) = @_;
-        return $self->{id};
+namespace eval ::HighScore {
 }
 
-
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
-}
-
-
-sub getScore {
-    my ($self) = @_;
-        return $self->{score};
-}
-
-
-# throws Exception
-sub getAsBytes {
-    my ($self) = @_;
-        my $byteArrayOutputStream = 'java::io::ByteArrayOutputStream'->new();
-        my $outputStream = 'java::io::DataOutputStream'->new($byteArrayOutputStream);
-        $outputStream->writeUTF($self->getName());
-        $outputStream->writeLong($self->getScore());
-        return $byteArrayOutputStream->toByteArray();
-}
-
-
-sub getGameInfo {
-    my ($self) = @_;
-        return $self->{gameInfo};
-}
-
-
-sub getScoreString {
-    my ($self) = @_;
-        return $self->{scoreString};
-}
-
-
-sub setName {
-    my ($self, $name) = @_;
-        $self->{name} = $name;
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $commonSeps = 'org::allbinary::string::CommonSeps'->getInstance();
-        return 'org::allbinary::logic::string::StringMaker'->new()->append($self->{name})->append($commonSeps->{COLON})->appendlong($self->{score})->append($commonSeps->{FORWARD_SLASH})->append($self->{scoreString})->toString();
-}
-
-use java::lang::Object ();
-# use java::io::ByteArrayOutputStream ();
-# use java::io::DataOutputStream ();
-use org::allbinary::game::GameInfo ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonSeps ();
-
-1;
 

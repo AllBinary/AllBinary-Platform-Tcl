@@ -11,39 +11,49 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gyro.action
 
-package org::allbinary::input::motion::gyro::action::DownOrientationInputToGameKeyEventAction;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::motion::action::GameKeyCompleteMotionGestureInputEvent';
+oo::class create ::DownOrientationInputToGameKeyEventAction {
+    superclass ::GameKeyCompleteMotionGestureInputEvent
+}
 
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
+oo::define ::DownOrientationInputToGameKeyEventAction {
+    method initFields_DownOrientationInputToGameKeyEventAction {} {
+        return
+    }
+    
+    
 
+    constructor {} {
+        next "Down Action" [[::OrientationMotionGestureFactory::getInstance] jget DOWN] [[[::PlatformInputMappingFactory::getInstance] getPersistentInputMappingInstance] getInputMapping]
+        my initFields_DownOrientationInputToGameKeyEventAction
+    }
+}
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::input::motion::gyro::action::DownOrientationInputToGameKeyEventAction::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::input::motion::gyro::action::DownOrientationInputToGameKeyEventAction::instance = 'org::allbinary::input::motion::gyro::action::DownOrientationInputToGameKeyEventAction'->new();
+namespace eval ::DownOrientationInputToGameKeyEventAction {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::input::motion::gyro::action::DownOrientationInputToGameKeyEventAction::instance;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::DownOrientationInputToGameKeyEventAction::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::DownOrientationInputToGameKeyEventAction::staticSet_instance [::DownOrientationInputToGameKeyEventAction new]
+        }
+        return [::DownOrientationInputToGameKeyEventAction::staticGet_instance]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new("Down Action", 'org::allbinary::input::gyro::OrientationMotionGestureFactory'->getInstance()->{DOWN}, 'org::allbinary::game::input::PlatformInputMappingFactory'->getInstance()->getPersistentInputMappingInstance()->getInputMapping());
-        # super(...) made $self above
-    return $self;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::PlatformInputMappingFactory ();
-use org::allbinary::game::input::motion::action::GameKeyCompleteMotionGestureInputEvent ();
-use org::allbinary::input::gyro::OrientationMotionGestureFactory ();
-use org::allbinary::logic::NullUtil ();
-
-1;
 

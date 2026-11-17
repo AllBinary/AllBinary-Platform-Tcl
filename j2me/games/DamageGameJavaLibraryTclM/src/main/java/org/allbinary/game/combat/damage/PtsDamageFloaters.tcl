@@ -11,84 +11,89 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.damage
 
-package org::allbinary::game::combat::damage::PtsDamageFloaters;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::combat::damage::DamageFloaters';
-
-tie our $basicColorArrayIndexer, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::color::BasicColorArrayIndexer'->new(['org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE}, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{RED}, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{YELLOW}, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{BLUE}]) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{basicSetColorUtil} = 'org::allbinary::graphics::color::BasicColorSetUtil'->getInstance();
-    $self->{layerInterface} = undef;
-    $self->{lastDamage} = [(0) x (5)];
-    $self->{lastDamageString} = [map { [("\0") x (0)] } 1 .. (5)];
-    $self->{lastDamageStringSizeArray} = [(0) x (5)];
-    $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstance(5);
-    $self->{primitiveLongUtil} = undef;
-    $self->{myRandomFactory} = 'org::allbinary::game::rand::MyRandomFactory'->getInstance();
+oo::class create ::PtsDamageFloaters {
+    superclass ::DamageFloaters
 }
 
+oo::define ::PtsDamageFloaters {
+    method initFields_PtsDamageFloaters {} {
+        my jset basicSetColorUtil {}
+        my jset layerInterface {}
+        my jset lastDamage {}
+        my jset lastDamageString {}
+        my jset lastDamageStringSizeArray {}
+        my jset circularIndexUtil {}
+        my jset primitiveLongUtil {}
+        my jset myRandomFactory {}
+        my jset basicSetColorUtil [::BasicColorSetUtil::getInstance]
+        
+        my jset lastDamage [jarray 5 0]
+        my jset lastDamageString [jarrayof 5 {jarray 0 0}]
+        my jset lastDamageStringSizeArray [jarray 5 0]
+        my jset circularIndexUtil [::CircularIndexUtil::createInstance 5]
+        
+        my jset myRandomFactory [::MyRandomFactory::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $layerInterface) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{primitiveLongUtil} = 'org::allbinary::logic::math::PrimitiveLongUtil'->createPowerOfTen(100000);
-        $self->{layerInterface} = $layerInterface;
-        my $CHAR_ARRAY = 'org::allbinary::logic::java::character::CharArrayFactory'->getInstance()->getZeroCharArray();
-        for (my $index = scalar(@{$self->{lastDamageString}}) - 1; $index >= 0; $index--) {
-            $self->{lastDamageString}->[$index] = $CHAR_ARRAY;
+    constructor {layerInterface} {
+        next
+        my initFields_PtsDamageFloaters
+        my jset primitiveLongUtil [::PrimitiveLongUtil::createPowerOfTen 100000]
+        my jset layerInterface $layerInterface
+        set CHAR_ARRAY [[::CharArrayFactory::getInstance] getZeroCharArray]
+        for {set index [jint [expr {[[my jget lastDamageString] length] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            [my jget lastDamageString] set $index $CHAR_ARRAY
         }
-    return $self;
-}
+    }
+    
 
+    method add {damage} {
+        set index [[my jget circularIndexUtil] getIndex]
+        [my jget lastDamage] set $index $damage
+        [my jget lastDamageString] set $index [[my jget primitiveLongUtil] getCharArray [[my jget lastDamage] get $index]]
+        [my jget lastDamageStringSizeArray] set $index [[my jget primitiveLongUtil] getCurrentTotalDigits]
+        [my jget circularIndexUtil] next
+    }
+    
 
-sub add {
-    my ($self, $damage) = @_;
-        my $index = $self->{circularIndexUtil}->getIndex();
-        $self->{lastDamage}->[$index] = $damage;
-        $self->{lastDamageString}->[$index] = $self->{primitiveLongUtil}->getCharArray($self->{lastDamage}->[$index]);
-        $self->{lastDamageStringSizeArray}->[$index] = $self->{primitiveLongUtil}->getCurrentTotalDigits();
-        $self->{circularIndexUtil}->next();
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        my $viewPosition = $self->{layerInterface}->getViewPosition();
-        my $x = $viewPosition->getX();
-        my $y = $viewPosition->getY();
-        for (my $index = scalar(@{$self->{lastDamage}}) - 1; $index >= 0; $index--) {
-            if ($self->{lastDamage}->[$index] != 0) {
-                my $delta = 10 * ($index + 2);
-                $self->{basicSetColorUtil}->setBasicColorP($graphics, $org::allbinary::game::combat::damage::PtsDamageFloaters::basicColorArrayIndexer->get());
-                $graphics->drawChars($self->{lastDamageString}->[$index], 0, $self->{lastDamageStringSizeArray}->[$index], $x - $self->{myRandomFactory}->getNextInt($delta), $y - $delta, 0);
-                $org::allbinary::game::combat::damage::PtsDamageFloaters::basicColorArrayIndexer->next();
+    method paint {graphics} {
+        set viewPosition [[my jget layerInterface] getViewPosition]
+        set x [$viewPosition getX]
+        set y [$viewPosition getY]
+        for {set index [jint [expr {[[my jget lastDamage] length] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            if {[expr {[[my jget lastDamage] get $index] != 0}]} {
+                set delta [jint [expr {10 * ([jint [expr {$index + 2}]])}]]
+                [my jget basicSetColorUtil] setBasicColorP $graphics [[::PtsDamageFloaters::staticGet_basicColorArrayIndexer] get]
+                $graphics drawChars [[my jget lastDamageString] get $index] 0 [[my jget lastDamageStringSizeArray] get $index] [expr {$x - [[my jget myRandomFactory] getNextInt $delta]}] [jint [expr {$y - $delta}]] 0
+                [::PtsDamageFloaters::staticGet_basicColorArrayIndexer] next
             }
-            $self->{lastDamage}->[$index] = 0;
+            [my jget lastDamage] set $index 0
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::rand::MyRandomFactory ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorArrayIndexer ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::color::BasicColorSetUtil ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::logic::java::character::CharArrayFactory ();
-use org::allbinary::logic::math::PrimitiveLongUtil ();
-use org::allbinary::util::CircularIndexUtil ();
-use org::allbinary::view::ViewPosition ();
-use org::allbinary::view::ViewPositionBase ();
-use org::allbinary::game::combat::damage::DamageFloaters ();
+namespace eval ::PtsDamageFloaters {
+    variable basicColorArrayIndexerValue {}
+    variable basicColorArrayIndexerSet 0
+    proc staticGet_basicColorArrayIndexer {} {
+        variable basicColorArrayIndexerValue
+        variable basicColorArrayIndexerSet
+        if {!$basicColorArrayIndexerSet} {
+            set basicColorArrayIndexerSet 1
+            set basicColorArrayIndexerValue [::BasicColorArrayIndexer new [jarrayfrom [list [[::BasicColorFactory::getInstance] jget WHITE] [[::BasicColorFactory::getInstance] jget RED] [[::BasicColorFactory::getInstance] jget YELLOW] [[::BasicColorFactory::getInstance] jget BLUE]]]]
+        }
+        return $basicColorArrayIndexerValue
+    }
+    proc staticSet_basicColorArrayIndexer {value} {
+        variable basicColorArrayIndexerValue
+        variable basicColorArrayIndexerSet
+        set basicColorArrayIndexerSet 1
+        set basicColorArrayIndexerValue $value
+    }
+}
 
-1;
 

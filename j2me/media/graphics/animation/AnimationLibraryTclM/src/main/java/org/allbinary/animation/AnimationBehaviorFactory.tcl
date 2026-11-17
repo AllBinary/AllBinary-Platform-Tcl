@@ -11,37 +11,50 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::AnimationBehaviorFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::animation::AnimationBehaviorFactory'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AnimationBehaviorFactory {
+    superclass ::JObject
 }
 
+oo::define ::AnimationBehaviorFactory {
+    method initFields_AnimationBehaviorFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::animation::AnimationBehaviorFactory::instance;
+    constructor {} {
+        next
+        my initFields_AnimationBehaviorFactory
+    }
+    
+    
+
+    method getOrCreateInstance {} {
+        return [::AnimationBehavior::getInstance]
+    }
 }
 
-
-sub getOrCreateInstance {
-    my ($self) = @_;
-        return 'org::allbinary::animation::AnimationBehavior'->getInstance();
+namespace eval ::AnimationBehaviorFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AnimationBehaviorFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AnimationBehaviorFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::animation::AnimationBehavior ();
-
-1;
 

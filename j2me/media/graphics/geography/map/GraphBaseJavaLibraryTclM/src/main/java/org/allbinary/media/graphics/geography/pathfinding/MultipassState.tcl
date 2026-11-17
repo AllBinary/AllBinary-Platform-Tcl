@@ -11,30 +11,30 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.media.graphics.geography.pathfinding
 
-package org::allbinary::media::graphics::geography::pathfinding::MultipassState;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{step} = 0;
-    $self->{iteration} = 0;
-    $self->{iteration2} = 0;
+oo::class create ::MultipassState {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::MultipassState {
+    method initFields_MultipassState {} {
+        my jset step 0
+        my jset iteration 0
+        my jset iteration2 0
+        my jset step 0
+        my jset iteration 0
+        my jset iteration2 0
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_MultipassState
+    }
 }
 
-use java::lang::Object ();
+namespace eval ::MultipassState {
+}
 
-1;
 

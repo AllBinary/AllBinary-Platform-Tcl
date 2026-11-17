@@ -11,103 +11,91 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-package org::allbinary::graphics::Rectangle;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{point} = undef;
-    $self->{width} = undef;
-    $self->{height} = undef;
+oo::class create ::Rectangle {
+    superclass ::JObject
 }
 
+oo::define ::Rectangle {
+    method initFields_Rectangle {} {
+        my jset point {}
+        my jset width 0
+        my jset height 0
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $point, $width, $height) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{point} = $point;
-        $self->{width} = $width;
-        $self->{height} = $height;
-    return $self;
+    constructor {point width height} {
+        next
+        my initFields_Rectangle
+        my jset point $point
+        my jset width $width
+        my jset height $height
+    }
+    
+
+    method getPoint {} {
+        return [my jget point]
+    }
+    
+
+    method setPoint {point} {
+        my jset point $point
+    }
+    
+
+    method getMaxX {} {
+        return [expr {[[my jget point] getX] + [my jget width]}]
+    }
+    
+
+    method getMaxY {} {
+        return [expr {[[my jget point] getY] + [my jget height]}]
+    }
+    
+
+    method getWidth {} {
+        return [my jget width]
+    }
+    
+
+    method setWidth {width} {
+        my jset width $width
+    }
+    
+
+    method getHeight {} {
+        return [my jget height]
+    }
+    
+
+    method setHeight {height} {
+        my jset height $height
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append [[my getPoint] toString]
+        $stringBuffer append [[::CommonSeps::getInstance] jget SPACE]
+        $stringBuffer append [[::CommonLabels::getInstance] jget WIDTH_LABEL]
+        $stringBuffer appendint [my getWidth]
+        $stringBuffer append [[::CommonSeps::getInstance] jget SPACE]
+        $stringBuffer append [[::CommonLabels::getInstance] jget HEIGHT_LABEL]
+        $stringBuffer appendint [my getHeight]
+        $stringBuffer append " MaxX: "
+        $stringBuffer appendint [my getMaxX]
+        $stringBuffer append " MaxY: "
+        $stringBuffer appendint [my getMaxY]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub getPoint {
-    my ($self) = @_;
-        return $self->{point};
+namespace eval ::Rectangle {
 }
 
-
-sub setPoint {
-    my ($self, $point) = @_;
-        $self->{point} = $point;
-}
-
-
-sub getMaxX {
-    my ($self) = @_;
-        return $self->{point}->getX() + $self->{width};
-}
-
-
-sub getMaxY {
-    my ($self) = @_;
-        return $self->{point}->getY() + $self->{height};
-}
-
-
-sub getWidth {
-    my ($self) = @_;
-        return $self->{width};
-}
-
-
-sub setWidth {
-    my ($self, $width) = @_;
-        $self->{width} = $width;
-}
-
-
-sub getHeight {
-    my ($self) = @_;
-        return $self->{height};
-}
-
-
-sub setHeight {
-    my ($self, $height) = @_;
-        $self->{height} = $height;
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append($self->getPoint()->toString());
-        $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
-        $stringBuffer->append('org::allbinary::string::CommonLabels'->getInstance()->{WIDTH_LABEL});
-        $stringBuffer->appendint($self->getWidth());
-        $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
-        $stringBuffer->append('org::allbinary::string::CommonLabels'->getInstance()->{HEIGHT_LABEL});
-        $stringBuffer->appendint($self->getHeight());
-        $stringBuffer->append(" MaxX: ");
-        $stringBuffer->appendint($self->getMaxX());
-        $stringBuffer->append(" MaxY: ");
-        $stringBuffer->appendint($self->getMaxY());
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonSeps ();
-
-1;
 

@@ -11,45 +11,52 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.canvas.transition.progress
 
-package org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $PROGRESS_FORM_SCREEN, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ProgressCanvasFactory {
+    superclass ::JObject
 }
 
+oo::define ::ProgressCanvasFactory {
+    method initFields_ProgressCanvasFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory::PROGRESS_FORM_SCREEN == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory::PROGRESS_FORM_SCREEN = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvas'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{BLACK}, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE});
+    constructor {} {
+        next
+        my initFields_ProgressCanvasFactory
+    }
+    
+    
+}
+
+namespace eval ::ProgressCanvasFactory {
+    variable PROGRESS_FORM_SCREENValue {}
+    variable PROGRESS_FORM_SCREENSet 0
+    proc staticGet_PROGRESS_FORM_SCREEN {} {
+        variable PROGRESS_FORM_SCREENValue
+        variable PROGRESS_FORM_SCREENSet
+        if {!$PROGRESS_FORM_SCREENSet} {
+            set PROGRESS_FORM_SCREENSet 1
+            set PROGRESS_FORM_SCREENValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory::PROGRESS_FORM_SCREEN;
+        return $PROGRESS_FORM_SCREENValue
+    }
+    proc staticSet_PROGRESS_FORM_SCREEN {value} {
+        variable PROGRESS_FORM_SCREENValue
+        variable PROGRESS_FORM_SCREENSet
+        set PROGRESS_FORM_SCREENSet 1
+        set PROGRESS_FORM_SCREENValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::ProgressCanvasFactory::staticGet_PROGRESS_FORM_SCREEN] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::ProgressCanvasFactory::staticSet_PROGRESS_FORM_SCREEN [::ProgressCanvas new [[::StringUtil::getInstance] jget EMPTY_STRING] [[::BasicColorFactory::getInstance] jget BLACK] [[::BasicColorFactory::getInstance] jget WHITE]]
+        }
+        return [::ProgressCanvasFactory::staticGet_PROGRESS_FORM_SCREEN]
+    }
+    proc getLazyInstance {} {
+        return [::NullPaintable::getInstance]
+    }
 }
 
-
-sub getLazyInstance {
-    my ($class) = @_;
-        return 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::paint::NullPaintable ();
-use org::allbinary::graphics::paint::PaintableInterface ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvas ();
-
-1;
 

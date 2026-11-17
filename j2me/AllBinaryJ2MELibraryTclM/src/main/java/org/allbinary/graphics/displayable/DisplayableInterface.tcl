@@ -11,47 +11,44 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable
 
-# Java interface
-package org::allbinary::graphics::displayable::DisplayableInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub addCommand {
-    my ($self, $cmd) = @_;
-    die "abstract method addCommand";
+oo::class create ::DisplayableInterface {
+    superclass ::JObject
 }
 
+oo::define ::DisplayableInterface {
+    method initFields_DisplayableInterface {} {
+        return
+    }
+    
 
-sub getHeight {
-    my ($self) = @_;
-    die "abstract method getHeight";
+    method addCommand {cmd} {
+        error [jexception AbstractMethodError addCommand]
+    }
+    
+
+    method getHeight {} {
+        error [jexception AbstractMethodError getHeight]
+    }
+    
+
+    method getWidth {} {
+        error [jexception AbstractMethodError getWidth]
+    }
+    
+
+    method removeCommand {cmd} {
+        error [jexception AbstractMethodError removeCommand]
+    }
+    
+
+    method setCommandListener {l} {
+        error [jexception AbstractMethodError setCommandListener]
+    }
 }
 
-
-sub getWidth {
-    my ($self) = @_;
-    die "abstract method getWidth";
+namespace eval ::DisplayableInterface {
 }
 
-
-sub removeCommand {
-    my ($self, $cmd) = @_;
-    die "abstract method removeCommand";
-}
-
-
-sub setCommandListener {
-    my ($self, $l) = @_;
-    die "abstract method setCommandListener";
-}
-
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::CommandListener ();
-
-1;
 

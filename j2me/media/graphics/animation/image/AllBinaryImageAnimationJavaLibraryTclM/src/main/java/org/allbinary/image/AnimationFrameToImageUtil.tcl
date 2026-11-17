@@ -11,59 +11,65 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.image
 
-package org::allbinary::image::AnimationFrameToImageUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::image::AnimationFrameToImageUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AnimationFrameToImageUtil {
+    superclass ::JObject
 }
 
+oo::define ::AnimationFrameToImageUtil {
+    method initFields_AnimationFrameToImageUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::image::AnimationFrameToImageUtil::instance;
+    constructor {} {
+        next
+        my initFields_AnimationFrameToImageUtil
+    }
+    
+    
+
+    method getInstanceTranslate {width height animationInterface} {
+        set image [[::GameFeatureImageCacheFactory::getInstance] get [jclassname [::AnimationFrameToImageUtil::staticGet_instance]] ([expr {([jint [expr {$width * 3}]]) >> 1}]) ([expr {([jint [expr {$height * 3}]]) >> 1}])]
+        set graphics [$image getGraphics]
+        set tranlateX ([expr {$width >> 2}])
+        set tranlateY ([expr {$height >> 2}])
+        $graphics translate $tranlateX $tranlateY
+        $animationInterface paintXY $graphics 0 0
+        $graphics translate [expr {-$tranlateX}] [expr {-$tranlateY}]
+        return $image
+    }
+    
+
+    method getInstanceWH {width height animationInterface} {
+        set image [[::GameFeatureImageCacheFactory::getInstance] get [jclassname [::AnimationFrameToImageUtil::staticGet_instance]] $width $height]
+        set graphics [$image getGraphics]
+        $animationInterface paintXY $graphics 0 0
+        return $image
+    }
 }
 
-
-# throws Exception
-sub getInstanceTranslate {
-    my ($self, $width, $height, $animationInterface) = @_;
-        my $image = 'org::allbinary::image::GameFeatureImageCacheFactory'->getInstance()->get(ref($org::allbinary::image::AnimationFrameToImageUtil::instance), (POSIX::floor((($width * 3)) / (2 ** (1)))), (POSIX::floor((($height * 3)) / (2 ** (1)))));
-        my $graphics = $image->getGraphics();
-        my $tranlateX = (POSIX::floor(($width) / (2 ** (2))));
-        my $tranlateY = (POSIX::floor(($height) / (2 ** (2))));
-        $graphics->translate($tranlateX, $tranlateY);
-        $animationInterface->paintXY($graphics, 0, 0);
-        $graphics->translate(-$tranlateX, -$tranlateY);
-        return $image;
+namespace eval ::AnimationFrameToImageUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AnimationFrameToImageUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AnimationFrameToImageUtil::staticGet_instance]
+    }
 }
 
-
-# throws Exception
-sub getInstanceWH {
-    my ($self, $width, $height, $animationInterface) = @_;
-        my $image = 'org::allbinary::image::GameFeatureImageCacheFactory'->getInstance()->get(ref($org::allbinary::image::AnimationFrameToImageUtil::instance), $width, $height);
-        my $graphics = $image->getGraphics();
-        $animationInterface->paintXY($graphics, 0, 0);
-        return $image;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::image::GameFeatureImageCacheFactory ();
-
-1;
 

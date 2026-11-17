@@ -11,130 +11,124 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.event.handler
 
-package org::allbinary::logic::util::event::handler::BasicEventHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::logic::util::event::handler::BasicEventHandlerInterface';
-
-our $PERFORMANCE_MESSAGE = "Use Custom onEvent Methods for needed optimization";
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{eventListenerInterfaceList} = undef;
+oo::class create ::BasicEventHandler {
+    superclass ::JObject
 }
 
+oo::define ::BasicEventHandler {
+    method initFields_BasicEventHandler {} {
+        my jset logUtil {}
+        my jset eventListenerInterfaceList {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{eventListenerInterfaceList} = 'org::allbinary::util::BasicArrayListD'->new();
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_BasicEventHandler
+        my jset eventListenerInterfaceList [::BasicArrayListD new]
+    }
+    
 
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $LISTENER = " Listener: ";
-        $stringBuffer->append("Total Listeners: ");
-        $stringBuffer->appendint($self->{eventListenerInterfaceList}->size());
-        my $eventListenerInterface = undef;
-        my $index = 0;
-        while ($index < $self->{eventListenerInterfaceList}->size()) {
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        set LISTENER " Listener: "
+        $stringBuffer append "Total Listeners: "
+        $stringBuffer appendint [[my jget eventListenerInterfaceList] size]
+        set eventListenerInterface {}
+        set index 0
+        while {[expr {$index < [[my jget eventListenerInterfaceList] size]}]} {
             try {
-                $eventListenerInterface = $self->{eventListenerInterfaceList}->{objectArray}->[$index];
-                $stringBuffer->append($LISTENER);
-                $stringBuffer->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($eventListenerInterface));
-            } catch ($e) {
-                my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-                $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{TOSTRING}, $e);
+                set eventListenerInterface [[[my jget eventListenerInterfaceList] jget objectArray] get $index]
+                $stringBuffer append $LISTENER
+                $stringBuffer append [[::StringUtil::getInstance] toString1 $eventListenerInterface]
+            } on error {e} {
+                set commonStrings [::CommonStrings::getInstance]
+                [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget TOSTRING] $e
             }
-            $index++;
+            jpostincr index 1
         }
-        return $stringBuffer->toString();
-}
+        return [$stringBuffer toString]
+    }
+    
 
+    method removeAllListeners {} {
+        my jset eventListenerInterfaceList [::BasicArrayListD new]
+    }
+    
 
-sub removeAllListeners {
-    my ($self) = @_;
-        $self->{eventListenerInterfaceList} = 'org::allbinary::util::BasicArrayListD'->new();
-}
-
-
-sub addListenerSingleThreaded {
-    my ($self, $eventListenerInterface) = @_;
-        if (!$self->{eventListenerInterfaceList}->contains($eventListenerInterface)) {
-            $self->{eventListenerInterfaceList}->add($eventListenerInterface);
+    method addListenerSingleThreaded {eventListenerInterface} {
+        if {[expr {![[my jget eventListenerInterfaceList] contains $eventListenerInterface]}]} {
+            [my jget eventListenerInterfaceList] add $eventListenerInterface
         }
-}
+    }
+    
 
-
-sub addListenerInterface {
-    my ($self, $eventListenerInterface) = @_;
-        if (!$self->{eventListenerInterfaceList}->contains($eventListenerInterface)) {
-            $self->{eventListenerInterfaceList}->add($eventListenerInterface);
+    method addListenerInterface {eventListenerInterface} {
+        if {[expr {![[my jget eventListenerInterfaceList] contains $eventListenerInterface]}]} {
+            [my jget eventListenerInterfaceList] add $eventListenerInterface
         }
-}
+    }
+    
 
+    method removeListenerSingleThreaded {eventListenerInterface} {
+        [my jget eventListenerInterfaceList] remove $eventListenerInterface
+    }
+    
 
-sub removeListenerSingleThreaded {
-    my ($self, $eventListenerInterface) = @_;
-        $self->{eventListenerInterfaceList}->remove($eventListenerInterface);
-}
+    method removeListener {eventListenerInterface} {
+        [my jget eventListenerInterfaceList] remove $eventListenerInterface
+    }
+    
 
-
-sub removeListener {
-    my ($self, $eventListenerInterface) = @_;
-        $self->{eventListenerInterfaceList}->remove($eventListenerInterface);
-}
-
-
-# throws Exception
-sub fireEvent {
-    my ($self, $eventObject) = @_;
-        my $index = 0;
-        my $eventListenerInterface = undef;
-        while ($index < $self->{eventListenerInterfaceList}->size()) {
+    method fireEvent {eventObject} {
+        set index 0
+        set eventListenerInterface {}
+        while {[expr {$index < [[my jget eventListenerInterfaceList] size]}]} {
             try {
-                $eventListenerInterface = $self->{eventListenerInterfaceList}->{objectArray}->[$index];
-                $self->process($eventObject, $eventListenerInterface);
-            } catch ($e) {
-                my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-                $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, 'org::allbinary::logic::util::event::EventStrings'->getInstance()->{FIRE_EVENT}, $e);
+                set eventListenerInterface [[[my jget eventListenerInterfaceList] jget objectArray] get $index]
+                my process $eventObject $eventListenerInterface
+            } on error {e} {
+                set commonStrings [::CommonStrings::getInstance]
+                [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [[::EventStrings::getInstance] jget FIRE_EVENT] $e
             }
-            $index++;
+            jpostincr index 1
         }
+    }
+    
+
+    method process {eventObject eventListenerInterface} {
+        $eventListenerInterface onEvent $eventObject
+    }
+    
+
+    method getEventListenerInterfaceListP {} {
+        return [my jget eventListenerInterfaceList]
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $eventObject, $eventListenerInterface) = @_;
-        $eventListenerInterface->onEvent($eventObject);
+namespace eval ::BasicEventHandler {
+    variable PERFORMANCE_MESSAGEValue {}
+    variable PERFORMANCE_MESSAGESet 0
+    proc staticGet_PERFORMANCE_MESSAGE {} {
+        variable PERFORMANCE_MESSAGEValue
+        variable PERFORMANCE_MESSAGESet
+        if {!$PERFORMANCE_MESSAGESet} {
+            set PERFORMANCE_MESSAGESet 1
+            set PERFORMANCE_MESSAGEValue "Use Custom onEvent Methods for needed optimization"
+        }
+        return $PERFORMANCE_MESSAGEValue
+    }
+    proc staticSet_PERFORMANCE_MESSAGE {value} {
+        variable PERFORMANCE_MESSAGEValue
+        variable PERFORMANCE_MESSAGESet
+        set PERFORMANCE_MESSAGESet 1
+        set PERFORMANCE_MESSAGEValue $value
+    }
 }
 
-
-sub getEventListenerInterfaceListP {
-    my ($self) = @_;
-        return $self->{eventListenerInterfaceList};
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::logic::util::event::handler::BasicEventHandlerInterface ();
-
-1;
 

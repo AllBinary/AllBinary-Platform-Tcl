@@ -11,68 +11,70 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
-package org::allbinary::game::configuration::InGameOptionsFormFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{SINGLETON} = 'org::allbinary::graphics::displayable::screen::CommandForm'->getNullCommandForm();
+oo::class create ::InGameOptionsFormFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::InGameOptionsFormFactory {
+    method initFields_InGameOptionsFormFactory {} {
+        my jset logUtil {}
+        my jset SINGLETON {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset SINGLETON [::CommandForm::getNullCommandForm]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_InGameOptionsFormFactory
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::configuration::InGameOptionsFormFactory::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::configuration::InGameOptionsFormFactory::instance = 'org::allbinary::game::configuration::InGameOptionsFormFactory'->new();
-        }
-        return $org::allbinary::game::configuration::InGameOptionsFormFactory::instance;
-}
-
-
-sub init {
-    my ($self, $commandListener, $initInterface, $title, $backgrounBasicColor, $foregroundBasicColor) = @_;
+    method init {commandListener initInterface title backgrounBasicColor foregroundBasicColor} {
         try {
-            if ($self->{SINGLETON} == 'org::allbinary::graphics::displayable::screen::CommandForm'->getNullCommandForm()) {
-                $initInterface->init();
-                $self->{SINGLETON} = 'org::allbinary::game::configuration::InGameOptionsForm'->new($commandListener, $title, $backgrounBasicColor, $foregroundBasicColor);
+            if {[expr {[my jget SINGLETON] eq [::CommandForm::getNullCommandForm]}]} {
+                $initInterface init
+                my jset SINGLETON [::InGameOptionsForm new $commandListener $title $backgrounBasicColor $foregroundBasicColor]
             }
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{INIT}, $e);
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget INIT] $e
         }
+    }
+    
+
+    method get {} {
+        return [my jget SINGLETON]
+    }
 }
 
-
-sub get {
-    my ($self) = @_;
-        return $self->{SINGLETON};
+namespace eval ::InGameOptionsFormFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::InGameOptionsFormFactory::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::InGameOptionsFormFactory::staticSet_instance [::InGameOptionsFormFactory new]
+        }
+        return [::InGameOptionsFormFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::CommandListener ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::displayable::screen::CommandForm ();
-use org::allbinary::init::Init ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::configuration::InGameOptionsForm ();
-
-1;
 

@@ -11,42 +11,55 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-package org::allbinary::game::layer::LayerPlacementTypeFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::LayerPlacementTypeFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{MAP} = 'org::allbinary::game::layer::LayerPlacementType'->new(2147483647);
-    $self->{LEFT} = 'org::allbinary::game::layer::LayerPlacementType'->new('org::allbinary::direction::DirectionFactory'->getInstance()->{LEFT}->getValue());
-    $self->{DOWN} = 'org::allbinary::game::layer::LayerPlacementType'->new('org::allbinary::direction::DirectionFactory'->getInstance()->{DOWN}->getValue());
-    $self->{UP} = 'org::allbinary::game::layer::LayerPlacementType'->new('org::allbinary::direction::DirectionFactory'->getInstance()->{UP}->getValue());
-    $self->{RIGHT} = 'org::allbinary::game::layer::LayerPlacementType'->new('org::allbinary::direction::DirectionFactory'->getInstance()->{RIGHT}->getValue());
+oo::class create ::LayerPlacementTypeFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::LayerPlacementTypeFactory {
+    method initFields_LayerPlacementTypeFactory {} {
+        my jset MAP {}
+        my jset LEFT {}
+        my jset DOWN {}
+        my jset UP {}
+        my jset RIGHT {}
+        my jset MAP [::LayerPlacementType new [::Integer::staticGet_MAX_VALUE]]
+        my jset LEFT [::LayerPlacementType new [[[::DirectionFactory::getInstance] jget LEFT] getValue]]
+        my jset DOWN [::LayerPlacementType new [[[::DirectionFactory::getInstance] jget DOWN] getValue]]
+        my jset UP [::LayerPlacementType new [[[::DirectionFactory::getInstance] jget UP] getValue]]
+        my jset RIGHT [::LayerPlacementType new [[[::DirectionFactory::getInstance] jget RIGHT] getValue]]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_LayerPlacementTypeFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::layer::LayerPlacementTypeFactory::instance;
+namespace eval ::LayerPlacementTypeFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LayerPlacementTypeFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LayerPlacementTypeFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::direction::DirectionFactory ();
-use org::allbinary::game::layer::LayerPlacementType ();
-
-1;
 

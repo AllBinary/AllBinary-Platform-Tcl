@@ -11,38 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.font
 
-package org::allbinary::graphics::font::FontDebugFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::font::FontDebugFactory'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::FontDebugFactory {
+    superclass ::JObject
 }
 
+oo::define ::FontDebugFactory {
+    method initFields_FontDebugFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::font::FontDebugFactory::instance;
+    constructor {} {
+        next
+        my initFields_FontDebugFactory
+    }
+    
+    
+
+    method setFont {font graphics} {
+        $graphics setFont $font
+    }
 }
 
-
-sub setFont {
-    my ($self, $font, $graphics) = @_;
-        $graphics->setFont($font);
+namespace eval ::FontDebugFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::FontDebugFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::FontDebugFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-
-1;
 

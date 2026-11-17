@@ -11,280 +11,230 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.canvas.transition.progress
 
-package org::allbinary::graphics::canvas::transition::progress::ProgressCanvas;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::canvas::RunnableCanvas','org::allbinary::graphics::paint::PaintableInterface','org::allbinary::graphics::font::UpdateMyFontInterface';
+oo::class create ::ProgressCanvas {
+    superclass ::RunnableCanvas
+}
 
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{hasPainted} = 0;
-    $self->{backgroundBasicColor} = undef;
-    $self->{GAUGE_PAINTABLE} = 'org::allbinary::graphics::canvas::transition::progress::ProgressPaintable'->new($self);
-    $self->{maxValue} = 100.0;
-    $self->{gauge} = undef;
-    $self->{TEXT} = $self->{commonStrings}->{LOADING};
-    $self->{updateMyFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-    $self->{allbinaryMidlet} = 'org::allbinary::midlet::AllBinaryMidlet'->getNullInstance();
-    $self->{value} = 0.0;
-    $self->{text} = $self->{TEXT};
-    $self->{background} = 1;
-    $self->{paintable} = $self->{GAUGE_PAINTABLE};
-    $self->{inProgress} = 0;
-    $self->{IN_GAME_PROCESSOR} = do {
-        package org::allbinary::canvas::Processor::AnonymousN66866 { our @ISA = ('org::allbinary::canvas::Processor', 'java::lang::Object');
+oo::define ::ProgressCanvas {
+    method initFields_ProgressCanvas {} {
+        my jset hasPainted false
+        my jset backgroundBasicColor {}
+        my jset GAUGE_PAINTABLE {}
+        my jset maxValue 0.0
+        my jset gauge {}
+        my jset TEXT {}
+        my jset updateMyFontProcessor {}
+        my jset myFontProcessor {}
+        my jset allbinaryMidlet {}
+        my jset value 0.0
+        my jset text {}
+        my jset background false
+        my jset paintable {}
+        my jset inProgress false
+        my jset IN_GAME_PROCESSOR {}
+        my jset inGameProcessor {}
+        my jset progressEndListener {}
+        my jset backgroundLabel {}
+        my jset START_BACKGROUND {}
+        my jset ADD_PORTION {}
+        my jset ADD_EARLY_PORTION {}
+        my jset hasPainted false
         
+        my jset GAUGE_PAINTABLE [::ProgressPaintable new [self]]
+        my jset maxValue 100.0
+        
+        my jset TEXT [[my jget commonStrings] jget LOADING]
+        my jset updateMyFontProcessor [::UpdateMyFontProcessor new [self]]
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+        my jset allbinaryMidlet [::AllBinaryMidlet::getNullInstance]
+        my jset value 0.0
+        my jset text [my jget TEXT]
+        my jset background true
+        my jset paintable [my jget GAUGE_PAINTABLE]
+        my jset inProgress false
+        my jset IN_GAME_PROCESSOR [::Processor new]
+        my jset inGameProcessor [::Processor::getInstance]
+        my jset progressEndListener [::ProgressEndListener::staticGet_instance]
+        my jset backgroundLabel "Background AI Game Loading..."
+        my jset START_BACKGROUND "startBackground"
+        my jset ADD_PORTION "addPortion"
+        my jset ADD_EARLY_PORTION "addEarlyPortion"
+        return
+    }
+    
 
-        # throws Exception
-        sub process {
-            my ($self) = @_;
-            $self->{pathFindingThreadPool}->runAPriorityTask();
+    constructor {title backgroundBasicColor foregroundBasicColor} {
+        next [::NullCommandListener::staticGet_NULL_COMMAND_LISTENER] [[::CanvasStrings::getInstance] jget EMPTY_CHILD_NAME_LIST] false
+        my initFields_ProgressCanvas
+        my jset backgroundBasicColor $backgroundBasicColor
+        my jset gauge [::ABCustomGaugeItem new [[::StringUtil::getInstance] jget EMPTY_STRING] [jint [jd2i [my jget maxValue]]] 0 $backgroundBasicColor $foregroundBasicColor]
+    }
+    
+
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        [my jget gauge] setHeight [expr {[$font getHeight] + 2}]
+        my jset myFontProcessor [::MyFontProcessor::getInstance]
+    }
+    
+
+    method init {gameMidlet} {
+        my jset allbinaryMidlet $gameMidlet
+    }
+    
+
+    method update {graphics} {
+    }
+    
+
+    method initCommands {cmdListener} {
+    }
+    
+
+    method getMaxValue {} {
+        return [my jget maxValue]
+    }
+    
+
+    method start {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget START_METHOD_NAME]
+        my setBackground true
+        [my jget gauge] setHeight 30
+        [my jget gauge] setLabel [[my jget commonStrings] jget PLEASE_WAIT]
+        my setText [my jget TEXT]
+        my setValue 0
+        my jset inGameProcessor [::Processor::getInstance]
+        my jset paintable [my jget GAUGE_PAINTABLE]
+        my jset inProgress true
+    }
+    
+
+    method startBackground {background} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [my jget START_BACKGROUND]
+        my setBackground $background
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+        [my jget gauge] setLabel [my jget backgroundLabel]
+        my setText [my jget TEXT]
+        my setValue 0
+        my jset inGameProcessor [::Processor::getInstance]
+        my jset paintable [my jget GAUGE_PAINTABLE]
+    }
+    
+
+    method endActual {} {
+        [my jget allbinaryMidlet] commandAction [[::GameCommandsFactory::getInstance] jget SHOW_GAME_CANVAS] [::NullCanvas::staticGet_NULL_CANVAS]
+        my jset inProgress false
+        my inGame
+    }
+    
+
+    method inGame {} {
+        [my jget progressEndListener] onEndEvent
+        my jset inGameProcessor [my jget IN_GAME_PROCESSOR]
+    }
+    
+
+    method end {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget END_METHOD_NAME]
+        [my jget gauge] setValue [my getMaxValue]
+        my endActual
+        my jset paintable [::NullPaintable::getInstance]
+    }
+    
+
+    method endFromInitialLazyLoadingComplete {} {
+        [my jget progressEndListener] onEndEvent
+        [my jget gauge] setValue [my getMaxValue]
+        my jset inGameProcessor [my jget IN_GAME_PROCESSOR]
+    }
+    
+
+    method isInGame {} {
+        if {[expr {[my jget inGameProcessor] eq [my jget IN_GAME_PROCESSOR]}]} {
+            return true
         }
-        sub _init_anonymous_fields {
-            my ($self) = @_;
-            $self->{pathFindingThreadPool} = 'org::allbinary::thread::PathFindingThreadPool'->getInstance();
+        return false
+    }
+    
+
+    method endIfPaintedSinceStart {} {
+    }
+    
+
+    method addEarlyPortion {value text index} {
+        my setText [[[[::StringMaker new] append $text] append [[[::SmallIntegerSingletonFactory::getInstance] getAt $index] toString]] toString]
+        [my jget gauge] setValue [expr {[[my jget gauge] getValue] + [expr {[my getMaxValue] / [expr {double($value)}]}]}]
+    }
+    
+
+    method addPortion {value text index} {
+        my setText [[[[::StringMaker new] append $text] append [[[::SmallIntegerSingletonFactory::getInstance] getAt $index] toString]] toString]
+        ::PreLogUtil::put [my jget text] [self] [my jget ADD_PORTION]
+        [my jget gauge] setValue [expr {[[my jget gauge] getValue] + [expr {[my getMaxValue] / [expr {double($value)}]}]}]
+    }
+    
+
+    method addNormalPortion {value text} {
+        if {[expr {[my jget text] ne $text}]} {
+            ::PreLogUtil::put $text [self] [my jget ADD_PORTION]
         }
-        }
-        my $anonymous = 'org::allbinary::canvas::Processor::AnonymousN66866'->can('new') ? 'org::allbinary::canvas::Processor::AnonymousN66866'->new() : bless({}, 'org::allbinary::canvas::Processor::AnonymousN66866'); $anonymous->_init_anonymous_fields(); $anonymous
-    };
-    $self->{inGameProcessor} = 'org::allbinary::canvas::Processor'->getInstance();
-    $self->{progressEndListener} = $org::allbinary::graphics::canvas::transition::progress::ProgressEndListener::instance;
-    $self->{backgroundLabel} = "Background AI Game Loading...";
-    $self->{START_BACKGROUND} = "startBackground";
-    $self->{ADD_PORTION} = "addPortion";
-    $self->{ADD_EARLY_PORTION} = "addEarlyPortion";
+        my setText $text
+        [my jget gauge] setValue [expr {[[my jget gauge] getValue] + [expr {[my getMaxValue] / [expr {double($value)}]}]}]
+    }
+    
+
+    method setValue {value} {
+        my jset value [expr {double($value)}]
+        [my jget gauge] setValue [expr {double($value)}]
+    }
+    
+
+    method paint {graphics} {
+        [my jget paintable] paint $graphics
+    }
+    
+
+    method paint2 {graphics} {
+        [my jget myFontProcessor] process $graphics
+        $graphics setColor [[my jget backgroundBasicColor] intValue]
+        $graphics fillRect 0 0 [[my jget displayInfo] getLastWidth] [[my jget displayInfo] getLastHeight]
+        [my jget gauge] paintXY $graphics 0 0
+        my jset hasPainted true
+    }
+    
+
+    method paintThreed {graphics} {
+    }
+    
+
+    method getValue {} {
+        return [my jget value]
+    }
+    
+
+    method setText {text} {
+        my jset text $text
+    }
+    
+
+    method getText {} {
+        return [my jget text]
+    }
+    
+
+    method setBackground {background} {
+        my jset background $background
+    }
+    
+
+    method isBackground {} {
+        return [my jget background]
+    }
 }
 
-
-sub new {
-    my ($class, $title, $backgroundBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($javax::microedition::lcdui::NullCommandListener::NULL_COMMAND_LISTENER, 'org::allbinary::graphics::displayable::CanvasStrings'->getInstance()->{EMPTY_CHILD_NAME_LIST}, 0);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{backgroundBasicColor} = $backgroundBasicColor;
-        $self->{gauge} = 'org::allbinary::graphics::form::item::ABCustomGaugeItem'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, int($self->{maxValue}), 0, $backgroundBasicColor, $foregroundBasicColor);
-    return $self;
+namespace eval ::ProgressCanvas {
 }
 
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->{gauge}->setHeight($font->getHeight() + 2);
-        $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
-}
-
-
-sub init {
-    my ($self, $gameMidlet) = @_;
-        $self->{allbinaryMidlet} = $gameMidlet;
-}
-
-
-# throws Exception
-sub update {
-    my ($self, $graphics) = @_;
-}
-
-
-sub initCommands {
-    my ($self, $cmdListener) = @_;
-}
-
-
-sub getMaxValue {
-    my ($self) = @_;
-        return $self->{maxValue};
-}
-
-
-sub start {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{START_METHOD_NAME});
-        $self->setBackground(1);
-        $self->{gauge}->setHeight(30);
-        $self->{gauge}->setLabel($self->{commonStrings}->{PLEASE_WAIT});
-        $self->setText($self->{TEXT});
-        $self->setValue(0);
-        $self->{inGameProcessor} = 'org::allbinary::canvas::Processor'->getInstance();
-        $self->{paintable} = $self->{GAUGE_PAINTABLE};
-        $self->{inProgress} = 1;
-}
-
-
-sub startBackground {
-    my ($self, $background) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{START_BACKGROUND});
-        $self->setBackground($background);
-        $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-        $self->{gauge}->setLabel($self->{backgroundLabel});
-        $self->setText($self->{TEXT});
-        $self->setValue(0);
-        $self->{inGameProcessor} = 'org::allbinary::canvas::Processor'->getInstance();
-        $self->{paintable} = $self->{GAUGE_PAINTABLE};
-}
-
-
-sub endActual {
-    my ($self) = @_;
-        $self->{allbinaryMidlet}->commandAction('org::allbinary::game::commands::GameCommandsFactory'->getInstance()->{SHOW_GAME_CANVAS}, $javax::microedition::lcdui::NullCanvas::NULL_CANVAS);
-        $self->{inProgress} = 0;
-        $self->inGame();
-}
-
-
-sub inGame {
-    my ($self) = @_;
-        $self->{progressEndListener}->onEndEvent();
-        $self->{inGameProcessor} = $self->{IN_GAME_PROCESSOR};
-}
-
-
-sub end {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{END_METHOD_NAME});
-        $self->{gauge}->setValue($self->getMaxValue());
-        $self->endActual();
-        $self->{paintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-}
-
-
-sub endFromInitialLazyLoadingComplete {
-    my ($self) = @_;
-        $self->{progressEndListener}->onEndEvent();
-        $self->{gauge}->setValue($self->getMaxValue());
-        $self->{inGameProcessor} = $self->{IN_GAME_PROCESSOR};
-}
-
-
-sub isInGame {
-    my ($self) = @_;
-        if ($self->{inGameProcessor} == $self->{IN_GAME_PROCESSOR}) {
-            return 1;
-        }
-        return 0;
-}
-
-
-sub endIfPaintedSinceStart {
-    my ($self) = @_;
-}
-
-
-sub addEarlyPortion {
-    my ($self, $value, $text, $index) = @_;
-        $self->setText('org::allbinary::logic::string::StringMaker'->new()->append($text)->append('org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt($index)->toString())->toString());
-        $self->{gauge}->setValue($self->{gauge}->getValue() + $self->getMaxValue() / $value);
-}
-
-
-sub addPortion {
-    my ($self, $value, $text, $index) = @_;
-        $self->setText('org::allbinary::logic::string::StringMaker'->new()->append($text)->append('org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt($index)->toString())->toString());
-        'org::allbinary::logic::communication::log::PreLogUtil'->put($self->{text}, $self, $self->{ADD_PORTION});
-        $self->{gauge}->setValue($self->{gauge}->getValue() + $self->getMaxValue() / $value);
-}
-
-
-sub addNormalPortion {
-    my ($self, $value, $text) = @_;
-        if ($self->{text} ne $text) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->put($text, $self, $self->{ADD_PORTION});
-        }
-        $self->setText($text);
-        $self->{gauge}->setValue($self->{gauge}->getValue() + $self->getMaxValue() / $value);
-}
-
-
-sub setValue {
-    my ($self, $value) = @_;
-        $self->{value} = $value;
-        $self->{gauge}->setValue($value);
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{paintable}->paint($graphics);
-}
-
-
-sub paint2 {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        $graphics->setColor(int($self->{backgroundBasicColor}));
-        $graphics->fillRect(0, 0, $self->{displayInfo}->getLastWidth(), $self->{displayInfo}->getLastHeight());
-        $self->{gauge}->paintXY($graphics, 0, 0);
-        $self->{hasPainted} = 1;
-}
-
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
-}
-
-
-sub getValue {
-    my ($self) = @_;
-        return $self->{value};
-}
-
-
-sub setText {
-    my ($self, $text) = @_;
-        $self->{text} = $text;
-}
-
-
-sub getText {
-    my ($self) = @_;
-        return $self->{text};
-}
-
-
-sub setBackground {
-    my ($self, $background) = @_;
-        $self->{background} = $background;
-}
-
-
-sub isBackground {
-    my ($self) = @_;
-        return $self->{background};
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::CommandListener ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::NullCanvas ();
-use javax::microedition::lcdui::NullCommandListener ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::canvas::RunnableCanvas ();
-use org::allbinary::game::commands::GameCommandsFactory ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::displayable::CanvasStrings ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::graphics::form::item::ABCustomGaugeItem ();
-use org::allbinary::graphics::paint::NullPaintable ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::graphics::paint::PaintableInterface ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::midlet::AllBinaryMidlet ();
-use org::allbinary::thread::PathFindingThreadPool ();
-use org::allbinary::thread::ThreadPool ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressPaintable ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressEndListener ();
-
-1;
 

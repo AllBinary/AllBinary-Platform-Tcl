@@ -11,32 +11,32 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
-package org::allbinary::logic::system::security::licensing::LicenseServerInitFileUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::LicenseServerInitFileUtil {
+    superclass ::JObject
 }
 
+oo::define ::LicenseServerInitFileUtil {
+    method initFields_LicenseServerInitFileUtil {} {
+        return
+    }
 
-sub init {
-    my ($self) = @_;
+    constructor {} {
+        next
+        my initFields_LicenseServerInitFileUtil
+    }
+    
+
+    method init {} {
+    }
+    
+
+    method write {} {
+    }
 }
 
-
-sub write {
-    my ($self) = @_;
+namespace eval ::LicenseServerInitFileUtil {
 }
 
-use java::lang::Object ();
-
-1;
 

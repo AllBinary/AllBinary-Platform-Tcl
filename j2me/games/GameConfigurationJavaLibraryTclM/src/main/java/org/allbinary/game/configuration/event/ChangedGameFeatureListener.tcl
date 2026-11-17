@@ -11,38 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.event
 
-package org::allbinary::game::configuration::event::ChangedGameFeatureListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::configuration::event::BaseChangedGameFeatureListener';
-
-tie our $gameFeatureListener, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::event::ChangedGameFeatureListener'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::ChangedGameFeatureListener {
+    superclass ::BaseChangedGameFeatureListener
 }
 
+oo::define ::ChangedGameFeatureListener {
+    method initFields_ChangedGameFeatureListener {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::event::ChangedGameFeatureListener::gameFeatureListener;
+    constructor {} {
+        next
+        my initFields_ChangedGameFeatureListener
+    }
+    
+    
+
+    method isChangedGameConfiguration {gameConfiguration} {
+        return [[my jget list] contains $gameConfiguration]
+    }
 }
 
-
-sub isChangedGameConfiguration {
-    my ($self, $gameConfiguration) = @_;
-        return $self->{list}->contains($gameConfiguration);
+namespace eval ::ChangedGameFeatureListener {
+    variable gameFeatureListenerValue {}
+    variable gameFeatureListenerSet 0
+    proc staticGet_gameFeatureListener {} {
+        variable gameFeatureListenerValue
+        variable gameFeatureListenerSet
+        if {!$gameFeatureListenerSet} {
+            set gameFeatureListenerSet 1
+            set gameFeatureListenerValue [::ChangedGameFeatureListener new]
+        }
+        return $gameFeatureListenerValue
+    }
+    proc staticSet_gameFeatureListener {value} {
+        variable gameFeatureListenerValue
+        variable gameFeatureListenerSet
+        set gameFeatureListenerSet 1
+        set gameFeatureListenerValue $value
+    }
+    proc getInstance {} {
+        return [::ChangedGameFeatureListener::staticGet_gameFeatureListener]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::configuration::GameConfiguration ();
-use org::allbinary::game::configuration::event::BaseChangedGameFeatureListener ();
-
-1;
 

@@ -11,84 +11,77 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.vector
 
-package org::allbinary::vector::VectorInfo;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{width} = undef;
-    $self->{height} = undef;
-    $self->{points} = undef;
-    $self->{totalFrames} = undef;
+oo::class create ::VectorInfo {
+    superclass ::JObject
 }
 
+oo::define ::VectorInfo {
+    method initFields_VectorInfo {} {
+        my jset width 0
+        my jset height 0
+        my jset points {}
+        my jset totalFrames 0
+        
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $width, $height, $points, $totalFrames) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{width} = $width;
-        $self->{height} = $height;
-        $self->{points} = $points;
-        $self->{totalFrames} = $totalFrames;
-    return $self;
+    constructor {width height points totalFrames} {
+        next
+        my initFields_VectorInfo
+        my jset width $width
+        my jset height $height
+        my jset points $points
+        my jset totalFrames $totalFrames
+    }
+    
+
+    method getWidth {} {
+        return [my jget width]
+    }
+    
+
+    method setWidth {width} {
+        my jset width $width
+    }
+    
+
+    method getHeight {} {
+        return [my jget height]
+    }
+    
+
+    method setHeight {height} {
+        my jset height $height
+    }
+    
+
+    method getPoints {} {
+        return [my jget points]
+    }
+    
+
+    method setPoints {points} {
+        my jset points $points
+    }
+    
+
+    method getTotalFrames {} {
+        return [my jget totalFrames]
+    }
+    
+
+    method setTotalFrames {totalFrames} {
+        my jset totalFrames $totalFrames
+    }
 }
 
-
-sub getWidth {
-    my ($self) = @_;
-        return $self->{width};
+namespace eval ::VectorInfo {
 }
 
-
-sub setWidth {
-    my ($self, $width) = @_;
-        $self->{width} = $width;
-}
-
-
-sub getHeight {
-    my ($self) = @_;
-        return $self->{height};
-}
-
-
-sub setHeight {
-    my ($self, $height) = @_;
-        $self->{height} = $height;
-}
-
-
-sub getPoints {
-    my ($self) = @_;
-        return $self->{points};
-}
-
-
-sub setPoints {
-    my ($self, $points) = @_;
-        $self->{points} = $points;
-}
-
-
-sub getTotalFrames {
-    my ($self) = @_;
-        return $self->{totalFrames};
-}
-
-
-sub setTotalFrames {
-    my ($self, $totalFrames) = @_;
-        $self->{totalFrames} = $totalFrames;
-}
-
-use java::lang::Object ();
-
-1;
 

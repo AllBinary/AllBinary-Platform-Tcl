@@ -11,83 +11,86 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-package org::allbinary::graphics::CustomGPoint;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::GPoint';
-
-tie our $NULL_CUSTOM_POINT, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::CustomGPoint'->new(0, 0, 0) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{cx} = 0;
-    $self->{cy} = 0;
-    $self->{cz} = 0;
+oo::class create ::CustomGPoint {
+    superclass ::GPoint
 }
 
+oo::define ::CustomGPoint {
+    method initFields_CustomGPoint {} {
+        my jset cx 0
+        my jset cy 0
+        my jset cz 0
+        my jset cx 0
+        my jset cy 0
+        my jset cz 0
+        return
+    }
+    
+    
+    
 
-sub getInstance {
-    my ($class, $point) = @_;
-        return 'org::allbinary::graphics::CustomGPoint'->new($point->getX(), $point->getY(), $point->getZ());
+    constructor {x y z} {
+        next $x $y $z
+        my initFields_CustomGPoint
+    }
+    
+
+    method setX {x} {
+        my jset cx $x
+    }
+    
+
+    method getX {} {
+        return [my jget cx]
+    }
+    
+
+    method setY {y} {
+        my jset cy $y
+    }
+    
+
+    method getY {} {
+        return [my jget cy]
+    }
+    
+
+    method setZ {z} {
+        my jset cz $z
+    }
+    
+
+    method getZ {} {
+        return [my jget cz]
+    }
 }
 
-
-sub getInstance3 {
-    my ($class, $x, $y) = @_;
-        return 'org::allbinary::graphics::CustomGPoint'->new($x, $y, 3);
+namespace eval ::CustomGPoint {
+    variable NULL_CUSTOM_POINTValue {}
+    variable NULL_CUSTOM_POINTSet 0
+    proc staticGet_NULL_CUSTOM_POINT {} {
+        variable NULL_CUSTOM_POINTValue
+        variable NULL_CUSTOM_POINTSet
+        if {!$NULL_CUSTOM_POINTSet} {
+            set NULL_CUSTOM_POINTSet 1
+            set NULL_CUSTOM_POINTValue [::CustomGPoint new 0 0 0]
+        }
+        return $NULL_CUSTOM_POINTValue
+    }
+    proc staticSet_NULL_CUSTOM_POINT {value} {
+        variable NULL_CUSTOM_POINTValue
+        variable NULL_CUSTOM_POINTSet
+        set NULL_CUSTOM_POINTSet 1
+        set NULL_CUSTOM_POINTValue $value
+    }
+    proc getInstance {point} {
+        return [::CustomGPoint new [$point getX] [$point getY] [$point getZ]]
+    }
+    proc getInstance3 {x y} {
+        return [::CustomGPoint new $x $y 3]
+    }
 }
 
-
-sub new {
-    my ($class, $x, $y, $z) = @_;
-    my $self = $class->SUPER::new($x, $y, $z);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
-}
-
-
-sub setX {
-    my ($self, $x) = @_;
-        $self->{cx} = $x;
-}
-
-
-sub getX {
-    my ($self) = @_;
-        return $self->{cx};
-}
-
-
-sub setY {
-    my ($self, $y) = @_;
-        $self->{cy} = $y;
-}
-
-
-sub getY {
-    my ($self) = @_;
-        return $self->{cy};
-}
-
-
-sub setZ {
-    my ($self, $z) = @_;
-        $self->{cz} = $z;
-}
-
-
-sub getZ {
-    my ($self) = @_;
-        return $self->{cz};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::GPoint ();
-
-1;
 

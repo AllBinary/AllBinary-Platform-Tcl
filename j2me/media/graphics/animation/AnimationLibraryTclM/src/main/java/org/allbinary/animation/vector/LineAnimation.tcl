@@ -11,87 +11,75 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.vector
 
-package org::allbinary::animation::vector::LineAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::Animation','org::allbinary::graphics::color::ColorCompositeInterface','org::allbinary::layer::PositionInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{newLine} = [map { [(0) x (2)] } 1 .. (2)];
-    $self->{tempLine} = 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_INT_ARRAY_ARRAY};
-    $self->{line} = [map { [(0) x (2)] } 1 .. (2)];
+oo::class create ::LineAnimation {
+    superclass ::Animation
 }
 
+oo::define ::LineAnimation {
+    method initFields_LineAnimation {} {
+        my jset newLine {}
+        my jset tempLine {}
+        my jset line {}
+        my jset newLine [jarrayof 2 {jarray 2 0}]
+        my jset tempLine [[::NullUtil::getInstance] jget NULL_INT_ARRAY_ARRAY]
+        my jset line [jarrayof 2 {jarray 2 0}]
+        return
+    }
+    
 
-sub new {
-    my ($class, $basicColor) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->setBasicColorP($basicColor);
-    return $self;
+    constructor {basicColor} {
+        next
+        my initFields_LineAnimation
+        my setBasicColorP $basicColor
+    }
+    
+
+    method init {x y} {
+        [[my jget newLine] get 0] set 0 $x
+        [[my jget newLine] get 0] set 1 $y
+        [[my jget newLine] get 1] set 0 $x
+        [[my jget newLine] get 1] set 1 $y
+        my jset tempLine [my jget line]
+        my jset line [my jget newLine]
+        my jset newLine [my jget tempLine]
+    }
+    
+
+    method setPosition {x y z} {
+        [[my jget newLine] get 0] set 0 [[[my jget line] get 1] get 0]
+        [[my jget newLine] get 0] set 1 [[[my jget line] get 1] get 1]
+        [[my jget newLine] get 1] set 0 $x
+        [[my jget newLine] get 1] set 1 $y
+        my jset tempLine [my jget line]
+        my jset line [my jget newLine]
+        my jset newLine [my jget tempLine]
+    }
+    
+
+    method paintXY {graphics x y} {
+        set currentLine [my jget line]
+        [my jget basicSetColorUtil] setBasicColorP3 $graphics [my getBasicColorP] [my getColor]
+        $graphics drawLine [[$currentLine get 0] get 0] [[$currentLine get 0] get 1] [[$currentLine get 1] get 0] [[$currentLine get 1] get 1]
+    }
+    
+
+    method nextFrame {} {
+    }
+    
+
+    method getBasicColorP {} {
+        return [next]
+    }
+    
+
+    method setBasicColorP {basicColor} {
+        next $basicColor
+    }
 }
 
-
-sub init {
-    my ($self, $x, $y) = @_;
-        $self->{newLine}->[0]->[0] = $x;
-        $self->{newLine}->[0]->[1] = $y;
-        $self->{newLine}->[1]->[0] = $x;
-        $self->{newLine}->[1]->[1] = $y;
-        $self->{tempLine} = $self->{line};
-        $self->{line} = $self->{newLine};
-        $self->{newLine} = $self->{tempLine};
+namespace eval ::LineAnimation {
 }
 
-
-sub setPosition {
-    my ($self, $x, $y, $z) = @_;
-        $self->{newLine}->[0]->[0] = $self->{line}->[1]->[0];
-        $self->{newLine}->[0]->[1] = $self->{line}->[1]->[1];
-        $self->{newLine}->[1]->[0] = $x;
-        $self->{newLine}->[1]->[1] = $y;
-        $self->{tempLine} = $self->{line};
-        $self->{line} = $self->{newLine};
-        $self->{newLine} = $self->{tempLine};
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        my $currentLine = $self->{line};
-        $self->{basicSetColorUtil}->setBasicColorP3($graphics, $self->getBasicColorP(), $self->getColor());
-        $graphics->drawLine($currentLine->[0]->[0], $currentLine->[0]->[1], $currentLine->[1]->[0], $currentLine->[1]->[1]);
-}
-
-
-sub nextFrame {
-    my ($self) = @_;
-}
-
-
-sub getBasicColorP {
-    my ($self) = @_;
-        return $self->SUPER::getBasicColorP();
-}
-
-
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
-        $self->SUPER::setBasicColorP($basicColor);
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::ColorCompositeInterface ();
-use org::allbinary::layer::PositionInterface ();
-use org::allbinary::logic::NullUtil ();
-
-1;
 

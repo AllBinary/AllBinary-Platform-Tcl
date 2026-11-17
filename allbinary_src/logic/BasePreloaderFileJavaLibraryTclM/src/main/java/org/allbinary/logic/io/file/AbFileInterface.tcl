@@ -11,165 +11,139 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io.file
 
-# Java interface
-package org::allbinary::logic::io::file::AbFileInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub canRead {
-    my ($self) = @_;
-    die "abstract method canRead";
+oo::class create ::AbFileInterface {
+    superclass ::JObject
 }
 
+oo::define ::AbFileInterface {
+    method initFields_AbFileInterface {} {
+        return
+    }
+    
 
-sub canWrite {
-    my ($self) = @_;
-    die "abstract method canWrite";
+    method canRead {} {
+        error [jexception AbstractMethodError canRead]
+    }
+    
+
+    method canWrite {} {
+        error [jexception AbstractMethodError canWrite]
+    }
+    
+
+    method createNewFile {} {
+        error [jexception AbstractMethodError createNewFile]
+    }
+    
+
+    method delete {} {
+        error [jexception AbstractMethodError delete]
+    }
+    
+
+    method deleteOnExit {} {
+        error [jexception AbstractMethodError deleteOnExit]
+    }
+    
+
+    method exists {} {
+        error [jexception AbstractMethodError exists]
+    }
+    
+
+    method getAbsolutePath {} {
+        error [jexception AbstractMethodError getAbsolutePath]
+    }
+    
+
+    method getCanonicalPath {} {
+        error [jexception AbstractMethodError getCanonicalPath]
+    }
+    
+
+    method getParent {} {
+        error [jexception AbstractMethodError getParent]
+    }
+    
+
+    method getPath {} {
+        error [jexception AbstractMethodError getPath]
+    }
+    
+
+    method isAbsolute {} {
+        error [jexception AbstractMethodError isAbsolute]
+    }
+    
+
+    method isDirectory {} {
+        error [jexception AbstractMethodError isDirectory]
+    }
+    
+
+    method isFile {} {
+        error [jexception AbstractMethodError isFile]
+    }
+    
+
+    method isHidden {} {
+        error [jexception AbstractMethodError isHidden]
+    }
+    
+
+    method lastModified {} {
+        error [jexception AbstractMethodError lastModified]
+    }
+    
+
+    method length {} {
+        error [jexception AbstractMethodError length]
+    }
+    
+
+    method list {} {
+        error [jexception AbstractMethodError list]
+    }
+    
+
+    method listWithFilter {filter} {
+        error [jexception AbstractMethodError listWithFilter]
+    }
+    
+
+    method mkdir {} {
+        error [jexception AbstractMethodError mkdir]
+    }
+    
+
+    method mkdirs {} {
+        error [jexception AbstractMethodError mkdirs]
+    }
+    
+
+    method setLastModified {time} {
+        error [jexception AbstractMethodError setLastModified]
+    }
+    
+
+    method setReadOnly {} {
+        error [jexception AbstractMethodError setReadOnly]
+    }
+    
+
+    method toString {} {
+        error [jexception AbstractMethodError toString]
+    }
+    
+
+    method toURI {} {
+        error [jexception AbstractMethodError toURI]
+    }
 }
 
-
-# throws IOException
-sub createNewFile {
-    my ($self) = @_;
-    die "abstract method createNewFile";
+namespace eval ::AbFileInterface {
 }
 
-
-# throws IOException
-sub delete {
-    my ($self) = @_;
-    die "abstract method delete";
-}
-
-
-sub deleteOnExit {
-    my ($self) = @_;
-    die "abstract method deleteOnExit";
-}
-
-
-sub exists {
-    my ($self) = @_;
-    die "abstract method exists";
-}
-
-
-sub getAbsolutePath {
-    my ($self) = @_;
-    die "abstract method getAbsolutePath";
-}
-
-
-# throws IOException
-sub getCanonicalPath {
-    my ($self) = @_;
-    die "abstract method getCanonicalPath";
-}
-
-
-sub getParent {
-    my ($self) = @_;
-    die "abstract method getParent";
-}
-
-
-sub getPath {
-    my ($self) = @_;
-    die "abstract method getPath";
-}
-
-
-sub isAbsolute {
-    my ($self) = @_;
-    die "abstract method isAbsolute";
-}
-
-
-sub isDirectory {
-    my ($self) = @_;
-    die "abstract method isDirectory";
-}
-
-
-sub isFile {
-    my ($self) = @_;
-    die "abstract method isFile";
-}
-
-
-sub isHidden {
-    my ($self) = @_;
-    die "abstract method isHidden";
-}
-
-
-sub lastModified {
-    my ($self) = @_;
-    die "abstract method lastModified";
-}
-
-
-sub length {
-    my ($self) = @_;
-    die "abstract method length";
-}
-
-
-sub list {
-    my ($self) = @_;
-    die "abstract method list";
-}
-
-
-sub listWithFilter {
-    my ($self, $filter) = @_;
-    die "abstract method listWithFilter";
-}
-
-
-sub mkdir {
-    my ($self) = @_;
-    die "abstract method mkdir";
-}
-
-
-sub mkdirs {
-    my ($self) = @_;
-    die "abstract method mkdirs";
-}
-
-
-sub setLastModified {
-    my ($self, $time) = @_;
-    die "abstract method setLastModified";
-}
-
-
-sub setReadOnly {
-    my ($self) = @_;
-    die "abstract method setReadOnly";
-}
-
-
-sub toString {
-    my ($self) = @_;
-    die "abstract method toString";
-}
-
-
-sub toURI {
-    my ($self) = @_;
-    die "abstract method toURI";
-}
-
-# use java::io::FilenameFilter ();
-# use java::io::IOException ();
-# use java::net::URI ();
-
-1;
 

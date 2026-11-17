@@ -11,38 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::ItemPaintableFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::ItemPaintable';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::form::ItemPaintableFactory'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::ItemPaintableFactory {
+    superclass ::ItemPaintable
 }
 
+oo::define ::ItemPaintableFactory {
+    method initFields_ItemPaintableFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::form::ItemPaintableFactory::instance;
+    constructor {} {
+        next
+        my initFields_ItemPaintableFactory
+    }
+    
+    
+
+    method getInstanceItemPaintable {paintableForm} {
+        return [::ItemPaintableFactory::staticGet_instance]
+    }
 }
 
-
-# throws Exception
-sub getInstanceItemPaintable {
-    my ($self, $paintableForm) = @_;
-        return $org::allbinary::graphics::form::ItemPaintableFactory::instance;
+namespace eval ::ItemPaintableFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ItemPaintableFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ItemPaintableFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::form::ItemPaintable ();
-
-1;
 

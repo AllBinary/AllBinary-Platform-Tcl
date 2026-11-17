@@ -11,38 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.gyro
 
-package org::allbinary::input::gyro::OrientationData;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::input::gyro::OrientationData'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{ORIENTATION_SENSOR_INPUT} = "Orientation Sensor Input";
-    $self->{ORIENTATION_TYPE} = "Orientation Type";
+oo::class create ::OrientationData {
+    superclass ::JObject
 }
 
+oo::define ::OrientationData {
+    method initFields_OrientationData {} {
+        my jset ORIENTATION_SENSOR_INPUT {}
+        my jset ORIENTATION_TYPE {}
+        my jset ORIENTATION_SENSOR_INPUT "Orientation Sensor Input"
+        my jset ORIENTATION_TYPE "Orientation Type"
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_OrientationData
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::gyro::OrientationData::SINGLETON;
+namespace eval ::OrientationData {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::OrientationData new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::OrientationData::staticGet_SINGLETON]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

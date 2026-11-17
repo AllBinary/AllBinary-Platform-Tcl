@@ -11,46 +11,55 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.terrain
 
-package org::allbinary::game::terrain::BasicTerrainInfo;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_BASIC_TERRAIN_INFO, 'java::lang::LazyStatic', sub { 'org::allbinary::game::terrain::BasicTerrainInfo'->new('org::allbinary::math::AngleFactory'->getInstance()->{NOT_ANGLE}) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{angle} = undef;
+oo::class create ::BasicTerrainInfo {
+    superclass ::JObject
 }
 
+oo::define ::BasicTerrainInfo {
+    method initFields_BasicTerrainInfo {} {
+        my jset angle {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $angle) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{angle} = $angle;
-    return $self;
+    constructor {angle} {
+        next
+        my initFields_BasicTerrainInfo
+        my jset angle $angle
+    }
+    
+
+    method getAngle {} {
+        return [my jget angle]
+    }
+    
+
+    method setAngle {angle} {
+        my jset angle $angle
+    }
 }
 
-
-sub getAngle {
-    my ($self) = @_;
-        return $self->{angle};
+namespace eval ::BasicTerrainInfo {
+    variable NULL_BASIC_TERRAIN_INFOValue {}
+    variable NULL_BASIC_TERRAIN_INFOSet 0
+    proc staticGet_NULL_BASIC_TERRAIN_INFO {} {
+        variable NULL_BASIC_TERRAIN_INFOValue
+        variable NULL_BASIC_TERRAIN_INFOSet
+        if {!$NULL_BASIC_TERRAIN_INFOSet} {
+            set NULL_BASIC_TERRAIN_INFOSet 1
+            set NULL_BASIC_TERRAIN_INFOValue [::BasicTerrainInfo new [[::AngleFactory::getInstance] jget NOT_ANGLE]]
+        }
+        return $NULL_BASIC_TERRAIN_INFOValue
+    }
+    proc staticSet_NULL_BASIC_TERRAIN_INFO {value} {
+        variable NULL_BASIC_TERRAIN_INFOValue
+        variable NULL_BASIC_TERRAIN_INFOSet
+        set NULL_BASIC_TERRAIN_INFOSet 1
+        set NULL_BASIC_TERRAIN_INFOValue $value
+    }
 }
 
-
-sub setAngle {
-    my ($self, $angle) = @_;
-        $self->{angle} = $angle;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::math::Angle ();
-use org::allbinary::math::AngleFactory ();
-
-1;
 

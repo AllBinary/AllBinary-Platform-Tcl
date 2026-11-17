@@ -11,43 +11,41 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::CanvasUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::CanvasUtil {
+    superclass ::JObject
 }
 
+oo::define ::CanvasUtil {
+    method initFields_CanvasUtil {} {
+        return
+    }
+    
 
-sub getKeyName {
-    my ($class, $key) = @_;
-        my $commonPhoneStrings = 'org::allbinary::string::CommonPhoneStrings'->getInstance();
-        if ($key == $javax::microedition::lcdui::Canvas::UP) {
-            return $commonPhoneStrings->{UP};
-        } elsif ($key == $javax::microedition::lcdui::Canvas::DOWN) {
-            return $commonPhoneStrings->{DOWN};
-        } elsif ($key == $javax::microedition::lcdui::Canvas::RIGHT) {
-            return $commonPhoneStrings->{RIGHT};
-        } elsif ($key == $javax::microedition::lcdui::Canvas::LEFT) {
-            return $commonPhoneStrings->{LEFT};
-        } elsif ($key == $javax::microedition::lcdui::Canvas::FIRE) {
-            return $commonPhoneStrings->{FIRE};
+    constructor {} {
+        next
+        my initFields_CanvasUtil
+    }
+    
+}
+
+namespace eval ::CanvasUtil {
+    proc getKeyName {key} {
+        set commonPhoneStrings [::CommonPhoneStrings::getInstance]
+        if {[expr {$key == [::Canvas::staticGet_UP]}]} {
+            return [$commonPhoneStrings jget UP]
+        } elseif {[expr {$key == [::Canvas::staticGet_DOWN]}]} {
+            return [$commonPhoneStrings jget DOWN]
+        } elseif {[expr {$key == [::Canvas::staticGet_RIGHT]}]} {
+            return [$commonPhoneStrings jget RIGHT]
+        } elseif {[expr {$key == [::Canvas::staticGet_LEFT]}]} {
+            return [$commonPhoneStrings jget LEFT]
+        } elseif {[expr {$key == [::Canvas::staticGet_FIRE]}]} {
+            return [$commonPhoneStrings jget FIRE]
         }
-        return "UNKNOWN KEY";
+        return "UNKNOWN KEY"
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::string::CommonPhoneStrings ();
-
-1;
 

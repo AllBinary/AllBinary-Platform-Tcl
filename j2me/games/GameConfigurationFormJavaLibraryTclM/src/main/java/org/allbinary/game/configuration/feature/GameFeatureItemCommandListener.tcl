@@ -11,58 +11,44 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
-package org::allbinary::game::configuration::feature::GameFeatureItemCommandListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Scalar::Util ();
-use parent -norequire,'java::lang::Object','javax::microedition::lcdui::ItemCommandListener';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{gameOptionsForm} = undef;
+oo::class create ::GameFeatureItemCommandListener {
+    superclass ::JObject
 }
 
+oo::define ::GameFeatureItemCommandListener {
+    method initFields_GameFeatureItemCommandListener {} {
+        my jset logUtil {}
+        my jset gameOptionsForm {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameOptionsForm) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{gameOptionsForm} = $gameOptionsForm;
-    return $self;
-}
+    constructor {gameOptionsForm} {
+        next
+        my initFields_GameFeatureItemCommandListener
+        my jset gameOptionsForm $gameOptionsForm
+    }
+    
 
-
-sub commandAction {
-    my ($self, $command, $item) = @_;
+    method commandAction {command item} {
         try {
-            my $itemLabel = $item->getLabel();
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{ITEM_LABEL})->append($itemLabel)->toString(), $self, 'org::allbinary::midlet::MidletStrings'->getInstance()->{COMMAND_ACTION});
-            if ((Scalar::Util::blessed($item) && $item->isa('org::allbinary::game::configuration::GameConfigurationGauge'))) {
-                'org::allbinary::game::configuration::GameConfigurationUtil'->getInstance()->change($self->{gameOptionsForm}, $item);
+            set itemLabel [$item getLabel]
+            [my jget logUtil] putF [[[[::StringMaker new] append [[::CommonLabels::getInstance] jget ITEM_LABEL]] append $itemLabel] toString] [self] [[::MidletStrings::getInstance] jget COMMAND_ACTION]
+            if {[jinstanceof $item ::GameConfigurationGauge]} {
+                [::GameConfigurationUtil::getInstance] change [my jget gameOptionsForm] $item
             }
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, 'org::allbinary::midlet::MidletStrings'->getInstance()->{COMMAND_ACTION}, $e);
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [[::MidletStrings::getInstance] jget COMMAND_ACTION] $e
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::Item ();
-use javax::microedition::lcdui::ItemCommandListener ();
-use org::allbinary::game::configuration::GameConfigurationGauge ();
-use org::allbinary::game::configuration::GameConfigurationUtil ();
-use org::allbinary::game::configuration::GameOptionsForm ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::midlet::MidletStrings ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::GameFeatureItemCommandListener {
+}
 
-1;
 

@@ -11,46 +11,38 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
-package org::allbinary::graphics::form::item::CommandTextItem;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::item::ABTextItem';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{command} = undef;
+oo::class create ::CommandTextItem {
+    superclass ::ABTextItem
 }
 
+oo::define ::CommandTextItem {
+    method initFields_CommandTextItem {} {
+        my jset command {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $command, $layout, $altText, $backgroundBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($command->getLabel(), $layout, $altText, $backgroundBasicColor, $foregroundBasicColor);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{command} = $command;
-    return $self;
+    constructor {command layout altText backgroundBasicColor foregroundBasicColor} {
+        next [$command getLabel] $layout $altText $backgroundBasicColor $foregroundBasicColor
+        my initFields_CommandTextItem
+        my jset command $command
+    }
+    
+
+    method isFocusable {} {
+        return true
+    }
+    
+
+    method getCommand {} {
+        return [my jget command]
+    }
 }
 
-
-sub isFocusable {
-    my ($self) = @_;
-        return 1;
+namespace eval ::CommandTextItem {
 }
 
-
-sub getCommand {
-    my ($self) = @_;
-        return $self->{command};
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Command ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::form::item::ABTextItem ();
-
-1;
 

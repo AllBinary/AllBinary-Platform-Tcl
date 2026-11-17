@@ -11,95 +11,77 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.scroller
 
-package org::allbinary::game::ag::ai::scroller::FlockingAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ai::BasicAI';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{allowedDistance} = undef;
+oo::class create ::FlockingAI {
+    superclass ::BasicAI
 }
 
+oo::define ::FlockingAI {
+    method initFields_FlockingAI {} {
+        my jset allowedDistance 0
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        my $allowedDistance = $hashtable->get($org::allbinary::game::ag::ai::scroller::BasePatrolAI::MAX_DISTANCE);
-        $self->{allowedDistance} = int($allowedDistance);
-    return $self;
-}
+    constructor {hashtable ownerLayerInterface gameInput} {
+        next $ownerLayerInterface $gameInput
+        my initFields_FlockingAI
+        set allowedDistance [$hashtable get [::BasePatrolAI::staticGet_MAX_DISTANCE]]
+        my jset allowedDistance [$allowedDistance intValue]
+    }
+    
 
-
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        my $maxDistance = 0;
-        my $farAllbinaryLayer = $org::allbinary::layer::AllBinaryLayer::NULL_ALLBINARY_LAYER;
-        my $groupLayerManagerListener = 'org::allbinary::game::layer::identification::GroupLayerManagerListener'->getInstance();
-        my $list = $groupLayerManagerListener->getList('org::allbinary::game::identification::BasicGroupFactory'->getInstance()->{ENEMY});
-        my $size = $list->size();
-        my $allBinaryLayer = undef;
-        my $ownerLayerInterface = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $allBinaryLayer = $list->get($index);
-            if ($allBinaryLayer->getType() != 'org::allbinary::game::layer::weapon::WeaponLayer'->getStaticType()) {
-                my $distance = $self->getXYDistance($allBinaryLayer);
-                if ($distance > $maxDistance) {
-                    $maxDistance = $distance;
-                    $farAllbinaryLayer = $allBinaryLayer;
-                    if ($distance > $self->{allowedDistance}) {
-                        last;
+    method processAI {allBinaryLayerManager} {
+        set maxDistance 0
+        set farAllbinaryLayer [::AllBinaryLayer::staticGet_NULL_ALLBINARY_LAYER]
+        set groupLayerManagerListener [::GroupLayerManagerListener::getInstance]
+        set list [$groupLayerManagerListener getList [[::BasicGroupFactory::getInstance] jget ENEMY]]
+        set size [$list size]
+        set allBinaryLayer {}
+        set ownerLayerInterface {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set allBinaryLayer [$list get $index]
+            if {[expr {[$allBinaryLayer getType] != [::WeaponLayer::getStaticType]}]} {
+                set distance [my getXYDistance $allBinaryLayer]
+                if {[expr {$distance > $maxDistance}]} {
+                    set maxDistance $distance
+                    set farAllbinaryLayer $allBinaryLayer
+                    if {[expr {$distance > [my jget allowedDistance]}]} {
+                        break
                     }
                 }
             }
         }
-        if ($maxDistance > $self->{allowedDistance}) {
-            if ($farAllbinaryLayer != $org::allbinary::layer::AllBinaryLayer::NULL_ALLBINARY_LAYER) {
-                $ownerLayerInterface = $self->getOwnerLayerInterface();
-                if ($farAllbinaryLayer->getXP() < $ownerLayerInterface->getXP()) {
-                    $self->processKeyAI($javax::microedition::lcdui::Canvas::LEFT);
-                } elsif ($farAllbinaryLayer->getXP() > $ownerLayerInterface->getXP()) {
-                    $self->processKeyAI($javax::microedition::lcdui::Canvas::RIGHT);
-                } elsif ($farAllbinaryLayer->getYP() > $ownerLayerInterface->getYP()) {
-                    $self->processKeyAI($javax::microedition::lcdui::Canvas::UP);
-                } elsif ($farAllbinaryLayer->getYP() < $ownerLayerInterface->getYP()) {
-                    $self->processKeyAI($javax::microedition::lcdui::Canvas::DOWN);
+        if {[expr {$maxDistance > [my jget allowedDistance]}]} {
+            if {[expr {$farAllbinaryLayer ne [::AllBinaryLayer::staticGet_NULL_ALLBINARY_LAYER]}]} {
+                set ownerLayerInterface [my getOwnerLayerInterface]
+                if {[expr {[$farAllbinaryLayer getXP] < [$ownerLayerInterface getXP]}]} {
+                    my processKeyAI [::Canvas::staticGet_LEFT]
+                } elseif {[expr {[$farAllbinaryLayer getXP] > [$ownerLayerInterface getXP]}]} {
+                    my processKeyAI [::Canvas::staticGet_RIGHT]
+                } elseif {[expr {[$farAllbinaryLayer getYP] > [$ownerLayerInterface getYP]}]} {
+                    my processKeyAI [::Canvas::staticGet_UP]
+                } elseif {[expr {[$farAllbinaryLayer getYP] < [$ownerLayerInterface getYP]}]} {
+                    my processKeyAI [::Canvas::staticGet_DOWN]
                 }
             }
         }
+    }
+    
+
+    method getXYDistance {allBinaryLayer} {
+        set ownerLayerInterface [my getOwnerLayerInterface]
+        set xTotalDistance [expr {([expr {[$allBinaryLayer getXP] + [$allBinaryLayer getHalfWidth]}]) - ([expr {[$ownerLayerInterface getXP] + [$ownerLayerInterface getHalfWidth]}])}]
+        set yTotalDistance [expr {([expr {[$allBinaryLayer getYP] + [$allBinaryLayer getHalfHeight]}]) - ([expr {[$ownerLayerInterface getYP] + [$ownerLayerInterface getHalfHeight]}])}]
+        set mathUtil [::MathUtil::getInstance]
+        set totalDistance [expr {[$mathUtil abs $xTotalDistance] + [$mathUtil abs $yTotalDistance]}]
+        return $totalDistance
+    }
 }
 
-
-sub getXYDistance {
-    my ($self, $allBinaryLayer) = @_;
-        my $ownerLayerInterface = $self->getOwnerLayerInterface();
-        my $xTotalDistance = ($allBinaryLayer->getXP() + $allBinaryLayer->getHalfWidth()) - ($ownerLayerInterface->getXP() + $ownerLayerInterface->getHalfWidth());
-        my $yTotalDistance = ($allBinaryLayer->getYP() + $allBinaryLayer->getHalfHeight()) - ($ownerLayerInterface->getYP() + $ownerLayerInterface->getHalfHeight());
-        my $mathUtil = 'org::allbinary::logic::math::MathUtil'->getInstance();
-        my $totalDistance = $mathUtil->abs($xTotalDistance) + $mathUtil->abs($yTotalDistance);
-        return $totalDistance;
+namespace eval ::FlockingAI {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::game::ai::BasicAI ();
-use org::allbinary::game::identification::BasicGroupFactory ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::game::layer::identification::GroupLayerManagerListener ();
-use org::allbinary::game::layer::weapon::WeaponLayer ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::logic::math::MathUtil ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::game::ag::ai::scroller::BasePatrolAI ();
-
-1;
 

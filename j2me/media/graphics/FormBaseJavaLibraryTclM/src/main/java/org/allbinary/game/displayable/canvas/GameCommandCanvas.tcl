@@ -11,311 +11,262 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::GameCommandCanvas;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::displayable::MyCanvas','org::allbinary::game::displayable::canvas::MenuListener','org::allbinary::graphics::displayable::event::DisplayChangeEventListener','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-our $id = 0;
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{repaintProcessor} = 'org::allbinary::graphics::displayable::screen::ScreenRepaintProcessorFactory'->getInstance()->create($self);
-    $self->{gameInputStrings} = 'org::allbinary::game::input::GameInputStrings'->getInstance();
-    $self->{foregroundBasicColor} = undef;
-    $self->{backgroundBasicColor} = undef;
-    $self->{inputToGameKeyMapping} = 'org::allbinary::game::input::PlatformInputMappingFactory'->getInstance()->getPersistentInputMappingInstance()->getInputMapping();
-    $self->{gameKeyFactory} = 'org::allbinary::game::input::GameKeyFactory'->getInstance();
-    $self->{gameKeyEventFactory} = 'org::allbinary::game::input::event::GameKeyEventFactory'->getInstance();
-    $self->{downGameKeyEventHandler} = 'org::allbinary::game::input::event::DownGameKeyEventHandler'->getInstance();
-    $self->{upGameKeyEventHandler} = 'org::allbinary::game::input::event::UpGameKeyEventHandler'->getInstance();
-    $self->{repaintBehavior} = undef;
-    $self->{updateMyFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-    $self->{foregroundColor} = undef;
-    $self->{backgroundColor} = undef;
-    $self->{menuInputProcessor} = 'org::allbinary::game::displayable::canvas::NoMenuInputProcessor'->getInstance();
-    $self->{menuPaintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-    $self->{menuForm} = 'org::allbinary::graphics::form::PaintableForm'->getNullPaintableForm();
-    $self->{isSingleKeyRepeatableProcessing} = 'org::allbinary::game::configuration::feature::Features'->getInstance()->isFeature('org::allbinary::game::configuration::feature::InputFeatureFactory'->getInstance()->{SINGLE_KEY_REPEAT_PRESS});
-    $self->{fontHeight} = 0;
+oo::class create ::GameCommandCanvas {
+    superclass ::MyCanvas
 }
 
+oo::define ::GameCommandCanvas {
+    method initFields_GameCommandCanvas {} {
+        my jset repaintProcessor {}
+        my jset gameInputStrings {}
+        my jset foregroundBasicColor {}
+        my jset backgroundBasicColor {}
+        my jset inputToGameKeyMapping {}
+        my jset gameKeyFactory {}
+        my jset gameKeyEventFactory {}
+        my jset downGameKeyEventHandler {}
+        my jset upGameKeyEventHandler {}
+        my jset repaintBehavior {}
+        my jset updateMyFontProcessor {}
+        my jset myFontProcessor {}
+        my jset foregroundColor 0
+        my jset backgroundColor 0
+        my jset menuInputProcessor {}
+        my jset menuPaintable {}
+        my jset menuForm {}
+        my jset isSingleKeyRepeatableProcessing false
+        my jset fontHeight 0
+        my jset repaintProcessor [[::ScreenRepaintProcessorFactory::getInstance] create [self]]
+        my jset gameInputStrings [::GameInputStrings::getInstance]
+        
+        
+        my jset inputToGameKeyMapping [[[::PlatformInputMappingFactory::getInstance] getPersistentInputMappingInstance] getInputMapping]
+        my jset gameKeyFactory [::GameKeyFactory::getInstance]
+        my jset gameKeyEventFactory [::GameKeyEventFactory::getInstance]
+        my jset downGameKeyEventHandler [::DownGameKeyEventHandler::getInstance]
+        my jset upGameKeyEventHandler [::UpGameKeyEventHandler::getInstance]
+        
+        my jset updateMyFontProcessor [::UpdateMyFontProcessor new [self]]
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+        
+        
+        my jset menuInputProcessor [::NoMenuInputProcessor::getInstance]
+        my jset menuPaintable [::NullPaintable::getInstance]
+        my jset menuForm [::PaintableForm::getNullPaintableForm]
+        my jset isSingleKeyRepeatableProcessing [[::Features::getInstance] isFeature [[::InputFeatureFactory::getInstance] jget SINGLE_KEY_REPEAT_PRESS]]
+        my jset fontHeight 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $cmdListener, $name, $backgroundBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($name, 'org::allbinary::graphics::displayable::CanvasStrings'->getInstance()->{EMPTY_CHILD_NAME_LIST});
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{repaintBehavior} = 'org::allbinary::game::displayable::RepaintBehavior'->getInstance();
-        $self->{foregroundBasicColor} = $foregroundBasicColor;
-        $self->{backgroundBasicColor} = $backgroundBasicColor;
-        $self->{foregroundColor} = int($self->{foregroundBasicColor});
-        $self->{backgroundColor} = int($self->{backgroundBasicColor});
-        $self->initCommands($cmdListener);
-        if ($cmdListener != $javax::microedition::lcdui::NullCommandListener::NULL_COMMAND_LISTENER) {
+    constructor {cmdListener name backgroundBasicColor foregroundBasicColor} {
+        next $name [[::CanvasStrings::getInstance] jget EMPTY_CHILD_NAME_LIST]
+        my initFields_GameCommandCanvas
+        my jset repaintBehavior [::RepaintBehavior::getInstance]
+        my jset foregroundBasicColor $foregroundBasicColor
+        my jset backgroundBasicColor $backgroundBasicColor
+        my jset foregroundColor [[my jget foregroundBasicColor] intValue]
+        my jset backgroundColor [[my jget backgroundBasicColor] intValue]
+        my initCommands $cmdListener
+        if {[expr {$cmdListener ne [::NullCommandListener::staticGet_NULL_COMMAND_LISTENER]}]} {
             try {
-                $self->initMenu();
-                $self->{repaintProcessor}->process();
-            } catch ($e) {
-                die ("RuntimeException");
+                my initMenu
+                [my jget repaintProcessor] process
+            } on error {e} {
+                error [jexception RuntimeException {}]
             }
         }
-    return $self;
-}
+    }
+    
 
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
+    method updateMeasurement {graphics} {
         try {
-            my $font = $graphics->getFont();
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonStrings}->{START})->append($self->{canvasStrings}->{FD_WIDTH})->appendint(int('org::allbinary::graphics::font::MyFontProcessor'->defaultCharWidth($font)))->append($self->{canvasStrings}->{FD_HEIGHT})->appendint(int($font->getHeight()))->toString(), $self, $self->{canvasStrings}->{UPDATE_MEASUREMENT});
-            $self->{fontHeight} = $font->getHeight();
-            my $rectangle = $self->createRectangle($self->{menuForm}->size());
-            $self->{menuForm}->init($rectangle, 'org::allbinary::graphics::form::FormTypeFactory'->getInstance()->{VERTICAL_CENTER_FORM});
-            $self->update();
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{canvasStrings}->{ON_DISPLAY_CHANGE_EVENT}, $e);
+            set font [$graphics getFont]
+            [my jget logUtil] putF [[[[[[[::StringMaker new] append [[my jget commonStrings] jget START]] append [[my jget canvasStrings] jget FD_WIDTH]] appendint [jint [::MyFontProcessor::defaultCharWidth $font]]] append [[my jget canvasStrings] jget FD_HEIGHT]] appendint [jint [$font getHeight]]] toString] [self] [[my jget canvasStrings] jget UPDATE_MEASUREMENT]
+            my jset fontHeight [$font getHeight]
+            set rectangle [my createRectangle [[my jget menuForm] size]]
+            [my jget menuForm] init $rectangle [[::FormTypeFactory::getInstance] jget VERTICAL_CENTER_FORM]
+            my update
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget canvasStrings] jget ON_DISPLAY_CHANGE_EVENT] $e
         }
-        $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
-}
+        my jset myFontProcessor [::MyFontProcessor::getInstance]
+    }
+    
 
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
 
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
-}
+    method onDisplayChangeEvent {displayChangeEvent} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[my jget commonStrings] jget START]] append [[::DisplayInfoSingleton::getInstance] toString]] toString] [self] [[my jget canvasStrings] jget ON_DISPLAY_CHANGE_EVENT]
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+    }
+    
 
+    method initCommands {cmdListener} {
+        my removeAllCommands
+        my addCommand [[::GameCommandsFactory::getInstance] jget CLOSE_AND_SHOW_GAME_CANVAS]
+        my setCommandListener $cmdListener
+    }
+    
 
-sub onDisplayChangeEvent {
-    my ($self, $displayChangeEvent) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonStrings}->{START})->append('org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance()->toString())->toString(), $self, $self->{canvasStrings}->{ON_DISPLAY_CHANGE_EVENT});
-        $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-}
-
-
-sub initCommands {
-    my ($self, $cmdListener) = @_;
-        $self->removeAllCommands();
-        $self->addCommand('org::allbinary::game::commands::GameCommandsFactory'->getInstance()->{CLOSE_AND_SHOW_GAME_CANVAS});
-        $self->setCommandListener($cmdListener);
-}
-
-
-# throws Exception
-sub initMenu {
-    my ($self) = @_;
-        my $form = $self->createForm();
-        $self->{menuForm} = $form;
-        if ($form != 'org::allbinary::graphics::form::ScrollSelectionFormNoneFactory'->getInstance()) {
-            $self->setMenuInputProcessor('org::allbinary::game::displayable::canvas::ImmediateCommandFormInputProcessor'->new('org::allbinary::util::BasicArrayListD'->new(), -1, $self, $form));
-            $self->{menuPaintable} = 'org::allbinary::graphics::form::FormPaintable'->new($form);
+    method initMenu {} {
+        set form [my createForm]
+        my jset menuForm $form
+        if {[expr {$form ne [::ScrollSelectionFormNoneFactory::getInstance]}]} {
+            my setMenuInputProcessor [::ImmediateCommandFormInputProcessor new [::BasicArrayListD new] [expr {-1}] [self] $form]
+            my jset menuPaintable [::FormPaintable new $form]
         }
-        $self->{repaintBehavior}->onChangeRepaint($self);
-}
+        [my jget repaintBehavior] onChangeRepaint [self]
+    }
+    
 
+    method createForm {} {
+        set items [[::CommandTextItemArrayFactory new [::AllCommandsVisitor new]] getInstance [my getCommandStack] [my jget backgroundBasicColor] [my jget foregroundBasicColor]]
+        set rectangle [my createRectangle [$items length]]
+        return [::CommandCurrentSelectionFormFactory::getInstance [[::StringUtil::getInstance] jget EMPTY_STRING] $items $rectangle [[::FormTypeFactory::getInstance] jget VERTICAL_CENTER_FORM] 15 false [my jget backgroundBasicColor] [my jget foregroundBasicColor]]
+    }
+    
 
-# throws Exception
-sub createForm {
-    my ($self) = @_;
-        my $items = 'org::allbinary::graphics::form::item::CommandTextItemArrayFactory'->new('org::allbinary::graphics::form::item::validation::AllCommandsVisitor'->new())->getInstance($self->getCommandStack(), $self->{backgroundBasicColor}, $self->{foregroundBasicColor});
-        my $rectangle = $self->createRectangle(scalar(@{$items}));
-        return 'org::allbinary::graphics::form::CommandCurrentSelectionFormFactory'->getInstance('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $items, $rectangle, 'org::allbinary::graphics::form::FormTypeFactory'->getInstance()->{VERTICAL_CENTER_FORM}, 15, 0, $self->{backgroundBasicColor}, $self->{foregroundBasicColor});
-}
+    method createRectangle {size} {
+        set height [jint [expr {$size * [my jget fontHeight]}]]
+        set startY [expr {([expr {[expr {[[my jget displayInfo] getLastHeight] * 2}] / 3}]) - $height}]
+        set pointFactory [::PointFactory::getInstance]
+        set rectangle [::Rectangle new [$pointFactory createXY 30 $startY] [expr {[[my jget displayInfo] getLastWidth] - 30}] $startY]
+        return $rectangle
+    }
+    
 
+    method open {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] "open"
+        [::BasicMotionGesturesHandler::getInstance] addListenerInterface [my getMenuInputProcessor]
+        [::GameKeyEventHandler::getInstance] addListener [my getMenuInputProcessor]
+        [::DisplayChangeEventHandler::getInstance] addListenerInterface [self]
+    }
+    
 
-sub createRectangle {
-    my ($self, $size) = @_;
-        my $height = $size * $self->{fontHeight};
-        my $startY = ($self->{displayInfo}->getLastHeight() * 2 / 3) - $height;
-        my $pointFactory = 'org::allbinary::graphics::PointFactory'->getInstance();
-        my $rectangle = 'org::allbinary::graphics::Rectangle'->new($pointFactory->createXY(30, $startY), $self->{displayInfo}->getLastWidth() - 30, $startY);
-        return $rectangle;
-}
+    method close {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget CLOSE]
+        [::BasicMotionGesturesHandler::getInstance] removeListener [my getMenuInputProcessor]
+        [::GameKeyEventHandler::getInstance] removeListener [my getMenuInputProcessor]
+        [::DisplayChangeEventHandler::getInstance] removeListener [self]
+    }
+    
 
+    method update {} {
+        [my jget repaintProcessor] process
+    }
+    
 
-sub open {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, "open");
-        'org::allbinary::input::motion::gesture::observer::BasicMotionGesturesHandler'->getInstance()->addListenerInterface($self->getMenuInputProcessor());
-        'org::allbinary::game::input::event::GameKeyEventHandler'->getInstance()->addListener($self->getMenuInputProcessor());
-        'org::allbinary::graphics::displayable::event::DisplayChangeEventHandler'->getInstance()->addListenerInterface($self);
-}
+    method getSourceId {} {
+        return [::GameCommandCanvas::staticGet_id]
+    }
+    
 
+    method keyPressed {keyCode} {
+        my keyPressedByDevice $keyCode 0
+    }
+    
 
-# throws Exception
-sub close {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{CLOSE});
-        'org::allbinary::input::motion::gesture::observer::BasicMotionGesturesHandler'->getInstance()->removeListener($self->getMenuInputProcessor());
-        'org::allbinary::game::input::event::GameKeyEventHandler'->getInstance()->removeListener($self->getMenuInputProcessor());
-        'org::allbinary::graphics::displayable::event::DisplayChangeEventHandler'->getInstance()->removeListener($self);
-}
+    method keyReleased {keyCode} {
+        my keyReleasedByDevice $keyCode 0
+    }
+    
 
+    method keyRepeated {keyCode} {
+        my keyRepeatedByDevice $keyCode 0
+    }
+    
 
-# throws Exception
-sub update {
-    my ($self) = @_;
-        $self->{repaintProcessor}->process();
-}
+    method keyPressedByDevice {keyCode deviceId} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[::CommonSeps::getInstance] jget SPACE]] appendint $keyCode] toString] [self] [[my jget gameInputStrings] jget KEY_PRESSED]
+        my addGameKeyEvent $keyCode 0 false
+    }
+    
 
+    method keyReleasedByDevice {keyCode deviceId} {
+        my removeGameKeyEvent $keyCode $deviceId false
+    }
+    
 
-sub getSourceId {
-    my ($self) = @_;
-        return $org::allbinary::game::displayable::canvas::GameCommandCanvas::id;
-}
-
-
-sub keyPressed {
-    my ($self, $keyCode) = @_;
-        $self->keyPressedByDevice($keyCode, 0);
-}
-
-
-sub keyReleased {
-    my ($self, $keyCode) = @_;
-        $self->keyReleasedByDevice($keyCode, 0);
-}
-
-
-sub keyRepeated {
-    my ($self, $keyCode) = @_;
-        $self->keyRepeatedByDevice($keyCode, 0);
-}
-
-
-sub keyPressedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE})->appendint($keyCode)->toString(), $self, $self->{gameInputStrings}->{KEY_PRESSED});
-        $self->addGameKeyEvent($keyCode, 0, 0);
-}
-
-
-sub keyReleasedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
-        $self->removeGameKeyEvent($keyCode, $deviceId, 0);
-}
-
-
-sub keyRepeatedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
-        if ($self->{isSingleKeyRepeatableProcessing}) {
-            $self->addGameKeyEvent($keyCode, $deviceId, 1);
+    method keyRepeatedByDevice {keyCode deviceId} {
+        if {[my jget isSingleKeyRepeatableProcessing]} {
+            my addGameKeyEvent $keyCode $deviceId true
         }
-}
+    }
+    
 
-
-sub addGameKeyEvent {
-    my ($self, $keyCode, $deviceId, $repeated) = @_;
+    method addGameKeyEvent {keyCode deviceId repeated} {
         try {
-            my $gameKey = $self->{inputToGameKeyMapping}->getInstanceForCanvas($self, $keyCode);
-            if ($gameKey != $self->{gameKeyFactory}->{NONE}) {
-                my $gameKeyEvent = $self->{gameKeyEventFactory}->getInstanceForInput($self, $gameKey);
-                $self->{downGameKeyEventHandler}->fireEvent($gameKeyEvent);
-                $self->{downGameKeyEventHandler}->getInstanceForDevice($deviceId)->fireEvent($gameKeyEvent);
+            set gameKey [[my jget inputToGameKeyMapping] getInstanceForCanvas [self] $keyCode]
+            if {[expr {$gameKey ne [[my jget gameKeyFactory] jget NONE]}]} {
+                set gameKeyEvent [[my jget gameKeyEventFactory] getInstanceForInput [self] $gameKey]
+                [my jget downGameKeyEventHandler] fireEvent $gameKeyEvent
+                [[my jget downGameKeyEventHandler] getInstanceForDevice $deviceId] fireEvent $gameKeyEvent
             } else {
-                $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{gameInputStrings}->{NO_KEY})->appendint($keyCode)->toString(), $self, $self->{gameInputStrings}->{ADD_KEY_EVENT});
+                [my jget logUtil] putF [[[[::StringMaker new] append [[my jget gameInputStrings] jget NO_KEY]] appendint $keyCode] toString] [self] [[my jget gameInputStrings] jget ADD_KEY_EVENT]
             }
-        } catch ($e) {
-            $self->{logUtil}->put("Key Event Error", $self, $self->{gameInputStrings}->{ADD_KEY_EVENT}, $e);
+        } on error {e} {
+            [my jget logUtil] put "Key Event Error" [self] [[my jget gameInputStrings] jget ADD_KEY_EVENT] $e
         }
-}
+    }
+    
 
-
-sub removeGameKeyEvent {
-    my ($self, $keyCode, $deviceId, $repeated) = @_;
+    method removeGameKeyEvent {keyCode deviceId repeated} {
         try {
-            my $gameKey = $self->{inputToGameKeyMapping}->getInstanceForCanvas($self, $keyCode);
-            if ($gameKey != $self->{gameKeyFactory}->{NONE}) {
-                my $gameKeyEvent = $self->{gameKeyEventFactory}->getInstanceForInput($self, $gameKey);
-                $self->{upGameKeyEventHandler}->fireEvent($gameKeyEvent);
-                $self->{upGameKeyEventHandler}->getInstanceForDevice($deviceId)->fireEvent($gameKeyEvent);
+            set gameKey [[my jget inputToGameKeyMapping] getInstanceForCanvas [self] $keyCode]
+            if {[expr {$gameKey ne [[my jget gameKeyFactory] jget NONE]}]} {
+                set gameKeyEvent [[my jget gameKeyEventFactory] getInstanceForInput [self] $gameKey]
+                [my jget upGameKeyEventHandler] fireEvent $gameKeyEvent
+                [[my jget upGameKeyEventHandler] getInstanceForDevice $deviceId] fireEvent $gameKeyEvent
             } else {
-                $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{gameInputStrings}->{NO_KEY})->appendint($keyCode)->toString(), $self, $self->{gameInputStrings}->{REMOVE_KEY_EVENT});
+                [my jget logUtil] putF [[[[::StringMaker new] append [[my jget gameInputStrings] jget NO_KEY]] appendint $keyCode] toString] [self] [[my jget gameInputStrings] jget REMOVE_KEY_EVENT]
             }
-        } catch ($e) {
-            $self->{logUtil}->put("Key Event Error", $self, $self->{gameInputStrings}->{REMOVE_KEY_EVENT}, $e);
+        } on error {e} {
+            [my jget logUtil] put "Key Event Error" [self] [[my jget gameInputStrings] jget REMOVE_KEY_EVENT] $e
         }
+    }
+    
+
+    method paint {graphics} {
+        [my jget myFontProcessor] process $graphics
+        [my jget menuPaintable] paint $graphics
+        [my jget repaintBehavior] repaint [self]
+    }
+    
+
+    method setMenuInputProcessor {menuInputProcessor} {
+        my jset menuInputProcessor $menuInputProcessor
+    }
+    
+
+    method getMenuInputProcessor {} {
+        return [my jget menuInputProcessor]
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        $self->{menuPaintable}->paint($graphics);
-        $self->{repaintBehavior}->repaint($self);
+namespace eval ::GameCommandCanvas {
+    variable idValue {}
+    variable idSet 0
+    proc staticGet_id {} {
+        variable idValue
+        variable idSet
+        if {!$idSet} {
+            set idSet 1
+            set idValue 0
+        }
+        return $idValue
+    }
+    proc staticSet_id {value} {
+        variable idValue
+        variable idSet
+        set idSet 1
+        set idValue $value
+    }
 }
 
-
-sub setMenuInputProcessor {
-    my ($self, $menuInputProcessor) = @_;
-        $self->{menuInputProcessor} = $menuInputProcessor;
-}
-
-
-sub getMenuInputProcessor {
-    my ($self) = @_;
-        return $self->{menuInputProcessor};
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::CommandListener ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::NullCommandListener ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::game::commands::GameCommandsFactory ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::InputFeatureFactory ();
-use org::allbinary::game::displayable::RepaintBehavior ();
-use org::allbinary::game::input::GameInputStrings ();
-use org::allbinary::game::input::GameKey ();
-use org::allbinary::game::input::GameKeyFactory ();
-use org::allbinary::game::input::PlatformInputMappingFactory ();
-use org::allbinary::game::input::event::DownGameKeyEventHandler ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::game::input::event::GameKeyEventFactory ();
-use org::allbinary::game::input::event::GameKeyEventHandler ();
-use org::allbinary::game::input::event::UpGameKeyEventHandler ();
-use org::allbinary::game::input::mapping::InputToGameKeyMapping ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::displayable::CanvasStrings ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::graphics::displayable::MyCanvas ();
-use org::allbinary::graphics::displayable::event::DisplayChangeEvent ();
-use org::allbinary::graphics::displayable::event::DisplayChangeEventHandler ();
-use org::allbinary::graphics::displayable::event::DisplayChangeEventListener ();
-use org::allbinary::graphics::displayable::screen::ScreenRepaintProcessorFactory ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::graphics::form::CommandCurrentSelectionFormFactory ();
-use org::allbinary::graphics::form::FormPaintable ();
-use org::allbinary::graphics::form::FormTypeFactory ();
-use org::allbinary::graphics::form::PaintableForm ();
-use org::allbinary::graphics::form::ScrollSelectionForm ();
-use org::allbinary::graphics::form::ScrollSelectionFormNoneFactory ();
-use org::allbinary::graphics::form::item::CommandTextItemArrayFactory ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
-use org::allbinary::graphics::form::item::validation::AllCommandsVisitor ();
-use org::allbinary::graphics::paint::NullPaintable ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::input::motion::gesture::observer::BasicMotionGesturesHandler ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::game::displayable::canvas::MenuListener ();
-use org::allbinary::game::displayable::canvas::NoMenuInputProcessor ();
-use org::allbinary::game::displayable::canvas::ImmediateCommandFormInputProcessor ();
-
-1;
 

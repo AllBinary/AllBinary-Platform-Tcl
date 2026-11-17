@@ -11,36 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::SpinnerAIFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::SpinnerAIFactory {
+    superclass ::JObject
 }
 
+oo::define ::SpinnerAIFactory {
+    method initFields_SpinnerAIFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($self, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-        my $direction = [$javax::microedition::lcdui::Canvas::LEFT];
-        return 'org::allbinary::game::ag::ai::SpinnerAI'->new($direction, $ownerLayerInterface, $gameInput);
+    constructor {} {
+        next
+        my initFields_SpinnerAIFactory
+    }
+    
+
+    method getInstance {hashtable ownerLayerInterface gameInput} {
+        set direction [jarrayfrom [list [::Canvas::staticGet_LEFT]]]
+        return [::SpinnerAI new $direction $ownerLayerInterface $gameInput]
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-use org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::ag::ai::SpinnerAI ();
+namespace eval ::SpinnerAIFactory {
+}
 
-1;
 

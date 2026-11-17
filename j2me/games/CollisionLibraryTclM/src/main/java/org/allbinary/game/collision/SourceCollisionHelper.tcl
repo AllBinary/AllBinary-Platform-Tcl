@@ -11,36 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-package org::allbinary::game::collision::SourceCollisionHelper;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::collision::CollisionHelper';
-
-
-
-sub new {
-    my ($class, $layerInterface) = @_;
-    my $self = $class->SUPER::new($layerInterface);
-        # super(...) made $self above
-    return $self;
+oo::class create ::SourceCollisionHelper {
+    superclass ::CollisionHelper
 }
 
+oo::define ::SourceCollisionHelper {
+    method initFields_SourceCollisionHelper {} {
+        return
+    }
+    
 
-sub isCollidable {
-    my ($self, $layerInterface) = @_;
-        if ($self->{sourceLayerInterface} != $layerInterface) {
-            return 1;
+    constructor {layerInterface} {
+        next $layerInterface
+        my initFields_SourceCollisionHelper
+    }
+    
+
+    method isCollidable {layerInterface} {
+        if {[expr {[my jget sourceLayerInterface] ne $layerInterface}]} {
+            return true
         }
-        return 0;
+        return false
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::layer::CollidableCompositeLayer ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::game::collision::CollisionHelper ();
+namespace eval ::SourceCollisionHelper {
+}
 
-1;
 

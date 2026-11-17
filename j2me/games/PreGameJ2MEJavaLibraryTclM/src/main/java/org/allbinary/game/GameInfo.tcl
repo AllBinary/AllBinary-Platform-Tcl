@@ -11,166 +11,181 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game
 
-package org::allbinary::game::GameInfo;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NONE, 'java::lang::LazyStatic', sub { 'org::allbinary::game::GameInfo'->new('org::allbinary::game::GameTypeFactory'->getInstance()->{NONE}, $org::allbinary::game::GameMode::NONE, 'org::allbinary::game::PlayerTypesFactory'->getInstance()->{PLAYER_TYPE_ONE}, -1, -1) };
-our $LEVEL_NAME = "LEVEL";
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{gameInfoData} = 'org::allbinary::game::GameInfoData'->getInstance();
-    $self->{gameType} = undef;
-    $self->{gameMode} = undef;
-    $self->{playerType} = undef;
-    $self->{highestLevel} = 0;
-    $self->{currentLevel} = undef;
-    $self->{NEW_LEVEL} = "New Level: ";
-    $self->{SET_CURRENT_LEVEL} = "setCurrentLevel";
-    $self->{NEXT_GAME_LEVEL} = "nextGameLevel";
+oo::class create ::GameInfo {
+    superclass ::JObject
 }
 
+oo::define ::GameInfo {
+    method initFields_GameInfo {} {
+        my jset logUtil {}
+        my jset gameInfoData {}
+        my jset gameType {}
+        my jset gameMode {}
+        my jset playerType {}
+        my jset highestLevel 0
+        my jset currentLevel 0
+        my jset NEW_LEVEL {}
+        my jset SET_CURRENT_LEVEL {}
+        my jset NEXT_GAME_LEVEL {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset gameInfoData [::GameInfoData::getInstance]
+        
+        
+        
+        my jset highestLevel 0
+        
+        my jset NEW_LEVEL "New Level: "
+        my jset SET_CURRENT_LEVEL "setCurrentLevel"
+        my jset NEXT_GAME_LEVEL "nextGameLevel"
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameType, $gameMode, $playerType, $highestLevel, $currentLevel) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{gameType} = $gameType;
-        $self->{gameMode} = $gameMode;
-        $self->setHighestLevel($highestLevel);
-        $self->{currentLevel} = $currentLevel;
-        $self->{playerType} = $playerType;
-    return $self;
-}
+    constructor {gameType gameMode playerType highestLevel currentLevel} {
+        next
+        my initFields_GameInfo
+        my jset gameType $gameType
+        my jset gameMode $gameMode
+        my setHighestLevel $highestLevel
+        my jset currentLevel $currentLevel
+        my jset playerType $playerType
+    }
+    
 
+    method getGameType {} {
+        return [my jget gameType]
+    }
+    
 
-sub getGameType {
-    my ($self) = @_;
-        return $self->{gameType};
-}
+    method getGameMode {} {
+        return [my jget gameMode]
+    }
+    
 
+    method getPlayerType {} {
+        return [my jget playerType]
+    }
+    
 
-sub getGameMode {
-    my ($self) = @_;
-        return $self->{gameMode};
-}
+    method getHighestLevel {} {
+        return [my jget highestLevel]
+    }
+    
 
+    method setHighestLevel {highestLevel} {
+        my jset highestLevel $highestLevel
+    }
+    
 
-sub getPlayerType {
-    my ($self) = @_;
-        return $self->{playerType};
-}
+    method getCurrentLevel {} {
+        return [my jget currentLevel]
+    }
+    
 
+    method setCurrentLevel {currentLevel} {
+        my jset currentLevel $currentLevel
+        [my jget logUtil] putF [[[[::StringMaker new] append [my jget NEW_LEVEL]] appendint [my getCurrentLevel]] toString] [self] [my jget SET_CURRENT_LEVEL]
+    }
+    
 
-sub getHighestLevel {
-    my ($self) = @_;
-        return $self->{highestLevel};
-}
-
-
-sub setHighestLevel {
-    my ($self, $highestLevel) = @_;
-        $self->{highestLevel} = $highestLevel;
-}
-
-
-sub getCurrentLevel {
-    my ($self) = @_;
-        return $self->{currentLevel};
-}
-
-
-sub setCurrentLevel {
-    my ($self, $currentLevel) = @_;
-        $self->{currentLevel} = $currentLevel;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{NEW_LEVEL})->appendint($self->getCurrentLevel())->toString(), $self, $self->{SET_CURRENT_LEVEL});
-}
-
-
-sub nextGameLevel {
-    my ($self) = @_;
-        if ($self->getCurrentLevel() < $self->getHighestLevel()) {
-            $self->{currentLevel}++;
+    method nextGameLevel {} {
+        if {[expr {[my getCurrentLevel] < [my getHighestLevel]}]} {
+            my jpostinc currentLevel 1
         }
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{NEXT})->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE})->append($self->{NEW_LEVEL})->appendint($self->getCurrentLevel())->toString(), $self, $self->{NEXT_GAME_LEVEL});
-}
+        [my jget logUtil] putF [[[[[[::StringMaker new] append [[::CommonLabels::getInstance] jget NEXT]] append [[::CommonSeps::getInstance] jget SPACE]] append [my jget NEW_LEVEL]] appendint [my getCurrentLevel]] toString] [self] [my jget NEXT_GAME_LEVEL]
+    }
+    
 
-
-sub previousGameLevel {
-    my ($self) = @_;
-        if ($self->getCurrentLevel() > 1) {
-            $self->{currentLevel}--;
+    method previousGameLevel {} {
+        if {[expr {[my getCurrentLevel] > 1}]} {
+            my jpostinc currentLevel -1
         }
-}
+    }
+    
 
-
-sub isLastLevel {
-    my ($self) = @_;
-        if ($self->getCurrentLevel() >= $self->getHighestLevel()) {
-            return 1;
+    method isLastLevel {} {
+        if {[expr {[my getCurrentLevel] >= [my getHighestLevel]}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
+    
+
+    method toHashtable {} {
+        set hashtable [[::StdUtil::getInstance] createHashtable]
+        $hashtable put [[my jget gameInfoData] jget GAME_TYPE] [[my getGameType] toString]
+        $hashtable put [[my jget gameInfoData] jget GAME_MODE] [[my jget gameMode] toString]
+        $hashtable put [[my jget gameInfoData] jget PLAYER_TYPE] [[my jget playerType] toString]
+        $hashtable put [[my jget gameInfoData] jget HIGHEST_LEVEL] [jstr [my getHighestLevel]]
+        $hashtable put [[my jget gameInfoData] jget CURRENT_LEVEL] [jstr [my jget currentLevel]]
+        return $hashtable
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        set commonSeps [::CommonSeps::getInstance]
+        $stringBuffer append [[my jget gameInfoData] jget GAME_TYPE]
+        $stringBuffer append [$commonSeps jget EQUALS]
+        $stringBuffer append [[my getGameType] toString]
+        $stringBuffer append [$commonSeps jget COMMA_SEP]
+        $stringBuffer append [[my jget gameInfoData] jget GAME_MODE]
+        $stringBuffer append [$commonSeps jget EQUALS]
+        $stringBuffer append [[my jget gameMode] toString]
+        $stringBuffer append [$commonSeps jget COMMA_SEP]
+        $stringBuffer append [[my jget gameInfoData] jget PLAYER_TYPE]
+        $stringBuffer append [$commonSeps jget EQUALS]
+        $stringBuffer append [[::StringUtil::getInstance] toString1 [my jget playerType]]
+        $stringBuffer append [$commonSeps jget COMMA_SEP]
+        $stringBuffer append [[my jget gameInfoData] jget HIGHEST_LEVEL]
+        $stringBuffer append [$commonSeps jget EQUALS]
+        $stringBuffer appendint [my getHighestLevel]
+        $stringBuffer append [$commonSeps jget COMMA_SEP]
+        $stringBuffer append [[my jget gameInfoData] jget CURRENT_LEVEL]
+        $stringBuffer append [$commonSeps jget EQUALS]
+        $stringBuffer appendint [my jget currentLevel]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub toHashtable {
-    my ($self) = @_;
-        my $hashtable = 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable();
-        $hashtable->put($self->{gameInfoData}->{GAME_TYPE}, $self->getGameType()->toString());
-        $hashtable->put($self->{gameInfoData}->{GAME_MODE}, $self->{gameMode}->toString());
-        $hashtable->put($self->{gameInfoData}->{PLAYER_TYPE}, $self->{playerType}->toString());
-        $hashtable->put($self->{gameInfoData}->{HIGHEST_LEVEL}, ("" . ($self->getHighestLevel())));
-        $hashtable->put($self->{gameInfoData}->{CURRENT_LEVEL}, ("" . ($self->{currentLevel})));
-        return $hashtable;
+namespace eval ::GameInfo {
+    variable NONEValue {}
+    variable NONESet 0
+    proc staticGet_NONE {} {
+        variable NONEValue
+        variable NONESet
+        if {!$NONESet} {
+            set NONESet 1
+            set NONEValue [::GameInfo new [[::GameTypeFactory::getInstance] jget NONE] [::GameMode::staticGet_NONE] [[::PlayerTypesFactory::getInstance] jget PLAYER_TYPE_ONE] [expr {-1}] [expr {-1}]]
+        }
+        return $NONEValue
+    }
+    proc staticSet_NONE {value} {
+        variable NONEValue
+        variable NONESet
+        set NONESet 1
+        set NONEValue $value
+    }
+    variable LEVEL_NAMEValue {}
+    variable LEVEL_NAMESet 0
+    proc staticGet_LEVEL_NAME {} {
+        variable LEVEL_NAMEValue
+        variable LEVEL_NAMESet
+        if {!$LEVEL_NAMESet} {
+            set LEVEL_NAMESet 1
+            set LEVEL_NAMEValue "LEVEL"
+        }
+        return $LEVEL_NAMEValue
+    }
+    proc staticSet_LEVEL_NAME {value} {
+        variable LEVEL_NAMEValue
+        variable LEVEL_NAMESet
+        set LEVEL_NAMESet 1
+        set LEVEL_NAMEValue $value
+    }
 }
 
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $commonSeps = 'org::allbinary::string::CommonSeps'->getInstance();
-        $stringBuffer->append($self->{gameInfoData}->{GAME_TYPE});
-        $stringBuffer->append($commonSeps->{EQUALS});
-        $stringBuffer->append($self->getGameType()->toString());
-        $stringBuffer->append($commonSeps->{COMMA_SEP});
-        $stringBuffer->append($self->{gameInfoData}->{GAME_MODE});
-        $stringBuffer->append($commonSeps->{EQUALS});
-        $stringBuffer->append($self->{gameMode}->toString());
-        $stringBuffer->append($commonSeps->{COMMA_SEP});
-        $stringBuffer->append($self->{gameInfoData}->{PLAYER_TYPE});
-        $stringBuffer->append($commonSeps->{EQUALS});
-        $stringBuffer->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($self->{playerType}));
-        $stringBuffer->append($commonSeps->{COMMA_SEP});
-        $stringBuffer->append($self->{gameInfoData}->{HIGHEST_LEVEL});
-        $stringBuffer->append($commonSeps->{EQUALS});
-        $stringBuffer->appendint($self->getHighestLevel());
-        $stringBuffer->append($commonSeps->{COMMA_SEP});
-        $stringBuffer->append($self->{gameInfoData}->{CURRENT_LEVEL});
-        $stringBuffer->append($commonSeps->{EQUALS});
-        $stringBuffer->appendint($self->{currentLevel});
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::GameTypeFactory ();
-use org::allbinary::game::GameMode ();
-use org::allbinary::game::PlayerTypesFactory ();
-use org::allbinary::game::GameInfoData ();
-
-1;
 

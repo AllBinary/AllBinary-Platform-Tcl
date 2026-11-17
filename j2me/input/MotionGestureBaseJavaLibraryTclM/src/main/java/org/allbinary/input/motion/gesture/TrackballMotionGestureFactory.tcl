@@ -11,51 +11,62 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture
 
-package org::allbinary::input::motion::gesture::TrackballMotionGestureFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{LEFT} = undef;
-    $self->{RIGHT} = undef;
-    $self->{UP} = undef;
-    $self->{DOWN} = undef;
+oo::class create ::TrackballMotionGestureFactory {
+    superclass ::JObject
 }
 
+oo::define ::TrackballMotionGestureFactory {
+    method initFields_TrackballMotionGestureFactory {} {
+        my jset LEFT {}
+        my jset RIGHT {}
+        my jset UP {}
+        my jset DOWN {}
+        
+        
+        
+        
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::input::motion::gesture::TrackballMotionGestureFactory::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::input::motion::gesture::TrackballMotionGestureFactory::instance = 'org::allbinary::input::motion::gesture::TrackballMotionGestureFactory'->new();
+    constructor {} {
+        next
+        my initFields_TrackballMotionGestureFactory
+        set MAX [[::InputFactory::getInstance] jget MAX]
+        my jset LEFT [::MotionGestureInput new [jint [expr {$MAX - 26}]] "L Trackball"]
+        my jset RIGHT [::MotionGestureInput new [jint [expr {$MAX - 27}]] "R Trackball"]
+        my jset UP [::MotionGestureInput new [jint [expr {$MAX - 28}]] "Up Trackball"]
+        my jset DOWN [::MotionGestureInput new [jint [expr {$MAX - 29}]] "D Trackball"]
+    }
+}
+
+namespace eval ::TrackballMotionGestureFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::input::motion::gesture::TrackballMotionGestureFactory::instance;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::TrackballMotionGestureFactory::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::TrackballMotionGestureFactory::staticSet_instance [::TrackballMotionGestureFactory new]
+        }
+        return [::TrackballMotionGestureFactory::staticGet_instance]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $MAX = 'org::allbinary::game::input::InputFactory'->getInstance()->{MAX};
-        $self->{LEFT} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 26, "L Trackball");
-        $self->{RIGHT} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 27, "R Trackball");
-        $self->{UP} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 28, "Up Trackball");
-        $self->{DOWN} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 29, "D Trackball");
-    return $self;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::InputFactory ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::input::motion::gesture::MotionGestureInput ();
-
-1;
 

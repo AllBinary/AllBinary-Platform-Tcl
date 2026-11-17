@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.midlet
 
-package org::allbinary::midlet::MidletFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::MidletFactoryInterface {
+    superclass ::JObject
 }
 
+oo::define ::MidletFactoryInterface {
+    method initFields_MidletFactoryInterface {} {
+        return
+    }
 
-sub getInstance {
-    my ($self) = @_;
-        return 'org::allbinary::midlet::AllBinaryMidlet'->getNullInstance();
+    constructor {} {
+        next
+        my initFields_MidletFactoryInterface
+    }
+    
+
+    method getInstance {} {
+        return [::AllBinaryMidlet::getNullInstance]
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::midlet::MIDlet ();
-use org::allbinary::midlet::AllBinaryMidlet ();
+namespace eval ::MidletFactoryInterface {
+}
 
-1;
 

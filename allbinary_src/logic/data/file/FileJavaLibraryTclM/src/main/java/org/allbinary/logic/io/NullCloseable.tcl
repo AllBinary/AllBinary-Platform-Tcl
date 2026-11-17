@@ -11,32 +11,45 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
-package org::allbinary::logic::io::NullCloseable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_CLOSEABLE, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::io::NullCloseable'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullCloseable {
+    superclass ::JObject
 }
 
+oo::define ::NullCloseable {
+    method initFields_NullCloseable {} {
+        return
+    }
 
-# throws IOException
-sub close {
-    my ($self) = @_;
+    constructor {} {
+        next
+        my initFields_NullCloseable
+    }
+    
+
+    method close {} {
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::Closeable ();
-# use java::io::IOException ();
+namespace eval ::NullCloseable {
+    variable NULL_CLOSEABLEValue {}
+    variable NULL_CLOSEABLESet 0
+    proc staticGet_NULL_CLOSEABLE {} {
+        variable NULL_CLOSEABLEValue
+        variable NULL_CLOSEABLESet
+        if {!$NULL_CLOSEABLESet} {
+            set NULL_CLOSEABLESet 1
+            set NULL_CLOSEABLEValue [::NullCloseable new]
+        }
+        return $NULL_CLOSEABLEValue
+    }
+    proc staticSet_NULL_CLOSEABLE {value} {
+        variable NULL_CLOSEABLEValue
+        variable NULL_CLOSEABLESet
+        set NULL_CLOSEABLESet 1
+        set NULL_CLOSEABLEValue $value
+    }
+}
 
-1;
 

@@ -11,31 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-package org::allbinary::logic::util::cache::NoCacheableFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::logic::util::cache::CacheableInterfaceFactoryInterface';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NoCacheableFactory {
+    superclass ::JObject
 }
 
+oo::define ::NoCacheableFactory {
+    method initFields_NoCacheableFactory {} {
+        return
+    }
+    
 
-# throws Exception
-sub getInstance {
-    my ($self, $key) = @_;
-        die ("This Factory Does Not");
+    constructor {} {
+        next
+        my initFields_NoCacheableFactory
+    }
+    
+
+    method getInstance {key} {
+        error [jexception Exception "This Factory Does Not"]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::util::cache::CacheableInterfaceFactoryInterface ();
+namespace eval ::NoCacheableFactory {
+}
 
-1;
 

@@ -11,61 +11,69 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-package org::allbinary::graphics::RendererStateFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::RendererStateFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{loaded} = 0;
-    $self->{surfaceChanged} = 0;
+oo::class create ::RendererStateFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::RendererStateFactory {
+    method initFields_RendererStateFactory {} {
+        my jset loaded false
+        my jset surfaceChanged false
+        my jset loaded false
+        my jset surfaceChanged false
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_RendererStateFactory
+    }
+    
+    
+
+    method setLoaded {loaded} {
+        my jset loaded $loaded
+    }
+    
+
+    method isLoaded {} {
+        return [my jget loaded]
+    }
+    
+
+    method setSurfaceChanged {initialized} {
+        my jset surfaceChanged $initialized
+    }
+    
+
+    method isSurfaceChanged {} {
+        return [my jget surfaceChanged]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::RendererStateFactory::instance;
+namespace eval ::RendererStateFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::RendererStateFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::RendererStateFactory::staticGet_instance]
+    }
 }
 
-
-sub setLoaded {
-    my ($self, $loaded) = @_;
-        $self->{loaded} = $loaded;
-}
-
-
-sub isLoaded {
-    my ($self) = @_;
-        return $self->{loaded};
-}
-
-
-sub setSurfaceChanged {
-    my ($self, $initialized) = @_;
-        $self->{surfaceChanged} = $initialized;
-}
-
-
-sub isSurfaceChanged {
-    my ($self) = @_;
-        return $self->{surfaceChanged};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

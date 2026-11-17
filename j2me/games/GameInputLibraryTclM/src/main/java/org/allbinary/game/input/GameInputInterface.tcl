@@ -11,31 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-# Java interface
-package org::allbinary::game::input::GameInputInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::NamedInterface';
-
-
-
-# throws Exception
-sub processInput {
-    my ($self, $layerManager) = @_;
-    die "abstract method processInput";
+oo::class create ::GameInputInterface {
+    superclass ::JObject
 }
 
+oo::define ::GameInputInterface {
+    method initFields_GameInputInterface {} {
+        return
+    }
+    
 
-sub initInputProcessors {
-    my ($self) = @_;
-    die "abstract method initInputProcessors";
+    method processInput {layerManager} {
+        error [jexception AbstractMethodError processInput]
+    }
+    
+
+    method initInputProcessors {} {
+        error [jexception AbstractMethodError initInputProcessors]
+    }
 }
 
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::layer::NamedInterface ();
+namespace eval ::GameInputInterface {
+}
 
-1;
 

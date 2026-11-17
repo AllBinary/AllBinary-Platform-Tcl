@@ -11,37 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.accelerometer
 
-package org::allbinary::input::accelerometer::NoAccelerometerSensor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::gyro::AllBinaryOrientationSensor';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::NoAccelerometerSensor {
+    superclass ::AllBinaryOrientationSensor
 }
 
+oo::define ::NoAccelerometerSensor {
+    method initFields_NoAccelerometerSensor {} {
+        return
+    }
+    
 
-# throws Exception
-sub getOrientation {
-    my ($self) = @_;
-        return $org::allbinary::logic::math::Orientation::NONE;
+    constructor {} {
+        next
+        my initFields_NoAccelerometerSensor
+    }
+    
+
+    method getOrientation {} {
+        return [::Orientation::staticGet_NONE]
+    }
+    
+
+    method onSensorChange {} {
+    }
 }
 
-
-sub onSensorChange {
-    my ($self) = @_;
+namespace eval ::NoAccelerometerSensor {
 }
 
-use java::lang::Object ();
-use org::allbinary::input::gyro::AllBinaryOrientationSensor ();
-use org::allbinary::logic::math::Orientation ();
-
-1;
 

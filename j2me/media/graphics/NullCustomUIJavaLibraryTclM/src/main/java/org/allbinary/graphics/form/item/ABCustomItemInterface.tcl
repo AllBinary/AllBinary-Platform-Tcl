@@ -1,44 +1,42 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
-# Java interface
-package org::allbinary::graphics::form::item::ABCustomItemInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getMinimumWidth {
-    my ($self) = @_;
-    die "abstract method getMinimumWidth";
+oo::class create ::ABCustomItemInterface {
+    superclass ::JObject
 }
 
+oo::define ::ABCustomItemInterface {
+    method initFields_ABCustomItemInterface {} {
+        return
+    }
+    
 
-sub getMinimumHeight {
-    my ($self) = @_;
-    die "abstract method getMinimumHeight";
+    method getMinimumWidth {} {
+        error [jexception AbstractMethodError getMinimumWidth]
+    }
+    
+
+    method getMinimumHeight {} {
+        error [jexception AbstractMethodError getMinimumHeight]
+    }
+    
+
+    method getLabel {} {
+        error [jexception AbstractMethodError getLabel]
+    }
+    
+
+    method paintXY {graphics x y} {
+        error [jexception AbstractMethodError paintXY]
+    }
+    
+
+    method paintUnselected {graphics x y} {
+        error [jexception AbstractMethodError paintUnselected]
+    }
 }
 
-
-sub getLabel {
-    my ($self) = @_;
-    die "abstract method getLabel";
+namespace eval ::ABCustomItemInterface {
 }
 
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-    die "abstract method paintXY";
-}
-
-
-sub paintUnselected {
-    my ($self, $graphics, $x, $y) = @_;
-    die "abstract method paintUnselected";
-}
-
-use javax::microedition::lcdui::Graphics ();
-
-1;
 

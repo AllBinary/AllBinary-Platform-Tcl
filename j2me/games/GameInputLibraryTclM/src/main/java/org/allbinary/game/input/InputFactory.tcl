@@ -11,75 +11,84 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::InputFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{KEY_CODE_LABEL} = "KeyCode: ";
-    $self->{DEVICE_ID_LABEL} = "DeviceId: ";
-    $self->{MAX} = 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getMin();
-    $self->{inputIntegerArray} = [(undef) x ($self->{MAX})];
-    $self->{NO_INPUT} = 'org::allbinary::game::input::Input'->new(0, $self->{commonStrings}->{UNKNOWN});
+oo::class create ::InputFactory {
+    superclass ::JObject
 }
 
+oo::define ::InputFactory {
+    method initFields_InputFactory {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset KEY_CODE_LABEL {}
+        my jset DEVICE_ID_LABEL {}
+        my jset MAX 0
+        my jset inputIntegerArray {}
+        my jset NO_INPUT {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset KEY_CODE_LABEL "KeyCode: "
+        my jset DEVICE_ID_LABEL "DeviceId: "
+        my jset MAX [[::SmallIntegerSingletonFactory::getInstance] getMin]
+        my jset inputIntegerArray [jarray [my jget MAX] {}]
+        my jset NO_INPUT [::Input new 0 [[my jget commonStrings] jget UNKNOWN]]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::input::InputFactory::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::input::InputFactory::instance = 'org::allbinary::game::input::InputFactory'->new();
+    constructor {} {
+        next
+        my initFields_InputFactory
+        set size [[my jget inputIntegerArray] length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            [my jget inputIntegerArray] set $index [my jget NO_INPUT]
         }
-        return $org::allbinary::game::input::InputFactory::instance;
-}
+    }
+    
 
+    method add {id input} {
+        [my jget inputIntegerArray] set $id $input
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $size = scalar(@{$self->{inputIntegerArray}});
-        for (my $index = 0; $index < $size; $index++) {
-            $self->{inputIntegerArray}->[$index] = $self->{NO_INPUT};
+    method getInstanceById {id} {
+        if {[expr {$id < 0}]} {
+            set id [expr {-$id}]
         }
-    return $self;
-}
-
-
-sub add {
-    my ($self, $id, $input) = @_;
-        $self->{inputIntegerArray}->[$id] = $input;
-}
-
-
-sub getInstanceById {
-    my ($self, $id) = @_;
-        if ($id < 0) {
-            $id = -$id;
+        if {[expr {$id > [[my jget inputIntegerArray] length]}]} {
+            [my jget logUtil] putF [[[[::StringMaker new] append "Warning id: "] appendint $id] toString] [self] [[my jget commonStrings] jget GET_INSTANCE]
+            return [my jget NO_INPUT]
         }
-        if ($id > scalar(@{$self->{inputIntegerArray}})) {
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Warning id: ")->appendint($id)->toString(), $self, $self->{commonStrings}->{GET_INSTANCE});
-            return $self->{NO_INPUT};
-        }
-        return $self->{inputIntegerArray}->[$id];
+        return [[my jget inputIntegerArray] get $id]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::input::Input ();
+namespace eval ::InputFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::InputFactory::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::InputFactory::staticSet_instance [::InputFactory new]
+        }
+        return [::InputFactory::staticGet_instance]
+    }
+}
 
-1;
 

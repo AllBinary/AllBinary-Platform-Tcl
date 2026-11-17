@@ -11,84 +11,82 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.image
 
-package org::allbinary::image::AnimationFactoryImageScaleUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::image::AnimationFactoryImageScaleUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{imageScaleUtil} = 'org::allbinary::media::image::ImageJ2MEScaleUtil'->getInstance();
+oo::class create ::AnimationFactoryImageScaleUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::AnimationFactoryImageScaleUtil {
+    method initFields_AnimationFactoryImageScaleUtil {} {
+        my jset imageScaleUtil {}
+        my jset imageScaleUtil [::ImageJ2MEScaleUtil::getInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_AnimationFactoryImageScaleUtil
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::image::AnimationFactoryImageScaleUtil::instance;
-}
-
-
-# throws Exception
-sub createImage {
-    my ($self, $image, $width, $height, $scaleWidth, $scaleHeight) = @_;
-        my $scaledImage = undef;
-        if ($scaleWidth != 0 && $scaleHeight != 0) {
-            my $scaleX = ($scaleWidth) / ($width);
-            my $scaleY = ($scaleHeight) / ($height);
-            if (($scaleX == 1.0 && $scaleY == 1.0) || ($scaleX == 0.0 || $scaleY == 0.0)) {
-                $scaledImage = $image;
+    method createImage {image width height scaleWidth scaleHeight} {
+        set scaledImage {}
+        if {[expr {[expr {$scaleWidth != 0}] && [expr {$scaleHeight != 0}]}]} {
+            set scaleX [expr {([expr {double($scaleWidth)}]) / ([expr {double($width)}])}]
+            set scaleY [expr {([expr {double($scaleHeight)}]) / ([expr {double($height)}])}]
+            if {[expr {([expr {[expr {$scaleX == 1.0}] && [expr {$scaleY == 1.0}]}]) || ([expr {[expr {$scaleX == 0.0}] || [expr {$scaleY == 0.0}]}])}]} {
+                set scaledImage $image
             } else {
-                my $scaledWidth = int(($scaleX * $width));
-                my $scaledHeight = int(($scaleY * $height));
-                $scaledImage = $self->{imageScaleUtil}->scale($image, $scaledWidth, $scaledHeight);
+                set scaledWidth [jint [jd2i ([expr {$scaleX * [expr {double($width)}]}])]]
+                set scaledHeight [jint [jd2i ([expr {$scaleY * [expr {double($height)}]}])]]
+                set scaledImage [[my jget imageScaleUtil] scale $image $scaledWidth $scaledHeight]
             }
         } else {
-            $scaledImage = $image;
+            set scaledImage $image
         }
-        return $scaledImage;
-}
+        return $scaledImage
+    }
+    
 
-
-# throws Exception
-sub processAdjust {
-    my ($self, $baseImageAnimationFactory) = @_;
-        my $scaleProperties = $baseImageAnimationFactory->getScalePropertiesP();
-        if ($scaleProperties->{scaleWidth} != 0 && $scaleProperties->{scaleHeight} != 0) {
-            my $animationFactoryInitializationVisitor = $baseImageAnimationFactory->getAnimationFactoryInitializationVisitorP();
-            my $scaleX = ($scaleProperties->{scaleWidth}) / ($animationFactoryInitializationVisitor->{width});
-            my $scaleY = ($scaleProperties->{scaleHeight}) / ($animationFactoryInitializationVisitor->{height});
-            if (($scaleX == 1.0 && $scaleY == 1.0) || ($scaleX == 0.0 || $scaleY == 0.0)) {
+    method processAdjust {baseImageAnimationFactory} {
+        set scaleProperties [$baseImageAnimationFactory getScalePropertiesP]
+        if {[expr {[expr {[$scaleProperties jget scaleWidth] != 0}] && [expr {[$scaleProperties jget scaleHeight] != 0}]}]} {
+            set animationFactoryInitializationVisitor [$baseImageAnimationFactory getAnimationFactoryInitializationVisitorP]
+            set scaleX [expr {([expr {double([$scaleProperties jget scaleWidth])}]) / ([expr {double([$animationFactoryInitializationVisitor jget width])}])}]
+            set scaleY [expr {([expr {double([$scaleProperties jget scaleHeight])}]) / ([expr {double([$animationFactoryInitializationVisitor jget height])}])}]
+            if {[expr {([expr {[expr {$scaleX == 1.0}] && [expr {$scaleY == 1.0}]}]) || ([expr {[expr {$scaleX == 0.0}] || [expr {$scaleY == 0.0}]}])}]} {
             } else {
-                $animationFactoryInitializationVisitor->{dx} = int(($animationFactoryInitializationVisitor->{originalDx} * $scaleX));
-                $animationFactoryInitializationVisitor->{dy} = int(($animationFactoryInitializationVisitor->{originalDy} * $scaleY));
+                $animationFactoryInitializationVisitor jset dx [jint ([expr {[$animationFactoryInitializationVisitor jget originalDx] * $scaleX}])]
+                $animationFactoryInitializationVisitor jset dy [jint ([expr {[$animationFactoryInitializationVisitor jget originalDy] * $scaleY}])]
             }
         } else {
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::animation::image::AnimationFactoryInitializationVisitor ();
-use org::allbinary::animation::image::BaseImageAnimationFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::media::ScaleProperties ();
-use org::allbinary::media::image::ImageJ2MEScaleUtil ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::AnimationFactoryImageScaleUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AnimationFactoryImageScaleUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AnimationFactoryImageScaleUtil::staticGet_instance]
+    }
+}
 
-1;
 

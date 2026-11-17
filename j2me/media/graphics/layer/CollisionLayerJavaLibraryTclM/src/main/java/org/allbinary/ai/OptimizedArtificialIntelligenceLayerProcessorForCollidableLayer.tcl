@@ -11,48 +11,40 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.ai
 
-package org::allbinary::ai::OptimizedArtificialIntelligenceLayerProcessorForCollidableLayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::LayerProcessor';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::ai::OptimizedArtificialIntelligenceLayerManager'->new());
-        # super(...) made $self above
-    return $self;
+oo::class create ::OptimizedArtificialIntelligenceLayerProcessorForCollidableLayer {
+    superclass ::LayerProcessor
 }
 
+oo::define ::OptimizedArtificialIntelligenceLayerProcessorForCollidableLayer {
+    method initFields_OptimizedArtificialIntelligenceLayerProcessorForCollidableLayer {} {
+        return
+    }
+    
 
-# throws Exception
-sub processAt {
-    my ($self, $allBinaryLayerManager, $layerInterface, $index) = @_;
-        my $artificialIntelligenceCompositeInterface = $layerInterface;
-        $artificialIntelligenceCompositeInterface->getArtificialIntelligenceInterface()->processAI($allBinaryLayerManager);
-}
+    constructor {} {
+        next [::OptimizedArtificialIntelligenceLayerManager new]
+        my initFields_OptimizedArtificialIntelligenceLayerProcessorForCollidableLayer
+    }
+    
 
+    method processAt {allBinaryLayerManager layerInterface index} {
+        set artificialIntelligenceCompositeInterface $layerInterface
+        [$artificialIntelligenceCompositeInterface getArtificialIntelligenceInterface] processAI $allBinaryLayerManager
+    }
+    
 
-# throws Exception
-sub isProcessorLayer {
-    my ($self, $layerInterface) = @_;
-        if ($layerInterface->implmentsArtificialIntelligenceCompositeInterface()) {
-            return 1;
+    method isProcessorLayer {layerInterface} {
+        if {[$layerInterface implmentsArtificialIntelligenceCompositeInterface]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::layer::CollidableCompositeLayer ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::layer::LayerProcessor ();
-use org::allbinary::ai::OptimizedArtificialIntelligenceLayerManager ();
+namespace eval ::OptimizedArtificialIntelligenceLayerProcessorForCollidableLayer {
+}
 
-1;
 

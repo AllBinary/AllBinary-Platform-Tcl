@@ -11,73 +11,70 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.weapon.mine
 
-package org::allbinary::game::ag::layer::weapon::mine::MineLayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::weapon::SimpleWeaponLayer';
-
-our $NAME = "MineLayer";
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{viewPositionEventHandler} = 'org::allbinary::view::event::ViewPositionEventHandler'->getInstance();
+oo::class create ::MineLayer {
+    superclass ::SimpleWeaponLayer
 }
 
+oo::define ::MineLayer {
+    method initFields_MineLayer {} {
+        my jset viewPositionEventHandler {}
+        my jset viewPositionEventHandler [::ViewPositionEventHandler::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $viewPosition) = @_;
-    my $self = $class->SUPER::new($org::allbinary::game::ag::layer::weapon::mine::MineLayer::NAME, $org::allbinary::game::multiplayer::layer::RemoteInfo::REMOTE_INFO, -1, 'org::allbinary::physics::movement::NoMovementFactory'->getInstance()->getMovmentInstance(), 'org::allbinary::animation::FeaturedAnimationInterfaceFactoryInterfaceFactory'->getInstance()->get('org::allbinary::game::ag::layer::weapon::mine::MineWeaponResources'->getInstance()->{RESOURCE})->getInstance(0), 'org::allbinary::game::layer::weapon::SimpleWeaponLayer'->createDestroyed(), 'org::allbinary::graphics::Rectangle'->new('org::allbinary::graphics::PointFactory'->getInstance()->{ZERO_ZERO}, 10, 10), $viewPosition);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
-}
+    constructor {viewPosition} {
+        next [::MineLayer::staticGet_NAME] [::RemoteInfo::staticGet_REMOTE_INFO] [expr {-1}] [[::NoMovementFactory::getInstance] getMovmentInstance] [[[::FeaturedAnimationInterfaceFactoryInterfaceFactory::getInstance] get [[::MineWeaponResources::getInstance] jget RESOURCE]] getInstance 0] [::SimpleWeaponLayer::createDestroyed] [::Rectangle new [[::PointFactory::getInstance] jget ZERO_ZERO] 10 10] $viewPosition
+        my initFields_MineLayer
+    }
+    
 
+    method initXYZ {x y z} {
+        my setPosition [jint [expr {$x + 5}]] [jint [expr {$y + 5}]] $z
+        [my jget viewPositionEventHandler] addListener [self]
+        [::SecondaryPlayerQueueFactory::getInstance] add [::DropWeaponSound::getInstance]
+    }
+    
 
-sub initXYZ {
-    my ($self, $x, $y, $z) = @_;
-        $self->setPosition($x + 5, $y + 5, $z);
-        $self->{viewPositionEventHandler}->addListener($self);
-        'org::allbinary::media::audio::SecondaryPlayerQueueFactory'->getInstance()->add('org::allbinary::ag::weapon::media::audio::DropWeaponSound'->getInstance());
-}
+    method damage {damage damageType} {
+        my jset totalDamage [expr {[my getInitDamage] + 1}]
+    }
+    
 
+    method getDamage {damageType} {
+        next $damageType
+        return [my getInitDamage]
+    }
+    
 
-sub damage {
-    my ($self, $damage, $damageType) = @_;
-        $self->{totalDamage} = $self->getInitDamage() + 1;
-}
-
-
-sub getDamage {
-    my ($self, $damageType) = @_;
-        $self->SUPER::getDamage($damageType);
-        return $self->getInitDamage();
-}
-
-
-sub setDestroyed {
-    my ($self, $destroyed) = @_;
-        $self->SUPER::setDestroyed($destroyed);
-        if ($self->isDestroyed()) {
-            $self->{viewPositionEventHandler}->removeListener($self);
+    method setDestroyed {destroyed} {
+        next $destroyed
+        if {[my isDestroyed]} {
+            [my jget viewPositionEventHandler] removeListener [self]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::ag::weapon::media::audio::DropWeaponSound ();
-use org::allbinary::animation::FeaturedAnimationInterfaceFactoryInterfaceFactory ();
-use org::allbinary::game::layer::weapon::SimpleWeaponLayer ();
-use org::allbinary::game::multiplayer::layer::RemoteInfo ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::media::audio::SecondaryPlayerQueueFactory ();
-use org::allbinary::physics::movement::NoMovementFactory ();
-use org::allbinary::view::ViewPositionBase ();
-use org::allbinary::view::event::ViewPositionEventHandler ();
-use org::allbinary::game::ag::layer::weapon::mine::MineWeaponResources ();
+namespace eval ::MineLayer {
+    variable NAMEValue {}
+    variable NAMESet 0
+    proc staticGet_NAME {} {
+        variable NAMEValue
+        variable NAMESet
+        if {!$NAMESet} {
+            set NAMESet 1
+            set NAMEValue "MineLayer"
+        }
+        return $NAMEValue
+    }
+    proc staticSet_NAME {value} {
+        variable NAMEValue
+        variable NAMESet
+        set NAMESet 1
+        set NAMEValue $value
+    }
+}
 
-1;
 

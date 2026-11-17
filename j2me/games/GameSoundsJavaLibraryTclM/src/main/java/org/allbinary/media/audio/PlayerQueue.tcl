@@ -11,91 +11,96 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-package org::allbinary::media::audio::PlayerQueue;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $TOTAL = "Sounds In Queue: ";
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{max} = undef;
+oo::class create ::PlayerQueue {
+    superclass ::JObject
 }
 
+oo::define ::PlayerQueue {
+    method initFields_PlayerQueue {} {
+        my jset commonStrings {}
+        my jset list {}
+        my jset max 0
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset list [::BasicArrayListD new]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $max) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{max} = $max;
-    return $self;
-}
+    constructor {max} {
+        next
+        my initFields_PlayerQueue
+        my jset max $max
+    }
+    
 
-
-sub add {
-    my ($self, $sound) = @_;
+    method add {sound} {
         try {
-            if (!$self->{list}->contains($sound)) {
-                $self->{list}->add($sound);
+            if {[expr {![[my jget list] contains $sound]}]} {
+                [my jget list] add $sound
             }
-        } catch ($e) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{ADD});
+        } on error {e} {
+            ::PreLogUtil::put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget ADD]
         }
-}
+    }
+    
 
-
-sub process {
-    my ($self) = @_;
-        my $sound = 'org::allbinary::media::audio::NoSound'->getInstance();
+    method process {} {
+        set sound [::NoSound::getInstance]
         try {
-            my $played = 0;
-            if ($self->{list}->size() > 0) {
-                $sound = $self->{list}->removeAt(0);
-                if (defined($sound)) {
-                    $sound->getPlayerP()->start();
+            set played false
+            if {[expr {[[my jget list] size] > 0}]} {
+                set sound [[my jget list] removeAt 0]
+                if {[expr {$sound ne {}}]} {
+                    [$sound getPlayerP] start
                 }
-                while ($self->{list}->size() > $self->{max}) {
-                    $self->{list}->removeAt(0);
+                while {[expr {[[my jget list] size] > [my jget max]}]} {
+                    [my jget list] removeAt 0
                 }
-                $played = 1;
+                set played true
             }
-            return $played;
-        } catch ($e) {
-            my $resource = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-            if (defined($sound)) {
-                $resource = $sound->getResource();
+            return $played
+        } on error {e} {
+            set resource [[::StringUtil::getInstance] jget EMPTY_STRING]
+            if {[expr {$sound ne {}}]} {
+                set resource [$sound getResource]
             }
-            'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonStrings}->{EXCEPTION_LABEL})->append($resource)->toString(), $self, $self->{commonStrings}->{PROCESS});
-            return 0;
+            ::PreLogUtil::put [[[[::StringMaker new] append [[my jget commonStrings] jget EXCEPTION_LABEL]] append $resource] toString] [self] [[my jget commonStrings] jget PROCESS]
+            return false
         }
+    }
+    
+
+    method clear {} {
+        [my jget list] clear
+    }
+    
+
+    method toString {} {
+        return [[[[::StringMaker new] append [::PlayerQueue::staticGet_TOTAL]] appendint [[my jget list] size]] toString]
+    }
 }
 
-
-sub clear {
-    my ($self) = @_;
-        $self->{list}->clear();
+namespace eval ::PlayerQueue {
+    variable TOTALValue {}
+    variable TOTALSet 0
+    proc staticGet_TOTAL {} {
+        variable TOTALValue
+        variable TOTALSet
+        if {!$TOTALSet} {
+            set TOTALSet 1
+            set TOTALValue "Sounds In Queue: "
+        }
+        return $TOTALValue
+    }
+    proc staticSet_TOTAL {value} {
+        variable TOTALValue
+        variable TOTALSet
+        set TOTALSet 1
+        set TOTALValue $value
+    }
 }
 
-
-sub toString {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringMaker'->new()->append($org::allbinary::media::audio::PlayerQueue::TOTAL)->appendint($self->{list}->size())->toString();
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::media::audio::NoSound ();
-
-1;
 

@@ -11,146 +11,193 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.health
 
-package org::allbinary::game::health::Health;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::health::HealthInterface';
-
-tie our $NULL_HEALTH, 'java::lang::LazyStatic', sub { 'org::allbinary::game::health::Health'->new(0) };
-our $NAME = "Health Resource";
-our $HEALTH_LABEL = "Health: ";
-our $MAX_HEALTH_LABEL = " Max: ";
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{health} = 0;
-    $self->{maxHealth} = 0;
-    $self->{healthListenerInterface} = $org::allbinary::game::health::NullHealthListener::NULL_HEALTH_LISTENER;
+oo::class create ::Health {
+    superclass ::JObject
 }
 
+oo::define ::Health {
+    method initFields_Health {} {
+        my jset health 0
+        my jset maxHealth 0
+        my jset healthListenerInterface {}
+        my jset health 0
+        my jset maxHealth 0
+        my jset healthListenerInterface [::NullHealthListener::staticGet_NULL_HEALTH_LISTENER]
+        return
+    }
+    
 
-sub new {
-    my ($class, $maxHealth) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->setMaxHealth($maxHealth);
-        $self->setHealth($maxHealth);
-    return $self;
-}
+    constructor {maxHealth} {
+        next
+        my initFields_Health
+        my setMaxHealth $maxHealth
+        my setHealth $maxHealth
+    }
+    
 
-
-sub heal {
-    my ($self, $ahealth) = @_;
-        my $newHealth = $self->getHealth() + $ahealth;
-        if ($newHealth > $self->getMaxHealth()) {
-            $self->setHealth($self->getMaxHealth());
+    method heal {ahealth} {
+        set newHealth [jint [expr {[my getHealth] + $ahealth}]]
+        if {[expr {$newHealth > [my getMaxHealth]}]} {
+            my setHealth [my getMaxHealth]
         } else {
-            $self->setHealth($newHealth);
+            my setHealth $newHealth
         }
-}
+    }
+    
 
+    method healMax {} {
+        my setHealth [my getMaxHealth]
+    }
+    
 
-sub healMax {
-    my ($self) = @_;
-        $self->setHealth($self->getMaxHealth());
-}
-
-
-sub isDamaged {
-    my ($self) = @_;
-        if ($self->getHealth() != $self->getMaxHealth()) {
-            return 1;
+    method isDamaged {} {
+        if {[expr {[my getHealth] != [my getMaxHealth]}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
-}
+    }
+    
 
-
-sub damage {
-    my ($self, $ahealth) = @_;
-        if ($ahealth < 0) {
-            my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-            $stringBuffer->append("******* Trying to heal when damaging. Damage: ");
-            $stringBuffer->appendint($ahealth);
-            $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
-            $stringBuffer->append($self->toString());
-            'org::allbinary::logic::communication::log::ForcedLogUtil'->log($stringBuffer->toString(), $self);
-            return;
+    method damage {ahealth} {
+        if {[expr {$ahealth < 0}]} {
+            set stringBuffer [::StringMaker new]
+            $stringBuffer append "******* Trying to heal when damaging. Damage: "
+            $stringBuffer appendint $ahealth
+            $stringBuffer append [[::CommonSeps::getInstance] jget SPACE]
+            $stringBuffer append [my toString]
+            ::ForcedLogUtil::log [$stringBuffer toString] [self]
+            return
         }
-        my $health = $self->getHealth() - $ahealth;
-        $self->setHealth($health);
-}
+        set health [jint [expr {[my getHealth] - $ahealth}]]
+        my setHealth $health
+    }
+    
 
-
-sub isAlive {
-    my ($self) = @_;
-        if ($self->getHealth() <= 0) {
-            return 0;
+    method isAlive {} {
+        if {[expr {[my getHealth] <= 0}]} {
+            return false
         } else {
-            return 1;
+            return true
         }
-}
+    }
+    
 
+    method getMaxHealth {} {
+        return [my jget maxHealth]
+    }
+    
 
-sub getMaxHealth {
-    my ($self) = @_;
-        return $self->{maxHealth};
-}
+    method setMaxHealth {maxHealth} {
+        my jset maxHealth $maxHealth
+    }
+    
 
-
-sub setMaxHealth {
-    my ($self, $maxHealth) = @_;
-        $self->{maxHealth} = $maxHealth;
-}
-
-
-sub setHealth {
-    my ($self, $health) = @_;
-        if ($health > $self->getMaxHealth()) {
-            $self->{health} = $self->getMaxHealth();
-        } elsif ($health < 0) {
-            $self->{health} = 0;
+    method setHealth {health} {
+        if {[expr {$health > [my getMaxHealth]}]} {
+            my jset health [my getMaxHealth]
+        } elseif {[expr {$health < 0}]} {
+            my jset health 0
         } else {
-            $self->{health} = $health;
+            my jset health $health
         }
-        if (defined($self->{healthListenerInterface})) {
-            $self->{healthListenerInterface}->onHealthChange();
+        if {[expr {[my jget healthListenerInterface] ne {}}]} {
+            [my jget healthListenerInterface] onHealthChange
         }
+    }
+    
+
+    method getHealth {} {
+        return [my jget health]
+    }
+    
+
+    method addListener {healthGraphic} {
+        my jset healthListenerInterface $healthGraphic
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append [::Health::staticGet_HEALTH_LABEL]
+        $stringBuffer appendint [my jget health]
+        $stringBuffer append [::Health::staticGet_MAX_HEALTH_LABEL]
+        $stringBuffer appendint [my jget maxHealth]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub getHealth {
-    my ($self) = @_;
-        return $self->{health};
+namespace eval ::Health {
+    variable NULL_HEALTHValue {}
+    variable NULL_HEALTHSet 0
+    proc staticGet_NULL_HEALTH {} {
+        variable NULL_HEALTHValue
+        variable NULL_HEALTHSet
+        if {!$NULL_HEALTHSet} {
+            set NULL_HEALTHSet 1
+            set NULL_HEALTHValue [::Health new 0]
+        }
+        return $NULL_HEALTHValue
+    }
+    proc staticSet_NULL_HEALTH {value} {
+        variable NULL_HEALTHValue
+        variable NULL_HEALTHSet
+        set NULL_HEALTHSet 1
+        set NULL_HEALTHValue $value
+    }
+    variable NAMEValue {}
+    variable NAMESet 0
+    proc staticGet_NAME {} {
+        variable NAMEValue
+        variable NAMESet
+        if {!$NAMESet} {
+            set NAMESet 1
+            set NAMEValue "Health Resource"
+        }
+        return $NAMEValue
+    }
+    proc staticSet_NAME {value} {
+        variable NAMEValue
+        variable NAMESet
+        set NAMESet 1
+        set NAMEValue $value
+    }
+    variable HEALTH_LABELValue {}
+    variable HEALTH_LABELSet 0
+    proc staticGet_HEALTH_LABEL {} {
+        variable HEALTH_LABELValue
+        variable HEALTH_LABELSet
+        if {!$HEALTH_LABELSet} {
+            set HEALTH_LABELSet 1
+            set HEALTH_LABELValue "Health: "
+        }
+        return $HEALTH_LABELValue
+    }
+    proc staticSet_HEALTH_LABEL {value} {
+        variable HEALTH_LABELValue
+        variable HEALTH_LABELSet
+        set HEALTH_LABELSet 1
+        set HEALTH_LABELValue $value
+    }
+    variable MAX_HEALTH_LABELValue {}
+    variable MAX_HEALTH_LABELSet 0
+    proc staticGet_MAX_HEALTH_LABEL {} {
+        variable MAX_HEALTH_LABELValue
+        variable MAX_HEALTH_LABELSet
+        if {!$MAX_HEALTH_LABELSet} {
+            set MAX_HEALTH_LABELSet 1
+            set MAX_HEALTH_LABELValue " Max: "
+        }
+        return $MAX_HEALTH_LABELValue
+    }
+    proc staticSet_MAX_HEALTH_LABEL {value} {
+        variable MAX_HEALTH_LABELValue
+        variable MAX_HEALTH_LABELSet
+        set MAX_HEALTH_LABELSet 1
+        set MAX_HEALTH_LABELValue $value
+    }
 }
 
-
-sub addListener {
-    my ($self, $healthGraphic) = @_;
-        $self->{healthListenerInterface} = $healthGraphic;
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append($org::allbinary::game::health::Health::HEALTH_LABEL);
-        $stringBuffer->appendint($self->{health});
-        $stringBuffer->append($org::allbinary::game::health::Health::MAX_HEALTH_LABEL);
-        $stringBuffer->appendint($self->{maxHealth});
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::game::health::HealthInterface ();
-use org::allbinary::game::health::NullHealthListener ();
-
-1;
 

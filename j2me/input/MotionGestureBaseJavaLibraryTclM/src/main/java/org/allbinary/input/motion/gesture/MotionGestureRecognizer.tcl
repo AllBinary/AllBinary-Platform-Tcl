@@ -11,194 +11,173 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture
 
-package org::allbinary::input::motion::gesture::MotionGestureRecognizer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use List::Util ();
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{j2seMath} = 'org::allbinary::logic::math::J2SEMath'->getInstance();
-    $self->{origin} = 'org::allbinary::graphics::PointFactory'->getInstance()->{ZERO_ZERO};
-    $self->{previous} = $self->{origin};
-    $self->{intermediate} = $self->{origin};
-    $self->{line} = 'org::allbinary::graphics::Line'->new($self->{origin}, $self->{origin});
-    $self->{motionGesturesHandler} = undef;
-    $self->{movedMotionGesturesHandler} = undef;
-    $self->{scrolledMotionGesturesHandler} = undef;
-    $self->{motionEventCircularPool} = undef;
+oo::class create ::MotionGestureRecognizer {
+    superclass ::JObject
 }
 
+oo::define ::MotionGestureRecognizer {
+    method initFields_MotionGestureRecognizer {} {
+        my jset logUtil {}
+        my jset j2seMath {}
+        my jset origin {}
+        my jset previous {}
+        my jset intermediate {}
+        my jset line {}
+        my jset motionGesturesHandler {}
+        my jset movedMotionGesturesHandler {}
+        my jset scrolledMotionGesturesHandler {}
+        my jset motionEventCircularPool {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset j2seMath [::J2SEMath::getInstance]
+        my jset origin [[::PointFactory::getInstance] jget ZERO_ZERO]
+        my jset previous [my jget origin]
+        my jset intermediate [my jget origin]
+        my jset line [::Line new [my jget origin] [my jget origin]]
+        
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $id) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{motionEventCircularPool} = 'org::allbinary::input::motion::gesture::observer::MotionEventCircularPool'->createPool($id);
-        my $motionGesturesHandler = 'org::allbinary::logic::util::event::handler::BasicEventHandler'->new();
-        my $movedMotionGesturesHandler = $motionGesturesHandler;
-        my $scrolledMotionGesturesHandler = $motionGesturesHandler;
+    constructor {id} {
+        next
+        my initFields_MotionGestureRecognizer
+        my jset motionEventCircularPool [::MotionEventCircularPool::createPool $id]
+        set motionGesturesHandler [::BasicEventHandler new]
+        set movedMotionGesturesHandler $motionGesturesHandler
+        set scrolledMotionGesturesHandler $motionGesturesHandler
         try {
-            $motionGesturesHandler = 'org::allbinary::input::motion::gesture::observer::BasicMotionGesturesHandler'->getInstance();
-            $movedMotionGesturesHandler = 'org::allbinary::input::motion::gesture::observer::MovedMotionGesturesHandler'->getInstance();
-            $scrolledMotionGesturesHandler = 'org::allbinary::input::motion::gesture::observer::ScrolledMotionGesturesHandler'->getInstance();
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{CONSTRUCTOR}, $e);
+            set motionGesturesHandler [::BasicMotionGesturesHandler::getInstance]
+            set movedMotionGesturesHandler [::MovedMotionGesturesHandler::getInstance]
+            set scrolledMotionGesturesHandler [::ScrolledMotionGesturesHandler::getInstance]
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget CONSTRUCTOR] $e
         }
-        $self->{motionGesturesHandler} = $motionGesturesHandler;
-        $self->{movedMotionGesturesHandler} = $movedMotionGesturesHandler;
-        $self->{scrolledMotionGesturesHandler} = $scrolledMotionGesturesHandler;
-    return $self;
-}
+        my jset motionGesturesHandler $motionGesturesHandler
+        my jset movedMotionGesturesHandler $movedMotionGesturesHandler
+        my jset scrolledMotionGesturesHandler $scrolledMotionGesturesHandler
+    }
+    
 
+    method processPressedMotionEvent {current deviceId button} {
+        my jset intermediate [my jget origin]
+        my jset previous [my jget origin]
+        set event [[my jget motionEventCircularPool] getInstance [[::TouchMotionGestureFactory::getInstance] jget PRESSED]]
+        $event setPreviousPoint [my jget previous]
+        $event setCurrentPoint $current
+        [my jget motionGesturesHandler] fireEvent $event
+        return true
+    }
+    
 
-# throws Exception
-sub processPressedMotionEvent {
-    my ($self, $current, $deviceId, $button) = @_;
-        $self->{intermediate} = $self->{origin};
-        $self->{previous} = $self->{origin};
-        my $event = $self->{motionEventCircularPool}->getInstance('org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance()->{PRESSED});
-        $event->setPreviousPoint($self->{previous});
-        $event->setCurrentPoint($current);
-        $self->{motionGesturesHandler}->fireEvent($event);
-        return 1;
-}
+    method processReleasedMotionEvent {current deviceId button} {
+        set event [[my jget motionEventCircularPool] getInstance [[::TouchMotionGestureFactory::getInstance] jget RELEASED]]
+        $event setPreviousPoint [my jget previous]
+        $event setCurrentPoint $current
+        [my jget motionGesturesHandler] fireEvent $event
+        return true
+    }
+    
 
-
-# throws Exception
-sub processReleasedMotionEvent {
-    my ($self, $current, $deviceId, $button) = @_;
-        my $event = $self->{motionEventCircularPool}->getInstance('org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance()->{RELEASED});
-        $event->setPreviousPoint($self->{previous});
-        $event->setCurrentPoint($current);
-        $self->{motionGesturesHandler}->fireEvent($event);
-        return 1;
-}
-
-
-# throws Exception
-sub processDraggedMotionEvent {
-    my ($self, $current, $deviceId, $buttonMask) = @_;
-        if ($self->{previous} == $self->{origin} || $self->{intermediate} == $self->{origin}) {
-            $self->{previous} = $current;
-            $self->{intermediate} = $current;
-            return;
+    method processDraggedMotionEvent {current deviceId buttonMask} {
+        if {[expr {[expr {[my jget previous] eq [my jget origin]}] || [expr {[my jget intermediate] eq [my jget origin]}]}]} {
+            my jset previous $current
+            my jset intermediate $current
+            return
         }
-        $self->{line}->setP1($self->{previous});
-        $self->{line}->setP2($current);
-        my $minimumMotionGesture = 'org::allbinary::input::motion::gesture::configuration::MotionGestureConfigurationFactory'->getInstance()->getMinimumMotionGesture();
-        if ($self->{j2seMath}->abs($self->{line}->getDeltaX()) < $minimumMotionGesture && $self->{j2seMath}->abs($self->{line}->getDeltaY()) < $minimumMotionGesture) {
-            $self->{intermediate} = $current;
-            return;
+        [my jget line] setP1 [my jget previous]
+        [my jget line] setP2 $current
+        set minimumMotionGesture [[::MotionGestureConfigurationFactory::getInstance] getMinimumMotionGesture]
+        if {[expr {[expr {[[my jget j2seMath] abs [expr {double([[my jget line] getDeltaX])}]] < $minimumMotionGesture}] && [expr {[[my jget j2seMath] abs [expr {double([[my jget line] getDeltaY])}]] < $minimumMotionGesture}]}]} {
+            my jset intermediate $current
+            return
         }
-        my $gradient = $self->{line}->getGradient();
-        my $absGradient = $self->{j2seMath}->abs($gradient);
-        my $conf = 'org::allbinary::input::motion::gesture::configuration::MotionGestureConfigurationFactory'->getInstance();
-        my $touchMotionGestureFactory = 'org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance();
-        my $newMotionGesture = $touchMotionGestureFactory->{NO_MOTION};
-        my $diagonalToleranceHigher = 12.0;
-        my $diagonalToleranceLower = 12.0;
-        if ($conf->isDiagonalMotionGestureAllowed()) {
-            $diagonalToleranceHigher = (90 - $conf->getDiagonalTolerance());
-            $diagonalToleranceLower = $conf->getDiagonalTolerance();
+        set gradient [[my jget line] getGradient]
+        set absGradient [expr {double([[my jget j2seMath] abs [expr {double($gradient)}]])}]
+        set conf [::MotionGestureConfigurationFactory::getInstance]
+        set touchMotionGestureFactory [::TouchMotionGestureFactory::getInstance]
+        set newMotionGesture [$touchMotionGestureFactory jget NO_MOTION]
+        set diagonalToleranceHigher 12.0
+        set diagonalToleranceLower 12.0
+        if {[$conf isDiagonalMotionGestureAllowed]} {
+            set diagonalToleranceHigher [expr {double(([expr {90 - [$conf getDiagonalTolerance]}]))}]
+            set diagonalToleranceLower [expr {double([$conf getDiagonalTolerance])}]
         }
-        if ($absGradient > POSIX::tan((($diagonalToleranceHigher) * 3.14159265358979 / 180))) {
-            if ($self->{line}->getDeltaY() > 0) {
-                $newMotionGesture = $touchMotionGestureFactory->{UP};
+        if {[expr {$absGradient > [expr {tan([expr {toRadians($diagonalToleranceHigher)}])}]}]} {
+            if {[expr {[[my jget line] getDeltaY] > 0}]} {
+                set newMotionGesture [$touchMotionGestureFactory jget UP]
             } else {
-                $newMotionGesture = $touchMotionGestureFactory->{DOWN};
+                set newMotionGesture [$touchMotionGestureFactory jget DOWN]
             }
         } else {
-            if ($absGradient < POSIX::tan((($diagonalToleranceLower) * 3.14159265358979 / 180))) {
-                if ($self->{line}->getDeltaX() > 0) {
-                    $newMotionGesture = $touchMotionGestureFactory->{LEFT};
+            if {[expr {$absGradient < [expr {tan([expr {toRadians($diagonalToleranceLower)}])}]}]} {
+                if {[expr {[[my jget line] getDeltaX] > 0}]} {
+                    set newMotionGesture [$touchMotionGestureFactory jget LEFT]
                 } else {
-                    $newMotionGesture = $touchMotionGestureFactory->{RIGHT};
+                    set newMotionGesture [$touchMotionGestureFactory jget RIGHT]
                 }
             } else {
-                if ($gradient > 0.0) {
-                    if ($self->{line}->getDeltaX() > 0) {
-                        $newMotionGesture = $touchMotionGestureFactory->{DIAGONAL_UP_LEFT};
+                if {[expr {$gradient > 0.0}]} {
+                    if {[expr {[[my jget line] getDeltaX] > 0}]} {
+                        set newMotionGesture [$touchMotionGestureFactory jget DIAGONAL_UP_LEFT]
                     } else {
-                        $newMotionGesture = $touchMotionGestureFactory->{DIAGONAL_DOWN_RIGHT};
+                        set newMotionGesture [$touchMotionGestureFactory jget DIAGONAL_DOWN_RIGHT]
                     }
                 } else {
-                    if ($self->{line}->getDeltaX() > 0) {
-                        $newMotionGesture = $touchMotionGestureFactory->{DIAGONAL_DOWN_LEFT};
+                    if {[expr {[[my jget line] getDeltaX] > 0}]} {
+                        set newMotionGesture [$touchMotionGestureFactory jget DIAGONAL_DOWN_LEFT]
                     } else {
-                        $newMotionGesture = $touchMotionGestureFactory->{DIAGONAL_UP_RIGHT};
+                        set newMotionGesture [$touchMotionGestureFactory jget DIAGONAL_UP_RIGHT]
                     }
                 }
             }
         }
-        $self->{previous} = $current;
-        $self->{intermediate} = $current;
-        my $event = $self->{motionEventCircularPool}->getInstance($newMotionGesture);
-        $event->setPreviousPoint($self->{previous});
-        $event->setCurrentPoint($current);
-        $self->{motionGesturesHandler}->fireEvent($event);
-        return;
-}
+        my jset previous $current
+        my jset intermediate $current
+        set event [[my jget motionEventCircularPool] getInstance $newMotionGesture]
+        $event setPreviousPoint [my jget previous]
+        $event setCurrentPoint $current
+        [my jget motionGesturesHandler] fireEvent $event
+        return
+    }
+    
 
+    method processMovedMotionEvent {current deviceId button} {
+        set event [[my jget motionEventCircularPool] getInstance [[::TouchMotionGestureFactory::getInstance] jget NO_MOTION]]
+        $event setPreviousPoint [my jget previous]
+        $event setCurrentPoint $current
+        [my jget movedMotionGesturesHandler] fireEvent $event
+        return true
+    }
+    
 
-# throws Exception
-sub processMovedMotionEvent {
-    my ($self, $current, $deviceId, $button) = @_;
-        my $event = $self->{motionEventCircularPool}->getInstance('org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance()->{NO_MOTION});
-        $event->setPreviousPoint($self->{previous});
-        $event->setCurrentPoint($current);
-        $self->{movedMotionGesturesHandler}->fireEvent($event);
-        return 1;
-}
-
-
-# throws Exception
-sub processScrolledMotionEvent {
-    my ($self, $current, $deviceId, $button) = @_;
-        my $touchMotionGestureFactory = 'org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance();
-        my $newMotionGesture = $touchMotionGestureFactory->{NO_MOTION};
-        if ($button > 0) {
-            $newMotionGesture = $touchMotionGestureFactory->{SCROLL_UP};
-        } elsif ($button < 0) {
-            $newMotionGesture = $touchMotionGestureFactory->{SCROLL_DOWN};
+    method processScrolledMotionEvent {current deviceId button} {
+        set touchMotionGestureFactory [::TouchMotionGestureFactory::getInstance]
+        set newMotionGesture [$touchMotionGestureFactory jget NO_MOTION]
+        if {[expr {$button > 0}]} {
+            set newMotionGesture [$touchMotionGestureFactory jget SCROLL_UP]
+        } elseif {[expr {$button < 0}]} {
+            set newMotionGesture [$touchMotionGestureFactory jget SCROLL_DOWN]
         }
-        my $event = $self->{motionEventCircularPool}->getInstance($newMotionGesture);
-        $event->setPreviousPoint($self->{previous});
-        $event->setCurrentPoint($current);
-        $self->{scrolledMotionGesturesHandler}->fireEvent($event);
-        return 1;
+        set event [[my jget motionEventCircularPool] getInstance $newMotionGesture]
+        $event setPreviousPoint [my jget previous]
+        $event setCurrentPoint $current
+        [my jget scrolledMotionGesturesHandler] fireEvent $event
+        return true
+    }
+    
+
+    method getMotionGesturesHandler {} {
+        return [my jget motionGesturesHandler]
+    }
 }
 
-
-sub getMotionGesturesHandler {
-    my ($self) = @_;
-        return $self->{motionGesturesHandler};
+namespace eval ::MotionGestureRecognizer {
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::GPoint ();
-use org::allbinary::graphics::Line ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::input::motion::gesture::configuration::MotionGestureConfiguration ();
-use org::allbinary::input::motion::gesture::configuration::MotionGestureConfigurationFactory ();
-use org::allbinary::input::motion::gesture::observer::BasicMotionGesturesHandler ();
-use org::allbinary::input::motion::gesture::observer::MotionEventCircularPool ();
-use org::allbinary::input::motion::gesture::observer::MotionGestureEvent ();
-use org::allbinary::input::motion::gesture::observer::MovedMotionGesturesHandler ();
-use org::allbinary::input::motion::gesture::observer::ScrolledMotionGesturesHandler ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::math::J2SEMath ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::input::motion::gesture::TouchMotionGestureFactory ();
-
-1;
 

@@ -11,29 +11,29 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-package org::allbinary::game::midlet::LicensedDemoSetupFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::LicensedDemoSetupFactory {
+    superclass ::JObject
 }
 
+oo::define ::LicensedDemoSetupFactory {
+    method initFields_LicensedDemoSetupFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($self) = @_;
-        return 'org::allbinary::game::midlet::DemoSetup'->new();
+    constructor {} {
+        next
+        my initFields_LicensedDemoSetupFactory
+    }
+    
+
+    method getInstance {} {
+        return [::DemoSetup new]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::midlet::DemoSetup ();
+namespace eval ::LicensedDemoSetupFactory {
+}
 
-1;
 

@@ -11,58 +11,65 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::Scoreable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::score::ScoreableInterface';
-
-tie our $ID, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt(3) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{points} = undef;
+oo::class create ::Scoreable {
+    superclass ::JObject
 }
 
+oo::define ::Scoreable {
+    method initFields_Scoreable {} {
+        my jset points 0
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $points) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{points} = $points;
-    return $self;
+    constructor {points} {
+        next
+        my initFields_Scoreable
+        my jset points $points
+    }
+    
+
+    method addPoints {points} {
+        my jset points [jint [expr {[my jget points] + $points}]]
+    }
+    
+
+    method removePoints {points} {
+        my jset points [jint [expr {[my jget points] - $points}]]
+    }
+    
+
+    method setPoints {points} {
+        my jset points $points
+    }
+    
+
+    method getPoints {} {
+        return [my jget points]
+    }
 }
 
-
-sub addPoints {
-    my ($self, $points) = @_;
-        $self->{points} += $points;
+namespace eval ::Scoreable {
+    variable IDValue {}
+    variable IDSet 0
+    proc staticGet_ID {} {
+        variable IDValue
+        variable IDSet
+        if {!$IDSet} {
+            set IDSet 1
+            set IDValue [[::SmallIntegerSingletonFactory::getInstance] getAt 3]
+        }
+        return $IDValue
+    }
+    proc staticSet_ID {value} {
+        variable IDValue
+        variable IDSet
+        set IDSet 1
+        set IDValue $value
+    }
 }
 
-
-sub removePoints {
-    my ($self, $points) = @_;
-        $self->{points} -= $points;
-}
-
-
-sub setPoints {
-    my ($self, $points) = @_;
-        $self->{points} = $points;
-}
-
-
-sub getPoints {
-    my ($self) = @_;
-        return $self->{points};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::game::score::ScoreableInterface ();
-
-1;
 

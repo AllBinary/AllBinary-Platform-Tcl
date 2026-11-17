@@ -11,36 +11,33 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
-package org::allbinary::logic::system::security::licensing::ClientInformationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ClientInformationFactory {
+    superclass ::JObject
 }
 
+oo::define ::ClientInformationFactory {
+    method initFields_ClientInformationFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($self) = @_;
-        my $logUtil = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-        $logUtil->putF($commonStrings->{NOT_IMPLEMENTED}, $self, $commonStrings->{GET_INSTANCE});
-        my $stringUtil = 'org::allbinary::logic::string::StringUtil'->getInstance();
-        return 'org::allbinary::logic::system::security::licensing::ClientInformation'->new($stringUtil->{NULL_STRING}, $stringUtil->{NULL_STRING}, $stringUtil->{NULL_STRING}, $stringUtil->{NULL_STRING});
+    constructor {} {
+        next
+        my initFields_ClientInformationFactory
+    }
+    
+
+    method getInstance {} {
+        set logUtil [::LogUtil::getInstance]
+        set commonStrings [::CommonStrings::getInstance]
+        $logUtil putF [$commonStrings jget NOT_IMPLEMENTED] [self] [$commonStrings jget GET_INSTANCE]
+        set stringUtil [::StringUtil::getInstance]
+        return [::ClientInformation new [$stringUtil jget NULL_STRING] [$stringUtil jget NULL_STRING] [$stringUtil jget NULL_STRING] [$stringUtil jget NULL_STRING]]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::logic::system::security::licensing::ClientInformation ();
+namespace eval ::ClientInformationFactory {
+}
 
-1;
 

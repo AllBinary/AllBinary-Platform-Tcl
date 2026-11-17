@@ -11,60 +11,65 @@
 # Created By: Travis Berthelot 
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
-package org::allbinary::logic::io::NullReader;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_READER, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::io::NullReader'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::NullReader {
+    superclass ::Reader
 }
 
+oo::define ::NullReader {
+    method initFields_NullReader {} {
+        return
+    }
 
-# throws IOException
-sub read {
-    my ($self) = @_;
-        return -1;
+    constructor {} {
+        next
+        my initFields_NullReader
+    }
+    
+
+    method read {} {
+        return [expr {-1}]
+    }
+    
+
+    method read {cbuf off len} {
+        return [expr {-1}]
+    }
+    
+
+    method ready {} {
+        return false
+    }
+    
+
+    method skip {n} {
+        return 0
+    }
+    
+
+    method close {} {
+    }
 }
 
-
-# throws IOException
-# Java overloaded method: Perl keeps the last definition
-sub read {
-    my ($self, $cbuf, $off, $len) = @_;
-        return -1;
+namespace eval ::NullReader {
+    variable NULL_READERValue {}
+    variable NULL_READERSet 0
+    proc staticGet_NULL_READER {} {
+        variable NULL_READERValue
+        variable NULL_READERSet
+        if {!$NULL_READERSet} {
+            set NULL_READERSet 1
+            set NULL_READERValue [::NullReader new]
+        }
+        return $NULL_READERValue
+    }
+    proc staticSet_NULL_READER {value} {
+        variable NULL_READERValue
+        variable NULL_READERSet
+        set NULL_READERSet 1
+        set NULL_READERValue $value
+    }
 }
 
-
-# throws IOException
-sub ready {
-    my ($self) = @_;
-        return 0;
-}
-
-
-# throws IOException
-sub skip {
-    my ($self, $n) = @_;
-        return 0;
-}
-
-
-sub close {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::IOException ();
-# use java::io::Reader ();
-
-1;
 

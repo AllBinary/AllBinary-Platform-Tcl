@@ -11,48 +11,36 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::DiveAndDirectionalTrackingAIFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::DiveAndDirectionalTrackingAIFactory {
+    superclass ::JObject
 }
 
+oo::define ::DiveAndDirectionalTrackingAIFactory {
+    method initFields_DiveAndDirectionalTrackingAIFactory {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($self, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-        my $visitorCanBeNull = $hashtable->get($org::allbinary::game::ai::BasicAI::AI_VISITOR);
-        if (!defined($visitorCanBeNull)) {
-            $visitorCanBeNull = 'org::allbinary::game::ag::ai::ThrustAIVisitorFactory'->getInstance();
+    constructor {} {
+        next
+        my initFields_DiveAndDirectionalTrackingAIFactory
+    }
+    
+
+    method getInstance {hashtable ownerLayerInterface gameInput} {
+        set visitorCanBeNull [$hashtable get [::BasicAI::staticGet_AI_VISITOR]]
+        if {[expr {$visitorCanBeNull eq {}}]} {
+            set visitorCanBeNull [::ThrustAIVisitorFactory::getInstance]
         }
-        my $hashtable2 = 'org::allbinary::game::ag::ai::BasicProbabilityAIDataFactory'->new()->getInstance();
-        $hashtable2->put($org::allbinary::game::ai::BasicAI::AI_VISITOR, 'org::allbinary::game::ag::ai::LastKeyAIVisitorFactory'->getInstance());
-        my $artificialIntelligenceInterface = 'org::allbinary::game::ag::ai::tactical::BasicRandomAIFactory'->new()->getInstance($hashtable2, $ownerLayerInterface, $gameInput);
-        return 'org::allbinary::game::ag::ai::DiveAndDirectionalTrackingAI'->new($ownerLayerInterface, $artificialIntelligenceInterface, $gameInput, $visitorCanBeNull);
+        set hashtable2 [[::BasicProbabilityAIDataFactory new] getInstance]
+        $hashtable2 put [::BasicAI::staticGet_AI_VISITOR] [::LastKeyAIVisitorFactory::getInstance]
+        set artificialIntelligenceInterface [[::BasicRandomAIFactory new] getInstance $hashtable2 $ownerLayerInterface $gameInput]
+        return [::DiveAndDirectionalTrackingAI new $ownerLayerInterface $artificialIntelligenceInterface $gameInput $visitorCanBeNull]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-use org::allbinary::game::ag::ai::tactical::BasicRandomAIFactory ();
-use org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface ();
-use org::allbinary::game::ai::BasicAI ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::logic::util::visitor::Visitor ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::ag::ai::ThrustAIVisitorFactory ();
-use org::allbinary::game::ag::ai::BasicProbabilityAIDataFactory ();
-use org::allbinary::game::ag::ai::LastKeyAIVisitorFactory ();
-use org::allbinary::game::ag::ai::DiveAndDirectionalTrackingAI ();
+namespace eval ::DiveAndDirectionalTrackingAIFactory {
+}
 
-1;
 

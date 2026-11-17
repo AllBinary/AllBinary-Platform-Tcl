@@ -1,31 +1,31 @@
 # Generated Code Do Not Modify
+# package org.eclipse.swt.graphics
 
-package org::eclipse::swt::graphics::Resource;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::Resource {
+    superclass ::JObject
 }
 
+oo::define ::Resource {
+    method initFields_Resource {} {
+        return
+    }
 
-sub dispose {
-    my ($self) = @_;
+    constructor {} {
+        next
+        my initFields_Resource
+    }
+    
+
+    method dispose {} {
+    }
+    
+
+    method isDisposed {} {
+        return false
+    }
 }
 
-
-sub isDisposed {
-    my ($self) = @_;
-        return 0;
+namespace eval ::Resource {
 }
 
-use java::lang::Object ();
-
-1;
 

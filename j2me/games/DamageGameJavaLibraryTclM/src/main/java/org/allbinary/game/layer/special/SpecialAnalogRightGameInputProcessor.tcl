@@ -11,34 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.special
 
-package org::allbinary::game::layer::special::SpecialAnalogRightGameInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::special::SpecialGameInputProcessor';
-
-
-
-sub new {
-    my ($class, $collidableDestroyableDamageableLayer) = @_;
-    my $self = $class->SUPER::new($collidableDestroyableDamageableLayer);
-        # super(...) made $self above
-    return $self;
+oo::class create ::SpecialAnalogRightGameInputProcessor {
+    superclass ::SpecialGameInputProcessor
 }
 
+oo::define ::SpecialAnalogRightGameInputProcessor {
+    method initFields_SpecialAnalogRightGameInputProcessor {} {
+        return
+    }
+    
 
-# throws Exception
-sub processAnalog {
-    my ($self, $allbinaryLayerManager, $gameKeyEvent, $xAnalogValue) = @_;
-        $self->{collidableDestroyableDamageableLayer}->rightAnalog($xAnalogValue);
+    constructor {collidableDestroyableDamageableLayer} {
+        next $collidableDestroyableDamageableLayer
+        my initFields_SpecialAnalogRightGameInputProcessor
+    }
+    
+
+    method processAnalog {allbinaryLayerManager gameKeyEvent xAnalogValue} {
+        [my jget collidableDestroyableDamageableLayer] rightAnalog $xAnalogValue
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::game::layer::special::SpecialGameInputProcessor ();
+namespace eval ::SpecialAnalogRightGameInputProcessor {
+}
 
-1;
 

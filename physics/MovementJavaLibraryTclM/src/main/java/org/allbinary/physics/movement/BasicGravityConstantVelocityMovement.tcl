@@ -11,43 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
-package org::allbinary::physics::movement::BasicGravityConstantVelocityMovement;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::physics::movement::BasicConstantVelocityMovement';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gravityUtil} = 'org::allbinary::game::physics::acceleration::GravityUtil'->getInstance();
+oo::class create ::BasicGravityConstantVelocityMovement {
+    superclass ::BasicConstantVelocityMovement
 }
 
+oo::define ::BasicGravityConstantVelocityMovement {
+    method initFields_BasicGravityConstantVelocityMovement {} {
+        my jset gravityUtil {}
+        my jset gravityUtil [::GravityUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $speedBasicDecimal) = @_;
-    my $self = $class->SUPER::new($speedBasicDecimal, 'org::allbinary::game::physics::velocity::VelocityProperties'->new(int($speedBasicDecimal->getUnscaled()), int($speedBasicDecimal->getUnscaled())));
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
+    constructor {speedBasicDecimal} {
+        next $speedBasicDecimal [::VelocityProperties new [jint [$speedBasicDecimal getUnscaled]] [jint [$speedBasicDecimal getUnscaled]]]
+        my initFields_BasicGravityConstantVelocityMovement
+    }
+    
+
+    method process {layer} {
+        next $layer
+        [my jget gravityUtil] process [my getVelocityProperties] [[my jget gravityUtil] jget GAME_GRAVITY_VELOCITY]
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $layer) = @_;
-        $self->SUPER::process($layer);
-        $self->{gravityUtil}->process($self->getVelocityProperties(), $self->{gravityUtil}->{GAME_GRAVITY_VELOCITY});
+namespace eval ::BasicGravityConstantVelocityMovement {
 }
 
-use java::lang::Object ();
-use org::allbinary::game::layer::AllBinaryGameLayer ();
-use org::allbinary::game::physics::acceleration::GravityUtil ();
-use org::allbinary::game::physics::velocity::VelocityProperties ();
-use org::allbinary::logic::math::BasicDecimal ();
-use org::allbinary::physics::movement::BasicConstantVelocityMovement ();
-
-1;
 

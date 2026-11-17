@@ -11,41 +11,49 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game
 
-package org::allbinary::game::BasicHighScoresGameInfoFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::BasicHighScoresGameInfoFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{MULTI_PLAYER_SERVER} = 'org::allbinary::game::GameInfo'->new('org::allbinary::game::GameTypeFactory'->getInstance()->{MULTI_PLAYER}, $org::allbinary::game::GameMode::SERVER, 'org::allbinary::game::PlayerTypesFactory'->getInstance()->{PLAYER_TYPE_ONE}, 0, 0);
-    $self->{SINGLE_PLAYER_SERVER} = 'org::allbinary::game::GameInfo'->new('org::allbinary::game::GameTypeFactory'->getInstance()->{SINGLE_PLAYER}, $org::allbinary::game::GameMode::SERVER, 'org::allbinary::game::PlayerTypesFactory'->getInstance()->{PLAYER_TYPE_ONE}, 0, 0);
+oo::class create ::BasicHighScoresGameInfoFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::BasicHighScoresGameInfoFactory {
+    method initFields_BasicHighScoresGameInfoFactory {} {
+        my jset MULTI_PLAYER_SERVER {}
+        my jset SINGLE_PLAYER_SERVER {}
+        my jset MULTI_PLAYER_SERVER [::GameInfo new [[::GameTypeFactory::getInstance] jget MULTI_PLAYER] [::GameMode::staticGet_SERVER] [[::PlayerTypesFactory::getInstance] jget PLAYER_TYPE_ONE] 0 0]
+        my jset SINGLE_PLAYER_SERVER [::GameInfo new [[::GameTypeFactory::getInstance] jget SINGLE_PLAYER] [::GameMode::staticGet_SERVER] [[::PlayerTypesFactory::getInstance] jget PLAYER_TYPE_ONE] 0 0]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_BasicHighScoresGameInfoFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::BasicHighScoresGameInfoFactory::SINGLETON;
+namespace eval ::BasicHighScoresGameInfoFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::BasicHighScoresGameInfoFactory new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::BasicHighScoresGameInfoFactory::staticGet_SINGLETON]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::GameInfo ();
-use org::allbinary::game::GameTypeFactory ();
-use org::allbinary::game::GameMode ();
-use org::allbinary::game::PlayerTypesFactory ();
-
-1;
 

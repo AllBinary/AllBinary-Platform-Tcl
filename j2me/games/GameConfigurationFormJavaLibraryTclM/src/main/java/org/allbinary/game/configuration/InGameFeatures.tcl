@@ -11,85 +11,75 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
-package org::allbinary::game::configuration::InGameFeatures;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::init::Init';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::InGameFeatures {
+    superclass ::Init
 }
 
+oo::define ::InGameFeatures {
+    method initFields_InGameFeatures {} {
+        return
+    }
 
-sub init {
-    my ($self) = @_;
-        my $LABEL = "Screen Buttons";
-        my $orientationData = 'org::allbinary::input::gyro::OrientationData'->getInstance();
-        my $exclusiveOrientationSensorVector = 'org::allbinary::game::configuration::feature::GameFeatureChoiceGroups'->getExclusiveInstance()->get()->get($orientationData->{ORIENTATION_SENSOR_INPUT});
-        my $inGameFeatureChoiceGroups = 'org::allbinary::game::configuration::feature::InGameFeatureChoiceGroups'->getExclusiveInstance();
-        if (defined($exclusiveOrientationSensorVector)) {
-            my $inGameExclusiveOrientationSensorVectorCanBeNull = $inGameFeatureChoiceGroups->get()->get($orientationData->{ORIENTATION_SENSOR_INPUT});
-            if (!defined($inGameExclusiveOrientationSensorVectorCanBeNull)) {
-                $self->addToInGameMenu();
+    constructor {} {
+        next
+        my initFields_InGameFeatures
+    }
+    
+
+    method init {} {
+        set LABEL "Screen Buttons"
+        set orientationData [::OrientationData::getInstance]
+        set exclusiveOrientationSensorVector [[[::GameFeatureChoiceGroups::getExclusiveInstance] get] get [$orientationData jget ORIENTATION_SENSOR_INPUT]]
+        set inGameFeatureChoiceGroups [::InGameFeatureChoiceGroups::getExclusiveInstance]
+        if {[expr {$exclusiveOrientationSensorVector ne {}}]} {
+            set inGameExclusiveOrientationSensorVectorCanBeNull [[$inGameFeatureChoiceGroups get] get [$orientationData jget ORIENTATION_SENSOR_INPUT]]
+            if {[expr {$inGameExclusiveOrientationSensorVectorCanBeNull eq {}}]} {
+                my addToInGameMenu
             } else {
-                my $inGameExclusiveOrientationSensorVector = $inGameExclusiveOrientationSensorVectorCanBeNull;
-                if ($inGameExclusiveOrientationSensorVector->size() == 0) {
-                    $self->addToInGameMenu();
+                set inGameExclusiveOrientationSensorVector $inGameExclusiveOrientationSensorVectorCanBeNull
+                if {[expr {[$inGameExclusiveOrientationSensorVector size] == 0}]} {
+                    my addToInGameMenu
                 }
             }
         }
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        if ($features->isFeature('org::allbinary::game::configuration::feature::TouchFeatureFactory'->getInstance()->{SHOW_SCREEN_BUTTONS}) || $features->isFeature('org::allbinary::game::configuration::feature::TouchFeatureFactory'->getInstance()->{AUTO_HIDE_SHOW_SCREEN_BUTTONS}) || $features->isFeature('org::allbinary::game::configuration::feature::TouchFeatureFactory'->getInstance()->{HIDE_SCREEN_BUTTONS})) {
-            my $exclusiveScreenButtonsVector = 'org::allbinary::util::BasicArrayListD'->new();
-            my $touchFeatureFactory = 'org::allbinary::game::configuration::feature::TouchFeatureFactory'->getInstance();
-            $exclusiveScreenButtonsVector->add($touchFeatureFactory->{AUTO_HIDE_SHOW_SCREEN_BUTTONS});
-            $exclusiveScreenButtonsVector->add($touchFeatureFactory->{SHOW_SCREEN_BUTTONS});
-            $exclusiveScreenButtonsVector->add($touchFeatureFactory->{HIDE_SCREEN_BUTTONS});
-            $inGameFeatureChoiceGroups->add($LABEL, $exclusiveScreenButtonsVector);
+        set features [::Features::getInstance]
+        if {[expr {[expr {[$features isFeature [[::TouchFeatureFactory::getInstance] jget SHOW_SCREEN_BUTTONS]] || [$features isFeature [[::TouchFeatureFactory::getInstance] jget AUTO_HIDE_SHOW_SCREEN_BUTTONS]]}] || [$features isFeature [[::TouchFeatureFactory::getInstance] jget HIDE_SCREEN_BUTTONS]]}]} {
+            set exclusiveScreenButtonsVector [::BasicArrayListD new]
+            set touchFeatureFactory [::TouchFeatureFactory::getInstance]
+            $exclusiveScreenButtonsVector add [$touchFeatureFactory jget AUTO_HIDE_SHOW_SCREEN_BUTTONS]
+            $exclusiveScreenButtonsVector add [$touchFeatureFactory jget SHOW_SCREEN_BUTTONS]
+            $exclusiveScreenButtonsVector add [$touchFeatureFactory jget HIDE_SCREEN_BUTTONS]
+            $inGameFeatureChoiceGroups add $LABEL $exclusiveScreenButtonsVector
         }
+    }
+    
+
+    method addToInGameMenu {} {
+        set orientationData [::OrientationData::getInstance]
+        set inGameExclusiveOrientationSensorVector [::BasicArrayListD new]
+        $inGameExclusiveOrientationSensorVector add [[::SensorFeatureFactory::getInstance] jget ORIENTATION_SENSORS]
+        $inGameExclusiveOrientationSensorVector add [[::SensorFeatureFactory::getInstance] jget NO_ORIENTATION]
+        [::InGameFeatureChoiceGroups::getExclusiveInstance] add [$orientationData jget ORIENTATION_SENSOR_INPUT] $inGameExclusiveOrientationSensorVector
+    }
+    
+
+    method isAny {} {
+        set features [::Features::getInstance]
+        set touchFeatureFactory [::TouchFeatureFactory::getInstance]
+        if {[expr {[expr {[$features isFeature [$touchFeatureFactory jget SHOW_SCREEN_BUTTONS]] || [$features isFeature [$touchFeatureFactory jget AUTO_HIDE_SHOW_SCREEN_BUTTONS]]}] || [$features isFeature [$touchFeatureFactory jget HIDE_SCREEN_BUTTONS]]}]} {
+            return true
+        }
+        set exclusiveOrientationSensorVector [[[::GameFeatureChoiceGroups::getExclusiveInstance] get] get [[::OrientationData::getInstance] jget ORIENTATION_SENSOR_INPUT]]
+        if {[expr {$exclusiveOrientationSensorVector ne {}}]} {
+            return true
+        }
+        return false
+    }
 }
 
-
-sub addToInGameMenu {
-    my ($self) = @_;
-        my $orientationData = 'org::allbinary::input::gyro::OrientationData'->getInstance();
-        my $inGameExclusiveOrientationSensorVector = 'org::allbinary::util::BasicArrayListD'->new();
-        $inGameExclusiveOrientationSensorVector->add('org::allbinary::game::configuration::feature::SensorFeatureFactory'->getInstance()->{ORIENTATION_SENSORS});
-        $inGameExclusiveOrientationSensorVector->add('org::allbinary::game::configuration::feature::SensorFeatureFactory'->getInstance()->{NO_ORIENTATION});
-        'org::allbinary::game::configuration::feature::InGameFeatureChoiceGroups'->getExclusiveInstance()->add($orientationData->{ORIENTATION_SENSOR_INPUT}, $inGameExclusiveOrientationSensorVector);
+namespace eval ::InGameFeatures {
 }
 
-
-sub isAny {
-    my ($self) = @_;
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        my $touchFeatureFactory = 'org::allbinary::game::configuration::feature::TouchFeatureFactory'->getInstance();
-        if ($features->isFeature($touchFeatureFactory->{SHOW_SCREEN_BUTTONS}) || $features->isFeature($touchFeatureFactory->{AUTO_HIDE_SHOW_SCREEN_BUTTONS}) || $features->isFeature($touchFeatureFactory->{HIDE_SCREEN_BUTTONS})) {
-            return 1;
-        }
-        my $exclusiveOrientationSensorVector = 'org::allbinary::game::configuration::feature::GameFeatureChoiceGroups'->getExclusiveInstance()->get()->get('org::allbinary::input::gyro::OrientationData'->getInstance()->{ORIENTATION_SENSOR_INPUT});
-        if (defined($exclusiveOrientationSensorVector)) {
-            return 1;
-        }
-        return 0;
-}
-
-use java::lang::Object ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::GameFeatureChoiceGroups ();
-use org::allbinary::game::configuration::feature::InGameFeatureChoiceGroups ();
-use org::allbinary::game::configuration::feature::SensorFeatureFactory ();
-use org::allbinary::game::configuration::feature::TouchFeatureFactory ();
-use org::allbinary::init::Init ();
-use org::allbinary::input::gyro::OrientationData ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

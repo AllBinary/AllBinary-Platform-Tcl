@@ -11,74 +11,62 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.vector
 
-package org::allbinary::animation::vector::RectangleFilledAdjustedAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::vector::RectangleFilledAnimation','org::allbinary::graphics::color::ColorCompositeInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{offsetX} = undef;
-    $self->{offsetY} = undef;
+oo::class create ::RectangleFilledAdjustedAnimation {
+    superclass ::RectangleFilledAnimation
 }
 
+oo::define ::RectangleFilledAdjustedAnimation {
+    method initFields_RectangleFilledAdjustedAnimation {} {
+        my jset offsetX 0
+        my jset offsetY 0
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $width, $height, $offsetX, $offsetY, $basicColor) = @_;
-    my $self = $class->SUPER::new($width, $height, $basicColor);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{offsetX} = $offsetX;
-        $self->{offsetY} = $offsetY;
-        $self->setBasicColorP($basicColor);
-    return $self;
+    constructor {width height offsetX offsetY basicColor} {
+        next $width $height $basicColor
+        my initFields_RectangleFilledAdjustedAnimation
+        my jset offsetX $offsetX
+        my jset offsetY $offsetY
+        my setBasicColorP $basicColor
+    }
+    
+
+    method nextFrame {} {
+    }
+    
+
+    method paintXY {graphics x y} {
+        [my jget basicSetColorUtil] setBasicColorP3 $graphics [my getBasicColorP] [my getColor]
+        next $graphics [jint [expr {$x + [my jget offsetX]}]] [jint [expr {$y + [my jget offsetY]}]]
+    }
+    
+
+    method setOffsetX {offsetX} {
+        my jset offsetX $offsetX
+    }
+    
+
+    method setOffsetY {offsetY} {
+        my jset offsetY $offsetY
+    }
+    
+
+    method getBasicColorP {} {
+        return [next]
+    }
+    
+
+    method setBasicColorP {basicColor} {
+        next $basicColor
+    }
 }
 
-
-sub nextFrame {
-    my ($self) = @_;
+namespace eval ::RectangleFilledAdjustedAnimation {
 }
 
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->{basicSetColorUtil}->setBasicColorP3($graphics, $self->getBasicColorP(), $self->getColor());
-        $self->SUPER::paintXY($graphics, $x + $self->{offsetX}, $y + $self->{offsetY});
-}
-
-
-sub setOffsetX {
-    my ($self, $offsetX) = @_;
-        $self->{offsetX} = $offsetX;
-}
-
-
-sub setOffsetY {
-    my ($self, $offsetY) = @_;
-        $self->{offsetY} = $offsetY;
-}
-
-
-sub getBasicColorP {
-    my ($self) = @_;
-        return $self->SUPER::getBasicColorP();
-}
-
-
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
-        $self->SUPER::setBasicColorP($basicColor);
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::ColorCompositeInterface ();
-use org::allbinary::animation::vector::RectangleFilledAnimation ();
-
-1;
 

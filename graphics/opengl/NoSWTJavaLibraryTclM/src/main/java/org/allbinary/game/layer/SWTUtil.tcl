@@ -11,24 +11,58 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-package org::allbinary::game::layer::SWTUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $isSWT = 0;
-our $SWT = "SWT";
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::SWTUtil {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
+oo::define ::SWTUtil {
+    method initFields_SWTUtil {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_SWTUtil
+    }
+}
+
+namespace eval ::SWTUtil {
+    variable isSWTValue {}
+    variable isSWTSet 0
+    proc staticGet_isSWT {} {
+        variable isSWTValue
+        variable isSWTSet
+        if {!$isSWTSet} {
+            set isSWTSet 1
+            set isSWTValue false
+        }
+        return $isSWTValue
+    }
+    proc staticSet_isSWT {value} {
+        variable isSWTValue
+        variable isSWTSet
+        set isSWTSet 1
+        set isSWTValue $value
+    }
+    variable SWTValue {}
+    variable SWTSet 0
+    proc staticGet_SWT {} {
+        variable SWTValue
+        variable SWTSet
+        if {!$SWTSet} {
+            set SWTSet 1
+            set SWTValue "SWT"
+        }
+        return $SWTValue
+    }
+    proc staticSet_SWT {value} {
+        variable SWTValue
+        variable SWTSet
+        set SWTSet 1
+        set SWTValue $value
+    }
+}
+
 

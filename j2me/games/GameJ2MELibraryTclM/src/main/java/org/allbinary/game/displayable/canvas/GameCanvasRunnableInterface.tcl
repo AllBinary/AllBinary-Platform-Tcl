@@ -11,111 +11,89 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-# Java interface
-package org::allbinary::game::displayable::canvas::GameCanvasRunnableInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::thread::RunnableInterface','org::allbinary::graphics::paint::PaintableInterface','javax::microedition::lcdui::ItemStateListener','org::allbinary::game::state::GameStateCompositeInterface';
-
-
-
-sub getTitle {
-    my ($self) = @_;
-    die "abstract method getTitle";
+oo::class create ::GameCanvasRunnableInterface {
+    superclass ::JObject
 }
 
+oo::define ::GameCanvasRunnableInterface {
+    method initFields_GameCanvasRunnableInterface {} {
+        return
+    }
+    
 
-sub isInitialized {
-    my ($self) = @_;
-    die "abstract method isInitialized";
+    method getTitle {} {
+        error [jexception AbstractMethodError getTitle]
+    }
+    
+
+    method isInitialized {} {
+        error [jexception AbstractMethodError isInitialized]
+    }
+    
+
+    method isPaused {} {
+        error [jexception AbstractMethodError isPaused]
+    }
+    
+
+    method unPause {} {
+        error [jexception AbstractMethodError unPause]
+    }
+    
+
+    method pause {} {
+        error [jexception AbstractMethodError pause]
+    }
+    
+
+    method isHighScoreSubmitted {} {
+        error [jexception AbstractMethodError isHighScoreSubmitted]
+    }
+    
+
+    method setHighScoreSubmitted {highScoreSubmitted} {
+        error [jexception AbstractMethodError setHighScoreSubmitted]
+    }
+    
+
+    method processGameOver {} {
+        error [jexception AbstractMethodError processGameOver]
+    }
+    
+
+    method isGameOver {} {
+        error [jexception AbstractMethodError isGameOver]
+    }
+    
+
+    method initCommands {cmdListener} {
+        error [jexception AbstractMethodError initCommands]
+    }
+    
+
+    method getCurrentStateHashtable {} {
+        error [jexception AbstractMethodError getCurrentStateHashtable]
+    }
+    
+
+    method getLoadStateHashtable {} {
+        error [jexception AbstractMethodError getLoadStateHashtable]
+    }
+    
+
+    method setLoadStateHashtable {hashtable} {
+        error [jexception AbstractMethodError setLoadStateHashtable]
+    }
+    
+
+    method getType {} {
+        error [jexception AbstractMethodError getType]
+    }
 }
 
-
-sub isPaused {
-    my ($self) = @_;
-    die "abstract method isPaused";
+namespace eval ::GameCanvasRunnableInterface {
 }
 
-
-sub unPause {
-    my ($self) = @_;
-    die "abstract method unPause";
-}
-
-
-sub pause {
-    my ($self) = @_;
-    die "abstract method pause";
-}
-
-
-sub isHighScoreSubmitted {
-    my ($self) = @_;
-    die "abstract method isHighScoreSubmitted";
-}
-
-
-# throws Exception
-sub setHighScoreSubmitted {
-    my ($self, $highScoreSubmitted) = @_;
-    die "abstract method setHighScoreSubmitted";
-}
-
-
-# throws Exception
-sub processGameOver {
-    my ($self) = @_;
-    die "abstract method processGameOver";
-}
-
-
-sub isGameOver {
-    my ($self) = @_;
-    die "abstract method isGameOver";
-}
-
-
-sub initCommands {
-    my ($self, $cmdListener) = @_;
-    die "abstract method initCommands";
-}
-
-
-# throws Exception
-sub getCurrentStateHashtable {
-    my ($self) = @_;
-    die "abstract method getCurrentStateHashtable";
-}
-
-
-# throws Exception
-sub getLoadStateHashtable {
-    my ($self) = @_;
-    die "abstract method getLoadStateHashtable";
-}
-
-
-# throws Exception
-sub setLoadStateHashtable {
-    my ($self, $hashtable) = @_;
-    die "abstract method setLoadStateHashtable";
-}
-
-
-sub getType {
-    my ($self) = @_;
-    die "abstract method getType";
-}
-
-use javax::microedition::lcdui::CommandListener ();
-use javax::microedition::lcdui::ItemStateListener ();
-use org::allbinary::game::state::GameStateCompositeInterface ();
-use org::allbinary::graphics::paint::PaintableInterface ();
-use org::allbinary::thread::RunnableInterface ();
-use org::allbinary::util::ABHashtable ();
-
-1;
 

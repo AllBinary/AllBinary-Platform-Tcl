@@ -11,48 +11,57 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.persistance
 
-package org::allbinary::game::configuration::persistance::GameDifficultyFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::persistance::GameDifficultyFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{level} = 0;
+oo::class create ::GameDifficultyFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::GameDifficultyFactory {
+    method initFields_GameDifficultyFactory {} {
+        my jset level 0
+        my jset level 0
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_GameDifficultyFactory
+    }
+    
+    
+
+    method setLevel {level} {
+        my jset level $level
+    }
+    
+
+    method getLevel {} {
+        return [my jget level]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::persistance::GameDifficultyFactory::instance;
+namespace eval ::GameDifficultyFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameDifficultyFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameDifficultyFactory::staticGet_instance]
+    }
 }
 
-
-sub setLevel {
-    my ($self, $level) = @_;
-        $self->{level} = $level;
-}
-
-
-sub getLevel {
-    my ($self) = @_;
-        return $self->{level};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

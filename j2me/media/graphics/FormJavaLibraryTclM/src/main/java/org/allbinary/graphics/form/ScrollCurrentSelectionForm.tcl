@@ -11,209 +11,182 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::ScrollCurrentSelectionForm;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::graphics::form::ScrollSelectionForm','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{moveForSmallScreen} = undef;
-    $self->{updateMyFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-    $self->{processor} = 'org::allbinary::canvas::Processor'->getInstance();
-    $self->{preItemIndexDx} = 'org::allbinary::graphics::form::ItemIndexDx'->getInstance();
-    $self->{dx} = 0;
-    $self->{dy} = 0;
-    $self->{maxWidth} = 0;
+oo::class create ::ScrollCurrentSelectionForm {
+    superclass ::ScrollSelectionForm
 }
 
+oo::define ::ScrollCurrentSelectionForm {
+    method initFields_ScrollCurrentSelectionForm {} {
+        my jset moveForSmallScreen false
+        my jset updateMyFontProcessor {}
+        my jset myFontProcessor {}
+        my jset processor {}
+        my jset preItemIndexDx {}
+        my jset dx 0
+        my jset dy 0
+        my jset maxWidth 0
+        
+        my jset updateMyFontProcessor [::UpdateMyFontProcessor new [self]]
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+        my jset processor [::Processor::getInstance]
+        my jset preItemIndexDx [::ItemIndexDx::getInstance]
+        my jset dx 0
+        my jset dy 0
+        my jset maxWidth 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $title, $items, $formPaintableFactory, $border, $adjustedExtraBorder, $moveForSmallScreen, $backgroundBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($title, $items, $formPaintableFactory, $border, $adjustedExtraBorder, $backgroundBasicColor, $foregroundBasicColor);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{moveForSmallScreen} = $moveForSmallScreen;
-    return $self;
-}
+    constructor {title items formPaintableFactory border adjustedExtraBorder moveForSmallScreen backgroundBasicColor foregroundBasicColor} {
+        next $title $items $formPaintableFactory $border $adjustedExtraBorder $backgroundBasicColor $foregroundBasicColor
+        my initFields_ScrollCurrentSelectionForm
+        my jset moveForSmallScreen $moveForSmallScreen
+    }
+    
 
-
-# throws Exception
-sub init {
-    my ($self, $rectangle, $formType) = @_;
-        $self->SUPER::init($rectangle, $formType);
-        my $formTypeFactory = 'org::allbinary::graphics::form::FormTypeFactory'->getInstance();
-        if ($formType == $formTypeFactory->{TEMP_HORIZONTAL_FORM}) {
-            $self->{processor} = 'org::allbinary::graphics::form::TempHorizontalFormProcessor'->new($self);
-            $self->{preItemIndexDx} = 'org::allbinary::graphics::form::TempHorizontalItemIndexDx'->new($self);
-        } elsif ($formType == $formTypeFactory->{HORIZONTAL_FORM}) {
-            $self->{processor} = 'org::allbinary::graphics::form::HorizontalFormProcessor'->new($self);
-            $self->{preItemIndexDx} = 'org::allbinary::graphics::form::HorizontalItemIndexDx'->new($self);
-        } elsif ($formType == $formTypeFactory->{VERTICAL_CENTER_FORM}) {
-            $self->{processor} = 'org::allbinary::graphics::form::VerticalFormProcessor'->new($self);
-            $self->{preItemIndexDx} = 'org::allbinary::graphics::form::VerticalItemIndexDx'->new($self);
-        } elsif ($formType == $formTypeFactory->{NULL_FORM_TYPE}) {
+    method init {rectangle formType} {
+        next $rectangle $formType
+        set formTypeFactory [::FormTypeFactory::getInstance]
+        if {[expr {$formType eq [$formTypeFactory jget TEMP_HORIZONTAL_FORM]}]} {
+            my jset processor [::TempHorizontalFormProcessor new [self]]
+            my jset preItemIndexDx [::TempHorizontalItemIndexDx new [self]]
+        } elseif {[expr {$formType eq [$formTypeFactory jget HORIZONTAL_FORM]}]} {
+            my jset processor [::HorizontalFormProcessor new [self]]
+            my jset preItemIndexDx [::HorizontalItemIndexDx new [self]]
+        } elseif {[expr {$formType eq [$formTypeFactory jget VERTICAL_CENTER_FORM]}]} {
+            my jset processor [::VerticalFormProcessor new [self]]
+            my jset preItemIndexDx [::VerticalItemIndexDx new [self]]
+        } elseif {[expr {$formType eq [$formTypeFactory jget NULL_FORM_TYPE]}]} {
         } else {
-            $self->{logUtil}->putF($formTypeFactory->{UNK}, $self, $self->{commonStrings}->{INIT});
+            [my jget logUtil] putF [$formTypeFactory jget UNK] [self] [[my jget commonStrings] jget INIT]
         }
-        $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-}
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+    }
+    
 
+    method updateMeasurement {graphics} {
+        my jset myFontProcessor [::MyFontProcessor::getInstance]
+    }
+    
 
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
-}
+    method processTempHorizontalForm {} {
+        my jset dx [expr {[expr {[my jget x] - 30}] + ([expr {[[my jget rectangle] getWidth] >> 1}])}]
+        my jset dy [my jget y]
+    }
+    
 
-
-sub processTempHorizontalForm {
-    my ($self) = @_;
-        $self->{dx} = $self->{x} - 30 + (POSIX::floor(($self->{rectangle}->getWidth()) / (2 ** (1))));
-        $self->{dy} = $self->{y};
-}
-
-
-sub processHorizontalForm {
-    my ($self) = @_;
-        my $size = $self->size();
-        my $totalWidth = 0;
-        my $item = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $item = $self->get($index);
-            $totalWidth += $item->getMinimumWidth() + $self->{border};
+    method processHorizontalForm {} {
+        set size [my size]
+        set totalWidth 0
+        set item {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set item [my get $index]
+            set totalWidth [jint [expr {$totalWidth + [expr {[$item getMinimumWidth] + [my jget border]}]}]]
         }
-        $self->{dx} = $self->{x} + (POSIX::floor(($self->{rectangle}->getWidth()) / (2 ** (1)))) - (POSIX::floor(($totalWidth) / (2 ** (1))));
-        $self->{dy} = $self->{y} + (POSIX::floor(($self->{rectangle}->getHeight()) / (2 ** (1))));
-        if ($self->{moveForSmallScreen}) {
-            my $maxTitleHeight = 175;
-            if ($self->{dy} < $maxTitleHeight) {
-                $self->{dy} = $maxTitleHeight;
+        my jset dx [expr {[expr {[my jget x] + ([expr {[[my jget rectangle] getWidth] >> 1}])}] - ([expr {$totalWidth >> 1}])}]
+        my jset dy [expr {[my jget y] + ([expr {[[my jget rectangle] getHeight] >> 1}])}]
+        if {[my jget moveForSmallScreen]} {
+            set maxTitleHeight 175
+            if {[expr {[my jget dy] < $maxTitleHeight}]} {
+                my jset dy $maxTitleHeight
             }
         }
-}
+    }
+    
 
-
-sub processVerticalForm {
-    my ($self) = @_;
-        my $totalHeight = 0;
-        my $size = $self->size();
-        my $item2 = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $item2 = $self->get($index);
-            if ($self->{maxWidth} < $item2->getMinimumWidth()) {
-                $self->{maxWidth} = $item2->getMinimumWidth();
+    method processVerticalForm {} {
+        set totalHeight 0
+        set size [my size]
+        set item2 {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set item2 [my get $index]
+            if {[expr {[my jget maxWidth] < [$item2 getMinimumWidth]}]} {
+                my jset maxWidth [$item2 getMinimumWidth]
             }
-            $totalHeight += $item2->getMinimumHeight() + $self->{border};
+            set totalHeight [jint [expr {$totalHeight + [expr {[$item2 getMinimumHeight] + [my jget border]}]}]]
         }
-        $self->{dx} = (($self->{rectangle}->getWidth() - $self->{maxWidth}) / 2);
-        if ($self->size() > 0) {
-            $self->{dy} = $self->{y} + (($self->{rectangle}->getHeight() - $totalHeight) / 2);
-            if ($self->{moveForSmallScreen}) {
-                my $maxTitleHeight = 175;
-                if ($self->{dy} < $maxTitleHeight) {
-                    $self->{dy} = $maxTitleHeight;
+        my jset dx ([expr {([expr {[[my jget rectangle] getWidth] - [my jget maxWidth]}]) / 2}])
+        if {[expr {[my size] > 0}]} {
+            my jset dy [expr {[my jget y] + ([expr {([expr {[[my jget rectangle] getHeight] - $totalHeight}]) / 2}])}]
+            if {[my jget moveForSmallScreen]} {
+                set maxTitleHeight 175
+                if {[expr {[my jget dy] < $maxTitleHeight}]} {
+                    my jset dy $maxTitleHeight
                 }
             }
         } else {
-            $self->{dy} = $self->{y};
+            my jset dy [my jget y]
         }
-}
+    }
+    
 
+    method getXTempHorizontalForm {index item dx dy} {
+        return [my getDiffX $item]
+    }
+    
 
-sub getXTempHorizontalForm {
-    my ($self, $index, $item, $dx, $dy) = @_;
-        return $self->getDiffX($item);
-}
+    method getXHorizontalForm {index item dx dy} {
+        return 0
+    }
+    
 
+    method getXVerticalForm {index item dx dy} {
+        return [expr {[my getDiffX $item] + [my jget halfBorder]}]
+    }
+    
 
-sub getXHorizontalForm {
-    my ($self, $index, $item, $dx, $dy) = @_;
-        return 0;
-}
+    method getDiffX {item} {
+        return ([expr {([expr {[my jget maxWidth] - [$item getMinimumWidth]}]) >> 1}])
+    }
+    
 
+    method getDx {} {
+        return [my jget dx]
+    }
+    
 
-sub getXVerticalForm {
-    my ($self, $index, $item, $dx, $dy) = @_;
-        return $self->getDiffX($item) + $self->{halfBorder};
-}
+    method getDy {} {
+        return [my jget dy]
+    }
+    
 
-
-sub getDiffX {
-    my ($self, $item) = @_;
-        return (POSIX::floor((($self->{maxWidth} - $item->getMinimumWidth())) / (2 ** (1))));
-}
-
-
-sub getDx {
-    my ($self) = @_;
-        return $self->{dx};
-}
-
-
-sub getDy {
-    my ($self) = @_;
-        return $self->{dy};
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
+    method paint {graphics} {
         try {
-            $self->{processor}->process();
-            my $delta = 0;
-            my $deltaX = $self->getDx();
-            my $deltaY = $self->getDy();
-            my $size = $self->size();
-            my $formTypeFactory = 'org::allbinary::graphics::form::FormTypeFactory'->getInstance();
-            my $item = undef;
-            for (my $index = 0; $index < $size; $index++) {
-                $item = $self->get($index);
-                my $diffX = $self->{preItemIndexDx}->getDx($index, $item, $self->{dx}, $self->{dy});
-                if ($index == $self->getSelectedIndex()) {
-                    $delta = $self->paintItem($graphics, $index, $item, $deltaX + $diffX, $deltaY);
-                    $self->{paintable}->paint($graphics, $index, $deltaX + $diffX, $deltaY);
+            [my jget processor] process
+            set delta 0
+            set deltaX [my getDx]
+            set deltaY [my getDy]
+            set size [my size]
+            set formTypeFactory [::FormTypeFactory::getInstance]
+            set item {}
+            for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+                set item [my get $index]
+                set diffX [[my jget preItemIndexDx] getDx $index $item [my jget dx] [my jget dy]]
+                if {[expr {$index == [my getSelectedIndex]}]} {
+                    set delta [my paintItem $graphics $index $item [jint [expr {$deltaX + $diffX}]] $deltaY]
+                    [my jget paintable] paint $graphics $index [jint [expr {$deltaX + $diffX}]] $deltaY
                 } else {
-                    $delta = $self->paintUnselectedItem($graphics, $index, $item, $deltaX + $diffX, $deltaY);
-                    $self->{paintable}->paint($graphics, $index, $deltaX + $diffX, $deltaY);
+                    set delta [my paintUnselectedItem $graphics $index $item [jint [expr {$deltaX + $diffX}]] $deltaY]
+                    [my jget paintable] paint $graphics $index [jint [expr {$deltaX + $diffX}]] $deltaY
                 }
-                if ($self->{formType} == $formTypeFactory->{TEMP_HORIZONTAL_FORM}) {
-                } elsif ($self->{formType} == $formTypeFactory->{HORIZONTAL_FORM}) {
-                    $deltaX = $delta;
-                } elsif ($self->{formType} == $formTypeFactory->{VERTICAL_CENTER_FORM}) {
-                    $deltaY = $delta;
+                if {[expr {[my jget formType] == [$formTypeFactory jget TEMP_HORIZONTAL_FORM]}]} {
+                } elseif {[expr {[my jget formType] == [$formTypeFactory jget HORIZONTAL_FORM]}]} {
+                    set deltaX $delta
+                } elseif {[expr {[my jget formType] == [$formTypeFactory jget VERTICAL_CENTER_FORM]}]} {
+                    set deltaY $delta
                 } else {
-                    die ($formTypeFactory->{UNK});
+                    error [jexception Exception [$formTypeFactory jget UNK]]
                 }
             }
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{canvasStrings}->{PAINT}, $e);
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget canvasStrings] jget PAINT] $e
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
-use org::allbinary::graphics::form::ScrollSelectionForm ();
-use org::allbinary::graphics::form::ItemIndexDx ();
-use org::allbinary::graphics::form::FormTypeFactory ();
-use org::allbinary::graphics::form::VerticalFormProcessor ();
-use org::allbinary::graphics::form::VerticalItemIndexDx ();
-use org::allbinary::graphics::form::HorizontalFormProcessor ();
-use org::allbinary::graphics::form::HorizontalItemIndexDx ();
-use org::allbinary::graphics::form::TempHorizontalFormProcessor ();
-use org::allbinary::graphics::form::TempHorizontalItemIndexDx ();
+namespace eval ::ScrollCurrentSelectionForm {
+}
 
-1;
 

@@ -11,23 +11,25 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.transition.shake
 
-package org::allbinary::animation::transition::shake::ShakeEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ShakeEvent {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
+oo::define ::ShakeEvent {
+    method initFields_ShakeEvent {} {
+        return
+    }
+    
 
-1;
+    constructor {} {
+        next
+        my initFields_ShakeEvent
+    }
+}
+
+namespace eval ::ShakeEvent {
+}
+
 

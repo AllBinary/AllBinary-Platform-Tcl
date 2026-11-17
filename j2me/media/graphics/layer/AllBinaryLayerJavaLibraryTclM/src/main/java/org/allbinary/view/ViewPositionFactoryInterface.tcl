@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.view
 
-# Java interface
-package org::allbinary::view::ViewPositionFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub getInstance {
-    my ($self) = @_;
-    die "abstract method getInstance";
+oo::class create ::ViewPositionFactoryInterface {
+    superclass ::JObject
 }
 
+oo::define ::ViewPositionFactoryInterface {
+    method initFields_ViewPositionFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getInstance {} {
+        error [jexception AbstractMethodError getInstance]
+    }
+}
+
+namespace eval ::ViewPositionFactoryInterface {
+}
+
 

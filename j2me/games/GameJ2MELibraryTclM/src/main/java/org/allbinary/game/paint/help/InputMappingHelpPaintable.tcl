@@ -11,241 +11,272 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.paint.help
 
-package org::allbinary::game::paint::help::InputMappingHelpPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::game::paint::help::HelpPaintable';
-
-our $AND = " and ";
-our $SEP = ", ";
-our $MORE_THAN_TWO_IN_LIST_AND = ", and ";
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{commonSeps} = 'org::allbinary::string::CommonSeps'->getInstance();
-    $self->{stringUtil} = 'org::allbinary::logic::string::StringUtil'->getInstance();
-    $self->{basicColorFactory} = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance();
-    $self->{NONE} = 'org::allbinary::game::input::GameKeyFactory'->getInstance()->{NONE};
-    $self->{EMPTY_STRING} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{gameInputMappingArray} = undef;
-    $self->{keyMappingArray} = [(undef) x (0)];
-    $self->{actionBasicColor} = 'org::allbinary::graphics::color::BasicColorUtil'->getInstance()->{ZERO_ARRAY};
-    $self->{inputBasicColorArray} = [map { [(undef) x (0)] } 1 .. (0)];
-    $self->{selectedBasicColor} = undef;
-    $self->{updateMyFontProperties} = 'org::allbinary::game::paint::help::UpdateMyFontProperties'->new();
+oo::class create ::InputMappingHelpPaintable {
+    superclass ::HelpPaintable
 }
 
+oo::define ::InputMappingHelpPaintable {
+    method initFields_InputMappingHelpPaintable {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset commonSeps {}
+        my jset stringUtil {}
+        my jset basicColorFactory {}
+        my jset NONE {}
+        my jset EMPTY_STRING {}
+        my jset gameInputMappingArray {}
+        my jset keyMappingArray {}
+        my jset actionBasicColor {}
+        my jset inputBasicColorArray {}
+        my jset selectedBasicColor {}
+        my jset updateMyFontProperties {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset commonSeps [::CommonSeps::getInstance]
+        my jset stringUtil [::StringUtil::getInstance]
+        my jset basicColorFactory [::BasicColorFactory::getInstance]
+        my jset NONE [[::GameKeyFactory::getInstance] jget NONE]
+        my jset EMPTY_STRING [[::StringUtil::getInstance] jget EMPTY_STRING]
+        
+        my jset keyMappingArray [jarray 0 {}]
+        my jset actionBasicColor [[::BasicColorUtil::getInstance] jget ZERO_ARRAY]
+        my jset inputBasicColorArray [jarrayof 0 {jarray 0 {}}]
+        my jset selectedBasicColor {}
+        my jset updateMyFontProperties [::UpdateMyFontProperties new]
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameInputMappingArray, $backgroundBasicColor, $basicColor) = @_;
-    my $self = $class->SUPER::new("Input Mapping", $backgroundBasicColor, $basicColor);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{gameInputMappingArray} = $gameInputMappingArray;
-        $self->update($self->{NONE}, $self->{NONE});
-        if ($backgroundBasicColor == $self->{basicColorFactory}->{WHITE} || $basicColor == $self->{basicColorFactory}->{WHITE}) {
-            $self->{selectedBasicColor} = $self->{basicColorFactory}->{RED};
+    constructor {gameInputMappingArray backgroundBasicColor basicColor} {
+        next "Input Mapping" $backgroundBasicColor $basicColor
+        my initFields_InputMappingHelpPaintable
+        my jset gameInputMappingArray $gameInputMappingArray
+        my update [my jget NONE] [my jget NONE]
+        if {[expr {[expr {$backgroundBasicColor eq [[my jget basicColorFactory] jget WHITE]}] || [expr {$basicColor eq [[my jget basicColorFactory] jget WHITE]}]}]} {
+            my jset selectedBasicColor [[my jget basicColorFactory] jget RED]
         } else {
-            $self->{selectedBasicColor} = $self->{basicColorFactory}->{WHITE};
+            my jset selectedBasicColor [[my jget basicColorFactory] jget WHITE]
         }
-    return $self;
-}
+    }
+    
 
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        my $updateMyFontProperties = 'org::allbinary::game::paint::help::UpdateMyFontProperties'->new();
-        $updateMyFontProperties->{charHeight} = $font->getHeight();
-        my $stringMaker = 'org::allbinary::logic::string::StringMaker'->new();
-        my $inputInfo = $self->{inputInfo};
-        my $size = scalar(@{$inputInfo});
-        $updateMyFontProperties->{actionStringArray} = [(undef) x ($size)];
-        $updateMyFontProperties->{keymappingBeginWidthArray} = [(0) x ($size)];
-        $updateMyFontProperties->{actionStringDeltaXArray} = [(0) x ($size)];
-        $updateMyFontProperties->{inputDeltaXArray} = [map { [(0) x (0)] } 1 .. ($size)];
-        $updateMyFontProperties->{sepArray} = [map { [(undef) x (0)] } 1 .. ($size)];
-        $updateMyFontProperties->{sepWidthArray} = [map { [(0) x (0)] } 1 .. ($size)];
-        my $list = undef;
-        my $keyMappings = undef;
-        my $actionString = undef;
-        my $input = undef;
-        my $size2 = 0;
-        for (my $index = 0; $index < $size; $index++) {
-            $list = $self->{keyMappingArray}->[$index];
-            $keyMappings = $self->get($list);
-            $stringMaker->delete(0, $stringMaker->length());
-            $actionString = $stringMaker->append($inputInfo->[$index])->append($self->{commonSeps}->{COLON})->append($self->{commonSeps}->{SPACE})->append($self->{commonSeps}->{SPACE})->toString();
-            $updateMyFontProperties->{actionStringArray}->[$index] = $actionString;
-            $stringMaker->delete(0, $stringMaker->length());
-            $updateMyFontProperties->{keymappingBeginWidthArray}->[$index] = (POSIX::floor(($font->stringWidth($stringMaker->append($updateMyFontProperties->{actionStringArray}->[$index])->append($keyMappings)->toString())) / (2 ** (1))));
-            $updateMyFontProperties->{actionStringDeltaXArray}->[$index] = $font->stringWidth($actionString);
-            $size2 = $list->size();
-            $updateMyFontProperties->{inputDeltaXArray}->[$index] = [(0) x ($size2)];
-            $updateMyFontProperties->{sepArray}->[$index] = [(undef) x ($size2)];
-            $updateMyFontProperties->{sepWidthArray}->[$index] = [(0) x ($size2)];
-            for (my $index2 = 0; $index2 < $size2; $index2++) {
-                $input = $list->{objectArray}->[$index2];
-                $updateMyFontProperties->{inputDeltaXArray}->[$index]->[$index2] = $font->stringWidth($input->getName());
-                $updateMyFontProperties->{sepArray}->[$index]->[$index2] = $self->{EMPTY_STRING};
-                if ($index2 + 1 < $list->size()) {
-                    if ($list->size() == 2) {
-                        $updateMyFontProperties->{sepArray}->[$index]->[$index2] = $org::allbinary::game::paint::help::InputMappingHelpPaintable::AND;
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        set updateMyFontProperties [::UpdateMyFontProperties new]
+        $updateMyFontProperties jset charHeight [$font getHeight]
+        set stringMaker [::StringMaker new]
+        set inputInfo [my jget inputInfo]
+        set size [$inputInfo length]
+        $updateMyFontProperties jset actionStringArray [jarray $size {}]
+        $updateMyFontProperties jset keymappingBeginWidthArray [jarray $size 0]
+        $updateMyFontProperties jset actionStringDeltaXArray [jarray $size 0]
+        $updateMyFontProperties jset inputDeltaXArray [jarrayof $size {jarray 0 0}]
+        $updateMyFontProperties jset sepArray [jarrayof $size {jarray 0 {}}]
+        $updateMyFontProperties jset sepWidthArray [jarrayof $size {jarray 0 0}]
+        set list {}
+        set keyMappings {}
+        set actionString {}
+        set input {}
+        set size2 0
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set list [[my jget keyMappingArray] get $index]
+            set keyMappings [my get $list]
+            $stringMaker delete 0 [$stringMaker length]
+            set actionString [[[[[$stringMaker append [$inputInfo get $index]] append [[my jget commonSeps] jget COLON]] append [[my jget commonSeps] jget SPACE]] append [[my jget commonSeps] jget SPACE]] toString]
+            [$updateMyFontProperties jget actionStringArray] set $index $actionString
+            $stringMaker delete 0 [$stringMaker length]
+            [$updateMyFontProperties jget keymappingBeginWidthArray] set $index ([expr {[$font stringWidth [[[$stringMaker append [[$updateMyFontProperties jget actionStringArray] get $index]] append $keyMappings] toString]] >> 1}])
+            [$updateMyFontProperties jget actionStringDeltaXArray] set $index [$font stringWidth $actionString]
+            set size2 [$list size]
+            [$updateMyFontProperties jget inputDeltaXArray] set $index [jarray $size2 0]
+            [$updateMyFontProperties jget sepArray] set $index [jarray $size2 {}]
+            [$updateMyFontProperties jget sepWidthArray] set $index [jarray $size2 0]
+            for {set index2 0} {[expr {$index2 < $size2}]} {jpostincr index2 1} {
+                set input [[$list jget objectArray] get $index2]
+                [[$updateMyFontProperties jget inputDeltaXArray] get $index] set $index2 [$font stringWidth [$input getName]]
+                [[$updateMyFontProperties jget sepArray] get $index] set $index2 [my jget EMPTY_STRING]
+                if {[expr {[jint [expr {$index2 + 1}]] < [$list size]}]} {
+                    if {[expr {[$list size] == 2}]} {
+                        [[$updateMyFontProperties jget sepArray] get $index] set $index2 [::InputMappingHelpPaintable::staticGet_AND]
                     } else {
-                        if ($index2 + 2 == $list->size()) {
-                            $updateMyFontProperties->{sepArray}->[$index]->[$index2] = $org::allbinary::game::paint::help::InputMappingHelpPaintable::MORE_THAN_TWO_IN_LIST_AND;
+                        if {[expr {[jint [expr {$index2 + 2}]] == [$list size]}]} {
+                            [[$updateMyFontProperties jget sepArray] get $index] set $index2 [::InputMappingHelpPaintable::staticGet_MORE_THAN_TWO_IN_LIST_AND]
                         } else {
-                            $updateMyFontProperties->{sepArray}->[$index]->[$index2] = $org::allbinary::game::paint::help::InputMappingHelpPaintable::SEP;
+                            [[$updateMyFontProperties jget sepArray] get $index] set $index2 [::InputMappingHelpPaintable::staticGet_SEP]
                         }
                     }
                 }
-                if ($updateMyFontProperties->{sepArray}->[$index]->[$index2] ne $self->{EMPTY_STRING}) {
-                    $updateMyFontProperties->{sepWidthArray}->[$index]->[$index2] = $font->stringWidth($updateMyFontProperties->{sepArray}->[$index]->[$index2]);
+                if {[expr {[[[$updateMyFontProperties jget sepArray] get $index] get $index2] ne [my jget EMPTY_STRING]}]} {
+                    [[$updateMyFontProperties jget sepWidthArray] get $index] set $index2 [$font stringWidth [[[$updateMyFontProperties jget sepArray] get $index] get $index2]]
                 }
             }
         }
-        $self->{updateMyFontProperties} = $updateMyFontProperties;
-        $self->SUPER::updateMeasurement($graphics);
-}
+        my jset updateMyFontProperties $updateMyFontProperties
+        next $graphics
+    }
+    
 
-
-sub update {
-    my ($self, $selectedGameKey, $selectedInput) = @_;
-        my $stringMaker = 'org::allbinary::logic::string::StringMaker'->new();
-        $self->{logUtil}->putF($stringMaker->append('org::allbinary::string::CommonLabels'->getInstance()->{START_LABEL})->append("selected GameKey: ")->append($self->{stringUtil}->toString($selectedGameKey))->append(" Input: ")->append($self->{stringUtil}->toString($selectedInput))->toString(), $self, $self->{commonStrings}->{UPDATE});
-        my $gameKeyMapping = 'org::allbinary::game::input::PlatformInputMappingFactory'->getInstance()->getPersistentInputMappingInstance();
-        my $size = scalar(@{$self->{gameInputMappingArray}});
-        my $keyInfo = [(undef) x ($size)];
-        my $keyMappingArray = [(undef) x ($size)];
-        my $actionBasicColor = [(undef) x ($size)];
-        my $inputBasicColorArray = [(undef) x ($size)];
-        my $gameInputMapping = undef;
-        my $gameKey = undef;
-        my $list = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $gameInputMapping = $self->{gameInputMappingArray}->[$index];
-            $gameKey = $gameInputMapping->getGameKey();
-            $list = $gameKeyMapping->getInputMapping()->getMappedInput($gameKey);
-            my $size2 = $list->size();
-            $inputBasicColorArray->[$index] = [(undef) x ($size2)];
-            for (my $index2 = 0; $index2 < $size2; $index2++) {
-                $inputBasicColorArray->[$index]->[$index2] = $self->{basicColor};
+    method update {selectedGameKey selectedInput} {
+        set stringMaker [::StringMaker new]
+        [my jget logUtil] putF [[[[[[$stringMaker append [[::CommonLabels::getInstance] jget START_LABEL]] append "selected GameKey: "] append [[my jget stringUtil] toString1 $selectedGameKey]] append " Input: "] append [[my jget stringUtil] toString1 $selectedInput]] toString] [self] [[my jget commonStrings] jget UPDATE]
+        set gameKeyMapping [[::PlatformInputMappingFactory::getInstance] getPersistentInputMappingInstance]
+        set size [[my jget gameInputMappingArray] length]
+        set keyInfo [jarray $size {}]
+        set keyMappingArray [jarray $size {}]
+        set actionBasicColor [jarray $size {}]
+        set inputBasicColorArray [jarray $size {}]
+        set gameInputMapping {}
+        set gameKey {}
+        set list {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set gameInputMapping [[my jget gameInputMappingArray] get $index]
+            set gameKey [$gameInputMapping getGameKey]
+            set list [[$gameKeyMapping getInputMapping] getMappedInput $gameKey]
+            set size2 [$list size]
+            $inputBasicColorArray set $index [jarray $size2 {}]
+            for {set index2 0} {[expr {$index2 < $size2}]} {jpostincr index2 1} {
+                [$inputBasicColorArray get $index] set $index2 [my jget basicColor]
             }
-            if ($gameKey == $selectedGameKey) {
-                $stringMaker->delete(0, $stringMaker->length());
-                $self->{logUtil}->putF($stringMaker->append("Found: selected GameKey: ")->append($self->{stringUtil}->toString($selectedGameKey))->toString(), $self, $self->{commonStrings}->{UPDATE});
-                $actionBasicColor->[$index] = $self->{selectedBasicColor};
-                my $indexOfSelectedInput = $list->indexOf($selectedInput);
-                if ($indexOfSelectedInput >= 0) {
-                    $stringMaker->delete(0, $stringMaker->length());
-                    $self->{logUtil}->putF($stringMaker->append("Found: selected Input: ")->append($self->{stringUtil}->toString($selectedInput))->toString(), $self, $self->{commonStrings}->{UPDATE});
-                    $inputBasicColorArray->[$index]->[$indexOfSelectedInput] = $self->{selectedBasicColor};
+            if {[expr {$gameKey eq $selectedGameKey}]} {
+                $stringMaker delete 0 [$stringMaker length]
+                [my jget logUtil] putF [[[$stringMaker append "Found: selected GameKey: "] append [[my jget stringUtil] toString1 $selectedGameKey]] toString] [self] [[my jget commonStrings] jget UPDATE]
+                $actionBasicColor set $index [my jget selectedBasicColor]
+                set indexOfSelectedInput [$list indexOf $selectedInput]
+                if {[expr {$indexOfSelectedInput >= 0}]} {
+                    $stringMaker delete 0 [$stringMaker length]
+                    [my jget logUtil] putF [[[$stringMaker append "Found: selected Input: "] append [[my jget stringUtil] toString1 $selectedInput]] toString] [self] [[my jget commonStrings] jget UPDATE]
+                    [$inputBasicColorArray get $index] set $indexOfSelectedInput [my jget selectedBasicColor]
                 }
             } else {
-                $actionBasicColor->[$index] = $self->{basicColor};
+                $actionBasicColor set $index [my jget basicColor]
             }
-            $keyInfo->[$index] = $gameInputMapping->getName();
-            $keyMappingArray->[$index] = $list;
+            $keyInfo set $index [$gameInputMapping getName]
+            $keyMappingArray set $index $list
         }
-        $self->{keyMappingArray} = $keyMappingArray;
-        $self->{actionBasicColor} = $actionBasicColor;
-        $self->{inputBasicColorArray} = $inputBasicColorArray;
-        $self->SUPER::setInputInfoP($keyInfo);
-        $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-}
+        my jset keyMappingArray $keyMappingArray
+        my jset actionBasicColor $actionBasicColor
+        my jset inputBasicColorArray $inputBasicColorArray
+        next $keyInfo
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+    }
+    
 
-
-sub get {
-    my ($self, $keyList) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $key = undef;
-        my $size = $keyList->size();
-        for (my $index = 0; $index < $size; $index++) {
-            $key = $keyList->{objectArray}->[$index];
-            $stringBuffer->append($key->getName());
-            if ($index + 1 < $keyList->size()) {
-                if ($keyList->size() == 2) {
-                    $stringBuffer->append($org::allbinary::game::paint::help::InputMappingHelpPaintable::AND);
+    method get {keyList} {
+        set stringBuffer [::StringMaker new]
+        set key {}
+        set size [$keyList size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set key [[$keyList jget objectArray] get $index]
+            $stringBuffer append [$key getName]
+            if {[expr {[jint [expr {$index + 1}]] < [$keyList size]}]} {
+                if {[expr {[$keyList size] == 2}]} {
+                    $stringBuffer append [::InputMappingHelpPaintable::staticGet_AND]
                 } else {
-                    if ($index + 2 == $keyList->size()) {
-                        $stringBuffer->append($org::allbinary::game::paint::help::InputMappingHelpPaintable::MORE_THAN_TWO_IN_LIST_AND);
+                    if {[expr {[jint [expr {$index + 2}]] == [$keyList size]}]} {
+                        $stringBuffer append [::InputMappingHelpPaintable::staticGet_MORE_THAN_TWO_IN_LIST_AND]
                     } else {
-                        $stringBuffer->append($org::allbinary::game::paint::help::InputMappingHelpPaintable::SEP);
+                        $stringBuffer append [::InputMappingHelpPaintable::staticGet_SEP]
                     }
                 }
             }
         }
-        return $stringBuffer->toString();
-}
+        return [$stringBuffer toString]
+    }
+    
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        my $halfWidth = $self->{displayInfo}->getLastHalfWidth();
-        $graphics->setColor(int($self->{basicColor}));
-        $graphics->drawString($self->{title}, $halfWidth - $self->{titleBeginWidth}, $self->{updateMyFontProperties}->{charHeight}, $self->{anchor});
-        my $inputInfo = $self->{inputInfo};
-        my $size = scalar(@{$inputInfo});
-        my $y = 0;
-        my $deltaX = 0;
-        my $size2 = 0;
-        my $actionString = undef;
-        my $input = undef;
-        my $list = undef;
-        my $sep = undef;
-        my $beginWidth = 0;
-        for (my $index = 0; $index < $size; $index++) {
-            $y = ($index + 3) * $self->{updateMyFontProperties}->{charHeight};
-            $deltaX = 0;
-            $list = $self->{keyMappingArray}->[$index];
-            $size2 = $list->size();
-            $beginWidth = $self->{updateMyFontProperties}->{keymappingBeginWidthArray}->[$index];
-            $graphics->setColor(int($self->{actionBasicColor}->[$index]));
-            $actionString = $self->{updateMyFontProperties}->{actionStringArray}->[$index];
-            $graphics->drawString($actionString, $halfWidth - $beginWidth + $deltaX, $y, $self->{anchor});
-            $deltaX += $self->{updateMyFontProperties}->{actionStringDeltaXArray}->[$index];
-            for (my $index2 = 0; $index2 < $size2; $index2++) {
-                $input = $list->{objectArray}->[$index2];
-                $graphics->setColor(int($self->{inputBasicColorArray}->[$index]->[$index2]));
-                $graphics->drawString($input->getName(), $halfWidth - $beginWidth + $deltaX, $y, $self->{anchor});
-                $deltaX += $self->{updateMyFontProperties}->{inputDeltaXArray}->[$index]->[$index2];
-                $sep = $self->{updateMyFontProperties}->{sepArray}->[$index]->[$index2];
-                $graphics->setColor(int($self->{basicColor}));
-                $graphics->drawString($sep, $halfWidth - $beginWidth + $deltaX, $y, $self->{anchor});
-                $deltaX += $self->{updateMyFontProperties}->{sepWidthArray}->[$index]->[$index2];
+    method paint {graphics} {
+        [my jget myFontProcessor] process $graphics
+        set halfWidth [[my jget displayInfo] getLastHalfWidth]
+        $graphics setColor [[my jget basicColor] intValue]
+        $graphics drawString [my jget title] [expr {$halfWidth - [my jget titleBeginWidth]}] [[my jget updateMyFontProperties] jget charHeight] [my jget anchor]
+        set inputInfo [my jget inputInfo]
+        set size [$inputInfo length]
+        set y 0
+        set deltaX 0
+        set size2 0
+        set actionString {}
+        set input {}
+        set list {}
+        set sep {}
+        set beginWidth 0
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set y [expr {([jint [expr {$index + 3}]]) * [[my jget updateMyFontProperties] jget charHeight]}]
+            set deltaX 0
+            set list [[my jget keyMappingArray] get $index]
+            set size2 [$list size]
+            set beginWidth [[[my jget updateMyFontProperties] jget keymappingBeginWidthArray] get $index]
+            $graphics setColor [[[my jget actionBasicColor] get $index] intValue]
+            set actionString [[[my jget updateMyFontProperties] jget actionStringArray] get $index]
+            $graphics drawString $actionString [jint [expr {[jint [expr {$halfWidth - $beginWidth}]] + $deltaX}]] $y [my jget anchor]
+            set deltaX [jint [expr {$deltaX + [[[my jget updateMyFontProperties] jget actionStringDeltaXArray] get $index]}]]
+            for {set index2 0} {[expr {$index2 < $size2}]} {jpostincr index2 1} {
+                set input [[$list jget objectArray] get $index2]
+                $graphics setColor [[[[my jget inputBasicColorArray] get $index] get $index2] intValue]
+                $graphics drawString [$input getName] [jint [expr {[jint [expr {$halfWidth - $beginWidth}]] + $deltaX}]] $y [my jget anchor]
+                set deltaX [jint [expr {$deltaX + [[[[my jget updateMyFontProperties] jget inputDeltaXArray] get $index] get $index2]}]]
+                set sep [[[[my jget updateMyFontProperties] jget sepArray] get $index] get $index2]
+                $graphics setColor [[my jget basicColor] intValue]
+                $graphics drawString $sep [jint [expr {[jint [expr {$halfWidth - $beginWidth}]] + $deltaX}]] $y [my jget anchor]
+                set deltaX [jint [expr {$deltaX + [[[[my jget updateMyFontProperties] jget sepWidthArray] get $index] get $index2]}]]
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::input::GameKey ();
-use org::allbinary::game::input::GameKeyFactory ();
-use org::allbinary::game::input::Input ();
-use org::allbinary::game::input::PlatformInputMappingFactory ();
-use org::allbinary::game::input::mapping::GameInputMapping ();
-use org::allbinary::game::input::mapping::PersistentInputMapping ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::color::BasicColorUtil ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::game::paint::help::HelpPaintable ();
-use org::allbinary::game::paint::help::UpdateMyFontProperties ();
+namespace eval ::InputMappingHelpPaintable {
+    variable ANDValue {}
+    variable ANDSet 0
+    proc staticGet_AND {} {
+        variable ANDValue
+        variable ANDSet
+        if {!$ANDSet} {
+            set ANDSet 1
+            set ANDValue " and "
+        }
+        return $ANDValue
+    }
+    proc staticSet_AND {value} {
+        variable ANDValue
+        variable ANDSet
+        set ANDSet 1
+        set ANDValue $value
+    }
+    variable SEPValue {}
+    variable SEPSet 0
+    proc staticGet_SEP {} {
+        variable SEPValue
+        variable SEPSet
+        if {!$SEPSet} {
+            set SEPSet 1
+            set SEPValue ", "
+        }
+        return $SEPValue
+    }
+    proc staticSet_SEP {value} {
+        variable SEPValue
+        variable SEPSet
+        set SEPSet 1
+        set SEPValue $value
+    }
+    variable MORE_THAN_TWO_IN_LIST_ANDValue {}
+    variable MORE_THAN_TWO_IN_LIST_ANDSet 0
+    proc staticGet_MORE_THAN_TWO_IN_LIST_AND {} {
+        variable MORE_THAN_TWO_IN_LIST_ANDValue
+        variable MORE_THAN_TWO_IN_LIST_ANDSet
+        if {!$MORE_THAN_TWO_IN_LIST_ANDSet} {
+            set MORE_THAN_TWO_IN_LIST_ANDSet 1
+            set MORE_THAN_TWO_IN_LIST_ANDValue ", and "
+        }
+        return $MORE_THAN_TWO_IN_LIST_ANDValue
+    }
+    proc staticSet_MORE_THAN_TWO_IN_LIST_AND {value} {
+        variable MORE_THAN_TWO_IN_LIST_ANDValue
+        variable MORE_THAN_TWO_IN_LIST_ANDSet
+        set MORE_THAN_TWO_IN_LIST_ANDSet 1
+        set MORE_THAN_TWO_IN_LIST_ANDValue $value
+    }
+}
 
-1;
 

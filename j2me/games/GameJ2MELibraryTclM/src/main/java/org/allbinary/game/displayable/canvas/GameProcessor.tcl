@@ -11,38 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::GameProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::canvas::Processor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gameCanvas} = undef;
+oo::class create ::GameProcessor {
+    superclass ::Processor
 }
 
+oo::define ::GameProcessor {
+    method initFields_GameProcessor {} {
+        my jset gameCanvas {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{gameCanvas} = $gameCanvas;
-    return $self;
+    constructor {gameCanvas} {
+        next
+        my initFields_GameProcessor
+        my jset gameCanvas $gameCanvas
+    }
+    
+
+    method process {} {
+        [my jget gameCanvas] processPlayingGame
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self) = @_;
-        $self->{gameCanvas}->processPlayingGame();
+namespace eval ::GameProcessor {
 }
 
-use java::lang::Object ();
-use org::allbinary::canvas::Processor ();
-
-1;
 

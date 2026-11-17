@@ -11,31 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item.validation
 
-package org::allbinary::graphics::form::item::validation::AllCommandsVisitor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::visitor::Visitor';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::AllCommandsVisitor {
+    superclass ::Visitor
 }
 
+oo::define ::AllCommandsVisitor {
+    method initFields_AllCommandsVisitor {} {
+        return
+    }
+    
 
-sub visit {
-    my ($self, $anyType) = @_;
-        return 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{TRUE};
+    constructor {} {
+        next
+        my initFields_AllCommandsVisitor
+    }
+    
+
+    method visit {anyType} {
+        return [[::BooleanFactory::getInstance] jget TRUE]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::java::bool::BooleanFactory ();
-use org::allbinary::logic::util::visitor::Visitor ();
+namespace eval ::AllCommandsVisitor {
+}
 
-1;
 

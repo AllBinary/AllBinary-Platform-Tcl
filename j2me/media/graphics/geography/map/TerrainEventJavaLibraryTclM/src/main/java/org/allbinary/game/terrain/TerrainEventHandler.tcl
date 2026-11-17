@@ -11,101 +11,95 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.terrain
 
-package org::allbinary::game::terrain::TerrainEventHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::handler::BasicEventHandler';
-
-tie our $hashtable, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::StdUtil'->getInstance()->{NULL_TABLE} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::TerrainEventHandler {
+    superclass ::BasicEventHandler
 }
 
+oo::define ::TerrainEventHandler {
+    method initFields_TerrainEventHandler {} {
+        my jset list {}
+        my jset list [::BasicArrayListD new]
+        return
+    }
+    
+    
+    
 
-sub init {
-    my ($class) = @_;
-        $org::allbinary::game::terrain::TerrainEventHandler::hashtable = 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable();
-}
+    constructor {} {
+        next
+        my initFields_TerrainEventHandler
+    }
+    
 
-
-sub getInstance {
-    my ($class, $anyType) = @_;
-        my $eventHandlerCanBeNull = $org::allbinary::game::terrain::TerrainEventHandler::hashtable->get($anyType);
-        if (!defined($eventHandlerCanBeNull)) {
-            $eventHandlerCanBeNull = 'org::allbinary::game::terrain::TerrainEventHandler'->new();
-            $org::allbinary::game::terrain::TerrainEventHandler::hashtable->put($anyType, $eventHandlerCanBeNull);
+    method addListener {terrainEventListener} {
+        if {[expr {![[my jget list] contains $terrainEventListener]}]} {
+            [my jget list] add $terrainEventListener
         }
-        return $eventHandlerCanBeNull;
-}
+    }
+    
 
+    method removeAllListeners {} {
+        [my jget list] clear
+        next
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+    method removeListener {eventListenerInterface} {
+        [my jget list] remove $eventListenerInterface
+        next $eventListenerInterface
+    }
+    
 
-
-sub addListener {
-    my ($self, $terrainEventListener) = @_;
-        if (!$self->{list}->contains($terrainEventListener)) {
-            $self->{list}->add($terrainEventListener);
-        }
-}
-
-
-sub removeAllListeners {
-    my ($self) = @_;
-        $self->{list}->clear();
-        $self->SUPER::removeAllListeners();
-}
-
-
-sub removeListener {
-    my ($self, $eventListenerInterface) = @_;
-        $self->{list}->remove($eventListenerInterface);
-        $self->SUPER::removeListener($eventListenerInterface);
-}
-
-
-# throws Exception
-sub fireEvent {
-    my ($self, $eventObject) = @_;
-        for (my $index = $self->{list}->size(); --$index >= 0; ) {
+    method fireEvent {eventObject} {
+        for {set index [[my jget list] size]} {[expr {[jpreincr index -1] >= 0}]} {} {
             try {
-                my $terrainEventListener = $self->{list}->get($index);
-                $terrainEventListener->onTerrainEvent($eventObject);
-            } catch ($e) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, 'org::allbinary::logic::util::event::EventStrings'->getInstance()->{FIRE_EVENT}, $e);
+                set terrainEventListener [[my jget list] get $index]
+                $terrainEventListener onTerrainEvent $eventObject
+            } on error {e} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[::EventStrings::getInstance] jget FIRE_EVENT] $e
             }
         }
-        $self->SUPER::fireEvent($eventObject);
+        next $eventObject
+    }
+    
+
+    method process {eventObject eventListenerInterface} {
+        set terrainEventListenerInterface $eventListenerInterface
+        $terrainEventListenerInterface onTerrainEvent $eventObject
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $eventObject, $eventListenerInterface) = @_;
-        my $terrainEventListenerInterface = $eventListenerInterface;
-        $terrainEventListenerInterface->onTerrainEvent($eventObject);
+namespace eval ::TerrainEventHandler {
+    variable hashtableValue {}
+    variable hashtableSet 0
+    proc staticGet_hashtable {} {
+        variable hashtableValue
+        variable hashtableSet
+        if {!$hashtableSet} {
+            set hashtableSet 1
+            set hashtableValue [[::StdUtil::getInstance] jget NULL_TABLE]
+        }
+        return $hashtableValue
+    }
+    proc staticSet_hashtable {value} {
+        variable hashtableValue
+        variable hashtableSet
+        set hashtableSet 1
+        set hashtableValue $value
+    }
+    proc init {} {
+        ::TerrainEventHandler::staticSet_hashtable [[::StdUtil::getInstance] createHashtable]
+    }
+    proc getInstance {anyType} {
+        set eventHandlerCanBeNull [[::TerrainEventHandler::staticGet_hashtable] get $anyType]
+        if {[expr {$eventHandlerCanBeNull eq {}}]} {
+            set eventHandlerCanBeNull [::TerrainEventHandler new]
+            [::TerrainEventHandler::staticGet_hashtable] put $anyType $eventHandlerCanBeNull
+        }
+        return $eventHandlerCanBeNull
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

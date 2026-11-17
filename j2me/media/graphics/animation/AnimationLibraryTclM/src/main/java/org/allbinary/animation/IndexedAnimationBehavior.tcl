@@ -11,41 +11,40 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::IndexedAnimationBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::AnimationBehavior';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{frameDelayTime} = undef;
-    $self->{loopTotal} = undef;
-    $self->{elapsedTime} = 0;
-    $self->{loopIndex} = 0;
+oo::class create ::IndexedAnimationBehavior {
+    superclass ::AnimationBehavior
 }
 
+oo::define ::IndexedAnimationBehavior {
+    method initFields_IndexedAnimationBehavior {} {
+        my jset frameDelayTime 0
+        my jset loopTotal 0
+        my jset elapsedTime 0
+        my jset loopIndex 0
+        
+        
+        my jset elapsedTime 0
+        my jset loopIndex 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $loopTotal, $frameDelayTime) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{loopTotal} = $loopTotal;
-        $self->{frameDelayTime} = $frameDelayTime;
-    return $self;
+    constructor {loopTotal frameDelayTime} {
+        next
+        my initFields_IndexedAnimationBehavior
+        my jset loopTotal $loopTotal
+        my jset frameDelayTime $frameDelayTime
+    }
+    
+
+    method reset {} {
+        my jset loopIndex 0
+    }
 }
 
-
-sub reset {
-    my ($self) = @_;
-        $self->{loopIndex} = 0;
+namespace eval ::IndexedAnimationBehavior {
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::AnimationBehavior ();
-
-1;
 

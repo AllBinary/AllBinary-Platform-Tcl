@@ -11,63 +11,55 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::IndependentVectorExplosionRotationAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{framePoints} = 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_INT_ARRAY_ARRAY_ARRAY};
-    $self->{vectorInfo} = undef;
-    $self->{basicColor} = undef;
-    $self->{vectorAnimationFactoryInterface} = undef;
-    $self->{vectorExplosionGenerator} = 'org::allbinary::animation::VectorExplosionGenerator'->getInstance();
+oo::class create ::IndependentVectorExplosionRotationAnimationFactory {
+    superclass ::JObject
 }
 
+oo::define ::IndependentVectorExplosionRotationAnimationFactory {
+    method initFields_IndependentVectorExplosionRotationAnimationFactory {} {
+        my jset framePoints {}
+        my jset vectorInfo {}
+        my jset basicColor {}
+        my jset vectorAnimationFactoryInterface {}
+        my jset vectorExplosionGenerator {}
+        my jset framePoints [[::NullUtil::getInstance] jget NULL_INT_ARRAY_ARRAY_ARRAY]
+        
+        
+        
+        my jset vectorExplosionGenerator [::VectorExplosionGenerator::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $vectorInfo, $basicColor, $vectorAnimationFactoryInterface) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{vectorInfo} = $vectorInfo;
-        $self->{basicColor} = $basicColor;
-        $self->{vectorAnimationFactoryInterface} = $vectorAnimationFactoryInterface;
-        $self->init();
-    return $self;
-}
+    constructor {vectorInfo basicColor vectorAnimationFactoryInterface} {
+        next
+        my initFields_IndependentVectorExplosionRotationAnimationFactory
+        my jset vectorInfo $vectorInfo
+        my jset basicColor $basicColor
+        my jset vectorAnimationFactoryInterface $vectorAnimationFactoryInterface
+        my init
+    }
+    
 
+    method init {} {
+        my jset framePoints [[::VectorRotationGenerator::getInstance] getInstance [my jget vectorInfo]]
+    }
+    
 
-# throws Exception
-sub init {
-    my ($self) = @_;
-        $self->{framePoints} = 'org::allbinary::animation::VectorRotationGenerator'->getInstance()->getInstance($self->{vectorInfo});
-}
-
-
-# throws Exception
-sub getInstanceAnimation {
-    my ($self, $animationInterface) = @_;
-        my $frame = 0;
-        if (defined($animationInterface)) {
-            my $rotationAnimationInterface = $animationInterface;
-            $frame = $rotationAnimationInterface->getFrame();
+    method getInstanceAnimation {animationInterface} {
+        set frame 0
+        if {[expr {$animationInterface ne {}}]} {
+            set rotationAnimationInterface $animationInterface
+            set frame [$rotationAnimationInterface getFrame]
         }
-        my $points = $self->{vectorExplosionGenerator}->getInstance($self->{framePoints}->[$frame], 6, $self->{vectorExplosionGenerator}->{ROTATION});
-        return $self->{vectorAnimationFactoryInterface}->getInstance($points, $self->{basicColor});
+        set points [[my jget vectorExplosionGenerator] getInstance [[my jget framePoints] get $frame] 6 [[my jget vectorExplosionGenerator] jget ROTATION]]
+        return [[my jget vectorAnimationFactoryInterface] getInstance $points [my jget basicColor]]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::vector::VectorInfo ();
-use org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::VectorRotationGenerator ();
-use org::allbinary::animation::VectorExplosionGenerator ();
+namespace eval ::IndependentVectorExplosionRotationAnimationFactory {
+}
 
-1;
 

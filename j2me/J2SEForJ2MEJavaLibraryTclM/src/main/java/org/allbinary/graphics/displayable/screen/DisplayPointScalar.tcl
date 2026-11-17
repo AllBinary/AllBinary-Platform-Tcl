@@ -11,50 +11,61 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.screen
 
-package org::allbinary::graphics::displayable::screen::DisplayPointScalar;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::displayable::screen::DisplayPointScalar'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::displayable::screen::DisplayPointScalar::instance;
+oo::class create ::DisplayPointScalar {
+    superclass ::JObject
 }
 
+oo::define ::DisplayPointScalar {
+    method initFields_DisplayPointScalar {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+    constructor {} {
+        next
+        my initFields_DisplayPointScalar
+    }
+    
+
+    method processX {value} {
+        return $value
+    }
+    
+
+    method processY {value} {
+        return $value
+    }
+    
+
+    method process {point} {
+        return $point
+    }
 }
 
-
-sub processX {
-    my ($self, $value) = @_;
-        return $value;
+namespace eval ::DisplayPointScalar {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::DisplayPointScalar new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::DisplayPointScalar::staticGet_instance]
+    }
 }
 
-
-sub processY {
-    my ($self, $value) = @_;
-        return $value;
-}
-
-
-sub process {
-    my ($self, $point) = @_;
-        return $point;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::GPoint ();
-
-1;
 

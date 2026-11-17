@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-# Java interface
-package org::allbinary::animation::AnimationListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-sub onEnd {
-    my ($self) = @_;
-    die "abstract method onEnd";
+oo::class create ::AnimationListener {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::AnimationListener {
+    method initFields_AnimationListener {} {
+        return
+    }
+    
 
-1;
+    method onEnd {} {
+        error [jexception AbstractMethodError onEnd]
+    }
+}
+
+namespace eval ::AnimationListener {
+}
+
 

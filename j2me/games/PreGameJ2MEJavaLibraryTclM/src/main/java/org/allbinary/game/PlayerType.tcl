@@ -11,51 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game
 
-package org::allbinary::game::PlayerType;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{id} = undef;
-    $self->{name} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+oo::class create ::PlayerType {
+    superclass ::JObject
 }
 
+oo::define ::PlayerType {
+    method initFields_PlayerType {} {
+        my jset id 0
+        my jset name {}
+        
+        my jset name [[::StringUtil::getInstance] jget EMPTY_STRING]
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $value) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{name} = $name;
-        $self->{id} = $value;
-    return $self;
+    constructor {name value} {
+        next
+        my initFields_PlayerType
+        my jset name $name
+        my jset id $value
+    }
+    
+
+    method getId {} {
+        return [my jget id]
+    }
+    
+
+    method getName {} {
+        return [my jget name]
+    }
+    
+
+    method toString {} {
+        return [my getName]
+    }
 }
 
-
-sub getId {
-    my ($self) = @_;
-        return $self->{id};
+namespace eval ::PlayerType {
 }
 
-
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
-}
-
-
-sub toString {
-    my ($self) = @_;
-        return $self->getName();
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::string::StringUtil ();
-
-1;
 

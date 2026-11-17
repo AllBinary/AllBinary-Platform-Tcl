@@ -11,35 +11,32 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game
 
-package org::allbinary::game::GameInfoCopyFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::GameInfoCopyFactory {
+    superclass ::JObject
 }
 
+oo::define ::GameInfoCopyFactory {
+    method initFields_GameInfoCopyFactory {} {
+        return
+    }
 
-sub getInstanceMaxLevel {
-    my ($class, $gameInfo, $maxLevel) = @_;
-        return 'org::allbinary::game::GameInfo'->new($gameInfo->getGameType(), $gameInfo->getGameMode(), $gameInfo->getPlayerType(), $maxLevel, $gameInfo->getCurrentLevel());
+    constructor {} {
+        next
+        my initFields_GameInfoCopyFactory
+    }
+    
+    
 }
 
-
-sub getInstance {
-    my ($class, $gameInfo) = @_;
-        return 'org::allbinary::game::GameInfo'->new($gameInfo->getGameType(), $gameInfo->getGameMode(), $gameInfo->getPlayerType(), $gameInfo->getHighestLevel(), $gameInfo->getCurrentLevel());
+namespace eval ::GameInfoCopyFactory {
+    proc getInstanceMaxLevel {gameInfo maxLevel} {
+        return [::GameInfo new [$gameInfo getGameType] [$gameInfo getGameMode] [$gameInfo getPlayerType] $maxLevel [$gameInfo getCurrentLevel]]
+    }
+    proc getInstance {gameInfo} {
+        return [::GameInfo new [$gameInfo getGameType] [$gameInfo getGameMode] [$gameInfo getPlayerType] [$gameInfo getHighestLevel] [$gameInfo getCurrentLevel]]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::GameInfo ();
-
-1;
 

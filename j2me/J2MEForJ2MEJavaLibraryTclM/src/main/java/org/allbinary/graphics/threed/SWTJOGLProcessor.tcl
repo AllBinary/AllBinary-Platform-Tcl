@@ -11,140 +11,133 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.threed
 
 #OpenGLNone
-package org::allbinary::graphics::threed::SWTJOGLProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::threed::SWTJOGLProcessor'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::SWTJOGLProcessor {
+    superclass ::JObject
 }
 
+oo::define ::SWTJOGLProcessor {
+    method initFields_SWTJOGLProcessor {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::threed::SWTJOGLProcessor::instance;
+    constructor {} {
+        next
+        my initFields_SWTJOGLProcessor
+    }
+    
+    
+
+    method init {display comp} {
+    }
+    
+
+    method isHolderCreated {} {
+        return true
+    }
+    
+
+    method setRenderer {renderer} {
+    }
+    
+
+    method isJOGL {} {
+        return false
+    }
+    
+
+    method createSurface {} {
+    }
+    
+
+    method onSurfaceCreated {} {
+    }
+    
+
+    method onSurfaceChangedForEvent {event} {
+    }
+    
+
+    method onSurfaceChanged {} {
+    }
+    
+
+    method onSurfaceChangedWH {width height} {
+    }
+    
+
+    method addListener {} {
+    }
+    
+
+    method addListeners {midlet} {
+    }
+    
+
+    method run {} {
+    }
+    
+
+    method clear {} {
+    }
+    
+
+    method setCustom {width height ratio} {
+    }
+    
+
+    method setRatioProcessor {ratioProcessor} {
+    }
+    
+
+    method isPortraitRatioProcessor {} {
+        return true
+    }
+    
+
+    method charWidth {font ch} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method charsWidth {font ch offset length} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method stringWidth {font str} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method substringWidth {font str offset len} {
+        error [jexception RuntimeException {}]
+    }
 }
 
-
-sub init {
-    my ($self, $display, $comp) = @_;
+namespace eval ::SWTJOGLProcessor {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::SWTJOGLProcessor new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::SWTJOGLProcessor::staticGet_instance]
+    }
 }
 
-
-sub isHolderCreated {
-    my ($self) = @_;
-        return 1;
-}
-
-
-sub setRenderer {
-    my ($self, $renderer) = @_;
-}
-
-
-sub isJOGL {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub createSurface {
-    my ($self) = @_;
-}
-
-
-sub onSurfaceCreated {
-    my ($self) = @_;
-}
-
-
-sub onSurfaceChangedForEvent {
-    my ($self, $event) = @_;
-}
-
-
-sub onSurfaceChanged {
-    my ($self) = @_;
-}
-
-
-sub onSurfaceChangedWH {
-    my ($self, $width, $height) = @_;
-}
-
-
-sub addListener {
-    my ($self) = @_;
-}
-
-
-sub addListeners {
-    my ($self, $midlet) = @_;
-}
-
-
-sub run {
-    my ($self) = @_;
-}
-
-
-sub clear {
-    my ($self) = @_;
-}
-
-
-sub setCustom {
-    my ($self, $width, $height, $ratio) = @_;
-}
-
-
-sub setRatioProcessor {
-    my ($self, $ratioProcessor) = @_;
-}
-
-
-sub isPortraitRatioProcessor {
-    my ($self) = @_;
-        return 1;
-}
-
-
-sub charWidth {
-    my ($self, $font, $ch) = @_;
-        die ("RuntimeException");
-}
-
-
-sub charsWidth {
-    my ($self, $font, $ch, $offset, $length) = @_;
-        die ("RuntimeException");
-}
-
-
-sub stringWidth {
-    my ($self, $font, $str) = @_;
-        die ("RuntimeException");
-}
-
-
-sub substringWidth {
-    my ($self, $font, $str, $offset, $len) = @_;
-        die ("RuntimeException");
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::midlet::MIDlet ();
-
-1;
 

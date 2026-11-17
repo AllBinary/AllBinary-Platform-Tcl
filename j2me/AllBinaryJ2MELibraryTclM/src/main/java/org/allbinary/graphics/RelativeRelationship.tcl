@@ -11,71 +11,79 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-package org::allbinary::graphics::RelativeRelationship;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_RELATIVE_RELATIONSHIP, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::RelativeRelationship'->new('org::allbinary::graphics::PointFactory'->getInstance()->{ZERO_ZERO}, 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance()) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{typesAllowedList} = undef;
-    $self->{x} = undef;
-    $self->{y} = undef;
-    $self->{z} = undef;
+oo::class create ::RelativeRelationship {
+    superclass ::JObject
 }
 
+oo::define ::RelativeRelationship {
+    method initFields_RelativeRelationship {} {
+        my jset typesAllowedList {}
+        my jset x 0
+        my jset y 0
+        my jset z 0
+        
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $point, $typesAllowedList) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{x} = $point->getX();
-        $self->{y} = $point->getY();
-        $self->{z} = $point->getZ();
-        $self->{typesAllowedList} = $typesAllowedList;
-    return $self;
+    constructor {point typesAllowedList} {
+        next
+        my initFields_RelativeRelationship
+        my jset x [$point getX]
+        my jset y [$point getY]
+        my jset z [$point getZ]
+        my jset typesAllowedList $typesAllowedList
+    }
+    
+
+    method getX {} {
+        return [my jget x]
+    }
+    
+
+    method getY {} {
+        return [my jget y]
+    }
+    
+
+    method getZ {} {
+        return [my jget z]
+    }
+    
+
+    method getTypesAllowedList {} {
+        return [my jget typesAllowedList]
+    }
+    
+
+    method setTypesAllowedList {typesAllowedList} {
+        my jset typesAllowedList $typesAllowedList
+    }
 }
 
-
-sub getX {
-    my ($self) = @_;
-        return $self->{x};
+namespace eval ::RelativeRelationship {
+    variable NULL_RELATIVE_RELATIONSHIPValue {}
+    variable NULL_RELATIVE_RELATIONSHIPSet 0
+    proc staticGet_NULL_RELATIVE_RELATIONSHIP {} {
+        variable NULL_RELATIVE_RELATIONSHIPValue
+        variable NULL_RELATIVE_RELATIONSHIPSet
+        if {!$NULL_RELATIVE_RELATIONSHIPSet} {
+            set NULL_RELATIVE_RELATIONSHIPSet 1
+            set NULL_RELATIVE_RELATIONSHIPValue [::RelativeRelationship new [[::PointFactory::getInstance] jget ZERO_ZERO] [[::BasicArrayListUtil::getInstance] getImmutableInstance]]
+        }
+        return $NULL_RELATIVE_RELATIONSHIPValue
+    }
+    proc staticSet_NULL_RELATIVE_RELATIONSHIP {value} {
+        variable NULL_RELATIVE_RELATIONSHIPValue
+        variable NULL_RELATIVE_RELATIONSHIPSet
+        set NULL_RELATIVE_RELATIONSHIPSet 1
+        set NULL_RELATIVE_RELATIONSHIPValue $value
+    }
 }
 
-
-sub getY {
-    my ($self) = @_;
-        return $self->{y};
-}
-
-
-sub getZ {
-    my ($self) = @_;
-        return $self->{z};
-}
-
-
-sub getTypesAllowedList {
-    my ($self) = @_;
-        return $self->{typesAllowedList};
-}
-
-
-sub setTypesAllowedList {
-    my ($self, $typesAllowedList) = @_;
-        $self->{typesAllowedList} = $typesAllowedList;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListUtil ();
-use org::allbinary::graphics::PointFactory ();
-
-1;
 

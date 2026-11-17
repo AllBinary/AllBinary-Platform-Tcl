@@ -11,102 +11,90 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.text
 
-package org::allbinary::animation::text::CustomTextAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::text::TextAnimation','org::allbinary::animation::text::TextInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{fontDebugFactory} = 'org::allbinary::graphics::font::FontDebugFactory'->getInstance();
-    $self->{fontSize} = undef;
-    $self->{font} = undef;
-    $self->{lastText} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{INIT_STRING};
-    $self->{hasChanged} = 1;
-    $self->{textWidth} = 0;
+oo::class create ::CustomTextAnimation {
+    superclass ::TextAnimation
 }
 
+oo::define ::CustomTextAnimation {
+    method initFields_CustomTextAnimation {} {
+        my jset fontDebugFactory {}
+        my jset fontSize 0
+        my jset font {}
+        my jset lastText {}
+        my jset hasChanged false
+        my jset textWidth 0
+        my jset fontDebugFactory [::FontDebugFactory::getInstance]
+        
+        
+        my jset lastText [[::StringUtil::getInstance] jget INIT_STRING]
+        my jset hasChanged true
+        my jset textWidth 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $text, $fontSize, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($text, $animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{fontSize} = $fontSize;
-        $self->{font} = 'javax::microedition::lcdui::Font'->getFont($javax::microedition::lcdui::Font::FACE_SYSTEM, $javax::microedition::lcdui::Font::STYLE_PLAIN, $fontSize);
-    return $self;
-}
+    constructor {text fontSize animationBehavior} {
+        next $text $animationBehavior
+        my initFields_CustomTextAnimation
+        my jset fontSize $fontSize
+        my jset font [::Font::getFont [::Font::staticGet_FACE_SYSTEM] [::Font::staticGet_STYLE_PLAIN] $fontSize]
+    }
+    
 
+    method paintXY {graphics x y} {
+        [my jget myFontProcessor] process $graphics
+        set existingFont [$graphics getFont]
+        [my jget fontDebugFactory] setFont [my jget font] $graphics
+        next $graphics $x $y
+        [my jget fontDebugFactory] setFont $existingFont $graphics
+    }
+    
 
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        my $existingFont = $graphics->getFont();
-        $self->{fontDebugFactory}->setFont($self->{font}, $graphics);
-        $self->SUPER::paintXYNoUpdate($graphics, $x, $y);
-        $self->{fontDebugFactory}->setFont($existingFont, $graphics);
-}
-
-
-sub setScale {
-    my ($self, $scaleX, $scaleY) = @_;
-        if ($scaleX != $scaleY) {
-            die ("RuntimeException");
+    method setScale {scaleX scaleY} {
+        if {[expr {$scaleX != $scaleY}]} {
+            error [jexception RuntimeException {}]
         }
-        $self->{hasChanged} = 1;
-        $self->{font} = 'javax::microedition::lcdui::Font'->getFont($javax::microedition::lcdui::Font::FACE_SYSTEM, $javax::microedition::lcdui::Font::STYLE_PLAIN, int(($self->{fontSize} * $scaleX)));
-}
+        my jset hasChanged true
+        my jset font [::Font::getFont [::Font::staticGet_FACE_SYSTEM] [::Font::staticGet_STYLE_PLAIN] [jint [jd2i ([expr {[expr {double([my jget fontSize])}] * $scaleX}])]]]
+    }
+    
 
+    method setTextWithOnMeasure {text textChangeListener} {
+        next $text $textChangeListener
+    }
+    
 
-sub setTextWithOnMeasure {
-    my ($self, $text, $textChangeListener) = @_;
-        $self->SUPER::setTextWithOnMeasure($text, $textChangeListener);
-}
-
-
-sub setText {
-    my ($self, $text) = @_;
-        if ($self->{lastText} ne $text) {
-            $self->{hasChanged} = 1;
-            $self->{lastText} = $text;
-            $self->SUPER::setText($text);
+    method setText {text} {
+        if {[expr {[my jget lastText] ne $text}]} {
+            my jset hasChanged true
+            my jset lastText $text
+            next $text
         }
-}
+    }
+    
 
+    method getText {} {
+        return [my jget lastText]
+    }
+    
 
-sub getText {
-    my ($self) = @_;
-        return $self->{lastText};
-}
-
-
-sub getWidth {
-    my ($self) = @_;
-        if ($self->{hasChanged}) {
-            $self->{textWidth} = $self->{font}->stringWidth($self->{textArrayP}->[0]);
-            $self->{hasChanged} = 0;
+    method getWidth {} {
+        if {[my jget hasChanged]} {
+            my jset textWidth [[my jget font] stringWidth [[my jget textArrayP] get 0]]
+            my jset hasChanged false
         }
-        return $self->{textWidth};
+        return [my jget textWidth]
+    }
+    
+
+    method getFontHeight {} {
+        return [[my jget font] getHeight]
+    }
 }
 
-
-sub getFontHeight {
-    my ($self) = @_;
-        return $self->{font}->getHeight();
+namespace eval ::CustomTextAnimation {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::graphics::font::FontDebugFactory ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::animation::text::TextAnimation ();
-use org::allbinary::animation::text::TextInterface ();
-
-1;
 

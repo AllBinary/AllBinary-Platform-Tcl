@@ -11,53 +11,45 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::RunnableCanvasSingleThreadStartRunnable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::displayable::canvas::GameRunnable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{runnableCanvas} = undef;
+oo::class create ::RunnableCanvasSingleThreadStartRunnable {
+    superclass ::GameRunnable
 }
 
+oo::define ::RunnableCanvasSingleThreadStartRunnable {
+    method initFields_RunnableCanvasSingleThreadStartRunnable {} {
+        my jset logUtil {}
+        my jset runnableCanvas {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $demoCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{runnableCanvas} = $demoCanvas;
-    return $self;
-}
+    constructor {demoCanvas} {
+        next
+        my initFields_RunnableCanvasSingleThreadStartRunnable
+        my jset runnableCanvas $demoCanvas
+    }
+    
 
-
-sub run {
-    my ($self) = @_;
+    method run {} {
         try {
-            $self->{runnableCanvas}->run();
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{RUN}, $e);
+            [my jget runnableCanvas] run
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget RUN] $e
         }
+    }
+    
+
+    method processLoopSleep {} {
+        [my jget runnableCanvas] processLoopSleep
+    }
 }
 
-
-# throws Exception
-sub processLoopSleep {
-    my ($self) = @_;
-        $self->{runnableCanvas}->processLoopSleep();
+namespace eval ::RunnableCanvasSingleThreadStartRunnable {
 }
 
-use java::lang::Object ();
-use org::allbinary::canvas::RunnableCanvas ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::displayable::canvas::GameRunnable ();
-
-1;
 

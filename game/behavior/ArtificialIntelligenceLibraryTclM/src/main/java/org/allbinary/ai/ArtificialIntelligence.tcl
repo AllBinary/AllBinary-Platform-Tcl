@@ -11,46 +11,72 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.ai
 
-package org::allbinary::ai::ArtificialIntelligence;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::ai::ArtificialIntelligenceInterface';
-
-our $AI_ID = 2;
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::ai::ArtificialIntelligence'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::ai::ArtificialIntelligence::instance;
+oo::class create ::ArtificialIntelligence {
+    superclass ::JObject
 }
 
+oo::define ::ArtificialIntelligence {
+    method initFields_ArtificialIntelligence {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+    constructor {} {
+        next
+        my initFields_ArtificialIntelligence
+    }
+    
+
+    method processAI {layerManager} {
+    }
+    
+
+    method getId {} {
+        return 1
+    }
 }
 
-
-# throws Exception
-sub processAI {
-    my ($self, $layerManager) = @_;
+namespace eval ::ArtificialIntelligence {
+    variable AI_IDValue {}
+    variable AI_IDSet 0
+    proc staticGet_AI_ID {} {
+        variable AI_IDValue
+        variable AI_IDSet
+        if {!$AI_IDSet} {
+            set AI_IDSet 1
+            set AI_IDValue 2
+        }
+        return $AI_IDValue
+    }
+    proc staticSet_AI_ID {value} {
+        variable AI_IDValue
+        variable AI_IDSet
+        set AI_IDSet 1
+        set AI_IDValue $value
+    }
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ArtificialIntelligence new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ArtificialIntelligence::staticGet_instance]
+    }
 }
 
-
-sub getId {
-    my ($self) = @_;
-        return 1;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-
-1;
 

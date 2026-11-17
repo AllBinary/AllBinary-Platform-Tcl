@@ -11,68 +11,52 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.text
 
-package org::allbinary::animation::text::CustomTextBoxIndexedAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::AnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{scaleProperties} = undef;
-    $self->{maxLength} = undef;
+oo::class create ::CustomTextBoxIndexedAnimationFactory {
+    superclass ::JObject
 }
 
+oo::define ::CustomTextBoxIndexedAnimationFactory {
+    method initFields_CustomTextBoxIndexedAnimationFactory {} {
+        my jset logUtil {}
+        my jset scaleProperties {}
+        my jset maxLength 0
+        my jset logUtil [::LogUtil::getInstance]
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $fontSize, $maxLength) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{scaleProperties} = 'org::allbinary::media::ScaleProperties'->new();
-        $self->{scaleProperties}->{scaleHeight} = $fontSize;
-        $self->{maxLength} = $maxLength;
-    return $self;
-}
+    constructor {fontSize maxLength} {
+        next
+        my initFields_CustomTextBoxIndexedAnimationFactory
+        my jset scaleProperties [::ScaleProperties new]
+        [my jget scaleProperties] jset scaleHeight $fontSize
+        my jset maxLength $maxLength
+    }
+    
 
+    method getInstance {instanceId} {
+        set abToGBUtil [::ABToGBUtil::getInstance]
+        set abCanvas [$abToGBUtil jget abCanvas]
+        set font [::Font::getFont [::Font::staticGet_FACE_SYSTEM] [::Font::staticGet_STYLE_PLAIN] [[my jget scaleProperties] jget scaleHeight]]
+        set customTextBox [::CustomTextBox2 new [$abCanvas getCustomCommandListener] [[::StringUtil::getInstance] jget EMPTY_STRING] [[::StringUtil::getInstance] jget EMPTY_STRING] [my jget maxLength] [::TextField::staticGet_ANY] $font [[$abCanvas getLayerManager] getBackgroundBasicColor] [[$abCanvas getLayerManager] getForegroundBasicColor]]
+        return [::CustomTextBoxIndexedAnimation new $customTextBox]
+    }
+    
 
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        my $abToGBUtil = 'org::allbinary::game::canvas::ABToGBUtil'->getInstance();
-        my $abCanvas = $abToGBUtil->{abCanvas};
-        my $font = 'javax::microedition::lcdui::Font'->getFont($javax::microedition::lcdui::Font::FACE_SYSTEM, $javax::microedition::lcdui::Font::STYLE_PLAIN, $self->{scaleProperties}->{scaleHeight});
-        my $customTextBox = 'org::allbinary::animation::text::CustomTextBox2'->new($abCanvas->getCustomCommandListener(), 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $self->{maxLength}, $javax::microedition::lcdui::TextField::ANY, $font, $abCanvas->getLayerManager()->getBackgroundBasicColor(), $abCanvas->getLayerManager()->getForegroundBasicColor());
-        return 'org::allbinary::animation::text::CustomTextBoxIndexedAnimation'->new($customTextBox);
-}
-
-
-sub setInitialScale {
-    my ($self, $scaleProperties) = @_;
-        my $fontSize = $self->{scaleProperties}->{scaleHeight};
-        $self->{scaleProperties} = $scaleProperties;
-        if ($self->{scaleProperties}->{scaleHeight} < 6) {
-            $self->{scaleProperties}->{scaleHeight} = $fontSize;
+    method setInitialScale {scaleProperties} {
+        set fontSize [[my jget scaleProperties] jget scaleHeight]
+        my jset scaleProperties $scaleProperties
+        if {[expr {[[my jget scaleProperties] jget scaleHeight] < 6}]} {
+            [my jget scaleProperties] jset scaleHeight $fontSize
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::TextField ();
-use org::allbinary::graphics::form::item::CustomTextBox ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::game::canvas::ABToGBUtil ();
-use org::allbinary::game::displayable::canvas::AllBinaryGameCanvas ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::media::ScaleProperties ();
-use org::allbinary::animation::text::CustomTextBox2 ();
-use org::allbinary::animation::text::CustomTextBoxIndexedAnimation ();
+namespace eval ::CustomTextBoxIndexedAnimationFactory {
+}
 
-1;
 

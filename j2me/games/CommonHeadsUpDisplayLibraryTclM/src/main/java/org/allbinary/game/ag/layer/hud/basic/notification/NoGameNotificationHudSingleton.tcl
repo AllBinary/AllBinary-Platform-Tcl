@@ -11,57 +11,62 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic.notification
 
-package org::allbinary::game::ag::layer::hud::basic::notification::NoGameNotificationHudSingleton;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::ag::layer::hud::basic::notification::NoGameNotificationHudSingleton'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{gameNotificationHud} = $org::allbinary::game::ag::layer::hud::basic::notification::GameNotificationHud::NULL_GAME_NOTIFICATION;
+oo::class create ::NoGameNotificationHudSingleton {
+    superclass ::JObject
 }
 
+oo::define ::NoGameNotificationHudSingleton {
+    method initFields_NoGameNotificationHudSingleton {} {
+        my jset logUtil {}
+        my jset gameNotificationHud {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset gameNotificationHud [::GameNotificationHud::staticGet_NULL_GAME_NOTIFICATION]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::ag::layer::hud::basic::notification::NoGameNotificationHudSingleton::instance;
-}
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
+    constructor {} {
+        next
+        my initFields_NoGameNotificationHudSingleton
         try {
-            my $basicHudFactory = 'org::allbinary::game::graphics::hud::BasicHudFactory'->getInstance();
-            $self->{gameNotificationHud} = 'org::allbinary::game::ag::layer::hud::basic::notification::NoGameGameNotificationHud'->new();
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{CONSTRUCTOR}, $e);
+            set basicHudFactory [::BasicHudFactory::getInstance]
+            my jset gameNotificationHud [::NoGameGameNotificationHud new]
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget CONSTRUCTOR] $e
         }
-    return $self;
+    }
+    
+
+    method getGameNotificationHud {} {
+        return [my jget gameNotificationHud]
+    }
 }
 
-
-sub getGameNotificationHud {
-    my ($self) = @_;
-        return $self->{gameNotificationHud};
+namespace eval ::NoGameNotificationHudSingleton {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::NoGameNotificationHudSingleton new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::NoGameNotificationHudSingleton::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::graphics::hud::BasicHudFactory ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::ag::layer::hud::basic::notification::GameNotificationHud ();
-use org::allbinary::game::ag::layer::hud::basic::notification::NoGameGameNotificationHud ();
-
-1;
 

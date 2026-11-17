@@ -11,67 +11,53 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.special
 
-package org::allbinary::game::layer::special::CollidableDestroyableDamageableBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::collision::CollidableBaseBehavior';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{damageUtil} = 'org::allbinary::game::combat::damage::DamageUtil'->getInstance();
+oo::class create ::CollidableDestroyableDamageableBehavior {
+    superclass ::CollidableBaseBehavior
 }
 
+oo::define ::CollidableDestroyableDamageableBehavior {
+    method initFields_CollidableDestroyableDamageableBehavior {} {
+        my jset damageUtil {}
+        my jset damageUtil [::DamageUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $collidable) = @_;
-    my $self = $class->SUPER::new($collidable);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
-}
+    constructor {collidable} {
+        next $collidable
+        my initFields_CollidableDestroyableDamageableBehavior
+    }
+    
 
-
-sub isCollision {
-    my ($self, $ownerLayer, $collisionLayer) = @_;
-        if ($ownerLayer->getGroupInterface()->[0] != $collisionLayer->getGroupInterface()->[0]) {
-            return $self->SUPER::isCollision($ownerLayer, $collisionLayer);
+    method isCollision {ownerLayer collisionLayer} {
+        if {[expr {[[$ownerLayer getGroupInterface] get 0] != [[$collisionLayer getGroupInterface] get 0]}]} {
+            return [next $ownerLayer $collisionLayer]
         }
-        return 0;
+        return false
+    }
+    
+
+    method collide {ownerLayer collidableInterfaceCompositeInterface} {
+        set ownerCollidableDestroyableDamageableLayer $ownerLayer
+        set collidableDestroyableDamageableLayer $collidableInterfaceCompositeInterface
+        $ownerCollidableDestroyableDamageableLayer damage [$collidableDestroyableDamageableLayer getDamage 0] 0
+    }
+    
+
+    method isCollisionInterface {ownerLayer collidableInterfaceCompositeInterface} {
+        ::ForcedLogUtil::log "No Longer Used" [self]
+        return false
+    }
+    
+
+    method collideInterface {ownerLayer collidableInterfaceCompositeInterface} {
+        ::ForcedLogUtil::log "No Longer Used" [self]
+    }
 }
 
-
-# throws Exception
-sub collide {
-    my ($self, $ownerLayer, $collidableInterfaceCompositeInterface) = @_;
-        my $ownerCollidableDestroyableDamageableLayer = $ownerLayer;
-        my $collidableDestroyableDamageableLayer = $collidableInterfaceCompositeInterface;
-        $ownerCollidableDestroyableDamageableLayer->damage($collidableDestroyableDamageableLayer->getDamage(0), 0);
+namespace eval ::CollidableDestroyableDamageableBehavior {
 }
 
-
-sub isCollisionInterface {
-    my ($self, $ownerLayer, $collidableInterfaceCompositeInterface) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log("No Longer Used", $self);
-        return 0;
-}
-
-
-# throws Exception
-sub collideInterface {
-    my ($self, $ownerLayer, $collidableInterfaceCompositeInterface) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log("No Longer Used", $self);
-}
-
-use java::lang::Object ();
-use org::allbinary::game::collision::CollidableBaseBehavior ();
-use org::allbinary::game::collision::CollidableInterfaceCompositeInterface ();
-use org::allbinary::game::combat::damage::DamageUtil ();
-use org::allbinary::game::layer::CollidableCompositeLayer ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-
-1;
 

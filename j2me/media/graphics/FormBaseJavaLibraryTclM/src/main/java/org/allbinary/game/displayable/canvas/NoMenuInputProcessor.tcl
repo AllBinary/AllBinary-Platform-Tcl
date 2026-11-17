@@ -11,52 +11,58 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::NoMenuInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::displayable::canvas::BasicMenuInputProcessor';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::displayable::canvas::NoMenuInputProcessor'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::displayable::canvas::NoMenuInputProcessor::SINGLETON;
+oo::class create ::NoMenuInputProcessor {
+    superclass ::BasicMenuInputProcessor
 }
 
+oo::define ::NoMenuInputProcessor {
+    method initFields_NoMenuInputProcessor {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance(), -1, $javax::microedition::lcdui::NullCanvas::NULL_CANVAS);
-        # super(...) made $self above
-    return $self;
+    constructor {} {
+        next [[::BasicArrayListUtil::getInstance] getImmutableInstance] [expr {-1}] [::NullCanvas::staticGet_NULL_CANVAS]
+        my initFields_NoMenuInputProcessor
+    }
+    
+
+    method onDownGameKeyEvent {gameKeyEvent} {
+    }
+    
+
+    method onUpGameKeyEvent {gameKeyEvent} {
+    }
+    
+
+    method onMotionGestureEvent {motionGestureEvent} {
+    }
 }
 
-
-sub onDownGameKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
+namespace eval ::NoMenuInputProcessor {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::NoMenuInputProcessor new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::NoMenuInputProcessor::staticGet_SINGLETON]
+    }
 }
 
-
-sub onUpGameKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
-}
-
-
-sub onMotionGestureEvent {
-    my ($self, $motionGestureEvent) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::NullCanvas ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::input::motion::gesture::observer::MotionGestureEvent ();
-use org::allbinary::util::BasicArrayListUtil ();
-use org::allbinary::game::displayable::canvas::BasicMenuInputProcessor ();
-
-1;
 

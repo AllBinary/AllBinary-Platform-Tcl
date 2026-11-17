@@ -11,175 +11,155 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
 #BasicPlayerMIDP2JavaLibrary
-package org::allbinary::media::audio::BasicPlayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','javax::microedition::media::Player','org::allbinary::media::audio::TimeBaseInterface','org::allbinary::media::audio::Controllable2';
-
-our $CONTROL_TYPE = "ToneControl";
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{listenersList} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{timeBase} = undef;
-    $self->{stateP} = 0;
-    $self->{loopCountP} = 0;
+oo::class create ::BasicPlayer {
+    superclass ::JObject
 }
 
+oo::define ::BasicPlayer {
+    method initFields_BasicPlayer {} {
+        my jset listenersList {}
+        my jset timeBase {}
+        my jset stateP 0
+        my jset loopCountP 0
+        my jset listenersList [::BasicArrayListD new]
+        my jset timeBase {}
+        my jset stateP 0
+        my jset loopCountP 0
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->setLoopCount(0);
-        $self->setState($javax::microedition::media::Player::UNREALIZED);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_BasicPlayer
+        my setLoopCount 0
+        my setState [::Player::staticGet_UNREALIZED]
+    }
+    
 
+    method getContentType {} {
+        return [[::StringUtil::getInstance] jget EMPTY_STRING]
+    }
+    
 
-sub getContentType {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-}
+    method getControl {controlType} {
+        return [::NullControl new]
+    }
+    
 
+    method getControls {} {
+        return [jarray 0 {}]
+    }
+    
 
-sub getControl {
-    my ($self, $controlType) = @_;
-        return 'org::allbinary::media::audio::NullControl'->new();
-}
+    method close {} {
+    }
+    
 
-
-sub getControls {
-    my ($self) = @_;
-        return [(undef) x (0)];
-}
-
-
-sub close {
-    my ($self) = @_;
-}
-
-
-sub addPlayerListener {
-    my ($self, $playerListener) = @_;
-        if (!$self->{listenersList}->contains($playerListener)) {
-            $self->{listenersList}->add($playerListener);
+    method addPlayerListener {playerListener} {
+        if {[expr {![[my jget listenersList] contains $playerListener]}]} {
+            [my jget listenersList] add $playerListener
         }
+    }
+    
+
+    method removePlayerListener {playerListener} {
+        [my jget listenersList] remove $playerListener
+    }
+    
+
+    method getState {} {
+        return [my jget stateP]
+    }
+    
+
+    method setState {state} {
+        my jset stateP $state
+    }
+    
+
+    method getDuration {} {
+        return 0
+    }
+    
+
+    method getMediaTime {} {
+        return 0
+    }
+    
+
+    method getTimeBase {} {
+        return [my jget timeBase]
+    }
+    
+
+    method setTimeBase {timeBase} {
+        my jset timeBase $timeBase
+    }
+    
+
+    method deallocate {} {
+    }
+    
+
+    method prefetch {} {
+    }
+    
+
+    method realize {} {
+    }
+    
+
+    method setLoopCount {count} {
+        my jset loopCountP $count
+    }
+    
+
+    method getLoopCount {} {
+        return [my jget loopCountP]
+    }
+    
+
+    method setMediaTime {now} {
+        return 0
+    }
+    
+
+    method start {} {
+        my setState [::Player::staticGet_STARTED]
+    }
+    
+
+    method stop {} {
+        my setState [::Player::staticGet_PREFETCHED]
+    }
+    
+
+    method setVolume {leftVolume rightVolume} {
+    }
 }
 
-
-sub removePlayerListener {
-    my ($self, $playerListener) = @_;
-        $self->{listenersList}->remove($playerListener);
+namespace eval ::BasicPlayer {
+    variable CONTROL_TYPEValue {}
+    variable CONTROL_TYPESet 0
+    proc staticGet_CONTROL_TYPE {} {
+        variable CONTROL_TYPEValue
+        variable CONTROL_TYPESet
+        if {!$CONTROL_TYPESet} {
+            set CONTROL_TYPESet 1
+            set CONTROL_TYPEValue "ToneControl"
+        }
+        return $CONTROL_TYPEValue
+    }
+    proc staticSet_CONTROL_TYPE {value} {
+        variable CONTROL_TYPEValue
+        variable CONTROL_TYPESet
+        set CONTROL_TYPESet 1
+        set CONTROL_TYPEValue $value
+    }
 }
 
-
-sub getState {
-    my ($self) = @_;
-        return $self->{stateP};
-}
-
-
-sub setState {
-    my ($self, $state) = @_;
-        $self->{stateP} = $state;
-}
-
-
-sub getDuration {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub getMediaTime {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub getTimeBase {
-    my ($self) = @_;
-        return $self->{timeBase};
-}
-
-
-sub setTimeBase {
-    my ($self, $timeBase) = @_;
-        $self->{timeBase} = $timeBase;
-}
-
-
-sub deallocate {
-    my ($self) = @_;
-}
-
-
-# throws MediaException
-sub prefetch {
-    my ($self) = @_;
-}
-
-
-# throws MediaException
-sub realize {
-    my ($self) = @_;
-}
-
-
-sub setLoopCount {
-    my ($self, $count) = @_;
-        $self->{loopCountP} = $count;
-}
-
-
-sub getLoopCount {
-    my ($self) = @_;
-        return $self->{loopCountP};
-}
-
-
-# throws MediaException
-sub setMediaTime {
-    my ($self, $now) = @_;
-        return 0;
-}
-
-
-# throws MediaException
-sub start {
-    my ($self) = @_;
-        $self->setState($javax::microedition::media::Player::STARTED);
-}
-
-
-# throws MediaException
-sub stop {
-    my ($self) = @_;
-        $self->setState($javax::microedition::media::Player::PREFETCHED);
-}
-
-
-sub setVolume {
-    my ($self, $leftVolume, $rightVolume) = @_;
-}
-
-use java::lang::Object ();
-use javax::microedition::media::Control ();
-use javax::microedition::media::MediaException ();
-use javax::microedition::media::Player ();
-use javax::microedition::media::PlayerListener ();
-use javax::microedition::media::TimeBase ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::media::audio::TimeBaseInterface ();
-use org::allbinary::media::audio::Controllable2 ();
-use org::allbinary::media::audio::NullControl ();
-
-1;
 

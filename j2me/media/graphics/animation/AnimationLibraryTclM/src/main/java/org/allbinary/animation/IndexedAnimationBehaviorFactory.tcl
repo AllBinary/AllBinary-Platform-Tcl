@@ -11,40 +11,36 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::IndexedAnimationBehaviorFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::AnimationBehaviorFactory';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{frameDelayTime} = undef;
-    $self->{loopTotal} = undef;
+oo::class create ::IndexedAnimationBehaviorFactory {
+    superclass ::AnimationBehaviorFactory
 }
 
+oo::define ::IndexedAnimationBehaviorFactory {
+    method initFields_IndexedAnimationBehaviorFactory {} {
+        my jset frameDelayTime 0
+        my jset loopTotal 0
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $loopTotal, $frameDelayTime) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{loopTotal} = $loopTotal;
-        $self->{frameDelayTime} = $frameDelayTime;
-    return $self;
+    constructor {loopTotal frameDelayTime} {
+        next
+        my initFields_IndexedAnimationBehaviorFactory
+        my jset loopTotal $loopTotal
+        my jset frameDelayTime $frameDelayTime
+    }
+    
+
+    method getOrCreateInstance {} {
+        return [::IndexedAnimationBehavior new [my jget loopTotal] [my jget frameDelayTime]]
+    }
 }
 
-
-sub getOrCreateInstance {
-    my ($self) = @_;
-        return 'org::allbinary::animation::IndexedAnimationBehavior'->new($self->{loopTotal}, $self->{frameDelayTime});
+namespace eval ::IndexedAnimationBehaviorFactory {
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::animation::IndexedAnimationBehavior ();
-
-1;
 

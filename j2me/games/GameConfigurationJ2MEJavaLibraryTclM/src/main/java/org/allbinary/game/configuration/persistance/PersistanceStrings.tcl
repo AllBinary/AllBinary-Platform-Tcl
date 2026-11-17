@@ -11,46 +11,67 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.persistance
 
-package org::allbinary::game::configuration::persistance::PersistanceStrings;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::persistance::PersistanceStrings'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{SAVING} = "Saving: ";
-    $self->{NUMBER_OF_RECORDS} = "Number of records: ";
-    $self->{LOADING_ID} = "Loading data with id: ";
-    $self->{LOAD_ALL} = "loadAll";
-    $self->{DELETING_WITH_ID} = "Deleting data with id: ";
-    $self->{CLOSING_RECORDSTORE} = "Closing RecordStore";
-    $self->{NOT_SAVING} = "Not Saving: ";
-    $self->{ERROR_LOADING} = "Error Loading gameActionInput: ";
-    $self->{ERROR_LOADING_ID} = "Error Loading id: ";
-    $self->{ID} = " id: ";
-    $self->{GAME_ACTION_INPUT} = " GameActionInput: ";
+oo::class create ::PersistanceStrings {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::PersistanceStrings {
+    method initFields_PersistanceStrings {} {
+        my jset SAVING {}
+        my jset NUMBER_OF_RECORDS {}
+        my jset LOADING_ID {}
+        my jset LOAD_ALL {}
+        my jset DELETING_WITH_ID {}
+        my jset CLOSING_RECORDSTORE {}
+        my jset NOT_SAVING {}
+        my jset ERROR_LOADING {}
+        my jset ERROR_LOADING_ID {}
+        my jset ID {}
+        my jset GAME_ACTION_INPUT {}
+        my jset SAVING "Saving: "
+        my jset NUMBER_OF_RECORDS "Number of records: "
+        my jset LOADING_ID "Loading data with id: "
+        my jset LOAD_ALL "loadAll"
+        my jset DELETING_WITH_ID "Deleting data with id: "
+        my jset CLOSING_RECORDSTORE "Closing RecordStore"
+        my jset NOT_SAVING "Not Saving: "
+        my jset ERROR_LOADING "Error Loading gameActionInput: "
+        my jset ERROR_LOADING_ID "Error Loading id: "
+        my jset ID " id: "
+        my jset GAME_ACTION_INPUT " GameActionInput: "
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_PersistanceStrings
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::persistance::PersistanceStrings::instance;
+namespace eval ::PersistanceStrings {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::PersistanceStrings new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::PersistanceStrings::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

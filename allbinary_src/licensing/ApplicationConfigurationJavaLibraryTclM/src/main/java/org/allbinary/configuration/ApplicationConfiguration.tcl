@@ -1,206 +1,191 @@
 # Generated Code Do Not Modify
+# package org.allbinary.configuration
 
-package org::allbinary::configuration::ApplicationConfiguration;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{fullscreen} = 1;
-    $self->{showTitleBar} = 0;
-    $self->{progressBarView} = 0;
-    $self->{FILE} = "ReloadConfiguration.dat";
+oo::class create ::ApplicationConfiguration {
+    superclass ::JObject
 }
 
+oo::define ::ApplicationConfiguration {
+    method initFields_ApplicationConfiguration {} {
+        my jset logUtil {}
+        my jset fullscreen false
+        my jset showTitleBar false
+        my jset progressBarView false
+        my jset FILE {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset fullscreen true
+        my jset showTitleBar false
+        my jset progressBarView false
+        my jset FILE "ReloadConfiguration.dat"
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::configuration::ApplicationConfiguration::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::configuration::ApplicationConfiguration::instance = 'org::allbinary::configuration::ApplicationConfiguration'->new();
-        }
-        return $org::allbinary::configuration::ApplicationConfiguration::instance;
-}
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
+    constructor {} {
+        next
+        my initFields_ApplicationConfiguration
         try {
-            if ('org::allbinary::logic::io::file::FileFactory'->getInstance()->isFile($self->{FILE})) {
-                $self->read();
+            if {[[::FileFactory::getInstance] isFile [my jget FILE]]} {
+                my read
             } else {
-                $self->write();
+                my write
             }
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{CONSTRUCTOR}, $e);
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget CONSTRUCTOR] $e
         }
-    return $self;
-}
+    }
+    
 
-
-# throws Exception
-sub read {
-    my ($self) = @_;
-        my $fileInputStreamFactory = 'org::allbinary::logic::io::FileStreamFactory'->getInstance();
-        my $fileInputStream = $fileInputStreamFactory->getFileInputStreamInstance('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $self->{FILE});
-        my $dataInputStream = 'org::allbinary::logic::io::AbDataInputStream'->new($fileInputStream);
-        my $fullScreen = $dataInputStream->readInt();
-        if ($fullScreen == 0) {
-            $self->setFullscreen(0);
-        } elsif ($fullScreen == 1) {
-            $self->setFullscreen(1);
+    method read {} {
+        set fileInputStreamFactory [::FileStreamFactory::getInstance]
+        set fileInputStream [$fileInputStreamFactory getFileInputStreamInstance [[::StringUtil::getInstance] jget EMPTY_STRING] [my jget FILE]]
+        set dataInputStream [::AbDataInputStream new $fileInputStream]
+        set fullScreen [$dataInputStream readInt]
+        if {[expr {$fullScreen == 0}]} {
+            my setFullscreen false
+        } elseif {[expr {$fullScreen == 1}]} {
+            my setFullscreen true
         } else {
-            die ("Invalid FullScreen ActivityConfiguration");
+            error [jexception Exception "Invalid FullScreen ActivityConfiguration"]
         }
-        my $progressBarView = $dataInputStream->readInt();
-        if ($progressBarView == 0) {
-            $self->setProgressBarView(0);
-        } elsif ($progressBarView == 1) {
-            $self->setProgressBarView(1);
+        set progressBarView [$dataInputStream readInt]
+        if {[expr {$progressBarView == 0}]} {
+            my setProgressBarView false
+        } elseif {[expr {$progressBarView == 1}]} {
+            my setProgressBarView true
         } else {
-            die ("Invalid ProgressBarView ActivityConfiguration");
+            error [jexception Exception "Invalid ProgressBarView ActivityConfiguration"]
         }
-        my $showTitleBar = $dataInputStream->readInt();
-        if ($showTitleBar == 0) {
-            $self->setShowTitleBar(0);
-        } elsif ($showTitleBar == 1) {
-            $self->setShowTitleBar(1);
+        set showTitleBar [$dataInputStream readInt]
+        if {[expr {$showTitleBar == 0}]} {
+            my setShowTitleBar false
+        } elseif {[expr {$showTitleBar == 1}]} {
+            my setShowTitleBar true
         } else {
-            die ("Invalid ShowTitleBar ActivityConfiguration");
+            error [jexception Exception "Invalid ShowTitleBar ActivityConfiguration"]
         }
-        $self->{logUtil}->putF("Read Configuration: " . $self->toString(), $self, "read");
-}
+        [my jget logUtil] putF [string cat "Read Configuration: " [my toString]] [self] "read"
+    }
+    
 
-
-# throws Exception
-sub write {
-    my ($self) = @_;
-        my $closeable = $org::allbinary::logic::io::NullCloseable::NULL_CLOSEABLE;
+    method write {} {
+        set closeable [::NullCloseable::staticGet_NULL_CLOSEABLE]
         try {
-            $self->{logUtil}->putF("Write Configuration: " . $self->toString(), $self, "write");
-            my $fileInputStreamFactory = 'org::allbinary::logic::io::FileStreamFactory'->getInstance();
-            my $fileOutputStream = $fileInputStreamFactory->getFileOutputStreamInstance('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $self->{FILE});
-            my $dataOutputStream = 'org::allbinary::logic::io::AbDataOutputStream'->new($fileOutputStream);
-            $closeable = $dataOutputStream;
-            if ($self->isFullscreen()) {
-                $dataOutputStream->writeInt(1);
+            [my jget logUtil] putF [string cat "Write Configuration: " [my toString]] [self] "write"
+            set fileInputStreamFactory [::FileStreamFactory::getInstance]
+            set fileOutputStream [$fileInputStreamFactory getFileOutputStreamInstance [[::StringUtil::getInstance] jget EMPTY_STRING] [my jget FILE]]
+            set dataOutputStream [::AbDataOutputStream new $fileOutputStream]
+            set closeable $dataOutputStream
+            if {[my isFullscreen]} {
+                $dataOutputStream writeInt 1
             } else {
-                $dataOutputStream->writeInt(0);
+                $dataOutputStream writeInt 0
             }
-            if ($self->isProgressBarView()) {
-                $dataOutputStream->writeInt(1);
+            if {[my isProgressBarView]} {
+                $dataOutputStream writeInt 1
             } else {
-                $dataOutputStream->writeInt(0);
+                $dataOutputStream writeInt 0
             }
-            if ($self->isShowTitleBar()) {
-                $dataOutputStream->writeInt(1);
+            if {[my isShowTitleBar]} {
+                $dataOutputStream writeInt 1
             } else {
-                $dataOutputStream->writeInt(0);
+                $dataOutputStream writeInt 0
             }
-            $dataOutputStream->flush();
-        } catch ($e) {
-            die $e;
+            $dataOutputStream flush
+        } on error {e} {
+            error $e
         } finally {
-            'org::allbinary::logic::io::StreamUtil'->getInstance()->close($closeable);
+            [::StreamUtil::getInstance] close $closeable
         }
-}
+    }
+    
 
-
-# throws Exception
-sub update {
-    my ($self, $gameFeature) = @_;
-        if ($gameFeature == 'org::allbinary::game::configuration::feature::MainFeatureFactory'->getInstance()->{FULL_SCREEN}) {
-            my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-            if ($features->isFeature($gameFeature)) {
-                if (!$self->isFullscreen()) {
-                    $self->setFullscreen(1);
-                    $self->write();
+    method update {gameFeature} {
+        if {[expr {$gameFeature eq [[::MainFeatureFactory::getInstance] jget FULL_SCREEN]}]} {
+            set features [::Features::getInstance]
+            if {[$features isFeature $gameFeature]} {
+                if {[expr {![my isFullscreen]}]} {
+                    my setFullscreen true
+                    my write
                 }
             } else {
-                if ($self->isFullscreen()) {
-                    $self->setFullscreen(0);
-                    $self->write();
+                if {[my isFullscreen]} {
+                    my setFullscreen false
+                    my write
                 }
             }
         }
+    }
+    
+
+    method setFullscreen {fullscreen} {
+        my jset fullscreen $fullscreen
+    }
+    
+
+    method isFullscreen {} {
+        return [my jget fullscreen]
+    }
+    
+
+    method setShowTitleBar {showTitleBar} {
+        my jset showTitleBar $showTitleBar
+    }
+    
+
+    method isShowTitleBar {} {
+        return [my jget showTitleBar]
+    }
+    
+
+    method setProgressBarView {progressBarView} {
+        my jset progressBarView $progressBarView
+    }
+    
+
+    method isProgressBarView {} {
+        return [my jget progressBarView]
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "isFullscreen: "
+        $stringBuffer appendboolean [my isFullscreen]
+        $stringBuffer append " isProgressBarView: "
+        $stringBuffer appendboolean [my isProgressBarView]
+        $stringBuffer append " isShowTitleBar: "
+        $stringBuffer appendboolean [my isShowTitleBar]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub setFullscreen {
-    my ($self, $fullscreen) = @_;
-        $self->{fullscreen} = $fullscreen;
+namespace eval ::ApplicationConfiguration {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::ApplicationConfiguration::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::ApplicationConfiguration::staticSet_instance [::ApplicationConfiguration new]
+        }
+        return [::ApplicationConfiguration::staticGet_instance]
+    }
 }
 
-
-sub isFullscreen {
-    my ($self) = @_;
-        return $self->{fullscreen};
-}
-
-
-sub setShowTitleBar {
-    my ($self, $showTitleBar) = @_;
-        $self->{showTitleBar} = $showTitleBar;
-}
-
-
-sub isShowTitleBar {
-    my ($self) = @_;
-        return $self->{showTitleBar};
-}
-
-
-sub setProgressBarView {
-    my ($self, $progressBarView) = @_;
-        $self->{progressBarView} = $progressBarView;
-}
-
-
-sub isProgressBarView {
-    my ($self) = @_;
-        return $self->{progressBarView};
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("isFullscreen: ");
-        $stringBuffer->appendboolean($self->isFullscreen());
-        $stringBuffer->append(" isProgressBarView: ");
-        $stringBuffer->appendboolean($self->isProgressBarView());
-        $stringBuffer->append(" isShowTitleBar: ");
-        $stringBuffer->appendboolean($self->isShowTitleBar());
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::Closeable ();
-# use java::io::InputStream ();
-# use java::io::OutputStream ();
-use org::allbinary::game::configuration::feature::Feature ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::MainFeatureFactory ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::io::AbDataInputStream ();
-use org::allbinary::logic::io::AbDataOutputStream ();
-use org::allbinary::logic::io::FileStreamFactory ();
-use org::allbinary::logic::io::NullCloseable ();
-use org::allbinary::logic::io::StreamUtil ();
-use org::allbinary::logic::io::file::FileFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

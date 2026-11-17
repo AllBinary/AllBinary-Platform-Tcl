@@ -11,31 +11,45 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
-package org::allbinary::graphics::opengles::shader::SimpleShaderInitializer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::opengles::shader::ShaderInitializer';
-
-tie our $instanceC, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::opengles::shader::SimpleShaderInitializer'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::SimpleShaderInitializer {
+    superclass ::ShaderInitializer
 }
 
+oo::define ::SimpleShaderInitializer {
+    method initFields_SimpleShaderInitializer {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::opengles::shader::SimpleShaderInitializer::instanceC;
+    constructor {} {
+        next
+        my initFields_SimpleShaderInitializer
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::opengles::shader::ShaderInitializer ();
+namespace eval ::SimpleShaderInitializer {
+    variable instanceCValue {}
+    variable instanceCSet 0
+    proc staticGet_instanceC {} {
+        variable instanceCValue
+        variable instanceCSet
+        if {!$instanceCSet} {
+            set instanceCSet 1
+            set instanceCValue [::SimpleShaderInitializer new]
+        }
+        return $instanceCValue
+    }
+    proc staticSet_instanceC {value} {
+        variable instanceCValue
+        variable instanceCSet
+        set instanceCSet 1
+        set instanceCValue $value
+    }
+    proc getInstance {} {
+        return [::SimpleShaderInitializer::staticGet_instanceC]
+    }
+}
 
-1;
 

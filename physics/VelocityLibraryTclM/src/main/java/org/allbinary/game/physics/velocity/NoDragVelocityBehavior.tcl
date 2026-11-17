@@ -11,25 +11,41 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.physics.velocity
 
-package org::allbinary::game::physics::velocity::NoDragVelocityBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::physics::velocity::VelocityBehaviorBase';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::physics::velocity::NoDragVelocityBehavior'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::NoDragVelocityBehavior {
+    superclass ::VelocityBehaviorBase
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::physics::velocity::VelocityBehaviorBase ();
+oo::define ::NoDragVelocityBehavior {
+    method initFields_NoDragVelocityBehavior {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_NoDragVelocityBehavior
+    }
+}
+
+namespace eval ::NoDragVelocityBehavior {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::NoDragVelocityBehavior new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+}
+
 

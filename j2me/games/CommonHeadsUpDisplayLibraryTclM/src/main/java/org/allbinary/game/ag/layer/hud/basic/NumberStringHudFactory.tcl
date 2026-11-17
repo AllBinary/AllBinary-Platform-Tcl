@@ -11,59 +11,62 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic
 
-package org::allbinary::game::ag::layer::hud::basic::NumberStringHudFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NULL_NUMBER_STRING_HUD} = $self->createHud();
+oo::class create ::NumberStringHudFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::NumberStringHudFactory {
+    method initFields_NumberStringHudFactory {} {
+        my jset NULL_NUMBER_STRING_HUD {}
+        my jset NULL_NUMBER_STRING_HUD [my createHud]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_NumberStringHudFactory
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::ag::layer::hud::basic::NumberStringHudFactory::instance == 'org::allbinary::logic::NullUtil'->getInstance()) {
-            $org::allbinary::game::ag::layer::hud::basic::NumberStringHudFactory::instance = 'org::allbinary::game::ag::layer::hud::basic::NumberStringHudFactory'->new();
-        }
-        return $org::allbinary::game::ag::layer::hud::basic::NumberStringHudFactory::instance;
-}
-
-
-sub createHud {
-    my ($self) = @_;
+    method createHud {} {
         try {
-            return 'org::allbinary::game::ag::layer::hud::basic::NumberStringHud'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, 9, 'org::allbinary::game::graphics::hud::BasicHudFactory'->getInstance()->{ABSOLUTE}, 1, 0, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{NULL_COLOR});
-        } catch ($e) {
-            my $logUtil = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $logUtil->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{CONSTRUCTOR}, $e);
-            die ("RuntimeException");
+            return [::NumberStringHud new [[::StringUtil::getInstance] jget EMPTY_STRING] 9 [[::BasicHudFactory::getInstance] jget ABSOLUTE] 1 0 [[::BasicColorFactory::getInstance] jget NULL_COLOR]]
+        } on error {e} {
+            set logUtil [::LogUtil::getInstance]
+            set commonStrings [::CommonStrings::getInstance]
+            $logUtil put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget CONSTRUCTOR] $e
+            error [jexception RuntimeException {}]
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::graphics::hud::BasicHudFactory ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::ag::layer::hud::basic::NumberStringHud ();
+namespace eval ::NumberStringHudFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::NullUtil::getInstance]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::NumberStringHudFactory::staticGet_instance] eq [::NullUtil::getInstance]}]} {
+            ::NumberStringHudFactory::staticSet_instance [::NumberStringHudFactory new]
+        }
+        return [::NumberStringHudFactory::staticGet_instance]
+    }
+}
 
-1;
 

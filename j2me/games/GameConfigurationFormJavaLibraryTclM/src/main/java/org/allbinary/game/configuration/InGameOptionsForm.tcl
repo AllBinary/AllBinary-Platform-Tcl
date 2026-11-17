@@ -11,51 +11,89 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
-package org::allbinary::game::configuration::InGameOptionsForm;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::displayable::screen::CommandForm';
-
-tie our $DISPLAY, 'java::lang::LazyStatic', sub { 'javax::microedition::lcdui::Command'->new("Options In Game", 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $javax::microedition::lcdui::Command::SCREEN, 1) };
-tie our $SAVE, 'java::lang::LazyStatic', sub { 'javax::microedition::lcdui::Command'->new("Save", 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $javax::microedition::lcdui::Command::SCREEN, 1) };
-tie our $DEFAULT, 'java::lang::LazyStatic', sub { 'javax::microedition::lcdui::Command'->new("Default", 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $javax::microedition::lcdui::Command::SCREEN, 1) };
-
-
-sub new {
-    my ($class, $commandListener, $title, $backgrounBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($commandListener, $title, $backgrounBasicColor, $foregroundBasicColor);
-        # super(...) made $self above
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{CONSTRUCTOR});
-        my $gameFeatureFormUtil = 'org::allbinary::game::configuration::feature::GameFeatureFormUtil'->getInstance();
-        $gameFeatureFormUtil->addChoiceGroup($self, 'org::allbinary::game::configuration::feature::InGameFeatureChoiceGroups'->getExclusiveInstance()->get(), $javax::microedition::lcdui::Choice::EXCLUSIVE);
-        $gameFeatureFormUtil->addChoiceGroup($self, 'org::allbinary::game::configuration::feature::InGameFeatureChoiceGroups'->getMultipleInstance()->get(), $javax::microedition::lcdui::Choice::MULTIPLE);
-        $self->initCommands($commandListener);
-    return $self;
+oo::class create ::InGameOptionsForm {
+    superclass ::CommandForm
 }
 
+oo::define ::InGameOptionsForm {
+    method initFields_InGameOptionsForm {} {
+        return
+    }
+    
 
-sub initCommands {
-    my ($self, $cmdListener) = @_;
-        $self->removeAllCommands();
-        $self->addCommand('org::allbinary::game::commands::GameCommandsFactory'->getInstance()->{CLOSE_AND_SHOW_GAME_CANVAS});
-        $self->addCommand($org::allbinary::game::configuration::InGameOptionsForm::DEFAULT);
-        $self->setCommandListener($cmdListener);
+    constructor {commandListener title backgrounBasicColor foregroundBasicColor} {
+        next $commandListener $title $backgrounBasicColor $foregroundBasicColor
+        my initFields_InGameOptionsForm
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+        set gameFeatureFormUtil [::GameFeatureFormUtil::getInstance]
+        $gameFeatureFormUtil addChoiceGroup [self] [[::InGameFeatureChoiceGroups::getExclusiveInstance] get] [::Choice::staticGet_EXCLUSIVE]
+        $gameFeatureFormUtil addChoiceGroup [self] [[::InGameFeatureChoiceGroups::getMultipleInstance] get] [::Choice::staticGet_MULTIPLE]
+        my initCommands $commandListener
+    }
+    
+
+    method initCommands {cmdListener} {
+        my removeAllCommands
+        my addCommand [[::GameCommandsFactory::getInstance] jget CLOSE_AND_SHOW_GAME_CANVAS]
+        my addCommand [::InGameOptionsForm::staticGet_DEFAULT]
+        my setCommandListener $cmdListener
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Choice ();
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::CommandListener ();
-use org::allbinary::game::commands::GameCommandsFactory ();
-use org::allbinary::game::configuration::feature::GameFeatureFormUtil ();
-use org::allbinary::game::configuration::feature::InGameFeatureChoiceGroups ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::displayable::screen::CommandForm ();
-use org::allbinary::logic::string::StringUtil ();
+namespace eval ::InGameOptionsForm {
+    variable DISPLAYValue {}
+    variable DISPLAYSet 0
+    proc staticGet_DISPLAY {} {
+        variable DISPLAYValue
+        variable DISPLAYSet
+        if {!$DISPLAYSet} {
+            set DISPLAYSet 1
+            set DISPLAYValue [::Command new "Options In Game" [[::StringUtil::getInstance] jget EMPTY_STRING] [::Command::staticGet_SCREEN] 1]
+        }
+        return $DISPLAYValue
+    }
+    proc staticSet_DISPLAY {value} {
+        variable DISPLAYValue
+        variable DISPLAYSet
+        set DISPLAYSet 1
+        set DISPLAYValue $value
+    }
+    variable SAVEValue {}
+    variable SAVESet 0
+    proc staticGet_SAVE {} {
+        variable SAVEValue
+        variable SAVESet
+        if {!$SAVESet} {
+            set SAVESet 1
+            set SAVEValue [::Command new "Save" [[::StringUtil::getInstance] jget EMPTY_STRING] [::Command::staticGet_SCREEN] 1]
+        }
+        return $SAVEValue
+    }
+    proc staticSet_SAVE {value} {
+        variable SAVEValue
+        variable SAVESet
+        set SAVESet 1
+        set SAVEValue $value
+    }
+    variable DEFAULTValue {}
+    variable DEFAULTSet 0
+    proc staticGet_DEFAULT {} {
+        variable DEFAULTValue
+        variable DEFAULTSet
+        if {!$DEFAULTSet} {
+            set DEFAULTSet 1
+            set DEFAULTValue [::Command new "Default" [[::StringUtil::getInstance] jget EMPTY_STRING] [::Command::staticGet_SCREEN] 1]
+        }
+        return $DEFAULTValue
+    }
+    proc staticSet_DEFAULT {value} {
+        variable DEFAULTValue
+        variable DEFAULTSet
+        set DEFAULTSet 1
+        set DEFAULTValue $value
+    }
+}
 
-1;
 

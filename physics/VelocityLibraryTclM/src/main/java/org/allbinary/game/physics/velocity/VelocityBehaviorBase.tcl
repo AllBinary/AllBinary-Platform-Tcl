@@ -11,37 +11,36 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.physics.velocity
 
-package org::allbinary::game::physics::velocity::VelocityBehaviorBase;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::VelocityBehaviorBase {
+    superclass ::JObject
 }
 
+oo::define ::VelocityBehaviorBase {
+    method initFields_VelocityBehaviorBase {} {
+        return
+    }
 
-sub reduce {
-    my ($self, $velocityProperties, $nominator, $denominator) = @_;
+    constructor {} {
+        next
+        my initFields_VelocityBehaviorBase
+    }
+    
+
+    method reduce {velocityProperties nominator denominator} {
+    }
+    
+
+    method reduceX {velocityProperties nominator denominator} {
+    }
+    
+
+    method reduceY {velocityProperties nominator denominator} {
+    }
 }
 
-
-sub reduceX {
-    my ($self, $velocityProperties, $nominator, $denominator) = @_;
+namespace eval ::VelocityBehaviorBase {
 }
 
-
-sub reduceY {
-    my ($self, $velocityProperties, $nominator, $denominator) = @_;
-}
-
-use java::lang::Object ();
-
-1;
 

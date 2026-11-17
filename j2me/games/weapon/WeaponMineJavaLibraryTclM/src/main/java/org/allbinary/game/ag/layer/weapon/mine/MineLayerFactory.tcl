@@ -11,41 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.weapon.mine
 
-package org::allbinary::game::ag::layer::weapon::mine::MineLayerFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::layer::AllBinaryLayerFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{viewPositionFactoryInterface} = undef;
+oo::class create ::MineLayerFactory {
+    superclass ::JObject
 }
 
+oo::define ::MineLayerFactory {
+    method initFields_MineLayerFactory {} {
+        my jset viewPositionFactoryInterface {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $viewPositionFactoryInterface) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{viewPositionFactoryInterface} = $viewPositionFactoryInterface;
-    return $self;
+    constructor {viewPositionFactoryInterface} {
+        next
+        my initFields_MineLayerFactory
+        my jset viewPositionFactoryInterface $viewPositionFactoryInterface
+    }
+    
+
+    method getInstance {} {
+        return [::MineLayer new [[my jget viewPositionFactoryInterface] getInstance]]
+    }
 }
 
-
-# throws Exception
-sub getInstance {
-    my ($self) = @_;
-        return 'org::allbinary::game::ag::layer::weapon::mine::MineLayer'->new($self->{viewPositionFactoryInterface}->getInstance());
+namespace eval ::MineLayerFactory {
 }
 
-use java::lang::Object ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerFactoryInterface ();
-use org::allbinary::view::ViewPositionFactoryInterface ();
-use org::allbinary::game::ag::layer::weapon::mine::MineLayer ();
-
-1;
 

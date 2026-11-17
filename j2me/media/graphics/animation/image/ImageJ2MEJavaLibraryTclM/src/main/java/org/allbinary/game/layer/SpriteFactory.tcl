@@ -11,46 +11,52 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-package org::allbinary::game::layer::SpriteFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::layer::SpriteFactoryInterface';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::SpriteFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::SpriteFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::SpriteFactory {
+    method initFields_SpriteFactory {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_SpriteFactory
+    }
+    
+    
+
+    method createSprite {image frameWidth frameHeight} {
+        return [::Sprite new $image $frameWidth $frameHeight]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::layer::SpriteFactory::instance;
+namespace eval ::SpriteFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::SpriteFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::SpriteFactory::staticGet_instance]
+    }
 }
 
-
-sub createSprite {
-    my ($self, $image, $frameWidth, $frameHeight) = @_;
-        return 'javax::microedition::lcdui::game::Sprite'->new($image, $frameWidth, $frameHeight);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::game::Sprite ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::game::layer::SpriteFactoryInterface ();
-
-1;
 

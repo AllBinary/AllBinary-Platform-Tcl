@@ -11,119 +11,99 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::TweenedImageAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::IndexedAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{image} = undef;
-    $self->{dx} = undef;
-    $self->{dy} = undef;
-    $self->{totalFrames} = undef;
-    $self->{circularIndexUtil} = undef;
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
+oo::class create ::TweenedImageAnimation {
+    superclass ::IndexedAnimation
 }
 
+oo::define ::TweenedImageAnimation {
+    method initFields_TweenedImageAnimation {} {
+        my jset image {}
+        my jset dx 0
+        my jset dy 0
+        my jset totalFrames 0
+        my jset circularIndexUtil {}
+        my jset anchor 0
+        
+        
+        
+        
+        
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        return
+    }
+    
 
-sub new {
-    my ($class, $image, $dx, $dy, $totalFrames, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{image} = $image;
-        $self->{dx} = $dx;
-        $self->{dy} = $dy;
-        $self->{totalFrames} = $totalFrames;
-        $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstance($self->{totalFrames});
-    return $self;
+    constructor {image dx dy totalFrames animationBehavior} {
+        next $animationBehavior
+        my initFields_TweenedImageAnimation
+        my jset image $image
+        my jset dx $dx
+        my jset dy $dy
+        my jset totalFrames $totalFrames
+        my jset circularIndexUtil [::CircularIndexUtil::createInstance [my jget totalFrames]]
+    }
+    
+
+    method getAnimationSize {} {
+        return [my getSize]
+    }
+    
+
+    method nextFrame {} {
+        [my jget circularIndexUtil] next
+    }
+    
+
+    method previousFrame {} {
+        [my jget circularIndexUtil] previous
+    }
+    
+
+    method setFrame {index} {
+        [my jget circularIndexUtil] setIndex $index
+    }
+    
+
+    method getFrame {} {
+        return [[my jget circularIndexUtil] getIndex]
+    }
+    
+
+    method getSize {} {
+        return [my jget totalFrames]
+    }
+    
+
+    method setSequence {sequence} {
+    }
+    
+
+    method getSequence {} {
+        return [::PrimitiveIntUtil::getArrayInstance]
+    }
+    
+
+    method paintXY {graphics x y} {
+        set frame [my getFrame]
+        set currentX [jint [expr {[my jget dx] * $frame}]]
+        set currentY [jint [expr {[my jget dy] * $frame}]]
+        $graphics drawImage [my jget image] [jint [expr {$x + $currentX}]] [jint [expr {$y + $currentY}]] [my jget anchor]
+    }
+    
+
+    method close {} {
+        [::DisposalUtil::getInstance] disposeImage [my jget image]
+    }
+    
+
+    method finalize {} {
+        [::DisposalUtil::getInstance] disposeImage [my jget image]
+    }
 }
 
-
-# throws Exception
-sub getAnimationSize {
-    my ($self) = @_;
-        return $self->getSize();
+namespace eval ::TweenedImageAnimation {
 }
 
-
-sub nextFrame {
-    my ($self) = @_;
-        $self->{circularIndexUtil}->next();
-}
-
-
-sub previousFrame {
-    my ($self) = @_;
-        $self->{circularIndexUtil}->previous();
-}
-
-
-sub setFrame {
-    my ($self, $index) = @_;
-        $self->{circularIndexUtil}->setIndex($index);
-}
-
-
-sub getFrame {
-    my ($self) = @_;
-        return $self->{circularIndexUtil}->getIndex();
-}
-
-
-sub getSize {
-    my ($self) = @_;
-        return $self->{totalFrames};
-}
-
-
-sub setSequence {
-    my ($self, $sequence) = @_;
-}
-
-
-sub getSequence {
-    my ($self) = @_;
-        return 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance();
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        my $frame = $self->getFrame();
-        my $currentX = $self->{dx} * $frame;
-        my $currentY = $self->{dy} * $frame;
-        $graphics->drawImage($self->{image}, $x + $currentX, $y + $currentY, $self->{anchor});
-}
-
-
-# throws Exception
-sub close {
-    my ($self) = @_;
-        'org::allbinary::DisposalUtil'->getInstance()->disposeImage($self->{image});
-}
-
-
-# throws Throwable
-sub finalize {
-    my ($self) = @_;
-        'org::allbinary::DisposalUtil'->getInstance()->disposeImage($self->{image});
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::DisposalUtil ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::util::CircularIndexUtil ();
-
-1;
 

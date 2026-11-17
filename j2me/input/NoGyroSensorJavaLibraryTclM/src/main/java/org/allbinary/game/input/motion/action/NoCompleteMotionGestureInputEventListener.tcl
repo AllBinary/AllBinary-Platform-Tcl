@@ -11,47 +11,55 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.motion.action
 
-package org::allbinary::game::input::motion::action::NoCompleteMotionGestureInputEventListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::input::CompleteMotionGestureInputEventListenerInterface';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::motion::action::NoCompleteMotionGestureInputEventListener'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NoCompleteMotionGestureInputEventListener {
+    superclass ::JObject
 }
 
+oo::define ::NoCompleteMotionGestureInputEventListener {
+    method initFields_NoCompleteMotionGestureInputEventListener {} {
+        return
+    }
+    
 
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
+    constructor {} {
+        next
+        my initFields_NoCompleteMotionGestureInputEventListener
+    }
+    
+
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
+
+    method onCompleteMotionGestureInputEvent {completeMotionGestureInputEvent} {
+    }
+    
 }
 
-
-sub onCompleteMotionGestureInputEvent {
-    my ($self, $completeMotionGestureInputEvent) = @_;
+namespace eval ::NoCompleteMotionGestureInputEventListener {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::NoCompleteMotionGestureInputEventListener new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::NoCompleteMotionGestureInputEventListener::staticGet_instance]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::motion::action::NoCompleteMotionGestureInputEventListener::instance;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::CompleteMotionGestureInputEvent ();
-use org::allbinary::game::input::CompleteMotionGestureInputEventListenerInterface ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventStrings ();
-
-1;
 

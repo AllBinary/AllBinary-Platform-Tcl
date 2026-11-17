@@ -11,42 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.weapon.mine
 
-package org::allbinary::game::ag::layer::weapon::mine::MineLayerCircularStaticPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $WEAPON_LAYER_CIRCULAR_STATIC_POOL, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::weapon::WeaponLayerCircularPool'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::MineLayerCircularStaticPool {
+    superclass ::JObject
 }
 
+oo::define ::MineLayerCircularStaticPool {
+    method initFields_MineLayerCircularStaticPool {} {
+        return
+    }
 
-# throws Exception
-sub init {
-    my ($class, $viewPositionFactoryInterface) = @_;
-        'org::allbinary::game::ag::layer::weapon::mine::MineCountedPickedUpLayerInterfaceFactory'->init();
-        $org::allbinary::game::ag::layer::weapon::mine::MineLayerCircularStaticPool::WEAPON_LAYER_CIRCULAR_STATIC_POOL->initAllBinaryLayerCircularPool('org::allbinary::game::ag::layer::weapon::mine::MineLayerFactory'->new($viewPositionFactoryInterface), 20);
+    constructor {} {
+        next
+        my initFields_MineLayerCircularStaticPool
+    }
+    
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::ag::layer::weapon::mine::MineLayerCircularStaticPool::WEAPON_LAYER_CIRCULAR_STATIC_POOL;
+namespace eval ::MineLayerCircularStaticPool {
+    variable WEAPON_LAYER_CIRCULAR_STATIC_POOLValue {}
+    variable WEAPON_LAYER_CIRCULAR_STATIC_POOLSet 0
+    proc staticGet_WEAPON_LAYER_CIRCULAR_STATIC_POOL {} {
+        variable WEAPON_LAYER_CIRCULAR_STATIC_POOLValue
+        variable WEAPON_LAYER_CIRCULAR_STATIC_POOLSet
+        if {!$WEAPON_LAYER_CIRCULAR_STATIC_POOLSet} {
+            set WEAPON_LAYER_CIRCULAR_STATIC_POOLSet 1
+            set WEAPON_LAYER_CIRCULAR_STATIC_POOLValue [::WeaponLayerCircularPool new]
+        }
+        return $WEAPON_LAYER_CIRCULAR_STATIC_POOLValue
+    }
+    proc staticSet_WEAPON_LAYER_CIRCULAR_STATIC_POOL {value} {
+        variable WEAPON_LAYER_CIRCULAR_STATIC_POOLValue
+        variable WEAPON_LAYER_CIRCULAR_STATIC_POOLSet
+        set WEAPON_LAYER_CIRCULAR_STATIC_POOLSet 1
+        set WEAPON_LAYER_CIRCULAR_STATIC_POOLValue $value
+    }
+    proc init {viewPositionFactoryInterface} {
+        ::MineCountedPickedUpLayerInterfaceFactory::init
+        [::MineLayerCircularStaticPool::staticGet_WEAPON_LAYER_CIRCULAR_STATIC_POOL] initAllBinaryLayerCircularPool [::MineLayerFactory new $viewPositionFactoryInterface] 20
+    }
+    proc getInstance {} {
+        return [::MineLayerCircularStaticPool::staticGet_WEAPON_LAYER_CIRCULAR_STATIC_POOL]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::layer::weapon::WeaponLayerCircularPool ();
-use org::allbinary::view::ViewPositionFactoryInterface ();
-use org::allbinary::game::ag::layer::weapon::mine::MineCountedPickedUpLayerInterfaceFactory ();
-use org::allbinary::game::ag::layer::weapon::mine::MineLayerFactory ();
-
-1;
 

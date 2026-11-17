@@ -11,31 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.special
 
-package org::allbinary::game::layer::special::SpecialGameInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::GameInputProcessor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{collidableDestroyableDamageableLayer} = undef;
+oo::class create ::SpecialGameInputProcessor {
+    superclass ::GameInputProcessor
 }
 
+oo::define ::SpecialGameInputProcessor {
+    method initFields_SpecialGameInputProcessor {} {
+        my jset collidableDestroyableDamageableLayer {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $collidableDestroyableDamageableLayer) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{collidableDestroyableDamageableLayer} = $collidableDestroyableDamageableLayer;
-    return $self;
+    constructor {collidableDestroyableDamageableLayer} {
+        next
+        my initFields_SpecialGameInputProcessor
+        my jset collidableDestroyableDamageableLayer $collidableDestroyableDamageableLayer
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::GameInputProcessor ();
+namespace eval ::SpecialGameInputProcessor {
+}
 
-1;
 

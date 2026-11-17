@@ -11,109 +11,94 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::HighScores;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::score::HighScoresInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{orderedHighScoresList} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{name} = undef;
-    $self->{heading} = undef;
-    $self->{columnOneHeading} = "Name";
-    $self->{columnTwoHeading} = undef;
+oo::class create ::HighScores {
+    superclass ::JObject
 }
 
+oo::define ::HighScores {
+    method initFields_HighScores {} {
+        my jset orderedHighScoresList {}
+        my jset name {}
+        my jset heading {}
+        my jset columnOneHeading {}
+        my jset columnTwoHeading {}
+        my jset orderedHighScoresList [::BasicArrayListD new]
+        
+        
+        my jset columnOneHeading "Name"
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $heading, $columnTwoHeading) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{name} = $name;
-        $self->{heading} = $heading;
-        $self->{columnTwoHeading} = $columnTwoHeading;
-    return $self;
+    constructor {name heading columnTwoHeading} {
+        next
+        my initFields_HighScores
+        my jset name $name
+        my jset heading $heading
+        my jset columnTwoHeading $columnTwoHeading
+    }
+    
+
+    method setList {orderedHighScoresList} {
+        my jset orderedHighScoresList $orderedHighScoresList
+    }
+    
+
+    method getList {} {
+        return [my jget orderedHighScoresList]
+    }
+    
+
+    method getName {} {
+        return [my jget name]
+    }
+    
+
+    method getTotal {} {
+        return [[my getList] size]
+    }
+    
+
+    method addHighScore {newHighScore} {
+        [my jget orderedHighScoresList] add $newHighScore
+    }
+    
+
+    method getHeading {} {
+        return [my jget heading]
+    }
+    
+
+    method getColumnOneHeading {} {
+        return [my jget columnOneHeading]
+    }
+    
+
+    method getColumnTwoHeading {} {
+        return [my jget columnTwoHeading]
+    }
+    
+
+    method isBestScore {newHighScore} {
+        return false
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "HighScores: "
+        $stringBuffer append [my jget heading]
+        $stringBuffer append [[::CommonSeps::getInstance] jget SPACE]
+        $stringBuffer append [[::CommonLabels::getInstance] jget TOTAL_LABEL]
+        $stringBuffer appendint [[my jget orderedHighScoresList] size]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub setList {
-    my ($self, $orderedHighScoresList) = @_;
-        $self->{orderedHighScoresList} = $orderedHighScoresList;
+namespace eval ::HighScores {
 }
 
-
-sub getList {
-    my ($self) = @_;
-        return $self->{orderedHighScoresList};
-}
-
-
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
-}
-
-
-sub getTotal {
-    my ($self) = @_;
-        return $self->getList()->size();
-}
-
-
-sub addHighScore {
-    my ($self, $newHighScore) = @_;
-        $self->{orderedHighScoresList}->add($newHighScore);
-}
-
-
-sub getHeading {
-    my ($self) = @_;
-        return $self->{heading};
-}
-
-
-sub getColumnOneHeading {
-    my ($self) = @_;
-        return $self->{columnOneHeading};
-}
-
-
-sub getColumnTwoHeading {
-    my ($self) = @_;
-        return $self->{columnTwoHeading};
-}
-
-
-# throws Exception
-sub isBestScore {
-    my ($self, $newHighScore) = @_;
-        return 0;
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("HighScores: ");
-        $stringBuffer->append($self->{heading});
-        $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
-        $stringBuffer->append('org::allbinary::string::CommonLabels'->getInstance()->{TOTAL_LABEL});
-        $stringBuffer->appendint($self->{orderedHighScoresList}->size());
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::game::score::HighScoresInterface ();
-
-1;
 

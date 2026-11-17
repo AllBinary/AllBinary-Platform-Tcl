@@ -11,32 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.pickup.health
 
-package org::allbinary::game::ag::layer::pickup::health::HealLayerFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::layer::AllBinaryLayerFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::HealLayerFactory {
+    superclass ::JObject
 }
 
+oo::define ::HealLayerFactory {
+    method initFields_HealLayerFactory {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($self) = @_;
-        return 'org::allbinary::game::ag::layer::pickup::health::HealLayer'->new();
+    constructor {} {
+        next
+        my initFields_HealLayerFactory
+    }
+    
+
+    method getInstance {} {
+        return [::HealLayer new]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerFactoryInterface ();
-use org::allbinary::game::ag::layer::pickup::health::HealLayer ();
+namespace eval ::HealLayerFactory {
+}
 
-1;
 

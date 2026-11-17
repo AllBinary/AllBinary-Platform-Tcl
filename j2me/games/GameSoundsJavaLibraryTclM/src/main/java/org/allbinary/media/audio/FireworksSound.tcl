@@ -11,34 +11,47 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
 #Use 8hz16bitmono for most J2ME
-package org::allbinary::media::audio::FireworksSound;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::media::audio::CompositeSound';
-
-tie our $soundInterface, 'java::lang::LazyStatic', sub { 'org::allbinary::media::audio::FireworksSound'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new("resource:/wav/fireworks.wav");
-        # super(...) made $self above
-    return $self;
+oo::class create ::FireworksSound {
+    superclass ::CompositeSound
 }
 
+oo::define ::FireworksSound {
+    method initFields_FireworksSound {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::media::audio::FireworksSound::soundInterface;
+    constructor {} {
+        next "resource:/wav/fireworks.wav"
+        my initFields_FireworksSound
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::media::audio::CompositeSound ();
+namespace eval ::FireworksSound {
+    variable soundInterfaceValue {}
+    variable soundInterfaceSet 0
+    proc staticGet_soundInterface {} {
+        variable soundInterfaceValue
+        variable soundInterfaceSet
+        if {!$soundInterfaceSet} {
+            set soundInterfaceSet 1
+            set soundInterfaceValue [::FireworksSound new]
+        }
+        return $soundInterfaceValue
+    }
+    proc staticSet_soundInterface {value} {
+        variable soundInterfaceValue
+        variable soundInterfaceSet
+        set soundInterfaceSet 1
+        set soundInterfaceValue $value
+    }
+    proc getInstance {} {
+        return [::FireworksSound::staticGet_soundInterface]
+    }
+}
 
-1;
 

@@ -11,38 +11,51 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchScreenTypeFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::input::motion::button::TouchScreenTypeFactory'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::TouchScreenTypeFactory {
+    superclass ::JObject
 }
 
+oo::define ::TouchScreenTypeFactory {
+    method initFields_TouchScreenTypeFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::motion::button::TouchScreenTypeFactory::instance;
+    constructor {} {
+        next
+        my initFields_TouchScreenTypeFactory
+    }
+    
+    
+
+    method TouchScreenTypeFactory {} {
+        set touchScreenFactory [::TouchScreenFactory::getInstance]
+        $touchScreenFactory setTouch true
+    }
 }
 
-
-sub TouchScreenTypeFactory {
-    my ($self) = @_;
-        my $touchScreenFactory = 'org::allbinary::input::motion::button::TouchScreenFactory'->getInstance();
-        $touchScreenFactory->setTouch(1);
+namespace eval ::TouchScreenTypeFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::TouchScreenTypeFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::TouchScreenTypeFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::input::motion::button::TouchScreenFactory ();
-
-1;
 

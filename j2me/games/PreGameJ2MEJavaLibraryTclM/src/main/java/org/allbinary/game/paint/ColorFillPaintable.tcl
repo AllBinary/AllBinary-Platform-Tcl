@@ -11,41 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.paint
 
-package org::allbinary::game::paint::ColorFillPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::paint::ColorFillBasePaintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{displayInfoSingleton} = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
+oo::class create ::ColorFillPaintable {
+    superclass ::ColorFillBasePaintable
 }
 
+oo::define ::ColorFillPaintable {
+    method initFields_ColorFillPaintable {} {
+        my jset displayInfoSingleton {}
+        my jset displayInfoSingleton [::DisplayInfoSingleton::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $basicColor) = @_;
-    my $self = $class->SUPER::new($basicColor);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
+    constructor {basicColor} {
+        next $basicColor
+        my initFields_ColorFillPaintable
+    }
+    
+
+    method paint {graphics} {
+        $graphics setColor [my jget colorP]
+        $graphics fillRect 0 0 [[my jget displayInfoSingleton] getLastWidth] [[my jget displayInfoSingleton] getLastHeight]
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $graphics->setColor($self->{colorP});
-        $graphics->fillRect(0, 0, $self->{displayInfoSingleton}->getLastWidth(), $self->{displayInfoSingleton}->getLastHeight());
+namespace eval ::ColorFillPaintable {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::game::paint::ColorFillBasePaintable ();
-
-1;
 

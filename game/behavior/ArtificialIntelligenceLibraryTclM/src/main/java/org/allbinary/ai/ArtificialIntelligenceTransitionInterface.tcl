@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.ai
 
-# Java interface
-package org::allbinary::ai::ArtificialIntelligenceTransitionInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub transition {
-    my ($self) = @_;
-    die "abstract method transition";
+oo::class create ::ArtificialIntelligenceTransitionInterface {
+    superclass ::JObject
 }
 
+oo::define ::ArtificialIntelligenceTransitionInterface {
+    method initFields_ArtificialIntelligenceTransitionInterface {} {
+        return
+    }
+    
 
-1;
+    method transition {} {
+        error [jexception AbstractMethodError transition]
+    }
+}
+
+namespace eval ::ArtificialIntelligenceTransitionInterface {
+}
+
 

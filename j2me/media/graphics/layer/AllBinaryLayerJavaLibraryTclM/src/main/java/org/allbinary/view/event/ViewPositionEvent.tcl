@@ -11,25 +11,25 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.view.event
 
-package org::allbinary::view::event::ViewPositionEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject';
-
-
-
-sub new {
-    my ($class, $anyType) = @_;
-    my $self = $class->SUPER::new($anyType);
-        # super(...) made $self above
-    return $self;
+oo::class create ::ViewPositionEvent {
+    superclass ::AllBinaryEventObject
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
+oo::define ::ViewPositionEvent {
+    method initFields_ViewPositionEvent {} {
+        return
+    }
+    
 
-1;
+    constructor {anyType} {
+        next $anyType
+        my initFields_ViewPositionEvent
+    }
+}
+
+namespace eval ::ViewPositionEvent {
+}
+
 

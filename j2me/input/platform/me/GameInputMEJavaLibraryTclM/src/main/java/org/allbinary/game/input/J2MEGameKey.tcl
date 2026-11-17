@@ -11,50 +11,44 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::J2MEGameKey;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::Input';
+oo::class create ::J2MEGameKey {
+    superclass ::Input
+}
 
+oo::define ::J2MEGameKey {
+    method initFields_J2MEGameKey {} {
+        return
+    }
+    
 
-
-sub new {
-    my ($class, $key, $keyName) = @_;
-    my $self = $class->SUPER::new($key, $keyName);
-        # super(...) made $self above
-        my $id = $self->getId();
-        if ($id >= 0) {
-            my $inputFactory = 'org::allbinary::game::input::InputFactory'->getInstance();
-            $inputFactory->add($id, $self);
+    constructor {key keyName} {
+        next $key $keyName
+        my initFields_J2MEGameKey
+        set id [my getId]
+        if {[expr {$id >= 0}]} {
+            set inputFactory [::InputFactory::getInstance]
+            $inputFactory add $id [self]
         }
-    return $self;
+    }
+    
+
+    method toString {} {
+        return [[[[::StringMaker new] append "J2MEGameKey: "] append [next]] toString]
+    }
+    
 }
 
-
-sub toString {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringMaker'->new()->append("J2MEGameKey: ")->append($self->SUPER::toString())->toString();
-}
-
-
-sub getString {
-    my ($class, $keyCode) = @_;
-        my $input = 'org::allbinary::game::input::InputFactory'->getInstance()->getInstanceById($keyCode);
-        if (defined($input)) {
-            return $input->getName();
+namespace eval ::J2MEGameKey {
+    proc getString {keyCode} {
+        set input [[::InputFactory::getInstance] getInstanceById $keyCode]
+        if {[expr {$input ne {}}]} {
+            return [$input getName]
         } else {
-            return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+            return [[::StringUtil::getInstance] jget EMPTY_STRING]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::game::input::Input ();
-use org::allbinary::game::input::InputFactory ();
-
-1;
 

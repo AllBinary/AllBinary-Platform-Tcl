@@ -11,57 +11,47 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::LockablePaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::ItemPaintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{animation} = 'org::allbinary::animation::FeaturedAnimationInterfaceFactoryInterfaceFactory'->getInstance()->get('org::allbinary::logic::system::security::licensing::LockedResources'->getInstance()->{LOCKED_DEMO_GAME_FEATURE_RESOURCE})->getInstance(0);
-    $self->{lockedIndex} = undef;
+oo::class create ::LockablePaintable {
+    superclass ::ItemPaintable
 }
 
+oo::define ::LockablePaintable {
+    method initFields_LockablePaintable {} {
+        my jset animation {}
+        my jset lockedIndex 0
+        my jset animation [[[::FeaturedAnimationInterfaceFactoryInterfaceFactory::getInstance] get [[::LockedResources::getInstance] jget LOCKED_DEMO_GAME_FEATURE_RESOURCE]] getInstance 0]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $lockedIndex) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{lockedIndex} = $lockedIndex;
-    return $self;
-}
+    constructor {lockedIndex} {
+        next
+        my initFields_LockablePaintable
+        my jset lockedIndex $lockedIndex
+    }
+    
 
-
-sub paint {
-    my ($self, $graphics, $currentIndex, $x, $y) = @_;
-        if ('org::allbinary::logic::system::security::licensing::LockedUtil'->getInstance()->isLocked() && $currentIndex >= $self->getLockedIndex()) {
-            $self->getAnimation()->paintXY($graphics, $x, $y);
+    method paint {graphics currentIndex x y} {
+        if {[expr {[[::LockedUtil::getInstance] isLocked] && [expr {$currentIndex >= [my getLockedIndex]}]}]} {
+            [my getAnimation] paintXY $graphics $x $y
         }
+    }
+    
+
+    method getLockedIndex {} {
+        return [my jget lockedIndex]
+    }
+    
+
+    method getAnimation {} {
+        return [my jget animation]
+    }
 }
 
-
-sub getLockedIndex {
-    my ($self) = @_;
-        return $self->{lockedIndex};
+namespace eval ::LockablePaintable {
 }
 
-
-sub getAnimation {
-    my ($self) = @_;
-        return $self->{animation};
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::FeaturedAnimationInterfaceFactoryInterfaceFactory ();
-use org::allbinary::logic::system::security::licensing::LockedResources ();
-use org::allbinary::logic::system::security::licensing::LockedUtil ();
-use org::allbinary::graphics::form::ItemPaintable ();
-
-1;
 

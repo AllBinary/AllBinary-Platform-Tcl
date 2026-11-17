@@ -11,49 +11,57 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.device
 
-package org::allbinary::device::OpenGLESGraphicsCompositeFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::device::OpenGLESGraphicsCompositeFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{openGLESGraphicsFactory} = 'org::allbinary::device::OpenGLESGraphicsFactory'->new();
+oo::class create ::OpenGLESGraphicsCompositeFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::OpenGLESGraphicsCompositeFactory {
+    method initFields_OpenGLESGraphicsCompositeFactory {} {
+        my jset openGLESGraphicsFactory {}
+        my jset openGLESGraphicsFactory [::OpenGLESGraphicsFactory new]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_OpenGLESGraphicsCompositeFactory
+    }
+    
+    
+
+    method set {openGLESGraphicsFactory} {
+        my jset openGLESGraphicsFactory $openGLESGraphicsFactory
+    }
+    
+
+    method get {} {
+        return [my jget openGLESGraphicsFactory]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::device::OpenGLESGraphicsCompositeFactory::instance;
+namespace eval ::OpenGLESGraphicsCompositeFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::OpenGLESGraphicsCompositeFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::OpenGLESGraphicsCompositeFactory::staticGet_instance]
+    }
 }
 
-
-sub set {
-    my ($self, $openGLESGraphicsFactory) = @_;
-        $self->{openGLESGraphicsFactory} = $openGLESGraphicsFactory;
-}
-
-
-sub get {
-    my ($self) = @_;
-        return $self->{openGLESGraphicsFactory};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::device::OpenGLESGraphicsFactory ();
-
-1;
 

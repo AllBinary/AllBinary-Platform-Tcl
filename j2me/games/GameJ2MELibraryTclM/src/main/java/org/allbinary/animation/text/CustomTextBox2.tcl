@@ -11,29 +11,26 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.text
 
-package org::allbinary::animation::text::CustomTextBox2;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::item::CustomTextBox';
-
-
-
-sub new {
-    my ($class, $cmdListener, $label, $text, $maxSize, $constraints, $font, $backgroundBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($cmdListener, $label, $text, $maxSize, $constraints, $font, $backgroundBasicColor, $foregroundBasicColor);
-        # super(...) made $self above
-        $self->getTextFieldItem()->setFocus(1);
-    return $self;
+oo::class create ::CustomTextBox2 {
+    superclass ::CustomTextBox
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::CommandListener ();
-use javax::microedition::lcdui::Font ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::form::item::CustomTextBox ();
+oo::define ::CustomTextBox2 {
+    method initFields_CustomTextBox2 {} {
+        return
+    }
+    
 
-1;
+    constructor {cmdListener label text maxSize constraints font backgroundBasicColor foregroundBasicColor} {
+        next $cmdListener $label $text $maxSize $constraints $font $backgroundBasicColor $foregroundBasicColor
+        my initFields_CustomTextBox2
+        [my getTextFieldItem] setFocus true
+    }
+}
+
+namespace eval ::CustomTextBox2 {
+}
+
 

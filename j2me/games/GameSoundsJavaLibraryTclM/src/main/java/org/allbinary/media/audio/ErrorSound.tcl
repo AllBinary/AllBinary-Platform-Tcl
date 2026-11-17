@@ -11,33 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-package org::allbinary::media::audio::ErrorSound;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::media::audio::CompositeSound';
-
-tie our $soundInterface, 'java::lang::LazyStatic', sub { 'org::allbinary::media::audio::ErrorSound'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new("resource:/wav/error.wav");
-        # super(...) made $self above
-    return $self;
+oo::class create ::ErrorSound {
+    superclass ::CompositeSound
 }
 
+oo::define ::ErrorSound {
+    method initFields_ErrorSound {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::media::audio::ErrorSound::soundInterface;
+    constructor {} {
+        next "resource:/wav/error.wav"
+        my initFields_ErrorSound
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::media::audio::CompositeSound ();
+namespace eval ::ErrorSound {
+    variable soundInterfaceValue {}
+    variable soundInterfaceSet 0
+    proc staticGet_soundInterface {} {
+        variable soundInterfaceValue
+        variable soundInterfaceSet
+        if {!$soundInterfaceSet} {
+            set soundInterfaceSet 1
+            set soundInterfaceValue [::ErrorSound new]
+        }
+        return $soundInterfaceValue
+    }
+    proc staticSet_soundInterface {value} {
+        variable soundInterfaceValue
+        variable soundInterfaceSet
+        set soundInterfaceSet 1
+        set soundInterfaceValue $value
+    }
+    proc getInstance {} {
+        return [::ErrorSound::staticGet_soundInterface]
+    }
+}
 
-1;
 

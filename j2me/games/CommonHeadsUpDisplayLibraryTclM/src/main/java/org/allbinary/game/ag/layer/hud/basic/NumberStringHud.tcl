@@ -11,116 +11,103 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic
 
-package org::allbinary::game::ag::layer::hud::basic::NumberStringHud;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::graphics::hud::BasicHud','org::allbinary::graphics::paint::PaintableInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{primitiveLongUtil} = undef;
-    $self->{prependString} = undef;
-    $self->{PREPEND_STRING} = undef;
-    $self->{value} = undef;
-    $self->{max} = undef;
-    $self->{offset} = 0;
-    $self->{valueString} = undef;
-    $self->{valueTotalDigits} = 0;
+oo::class create ::NumberStringHud {
+    superclass ::BasicHud
 }
 
+oo::define ::NumberStringHud {
+    method initFields_NumberStringHud {} {
+        my jset primitiveLongUtil {}
+        my jset prependString {}
+        my jset PREPEND_STRING {}
+        my jset value 0
+        my jset max 0
+        my jset offset 0
+        my jset valueString {}
+        my jset valueTotalDigits 0
+        
+        
+        
+        
+        
+        my jset offset 0
+        
+        my jset valueTotalDigits 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $prependString, $max, $location, $direction, $bufferZone, $basicColor) = @_;
-    my $self = $class->SUPER::new($location, $direction, $bufferZone, $basicColor);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{prependString} = $prependString;
-        $self->{PREPEND_STRING} = [split(//, $prependString)];
-        $self->{valueString} = 'org::allbinary::logic::math::PrimitiveLongSingleton'->getInstance()->{NUMBER_CHAR_ARRAYS}->[0];
-        $self->{primitiveLongUtil} = 'org::allbinary::logic::math::PrimitiveLongUtil'->createPowerOfTen($max + 1);
-        $self->{max} = $max;
-        $self->{value} = 0;
-        if ($direction == 0) {
-            die ('org::allbinary::game::graphics::hud::BasicHudFactory'->getInstance()->{DIRECTION_EXCEPTION});
+    constructor {prependString max location direction bufferZone basicColor} {
+        next $location $direction $bufferZone $basicColor
+        my initFields_NumberStringHud
+        my jset prependString $prependString
+        my jset PREPEND_STRING [jtochararray $prependString]
+        my jset valueString [[[::PrimitiveLongSingleton::getInstance] jget NUMBER_CHAR_ARRAYS] get 0]
+        my jset primitiveLongUtil [::PrimitiveLongUtil::createPowerOfTen [jint [expr {$max + 1}]]]
+        my jset max $max
+        my jset value 0
+        if {[expr {$direction == 0}]} {
+            error [jexception RuntimeException [[::BasicHudFactory::getInstance] jget DIRECTION_EXCEPTION]]
         }
-    return $self;
-}
+    }
+    
 
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        my jset offset [expr {[$font stringWidth [my jget prependString]] + [::MyFontProcessor::defaultCharWidth $font]}]
+        next $graphics
+    }
+    
 
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->{offset} = $font->stringWidth($self->{prependString}) + 'org::allbinary::graphics::font::MyFontProcessor'->defaultCharWidth($font);
-        $self->SUPER::updateMeasurement($graphics);
-}
+    method get {} {
+        return [my jget value]
+    }
+    
 
+    method add {value} {
+        my set [jint [expr {[my jget value] + $value}]]
+    }
+    
 
-sub get {
-    my ($self) = @_;
-        return $self->{value};
-}
-
-
-sub add {
-    my ($self, $value) = @_;
-        $self->set($self->{value} + $value);
-}
-
-
-sub set {
-    my ($self, $value) = @_;
-        $self->{value} = $value;
-        if ($self->{value} > $self->{max}) {
-            $self->{value} = 0;
+    method set {value} {
+        my jset value $value
+        if {[expr {[my jget value] > [my jget max]}]} {
+            my jset value 0
         }
-        $self->{valueString} = $self->{primitiveLongUtil}->getCharArray($self->{value});
-        $self->{valueTotalDigits} = $self->{primitiveLongUtil}->getCurrentTotalDigits();
+        my jset valueString [[my jget primitiveLongUtil] getCharArray [my jget value]]
+        my jset valueTotalDigits [[my jget primitiveLongUtil] getCurrentTotalDigits]
+    }
+    
+
+    method reduce {value} {
+        my set [jint [expr {[my jget value] - $value}]]
+    }
+    
+
+    method paint {graphics} {
+        next $graphics [my jget PREPEND_STRING] 0 [[my jget PREPEND_STRING] length] [my jget valueString] 0 [my jget valueTotalDigits] [my jget offset]
+    }
+    
+
+    method paintXY {graphics x y} {
+        [my jget myFontProcessor] process $graphics
+        set charArray [my jget PREPEND_STRING]
+        set len [[my jget PREPEND_STRING] length]
+        set charArray2 [my jget valueString]
+        set len2 [my jget valueTotalDigits]
+        [my jget basicSetColorUtil] setBasicColorP $graphics [my getBasicColorP]
+        $graphics drawChars $charArray 0 $len $x $y 0
+        $graphics drawChars $charArray2 0 $len2 [jint [expr {$x - [my jget offset]}]] $y 0
+    }
+    
+
+    method paintThreed {graphics} {
+    }
 }
 
-
-sub reduce {
-    my ($self, $value) = @_;
-        $self->set($self->{value} - $value);
+namespace eval ::NumberStringHud {
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->SUPER::paintDX($graphics, $self->{PREPEND_STRING}, 0, scalar(@{$self->{PREPEND_STRING}}), $self->{valueString}, 0, $self->{valueTotalDigits}, $self->{offset});
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        my $charArray = $self->{PREPEND_STRING};
-        my $len = scalar(@{$self->{PREPEND_STRING}});
-        my $charArray2 = $self->{valueString};
-        my $len2 = $self->{valueTotalDigits};
-        $self->{basicSetColorUtil}->setBasicColorP($graphics, $self->getBasicColorP());
-        $graphics->drawChars($charArray, 0, $len, $x, $y, 0);
-        $graphics->drawChars($charArray2, 0, $len2, $x - $self->{offset}, $y, 0);
-}
-
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::graphics::hud::BasicHud ();
-use org::allbinary::game::graphics::hud::BasicHudFactory ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::paint::PaintableInterface ();
-use org::allbinary::logic::math::PrimitiveLongSingleton ();
-use org::allbinary::logic::math::PrimitiveLongUtil ();
-
-1;
 

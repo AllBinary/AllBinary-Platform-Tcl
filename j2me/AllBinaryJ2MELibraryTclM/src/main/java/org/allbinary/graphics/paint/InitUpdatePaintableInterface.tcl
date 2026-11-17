@@ -11,19 +11,19 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-# Java interface
-package org::allbinary::graphics::paint::InitUpdatePaintableInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::init::InitInterface','org::allbinary::init::UpdateInterface','org::allbinary::graphics::paint::PaintableInterface';
+oo::class create ::InitUpdatePaintableInterface {
+    superclass ::JObject
+}
 
+oo::define ::InitUpdatePaintableInterface {
+    method initFields_InitUpdatePaintableInterface {} {
+        return
+    }
+}
 
-use org::allbinary::init::InitInterface ();
-use org::allbinary::init::UpdateInterface ();
-use org::allbinary::graphics::paint::PaintableInterface ();
+namespace eval ::InitUpdatePaintableInterface {
+}
 
-1;
 

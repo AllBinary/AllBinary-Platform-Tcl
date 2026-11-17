@@ -11,41 +11,39 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-# Java interface
-package org::allbinary::game::score::HighScoresInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getList {
-    my ($self) = @_;
-    die "abstract method getList";
+oo::class create ::HighScoresInterface {
+    superclass ::JObject
 }
 
+oo::define ::HighScoresInterface {
+    method initFields_HighScoresInterface {} {
+        return
+    }
+    
 
-sub addHighScore {
-    my ($self, $newHighScore) = @_;
-    die "abstract method addHighScore";
+    method getList {} {
+        error [jexception AbstractMethodError getList]
+    }
+    
+
+    method addHighScore {newHighScore} {
+        error [jexception AbstractMethodError addHighScore]
+    }
+    
+
+    method getTotal {} {
+        error [jexception AbstractMethodError getTotal]
+    }
+    
+
+    method isBestScore {newHighScore} {
+        error [jexception AbstractMethodError isBestScore]
+    }
 }
 
-
-sub getTotal {
-    my ($self) = @_;
-    die "abstract method getTotal";
+namespace eval ::HighScoresInterface {
 }
 
-
-# throws Exception
-sub isBestScore {
-    my ($self, $newHighScore) = @_;
-    die "abstract method isBestScore";
-}
-
-use org::allbinary::util::BasicArrayList ();
-
-1;
 

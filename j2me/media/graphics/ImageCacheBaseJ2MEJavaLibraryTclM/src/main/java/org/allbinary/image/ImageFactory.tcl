@@ -11,64 +11,67 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.image
 
 #ImageCacheBaseJavaLibrary - J2ME
-package org::allbinary::image::ImageFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::image::ImageFactory'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ImageFactory {
+    superclass ::JObject
 }
 
+oo::define ::ImageFactory {
+    method initFields_ImageFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::image::ImageFactory::instance;
+    constructor {} {
+        next
+        my initFields_ImageFactory
+    }
+    
+    
+
+    method createImageUrl {url} {
+        return [::Image::createImage $url]
+    }
+    
+
+    method createImage {caller width height} {
+        return [[::MIDPUtil::getInstance] createImageWH $width $height]
+    }
+    
+
+    method createImageFromInputStream {key inputStream} {
+        set image [[::MIDPUtil::getInstance] createImageFromInputStream $inputStream]
+        return $image
+    }
+    
+
+    method createImageFromInputStream {inputStream} {
+        return [[::MIDPUtil::getInstance] createImageFromInputStream $inputStream]
+    }
 }
 
-
-# throws Exception
-sub createImageUrl {
-    my ($self, $url) = @_;
-        return 'javax::microedition::lcdui::Image'->createImage($url);
+namespace eval ::ImageFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ImageFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ImageFactory::staticGet_instance]
+    }
 }
 
-
-# throws Exception
-sub createImage {
-    my ($self, $caller, $width, $height) = @_;
-        return 'org::allbinary::MIDPUtil'->getInstance()->createImageWH($width, $height);
-}
-
-
-# throws Exception
-sub createImageFromInputStream {
-    my ($self, $key, $inputStream) = @_;
-        my $image = 'org::allbinary::MIDPUtil'->getInstance()->createImageFromInputStream($inputStream);
-        return $image;
-}
-
-
-# throws Exception
-# Java overloaded method: Perl keeps the last definition
-sub createImageFromInputStream {
-    my ($self, $inputStream) = @_;
-        return 'org::allbinary::MIDPUtil'->getInstance()->createImageFromInputStream($inputStream);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::InputStream ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::MIDPUtil ();
-
-1;
 

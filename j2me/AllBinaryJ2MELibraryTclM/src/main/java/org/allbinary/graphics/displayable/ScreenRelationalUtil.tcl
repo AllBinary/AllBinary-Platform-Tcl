@@ -1,69 +1,77 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable
 
-package org::allbinary::graphics::displayable::ScreenRelationalUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::displayable::ScreenRelationalUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ScreenRelationalUtil {
+    superclass ::JObject
 }
 
+oo::define ::ScreenRelationalUtil {
+    method initFields_ScreenRelationalUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::displayable::ScreenRelationalUtil::instance;
-}
+    constructor {} {
+        next
+        my initFields_ScreenRelationalUtil
+    }
+    
+    
 
+    method getScaleImage {image} {
+        return [my getScaleWH [$image getWidth] [$image getHeight]]
+    }
+    
 
-sub getScaleImage {
-    my ($self, $image) = @_;
-        return $self->getScaleWH($image->getWidth(), $image->getHeight());
-}
+    method getScaleWH {aWidth aHeight} {
+        return [my getScaleWHA $aWidth $aHeight 20]
+    }
+    
 
-
-sub getScaleWH {
-    my ($self, $aWidth, $aHeight) = @_;
-        return $self->getScaleWHA($aWidth, $aHeight, 20);
-}
-
-
-sub getScaleWHA {
-    my ($self, $aWidth, $aHeight, $add) = @_;
-        my $displayInfoSingleton = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-        my $last = $displayInfoSingleton->getLast();
-        my $width = $last->[$displayInfoSingleton->{WIDTH}];
-        my $height = $last->[$displayInfoSingleton->{HEIGHT}];
-        my $largestSize = $width;
-        if ($largestSize < $height) {
-            $largestSize = $height;
+    method getScaleWHA {aWidth aHeight add} {
+        set displayInfoSingleton [::DisplayInfoSingleton::getInstance]
+        set last [$displayInfoSingleton getLast]
+        set width [expr {double([$last get [$displayInfoSingleton jget WIDTH]])}]
+        set height [expr {double([$last get [$displayInfoSingleton jget HEIGHT]])}]
+        set largestSize $width
+        if {[expr {$largestSize < $height}]} {
+            set largestSize $height
         }
-        my $scale = ($largestSize) / $aWidth;
-        return $scale;
+        set scale [expr {($largestSize) / [expr {double($aWidth)}]}]
+        return $scale
+    }
+    
+
+    method getScaledHeight {aWidth aHeight} {
+        return [jint [jd2i ([expr {[my getScaleWH $aWidth $aHeight] * [expr {double($aHeight)}]}])]]
+    }
+    
+
+    method getScaledHeightAdd {aWidth aHeight add} {
+        return [jint [jd2i ([expr {[my getScaleWHA $aWidth $aHeight $add] * [expr {double($aHeight)}]}])]]
+    }
 }
 
-
-sub getScaledHeight {
-    my ($self, $aWidth, $aHeight) = @_;
-        return int(($self->getScaleWH($aWidth, $aHeight) * $aHeight));
+namespace eval ::ScreenRelationalUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ScreenRelationalUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ScreenRelationalUtil::staticGet_instance]
+    }
 }
 
-
-sub getScaledHeightAdd {
-    my ($self, $aWidth, $aHeight, $add) = @_;
-        return int(($self->getScaleWHA($aWidth, $aHeight, $add) * $aHeight));
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-
-1;
 

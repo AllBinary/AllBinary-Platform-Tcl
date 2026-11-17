@@ -11,70 +11,58 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::CompleteMotionGestureInputEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject','org::allbinary::game::input::CompleteMotionGestureInputInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{name} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{motionGestureInput} = 'org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance()->{NO_MOTION};
+oo::class create ::CompleteMotionGestureInputEvent {
+    superclass ::AllBinaryEventObject
 }
 
+oo::define ::CompleteMotionGestureInputEvent {
+    method initFields_CompleteMotionGestureInputEvent {} {
+        my jset logUtil {}
+        my jset name {}
+        my jset motionGestureInput {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset name [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset motionGestureInput [[::TouchMotionGestureFactory::getInstance] jget NO_MOTION]
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $motionGestureInput) = @_;
-    my $self = $class->SUPER::new($motionGestureInput);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->setName($name);
+    constructor {name motionGestureInput} {
+        next $motionGestureInput
+        my initFields_CompleteMotionGestureInputEvent
+        my setName $name
         try {
-            $self->setMotionGestureInput($motionGestureInput);
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, "InputToGameKeyEventAction", $e);
+            my setMotionGestureInput $motionGestureInput
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] "InputToGameKeyEventAction" $e
         }
-    return $self;
+    }
+    
+
+    method setName {name} {
+        my jset name $name
+    }
+    
+
+    method getName {} {
+        return [my jget name]
+    }
+    
+
+    method setMotionGestureInput {motionGestureInput} {
+        my jset motionGestureInput $motionGestureInput
+    }
+    
+
+    method getMotionGestureInput {} {
+        return [my jget motionGestureInput]
+    }
 }
 
-
-sub setName {
-    my ($self, $name) = @_;
-        $self->{name} = $name;
+namespace eval ::CompleteMotionGestureInputEvent {
 }
 
-
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
-}
-
-
-sub setMotionGestureInput {
-    my ($self, $motionGestureInput) = @_;
-        $self->{motionGestureInput} = $motionGestureInput;
-}
-
-
-sub getMotionGestureInput {
-    my ($self) = @_;
-        return $self->{motionGestureInput};
-}
-
-use java::lang::Object ();
-use org::allbinary::input::motion::gesture::MotionGestureInput ();
-use org::allbinary::input::motion::gesture::TouchMotionGestureFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::input::CompleteMotionGestureInputInterface ();
-
-1;
 

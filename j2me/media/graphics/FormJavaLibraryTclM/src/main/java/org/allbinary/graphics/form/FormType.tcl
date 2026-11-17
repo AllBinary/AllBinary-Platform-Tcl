@@ -11,36 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::FormType;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{name} = undef;
+oo::class create ::FormType {
+    superclass ::JObject
 }
 
+oo::define ::FormType {
+    method initFields_FormType {} {
+        my jset name {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $name) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{name} = $name;
-    return $self;
+    constructor {name} {
+        next
+        my initFields_FormType
+        my jset name $name
+    }
+    
+
+    method toString {} {
+        return [my jget name]
+    }
 }
 
-
-sub toString {
-    my ($self) = @_;
-        return $self->{name};
+namespace eval ::FormType {
 }
 
-use java::lang::Object ();
-
-1;
 

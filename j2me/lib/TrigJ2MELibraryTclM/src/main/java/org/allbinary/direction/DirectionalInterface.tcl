@@ -11,40 +11,39 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.direction
 
-# Java interface
-package org::allbinary::direction::DirectionalInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub setFrameByDirection {
-    my ($self, $direction) = @_;
-    die "abstract method setFrameByDirection";
+oo::class create ::DirectionalInterface {
+    superclass ::JObject
 }
 
+oo::define ::DirectionalInterface {
+    method initFields_DirectionalInterface {} {
+        return
+    }
+    
 
-sub setFrameToAngle {
-    my ($self, $angle) = @_;
-    die "abstract method setFrameToAngle";
+    method setFrameByDirection {direction} {
+        error [jexception AbstractMethodError setFrameByDirection]
+    }
+    
+
+    method setFrameToAngle {angle} {
+        error [jexception AbstractMethodError setFrameToAngle]
+    }
+    
+
+    method adjustFrameToAngle {newAngle} {
+        error [jexception AbstractMethodError adjustFrameToAngle]
+    }
+    
+
+    method adjustFrame {angle} {
+        error [jexception AbstractMethodError adjustFrame]
+    }
 }
 
-
-sub adjustFrameToAngle {
-    my ($self, $newAngle) = @_;
-    die "abstract method adjustFrameToAngle";
+namespace eval ::DirectionalInterface {
 }
 
-
-sub adjustFrame {
-    my ($self, $angle) = @_;
-    die "abstract method adjustFrame";
-}
-
-use org::allbinary::math::Angle ();
-
-1;
 

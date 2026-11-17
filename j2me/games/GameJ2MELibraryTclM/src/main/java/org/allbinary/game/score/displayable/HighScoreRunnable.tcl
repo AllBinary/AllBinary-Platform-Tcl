@@ -11,67 +11,57 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score.displayable
 
-package org::allbinary::game::score::displayable::HighScoreRunnable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Time::HiRes ();
-use parent -norequire,'org::allbinary::thread::ARunnable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{highScoresCanvas} = undef;
+oo::class create ::HighScoreRunnable {
+    superclass ::ARunnable
 }
 
+oo::define ::HighScoreRunnable {
+    method initFields_HighScoreRunnable {} {
+        my jset highScoresCanvas {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $highScoresCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{highScoresCanvas} = $highScoresCanvas;
-    return $self;
-}
+    constructor {highScoresCanvas} {
+        next
+        my initFields_HighScoreRunnable
+        my jset highScoresCanvas $highScoresCanvas
+    }
+    
 
-
-sub run {
-    my ($self) = @_;
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-        my $logUtil = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-        my $highScoresCanvas = $self->{highScoresCanvas};
+    method run {} {
+        set commonStrings [::CommonStrings::getInstance]
+        set logUtil [::LogUtil::getInstance]
+        set highScoresCanvas [my jget highScoresCanvas]
         try {
-            my $isHTML = 'org::allbinary::J2MEUtil'->isHTML();
-            if (!$isHTML) {
-                while (!$highScoresCanvas->{hasPainted}) {
+            set isHTML [::J2MEUtil::isHTML]
+            if {[expr {!$isHTML}]} {
+                while {[expr {![$highScoresCanvas jget hasPainted]}]} {
                 }
-                $highScoresCanvas->{hasPainted} = 0;
+                $highScoresCanvas jset hasPainted false
             }
-            my $stringMaker = 'org::allbinary::logic::string::StringMaker'->new();
-            my $systemWrapper = 'org::allbinary::logic::ABSystemWrapper'->getInstance();
-            my $currentTimeMillis = $systemWrapper->currentTimeMillis();
-            $logUtil->putF($stringMaker->append("HighScoresCanvas - Request repaint to be sure: ")->appendlong($currentTimeMillis)->toString(), $self, $commonStrings->{RUN});
-            $highScoresCanvas->{repaintBehavior}->onChangeRepaint($highScoresCanvas);
-            if (!$isHTML) {
-                while (!$highScoresCanvas->{hasPainted}) {
+            set stringMaker [::StringMaker new]
+            set systemWrapper [::ABSystemWrapper::getInstance]
+            set currentTimeMillis [$systemWrapper currentTimeMillis]
+            $logUtil putF [[[$stringMaker append "HighScoresCanvas - Request repaint to be sure: "] appendlong $currentTimeMillis] toString] [self] [$commonStrings jget RUN]
+            [$highScoresCanvas jget repaintBehavior] onChangeRepaint $highScoresCanvas
+            if {[expr {!$isHTML}]} {
+                while {[expr {![$highScoresCanvas jget hasPainted]}]} {
                 }
             }
-            $stringMaker->delete(0, $stringMaker->length());
-            $logUtil->putF($stringMaker->append("HighScoresCanvas - Now that the canvas has completed repaint go ahead and fetch the scores: ")->appendlong($currentTimeMillis)->toString(), $self, $commonStrings->{RUN});
-            $highScoresCanvas->executeUpdate();
-        } catch ($e) {
-            $logUtil->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{RUN}, $e);
+            $stringMaker delete 0 [$stringMaker length]
+            $logUtil putF [[[$stringMaker append "HighScoresCanvas - Now that the canvas has completed repaint go ahead and fetch the scores: "] appendlong $currentTimeMillis] toString] [self] [$commonStrings jget RUN]
+            $highScoresCanvas executeUpdate
+        } on error {e} {
+            $logUtil put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget RUN] $e
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::J2MEUtil ();
-use org::allbinary::logic::ABSystemWrapper ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::thread::ARunnable ();
+namespace eval ::HighScoreRunnable {
+}
 
-1;
 

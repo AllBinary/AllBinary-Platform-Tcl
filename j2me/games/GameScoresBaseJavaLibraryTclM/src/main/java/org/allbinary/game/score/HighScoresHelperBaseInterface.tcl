@@ -11,35 +11,34 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-# Java interface
-package org::allbinary::game::score::HighScoresHelperBaseInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::score::HighScoresResultsListener';
-
-
-
-sub setSelectedHighScores {
-    my ($self, $selectedHighScores) = @_;
-    die "abstract method setSelectedHighScores";
+oo::class create ::HighScoresHelperBaseInterface {
+    superclass ::JObject
 }
 
+oo::define ::HighScoresHelperBaseInterface {
+    method initFields_HighScoresHelperBaseInterface {} {
+        return
+    }
+    
 
-sub getHighScoresArray {
-    my ($self) = @_;
-    die "abstract method getHighScoresArray";
+    method setSelectedHighScores {selectedHighScores} {
+        error [jexception AbstractMethodError setSelectedHighScores]
+    }
+    
+
+    method getHighScoresArray {} {
+        error [jexception AbstractMethodError getHighScoresArray]
+    }
+    
+
+    method getSelectedHighScores {} {
+        error [jexception AbstractMethodError getSelectedHighScores]
+    }
 }
 
-
-sub getSelectedHighScores {
-    my ($self) = @_;
-    die "abstract method getSelectedHighScores";
+namespace eval ::HighScoresHelperBaseInterface {
 }
 
-use org::allbinary::game::score::HighScoresResultsListener ();
-
-1;
 

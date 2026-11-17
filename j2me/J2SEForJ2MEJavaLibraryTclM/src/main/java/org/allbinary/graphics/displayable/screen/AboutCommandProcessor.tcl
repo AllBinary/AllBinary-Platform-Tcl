@@ -11,39 +11,50 @@
 # Created By: Travis Berthelot
 # 
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.screen
 
-package org::allbinary::graphics::displayable::screen::AboutCommandProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::displayable::screen::AboutCommandProcessor'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AboutCommandProcessor {
+    superclass ::JObject
 }
 
+oo::define ::AboutCommandProcessor {
+    method initFields_AboutCommandProcessor {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::displayable::screen::AboutCommandProcessor::instance;
+    constructor {} {
+        next
+        my initFields_AboutCommandProcessor
+    }
+    
+    
+
+    method process {midletCommandListener command canvas} {
+        $midletCommandListener commandAction $command $canvas
+    }
 }
 
-
-sub process {
-    my ($self, $midletCommandListener, $command, $canvas) = @_;
-        $midletCommandListener->commandAction($command, $canvas);
+namespace eval ::AboutCommandProcessor {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AboutCommandProcessor new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AboutCommandProcessor::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Canvas ();
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::CommandListener ();
-
-1;
 

@@ -11,112 +11,114 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.math.permutations
 
-package org::allbinary::logic::math::permutations::OrderedIntArrayPermutationUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::math::permutations::OrderedIntArrayPermutationUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{TOTAL_ITERATIONS_TABLE} = "Total Iterations: ";
-    $self->{FINISHED} = "\nFINISHED";
+oo::class create ::OrderedIntArrayPermutationUtil {
+    superclass ::JObject
 }
 
+oo::define ::OrderedIntArrayPermutationUtil {
+    method initFields_OrderedIntArrayPermutationUtil {} {
+        my jset TOTAL_ITERATIONS_TABLE {}
+        my jset FINISHED {}
+        my jset TOTAL_ITERATIONS_TABLE "Total Iterations: "
+        my jset FINISHED "\nFINISHED"
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::math::permutations::OrderedIntArrayPermutationUtil::instance;
-}
+    constructor {} {
+        next
+        my initFields_OrderedIntArrayPermutationUtil
+    }
+    
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-sub getNext {
-    my ($self, $data) = @_;
-        my $length = scalar(@{$data});
-        my $i = $length - 1;
-        while ($data->[$i - 1] >= $data->[$i]) {
-            $i = $i - 1;
+    method getNext {data} {
+        set length [$data length]
+        set i [jint [expr {$length - 1}]]
+        while {[expr {[$data get [jint [expr {$i - 1}]]] >= [$data get $i]}]} {
+            set i [jint [expr {$i - 1}]]
         }
-        my $j = $length;
-        while ($data->[$j - 1] <= $data->[$i - 1]) {
-            $j = $j - 1;
+        set j $length
+        while {[expr {[$data get [jint [expr {$j - 1}]]] <= [$data get [jint [expr {$i - 1}]]]}]} {
+            set j [jint [expr {$j - 1}]]
         }
-        $self->swap($data, $i - 1, $j - 1);
-        $i++;
-        $j = $length;
-        while ($i < $j) {
-            $self->swap($data, $i - 1, $j - 1);
-            $i++;
-            $j--;
+        my swap $data [jint [expr {$i - 1}]] [jint [expr {$j - 1}]]
+        jpostincr i 1
+        set j $length
+        while {[expr {$i < $j}]} {
+            my swap $data [jint [expr {$i - 1}]] [jint [expr {$j - 1}]]
+            jpostincr i 1
+            jpostincr j -1
         }
-}
+    }
+    
 
+    method swap {data a b} {
+        set temp [$data get $a]
+        $data set $a [$data get $b]
+        $data set $b $temp
+    }
+    
 
-sub swap {
-    my ($self, $data, $a, $b) = @_;
-        my $temp = $data->[$a];
-        $data->[$a] = $data->[$b];
-        $data->[$b] = $temp;
-}
-
-
-sub factorial {
-    my ($self, $dataLength) = @_;
-        my $temp = 1;
-        if ($dataLength > 1) {
-            for (my $i = 1; $i <= $dataLength; $i++) {
-                $temp *= $i;
+    method factorial {dataLength} {
+        set temp 1
+        if {[expr {$dataLength > 1}]} {
+            for {set i 1} {[expr {$i <= $dataLength}]} {jpostincr i 1} {
+                set temp [jlong [expr {$temp * $i}]]
             }
         }
-        return $temp;
-}
+        return $temp
+    }
+    
 
-
-sub generate {
-    my ($self, $data, $visitor) = @_;
-        my $iterations = $self->factorial(scalar(@{$data}));
-        print($self->{TOTAL_ITERATIONS_TABLE});
-        print($iterations, "\n");
-        for (my $count = 0; $count < $iterations - 1; $count++) {
-            $self->getNext($data);
-            $visitor->visit($self);
+    method generate {data visitor} {
+        set iterations [my factorial [$data length]]
+        puts [jstr [my jget TOTAL_ITERATIONS_TABLE]]
+        puts [jstr $iterations]
+        for {set count 0} {[expr {$count < [jlong [expr {$iterations - 1}]]}]} {jpostincr count 1} {
+            my getNext $data
+            $visitor visit [self]
         }
-        print($self->{FINISHED}, "\n");
+        puts [jstr [my jget FINISHED]]
+    }
+    
 }
 
-
-sub main {
-    my ($class, $args) = @_;
-        my $TOTAL = 3;
-        my $data = [(0) x ($TOTAL)];
-        for (my $i = 0; $i < $TOTAL; $i++) {
-            $data->[$i] = $i;
+namespace eval ::OrderedIntArrayPermutationUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::OrderedIntArrayPermutationUtil new]
         }
-        my $permutationVisitor = 'org::allbinary::logic::math::permutations::IntPermutationVisitor'->new($data);
-        my $ORIGINAL_DATA_LABEL = "Original Data: ";
-        print($ORIGINAL_DATA_LABEL);
-        $permutationVisitor->print($data, 'org::allbinary::logic::string::StringMaker'->new());
-        'org::allbinary::logic::math::permutations::OrderedIntArrayPermutationUtil'->getInstance()->generate($data, $permutationVisitor);
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::OrderedIntArrayPermutationUtil::staticGet_instance]
+    }
+    proc main {args} {
+        set TOTAL 3
+        set data [jarray $TOTAL 0]
+        for {set i 0} {[expr {$i < $TOTAL}]} {jpostincr i 1} {
+            $data set $i $i
+        }
+        set permutationVisitor [::IntPermutationVisitor new $data]
+        set ORIGINAL_DATA_LABEL "Original Data: "
+        puts [jstr $ORIGINAL_DATA_LABEL]
+        $permutationVisitor print $data [::StringMaker new]
+        [::OrderedIntArrayPermutationUtil::getInstance] generate $data $permutationVisitor
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::util::visitor::Visitor ();
-use org::allbinary::logic::string::StringMaker ();
-use java::lang::System ();
-use org::allbinary::logic::math::permutations::IntPermutationVisitor ();
-
-1;
 

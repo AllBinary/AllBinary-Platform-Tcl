@@ -11,39 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
-package org::allbinary::logic::system::security::licensing::StoreAppClientInformation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::system::security::licensing::AbeClientInformation','org::allbinary::thirdparty::store::LongArrayIdentifierInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{longArrayIdentifier} = undef;
+oo::class create ::StoreAppClientInformation {
+    superclass ::AbeClientInformation
 }
 
+oo::define ::StoreAppClientInformation {
+    method initFields_StoreAppClientInformation {} {
+        my jset longArrayIdentifier {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $version, $specialName, $shortName, $longArrayIdentifier) = @_;
-    my $self = $class->SUPER::new($name, $version, $specialName, $shortName);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{longArrayIdentifier} = $longArrayIdentifier;
-    return $self;
+    constructor {name version specialName shortName longArrayIdentifier} {
+        next $name $version $specialName $shortName
+        my initFields_StoreAppClientInformation
+        my jset longArrayIdentifier $longArrayIdentifier
+    }
+    
+
+    method getLongArrayIdentifier {} {
+        return [my jget longArrayIdentifier]
+    }
 }
 
-
-sub getLongArrayIdentifier {
-    my ($self) = @_;
-        return $self->{longArrayIdentifier};
+namespace eval ::StoreAppClientInformation {
 }
 
-use java::lang::Object ();
-use org::allbinary::thirdparty::store::LongArrayIdentifierInterface ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformation ();
-
-1;
 

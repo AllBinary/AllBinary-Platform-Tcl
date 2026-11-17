@@ -47,7 +47,7 @@ namespace eval ::ExceptionUtil {
         variable instanceSet
         if {!$instanceSet} {
             set instanceSet 1
-            set instanceValue [jexception ExceptionUtil {}]
+            set instanceValue [::ExceptionUtil new]
         }
         return $instanceValue
     }

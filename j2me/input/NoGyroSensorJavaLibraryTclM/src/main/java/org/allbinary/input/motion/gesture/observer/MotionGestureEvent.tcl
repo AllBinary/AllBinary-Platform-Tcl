@@ -11,104 +11,120 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
-package org::allbinary::input::motion::gesture::observer::MotionGestureEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject';
-
-our $PREVIOUS = " Previous: ";
-our $HASHCODE = " hashcode: ";
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{motionGesture} = 'org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance()->{NO_MOTION};
-    $self->{id} = undef;
-    $self->{previousPoint} = 'org::allbinary::graphics::PointFactory'->getInstance()->{ZERO_ZERO};
-    $self->{currentPoint} = 'org::allbinary::graphics::PointFactory'->getInstance()->{ZERO_ZERO};
-    $self->{commonLabels} = 'org::allbinary::string::CommonLabels'->getInstance();
+oo::class create ::MotionGestureEvent {
+    superclass ::AllBinaryEventObject
 }
 
+oo::define ::MotionGestureEvent {
+    method initFields_MotionGestureEvent {} {
+        my jset motionGesture {}
+        my jset id 0
+        my jset previousPoint {}
+        my jset currentPoint {}
+        my jset commonLabels {}
+        my jset motionGesture [[::TouchMotionGestureFactory::getInstance] jget NO_MOTION]
+        
+        my jset previousPoint [[::PointFactory::getInstance] jget ZERO_ZERO]
+        my jset currentPoint [[::PointFactory::getInstance] jget ZERO_ZERO]
+        my jset commonLabels [::CommonLabels::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $source, $id, $motionGesture) = @_;
-    my $self = $class->SUPER::new($source);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{id} = $id;
-        $self->setMotionGesture($motionGesture);
-    return $self;
+    constructor {source id motionGesture} {
+        next $source
+        my initFields_MotionGestureEvent
+        my jset id $id
+        my setMotionGesture $motionGesture
+    }
+    
+
+    method getMotionGesture {} {
+        return [my jget motionGesture]
+    }
+    
+
+    method setMotionGesture {motionGesture} {
+        my jset motionGesture $motionGesture
+    }
+    
+
+    method getPreviousPoint {} {
+        return [my jget previousPoint]
+    }
+    
+
+    method setPreviousPoint {previousPoint} {
+        my jset previousPoint $previousPoint
+    }
+    
+
+    method getCurrentPoint {} {
+        return [my jget currentPoint]
+    }
+    
+
+    method setCurrentPoint {currentPoint} {
+        my jset currentPoint $currentPoint
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        set stringUtil [::StringUtil::getInstance]
+        $stringBuffer append [$stringUtil toString1 [my jget motionGesture]]
+        $stringBuffer append [[my jget commonLabels] jget CURRENT]
+        $stringBuffer append [$stringUtil toString1 [my jget currentPoint]]
+        $stringBuffer append [::MotionGestureEvent::staticGet_PREVIOUS]
+        $stringBuffer append [$stringUtil toString1 [my jget previousPoint]]
+        $stringBuffer append [::MotionGestureEvent::staticGet_HASHCODE]
+        $stringBuffer appendint [jint [[::TsUtil::getInstance] hashCode1 [self]]]
+        return [$stringBuffer toString]
+    }
+    
+
+    method getId {} {
+        return [my jget id]
+    }
 }
 
-
-sub getMotionGesture {
-    my ($self) = @_;
-        return $self->{motionGesture};
+namespace eval ::MotionGestureEvent {
+    variable PREVIOUSValue {}
+    variable PREVIOUSSet 0
+    proc staticGet_PREVIOUS {} {
+        variable PREVIOUSValue
+        variable PREVIOUSSet
+        if {!$PREVIOUSSet} {
+            set PREVIOUSSet 1
+            set PREVIOUSValue " Previous: "
+        }
+        return $PREVIOUSValue
+    }
+    proc staticSet_PREVIOUS {value} {
+        variable PREVIOUSValue
+        variable PREVIOUSSet
+        set PREVIOUSSet 1
+        set PREVIOUSValue $value
+    }
+    variable HASHCODEValue {}
+    variable HASHCODESet 0
+    proc staticGet_HASHCODE {} {
+        variable HASHCODEValue
+        variable HASHCODESet
+        if {!$HASHCODESet} {
+            set HASHCODESet 1
+            set HASHCODEValue " hashcode: "
+        }
+        return $HASHCODEValue
+    }
+    proc staticSet_HASHCODE {value} {
+        variable HASHCODEValue
+        variable HASHCODESet
+        set HASHCODESet 1
+        set HASHCODEValue $value
+    }
 }
 
-
-sub setMotionGesture {
-    my ($self, $motionGesture) = @_;
-        $self->{motionGesture} = $motionGesture;
-}
-
-
-sub getPreviousPoint {
-    my ($self) = @_;
-        return $self->{previousPoint};
-}
-
-
-sub setPreviousPoint {
-    my ($self, $previousPoint) = @_;
-        $self->{previousPoint} = $previousPoint;
-}
-
-
-sub getCurrentPoint {
-    my ($self) = @_;
-        return $self->{currentPoint};
-}
-
-
-sub setCurrentPoint {
-    my ($self, $currentPoint) = @_;
-        $self->{currentPoint} = $currentPoint;
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $stringUtil = 'org::allbinary::logic::string::StringUtil'->getInstance();
-        $stringBuffer->append($stringUtil->toString($self->{motionGesture}));
-        $stringBuffer->append($self->{commonLabels}->{CURRENT});
-        $stringBuffer->append($stringUtil->toString($self->{currentPoint}));
-        $stringBuffer->append($org::allbinary::input::motion::gesture::observer::MotionGestureEvent::PREVIOUS);
-        $stringBuffer->append($stringUtil->toString($self->{previousPoint}));
-        $stringBuffer->append($org::allbinary::input::motion::gesture::observer::MotionGestureEvent::HASHCODE);
-        $stringBuffer->appendint(int('org::allbinary::TsUtil'->getInstance()->hashCode($self)));
-        return $stringBuffer->toString();
-}
-
-
-sub getId {
-    my ($self) = @_;
-        return $self->{id};
-}
-
-use java::lang::Object ();
-use org::allbinary::graphics::GPoint ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::input::motion::gesture::MotionGestureInput ();
-use org::allbinary::input::motion::gesture::TouchMotionGestureFactory ();
-use org::allbinary::TsUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::string::CommonLabels ();
-
-1;
 

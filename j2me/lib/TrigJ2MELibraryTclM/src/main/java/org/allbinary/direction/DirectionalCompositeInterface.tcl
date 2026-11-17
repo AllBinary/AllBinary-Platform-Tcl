@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.direction
 
-# Java interface
-package org::allbinary::direction::DirectionalCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getDirectionalInterface {
-    my ($self) = @_;
-    die "abstract method getDirectionalInterface";
+oo::class create ::DirectionalCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::DirectionalCompositeInterface {
+    method initFields_DirectionalCompositeInterface {} {
+        return
+    }
+    
 
-1;
+    method getDirectionalInterface {} {
+        error [jexception AbstractMethodError getDirectionalInterface]
+    }
+}
+
+namespace eval ::DirectionalCompositeInterface {
+}
+
 

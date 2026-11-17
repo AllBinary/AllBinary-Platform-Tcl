@@ -11,70 +11,84 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
-package org::allbinary::graphics::opengles::shader::ShaderComposite;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{disableProgramShaderOpenGLProcessor} = undef;
-    $self->{requiresOpenGLVersion} = undef;
-    $self->{shaderArray} = undef;
-    $self->{shaderInitializer} = undef;
-    $self->{compositeShaderUpdater} = undef;
-    $self->{modelViewProjection} = undef;
-    $self->{colorOpenGLProcessor} = undef;
-    $self->{vertexOpenGLProcessor} = undef;
-    $self->{useProgramShaderOpenGLProcessor} = 'org::allbinary::graphics::opengles::NullOpenGLProcessorFactory'->getInstance();
-    $self->{shaderMatrixOpenGLProcessor} = 'org::allbinary::graphics::opengles::NullOpenGLProcessorFactory'->getInstance();
-    $self->{colorEnableVertexAttribArrayOpenGLProcessor} = 'org::allbinary::graphics::opengles::NullOpenGLProcessorFactory'->getInstance();
-    $self->{normalEnableVertexAttribArrayOpenGLProcessor} = 'org::allbinary::graphics::opengles::NullOpenGLProcessorFactory'->getInstance();
-    $self->{vertexEnableVertexAttribArrayOpenGLProcessor} = 'org::allbinary::graphics::opengles::NullOpenGLProcessorFactory'->getInstance();
-    $self->{textureEnableVertexAttribArrayOpenGLProcessor} = 'org::allbinary::graphics::opengles::NullOpenGLProcessorFactory'->getInstance();
-    $self->{colorDisableVertexAttribArrayOpenGLProcessor} = 'org::allbinary::graphics::opengles::NullOpenGLProcessorFactory'->getInstance();
-    $self->{normalDisableVertexAttribArrayOpenGLProcessor} = 'org::allbinary::graphics::opengles::NullOpenGLProcessorFactory'->getInstance();
-    $self->{vertexDisableVertexAttribArrayOpenGLProcessor} = 'org::allbinary::graphics::opengles::NullOpenGLProcessorFactory'->getInstance();
-    $self->{textureDisableVertexAttribArrayOpenGLProcessor} = 'org::allbinary::graphics::opengles::NullOpenGLProcessorFactory'->getInstance();
-    $self->{uniformLightPositionOpenGLProcessor} = 'org::allbinary::graphics::opengles::shader::NullOpenGLTextureProcessor'->getInstance();
-    $self->{uniformLightColorOpenGLProcessor} = 'org::allbinary::graphics::opengles::shader::NullOpenGLTextureProcessor'->getInstance();
-    $self->{uniformCameraPositionOpenGLProcessor} = 'org::allbinary::graphics::opengles::shader::NullOpenGLTextureProcessor'->getInstance();
-    $self->{uniformTextureUnitOpenGLProcessor} = 'org::allbinary::graphics::opengles::shader::NullOpenGLTextureProcessor'->getInstance();
-    $self->{programHandle} = 0;
+oo::class create ::ShaderComposite {
+    superclass ::JObject
 }
 
+oo::define ::ShaderComposite {
+    method initFields_ShaderComposite {} {
+        my jset disableProgramShaderOpenGLProcessor {}
+        my jset requiresOpenGLVersion {}
+        my jset shaderArray {}
+        my jset shaderInitializer {}
+        my jset compositeShaderUpdater {}
+        my jset modelViewProjection {}
+        my jset colorOpenGLProcessor {}
+        my jset vertexOpenGLProcessor {}
+        my jset useProgramShaderOpenGLProcessor {}
+        my jset shaderMatrixOpenGLProcessor {}
+        my jset colorEnableVertexAttribArrayOpenGLProcessor {}
+        my jset normalEnableVertexAttribArrayOpenGLProcessor {}
+        my jset vertexEnableVertexAttribArrayOpenGLProcessor {}
+        my jset textureEnableVertexAttribArrayOpenGLProcessor {}
+        my jset colorDisableVertexAttribArrayOpenGLProcessor {}
+        my jset normalDisableVertexAttribArrayOpenGLProcessor {}
+        my jset vertexDisableVertexAttribArrayOpenGLProcessor {}
+        my jset textureDisableVertexAttribArrayOpenGLProcessor {}
+        my jset uniformLightPositionOpenGLProcessor {}
+        my jset uniformLightColorOpenGLProcessor {}
+        my jset uniformCameraPositionOpenGLProcessor {}
+        my jset uniformTextureUnitOpenGLProcessor {}
+        my jset programHandle 0
+        
+        
+        
+        
+        
+        
+        
+        
+        my jset useProgramShaderOpenGLProcessor [::NullOpenGLProcessorFactory::getInstance]
+        my jset shaderMatrixOpenGLProcessor [::NullOpenGLProcessorFactory::getInstance]
+        my jset colorEnableVertexAttribArrayOpenGLProcessor [::NullOpenGLProcessorFactory::getInstance]
+        my jset normalEnableVertexAttribArrayOpenGLProcessor [::NullOpenGLProcessorFactory::getInstance]
+        my jset vertexEnableVertexAttribArrayOpenGLProcessor [::NullOpenGLProcessorFactory::getInstance]
+        my jset textureEnableVertexAttribArrayOpenGLProcessor [::NullOpenGLProcessorFactory::getInstance]
+        my jset colorDisableVertexAttribArrayOpenGLProcessor [::NullOpenGLProcessorFactory::getInstance]
+        my jset normalDisableVertexAttribArrayOpenGLProcessor [::NullOpenGLProcessorFactory::getInstance]
+        my jset vertexDisableVertexAttribArrayOpenGLProcessor [::NullOpenGLProcessorFactory::getInstance]
+        my jset textureDisableVertexAttribArrayOpenGLProcessor [::NullOpenGLProcessorFactory::getInstance]
+        my jset uniformLightPositionOpenGLProcessor [::NullOpenGLTextureProcessor::getInstance]
+        my jset uniformLightColorOpenGLProcessor [::NullOpenGLTextureProcessor::getInstance]
+        my jset uniformCameraPositionOpenGLProcessor [::NullOpenGLTextureProcessor::getInstance]
+        my jset uniformTextureUnitOpenGLProcessor [::NullOpenGLTextureProcessor::getInstance]
+        my jset programHandle 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $requiresOpenGLVersion, $shaderArray, $compositeShaderUpdater, $shaderInitializer, $modelViewProjection, $colorOpenGLProcessor, $vertexOpenGLProcessor, $disableProgramShaderOpenGLProcessor) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{requiresOpenGLVersion} = $requiresOpenGLVersion;
-        $self->{shaderArray} = $shaderArray;
-        $self->{shaderInitializer} = $shaderInitializer;
-        $self->{compositeShaderUpdater} = $compositeShaderUpdater;
-        $self->{modelViewProjection} = $modelViewProjection;
-        $self->{colorOpenGLProcessor} = $colorOpenGLProcessor;
-        $self->{vertexOpenGLProcessor} = $vertexOpenGLProcessor;
-        $self->{disableProgramShaderOpenGLProcessor} = $disableProgramShaderOpenGLProcessor;
-    return $self;
+    constructor {requiresOpenGLVersion shaderArray compositeShaderUpdater shaderInitializer modelViewProjection colorOpenGLProcessor vertexOpenGLProcessor disableProgramShaderOpenGLProcessor} {
+        next
+        my initFields_ShaderComposite
+        my jset requiresOpenGLVersion $requiresOpenGLVersion
+        my jset shaderArray $shaderArray
+        my jset shaderInitializer $shaderInitializer
+        my jset compositeShaderUpdater $compositeShaderUpdater
+        my jset modelViewProjection $modelViewProjection
+        my jset colorOpenGLProcessor $colorOpenGLProcessor
+        my jset vertexOpenGLProcessor $vertexOpenGLProcessor
+        my jset disableProgramShaderOpenGLProcessor $disableProgramShaderOpenGLProcessor
+    }
+    
+
+    method init {gl} {
+        my jset programHandle [[my jget shaderInitializer] init $gl [my jget shaderArray] [[::StringUtil::getInstance] getArrayInstance]]
+    }
 }
 
-
-sub init {
-    my ($self, $gl) = @_;
-        $self->{programHandle} = $self->{shaderInitializer}->init($gl, $self->{shaderArray}, 'org::allbinary::logic::string::StringUtil'->getInstance()->getArrayInstance());
+namespace eval ::ShaderComposite {
 }
 
-use java::lang::Object ();
-use javax::microedition::khronos::opengles::GL10 ();
-use org::allbinary::graphics::opengles::NullOpenGLProcessorFactory ();
-use org::allbinary::graphics::opengles::OpenGLProcessor ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::graphics::opengles::shader::NullOpenGLTextureProcessor ();
-
-1;
 

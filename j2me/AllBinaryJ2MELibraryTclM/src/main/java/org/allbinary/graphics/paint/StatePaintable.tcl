@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-package org::allbinary::graphics::paint::StatePaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable','org::allbinary::graphics::displayable::StateControlledInterface';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::StatePaintable {
+    superclass ::Paintable
 }
 
+oo::define ::StatePaintable {
+    method initFields_StatePaintable {} {
+        return
+    }
+    
 
-sub setState {
-    my ($self, $state) = @_;
+    constructor {} {
+        next
+        my initFields_StatePaintable
+    }
+    
+
+    method setState {state} {
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::displayable::StateControlledInterface ();
-use org::allbinary::graphics::paint::Paintable ();
+namespace eval ::StatePaintable {
+}
 
-1;
 

@@ -11,67 +11,70 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.hud.event
 
-package org::allbinary::game::layer::hud::event::GameNotificationEventHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::handler::BasicEventHandler';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::hud::event::GameNotificationEventHandler'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{enabled} = 1;
+oo::class create ::GameNotificationEventHandler {
+    superclass ::BasicEventHandler
 }
 
+oo::define ::GameNotificationEventHandler {
+    method initFields_GameNotificationEventHandler {} {
+        my jset enabled false
+        my jset enabled true
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_GameNotificationEventHandler
+    }
+    
 
-
-sub removeAllListeners {
-    my ($self) = @_;
-        my $eventListenerInterface = $org::allbinary::logic::util::event::NullEventListener::NULL_EVENT_LISTENER;
-        my $list = $self->{eventListenerInterfaceList};
-        if ($list->size() > 0) {
-            $eventListenerInterface = $list->{objectArray}->[0];
+    method removeAllListeners {} {
+        set eventListenerInterface [::NullEventListener::staticGet_NULL_EVENT_LISTENER]
+        set list [my jget eventListenerInterfaceList]
+        if {[expr {[$list size] > 0}]} {
+            set eventListenerInterface [[$list jget objectArray] get 0]
         }
-        $self->SUPER::removeAllListeners();
-        if ($eventListenerInterface != $org::allbinary::logic::util::event::NullEventListener::NULL_EVENT_LISTENER) {
-            $self->addListenerInterface($eventListenerInterface);
+        next
+        if {[expr {$eventListenerInterface ne [::NullEventListener::staticGet_NULL_EVENT_LISTENER]}]} {
+            my addListenerInterface $eventListenerInterface
         }
-}
+    }
+    
+    
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::layer::hud::event::GameNotificationEventHandler::instance;
-}
-
-
-# throws Exception
-sub process {
-    my ($self, $eventObject, $eventListenerInterface) = @_;
-        if (!$self->{enabled}) {
-            return;
+    method process {eventObject eventListenerInterface} {
+        if {[expr {![my jget enabled]}]} {
+            return
         }
-        my $gameNotificationListenerInterface = $eventListenerInterface;
-        $gameNotificationListenerInterface->onGameNotificationEvent($eventObject);
+        set gameNotificationListenerInterface $eventListenerInterface
+        $gameNotificationListenerInterface onGameNotificationEvent $eventObject
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
-use org::allbinary::logic::util::event::NullEventListener ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
-use org::allbinary::util::BasicArrayList ();
+namespace eval ::GameNotificationEventHandler {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameNotificationEventHandler new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameNotificationEventHandler::staticGet_instance]
+    }
+}
 
-1;
 

@@ -11,37 +11,35 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::GameInputProcessorUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::GameInputProcessorUtil {
+    superclass ::JObject
 }
 
+oo::define ::GameInputProcessorUtil {
+    method initFields_GameInputProcessorUtil {} {
+        return
+    }
 
-sub init {
-    my ($class, $inputProcessorArray) = @_;
-        my $noInputProcessor = 'org::allbinary::game::input::GameInputProcessor'->getInstance();
-        my $total = 'org::allbinary::game::input::InputFactory'->getInstance()->{MAX};
-        for (my $index = 0; $index < $total; $index++) {
-            my $inputProcessorCanBeNull = $inputProcessorArray->[$index];
-            if (!defined($inputProcessorCanBeNull)) {
-                $inputProcessorArray->[$index] = $noInputProcessor;
+    constructor {} {
+        next
+        my initFields_GameInputProcessorUtil
+    }
+    
+}
+
+namespace eval ::GameInputProcessorUtil {
+    proc init {inputProcessorArray} {
+        set noInputProcessor [::GameInputProcessor::getInstance]
+        set total [[::InputFactory::getInstance] jget MAX]
+        for {set index 0} {[expr {$index < $total}]} {jpostincr index 1} {
+            set inputProcessorCanBeNull [$inputProcessorArray get $index]
+            if {[expr {$inputProcessorCanBeNull eq {}}]} {
+                $inputProcessorArray set $index $noInputProcessor
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::GameInputProcessor ();
-use org::allbinary::game::input::InputFactory ();
-
-1;
 

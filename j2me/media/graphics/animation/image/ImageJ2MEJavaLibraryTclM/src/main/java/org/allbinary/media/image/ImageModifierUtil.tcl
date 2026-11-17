@@ -11,63 +11,70 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.media.image
 
-package org::allbinary::media::image::ImageModifierUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::media::image::ImageModifierUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ImageModifierUtil {
+    superclass ::JObject
 }
 
+oo::define ::ImageModifierUtil {
+    method initFields_ImageModifierUtil {} {
+        return
+    }
 
-sub getInstanceOrCreate {
-    my ($class) = @_;
-        return $org::allbinary::media::image::ImageModifierUtil::instance;
+    constructor {} {
+        next
+        my initFields_ImageModifierUtil
+    }
+    
+    
+
+    method setColor {unusedOriginalImage image imageIndex basicColor} {
+    }
+    
+
+    method changeColor {unusedOriginalImage image imageIndex basicColor} {
+    }
+    
+
+    method setAlpha {originalImage image imageIndex alphaInt} {
+    }
+    
+
+    method getImageArray {originalImageArray} {
+        return $originalImageArray
+    }
+    
+
+    method handleImage {imageArray index image} {
+    }
+    
+
+    method reset {} {
+    }
 }
 
-
-sub setColor {
-    my ($self, $unusedOriginalImage, $image, $imageIndex, $basicColor) = @_;
+namespace eval ::ImageModifierUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ImageModifierUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstanceOrCreate {} {
+        return [::ImageModifierUtil::staticGet_instance]
+    }
 }
 
-
-sub changeColor {
-    my ($self, $unusedOriginalImage, $image, $imageIndex, $basicColor) = @_;
-}
-
-
-sub setAlpha {
-    my ($self, $originalImage, $image, $imageIndex, $alphaInt) = @_;
-}
-
-
-sub getImageArray {
-    my ($self, $originalImageArray) = @_;
-        return $originalImageArray;
-}
-
-
-sub handleImage {
-    my ($self, $imageArray, $index, $image) = @_;
-}
-
-
-sub reset {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::graphics::color::BasicColor ();
-
-1;
 

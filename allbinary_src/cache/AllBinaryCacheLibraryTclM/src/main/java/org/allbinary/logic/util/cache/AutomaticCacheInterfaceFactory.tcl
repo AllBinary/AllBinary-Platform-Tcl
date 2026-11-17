@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-package org::allbinary::logic::util::cache::AutomaticCacheInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AutomaticCacheInterfaceFactory {
+    superclass ::JObject
 }
 
+oo::define ::AutomaticCacheInterfaceFactory {
+    method initFields_AutomaticCacheInterfaceFactory {} {
+        return
+    }
+    
 
-# throws Exception
-sub getInstance {
-    my ($class, $cacheableInterfaceFactoryInterface, $cacheType, $cachePolicy) = @_;
-        die ("No such " . $cacheType->toString());
+    constructor {} {
+        next
+        my initFields_AutomaticCacheInterfaceFactory
+    }
+    
 }
 
-use java::lang::Object ();
+namespace eval ::AutomaticCacheInterfaceFactory {
+    proc getInstance {cacheableInterfaceFactoryInterface cacheType cachePolicy} {
+        error [jexception Exception [string cat "No such " [$cacheType toString]]]
+    }
+}
 
-1;
 

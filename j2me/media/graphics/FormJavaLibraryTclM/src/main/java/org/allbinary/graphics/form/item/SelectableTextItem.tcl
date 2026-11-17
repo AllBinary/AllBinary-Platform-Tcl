@@ -11,44 +11,40 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
-package org::allbinary::graphics::form::item::SelectableTextItem;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::item::ABTextItem';
-
-
-
-sub new {
-    my ($class, $label, $layout, $altText, $backgroundBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($label, $layout, $altText, $backgroundBasicColor, $foregroundBasicColor);
-        # super(...) made $self above
-    return $self;
+oo::class create ::SelectableTextItem {
+    superclass ::ABTextItem
 }
 
+oo::define ::SelectableTextItem {
+    method initFields_SelectableTextItem {} {
+        return
+    }
+    
 
-sub isFocusable {
-    my ($self) = @_;
-        return 1;
-}
+    constructor {label layout altText backgroundBasicColor foregroundBasicColor} {
+        next $label $layout $altText $backgroundBasicColor $foregroundBasicColor
+        my initFields_SelectableTextItem
+    }
+    
 
+    method isFocusable {} {
+        return true
+    }
+    
 
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        my $stringComponent = $self->getLabelStringComponent();
-        if (defined($stringComponent)) {
-            $graphics->setColor(int($stringComponent->getForegroundBasicColor()));
+    method paintXY {graphics x y} {
+        [my jget myFontProcessor] process $graphics
+        set stringComponent [my getLabelStringComponent]
+        if {[expr {$stringComponent ne {}}]} {
+            $graphics setColor [[$stringComponent getForegroundBasicColor] intValue]
         }
-        $graphics->drawString($self->getLabel(), $x + 2, $y, 0);
+        $graphics drawString [my getLabel] [jint [expr {$x + 2}]] $y 0
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::form::item::ABTextItem ();
+namespace eval ::SelectableTextItem {
+}
 
-1;
 

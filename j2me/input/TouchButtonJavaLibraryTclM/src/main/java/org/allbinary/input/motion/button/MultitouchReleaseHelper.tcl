@@ -11,45 +11,41 @@
 # Created By: Travis Berthelot
 # 
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::MultitouchReleaseHelper;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::motion::button::ReleaseHelper';
-
-
-
-sub new {
-    my ($class, $touchButtonRecognizer) = @_;
-    my $self = $class->SUPER::new($touchButtonRecognizer);
-        # super(...) made $self above
-    return $self;
+oo::class create ::MultitouchReleaseHelper {
+    superclass ::ReleaseHelper
 }
 
+oo::define ::MultitouchReleaseHelper {
+    method initFields_MultitouchReleaseHelper {} {
+        return
+    }
+    
 
-# throws Exception
-sub release {
-    my ($self, $touchButtonInput, $deviceId) = @_;
-        my $cancelTouchButtonInput = 'org::allbinary::input::motion::button::CancelTouchButtonInputFactory'->getInstance()->getCancel($touchButtonInput);
-        my $nextTouchButtonInput = undef;
-        my $gameKeyEvent = undef;
-        for (my $index = $self->{touchButtonRecognizer}->{currentlyPressedTouchButtonSingleton}->size() - 1; $index >= 0; $index--) {
-            $nextTouchButtonInput = $self->{touchButtonRecognizer}->{currentlyPressedTouchButtonSingleton}->get($index);
-            if ($cancelTouchButtonInput == $nextTouchButtonInput) {
-                $gameKeyEvent = $nextTouchButtonInput->getGameKeyEvent();
-                $self->{touchButtonRecognizer}->{upGameKeyEventHandler}->fireEvent($gameKeyEvent);
-                $self->{touchButtonRecognizer}->{upGameKeyEventHandler}->getInstanceForDevice($deviceId)->fireEvent($gameKeyEvent);
-                $self->{touchButtonRecognizer}->{currentlyPressedTouchButtonSingleton}->removeAt($index);
+    constructor {touchButtonRecognizer} {
+        next $touchButtonRecognizer
+        my initFields_MultitouchReleaseHelper
+    }
+    
+
+    method release {touchButtonInput deviceId} {
+        set cancelTouchButtonInput [[::CancelTouchButtonInputFactory::getInstance] getCancel $touchButtonInput]
+        set nextTouchButtonInput {}
+        set gameKeyEvent {}
+        for {set index [jint [expr {[[[my jget touchButtonRecognizer] jget currentlyPressedTouchButtonSingleton] size] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set nextTouchButtonInput [[[my jget touchButtonRecognizer] jget currentlyPressedTouchButtonSingleton] get $index]
+            if {[expr {$cancelTouchButtonInput eq $nextTouchButtonInput}]} {
+                set gameKeyEvent [$nextTouchButtonInput getGameKeyEvent]
+                [[my jget touchButtonRecognizer] jget upGameKeyEventHandler] fireEvent $gameKeyEvent
+                [[[my jget touchButtonRecognizer] jget upGameKeyEventHandler] getInstanceForDevice $deviceId] fireEvent $gameKeyEvent
+                [[my jget touchButtonRecognizer] jget currentlyPressedTouchButtonSingleton] removeAt $index
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::input::motion::button::ReleaseHelper ();
-use org::allbinary::input::motion::button::CancelTouchButtonInputFactory ();
+namespace eval ::MultitouchReleaseHelper {
+}
 
-1;
 

@@ -11,37 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game
 
-package org::allbinary::game::NullIntermissionEnableListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::IntermissionEnableListenerInterface';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::NullIntermissionEnableListener'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::NullIntermissionEnableListener::SINGLETON;
+oo::class create ::NullIntermissionEnableListener {
+    superclass ::JObject
 }
 
+oo::define ::NullIntermissionEnableListener {
+    method initFields_NullIntermissionEnableListener {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+    constructor {} {
+        next
+        my initFields_NullIntermissionEnableListener
+    }
+    
+
+    method notifyIntermission {enable} {
+    }
 }
 
-
-sub notifyIntermission {
-    my ($self, $enable) = @_;
+namespace eval ::NullIntermissionEnableListener {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::NullIntermissionEnableListener new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::NullIntermissionEnableListener::staticGet_SINGLETON]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::IntermissionEnableListenerInterface ();
-
-1;
 

@@ -1,21 +1,23 @@
 # Generated Code Do Not Modify
+# package java.lang
 
 #J2SE to J2ME compatibility
-package java::lang::Deprecated;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::Deprecated {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
+oo::define ::Deprecated {
+    method initFields_Deprecated {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_Deprecated
+    }
+}
+
+namespace eval ::Deprecated {
+}
+
 

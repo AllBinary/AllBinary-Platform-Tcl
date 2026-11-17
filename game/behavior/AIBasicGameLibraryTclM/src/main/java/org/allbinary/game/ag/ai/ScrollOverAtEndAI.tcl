@@ -11,53 +11,47 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::ScrollOverAtEndAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ai::BasicAI';
-
-
-
-sub new {
-    my ($class, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($ownerLayerInterface, $gameInput);
-        # super(...) made $self above
-    return $self;
+oo::class create ::ScrollOverAtEndAI {
+    superclass ::BasicAI
 }
 
+oo::define ::ScrollOverAtEndAI {
+    method initFields_ScrollOverAtEndAI {} {
+        return
+    }
+    
 
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        my $ownerLayerInterface = $self->getOwnerLayerInterface();
-        my $x = $ownerLayerInterface->getXP();
-        my $y = $ownerLayerInterface->getYP();
-        my $width = $ownerLayerInterface->getWidth();
-        my $height = $ownerLayerInterface->getHeight();
-        my $displayInfo = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-        if ($x > $displayInfo->getLastWidth()) {
-            $ownerLayerInterface->setPosition(0, $y, $ownerLayerInterface->getZP());
+    constructor {ownerLayerInterface gameInput} {
+        next $ownerLayerInterface $gameInput
+        my initFields_ScrollOverAtEndAI
+    }
+    
+
+    method processAI {allBinaryLayerManager} {
+        set ownerLayerInterface [my getOwnerLayerInterface]
+        set x [$ownerLayerInterface getXP]
+        set y [$ownerLayerInterface getYP]
+        set width [$ownerLayerInterface getWidth]
+        set height [$ownerLayerInterface getHeight]
+        set displayInfo [::DisplayInfoSingleton::getInstance]
+        if {[expr {$x > [$displayInfo getLastWidth]}]} {
+            $ownerLayerInterface setPosition 0 $y [$ownerLayerInterface getZP]
         }
-        if ($y > $displayInfo->getLastHeight()) {
-            $ownerLayerInterface->setPosition($x, 0, $ownerLayerInterface->getZP());
+        if {[expr {$y > [$displayInfo getLastHeight]}]} {
+            $ownerLayerInterface setPosition $x 0 [$ownerLayerInterface getZP]
         }
-        if ($x < -$width) {
-            $ownerLayerInterface->setPosition($displayInfo->getLastWidth() - $width, $y, $ownerLayerInterface->getZP());
+        if {[expr {$x < [expr {-$width}]}]} {
+            $ownerLayerInterface setPosition [expr {[$displayInfo getLastWidth] - $width}] $y [$ownerLayerInterface getZP]
         }
-        if ($y < -$height) {
-            $ownerLayerInterface->setPosition($x, $displayInfo->getLastHeight() - $height, $ownerLayerInterface->getZP());
+        if {[expr {$y < [expr {-$height}]}]} {
+            $ownerLayerInterface setPosition $x [expr {[$displayInfo getLastHeight] - $height}] [$ownerLayerInterface getZP]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::ai::BasicAI ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
+namespace eval ::ScrollOverAtEndAI {
+}
 
-1;
 

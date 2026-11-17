@@ -11,34 +11,47 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
 #Use 8hz16bitmono for most J2ME
-package org::allbinary::media::audio::GameYouLoseSound;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::media::audio::CompositeSound';
-
-tie our $soundInterface, 'java::lang::LazyStatic', sub { 'org::allbinary::media::audio::GameYouLoseSound'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new("resource:/wav/youlose.wav");
-        # super(...) made $self above
-    return $self;
+oo::class create ::GameYouLoseSound {
+    superclass ::CompositeSound
 }
 
+oo::define ::GameYouLoseSound {
+    method initFields_GameYouLoseSound {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::media::audio::GameYouLoseSound::soundInterface;
+    constructor {} {
+        next "resource:/wav/youlose.wav"
+        my initFields_GameYouLoseSound
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::media::audio::CompositeSound ();
+namespace eval ::GameYouLoseSound {
+    variable soundInterfaceValue {}
+    variable soundInterfaceSet 0
+    proc staticGet_soundInterface {} {
+        variable soundInterfaceValue
+        variable soundInterfaceSet
+        if {!$soundInterfaceSet} {
+            set soundInterfaceSet 1
+            set soundInterfaceValue [::GameYouLoseSound new]
+        }
+        return $soundInterfaceValue
+    }
+    proc staticSet_soundInterface {value} {
+        variable soundInterfaceValue
+        variable soundInterfaceSet
+        set soundInterfaceSet 1
+        set soundInterfaceValue $value
+    }
+    proc getInstance {} {
+        return [::GameYouLoseSound::staticGet_soundInterface]
+    }
+}
 
-1;
 

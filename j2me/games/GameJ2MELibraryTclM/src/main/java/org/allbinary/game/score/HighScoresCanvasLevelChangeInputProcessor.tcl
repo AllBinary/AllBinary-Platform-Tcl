@@ -11,95 +11,77 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::HighScoresCanvasLevelChangeInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::game::score::HighScoresCanvasInputProcessor','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{displayInfoSingleton} = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-    $self->{INSTRUCTIONS} = "(Right = Next Track, Left = Previous Track)";
-    $self->{myFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
-    $self->{fontHeight} = 0;
+oo::class create ::HighScoresCanvasLevelChangeInputProcessor {
+    superclass ::HighScoresCanvasInputProcessor
 }
 
+oo::define ::HighScoresCanvasLevelChangeInputProcessor {
+    method initFields_HighScoresCanvasLevelChangeInputProcessor {} {
+        my jset displayInfoSingleton {}
+        my jset INSTRUCTIONS {}
+        my jset myFontProcessor {}
+        my jset anchor 0
+        my jset fontHeight 0
+        my jset displayInfoSingleton [::DisplayInfoSingleton::getInstance]
+        my jset INSTRUCTIONS "(Right = Next Track, Left = Previous Track)"
+        my jset myFontProcessor [::UpdateMyFontProcessor new [self]]
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        my jset fontHeight 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $highScoresCanvas) = @_;
-    my $self = $class->SUPER::new($highScoresCanvas);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
-}
+    constructor {highScoresCanvas} {
+        next $highScoresCanvas
+        my initFields_HighScoresCanvasLevelChangeInputProcessor
+    }
+    
 
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        my jset fontHeight [$font getHeight]
+        my jset myFontProcessor [::MyFontProcessor::getInstance]
+    }
+    
 
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->{fontHeight} = $font->getHeight();
-        $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
-}
+    method open {} {
+        [::GameKeyEventHandler::getInstance] addListener [self]
+    }
+    
 
+    method close {} {
+        [::GameKeyEventHandler::getInstance] removeListener [self]
+    }
+    
 
-sub open {
-    my ($self) = @_;
-        'org::allbinary::game::input::event::GameKeyEventHandler'->getInstance()->addListener($self);
-}
-
-
-sub close {
-    my ($self) = @_;
-        'org::allbinary::game::input::event::GameKeyEventHandler'->getInstance()->removeListener($self);
-}
-
-
-sub update {
-    my ($self) = @_;
-        my $list = $self->getGameKeyEventList();
-        my $size = $list->size();
-        for (my $index = 0; $index < $size; $index++) {
-            my $anyType = $list->{objectArray}->[$index];
-            my $key = 'org::allbinary::game::input::event::GameKeyEventUtil'->getKey($anyType);
-            if ($key == $javax::microedition::lcdui::Canvas::RIGHT) {
-                $self->getHighScoresCanvas()->getGameInfo()->nextGameLevel();
-            } elsif ($key == $javax::microedition::lcdui::Canvas::LEFT) {
-                $self->getHighScoresCanvas()->getGameInfo()->previousGameLevel();
+    method update {} {
+        set list [my getGameKeyEventList]
+        set size [$list size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set anyType [[$list jget objectArray] get $index]
+            set key [::GameKeyEventUtil::getKey $anyType]
+            if {[expr {$key == [::Canvas::staticGet_RIGHT]}]} {
+                [[my getHighScoresCanvas] getGameInfo] nextGameLevel
+            } elseif {[expr {$key == [::Canvas::staticGet_LEFT]}]} {
+                [[my getHighScoresCanvas] getGameInfo] previousGameLevel
             }
-            $self->getHighScoresCanvas()->executeUpdate();
+            [my getHighScoresCanvas] executeUpdate
         }
-        $list->clear();
+        $list clear
+    }
+    
+
+    method paint {graphics} {
+        [my jget myFontProcessor] process $graphics
+        set width [[my jget displayInfoSingleton] getLastWidth]
+        set topScoresWidth ([expr {[[$graphics getFont] stringWidth [my jget INSTRUCTIONS]] >> 1}])
+        $graphics drawString [my jget INSTRUCTIONS] [jint [expr {([expr {$width >> 1}]) - $topScoresWidth}]] [jint [expr {[my jget fontHeight] * 2}]] [my jget anchor]
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        my $width = $self->{displayInfoSingleton}->getLastWidth();
-        my $topScoresWidth = (POSIX::floor(($graphics->getFont()->stringWidth($self->{INSTRUCTIONS})) / (2 ** (1))));
-        $graphics->drawString($self->{INSTRUCTIONS}, (POSIX::floor(($width) / (2 ** (1)))) - $topScoresWidth, $self->{fontHeight} * 2, $self->{anchor});
+namespace eval ::HighScoresCanvasLevelChangeInputProcessor {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::input::event::GameKeyEventHandler ();
-use org::allbinary::game::input::event::GameKeyEventUtil ();
-use org::allbinary::game::score::displayable::HighScoresCanvas ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::game::score::HighScoresCanvasInputProcessor ();
-
-1;
 

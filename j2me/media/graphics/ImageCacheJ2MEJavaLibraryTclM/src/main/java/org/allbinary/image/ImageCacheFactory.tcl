@@ -11,36 +11,48 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.image
 
-package org::allbinary::image::ImageCacheFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $IMAGE_CACHE, 'java::lang::LazyStatic', sub { 'org::allbinary::image::ImageCache'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ImageCacheFactory {
+    superclass ::JObject
 }
 
+oo::define ::ImageCacheFactory {
+    method initFields_ImageCacheFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::image::ImageCacheFactory::IMAGE_CACHE;
+    constructor {} {
+        next
+        my initFields_ImageCacheFactory
+    }
+    
+    
 }
 
-
-sub init {
-    my ($class) = @_;
+namespace eval ::ImageCacheFactory {
+    variable IMAGE_CACHEValue {}
+    variable IMAGE_CACHESet 0
+    proc staticGet_IMAGE_CACHE {} {
+        variable IMAGE_CACHEValue
+        variable IMAGE_CACHESet
+        if {!$IMAGE_CACHESet} {
+            set IMAGE_CACHESet 1
+            set IMAGE_CACHEValue [::ImageCache new]
+        }
+        return $IMAGE_CACHEValue
+    }
+    proc staticSet_IMAGE_CACHE {value} {
+        variable IMAGE_CACHEValue
+        variable IMAGE_CACHESet
+        set IMAGE_CACHESet 1
+        set IMAGE_CACHEValue $value
+    }
+    proc getInstance {} {
+        return [::ImageCacheFactory::staticGet_IMAGE_CACHE]
+    }
+    proc init {} {
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::image::ImageCache ();
-
-1;
 

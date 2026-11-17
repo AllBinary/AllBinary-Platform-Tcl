@@ -11,182 +11,167 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::HighScoreNamePersistanceSingleton;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::score::HighScoreNamePersistanceSingleton'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{tsUtil} = 'org::allbinary::TsUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{platformRecordIdUtil} = 'org::allbinary::persistance::PlatformRecordIdUtil'->getInstance();
-    $self->{RECORD_ID} = "_SN";
-    $self->{name} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{nameBasicArrayList} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::HighScoreNamePersistanceSingleton {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::HighScoreNamePersistanceSingleton {
+    method initFields_HighScoreNamePersistanceSingleton {} {
+        my jset logUtil {}
+        my jset tsUtil {}
+        my jset commonStrings {}
+        my jset platformRecordIdUtil {}
+        my jset RECORD_ID {}
+        my jset name {}
+        my jset nameBasicArrayList {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset tsUtil [::TsUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset platformRecordIdUtil [::PlatformRecordIdUtil::getInstance]
+        my jset RECORD_ID "_SN"
+        my jset name [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset nameBasicArrayList [::BasicArrayListD new]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_HighScoreNamePersistanceSingleton
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::score::HighScoreNamePersistanceSingleton::SINGLETON;
-}
+    method clear {} {
+        my jset name [[::StringUtil::getInstance] jget EMPTY_STRING]
+    }
+    
 
-
-sub clear {
-    my ($self) = @_;
-        $self->{name} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-}
-
-
-# throws Exception
-sub deleteAll {
-    my ($self, $abeClientInformation, $gameInfo) = @_;
-        my $size = $self->{nameBasicArrayList}->size();
-        for (my $index = 0; $index < $size; $index++) {
-            my $integer = $self->{nameBasicArrayList}->{objectArray}->[$index];
-            $self->delete($abeClientInformation, $gameInfo, int($integer));
+    method deleteAll {abeClientInformation gameInfo} {
+        set size [[my jget nameBasicArrayList] size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set integer [[[my jget nameBasicArrayList] jget objectArray] get $index]
+            my delete $abeClientInformation $gameInfo [$integer intValue]
         }
-        $self->clear();
-}
+        my clear
+    }
+    
 
+    method getRecordId {abeClientInformation} {
+        return [[my jget platformRecordIdUtil] getRecordId $abeClientInformation [my jget RECORD_ID]]
+    }
+    
 
-sub getRecordId {
-    my ($self, $abeClientInformation) = @_;
-        return $self->{platformRecordIdUtil}->getRecordId($abeClientInformation, $self->{RECORD_ID});
-}
-
-
-# throws Exception
-sub delete {
-    my ($self, $abeClientInformation, $gameInfo, $deleteId) = @_;
-        my $recordStore = $org::allbinary::game::configuration::persistance::NullRecordStore::NULL_RECORD_STORE;
+    method delete {abeClientInformation gameInfo deleteId} {
+        set recordStore [::NullRecordStore::staticGet_NULL_RECORD_STORE]
         try {
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Deleting: ")->appendint($deleteId)->toString(), $self, $self->{commonStrings}->{delete});
-            $recordStore = 'javax::microedition::rms::RecordStore'->openRecordStore($self->getRecordId($abeClientInformation), 1);
-            $recordStore->deleteRecord($deleteId);
-        } catch ($e) {
-            die $e;
+            [my jget logUtil] putF [[[[::StringMaker new] append "Deleting: "] appendint $deleteId] toString] [self] [[my jget commonStrings] jget delete]
+            set recordStore [::RecordStore::openRecordStore [my getRecordId $abeClientInformation] true]
+            $recordStore deleteRecord $deleteId
+        } on error {e} {
+            error $e
         } finally {
-            if (defined($recordStore)) {
-                'org::allbinary::logic::communication::log::PreLogUtil'->put("Closing RecordStore", $self, $self->{commonStrings}->{delete});
-                $recordStore->closeRecordStore();
+            if {[expr {$recordStore ne {}}]} {
+                ::PreLogUtil::put "Closing RecordStore" [self] [[my jget commonStrings] jget delete]
+                $recordStore closeRecordStore
             }
         }
-}
+    }
+    
 
+    method getIds {} {
+        return [my jget nameBasicArrayList]
+    }
+    
 
-sub getIds {
-    my ($self) = @_;
-        return $self->{nameBasicArrayList};
-}
-
-
-sub load {
-    my ($self, $abeClientInformation, $gameInfo) = @_;
-        my $recordStore = $org::allbinary::game::configuration::persistance::NullRecordStore::NULL_RECORD_STORE;
+    method load {abeClientInformation gameInfo} {
+        set recordStore [::NullRecordStore::staticGet_NULL_RECORD_STORE]
         try {
-            if ($self->{name} eq 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}) {
-                my $LOADING_ID = "Loading id: ";
-                $recordStore = 'javax::microedition::rms::RecordStore'->openRecordStore($self->getRecordId($abeClientInformation), 1);
-                my $recordEnum = $recordStore->enumerateRecords($org::allbinary::game::configuration::persistance::NullRecordFilter::NULL_RECORD_FILTER, $org::allbinary::game::configuration::persistance::NullRecordComparator::NULL_RECORD_COMPARATOR, 1);
-                my $smallIntegerSingletonFactory = 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance();
-                my $recordAsBytes = undef;
-                my $byteArrayInputStream = undef;
-                my $inputStream = undef;
-                while ($recordEnum->hasNextElement()) {
-                    my $id = $recordEnum->nextRecordId();
-                    $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($LOADING_ID)->appendint($id)->toString(), $self, $self->{commonStrings}->{LOAD});
-                    $recordAsBytes = $self->{tsUtil}->getRecord($recordStore, $id);
-                    $byteArrayInputStream = 'java::io::ByteArrayInputStream'->new($recordAsBytes);
-                    $inputStream = 'java::io::DataInputStream'->new($byteArrayInputStream);
-                    while ($inputStream->available() > 0) {
-                        $self->{name} = $inputStream->readUTF();
+            if {[expr {[my jget name] eq [[::StringUtil::getInstance] jget EMPTY_STRING]}]} {
+                set LOADING_ID "Loading id: "
+                set recordStore [::RecordStore::openRecordStore [my getRecordId $abeClientInformation] true]
+                set recordEnum [$recordStore enumerateRecords [::NullRecordFilter::staticGet_NULL_RECORD_FILTER] [::NullRecordComparator::staticGet_NULL_RECORD_COMPARATOR] true]
+                set smallIntegerSingletonFactory [::SmallIntegerSingletonFactory::getInstance]
+                set recordAsBytes {}
+                set byteArrayInputStream {}
+                set inputStream {}
+                while {[$recordEnum hasNextElement]} {
+                    set id [$recordEnum nextRecordId]
+                    [my jget logUtil] putF [[[[::StringMaker new] append $LOADING_ID] appendint $id] toString] [self] [[my jget commonStrings] jget LOAD]
+                    set recordAsBytes [[my jget tsUtil] getRecord $recordStore $id]
+                    set byteArrayInputStream [::ByteArrayInputStream new $recordAsBytes]
+                    set inputStream [::DataInputStream new $byteArrayInputStream]
+                    while {[expr {[$inputStream available] > 0}]} {
+                        my jset name [$inputStream readUTF]
                     }
-                    $self->{nameBasicArrayList}->add($smallIntegerSingletonFactory->getAt($id));
+                    [my jget nameBasicArrayList] add [$smallIntegerSingletonFactory getAt $id]
                 }
             }
-        } catch ($e) {
-            $self->save($abeClientInformation, $gameInfo, $self->{name});
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonStrings}->{EXCEPTION_LABEL})->append('org::allbinary::logic::java::exception::ExceptionUtil'->getInstance()->getStackTrace($e))->toString(), $self, $self->{commonStrings}->{LOAD});
+        } on error {e} {
+            my save $abeClientInformation $gameInfo [my jget name]
+            [my jget logUtil] putF [[[[::StringMaker new] append [[my jget commonStrings] jget EXCEPTION_LABEL]] append [[::ExceptionUtil::getInstance] getStackTrace $e]] toString] [self] [[my jget commonStrings] jget LOAD]
         } finally {
             try {
-                if (defined($recordStore)) {
-                    'org::allbinary::logic::communication::log::PreLogUtil'->put("Closing RecordStore", $self, $self->{commonStrings}->{LOAD});
-                    $recordStore->closeRecordStore();
+                if {[expr {$recordStore ne {}}]} {
+                    ::PreLogUtil::put "Closing RecordStore" [self] [[my jget commonStrings] jget LOAD]
+                    $recordStore closeRecordStore
                 }
-            } catch ($e) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{LOAD}, $e);
+            } on error {e} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget LOAD] $e
             }
         }
-        return $self->{name};
-}
+        return [my jget name]
+    }
+    
 
-
-sub save {
-    my ($self, $abeClientInformation, $gameInfo, $name) = @_;
-        my $recordStore = $org::allbinary::game::configuration::persistance::NullRecordStore::NULL_RECORD_STORE;
+    method save {abeClientInformation gameInfo name} {
+        set recordStore [::NullRecordStore::staticGet_NULL_RECORD_STORE]
         try {
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Saving: ")->append($name)->toString(), $self, $self->{commonStrings}->{SAVE});
-            $recordStore = 'javax::microedition::rms::RecordStore'->openRecordStore($self->getRecordId($abeClientInformation), 1);
-            my $byteArrayOutputStream = 'java::io::ByteArrayOutputStream'->new();
-            my $outputStream = 'java::io::DataOutputStream'->new($byteArrayOutputStream);
-            $outputStream->writeUTF($name);
-            my $savedGameBytes = $byteArrayOutputStream->toByteArray();
-            $recordStore->addRecord($savedGameBytes, 0, scalar(@{$savedGameBytes}));
-            $self->{name} = $name;
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{SAVE}, $e);
+            [my jget logUtil] putF [[[[::StringMaker new] append "Saving: "] append $name] toString] [self] [[my jget commonStrings] jget SAVE]
+            set recordStore [::RecordStore::openRecordStore [my getRecordId $abeClientInformation] true]
+            set byteArrayOutputStream [::ByteArrayOutputStream new]
+            set outputStream [::DataOutputStream new $byteArrayOutputStream]
+            $outputStream writeUTF $name
+            set savedGameBytes [$byteArrayOutputStream toByteArray]
+            $recordStore addRecord $savedGameBytes 0 [$savedGameBytes length]
+            my jset name $name
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget SAVE] $e
         } finally {
             try {
-                if (defined($recordStore)) {
-                    'org::allbinary::logic::communication::log::PreLogUtil'->put("Closing RecordStore", $self, $self->{commonStrings}->{SAVE});
-                    $recordStore->closeRecordStore();
+                if {[expr {$recordStore ne {}}]} {
+                    ::PreLogUtil::put "Closing RecordStore" [self] [[my jget commonStrings] jget SAVE]
+                    $recordStore closeRecordStore
                 }
-            } catch ($e) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{SAVE}, $e);
+            } on error {e} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget SAVE] $e
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::ByteArrayInputStream ();
-# use java::io::ByteArrayOutputStream ();
-# use java::io::DataInputStream ();
-# use java::io::DataOutputStream ();
-use javax::microedition::rms::RecordEnumeration ();
-use javax::microedition::rms::RecordStore ();
-use javax::microedition::rms::RecordStoreException ();
-use org::allbinary::TsUtil ();
-use org::allbinary::game::GameInfo ();
-use org::allbinary::game::configuration::persistance::NullRecordComparator ();
-use org::allbinary::game::configuration::persistance::NullRecordFilter ();
-use org::allbinary::game::configuration::persistance::NullRecordStore ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::java::exception::ExceptionUtil ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::persistance::PlatformRecordIdUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
+namespace eval ::HighScoreNamePersistanceSingleton {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::HighScoreNamePersistanceSingleton new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::HighScoreNamePersistanceSingleton::staticGet_SINGLETON]
+    }
+}
 
-1;
 

@@ -11,57 +11,63 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-package org::allbinary::layer::BasicLayerProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_LAYER_PROCESSOR, 'java::lang::LazyStatic', sub { 'org::allbinary::layer::BasicLayerProcessor'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::BasicLayerProcessor {
+    superclass ::JObject
 }
 
+oo::define ::BasicLayerProcessor {
+    method initFields_BasicLayerProcessor {} {
+        my jset logUtil {}
+        my jset list {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset list [::BasicArrayListD new]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_BasicLayerProcessor
+    }
+    
 
-
-sub add {
-    my ($self, $layerInterface) = @_;
-        if (!$self->{list}->contains($layerInterface)) {
-            $self->{list}->add($layerInterface);
+    method add {layerInterface} {
+        if {[expr {![[my jget list] contains $layerInterface]}]} {
+            [my jget list] add $layerInterface
         }
+    }
+    
+
+    method process {allBinaryLayerManager} {
+        error [jexception Exception [[::CommonStrings::getInstance] jget NOT_IMPLEMENTED]]
+    }
+    
+
+    method getList {} {
+        return [my jget list]
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $allBinaryLayerManager) = @_;
-        die ('org::allbinary::string::CommonStrings'->getInstance()->{NOT_IMPLEMENTED});
+namespace eval ::BasicLayerProcessor {
+    variable NULL_LAYER_PROCESSORValue {}
+    variable NULL_LAYER_PROCESSORSet 0
+    proc staticGet_NULL_LAYER_PROCESSOR {} {
+        variable NULL_LAYER_PROCESSORValue
+        variable NULL_LAYER_PROCESSORSet
+        if {!$NULL_LAYER_PROCESSORSet} {
+            set NULL_LAYER_PROCESSORSet 1
+            set NULL_LAYER_PROCESSORValue [::BasicLayerProcessor new]
+        }
+        return $NULL_LAYER_PROCESSORValue
+    }
+    proc staticSet_NULL_LAYER_PROCESSOR {value} {
+        variable NULL_LAYER_PROCESSORValue
+        variable NULL_LAYER_PROCESSORSet
+        set NULL_LAYER_PROCESSORSet 1
+        set NULL_LAYER_PROCESSORValue $value
+    }
 }
 
-
-sub getList {
-    my ($self) = @_;
-        return $self->{list};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

@@ -11,44 +11,56 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.color
 
-package org::allbinary::graphics::color::BasicColorSetUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::color::BasicColorSetUtil'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::color::BasicColorSetUtil::instance;
+oo::class create ::BasicColorSetUtil {
+    superclass ::JObject
 }
 
+oo::define ::BasicColorSetUtil {
+    method initFields_BasicColorSetUtil {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+    constructor {} {
+        next
+        my initFields_BasicColorSetUtil
+    }
+    
+
+    method setBasicColorP {graphics basicColor} {
+        $graphics setColor [$basicColor intValue]
+    }
+    
+
+    method setBasicColorP3 {graphics basicColor value} {
+        $graphics setColor $value
+    }
 }
 
-
-sub setBasicColorP {
-    my ($self, $graphics, $basicColor) = @_;
-        $graphics->setColor(int($basicColor));
+namespace eval ::BasicColorSetUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::BasicColorSetUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::BasicColorSetUtil::staticGet_instance]
+    }
 }
 
-
-sub setBasicColorP3 {
-    my ($self, $graphics, $basicColor, $value) = @_;
-        $graphics->setColor($value);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Graphics ();
-
-1;
 

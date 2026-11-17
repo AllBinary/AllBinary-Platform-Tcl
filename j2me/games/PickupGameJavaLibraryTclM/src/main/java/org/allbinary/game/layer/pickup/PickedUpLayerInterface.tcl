@@ -11,29 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
-# Java interface
-package org::allbinary::game::layer::pickup::PickedUpLayerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::LayerInterface';
-
-
-
-sub getPickedUpLayerInterfaceFactoryInterface {
-    my ($self) = @_;
-    die "abstract method getPickedUpLayerInterfaceFactoryInterface";
+oo::class create ::PickedUpLayerInterface {
+    superclass ::JObject
 }
 
+oo::define ::PickedUpLayerInterface {
+    method initFields_PickedUpLayerInterface {} {
+        return
+    }
+    
 
-sub setPickedUp {
-    my ($self) = @_;
-    die "abstract method setPickedUp";
+    method getPickedUpLayerInterfaceFactoryInterface {} {
+        error [jexception AbstractMethodError getPickedUpLayerInterfaceFactoryInterface]
+    }
+    
+
+    method setPickedUp {} {
+        error [jexception AbstractMethodError setPickedUp]
+    }
 }
 
-use org::allbinary::layer::LayerInterface ();
+namespace eval ::PickedUpLayerInterface {
+}
 
-1;
 

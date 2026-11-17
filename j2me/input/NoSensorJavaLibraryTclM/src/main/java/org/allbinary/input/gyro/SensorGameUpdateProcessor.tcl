@@ -11,70 +11,58 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.gyro
 
-package org::allbinary::input::gyro::SensorGameUpdateProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{inputSensor} = 'org::allbinary::input::NoAllBinarySensor'->getInstance();
+oo::class create ::SensorGameUpdateProcessor {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::SensorGameUpdateProcessor {
+    method initFields_SensorGameUpdateProcessor {} {
+        my jset inputSensor {}
+        my jset inputSensor [::NoAllBinarySensor::getInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_SensorGameUpdateProcessor
+    }
+    
 
-sub setInputSensor {
-    my ($self, $inputSensor) = @_;
-        $self->{inputSensor} = $inputSensor;
-}
+    method setInputSensor {inputSensor} {
+        my jset inputSensor $inputSensor
+    }
+    
 
+    method getInputSensor {} {
+        return [my jget inputSensor]
+    }
+    
 
-sub getInputSensor {
-    my ($self) = @_;
-        return $self->{inputSensor};
-}
+    method process {anyType} {
+    }
+    
 
+    method sendNotifications {anyType} {
+    }
+    
 
-# throws Exception
-sub process {
-    my ($self, $anyType) = @_;
-}
-
-
-# throws Exception
-sub sendNotifications {
-    my ($self, $anyType) = @_;
-}
-
-
-sub isAnySensor {
-    my ($self) = @_;
-        if ($self->{inputSensor} == 'org::allbinary::input::NoAllBinarySensor'->getInstance()) {
-            return 0;
+    method isAnySensor {} {
+        if {[expr {[my jget inputSensor] eq [::NoAllBinarySensor::getInstance]}]} {
+            return false
         } else {
-            return 1;
+            return true
         }
+    }
+    
+
+    method setNoSensors {} {
+        my setInputSensor [::NoAllBinarySensor::getInstance]
+    }
 }
 
-
-sub setNoSensors {
-    my ($self) = @_;
-        $self->setInputSensor('org::allbinary::input::NoAllBinarySensor'->getInstance());
+namespace eval ::SensorGameUpdateProcessor {
 }
 
-use java::lang::Object ();
-use org::allbinary::input::AllBinarySensor ();
-use org::allbinary::input::NoAllBinarySensor ();
-
-1;
 

@@ -11,31 +11,45 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::NullWaitGameRunnable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::displayable::canvas::GameRunnable';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::displayable::canvas::NullWaitGameRunnable'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::NullWaitGameRunnable {
+    superclass ::GameRunnable
 }
 
+oo::define ::NullWaitGameRunnable {
+    method initFields_NullWaitGameRunnable {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::displayable::canvas::NullWaitGameRunnable::instance;
+    constructor {} {
+        next
+        my initFields_NullWaitGameRunnable
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::displayable::canvas::GameRunnable ();
+namespace eval ::NullWaitGameRunnable {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::NullWaitGameRunnable new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::NullWaitGameRunnable::staticGet_instance]
+    }
+}
 
-1;
 

@@ -11,31 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.event
 
-# Java interface
-package org::allbinary::game::input::event::DownKeyEventListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-# throws Exception
-sub onDownKeyEvent {
-    my ($self, $keyInteger) = @_;
-    die "abstract method onDownKeyEvent";
+oo::class create ::DownKeyEventListenerInterface {
+    superclass ::JObject
 }
 
+oo::define ::DownKeyEventListenerInterface {
+    method initFields_DownKeyEventListenerInterface {} {
+        return
+    }
+    
 
-# throws Exception
-sub onDownKey {
-    my ($self, $keyInteger) = @_;
-    die "abstract method onDownKey";
+    method onDownKeyEvent {keyInteger} {
+        error [jexception AbstractMethodError onDownKeyEvent]
+    }
+    
+
+    method onDownKey {keyInteger} {
+        error [jexception AbstractMethodError onDownKey]
+    }
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+namespace eval ::DownKeyEventListenerInterface {
+}
 
-1;
 

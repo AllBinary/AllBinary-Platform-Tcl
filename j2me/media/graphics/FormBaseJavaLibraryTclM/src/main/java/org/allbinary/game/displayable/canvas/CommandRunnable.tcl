@@ -11,53 +11,48 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::CommandRunnable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{commandFormInputProcessor} = undef;
-    $self->{command} = undef;
+oo::class create ::CommandRunnable {
+    superclass ::JObject
 }
 
+oo::define ::CommandRunnable {
+    method initFields_CommandRunnable {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset commandFormInputProcessor {}
+        my jset command {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $commandFormInputProcessor, $command) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{commandFormInputProcessor} = $commandFormInputProcessor;
-        $self->{command} = $command;
-    return $self;
-}
+    constructor {commandFormInputProcessor command} {
+        next
+        my initFields_CommandRunnable
+        my jset commandFormInputProcessor $commandFormInputProcessor
+        my jset command $command
+    }
+    
 
-
-sub run {
-    my ($self) = @_;
+    method run {} {
         try {
-            $self->{logUtil}->putF($self->{commonStrings}->{START_RUNNABLE}, $self, $self->{commonStrings}->{RUN});
-            my $canvas = $self->{commandFormInputProcessor}->getCanvas();
-            my $commandListener = $canvas->getCustomCommandListener();
-            $commandListener->commandAction($self->{command}, $canvas);
-            $self->{logUtil}->putF($self->{commonStrings}->{END_RUNNABLE}, $self, $self->{commonStrings}->{RUN});
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{RUN}, $e);
+            [my jget logUtil] putF [[my jget commonStrings] jget START_RUNNABLE] [self] [[my jget commonStrings] jget RUN]
+            set canvas [[my jget commandFormInputProcessor] getCanvas]
+            set commandListener [$canvas getCustomCommandListener]
+            $commandListener commandAction [my jget command] $canvas
+            [my jget logUtil] putF [[my jget commonStrings] jget END_RUNNABLE] [self] [[my jget commonStrings] jget RUN]
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget RUN] $e
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::CommandListener ();
-use org::allbinary::graphics::displayable::MyCanvas ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::CommandRunnable {
+}
 
-1;
 

@@ -11,58 +11,51 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.health
 
-package org::allbinary::game::health::HealthBar;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable','org::allbinary::game::health::HealthListenerInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{animationInterface} = undef;
-    $self->{healthInterface} = undef;
-    $self->{allbinaryLayer} = undef;
+oo::class create ::HealthBar {
+    superclass ::Paintable
 }
 
+oo::define ::HealthBar {
+    method initFields_HealthBar {} {
+        my jset animationInterface {}
+        my jset healthInterface {}
+        my jset allbinaryLayer {}
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $layerInterface, $healthInterface, $animationInterface, $direction) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{allbinaryLayer} = $layerInterface;
-        $self->{animationInterface} = $animationInterface;
-        $self->{healthInterface} = $healthInterface;
-        $self->{healthInterface}->addListener($self);
-        $self->onHealthChange();
-    return $self;
+    constructor {layerInterface healthInterface animationInterface direction} {
+        next
+        my initFields_HealthBar
+        my jset allbinaryLayer $layerInterface
+        my jset animationInterface $animationInterface
+        my jset healthInterface $healthInterface
+        [my jget healthInterface] addListener [self]
+        my onHealthChange
+    }
+    
+
+    method onHealthChange {} {
+        [my jget animationInterface] onHealthChange [expr {[expr {[[my jget healthInterface] getHealth] * [[my jget allbinaryLayer] getWidth]}] / [[my jget healthInterface] getMaxHealth]}]
+    }
+    
+
+    method paint {graphics} {
+        [my jget animationInterface] paintXY $graphics 0 0
+    }
+    
+
+    method paintThreed {graphics} {
+        [my jget animationInterface] paintThreedXYZ $graphics 0 0 0
+    }
 }
 
-
-sub onHealthChange {
-    my ($self) = @_;
-        $self->{animationInterface}->onHealthChange($self->{healthInterface}->getHealth() * $self->{allbinaryLayer}->getWidth() / $self->{healthInterface}->getMaxHealth());
+namespace eval ::HealthBar {
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{animationInterface}->paintXY($graphics, 0, 0);
-}
-
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
-        $self->{animationInterface}->paintThreedXYZ($graphics, 0, 0, 0);
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::game::health::HealthListenerInterface ();
-
-1;
 

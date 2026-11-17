@@ -11,39 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.pickup.life
 
-package org::allbinary::game::ag::layer::pickup::life::LifeLayerCircularStaticPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::AllBinaryLayerCircularPool';
-
-
-
-sub new {
-    my ($class, $allbinaryLayerFactoryInterface, $total) = @_;
-    my $self = $class->SUPER::new();
-        $self->SUPER::initAllBinaryLayerCircularPool($allbinaryLayerFactoryInterface, $total);
-    return $self;
+oo::class create ::LifeLayerCircularStaticPool {
+    superclass ::AllBinaryLayerCircularPool
 }
 
+oo::define ::LifeLayerCircularStaticPool {
+    method initFields_LifeLayerCircularStaticPool {} {
+        return
+    }
+    
 
-# throws Exception
-sub visit {
-    my ($self, $sourceLayerInterface) = @_;
-        my $lifeLayer = $self->getNextInstance();
-        my $lifeInterfaceCompositeInterface = $sourceLayerInterface;
-        my $lifeInterface = $lifeInterfaceCompositeInterface->getLifeInterface();
-        $lifeLayer->visit($lifeInterface);
+    constructor {allbinaryLayerFactoryInterface total} {
+        next
+        my initFields_LifeLayerCircularStaticPool
+        next $allbinaryLayerFactoryInterface $total
+    }
+    
+
+    method visit {sourceLayerInterface} {
+        set lifeLayer [my getNextInstance]
+        set lifeInterfaceCompositeInterface $sourceLayerInterface
+        set lifeInterface [$lifeInterfaceCompositeInterface getLifeInterface]
+        $lifeLayer visit $lifeInterface
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::ag::life::Life ();
-use org::allbinary::game::ag::life::LifeInterfaceCompositeInterface ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerCircularPool ();
-use org::allbinary::layer::AllBinaryLayerFactoryInterface ();
+namespace eval ::LifeLayerCircularStaticPool {
+}
 
-1;
 

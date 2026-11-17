@@ -11,25 +11,41 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.special
 
-package org::allbinary::game::layer::special::SpecialGameInputFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NO_SPECIAL_GAME_INPUT, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::special::SpecialGameInput'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::SpecialGameInputFactory {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::layer::special::SpecialGameInput ();
+oo::define ::SpecialGameInputFactory {
+    method initFields_SpecialGameInputFactory {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_SpecialGameInputFactory
+    }
+}
+
+namespace eval ::SpecialGameInputFactory {
+    variable NO_SPECIAL_GAME_INPUTValue {}
+    variable NO_SPECIAL_GAME_INPUTSet 0
+    proc staticGet_NO_SPECIAL_GAME_INPUT {} {
+        variable NO_SPECIAL_GAME_INPUTValue
+        variable NO_SPECIAL_GAME_INPUTSet
+        if {!$NO_SPECIAL_GAME_INPUTSet} {
+            set NO_SPECIAL_GAME_INPUTSet 1
+            set NO_SPECIAL_GAME_INPUTValue [::SpecialGameInput new]
+        }
+        return $NO_SPECIAL_GAME_INPUTValue
+    }
+    proc staticSet_NO_SPECIAL_GAME_INPUT {value} {
+        variable NO_SPECIAL_GAME_INPUTValue
+        variable NO_SPECIAL_GAME_INPUTSet
+        set NO_SPECIAL_GAME_INPUTSet 1
+        set NO_SPECIAL_GAME_INPUTValue $value
+    }
+}
+
 

@@ -11,34 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.ag.weapon.media.audio
 
-package org::allbinary::ag::weapon::media::audio::DropWeaponSound;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::media::audio::CompositeSound';
-
-tie our $soundInterface, 'java::lang::LazyStatic', sub { 'org::allbinary::ag::weapon::media::audio::DropWeaponSound'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new("resource:/wav/mine.wav");
-        # super(...) made $self above
-    return $self;
+oo::class create ::DropWeaponSound {
+    superclass ::CompositeSound
 }
 
+oo::define ::DropWeaponSound {
+    method initFields_DropWeaponSound {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::ag::weapon::media::audio::DropWeaponSound::soundInterface;
+    constructor {} {
+        next "resource:/wav/mine.wav"
+        my initFields_DropWeaponSound
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::media::audio::CompositeSound ();
-use org::allbinary::media::audio::Sound ();
+namespace eval ::DropWeaponSound {
+    variable soundInterfaceValue {}
+    variable soundInterfaceSet 0
+    proc staticGet_soundInterface {} {
+        variable soundInterfaceValue
+        variable soundInterfaceSet
+        if {!$soundInterfaceSet} {
+            set soundInterfaceSet 1
+            set soundInterfaceValue [::DropWeaponSound new]
+        }
+        return $soundInterfaceValue
+    }
+    proc staticSet_soundInterface {value} {
+        variable soundInterfaceValue
+        variable soundInterfaceSet
+        set soundInterfaceSet 1
+        set soundInterfaceValue $value
+    }
+    proc getInstance {} {
+        return [::DropWeaponSound::staticGet_soundInterface]
+    }
+}
 
-1;
 

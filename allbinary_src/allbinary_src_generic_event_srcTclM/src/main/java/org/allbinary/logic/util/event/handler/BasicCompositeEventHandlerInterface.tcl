@@ -11,27 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.event.handler
 
-# Java interface
-package org::allbinary::logic::util::event::handler::BasicCompositeEventHandlerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getEventHandler {
-    my ($self) = @_;
-    die "abstract method getEventHandler";
+oo::class create ::BasicCompositeEventHandlerInterface {
+    superclass ::JObject
 }
 
+oo::define ::BasicCompositeEventHandlerInterface {
+    method initFields_BasicCompositeEventHandlerInterface {} {
+        return
+    }
+    
 
-sub setEventHandler {
-    my ($self, $basicEventHandlerInterface) = @_;
-    die "abstract method setEventHandler";
+    method getEventHandler {} {
+        error [jexception AbstractMethodError getEventHandler]
+    }
+    
+
+    method setEventHandler {basicEventHandlerInterface} {
+        error [jexception AbstractMethodError setEventHandler]
+    }
 }
 
+namespace eval ::BasicCompositeEventHandlerInterface {
+}
 
-1;
 

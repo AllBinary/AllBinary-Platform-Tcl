@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-# Java interface
-package org::allbinary::game::score::HighScoresCanvasInputProcessorFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getInstance {
-    my ($self, $highScoresCanvas) = @_;
-    die "abstract method getInstance";
+oo::class create ::HighScoresCanvasInputProcessorFactoryInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::game::score::displayable::HighScoresCanvas ();
+oo::define ::HighScoresCanvasInputProcessorFactoryInterface {
+    method initFields_HighScoresCanvasInputProcessorFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getInstance {highScoresCanvas} {
+        error [jexception AbstractMethodError getInstance]
+    }
+}
+
+namespace eval ::HighScoresCanvasInputProcessorFactoryInterface {
+}
+
 

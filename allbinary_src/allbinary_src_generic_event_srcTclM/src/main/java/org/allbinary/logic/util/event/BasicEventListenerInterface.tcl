@@ -11,17 +11,19 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.event
 
-# Java interface
-package org::allbinary::logic::util::event::BasicEventListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
+oo::class create ::BasicEventListenerInterface {
+    superclass ::JObject
+}
 
+oo::define ::BasicEventListenerInterface {
+    method initFields_BasicEventListenerInterface {} {
+        return
+    }
+}
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+namespace eval ::BasicEventListenerInterface {
+}
 
-1;
 

@@ -11,29 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary
 
-package org::allbinary::AppletUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AppletUtil {
+    superclass ::JObject
 }
 
+oo::define ::AppletUtil {
+    method initFields_AppletUtil {} {
+        return
+    }
+    
 
-sub isAppletLoader {
-    my ($class, $anyType) = @_;
-        return 0;
+    constructor {} {
+        next
+        my initFields_AppletUtil
+    }
+    
 }
 
-use java::lang::Object ();
+namespace eval ::AppletUtil {
+    proc isAppletLoader {anyType} {
+        return false
+    }
+}
 
-1;
 

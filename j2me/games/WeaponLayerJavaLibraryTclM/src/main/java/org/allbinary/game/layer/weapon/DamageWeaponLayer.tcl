@@ -11,32 +11,26 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.weapon
 
-package org::allbinary::game::layer::weapon::DamageWeaponLayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::weapon::WeaponLayer';
-
-
-
-sub new {
-    my ($class, $name, $remoteInfo, $movement, $animationInterface, $destroyedAnimationInterface, $rectangle, $viewPosition, $username, $actorSessionId, $id, $multiPlayerType) = @_;
-    my $self = $class->SUPER::new($name, $remoteInfo, $multiPlayerType, $movement, $animationInterface, $destroyedAnimationInterface, $rectangle, $viewPosition);
-        # super(...) made $self above
-        $self->setCollidableInferface('org::allbinary::game::layer::weapon::CollidableDamageWeaponBehavior'->new(1));
-    return $self;
+oo::class create ::DamageWeaponLayer {
+    superclass ::WeaponLayer
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::game::multiplayer::layer::RemoteInfo ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::physics::movement::Movement ();
-use org::allbinary::view::ViewPositionBase ();
-use org::allbinary::game::layer::weapon::WeaponLayer ();
-use org::allbinary::game::layer::weapon::CollidableDamageWeaponBehavior ();
+oo::define ::DamageWeaponLayer {
+    method initFields_DamageWeaponLayer {} {
+        return
+    }
+    
 
-1;
+    constructor {name remoteInfo movement animationInterface destroyedAnimationInterface rectangle viewPosition username actorSessionId id multiPlayerType} {
+        next $name $remoteInfo $multiPlayerType $movement $animationInterface $destroyedAnimationInterface $rectangle $viewPosition
+        my initFields_DamageWeaponLayer
+        my setCollidableInferface [::CollidableDamageWeaponBehavior new true]
+    }
+}
+
+namespace eval ::DamageWeaponLayer {
+}
+
 

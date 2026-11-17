@@ -11,27 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.identification
 
-# Java interface
-package org::allbinary::game::identification::GroupInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getGroupName {
-    my ($self) = @_;
-    die "abstract method getGroupName";
+oo::class create ::GroupInterface {
+    superclass ::JObject
 }
 
+oo::define ::GroupInterface {
+    method initFields_GroupInterface {} {
+        return
+    }
+    
 
-sub getGroupId {
-    my ($self) = @_;
-    die "abstract method getGroupId";
+    method getGroupName {} {
+        error [jexception AbstractMethodError getGroupName]
+    }
+    
+
+    method getGroupId {} {
+        error [jexception AbstractMethodError getGroupId]
+    }
 }
 
+namespace eval ::GroupInterface {
+}
 
-1;
 

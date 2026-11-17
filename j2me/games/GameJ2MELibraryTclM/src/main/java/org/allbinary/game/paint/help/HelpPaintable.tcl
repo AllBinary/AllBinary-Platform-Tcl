@@ -11,86 +11,78 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.paint.help
 
-package org::allbinary::game::paint::help::HelpPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::graphics::paint::Paintable','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{displayInfo} = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-    $self->{updateMyFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
-    $self->{title} = undef;
-    $self->{inputInfo} = 'org::allbinary::logic::string::StringUtil'->getInstance()->getArrayInstance();
-    $self->{basicColor} = undef;
-    $self->{titleBeginWidth} = 0;
-    $self->{beginWidthArray} = 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_INT_ARRAY};
-    $self->{charHeight} = 0;
+oo::class create ::HelpPaintable {
+    superclass ::Paintable
 }
 
+oo::define ::HelpPaintable {
+    method initFields_HelpPaintable {} {
+        my jset displayInfo {}
+        my jset updateMyFontProcessor {}
+        my jset myFontProcessor {}
+        my jset anchor 0
+        my jset title {}
+        my jset inputInfo {}
+        my jset basicColor {}
+        my jset titleBeginWidth 0
+        my jset beginWidthArray {}
+        my jset charHeight 0
+        my jset displayInfo [::DisplayInfoSingleton::getInstance]
+        my jset updateMyFontProcessor [::UpdateMyFontProcessor new [self]]
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        
+        my jset inputInfo [[::StringUtil::getInstance] getArrayInstance]
+        
+        my jset titleBeginWidth 0
+        my jset beginWidthArray [[::NullUtil::getInstance] jget NULL_INT_ARRAY]
+        my jset charHeight 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $title, $backgroundBasicColor, $basicColor) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{title} = $title;
-        $self->{basicColor} = $basicColor;
-    return $self;
-}
+    constructor {title backgroundBasicColor basicColor} {
+        next
+        my initFields_HelpPaintable
+        my jset title $title
+        my jset basicColor $basicColor
+    }
+    
 
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->{titleBeginWidth} = (POSIX::floor(($font->stringWidth($self->{title})) / (2 ** (1))));
-        $self->{charHeight} = $font->getHeight();
-        my $size = scalar(@{$self->{inputInfo}});
-        for (my $index = 0; $index < $size; $index++) {
-            $self->{beginWidthArray}->[$index] = (POSIX::floor(($font->stringWidth($self->{inputInfo}->[$index])) / (2 ** (1))));
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        my jset titleBeginWidth ([expr {[$font stringWidth [my jget title]] >> 1}])
+        my jset charHeight [$font getHeight]
+        set size [[my jget inputInfo] length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            [my jget beginWidthArray] set $index ([expr {[$font stringWidth [[my jget inputInfo] get $index]] >> 1}])
         }
-        $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
-}
+        my jset myFontProcessor [::MyFontProcessor::getInstance]
+    }
+    
 
+    method setInputInfoP {inputInfo} {
+        my jset inputInfo $inputInfo
+        my jset beginWidthArray [jarray [[my jget inputInfo] length] 0]
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+    }
+    
 
-sub setInputInfoP {
-    my ($self, $inputInfo) = @_;
-        $self->{inputInfo} = $inputInfo;
-        $self->{beginWidthArray} = [(0) x (scalar(@{$self->{inputInfo}}))];
-        $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        my $halfWidth = $self->{displayInfo}->getLastHalfWidth();
-        $graphics->setColor(int($self->{basicColor}));
-        $graphics->drawString($self->{title}, $halfWidth - $self->{titleBeginWidth}, $self->{charHeight}, $self->{anchor});
-        my $size = scalar(@{$self->{inputInfo}});
-        for (my $index = 0; $index < $size; $index++) {
-            $graphics->drawString($self->{inputInfo}->[$index], $halfWidth - $self->{beginWidthArray}->[$index], ($index + 3) * $self->{charHeight}, $self->{anchor});
+    method paint {graphics} {
+        [my jget myFontProcessor] process $graphics
+        set halfWidth [[my jget displayInfo] getLastHalfWidth]
+        $graphics setColor [[my jget basicColor] intValue]
+        $graphics drawString [my jget title] [jint [expr {$halfWidth - [my jget titleBeginWidth]}]] [my jget charHeight] [my jget anchor]
+        set size [[my jget inputInfo] length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            $graphics drawString [[my jget inputInfo] get $index] [jint [expr {$halfWidth - [[my jget beginWidthArray] get $index]}]] [jint [expr {([jint [expr {$index + 3}]]) * [my jget charHeight]}]] [my jget anchor]
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::string::StringUtil ();
+namespace eval ::HelpPaintable {
+}
 
-1;
 

@@ -11,143 +11,140 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
-package org::allbinary::game::configuration::GameConfigurationUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use Scalar::Util ();
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::GameConfigurationUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{GAUGE_UPDATE} = "Gauge Update: ";
-    $self->{FROM} = " from: ";
-    $self->{TO} = " to: ";
-    $self->{COMPETITION_VALUE} = 1;
+oo::class create ::GameConfigurationUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::GameConfigurationUtil {
+    method initFields_GameConfigurationUtil {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset GAUGE_UPDATE {}
+        my jset FROM {}
+        my jset TO {}
+        my jset COMPETITION_VALUE 0
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset GAUGE_UPDATE "Gauge Update: "
+        my jset FROM " from: "
+        my jset TO " to: "
+        my jset COMPETITION_VALUE 1
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_GameConfigurationUtil
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::GameConfigurationUtil::instance;
-}
+    method change {gameOptionsForm gauge} {
+        my update $gauge
+        set gameConfigurationSingleton [::GameConfigurationSingleton::getInstance]
+        set gameConfiguration [$gameConfigurationSingleton getInstanceByName [$gauge getLabel]]
+        my updateChallange $gameOptionsForm $gameConfiguration
+    }
+    
 
+    method update {gauge} {
+        set gameConfigurationSingleton [::GameConfigurationSingleton::getInstance]
+        set gameConfiguration [$gameConfigurationSingleton getInstanceByName [$gauge getLabel]]
+        set smallIntegerSingletonFactory [::SmallIntegerSingletonFactory::getInstance]
+        set value [$smallIntegerSingletonFactory getAt [expr {[$gauge getValue] + [[$gameConfiguration getMinValue] intValue]}]]
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append [my jget GAUGE_UPDATE]
+        $stringBuffer append [$gameConfiguration getName]
+        $stringBuffer append [my jget FROM]
+        $stringBuffer appendint [jint [[$gameConfiguration getValue] intValue]]
+        $stringBuffer append [my jget TO]
+        $stringBuffer appendint [jint [$value intValue]]
+        [my jget logUtil] putF [$stringBuffer toString] [self] [[my jget commonStrings] jget UPDATE]
+        $gameConfiguration setValue $value
+    }
+    
 
-# throws Exception
-sub change {
-    my ($self, $gameOptionsForm, $gauge) = @_;
-        $self->update($gauge);
-        my $gameConfigurationSingleton = 'org::allbinary::game::configuration::GameConfigurationSingleton'->getInstance();
-        my $gameConfiguration = $gameConfigurationSingleton->getInstanceByName($gauge->getLabel());
-        $self->updateChallange($gameOptionsForm, $gameConfiguration);
-}
+    method setDefault {gauge} {
+        set gameConfigurationSingleton [::GameConfigurationSingleton::getInstance]
+        set gameConfiguration [$gameConfigurationSingleton getInstanceByName [$gauge getLabel]]
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "Gauge Default: "
+        $stringBuffer append [$gameConfiguration getName]
+        $stringBuffer append [my jget TO]
+        $stringBuffer appendint [jint [[$gameConfiguration getDefaultValue] intValue]]
+        [my jget logUtil] putF [$stringBuffer toString] [self] "setDefault"
+        $gauge setValue [expr {[[$gameConfiguration getDefaultValue] intValue] - [[$gameConfiguration getMinValue] intValue]}]
+        $gameConfiguration setValue [$gameConfiguration getDefaultValue]
+    }
+    
 
-
-# throws Exception
-sub update {
-    my ($self, $gauge) = @_;
-        my $gameConfigurationSingleton = 'org::allbinary::game::configuration::GameConfigurationSingleton'->getInstance();
-        my $gameConfiguration = $gameConfigurationSingleton->getInstanceByName($gauge->getLabel());
-        my $smallIntegerSingletonFactory = 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance();
-        my $value = $smallIntegerSingletonFactory->getAt($gauge->getValue() + int($gameConfiguration->getMinValue()));
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append($self->{GAUGE_UPDATE});
-        $stringBuffer->append($gameConfiguration->getName());
-        $stringBuffer->append($self->{FROM});
-        $stringBuffer->appendint(int(int($gameConfiguration->getValue())));
-        $stringBuffer->append($self->{TO});
-        $stringBuffer->appendint(int(int($value)));
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, $self->{commonStrings}->{UPDATE});
-        $gameConfiguration->setValue($value);
-}
-
-
-# throws Exception
-sub setDefault {
-    my ($self, $gauge) = @_;
-        my $gameConfigurationSingleton = 'org::allbinary::game::configuration::GameConfigurationSingleton'->getInstance();
-        my $gameConfiguration = $gameConfigurationSingleton->getInstanceByName($gauge->getLabel());
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("Gauge Default: ");
-        $stringBuffer->append($gameConfiguration->getName());
-        $stringBuffer->append($self->{TO});
-        $stringBuffer->appendint(int(int($gameConfiguration->getDefaultValue())));
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, "setDefault");
-        $gauge->setValue(int($gameConfiguration->getDefaultValue()) - int($gameConfiguration->getMinValue()));
-        $gameConfiguration->setValue($gameConfiguration->getDefaultValue());
-}
-
-
-# throws Exception
-sub updateChallange {
-    my ($self, $gameOptionsForm, $gameConfiguration) = @_;
-        my $gameConfigurationSingleton = 'org::allbinary::game::configuration::GameConfigurationSingleton'->getInstance();
-        my $gameConfigurationCentral = 'org::allbinary::game::configuration::GameConfigurationCentral'->getInstance();
-        if ($gameConfiguration == $gameConfigurationCentral->{CHALLENGE_LEVEL}) {
-            $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, "updateChallange");
-            $gameConfigurationCentral->{COLLIDE_DAMAGE}->setValue($gameConfiguration->getValue());
-            $gameConfigurationCentral->{ATTACK_CHALLENGE_LEVEL}->setValue($gameConfiguration->getValue());
-            $gameConfigurationCentral->{DURABILITY_CHALLENGE_LEVEL}->setValue($gameConfiguration->getValue());
-            $gameConfigurationCentral->{SPEED_CHALLENGE_LEVEL}->setValue($gameConfiguration->getValue());
-            my $size = $gameOptionsForm->size();
-            for (my $index = 0; $index < $size; $index++) {
-                my $item = $gameOptionsForm->get($index);
-                if ((Scalar::Util::blessed($item) && $item->isa('org::allbinary::game::configuration::GameConfigurationGauge'))) {
-                    my $gauge = $item;
-                    my $name = $item->getLabel();
-                    my $nextGameConfiguration = $gameConfigurationSingleton->getInstanceByName($name);
-                    if ($nextGameConfiguration == $gameConfigurationCentral->{COLLIDE_DAMAGE}) {
-                        $gauge->setValue(int($gameConfigurationCentral->{COLLIDE_DAMAGE}->getValue()) - int($gameConfiguration->getMinValue()));
-                    } elsif ($nextGameConfiguration == $gameConfigurationCentral->{DURABILITY_CHALLENGE_LEVEL}) {
-                        $gauge->setValue(int($gameConfigurationCentral->{DURABILITY_CHALLENGE_LEVEL}->getValue()) - int($gameConfiguration->getMinValue()));
-                    } elsif ($nextGameConfiguration == $gameConfigurationCentral->{ATTACK_CHALLENGE_LEVEL}) {
-                        $gauge->setValue(int($gameConfigurationCentral->{ATTACK_CHALLENGE_LEVEL}->getValue()) - int($gameConfiguration->getMinValue()));
-                    } elsif ($nextGameConfiguration == $gameConfigurationCentral->{SPEED_CHALLENGE_LEVEL}) {
-                        $gauge->setValue(int($gameConfigurationCentral->{SPEED_CHALLENGE_LEVEL}->getValue()) - int($gameConfiguration->getMinValue()));
+    method updateChallange {gameOptionsForm gameConfiguration} {
+        set gameConfigurationSingleton [::GameConfigurationSingleton::getInstance]
+        set gameConfigurationCentral [::GameConfigurationCentral::getInstance]
+        if {[expr {$gameConfiguration eq [$gameConfigurationCentral jget CHALLENGE_LEVEL]}]} {
+            [my jget logUtil] putF [[my jget commonStrings] jget START] [self] "updateChallange"
+            [$gameConfigurationCentral jget COLLIDE_DAMAGE] setValue [$gameConfiguration getValue]
+            [$gameConfigurationCentral jget ATTACK_CHALLENGE_LEVEL] setValue [$gameConfiguration getValue]
+            [$gameConfigurationCentral jget DURABILITY_CHALLENGE_LEVEL] setValue [$gameConfiguration getValue]
+            [$gameConfigurationCentral jget SPEED_CHALLENGE_LEVEL] setValue [$gameConfiguration getValue]
+            set size [$gameOptionsForm size]
+            for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+                set item [$gameOptionsForm get $index]
+                if {[jinstanceof $item ::GameConfigurationGauge]} {
+                    set gauge $item
+                    set name [$item getLabel]
+                    set nextGameConfiguration [$gameConfigurationSingleton getInstanceByName $name]
+                    if {[expr {$nextGameConfiguration eq [$gameConfigurationCentral jget COLLIDE_DAMAGE]}]} {
+                        $gauge setValue [expr {[[[$gameConfigurationCentral jget COLLIDE_DAMAGE] getValue] intValue] - [[$gameConfiguration getMinValue] intValue]}]
+                    } elseif {[expr {$nextGameConfiguration eq [$gameConfigurationCentral jget DURABILITY_CHALLENGE_LEVEL]}]} {
+                        $gauge setValue [expr {[[[$gameConfigurationCentral jget DURABILITY_CHALLENGE_LEVEL] getValue] intValue] - [[$gameConfiguration getMinValue] intValue]}]
+                    } elseif {[expr {$nextGameConfiguration eq [$gameConfigurationCentral jget ATTACK_CHALLENGE_LEVEL]}]} {
+                        $gauge setValue [expr {[[[$gameConfigurationCentral jget ATTACK_CHALLENGE_LEVEL] getValue] intValue] - [[$gameConfiguration getMinValue] intValue]}]
+                    } elseif {[expr {$nextGameConfiguration eq [$gameConfigurationCentral jget SPEED_CHALLENGE_LEVEL]}]} {
+                        $gauge setValue [expr {[[[$gameConfigurationCentral jget SPEED_CHALLENGE_LEVEL] getValue] intValue] - [[$gameConfiguration getMinValue] intValue]}]
                     }
                 }
             }
         }
+    }
+    
+
+    method updateCompetitionValue {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] "updateCompetitionValue"
+        set gameConfigurationCentral [::GameConfigurationCentral::getInstance]
+        my jset COMPETITION_VALUE [expr {[expr {[expr {[[[$gameConfigurationCentral jget COLLIDE_DAMAGE] getValue] intValue] + [[[$gameConfigurationCentral jget ATTACK_CHALLENGE_LEVEL] getValue] intValue]}] + [[[$gameConfigurationCentral jget DURABILITY_CHALLENGE_LEVEL] getValue] intValue]}] + [[[$gameConfigurationCentral jget SPEED_CHALLENGE_LEVEL] getValue] intValue]}]
+        my jset COMPETITION_VALUE ([expr {[my jget COMPETITION_VALUE] >> 2}])
+    }
+    
+
+    method getCompetitionValue {} {
+        return [my jget COMPETITION_VALUE]
+    }
 }
 
-
-sub updateCompetitionValue {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, "updateCompetitionValue");
-        my $gameConfigurationCentral = 'org::allbinary::game::configuration::GameConfigurationCentral'->getInstance();
-        $self->{COMPETITION_VALUE} = int($gameConfigurationCentral->{COLLIDE_DAMAGE}->getValue()) + int($gameConfigurationCentral->{ATTACK_CHALLENGE_LEVEL}->getValue()) + int($gameConfigurationCentral->{DURABILITY_CHALLENGE_LEVEL}->getValue()) + int($gameConfigurationCentral->{SPEED_CHALLENGE_LEVEL}->getValue());
-        $self->{COMPETITION_VALUE} = (POSIX::floor(($self->{COMPETITION_VALUE}) / (2 ** (2))));
+namespace eval ::GameConfigurationUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameConfigurationUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameConfigurationUtil::staticGet_instance]
+    }
 }
 
-
-sub getCompetitionValue {
-    my ($self) = @_;
-        return $self->{COMPETITION_VALUE};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Item ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::configuration::GameConfigurationSingleton ();
-use org::allbinary::game::configuration::GameConfigurationCentral ();
-
-1;
 

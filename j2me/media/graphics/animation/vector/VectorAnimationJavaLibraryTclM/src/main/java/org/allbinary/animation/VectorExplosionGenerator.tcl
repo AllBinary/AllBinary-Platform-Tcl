@@ -11,149 +11,143 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::VectorExplosionGenerator;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::animation::VectorExplosionGenerator'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{RANDOM} = 'org::allbinary::animation::VectorExplosionType'->new();
-    $self->{ROTATION} = 'org::allbinary::animation::VectorExplosionType'->new();
-    $self->{vectorAnimationUtil} = 'org::allbinary::animation::VectorAnimationUtil'->getInstance();
-    $self->{randomRotationFactory} = 'org::allbinary::graphics::pipeline::RandomRotationFactory'->getInstance();
+oo::class create ::VectorExplosionGenerator {
+    superclass ::JObject
 }
 
+oo::define ::VectorExplosionGenerator {
+    method initFields_VectorExplosionGenerator {} {
+        my jset RANDOM {}
+        my jset ROTATION {}
+        my jset vectorAnimationUtil {}
+        my jset randomRotationFactory {}
+        my jset RANDOM [::VectorExplosionType new]
+        my jset ROTATION [::VectorExplosionType new]
+        my jset vectorAnimationUtil [::VectorAnimationUtil::getInstance]
+        my jset randomRotationFactory [::RandomRotationFactory::getInstance]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::animation::VectorExplosionGenerator::instance;
-}
+    constructor {} {
+        next
+        my initFields_VectorExplosionGenerator
+    }
+    
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-# throws Exception
-sub createList {
-    my ($self, $list, $howMuch, $type) = @_;
-        my $point = undef;
-        my $size = $list->size();
-        my $points = [map { [(0) x (2)] } 1 .. ($size)];
-        for (my $index = 0; $index < $size; $index++) {
-            $point = $list->{objectArray}->[$index];
-            $points->[$index]->[0] = $point->getX();
-            $points->[$index]->[1] = $point->getY();
+    method createList {list howMuch type} {
+        set point {}
+        set size [$list size]
+        set points [jarrayof $size {jarray 2 0}]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set point [[$list jget objectArray] get $index]
+            [$points get $index] set 0 [$point getX]
+            [$points get $index] set 1 [$point getY]
         }
-        return $self->createListFromPoints($list, $points, $howMuch, $type);
-}
+        return [my createListFromPoints $list $points $howMuch $type]
+    }
+    
 
+    method getInstance {points howMuch type} {
+        set pointsBasicArrayList [my getInstanceStartFrame $points $howMuch $type true]
+        set tempBasicArrayList [[$pointsBasicArrayList jget objectArray] get 0]
+        set newPoints [[my jget vectorAnimationUtil] toAnimationArrayFromListOfPointListWithPointsPerFrame $pointsBasicArrayList [$tempBasicArrayList size]]
+        return $newPoints
+    }
+    
 
-# throws Exception
-# Java overloaded method: Perl keeps the last definition
-sub getInstance {
-    my ($self, $points, $howMuch, $type) = @_;
-        my $pointsBasicArrayList = $self->getInstanceStartFrame($points, $howMuch, $type, 1);
-        my $tempBasicArrayList = $pointsBasicArrayList->{objectArray}->[0];
-        my $newPoints = $self->{vectorAnimationUtil}->toAnimationArrayFromListOfPointListWithPointsPerFrame($pointsBasicArrayList, $tempBasicArrayList->size());
-        return $newPoints;
-}
-
-
-# throws Exception
-sub getInstanceStartFrame {
-    my ($self, $points, $howMuch, $type, $startFrame) = @_;
+    method getInstanceStartFrame {points howMuch type startFrame} {
         try {
-            my $pointsBasicArrayList = 'org::allbinary::util::BasicArrayListS'->new($howMuch);
-            $pointsBasicArrayList->add($self->createPointsBasicArrayList($points));
-            my $frameIndex = 0;
-            my $tempBasicArrayList = undef;
-            my $pointBasicArrayList = undef;
-            while ($frameIndex < $howMuch) {
-                $tempBasicArrayList = $pointsBasicArrayList->{objectArray}->[$frameIndex];
-                $pointBasicArrayList = $self->createListFromPoints($tempBasicArrayList, $points, $howMuch, $type);
-                $pointsBasicArrayList->add($pointBasicArrayList);
-                $frameIndex++;
+            set pointsBasicArrayList [::BasicArrayListS new $howMuch]
+            $pointsBasicArrayList add [my createPointsBasicArrayList $points]
+            set frameIndex 0
+            set tempBasicArrayList {}
+            set pointBasicArrayList {}
+            while {[expr {$frameIndex < $howMuch}]} {
+                set tempBasicArrayList [[$pointsBasicArrayList jget objectArray] get $frameIndex]
+                set pointBasicArrayList [my createListFromPoints $tempBasicArrayList $points $howMuch $type]
+                $pointsBasicArrayList add $pointBasicArrayList
+                jpostincr frameIndex 1
             }
-            if (!$startFrame) {
-                $pointsBasicArrayList->removeAt(0);
+            if {[expr {!$startFrame}]} {
+                $pointsBasicArrayList removeAt 0
             }
-            return $pointsBasicArrayList;
-        } catch ($e) {
-            die $e;
+            return $pointsBasicArrayList
+        } on error {e} {
+            error $e
         }
-}
+    }
+    
 
-
-# throws Exception
-sub createListFromPoints {
-    my ($self, $tempBasicArrayList, $points, $howMuch, $type) = @_;
-        my $index = 0;
-        my $pointBasicArrayList = 'org::allbinary::util::BasicArrayListD'->new();
-        my $sectionBasicArrayList = undef;
-        while ($index < scalar(@{$points})) {
-            $sectionBasicArrayList = 'org::allbinary::util::BasicArrayListD'->new();
-            while ($points->[$index]->[0] != 1000) {
-                $sectionBasicArrayList->add($tempBasicArrayList->{objectArray}->[$index]);
-                $index++;
-                if ($index >= scalar(@{$points})) {
-                    last;
+    method createListFromPoints {tempBasicArrayList points howMuch type} {
+        set index 0
+        set pointBasicArrayList [::BasicArrayListD new]
+        set sectionBasicArrayList {}
+        while {[expr {$index < [$points length]}]} {
+            set sectionBasicArrayList [::BasicArrayListD new]
+            while {[expr {[[$points get $index] get 0] != 1000}]} {
+                $sectionBasicArrayList add [[$tempBasicArrayList jget objectArray] get $index]
+                jpostincr index 1
+                if {[expr {$index >= [$points length]}]} {
+                    break
                 }
             }
-            $sectionBasicArrayList = 'org::allbinary::graphics::pipeline::RandomTranslation'->getInstance($sectionBasicArrayList, $howMuch);
-            if ($type == $self->{ROTATION}) {
-                $sectionBasicArrayList = $self->{randomRotationFactory}->getInstanceList($sectionBasicArrayList, $howMuch);
+            set sectionBasicArrayList [::RandomTranslation::getInstance $sectionBasicArrayList $howMuch]
+            if {[expr {$type eq [my jget ROTATION]}]} {
+                set sectionBasicArrayList [[my jget randomRotationFactory] getInstanceList $sectionBasicArrayList $howMuch]
             }
-            my $size = $sectionBasicArrayList->size();
-            for (my $index2 = 0; $index2 < $size; $index2++) {
-                $pointBasicArrayList->add($sectionBasicArrayList->{objectArray}->[$index2]);
+            set size [$sectionBasicArrayList size]
+            for {set index2 0} {[expr {$index2 < $size}]} {jpostincr index2 1} {
+                $pointBasicArrayList add [[$sectionBasicArrayList jget objectArray] get $index2]
             }
-            if ($index >= scalar(@{$points})) {
-                last;
-            } elsif ($points->[$index]->[0] == 1000) {
-                $pointBasicArrayList->add($tempBasicArrayList->{objectArray}->[$index]);
-                $index++;
+            if {[expr {$index >= [$points length]}]} {
+                break
+            } elseif {[expr {[[$points get $index] get 0] == 1000}]} {
+                $pointBasicArrayList add [[$tempBasicArrayList jget objectArray] get $index]
+                jpostincr index 1
             }
         }
-        return $pointBasicArrayList;
+        return $pointBasicArrayList
+    }
+    
+
+    method createPointsBasicArrayList {points} {
+        if {[expr {[$points length] == 0}]} {
+            error [jexception Exception "Not Points Provided"]
+        }
+        set firstPointBasicArrayList [::BasicArrayListS new [$points length]]
+        set pointFactory [::PointFactory::getInstance]
+        for {set index 0} {[expr {$index < [$points length]}]} {jpostincr index 1} {
+            $firstPointBasicArrayList add [$pointFactory createXY [[$points get $index] get 0] [[$points get $index] get 1]]
+        }
+        return $firstPointBasicArrayList
+    }
 }
 
-
-# throws Exception
-sub createPointsBasicArrayList {
-    my ($self, $points) = @_;
-        if (scalar(@{$points}) == 0) {
-            die ("Not Points Provided");
+namespace eval ::VectorExplosionGenerator {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::VectorExplosionGenerator new]
         }
-        my $firstPointBasicArrayList = 'org::allbinary::util::BasicArrayListS'->new(scalar(@{$points}));
-        my $pointFactory = 'org::allbinary::graphics::PointFactory'->getInstance();
-        for (my $index = 0; $index < scalar(@{$points}); $index++) {
-            $firstPointBasicArrayList->add($pointFactory->createXY($points->[$index]->[0], $points->[$index]->[1]));
-        }
-        return $firstPointBasicArrayList;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::VectorExplosionGenerator::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::GPoint ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::graphics::pipeline::RandomRotationFactory ();
-use org::allbinary::graphics::pipeline::RandomTranslation ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::util::BasicArrayListS ();
-use org::allbinary::animation::VectorExplosionType ();
-use org::allbinary::animation::VectorAnimationUtil ();
-
-1;
 

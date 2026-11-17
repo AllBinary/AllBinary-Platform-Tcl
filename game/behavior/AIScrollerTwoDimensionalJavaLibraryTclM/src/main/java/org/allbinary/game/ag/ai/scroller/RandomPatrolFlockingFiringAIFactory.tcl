@@ -11,40 +11,32 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.scroller
 
-package org::allbinary::game::ag::ai::scroller::RandomPatrolFlockingFiringAIFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::RandomPatrolFlockingFiringAIFactory {
+    superclass ::JObject
 }
 
+oo::define ::RandomPatrolFlockingFiringAIFactory {
+    method initFields_RandomPatrolFlockingFiringAIFactory {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($self, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-        my $artificialIntelligenceInterface = [(undef) x (2)];
-        $artificialIntelligenceInterface->[0] = 'org::allbinary::game::ag::ai::scroller::RandomPatrolAI'->new($hashtable, $ownerLayerInterface, $gameInput);
-        $artificialIntelligenceInterface->[1] = 'org::allbinary::game::ag::ai::scroller::TimedFireAI'->new(1800, $ownerLayerInterface, $gameInput);
-        return 'org::allbinary::game::ag::ai::ArrayAI'->new($artificialIntelligenceInterface, $ownerLayerInterface, $gameInput);
+    constructor {} {
+        next
+        my initFields_RandomPatrolFlockingFiringAIFactory
+    }
+    
+
+    method getInstance {hashtable ownerLayerInterface gameInput} {
+        set artificialIntelligenceInterface [jarray 2 {}]
+        $artificialIntelligenceInterface set 0 [::RandomPatrolAI new $hashtable $ownerLayerInterface $gameInput]
+        $artificialIntelligenceInterface set 1 [::TimedFireAI new 1800 $ownerLayerInterface $gameInput]
+        return [::ArrayAI new $artificialIntelligenceInterface $ownerLayerInterface $gameInput]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-use org::allbinary::game::ag::ai::ArrayAI ();
-use org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::ag::ai::scroller::RandomPatrolAI ();
-use org::allbinary::game::ag::ai::scroller::TimedFireAI ();
+namespace eval ::RandomPatrolFlockingFiringAIFactory {
+}
 
-1;
 

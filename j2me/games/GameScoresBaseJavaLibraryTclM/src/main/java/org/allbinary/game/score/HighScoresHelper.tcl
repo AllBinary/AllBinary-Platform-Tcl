@@ -11,69 +11,63 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::HighScoresHelper;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::score::HighScoresHelperBase';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstanceAt(0, 0);
-    $self->{lastIndex} = -1;
+oo::class create ::HighScoresHelper {
+    superclass ::HighScoresHelperBase
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+oo::define ::HighScoresHelper {
+    method initFields_HighScoresHelper {} {
+        my jset circularIndexUtil {}
+        my jset lastIndex 0
+        my jset circularIndexUtil [::CircularIndexUtil::createInstanceAt 0 0]
+        my jset lastIndex [expr {-1}]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_HighScoresHelper
+    }
+    
 
-sub setHighScoresArray {
-    my ($self, $highScoresArrayP) = @_;
-        $self->SUPER::setHighScoresArray($highScoresArrayP);
-        $self->{circularIndexUtil}->setSize(scalar(@{$self->{highScoresArrayP}}));
-}
+    method setHighScoresArray {highScoresArrayP} {
+        next $highScoresArrayP
+        [my jget circularIndexUtil] setSize [[my jget highScoresArrayP] length]
+    }
+    
 
-
-sub getNextHighScores {
-    my ($self) = @_;
-        my $highScores = $self->{highScoresArrayP}->[$self->{circularIndexUtil}->getIndex()];
-        my $index = 0;
-        while (($highScores->getTotal() < 1 || $self->{lastIndex} == $self->{circularIndexUtil}->getIndex()) && $index < scalar(@{$self->{highScoresArrayP}})) {
-            $self->{circularIndexUtil}->next();
-            $highScores = $self->{highScoresArrayP}->[$self->{circularIndexUtil}->getIndex()];
-            $index++;
+    method getNextHighScores {} {
+        set highScores [[my jget highScoresArrayP] get [[my jget circularIndexUtil] getIndex]]
+        set index 0
+        while {[expr {([expr {[expr {[$highScores getTotal] < 1}] || [expr {[my jget lastIndex] == [[my jget circularIndexUtil] getIndex]}]}]) && [expr {$index < [[my jget highScoresArrayP] length]}]}]} {
+            [my jget circularIndexUtil] next
+            set highScores [[my jget highScoresArrayP] get [[my jget circularIndexUtil] getIndex]]
+            jpostincr index 1
         }
-        $self->{lastIndex} = $self->{circularIndexUtil}->getIndex();
-        return $highScores;
-}
+        my jset lastIndex [[my jget circularIndexUtil] getIndex]
+        return $highScores
+    }
+    
 
-
-sub isAnyHighScores {
-    my ($self) = @_;
-        if (scalar(@{$self->{highScoresArrayP}}) < 1) {
-            return 0;
+    method isAnyHighScores {} {
+        if {[expr {[[my jget highScoresArrayP] length] < 1}]} {
+            return false
         }
-        my $anyScores = 0;
-        my $highScores = undef;
-        for (my $index = scalar(@{$self->{highScoresArrayP}}) - 1; $index >= 0; $index--) {
-            $highScores = $self->{highScoresArrayP}->[$index];
-            if ($highScores->getTotal() > 0) {
-                $anyScores = 1;
+        set anyScores false
+        set highScores {}
+        for {set index [jint [expr {[[my jget highScoresArrayP] length] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set highScores [[my jget highScoresArrayP] get $index]
+            if {[expr {[$highScores getTotal] > 0}]} {
+                set anyScores true
             }
         }
-        return $anyScores;
+        return $anyScores
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::util::CircularIndexUtil ();
-use org::allbinary::game::score::HighScoresHelperBase ();
+namespace eval ::HighScoresHelper {
+}
 
-1;
 

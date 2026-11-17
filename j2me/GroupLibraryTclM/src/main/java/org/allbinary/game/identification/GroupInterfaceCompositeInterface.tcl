@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.identification
 
-# Java interface
-package org::allbinary::game::identification::GroupInterfaceCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getGroupInterface {
-    my ($self) = @_;
-    die "abstract method getGroupInterface";
+oo::class create ::GroupInterfaceCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::GroupInterfaceCompositeInterface {
+    method initFields_GroupInterfaceCompositeInterface {} {
+        return
+    }
+    
 
-1;
+    method getGroupInterface {} {
+        error [jexception AbstractMethodError getGroupInterface]
+    }
+}
+
+namespace eval ::GroupInterfaceCompositeInterface {
+}
+
 

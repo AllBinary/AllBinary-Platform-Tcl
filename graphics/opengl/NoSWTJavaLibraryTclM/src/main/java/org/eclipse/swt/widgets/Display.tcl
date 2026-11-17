@@ -11,28 +11,28 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.eclipse.swt.widgets
 
-package org::eclipse::swt::widgets::Display;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Time::HiRes ();
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::Display {
+    superclass ::JObject
 }
 
+oo::define ::Display {
+    method initFields_Display {} {
+        return
+    }
 
-sub sleep {
-    my ($self) = @_;
+    constructor {} {
+        next
+        my initFields_Display
+    }
+    
+
+    method sleep {} {
+    }
 }
 
-use java::lang::Object ();
+namespace eval ::Display {
+}
 
-1;
 

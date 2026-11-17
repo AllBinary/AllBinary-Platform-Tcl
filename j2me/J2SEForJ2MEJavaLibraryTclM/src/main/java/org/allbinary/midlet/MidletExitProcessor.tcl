@@ -11,40 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.midlet
 
-package org::allbinary::midlet::MidletExitProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::canvas::Processor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{midlet} = undef;
+oo::class create ::MidletExitProcessor {
+    superclass ::Processor
 }
 
+oo::define ::MidletExitProcessor {
+    method initFields_MidletExitProcessor {} {
+        my jset midlet {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $midlet) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{midlet} = $midlet;
-    return $self;
+    constructor {midlet} {
+        next
+        my initFields_MidletExitProcessor
+        my jset midlet $midlet
+    }
+    
+
+    method process {} {
+        ::System::exit 0
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self) = @_;
-        exit(0);
+namespace eval ::MidletExitProcessor {
 }
 
-use java::lang::Object ();
-use javax::microedition::midlet::MIDlet ();
-use org::allbinary::canvas::Processor ();
-use java::lang::System ();
-
-1;
 

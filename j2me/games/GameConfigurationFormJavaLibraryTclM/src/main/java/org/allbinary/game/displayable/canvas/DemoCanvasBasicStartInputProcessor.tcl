@@ -11,48 +11,38 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::DemoCanvasBasicStartInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::displayable::canvas::BasicMenuInputProcessor';
-
-
-
-sub new {
-    my ($class, $gameKeyEventList, $gameCanvas) = @_;
-    my $self = $class->SUPER::new($gameKeyEventList, -1, $gameCanvas);
-        # super(...) made $self above
-    return $self;
+oo::class create ::DemoCanvasBasicStartInputProcessor {
+    superclass ::BasicMenuInputProcessor
 }
 
+oo::define ::DemoCanvasBasicStartInputProcessor {
+    method initFields_DemoCanvasBasicStartInputProcessor {} {
+        return
+    }
+    
 
-# throws Exception
-sub processInputList {
-    my ($self) = @_;
-        my $list = $self->getGameKeyEventList();
-        my $size = $list->size();
-        my $gameKeyEvent = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $gameKeyEvent = $list->{objectArray}->[$index];
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Start GameKey: ")->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($gameKeyEvent))->toString(), $self, 'org::allbinary::game::input::GameInputStrings'->getInstance()->{PROCESS_INPUT});
+    constructor {gameKeyEventList gameCanvas} {
+        next $gameKeyEventList [expr {-1}] $gameCanvas
+        my initFields_DemoCanvasBasicStartInputProcessor
+    }
+    
+
+    method processInputList {} {
+        set list [my getGameKeyEventList]
+        set size [$list size]
+        set gameKeyEvent {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set gameKeyEvent [[$list jget objectArray] get $index]
+            [my jget logUtil] putF [[[[::StringMaker new] append "Start GameKey: "] append [[::StringUtil::getInstance] toString1 $gameKeyEvent]] toString] [self] [[::GameInputStrings::getInstance] jget PROCESS_INPUT]
         }
-        $self->getCanvas()->getCustomCommandListener()->commandAction('org::allbinary::game::commands::GameCommandsFactory'->getInstance()->{START_COMMAND}, $javax::microedition::lcdui::NullCanvas::NULL_CANVAS);
-        return $size;
+        [[my getCanvas] getCustomCommandListener] commandAction [[::GameCommandsFactory::getInstance] jget START_COMMAND] [::NullCanvas::staticGet_NULL_CANVAS]
+        return $size
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::NullCanvas ();
-use org::allbinary::canvas::RunnableCanvas ();
-use org::allbinary::game::commands::GameCommandsFactory ();
-use org::allbinary::game::input::GameInputStrings ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::game::displayable::canvas::BasicMenuInputProcessor ();
+namespace eval ::DemoCanvasBasicStartInputProcessor {
+}
 
-1;
 

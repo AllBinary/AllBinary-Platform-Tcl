@@ -11,93 +11,93 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.image.sprite
 
-package org::allbinary::image::sprite::AnimationFactorySpriteScaleUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::image::sprite::AnimationFactorySpriteScaleUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{imageCache} = 'org::allbinary::image::ImageCacheFactory'->getInstance();
-    $self->{imageScaleUtil} = 'org::allbinary::media::image::ImageScaleUtil'->getInstance();
-    $self->{openGLUtil} = 'org::allbinary::graphics::opengles::OpenGLUtil'->getInstance();
-    $self->{j2seMath} = 'org::allbinary::logic::math::J2SEMath'->getInstance();
-    $self->{openGLESImageExclusionUtil} = 'org::allbinary::image::opengles::OpenGLESImageExclusionUtil'->getInstance();
+oo::class create ::AnimationFactorySpriteScaleUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::AnimationFactorySpriteScaleUtil {
+    method initFields_AnimationFactorySpriteScaleUtil {} {
+        my jset imageCache {}
+        my jset imageScaleUtil {}
+        my jset openGLUtil {}
+        my jset j2seMath {}
+        my jset openGLESImageExclusionUtil {}
+        my jset imageCache [::ImageCacheFactory::getInstance]
+        my jset imageScaleUtil [::ImageScaleUtil::getInstance]
+        my jset openGLUtil [::OpenGLUtil::getInstance]
+        my jset j2seMath [::J2SEMath::getInstance]
+        my jset openGLESImageExclusionUtil [::OpenGLESImageExclusionUtil::getInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_AnimationFactorySpriteScaleUtil
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::image::sprite::AnimationFactorySpriteScaleUtil::instance;
-}
-
-
-# throws Exception
-sub createImage {
-    my ($self, $image, $width, $height, $scaleWidth, $scaleHeight) = @_;
-        my $spriteFactory = 'org::allbinary::game::layer::SpriteFactory'->getInstance();
-        my $sprite = undef;
-        my $scaledImage = undef;
-        if ($scaleWidth != 0 && $scaleHeight != 0) {
-            my $scaleX = ($scaleWidth) / ($width);
-            my $scaleY = ($scaleHeight) / ($height);
-            if (($scaleX == 1.0 && $scaleY == 1.0) || ($scaleX == 0.0 || $scaleY == 0.0)) {
-                $scaledImage = $self->{openGLUtil}->addImage($image);
-                $sprite = $spriteFactory->createSprite($scaledImage, $width, $height);
+    method createImage {image width height scaleWidth scaleHeight} {
+        set spriteFactory [::SpriteFactory::getInstance]
+        set sprite {}
+        set scaledImage {}
+        if {[expr {[expr {$scaleWidth != 0}] && [expr {$scaleHeight != 0}]}]} {
+            set scaleX [expr {([expr {double($scaleWidth)}]) / ([expr {double($width)}])}]
+            set scaleY [expr {([expr {double($scaleHeight)}]) / ([expr {double($height)}])}]
+            if {[expr {([expr {[expr {$scaleX == 1.0}] && [expr {$scaleY == 1.0}]}]) || ([expr {[expr {$scaleX == 0.0}] || [expr {$scaleY == 0.0}]}])}]} {
+                set scaledImage [[my jget openGLUtil] addImage $image]
+                set sprite [$spriteFactory createSprite $scaledImage $width $height]
             } else {
-                if ($self->{openGLESImageExclusionUtil}->isCustomScaling($image)) {
-                    my $width2 = $self->{j2seMath}->round(($scaleWidth) - 0.5);
-                    my $height2 = $self->{j2seMath}->round(($scaleHeight) - 0.5);
-                    my $multiplesOf16Width = int($width2 / 16);
-                    my $by16Width = $multiplesOf16Width * 16;
-                    $scaleX = ($by16Width) / $width;
-                    my $multiplesOf16Height = int($height2 / 16);
-                    my $by16Height = $multiplesOf16Height * 16;
-                    $scaleY = ($by16Height) / $height;
-                    if ($scaleWidth < $width) {
-                        $scaleX = $scaleX * 2.35;
+                if {[[my jget openGLESImageExclusionUtil] isCustomScaling $image]} {
+                    set width2 [[my jget j2seMath] round [expr {[expr {double(($scaleWidth))}] - 0.5}]]
+                    set height2 [[my jget j2seMath] round [expr {[expr {double(($scaleHeight))}] - 0.5}]]
+                    set multiplesOf16Width [jdiv $width2 16]
+                    set by16Width [jint [expr {$multiplesOf16Width * 16}]]
+                    set scaleX [expr {([expr {double($by16Width)}]) / [expr {double($width)}]}]
+                    set multiplesOf16Height [jdiv $height2 16]
+                    set by16Height [jint [expr {$multiplesOf16Height * 16}]]
+                    set scaleY [expr {([expr {double($by16Height)}]) / [expr {double($height)}]}]
+                    if {[expr {$scaleWidth < $width}]} {
+                        set scaleX [expr {$scaleX * 2.35}]
                     }
-                    if ($scaleHeight < $height) {
-                        $scaleY = $scaleY * 2.35;
+                    if {[expr {$scaleHeight < $height}]} {
+                        set scaleY [expr {$scaleY * 2.35}]
                     }
                 }
-                $scaledImage = $self->{imageScaleUtil}->createImage2($self->{imageCache}, $image, $scaleX, 1.0, $scaleY, 1.0, 1);
-                $sprite = $spriteFactory->createSprite($scaledImage, int(($width * $scaleX)), int(($height * $scaleY)));
+                set scaledImage [[my jget imageScaleUtil] createImage2 [my jget imageCache] $image $scaleX 1.0 $scaleY 1.0 true]
+                set sprite [$spriteFactory createSprite $scaledImage [jint [jd2i ([expr {[expr {double($width)}] * $scaleX}])]] [jint [jd2i ([expr {[expr {double($height)}] * $scaleY}])]]]
             }
         } else {
-            $scaledImage = $self->{openGLUtil}->addImage($image);
-            $sprite = $spriteFactory->createSprite($scaledImage, $width, $height);
+            set scaledImage [[my jget openGLUtil] addImage $image]
+            set sprite [$spriteFactory createSprite $scaledImage $width $height]
         }
-        return $sprite;
+        return $sprite
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::game::Sprite ();
-use org::allbinary::game::layer::SpriteFactory ();
-use org::allbinary::graphics::opengles::OpenGLUtil ();
-use org::allbinary::image::ImageCache ();
-use org::allbinary::image::ImageCacheFactory ();
-use org::allbinary::image::opengles::OpenGLESImageExclusionUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::math::J2SEMath ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::media::image::ImageScaleUtil ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::AnimationFactorySpriteScaleUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AnimationFactorySpriteScaleUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AnimationFactorySpriteScaleUtil::staticGet_instance]
+    }
+}
 
-1;
 

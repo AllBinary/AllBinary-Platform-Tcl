@@ -11,36 +11,35 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item.validation
 
-package org::allbinary::graphics::form::item::validation::TextItemVisitor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::visitor::Visitor';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::TextItemVisitor {
+    superclass ::Visitor
 }
 
+oo::define ::TextItemVisitor {
+    method initFields_TextItemVisitor {} {
+        return
+    }
+    
 
-sub visit {
-    my ($self, $anyType) = @_;
-        my $value = $anyType;
-        if (length($value) < 2) {
-            return 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{TRUE};
+    constructor {} {
+        next
+        my initFields_TextItemVisitor
+    }
+    
+
+    method visit {anyType} {
+        set value $anyType
+        if {[expr {[string length $value] < 2}]} {
+            return [[::BooleanFactory::getInstance] jget TRUE]
         } else {
-            return 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{FALSE};
+            return [[::BooleanFactory::getInstance] jget FALSE]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::java::bool::BooleanFactory ();
-use org::allbinary::logic::util::visitor::Visitor ();
+namespace eval ::TextItemVisitor {
+}
 
-1;
 

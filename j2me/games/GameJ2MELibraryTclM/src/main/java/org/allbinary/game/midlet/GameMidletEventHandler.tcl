@@ -11,42 +11,52 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-package org::allbinary::game::midlet::GameMidletEventHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::handler::BasicEventHandler';
-
-tie our $gameKeyEventHandler, 'java::lang::LazyStatic', sub { 'org::allbinary::game::midlet::GameMidletEventHandler'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::GameMidletEventHandler {
+    superclass ::BasicEventHandler
 }
 
+oo::define ::GameMidletEventHandler {
+    method initFields_GameMidletEventHandler {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::midlet::GameMidletEventHandler::gameKeyEventHandler;
+    constructor {} {
+        next
+        my initFields_GameMidletEventHandler
+    }
+    
+    
+
+    method process {eventObject eventListenerInterface} {
+        set gameMidletEventListener $eventListenerInterface
+        $gameMidletEventListener onGameEnd $eventObject
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $eventObject, $eventListenerInterface) = @_;
-        my $gameMidletEventListener = $eventListenerInterface;
-        $gameMidletEventListener->onGameEnd($eventObject);
+namespace eval ::GameMidletEventHandler {
+    variable gameKeyEventHandlerValue {}
+    variable gameKeyEventHandlerSet 0
+    proc staticGet_gameKeyEventHandler {} {
+        variable gameKeyEventHandlerValue
+        variable gameKeyEventHandlerSet
+        if {!$gameKeyEventHandlerSet} {
+            set gameKeyEventHandlerSet 1
+            set gameKeyEventHandlerValue [::GameMidletEventHandler new]
+        }
+        return $gameKeyEventHandlerValue
+    }
+    proc staticSet_gameKeyEventHandler {value} {
+        variable gameKeyEventHandlerValue
+        variable gameKeyEventHandlerSet
+        set gameKeyEventHandlerSet 1
+        set gameKeyEventHandlerValue $value
+    }
+    proc getInstance {} {
+        return [::GameMidletEventHandler::staticGet_gameKeyEventHandler]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
-
-1;
 

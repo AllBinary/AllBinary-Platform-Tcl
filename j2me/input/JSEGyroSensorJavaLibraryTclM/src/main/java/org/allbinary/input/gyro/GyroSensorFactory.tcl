@@ -11,37 +11,49 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.gyro
 
-package org::allbinary::input::gyro::GyroSensorFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $allBinaryGyroSensor = undef;
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::GyroSensorFactory {
+    superclass ::JObject
 }
 
+oo::define ::GyroSensorFactory {
+    method initFields_GyroSensorFactory {} {
+        return
+    }
 
-# throws Exception
-sub init {
-    my ($class) = @_;
-        $org::allbinary::input::gyro::GyroSensorFactory::allBinaryGyroSensor = 'org::allbinary::input::gyro::NoGyroSensor'->new();
+    constructor {} {
+        next
+        my initFields_GyroSensorFactory
+    }
+    
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::gyro::GyroSensorFactory::allBinaryGyroSensor;
+namespace eval ::GyroSensorFactory {
+    variable allBinaryGyroSensorValue {}
+    variable allBinaryGyroSensorSet 0
+    proc staticGet_allBinaryGyroSensor {} {
+        variable allBinaryGyroSensorValue
+        variable allBinaryGyroSensorSet
+        if {!$allBinaryGyroSensorSet} {
+            set allBinaryGyroSensorSet 1
+            set allBinaryGyroSensorValue {}
+        }
+        return $allBinaryGyroSensorValue
+    }
+    proc staticSet_allBinaryGyroSensor {value} {
+        variable allBinaryGyroSensorValue
+        variable allBinaryGyroSensorSet
+        set allBinaryGyroSensorSet 1
+        set allBinaryGyroSensorValue $value
+    }
+    proc init {} {
+        ::GyroSensorFactory::staticSet_allBinaryGyroSensor [::NoGyroSensor new]
+    }
+    proc getInstance {} {
+        return [::GyroSensorFactory::staticGet_allBinaryGyroSensor]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::input::gyro::NoGyroSensor ();
-
-1;
 

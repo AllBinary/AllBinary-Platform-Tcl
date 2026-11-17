@@ -11,31 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::GameEventHandlerUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::GameEventHandlerUtil {
+    superclass ::JObject
 }
 
+oo::define ::GameEventHandlerUtil {
+    method initFields_GameEventHandlerUtil {} {
+        return
+    }
 
-sub removeAllListeners {
-    my ($class) = @_;
-        'org::allbinary::game::input::event::UpGameKeyEventHandler'->getInstance()->removeAllListeners();
-        'org::allbinary::game::input::event::DownGameKeyEventHandler'->getInstance()->removeAllListeners();
+    constructor {} {
+        next
+        my initFields_GameEventHandlerUtil
+    }
+    
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::event::DownGameKeyEventHandler ();
-use org::allbinary::game::input::event::UpGameKeyEventHandler ();
+namespace eval ::GameEventHandlerUtil {
+    proc removeAllListeners {} {
+        [::UpGameKeyEventHandler::getInstance] removeAllListeners
+        [::DownGameKeyEventHandler::getInstance] removeAllListeners
+    }
+}
 
-1;
 

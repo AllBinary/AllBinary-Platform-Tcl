@@ -11,90 +11,79 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.physics.velocity
 
-# Java interface
-package org::allbinary::game::physics::velocity::BasicVelocityInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getVelocityXBasicDecimalP {
-    my ($self) = @_;
-    die "abstract method getVelocityXBasicDecimalP";
+oo::class create ::BasicVelocityInterface {
+    superclass ::JObject
 }
 
+oo::define ::BasicVelocityInterface {
+    method initFields_BasicVelocityInterface {} {
+        return
+    }
+    
 
-sub getVelocityYBasicDecimalP {
-    my ($self) = @_;
-    die "abstract method getVelocityYBasicDecimalP";
+    method getVelocityXBasicDecimalP {} {
+        error [jexception AbstractMethodError getVelocityXBasicDecimalP]
+    }
+    
+
+    method getVelocityYBasicDecimalP {} {
+        error [jexception AbstractMethodError getVelocityYBasicDecimalP]
+    }
+    
+
+    method zero {} {
+        error [jexception AbstractMethodError zero]
+    }
+    
+
+    method setVelocityWithBigDecimalAndDirection {magnitudeBasicDecimal direction otherDirection} {
+        error [jexception AbstractMethodError setVelocityWithBigDecimalAndDirection]
+    }
+    
+
+    method addVelocityWithBigDecimalAndDirection {magnitudeBasicDecimal direction otherDirection} {
+        error [jexception AbstractMethodError addVelocityWithBigDecimalAndDirection]
+    }
+    
+
+    method setVelocityWithDirection {magnitude direction otherDirection} {
+        error [jexception AbstractMethodError setVelocityWithDirection]
+    }
+    
+
+    method addVelocityWithDirection {magnitude direction otherDirection} {
+        error [jexception AbstractMethodError addVelocityWithDirection]
+    }
+    
+
+    method setVelocityWithBigDecimal {magnitudeBasicDecimal angle otherAngle} {
+        error [jexception AbstractMethodError setVelocityWithBigDecimal]
+    }
+    
+
+    method addVelocityWithBigDecimal {magnitudeBasicDecimal angle otherAngle} {
+        error [jexception AbstractMethodError addVelocityWithBigDecimal]
+    }
+    
+
+    method setVelocity {magnitude angle otherAngle} {
+        error [jexception AbstractMethodError setVelocity]
+    }
+    
+
+    method addVelocity {magnitude angle otherAngle} {
+        error [jexception AbstractMethodError addVelocity]
+    }
+    
+
+    method addVelocityi {magnitude angle otherAngle} {
+        error [jexception AbstractMethodError addVelocityi]
+    }
 }
 
-
-sub zero {
-    my ($self) = @_;
-    die "abstract method zero";
+namespace eval ::BasicVelocityInterface {
 }
 
-
-sub setVelocityWithBigDecimalAndDirection {
-    my ($self, $magnitudeBasicDecimal, $direction, $otherDirection) = @_;
-    die "abstract method setVelocityWithBigDecimalAndDirection";
-}
-
-
-sub addVelocityWithBigDecimalAndDirection {
-    my ($self, $magnitudeBasicDecimal, $direction, $otherDirection) = @_;
-    die "abstract method addVelocityWithBigDecimalAndDirection";
-}
-
-
-sub setVelocityWithDirection {
-    my ($self, $magnitude, $direction, $otherDirection) = @_;
-    die "abstract method setVelocityWithDirection";
-}
-
-
-sub addVelocityWithDirection {
-    my ($self, $magnitude, $direction, $otherDirection) = @_;
-    die "abstract method addVelocityWithDirection";
-}
-
-
-sub setVelocityWithBigDecimal {
-    my ($self, $magnitudeBasicDecimal, $angle, $otherAngle) = @_;
-    die "abstract method setVelocityWithBigDecimal";
-}
-
-
-sub addVelocityWithBigDecimal {
-    my ($self, $magnitudeBasicDecimal, $angle, $otherAngle) = @_;
-    die "abstract method addVelocityWithBigDecimal";
-}
-
-
-sub setVelocity {
-    my ($self, $magnitude, $angle, $otherAngle) = @_;
-    die "abstract method setVelocity";
-}
-
-
-sub addVelocity {
-    my ($self, $magnitude, $angle, $otherAngle) = @_;
-    die "abstract method addVelocity";
-}
-
-
-sub addVelocityi {
-    my ($self, $magnitude, $angle, $otherAngle) = @_;
-    die "abstract method addVelocityi";
-}
-
-use org::allbinary::direction::Direction ();
-use org::allbinary::logic::math::BasicDecimal ();
-use org::allbinary::math::Angle ();
-
-1;
 

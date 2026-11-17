@@ -11,93 +11,77 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.paint.help
 
-package org::allbinary::game::paint::help::BasicInputMappingHelpPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::paint::help::HelpPaintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gameInputMappingArray} = undef;
-    $self->{NONE} = 'org::allbinary::game::input::GameKeyFactory'->getInstance()->{NONE};
+oo::class create ::BasicInputMappingHelpPaintable {
+    superclass ::HelpPaintable
 }
 
+oo::define ::BasicInputMappingHelpPaintable {
+    method initFields_BasicInputMappingHelpPaintable {} {
+        my jset gameInputMappingArray {}
+        my jset NONE {}
+        
+        my jset NONE [[::GameKeyFactory::getInstance] jget NONE]
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameInputMappingArray, $basicColor) = @_;
-    my $self = $class->SUPER::new("Help Screen", 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{BLACK}, $basicColor);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{gameInputMappingArray} = $gameInputMappingArray;
-        $self->update($self->{NONE}, $self->{NONE});
-    return $self;
-}
+    constructor {gameInputMappingArray basicColor} {
+        next "Help Screen" [[::BasicColorFactory::getInstance] jget BLACK] $basicColor
+        my initFields_BasicInputMappingHelpPaintable
+        my jset gameInputMappingArray $gameInputMappingArray
+        my update [my jget NONE] [my jget NONE]
+    }
+    
 
-
-sub update {
-    my ($self, $selectedGameKey, $selectedInput) = @_;
-        my $gameKeyMapping = 'org::allbinary::game::input::PlatformInputMappingFactory'->getInstance()->getPersistentInputMappingInstance();
-        my $EQUAL = " = ";
-        my $stringMaker = 'org::allbinary::logic::string::StringMaker'->new();
-        my $size = scalar(@{$self->{gameInputMappingArray}});
-        my $keyInfo = [(undef) x ($size)];
-        my $gameInputMapping = undef;
-        my $gameKey = undef;
-        my $list = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $gameInputMapping = $self->{gameInputMappingArray}->[$index];
-            $gameKey = $gameInputMapping->getGameKey();
-            $list = $gameKeyMapping->getInputMapping()->getMappedInput($gameKey);
-            $stringMaker->delete(0, $stringMaker->length());
-            $keyInfo->[$index] = $stringMaker->append($gameInputMapping->getName())->append($EQUAL)->append($self->get($list))->toString();
+    method update {selectedGameKey selectedInput} {
+        set gameKeyMapping [[::PlatformInputMappingFactory::getInstance] getPersistentInputMappingInstance]
+        set EQUAL " = "
+        set stringMaker [::StringMaker new]
+        set size [[my jget gameInputMappingArray] length]
+        set keyInfo [jarray $size {}]
+        set gameInputMapping {}
+        set gameKey {}
+        set list {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set gameInputMapping [[my jget gameInputMappingArray] get $index]
+            set gameKey [$gameInputMapping getGameKey]
+            set list [[$gameKeyMapping getInputMapping] getMappedInput $gameKey]
+            $stringMaker delete 0 [$stringMaker length]
+            $keyInfo set $index [[[[$stringMaker append [$gameInputMapping getName]] append $EQUAL] append [my get $list]] toString]
         }
-        $self->SUPER::setInputInfoP($keyInfo);
-}
+        next $keyInfo
+    }
+    
 
-
-sub get {
-    my ($self, $keyList) = @_;
-        my $commonSeps = 'org::allbinary::string::CommonSeps'->getInstance();
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $AND = "and ";
-        my $key = undef;
-        my $size = $keyList->size();
-        for (my $index = 0; $index < $size; $index++) {
-            $key = $keyList->{objectArray}->[$index];
-            $stringBuffer->append($key->getName());
-            if ($index + 1 < $keyList->size()) {
-                if ($keyList->size() == 2) {
-                    $stringBuffer->append($commonSeps->{SPACE})->append($AND);
+    method get {keyList} {
+        set commonSeps [::CommonSeps::getInstance]
+        set stringBuffer [::StringMaker new]
+        set AND "and "
+        set key {}
+        set size [$keyList size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set key [[$keyList jget objectArray] get $index]
+            $stringBuffer append [$key getName]
+            if {[expr {[jint [expr {$index + 1}]] < [$keyList size]}]} {
+                if {[expr {[$keyList size] == 2}]} {
+                    [$stringBuffer append [$commonSeps jget SPACE]] append $AND
                 } else {
-                    if ($index + 2 == $keyList->size()) {
-                        $stringBuffer->append($commonSeps->{COMMA_SEP});
-                        $stringBuffer->append($AND);
+                    if {[expr {[jint [expr {$index + 2}]] == [$keyList size]}]} {
+                        $stringBuffer append [$commonSeps jget COMMA_SEP]
+                        $stringBuffer append $AND
                     } else {
-                        $stringBuffer->append($commonSeps->{COMMA_SEP});
+                        $stringBuffer append [$commonSeps jget COMMA_SEP]
                     }
                 }
             }
         }
-        return $stringBuffer->toString();
+        return [$stringBuffer toString]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::GameKey ();
-use org::allbinary::game::input::GameKeyFactory ();
-use org::allbinary::game::input::Input ();
-use org::allbinary::game::input::PlatformInputMappingFactory ();
-use org::allbinary::game::input::mapping::GameInputMapping ();
-use org::allbinary::game::input::mapping::PersistentInputMapping ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::game::paint::help::HelpPaintable ();
+namespace eval ::BasicInputMappingHelpPaintable {
+}
 
-1;
 

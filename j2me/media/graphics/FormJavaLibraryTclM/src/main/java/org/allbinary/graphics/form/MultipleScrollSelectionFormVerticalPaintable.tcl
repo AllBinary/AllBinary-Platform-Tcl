@@ -11,40 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::MultipleScrollSelectionFormVerticalPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::ItemIndexPaintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{multipleScrollSelectionForm} = undef;
+oo::class create ::MultipleScrollSelectionFormVerticalPaintable {
+    superclass ::ItemIndexPaintable
 }
 
+oo::define ::MultipleScrollSelectionFormVerticalPaintable {
+    method initFields_MultipleScrollSelectionFormVerticalPaintable {} {
+        my jset multipleScrollSelectionForm {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $multipleScrollSelectionForm) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{multipleScrollSelectionForm} = $multipleScrollSelectionForm;
-    return $self;
+    constructor {multipleScrollSelectionForm} {
+        next
+        my initFields_MultipleScrollSelectionFormVerticalPaintable
+        my jset multipleScrollSelectionForm $multipleScrollSelectionForm
+    }
+    
+
+    method paint {graphics index item dx dy} {
+        return [[my jget multipleScrollSelectionForm] paintVertical $graphics $index $item $dx $dy]
+    }
 }
 
-
-# throws Exception
-sub paint {
-    my ($self, $graphics, $index, $item, $dx, $dy) = @_;
-        return $self->{multipleScrollSelectionForm}->paintVertical($graphics, $index, $item, $dx, $dy);
+namespace eval ::MultipleScrollSelectionFormVerticalPaintable {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
-use org::allbinary::graphics::form::ItemIndexPaintable ();
-
-1;
 

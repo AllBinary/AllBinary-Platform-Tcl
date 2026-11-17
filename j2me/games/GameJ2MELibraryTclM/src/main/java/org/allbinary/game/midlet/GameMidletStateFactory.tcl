@@ -1,55 +1,59 @@
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-package org::allbinary::game::midlet::GameMidletStateFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $INSTANCE, 'java::lang::LazyStatic', sub { 'org::allbinary::game::midlet::GameMidletStateFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{currentGameState} = 'org::allbinary::game::state::GameStateFactory'->getInstance()->{NO_GAME_STATE};
+oo::class create ::GameMidletStateFactory {
+    superclass ::JObject
 }
 
+oo::define ::GameMidletStateFactory {
+    method initFields_GameMidletStateFactory {} {
+        my jset logUtil {}
+        my jset currentGameState {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset currentGameState [[::GameStateFactory::getInstance] jget NO_GAME_STATE]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_GameMidletStateFactory
+    }
+    
+    
+
+    method getCurrentGameState {} {
+        return [my jget currentGameState]
+    }
+    
+
+    method setCurrentGameState {currentGameState} {
+        [my jget logUtil] putF [[[[[::StringMaker new] append [[::CommonLabels::getInstance] jget CURRENT]] append " GameState: "] append [[::StringUtil::getInstance] toString1 $currentGameState]] toString] [self] "setCurrentGameState"
+        my jset currentGameState $currentGameState
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::midlet::GameMidletStateFactory::INSTANCE;
+namespace eval ::GameMidletStateFactory {
+    variable INSTANCEValue {}
+    variable INSTANCESet 0
+    proc staticGet_INSTANCE {} {
+        variable INSTANCEValue
+        variable INSTANCESet
+        if {!$INSTANCESet} {
+            set INSTANCESet 1
+            set INSTANCEValue [::GameMidletStateFactory new]
+        }
+        return $INSTANCEValue
+    }
+    proc staticSet_INSTANCE {value} {
+        variable INSTANCEValue
+        variable INSTANCESet
+        set INSTANCESet 1
+        set INSTANCEValue $value
+    }
+    proc getInstance {} {
+        return [::GameMidletStateFactory::staticGet_INSTANCE]
+    }
 }
 
-
-sub getCurrentGameState {
-    my ($self) = @_;
-        return $self->{currentGameState};
-}
-
-
-sub setCurrentGameState {
-    my ($self, $currentGameState) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{CURRENT})->append(" GameState: ")->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($currentGameState))->toString(), $self, "setCurrentGameState");
-        $self->{currentGameState} = $currentGameState;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::state::GameState ();
-use org::allbinary::game::state::GameStateFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonLabels ();
-
-1;
 

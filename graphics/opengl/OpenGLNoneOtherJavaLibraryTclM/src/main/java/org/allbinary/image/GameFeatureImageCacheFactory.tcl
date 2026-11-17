@@ -11,41 +11,36 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.image
 
-package org::allbinary::image::GameFeatureImageCacheFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::GameFeatureImageCacheFactory {
+    superclass ::JObject
 }
 
+oo::define ::GameFeatureImageCacheFactory {
+    method initFields_GameFeatureImageCacheFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return 'org::allbinary::image::ImageCacheFactory'->getInstance();
+    constructor {} {
+        next
+        my initFields_GameFeatureImageCacheFactory
+    }
+    
+    
+    
 }
 
-
-sub init {
-    my ($class) = @_;
-        'org::allbinary::image::ImageCacheFactory'->init();
+namespace eval ::GameFeatureImageCacheFactory {
+    proc getInstance {} {
+        return [::ImageCacheFactory::getInstance]
+    }
+    proc init {} {
+        ::ImageCacheFactory::init
+    }
+    proc releaseAll {} {
+        [::ImageCacheFactory::getInstance] releaseAll
+    }
 }
 
-
-sub releaseAll {
-    my ($class) = @_;
-        'org::allbinary::image::ImageCacheFactory'->getInstance()->releaseAll();
-}
-
-use java::lang::Object ();
-use org::allbinary::image::ImageCacheFactory ();
-
-1;
 

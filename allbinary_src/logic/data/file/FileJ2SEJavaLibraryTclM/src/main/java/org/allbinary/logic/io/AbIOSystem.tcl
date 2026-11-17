@@ -11,52 +11,61 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
-package org::allbinary::logic::io::AbIOSystem;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::io::AbIOSystem'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{type} = "java.io";
+oo::class create ::AbIOSystem {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::AbIOSystem {
+    method initFields_AbIOSystem {} {
+        my jset type {}
+        my jset type "java.io"
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_AbIOSystem
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::io::AbIOSystem::instance;
-}
+    method getType {} {
+        return [my jget type]
+    }
+    
 
-
-sub getType {
-    my ($self) = @_;
-        return $self->{type};
-}
-
-
-sub isType {
-    my ($self, $type) = @_;
-        if (($self->{type} cmp $type) == 0) {
-            return 1;
+    method isType {type} {
+        if {[expr {[jcompareto [my jget type] $type] == 0}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
+namespace eval ::AbIOSystem {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AbIOSystem new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AbIOSystem::staticGet_instance]
+    }
+}
 
-1;
 

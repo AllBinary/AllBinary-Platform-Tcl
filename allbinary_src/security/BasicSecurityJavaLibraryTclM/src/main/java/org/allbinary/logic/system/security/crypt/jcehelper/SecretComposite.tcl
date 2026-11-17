@@ -11,68 +11,60 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.crypt.jcehelper
 
-package org::allbinary::logic::system::security::crypt::jcehelper::SecretComposite;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::system::security::crypt::jcehelper::BaseSecretComposite';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{byteUtil} = 'org::allbinary::logic::java::byteutil::ByteUtil'->getInstance();
-    $self->{cipher} = undef;
-    $self->{secretKey} = undef;
-    $self->{key} = undef;
+oo::class create ::SecretComposite {
+    superclass ::BaseSecretComposite
 }
 
+oo::define ::SecretComposite {
+    method initFields_SecretComposite {} {
+        my jset byteUtil {}
+        my jset cipher {}
+        my jset secretKey {}
+        my jset key {}
+        my jset byteUtil [::ByteUtil::getInstance]
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $secretKey, $cipher, $key) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{secretKey} = $secretKey;
-        $self->{cipher} = $cipher;
-        $self->{key} = $key;
-    return $self;
-}
+    constructor {secretKey cipher key} {
+        next
+        my initFields_SecretComposite
+        my jset secretKey $secretKey
+        my jset cipher $cipher
+        my jset key $key
+    }
+    
 
+    method encrypt {array} {
+        set array [my mutilate $array]
+        [my jget cipher] init [::Cipher::staticGet_ENCRYPT_MODE] [my jget secretKey]
+        return [[my jget cipher] doFinal $array]
+    }
+    
 
-# throws Exception
-sub encrypt {
-    my ($self, $array) = @_;
-        $array = $self->mutilate($array);
-        $self->{cipher}->init($javax::crypto::Cipher::ENCRYPT_MODE, $self->{secretKey});
-        return $self->{cipher}->doFinal($array);
-}
+    method decrypt {array} {
+        [my jget cipher] init [::Cipher::staticGet_DECRYPT_MODE] [my jget secretKey]
+        return [my mutilate [[my jget cipher] doFinal $array]]
+    }
+    
 
-
-# throws Exception
-sub decrypt {
-    my ($self, $array) = @_;
-        $self->{cipher}->init($javax::crypto::Cipher::DECRYPT_MODE, $self->{secretKey});
-        return $self->mutilate($self->{cipher}->doFinal($array));
-}
-
-
-sub mutilate {
-    my ($self, $array) = @_;
-        for (my $index = 0; $index < scalar(@{$self->{key}}); $index++) {
-            my $value = $self->{key}->[$index];
-            if ($value < 8 && $value > 0) {
-                $array = $self->{byteUtil}->xorByte($array, $value);
+    method mutilate {array} {
+        for {set index 0} {[expr {$index < [[my jget key] length]}]} {jpostincr index 1} {
+            set value [[my jget key] get $index]
+            if {[expr {[expr {[jint $value] < 8}] && [expr {[jint $value] > 0}]}]} {
+                set array [[my jget byteUtil] xorByte $array [jint $value]]
             }
         }
-        return $array;
+        return $array
+    }
 }
 
-use java::lang::Object ();
-# use javax::crypto::Cipher ();
-# use javax::crypto::SecretKey ();
-use org::allbinary::logic::java::byteutil::ByteUtil ();
-use org::allbinary::logic::system::security::crypt::jcehelper::BaseSecretComposite ();
+namespace eval ::SecretComposite {
+}
 
-1;
 

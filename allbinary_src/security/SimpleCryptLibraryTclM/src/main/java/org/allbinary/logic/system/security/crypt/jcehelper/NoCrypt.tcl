@@ -11,35 +11,34 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.crypt.jcehelper
 
-package org::allbinary::logic::system::security::crypt::jcehelper::NoCrypt;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::init::crypt::jcehelper::CryptInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NoCrypt {
+    superclass ::JObject
 }
 
+oo::define ::NoCrypt {
+    method initFields_NoCrypt {} {
+        return
+    }
 
-sub encrypt {
-    my ($self, $array) = @_;
-        return $array;
+    constructor {} {
+        next
+        my initFields_NoCrypt
+    }
+    
+
+    method encrypt {array} {
+        return $array
+    }
+    
+
+    method decrypt {array} {
+        return $array
+    }
 }
 
-
-sub decrypt {
-    my ($self, $array) = @_;
-        return $array;
+namespace eval ::NoCrypt {
 }
 
-use java::lang::Object ();
-use org::allbinary::init::crypt::jcehelper::CryptInterface ();
-
-1;
 

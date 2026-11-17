@@ -11,57 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.life
 
-# Java interface
-package org::allbinary::game::ag::life::LifeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub get {
-    my ($self) = @_;
-    die "abstract method get";
+oo::class create ::LifeInterface {
+    superclass ::JObject
 }
 
+oo::define ::LifeInterface {
+    method initFields_LifeInterface {} {
+        return
+    }
+    
 
-sub set {
-    my ($self, $lives) = @_;
-    die "abstract method set";
+    method get {} {
+        error [jexception AbstractMethodError get]
+    }
+    
+
+    method set {lives} {
+        error [jexception AbstractMethodError set]
+    }
+    
+
+    method reset {} {
+        error [jexception AbstractMethodError reset]
+    }
+    
+
+    method add {lives} {
+        error [jexception AbstractMethodError add]
+    }
+    
+
+    method deaths {lives} {
+        error [jexception AbstractMethodError deaths]
+    }
+    
+
+    method getMaxlives {} {
+        error [jexception AbstractMethodError getMaxlives]
+    }
+    
+
+    method isAlive {} {
+        error [jexception AbstractMethodError isAlive]
+    }
 }
 
-
-sub reset {
-    my ($self) = @_;
-    die "abstract method reset";
+namespace eval ::LifeInterface {
 }
 
-
-sub add {
-    my ($self, $lives) = @_;
-    die "abstract method add";
-}
-
-
-sub deaths {
-    my ($self, $lives) = @_;
-    die "abstract method deaths";
-}
-
-
-sub getMaxlives {
-    my ($self) = @_;
-    die "abstract method getMaxlives";
-}
-
-
-sub isAlive {
-    my ($self) = @_;
-    die "abstract method isAlive";
-}
-
-
-1;
 

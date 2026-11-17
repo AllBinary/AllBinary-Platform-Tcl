@@ -11,15 +11,19 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.canvas
 
-# Java interface
-package org::allbinary::canvas::FullScreenInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
+oo::class create ::FullScreenInterface {
+    superclass ::JObject
+}
 
+oo::define ::FullScreenInterface {
+    method initFields_FullScreenInterface {} {
+        return
+    }
+}
 
+namespace eval ::FullScreenInterface {
+}
 
-1;
 

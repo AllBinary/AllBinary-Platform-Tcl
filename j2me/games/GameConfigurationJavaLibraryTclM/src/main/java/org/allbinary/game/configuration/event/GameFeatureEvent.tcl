@@ -11,44 +11,38 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.event
 
-package org::allbinary::game::configuration::event::GameFeatureEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{whatChanged} = undef;
+oo::class create ::GameFeatureEvent {
+    superclass ::AllBinaryEventObject
 }
 
+oo::define ::GameFeatureEvent {
+    method initFields_GameFeatureEvent {} {
+        my jset whatChanged {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $anyType, $whatChanged) = @_;
-    my $self = $class->SUPER::new($anyType);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{whatChanged} = $whatChanged;
-    return $self;
+    constructor {anyType whatChanged} {
+        next $anyType
+        my initFields_GameFeatureEvent
+        my jset whatChanged $whatChanged
+    }
+    
+
+    method getWhatChanged {} {
+        return [my jget whatChanged]
+    }
+    
+
+    method getGameOption {} {
+        return [my getSource]
+    }
 }
 
-
-sub getWhatChanged {
-    my ($self) = @_;
-        return $self->{whatChanged};
+namespace eval ::GameFeatureEvent {
 }
 
-
-sub getGameOption {
-    my ($self) = @_;
-        return $self->getSource();
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-
-1;
 

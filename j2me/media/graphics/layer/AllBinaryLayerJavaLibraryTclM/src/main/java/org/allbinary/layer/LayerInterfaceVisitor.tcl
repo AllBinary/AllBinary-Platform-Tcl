@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-# Java interface
-package org::allbinary::layer::LayerInterfaceVisitor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub visit {
-    my ($self, $layerInterface) = @_;
-    die "abstract method visit";
+oo::class create ::LayerInterfaceVisitor {
+    superclass ::JObject
 }
 
+oo::define ::LayerInterfaceVisitor {
+    method initFields_LayerInterfaceVisitor {} {
+        return
+    }
+    
 
-1;
+    method visit {layerInterface} {
+        error [jexception AbstractMethodError visit]
+    }
+}
+
+namespace eval ::LayerInterfaceVisitor {
+}
+
 

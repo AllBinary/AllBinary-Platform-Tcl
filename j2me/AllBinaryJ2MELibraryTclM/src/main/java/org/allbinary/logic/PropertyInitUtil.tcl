@@ -11,36 +11,48 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic
 
-package org::allbinary::logic::PropertyInitUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::PropertyInitUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::PropertyInitUtil {
+    superclass ::JObject
 }
 
+oo::define ::PropertyInitUtil {
+    method initFields_PropertyInitUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class, $value) = @_;
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-        my $logUtil = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-        $logUtil->putF('org::allbinary::logic::string::StringMaker'->new()->append("PropertyInitUtil: ")->appendint($value)->toString(), $logUtil, $commonStrings->{CONSTRUCTOR});
-        return $org::allbinary::logic::PropertyInitUtil::instance;
+    constructor {} {
+        next
+        my initFields_PropertyInitUtil
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::PropertyInitUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::PropertyInitUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {value} {
+        set commonStrings [::CommonStrings::getInstance]
+        set logUtil [::LogUtil::getInstance]
+        $logUtil putF [[[[::StringMaker new] append "PropertyInitUtil: "] appendint $value] toString] $logUtil [$commonStrings jget CONSTRUCTOR]
+        return [::PropertyInitUtil::staticGet_instance]
+    }
+}
 
-1;
 

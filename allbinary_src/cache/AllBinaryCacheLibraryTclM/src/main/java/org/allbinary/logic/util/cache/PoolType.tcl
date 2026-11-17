@@ -11,43 +11,39 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-package org::allbinary::logic::util::cache::PoolType;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{cacheType} = undef;
+oo::class create ::PoolType {
+    superclass ::JObject
 }
 
+oo::define ::PoolType {
+    method initFields_PoolType {} {
+        my jset cacheType {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $cacheType) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{cacheType} = $cacheType;
-    return $self;
+    constructor {cacheType} {
+        next
+        my initFields_PoolType
+        my jset cacheType $cacheType
+    }
+    
+
+    method getCacheType {} {
+        return [my jget cacheType]
+    }
+    
+
+    method toString {} {
+        set POOL_TYPE "PoolType: "
+        return [string cat $POOL_TYPE [[my getCacheType] toString]]
+    }
 }
 
-
-sub getCacheType {
-    my ($self) = @_;
-        return $self->{cacheType};
+namespace eval ::PoolType {
 }
 
-
-sub toString {
-    my ($self) = @_;
-        my $POOL_TYPE = "PoolType: ";
-        return $POOL_TYPE . $self->getCacheType()->toString();
-}
-
-use java::lang::Object ();
-
-1;
 

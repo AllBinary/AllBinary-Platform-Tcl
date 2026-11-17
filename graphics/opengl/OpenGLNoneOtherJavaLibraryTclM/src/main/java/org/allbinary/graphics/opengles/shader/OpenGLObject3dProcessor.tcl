@@ -1,39 +1,32 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
-package org::allbinary::graphics::opengles::shader::OpenGLObject3dProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
+oo::class create ::OpenGLObject3dProcessor {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::OpenGLObject3dProcessor {
+    method initFields_OpenGLObject3dProcessor {} {
+        my jset commonStrings {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_OpenGLObject3dProcessor
+    }
+    
+
+    method process {gl object3d} {
+    }
+    
+
+    method process {gl object3d index} {
+    }
 }
 
-
-sub process {
-    my ($self, $gl, $object3d) = @_;
+namespace eval ::OpenGLObject3dProcessor {
 }
 
-
-# Java overloaded method: Perl keeps the last definition
-sub process {
-    my ($self, $gl, $object3d, $index) = @_;
-}
-
-use java::lang::Object ();
-use javax::microedition::khronos::opengles::GL10 ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

@@ -1,30 +1,28 @@
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::NullIndexedAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::IndexedAnimation';
-
-
-
-sub new {
-    my ($class, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($animationBehavior);
-        # super(...) made $self above
-    return $self;
+oo::class create ::NullIndexedAnimation {
+    superclass ::IndexedAnimation
 }
 
+oo::define ::NullIndexedAnimation {
+    method initFields_NullIndexedAnimation {} {
+        return
+    }
+    
 
-# throws Exception
-sub getAnimationSize {
-    my ($self) = @_;
-        return 0;
+    constructor {animationBehavior} {
+        next $animationBehavior
+        my initFields_NullIndexedAnimation
+    }
+    
+
+    method getAnimationSize {} {
+        return 0
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::IndexedAnimation ();
+namespace eval ::NullIndexedAnimation {
+}
 
-1;
 

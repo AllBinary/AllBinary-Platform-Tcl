@@ -11,35 +11,49 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary
 
-package org::allbinary::ThreedResources;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $threedResources, 'java::lang::LazyStatic', sub { 'org::allbinary::ThreedResources'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ThreedResources {
+    superclass ::JObject
 }
 
+oo::define ::ThreedResources {
+    method initFields_ThreedResources {} {
+        return
+    }
 
-sub getThreedResources {
-    my ($class) = @_;
-        return $org::allbinary::ThreedResources::threedResources;
+    constructor {} {
+        next
+        my initFields_ThreedResources
+    }
+    
+    
+
+    method add {} {
+    }
 }
 
-
-sub add {
-    my ($self) = @_;
+namespace eval ::ThreedResources {
+    variable threedResourcesValue {}
+    variable threedResourcesSet 0
+    proc staticGet_threedResources {} {
+        variable threedResourcesValue
+        variable threedResourcesSet
+        if {!$threedResourcesSet} {
+            set threedResourcesSet 1
+            set threedResourcesValue [::ThreedResources new]
+        }
+        return $threedResourcesValue
+    }
+    proc staticSet_threedResources {value} {
+        variable threedResourcesValue
+        variable threedResourcesSet
+        set threedResourcesSet 1
+        set threedResourcesValue $value
+    }
+    proc getThreedResources {} {
+        return [::ThreedResources::staticGet_threedResources]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

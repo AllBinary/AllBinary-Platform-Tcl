@@ -11,35 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary
 
-package org::allbinary::AndroidUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AndroidUtil {
+    superclass ::JObject
 }
 
+oo::define ::AndroidUtil {
+    method initFields_AndroidUtil {} {
+        return
+    }
+    
 
-sub isMemoryRestrictive {
-    my ($class) = @_;
-        return 1;
+    constructor {} {
+        next
+        my initFields_AndroidUtil
+    }
+    
+    
 }
 
-
-sub isAndroid {
-    my ($class) = @_;
-        return 0;
+namespace eval ::AndroidUtil {
+    proc isMemoryRestrictive {} {
+        return true
+    }
+    proc isAndroid {} {
+        return false
+    }
 }
 
-use java::lang::Object ();
-
-1;
 

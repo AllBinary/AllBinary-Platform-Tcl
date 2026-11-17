@@ -11,92 +11,88 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.sequence
 
-package org::allbinary::game::ag::ai::sequence::SequenceAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ag::ai::ArrayAI';
-
-our $SEQUENCE_AI = "Sequence AI";
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{index} = 0;
+oo::class create ::SequenceAI {
+    superclass ::ArrayAI
 }
 
+oo::define ::SequenceAI {
+    method initFields_SequenceAI {} {
+        my jset index 0
+        my jset index 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $artificialIntelligenceInterfaceArray, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($artificialIntelligenceInterfaceArray, $ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
-}
+    constructor {artificialIntelligenceInterfaceArray ownerLayerInterface gameInput} {
+        next $artificialIntelligenceInterfaceArray $ownerLayerInterface $gameInput
+        my initFields_SequenceAI
+    }
+    
 
+    method processAI {allBinaryLayerManager} {
+        [[my getArtificialIntelligenceInterface] get [my jget index]] processAI $allBinaryLayerManager
+    }
+    
 
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        $self->getArtificialIntelligenceInterface()->[$self->{index}]->processAI($allBinaryLayerManager);
-}
-
-
-sub next {
-    my ($self) = @_;
-        $self->{index}++;
-        my $artificialIntelligenceInterface = $self->getSelectedArtificialIntelligenceInterface();
-        if ($artificialIntelligenceInterface->getId() == $org::allbinary::ai::ArtificialIntelligence::AI_ID) {
-            my $artificialIntelligenceTransitionInterface = $artificialIntelligenceInterface;
-            $artificialIntelligenceTransitionInterface->transition();
+    method next {} {
+        my jpostinc index 1
+        set artificialIntelligenceInterface [my getSelectedArtificialIntelligenceInterface]
+        if {[expr {[$artificialIntelligenceInterface getId] == [::ArtificialIntelligence::staticGet_AI_ID]}]} {
+            set artificialIntelligenceTransitionInterface $artificialIntelligenceInterface
+            $artificialIntelligenceTransitionInterface transition
         }
+    }
+    
+
+    method getIndex {} {
+        return [my jget index]
+    }
+    
+
+    method setIndex {index} {
+        my jset index $index
+    }
+    
+
+    method getSelectedArtificialIntelligenceInterface {} {
+        return [[my getArtificialIntelligenceInterface] get [my jget index]]
+    }
+    
+
+    method getName {} {
+        return [::SequenceAI::staticGet_SEQUENCE_AI]
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append [next]
+        $stringBuffer append " Selected AI: "
+        $stringBuffer append [[::StringUtil::getInstance] toString1 [my getSelectedArtificialIntelligenceInterface]]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub getIndex {
-    my ($self) = @_;
-        return $self->{index};
+namespace eval ::SequenceAI {
+    variable SEQUENCE_AIValue {}
+    variable SEQUENCE_AISet 0
+    proc staticGet_SEQUENCE_AI {} {
+        variable SEQUENCE_AIValue
+        variable SEQUENCE_AISet
+        if {!$SEQUENCE_AISet} {
+            set SEQUENCE_AISet 1
+            set SEQUENCE_AIValue "Sequence AI"
+        }
+        return $SEQUENCE_AIValue
+    }
+    proc staticSet_SEQUENCE_AI {value} {
+        variable SEQUENCE_AIValue
+        variable SEQUENCE_AISet
+        set SEQUENCE_AISet 1
+        set SEQUENCE_AIValue $value
+    }
 }
 
-
-sub setIndex {
-    my ($self, $index) = @_;
-        $self->{index} = $index;
-}
-
-
-sub getSelectedArtificialIntelligenceInterface {
-    my ($self) = @_;
-        return $self->getArtificialIntelligenceInterface()->[$self->{index}];
-}
-
-
-sub getName {
-    my ($self) = @_;
-        return $org::allbinary::game::ag::ai::sequence::SequenceAI::SEQUENCE_AI;
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append($self->SUPER::toString());
-        $stringBuffer->append(" Selected AI: ");
-        $stringBuffer->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($self->getSelectedArtificialIntelligenceInterface()));
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use org::allbinary::ai::ArtificialIntelligence ();
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-use org::allbinary::ai::ArtificialIntelligenceTransitionInterface ();
-use org::allbinary::game::ag::ai::ArrayAI ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-
-1;
 

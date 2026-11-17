@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.bounds.event
 
-# Java interface
-package org::allbinary::bounds::event::BoundsChangeEventListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-sub onBoundsChangeEvent {
-    my ($self, $boundsChangeEvent) = @_;
-    die "abstract method onBoundsChangeEvent";
+oo::class create ::BoundsChangeEventListener {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::BoundsChangeEventListener {
+    method initFields_BoundsChangeEventListener {} {
+        return
+    }
+    
 
-1;
+    method onBoundsChangeEvent {boundsChangeEvent} {
+        error [jexception AbstractMethodError onBoundsChangeEvent]
+    }
+}
+
+namespace eval ::BoundsChangeEventListener {
+}
+
 

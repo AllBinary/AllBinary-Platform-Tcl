@@ -11,69 +11,51 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.init
 
-package org::allbinary::game::init::CommonGameInitialization;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::init::BaseGameInitialization';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
+oo::class create ::CommonGameInitialization {
+    superclass ::BaseGameInitialization
 }
 
+oo::define ::CommonGameInitialization {
+    method initFields_CommonGameInitialization {} {
+        my jset commonStrings {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $resourceInitializationArray, $portion) = @_;
-    my $self = $class->SUPER::new($resourceInitializationArray, $portion);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
-}
+    constructor {resourceInitializationArray portion} {
+        next $resourceInitializationArray $portion
+        my initFields_CommonGameInitialization
+    }
+    
 
-
-# throws Exception
-sub init {
-    my ($self, $abeClientInformation, $commandListener, $level) = @_;
-        $self->SUPER::init($abeClientInformation, $commandListener, $level);
-        my $resourceLoadingLevelFactory = 'org::allbinary::game::resource::ResourceLoadingLevelFactory'->getInstance();
-        if (!$self->isGameInitialized() && $level == $resourceLoadingLevelFactory->{LOAD_ALL}->getLevel()) {
-            $self->setGameInitialized(1);
-            my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-            'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->init();
-            $progressCanvas->addNormalPortion(50, "Integers");
-            'org::allbinary::graphics::PointFactory'->getInstance()->init();
-            $progressCanvas->addNormalPortion(50, "Points");
-            'org::allbinary::math::AngleFactory'->getInstance();
-            $progressCanvas->addNormalPortion(50, "Angles");
-            $self->initGame();
-            $self->{resourceInitializationArray}->[$self->{GAME_RESOURCES}]->init();
+    method init {abeClientInformation commandListener level} {
+        next $abeClientInformation $commandListener $level
+        set resourceLoadingLevelFactory [::ResourceLoadingLevelFactory::getInstance]
+        if {[expr {[expr {![my isGameInitialized]}] && [expr {$level == [[$resourceLoadingLevelFactory jget LOAD_ALL] getLevel]}]}]} {
+            my setGameInitialized true
+            set progressCanvas [::ProgressCanvasFactory::getInstance]
+            [::SmallIntegerSingletonFactory::getInstance] init
+            $progressCanvas addNormalPortion 50 "Integers"
+            [::PointFactory::getInstance] init
+            $progressCanvas addNormalPortion 50 "Points"
+            ::AngleFactory::getInstance
+            $progressCanvas addNormalPortion 50 "Angles"
+            my initGame
+            [[my jget resourceInitializationArray] get [my jget GAME_RESOURCES]] init
         }
-        $self->SUPER::resourceInitialization($level);
+        next $level
+    }
+    
+
+    method initGame {} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
 }
 
-
-# throws Exception
-sub initGame {
-    my ($self) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
+namespace eval ::CommonGameInitialization {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::CommandListener ();
-use org::allbinary::game::resource::ResourceInitialization ();
-use org::allbinary::game::resource::ResourceLoadingLevelFactory ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvas ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::math::AngleFactory ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::init::BaseGameInitialization ();
-
-1;
 

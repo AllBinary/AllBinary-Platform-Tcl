@@ -11,33 +11,31 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.view
 
-package org::allbinary::view::CenterStaticViewPositionFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::CenterStaticViewPositionFactory {
+    superclass ::JObject
 }
 
+oo::define ::CenterStaticViewPositionFactory {
+    method initFields_CenterStaticViewPositionFactory {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($self, $z) = @_;
-        my $displayInfoSingleton = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-        return 'org::allbinary::view::StaticViewPosition'->new((POSIX::floor(($displayInfoSingleton->getLastWidth()) / (2 ** (1)))), (POSIX::floor(($displayInfoSingleton->getLastHeight()) / (2 ** (1)))), $z);
+    constructor {} {
+        next
+        my initFields_CenterStaticViewPositionFactory
+    }
+    
+
+    method getInstance {z} {
+        set displayInfoSingleton [::DisplayInfoSingleton::getInstance]
+        return [::StaticViewPosition new ([expr {[$displayInfoSingleton getLastWidth] >> 1}]) ([expr {[$displayInfoSingleton getLastHeight] >> 1}]) $z]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::view::StaticViewPosition ();
+namespace eval ::CenterStaticViewPositionFactory {
+}
 
-1;
 

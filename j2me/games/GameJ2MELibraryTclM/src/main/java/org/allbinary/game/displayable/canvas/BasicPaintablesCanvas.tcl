@@ -11,51 +11,41 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::BasicPaintablesCanvas;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::displayable::canvas::GameCommandCanvas';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{paintableArray} = undef;
-    $self->{colorFillPaintable} = undef;
+oo::class create ::BasicPaintablesCanvas {
+    superclass ::GameCommandCanvas
 }
 
+oo::define ::BasicPaintablesCanvas {
+    method initFields_BasicPaintablesCanvas {} {
+        my jset paintableArray {}
+        my jset colorFillPaintable {}
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $cmdListener, $name, $allBinaryGameLayerManager, $paintableArray) = @_;
-    my $self = $class->SUPER::new($cmdListener, $name, $allBinaryGameLayerManager->getBackgroundBasicColor(), $allBinaryGameLayerManager->getForegroundBasicColor());
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{paintableArray} = $paintableArray;
-        $self->{colorFillPaintable} = 'org::allbinary::game::paint::ColorFillPaintableFactory'->getInstance()->getInstance($allBinaryGameLayerManager->getBackgroundBasicColor(), 0);
-    return $self;
-}
+    constructor {cmdListener name allBinaryGameLayerManager paintableArray} {
+        next $cmdListener $name [$allBinaryGameLayerManager getBackgroundBasicColor] [$allBinaryGameLayerManager getForegroundBasicColor]
+        my initFields_BasicPaintablesCanvas
+        my jset paintableArray $paintableArray
+        my jset colorFillPaintable [[::ColorFillPaintableFactory::getInstance] getInstance [$allBinaryGameLayerManager getBackgroundBasicColor] false]
+    }
+    
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{colorFillPaintable}->paint($graphics);
-        $graphics->setColor($self->{foregroundColor});
-        for (my $index = scalar(@{$self->{paintableArray}}) - 1; $index >= 0; $index--) {
-            $self->{paintableArray}->[$index]->paint($graphics);
+    method paint {graphics} {
+        [my jget colorFillPaintable] paint $graphics
+        $graphics setColor [my jget foregroundColor]
+        for {set index [jint [expr {[[my jget paintableArray] length] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            [[my jget paintableArray] get $index] paint $graphics
         }
-        $self->SUPER::paint($graphics);
+        next $graphics
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::CommandListener ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::layer::AllBinaryGameLayerManager ();
-use org::allbinary::game::paint::ColorFillBasePaintable ();
-use org::allbinary::game::paint::ColorFillPaintableFactory ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::game::displayable::canvas::GameCommandCanvas ();
+namespace eval ::BasicPaintablesCanvas {
+}
 
-1;
 

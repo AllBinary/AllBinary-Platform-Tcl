@@ -11,38 +11,32 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::KeyFactoryInitializer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::init::Init';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::KeyFactoryInitializer {
+    superclass ::Init
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
+oo::define ::KeyFactoryInitializer {
+    method initFields_KeyFactoryInitializer {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_KeyFactoryInitializer
+    }
+    
+
+    method init {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget INIT]
+        [::SmallIntegerSingletonFactory::getInstance] initWithRange 0x2D0 6
+    }
 }
 
-
-sub init {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{INIT});
-        'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->initWithRange(0x2D0, 6);
+namespace eval ::KeyFactoryInitializer {
 }
 
-use java::lang::Object ();
-use org::allbinary::init::Init ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-
-1;
 

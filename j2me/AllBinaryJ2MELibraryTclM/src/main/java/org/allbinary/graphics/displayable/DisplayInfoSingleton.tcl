@@ -11,472 +11,467 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable
 
-package org::allbinary::graphics::displayable::DisplayInfoSingleton;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonLabels} = 'org::allbinary::string::CommonLabels'->getInstance();
-    $self->{commonSeps} = 'org::allbinary::string::CommonSeps'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{ORIENTATION} = "ORIENTATION";
-    $self->{ADJUSTING_FOR_SCALING_IN_PORTRAIT} = "Adjusting for Scaling in portrait display ratio: ";
-    $self->{ADJUSTING_FOR_SCALING_IN_LANDSCAPE} = "Adjusting for Scaling in landscape display ratio: ";
-    $self->{last} = [(0) x (4)];
-    $self->{lastHalf} = [(0) x (4)];
-    $self->{full} = [(0) x (4)];
-    $self->{top} = 0;
-    $self->{left} = 0;
-    $self->{xOffset} = 0;
-    $self->{yOffset} = 0;
-    $self->{scaleLargestTo} = 0.0;
-    $self->{WIDTH} = 0;
-    $self->{HEIGHT} = 1;
-    $self->{CUSTOM_WIDTH} = 2;
-    $self->{CUSTOM_HEIGHT} = 3;
-    $self->{scalableListener} = 'org::allbinary::graphics::displayable::BaseScalable'->new();
-    $self->{displayRatio} = 0.0;
-    $self->{ratio} = 1.0;
-    $self->{SET_LAST_SIZE_METHOD_NAME} = "setLastSize";
-    $self->{FULL_WIDTH} = " FullWidth: ";
-    $self->{FULL_HEIGHT} = " FullHeight: ";
-    $self->{LAST_WIDTH} = "LastWidth: ";
-    $self->{LAST_HEIGHT} = " LastHeight: ";
-    $self->{PORTRAIT} = "Portrait";
-    $self->{LANDSCAPE} = "Landscape";
-    $self->{displayChangeEvent} = 'org::allbinary::graphics::displayable::event::DisplayChangeEvent'->new($self);
-    $self->{FIRE_METHOD_NAME} = "fire";
-    $self->{REASON} = "reason: ";
-    $self->{UPDATE_FROM_ORIENTATION_CHANGE} = "Updating from Orientation Change ";
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{DISPLAY_INFO} = "Display Info: ";
-    $self->{FULL} = "full";
-    $self->{LAST} = "last";
-    $self->{LAST_HALF} = "lastHalf";
+oo::class create ::DisplayInfoSingleton {
+    superclass ::JObject
 }
 
+oo::define ::DisplayInfoSingleton {
+    method initFields_DisplayInfoSingleton {} {
+        my jset logUtil {}
+        my jset commonLabels {}
+        my jset commonSeps {}
+        my jset commonStrings {}
+        my jset ORIENTATION {}
+        my jset ADJUSTING_FOR_SCALING_IN_PORTRAIT {}
+        my jset ADJUSTING_FOR_SCALING_IN_LANDSCAPE {}
+        my jset last {}
+        my jset lastHalf {}
+        my jset full {}
+        my jset top 0
+        my jset left 0
+        my jset xOffset 0
+        my jset yOffset 0
+        my jset scaleLargestTo 0.0
+        my jset WIDTH 0
+        my jset HEIGHT 0
+        my jset CUSTOM_WIDTH 0
+        my jset CUSTOM_HEIGHT 0
+        my jset scalableListener {}
+        my jset displayRatio 0.0
+        my jset ratio 0.0
+        my jset SET_LAST_SIZE_METHOD_NAME {}
+        my jset FULL_WIDTH {}
+        my jset FULL_HEIGHT {}
+        my jset LAST_WIDTH {}
+        my jset LAST_HEIGHT {}
+        my jset PORTRAIT {}
+        my jset LANDSCAPE {}
+        my jset displayChangeEvent {}
+        my jset FIRE_METHOD_NAME {}
+        my jset REASON {}
+        my jset UPDATE_FROM_ORIENTATION_CHANGE {}
+        my jset list {}
+        my jset DISPLAY_INFO {}
+        my jset FULL {}
+        my jset LAST {}
+        my jset LAST_HALF {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonLabels [::CommonLabels::getInstance]
+        my jset commonSeps [::CommonSeps::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset ORIENTATION "ORIENTATION"
+        my jset ADJUSTING_FOR_SCALING_IN_PORTRAIT "Adjusting for Scaling in portrait display ratio: "
+        my jset ADJUSTING_FOR_SCALING_IN_LANDSCAPE "Adjusting for Scaling in landscape display ratio: "
+        my jset last [jarray 4 0]
+        my jset lastHalf [jarray 4 0]
+        my jset full [jarray 4 0]
+        my jset top 0
+        my jset left 0
+        my jset xOffset 0
+        my jset yOffset 0
+        my jset scaleLargestTo 0.0
+        my jset WIDTH 0
+        my jset HEIGHT 1
+        my jset CUSTOM_WIDTH 2
+        my jset CUSTOM_HEIGHT 3
+        my jset scalableListener [::BaseScalable new]
+        my jset displayRatio 0.0
+        my jset ratio 1.0
+        my jset SET_LAST_SIZE_METHOD_NAME "setLastSize"
+        my jset FULL_WIDTH " FullWidth: "
+        my jset FULL_HEIGHT " FullHeight: "
+        my jset LAST_WIDTH "LastWidth: "
+        my jset LAST_HEIGHT " LastHeight: "
+        my jset PORTRAIT "Portrait"
+        my jset LANDSCAPE "Landscape"
+        my jset displayChangeEvent [::DisplayChangeEvent new [self]]
+        my jset FIRE_METHOD_NAME "fire"
+        my jset REASON "reason: "
+        my jset UPDATE_FROM_ORIENTATION_CHANGE "Updating from Orientation Change "
+        my jset list [::BasicArrayListD new]
+        my jset DISPLAY_INFO "Display Info: "
+        my jset FULL "full"
+        my jset LAST "last"
+        my jset LAST_HALF "lastHalf"
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::displayable::DisplayInfoSingleton::SINGLETON;
-}
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $size = scalar(@{$self->{last}});
-        for (my $index = 0; $index < $size; $index++) {
-            $self->{last}->[$index] = 0;
-            $self->{lastHalf}->[$index] = 0;
-            $self->{full}->[$index] = 0;
+    constructor {} {
+        next
+        my initFields_DisplayInfoSingleton
+        set size [[my jget last] length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            [my jget last] set $index 0
+            [my jget lastHalf] set $index 0
+            [my jget full] set $index 0
         }
-        if ('org::allbinary::AndroidUtil'->isAndroid()) {
-            $self->{scaleLargestTo} = 640.0;
+        if {[::AndroidUtil::isAndroid]} {
+            my jset scaleLargestTo 640.0
         } else {
-            $self->{scaleLargestTo} = 1080.0;
+            my jset scaleLargestTo 1080.0
         }
-    return $self;
-}
+    }
+    
 
+    method getLastHalf {} {
+        return [my jget lastHalf]
+    }
+    
 
-sub getLastHalf {
-    my ($self) = @_;
-        return $self->{lastHalf};
-}
+    method getLast {} {
+        return [my jget last]
+    }
+    
 
+    method getFull {} {
+        return [my jget full]
+    }
+    
 
-sub getLast {
-    my ($self) = @_;
-        return $self->{last};
-}
+    method getScaleLargestTo {} {
+        return [my jget scaleLargestTo]
+    }
+    
 
+    method setScaleLargestTo {scaleLargestTo} {
+        my jset scaleLargestTo [expr {double($scaleLargestTo)}]
+    }
+    
 
-sub getFull {
-    my ($self) = @_;
-        return $self->{full};
-}
-
-
-sub getScaleLargestTo {
-    my ($self) = @_;
-        return $self->{scaleLargestTo};
-}
-
-
-sub setScaleLargestTo {
-    my ($self, $scaleLargestTo) = @_;
-        $self->{scaleLargestTo} = $scaleLargestTo;
-}
-
-
-sub setLastSize {
-    my ($self, $aLastWidth, $aLastHeight, $reason) = @_;
-        if ($self->{full}->[$self->{WIDTH}] != $aLastWidth || $self->{full}->[$self->{HEIGHT}] != $aLastHeight) {
-            $self->setLastSizeForce($aLastWidth, $aLastHeight, $reason);
+    method setLastSize {aLastWidth aLastHeight reason} {
+        if {[expr {[expr {[[my jget full] get [my jget WIDTH]] != $aLastWidth}] || [expr {[[my jget full] get [my jget HEIGHT]] != $aLastHeight}]}]} {
+            my setLastSizeForce $aLastWidth $aLastHeight $reason
         }
-}
+    }
+    
 
-
-sub setLastSizeForce {
-    my ($self, $aLastWidth, $aLastHeight, $reason) = @_;
-        my $stringMaker = 'org::allbinary::logic::string::StringMaker'->new();
-        $self->{logUtil}->putF($stringMaker->append('org::allbinary::string::CommonLabels'->getInstance()->{START_LABEL})->append($reason)->toString(), $self, $self->{SET_LAST_SIZE_METHOD_NAME});
-        my $aFullWidth = $aLastWidth;
-        my $aFullHeight = $aLastHeight;
-        $stringMaker->delete(0, $stringMaker->length());
-        $self->{logUtil}->putF($stringMaker->append($self->{FULL_WIDTH})->appendint($aFullWidth)->append($self->{FULL_HEIGHT})->appendint($aFullHeight)->append($self->toString())->toString(), $self, $self->{SET_LAST_SIZE_METHOD_NAME});
-        my $operatingSystemInterface = 'org::allbinary::logic::system::os::OperatingSystemFactory'->getInstance()->getOperatingSystemInstance();
-        if ($operatingSystemInterface->isOverScan()) {
-            $aLastWidth = $aLastWidth * $operatingSystemInterface->getOverScanXPercent() / 100;
-            $aLastHeight = $aLastHeight * $operatingSystemInterface->getOverScanYPercent() / 100;
+    method setLastSizeForce {aLastWidth aLastHeight reason} {
+        set stringMaker [::StringMaker new]
+        [my jget logUtil] putF [[[$stringMaker append [[::CommonLabels::getInstance] jget START_LABEL]] append $reason] toString] [self] [my jget SET_LAST_SIZE_METHOD_NAME]
+        set aFullWidth $aLastWidth
+        set aFullHeight $aLastHeight
+        $stringMaker delete 0 [$stringMaker length]
+        [my jget logUtil] putF [[[[[[$stringMaker append [my jget FULL_WIDTH]] appendint $aFullWidth] append [my jget FULL_HEIGHT]] appendint $aFullHeight] append [my toString]] toString] [self] [my jget SET_LAST_SIZE_METHOD_NAME]
+        set operatingSystemInterface [[::OperatingSystemFactory::getInstance] getOperatingSystemInstance]
+        if {[$operatingSystemInterface isOverScan]} {
+            set aLastWidth [expr {[expr {$aLastWidth * [$operatingSystemInterface getOverScanXPercent]}] / 100}]
+            set aLastHeight [expr {[expr {$aLastHeight * [$operatingSystemInterface getOverScanYPercent]}] / 100}]
         }
-        if ($operatingSystemInterface->isScalable()) {
-            if ($self->isPortraitWH($aLastWidth, $aLastHeight)) {
-                if ($aLastHeight > $self->{scaleLargestTo}) {
-                    $self->{displayRatio} = $self->{scaleLargestTo} / $aLastHeight;
-                    $self->{ratio} = $aLastHeight / $self->{scaleLargestTo};
-                    $stringMaker->delete(0, $stringMaker->length());
-                    $self->{logUtil}->putF($stringMaker->append($self->{ADJUSTING_FOR_SCALING_IN_PORTRAIT})->appendfloat($self->{displayRatio})->toString(), $self, $self->{SET_LAST_SIZE_METHOD_NAME});
-                    $aLastWidth = int(($aLastWidth * $self->{displayRatio}));
-                    $aLastHeight = int(($aLastHeight * $self->{displayRatio}));
-                    $self->{scalableListener}->scale($self->{ratio});
+        if {[$operatingSystemInterface isScalable]} {
+            if {[my isPortraitWH $aLastWidth $aLastHeight]} {
+                if {[expr {[expr {double($aLastHeight)}] > [my jget scaleLargestTo]}]} {
+                    my jset displayRatio [expr {[my jget scaleLargestTo] / [expr {double($aLastHeight)}]}]
+                    my jset ratio [expr {[expr {double($aLastHeight)}] / [my jget scaleLargestTo]}]
+                    $stringMaker delete 0 [$stringMaker length]
+                    [my jget logUtil] putF [[[$stringMaker append [my jget ADJUSTING_FOR_SCALING_IN_PORTRAIT]] appendfloat [my jget displayRatio]] toString] [self] [my jget SET_LAST_SIZE_METHOD_NAME]
+                    set aLastWidth [jint [jd2i ([expr {[expr {double($aLastWidth)}] * [my jget displayRatio]}])]]
+                    set aLastHeight [jint [jd2i ([expr {[expr {double($aLastHeight)}] * [my jget displayRatio]}])]]
+                    [my jget scalableListener] scale [my jget ratio]
                 } else {
-                    $self->{ratio} = 1.0;
-                    $self->{scalableListener}->scale($self->{ratio});
+                    my jset ratio 1.0
+                    [my jget scalableListener] scale [my jget ratio]
                 }
             } else {
-                if ($aLastWidth > $self->{scaleLargestTo}) {
-                    $self->{displayRatio} = $self->{scaleLargestTo} / $aLastWidth;
-                    $self->{ratio} = $aLastWidth / $self->{scaleLargestTo};
-                    $stringMaker->delete(0, $stringMaker->length());
-                    $self->{logUtil}->putF($stringMaker->append($self->{ADJUSTING_FOR_SCALING_IN_LANDSCAPE})->appendfloat($self->{displayRatio})->toString(), $self, $self->{SET_LAST_SIZE_METHOD_NAME});
-                    $aLastWidth = int(($aLastWidth * $self->{displayRatio}));
-                    $aLastHeight = int(($aLastHeight * $self->{displayRatio}));
-                    $self->{scalableListener}->scale($self->{ratio});
+                if {[expr {[expr {double($aLastWidth)}] > [my jget scaleLargestTo]}]} {
+                    my jset displayRatio [expr {[my jget scaleLargestTo] / [expr {double($aLastWidth)}]}]
+                    my jset ratio [expr {[expr {double($aLastWidth)}] / [my jget scaleLargestTo]}]
+                    $stringMaker delete 0 [$stringMaker length]
+                    [my jget logUtil] putF [[[$stringMaker append [my jget ADJUSTING_FOR_SCALING_IN_LANDSCAPE]] appendfloat [my jget displayRatio]] toString] [self] [my jget SET_LAST_SIZE_METHOD_NAME]
+                    set aLastWidth [jint [jd2i ([expr {[expr {double($aLastWidth)}] * [my jget displayRatio]}])]]
+                    set aLastHeight [jint [jd2i ([expr {[expr {double($aLastHeight)}] * [my jget displayRatio]}])]]
+                    [my jget scalableListener] scale [my jget ratio]
                 } else {
-                    $self->{ratio} = 1.0;
-                    $self->{scalableListener}->scale($self->{ratio});
+                    my jset ratio 1.0
+                    [my jget scalableListener] scale [my jget ratio]
                 }
             }
         }
-        $stringMaker->delete(0, $stringMaker->length());
-        $self->{logUtil}->putF($stringMaker->append($self->{LAST_WIDTH})->appendint($aLastWidth)->append($self->{LAST_HEIGHT})->appendint($aLastHeight)->toString(), $self, $self->{SET_LAST_SIZE_METHOD_NAME});
-        $self->{xOffset} = $aFullWidth - $aLastWidth;
-        $self->{yOffset} = $aFullHeight - $aLastHeight;
-        $self->{left} = $self->{scalableListener}->getLeft($self->{xOffset});
-        $self->{top} = $self->{scalableListener}->getTop($self->{yOffset});
-        $self->{full}->[$self->{WIDTH}] = $aFullWidth;
-        $self->{full}->[$self->{HEIGHT}] = $aFullHeight;
-        $self->{last}->[$self->{WIDTH}] = $aLastWidth;
-        $self->{lastHalf}->[$self->{WIDTH}] = (POSIX::floor(($self->{last}->[$self->{WIDTH}]) / (2 ** (1))));
-        $self->{last}->[$self->{HEIGHT}] = $aLastHeight;
-        $self->{lastHalf}->[$self->{HEIGHT}] = (POSIX::floor(($self->{last}->[$self->{HEIGHT}]) / (2 ** (1))));
-        'org::allbinary::graphics::threed::SWTJOGLProcessor'->getInstance()->setCustom($aLastWidth, $aLastHeight, $self->{ratio});
-        $self->add($self->{SET_LAST_SIZE_METHOD_NAME});
-}
+        $stringMaker delete 0 [$stringMaker length]
+        [my jget logUtil] putF [[[[[$stringMaker append [my jget LAST_WIDTH]] appendint $aLastWidth] append [my jget LAST_HEIGHT]] appendint $aLastHeight] toString] [self] [my jget SET_LAST_SIZE_METHOD_NAME]
+        my jset xOffset [jint [expr {$aFullWidth - $aLastWidth}]]
+        my jset yOffset [jint [expr {$aFullHeight - $aLastHeight}]]
+        my jset left [[my jget scalableListener] getLeft [my jget xOffset]]
+        my jset top [[my jget scalableListener] getTop [my jget yOffset]]
+        [my jget full] set [my jget WIDTH] $aFullWidth
+        [my jget full] set [my jget HEIGHT] $aFullHeight
+        [my jget last] set [my jget WIDTH] $aLastWidth
+        [my jget lastHalf] set [my jget WIDTH] ([expr {[[my jget last] get [my jget WIDTH]] >> 1}])
+        [my jget last] set [my jget HEIGHT] $aLastHeight
+        [my jget lastHalf] set [my jget HEIGHT] ([expr {[[my jget last] get [my jget HEIGHT]] >> 1}])
+        [::SWTJOGLProcessor::getInstance] setCustom $aLastWidth $aLastHeight [my jget ratio]
+        my add [my jget SET_LAST_SIZE_METHOD_NAME]
+    }
+    
 
-
-sub isPortraitWH {
-    my ($self, $lastWidth, $lastHeight) = @_;
-        if ($lastHeight > $lastWidth) {
-            return 1;
+    method isPortraitWH {lastWidth lastHeight} {
+        if {[expr {$lastHeight > $lastWidth}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
-}
+    }
+    
 
+    method isPortrait {} {
+        return [my isPortraitWH [[my jget last] get [my jget WIDTH]] [[my jget last] get [my jget HEIGHT]]]
+    }
+    
 
-sub isPortrait {
-    my ($self) = @_;
-        return $self->isPortraitWH($self->{last}->[$self->{WIDTH}], $self->{last}->[$self->{HEIGHT}]);
-}
+    method add {reason} {
+        set stringMaker [::StringMaker new]
+        [my jget logUtil] putF [[[$stringMaker append [my jget REASON]] append $reason] toString] [self] [my jget FIRE_METHOD_NAME]
+        $stringMaker delete 0 [$stringMaker length]
+        [my jget logUtil] putF [my toStringAppend $stringMaker] [self] [my jget FIRE_METHOD_NAME]
+        [my jget list] add $reason
+    }
+    
 
-
-sub add {
-    my ($self, $reason) = @_;
-        my $stringMaker = 'org::allbinary::logic::string::StringMaker'->new();
-        $self->{logUtil}->putF($stringMaker->append($self->{REASON})->append($reason)->toString(), $self, $self->{FIRE_METHOD_NAME});
-        $stringMaker->delete(0, $stringMaker->length());
-        $self->{logUtil}->putF($self->toStringAppend($stringMaker), $self, $self->{FIRE_METHOD_NAME});
-        $self->{list}->add($reason);
-}
-
-
-sub process {
-    my ($self) = @_;
+    method process {} {
         try {
-            if ($self->{list}->size() > 0) {
-                $self->processForced();
+            if {[expr {[[my jget list] size] > 0}]} {
+                my processForced
             }
-            $self->{list}->clear();
-        } catch ($e) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->putOE($self->{commonStrings}->{EXCEPTION}, $self, $self->{FIRE_METHOD_NAME}, $e);
+            [my jget list] clear
+        } on error {e} {
+            ::PreLogUtil::putOE [[my jget commonStrings] jget EXCEPTION] [self] [my jget FIRE_METHOD_NAME] $e
         }
-}
+    }
+    
 
-
-sub processForced {
-    my ($self) = @_;
+    method processForced {} {
         try {
-            my $swtJOGLProcessor = 'org::allbinary::graphics::threed::SWTJOGLProcessor'->getInstance();
-            $swtJOGLProcessor->clear();
-            'org::allbinary::graphics::displayable::event::DisplayChangeEventHandler'->getInstance()->fireEvent($self->{displayChangeEvent});
-            'org::allbinary::graphics::displayable::event::LastDisplayChangeEventHandler'->getInstance()->fireEvent($self->{displayChangeEvent});
-            $swtJOGLProcessor->onSurfaceChanged();
-        } catch ($e) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->putOE($self->{commonStrings}->{EXCEPTION}, $self, $self->{FIRE_METHOD_NAME}, $e);
+            set swtJOGLProcessor [::SWTJOGLProcessor::getInstance]
+            $swtJOGLProcessor clear
+            [::DisplayChangeEventHandler::getInstance] fireEvent [my jget displayChangeEvent]
+            [::LastDisplayChangeEventHandler::getInstance] fireEvent [my jget displayChangeEvent]
+            $swtJOGLProcessor onSurfaceChanged
+        } on error {e} {
+            ::PreLogUtil::putOE [[my jget commonStrings] jget EXCEPTION] [self] [my jget FIRE_METHOD_NAME] $e
         }
-}
+    }
+    
 
-
-sub update {
-    my ($self, $displayable, $reason) = @_;
-        my $aLastWidth = $displayable->getWidth();
-        my $aLastHeight = $displayable->getHeight();
-        my $aFullWidth = $aLastWidth;
-        my $aFullHeight = $aLastHeight;
-        my $stringMaker = 'org::allbinary::logic::string::StringMaker'->new();
-        $self->{logUtil}->putF($stringMaker->append('org::allbinary::string::CommonLabels'->getInstance()->{START_LABEL})->append($reason)->append($self->{LAST_WIDTH})->appendint($aLastWidth)->append($self->{LAST_HEIGHT})->appendint($aLastHeight)->append($self->{commonSeps}->{SPACE})->append($self->toString())->toString(), $self, $self->{commonStrings}->{UPDATE});
-        if ($aLastWidth > 0 && $aLastHeight > 0) {
-            my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-            my $openGLFeatureFactory = 'org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance();
-            if (!$features->isDefault($openGLFeatureFactory->{OPENGL}) || $self->{last}->[$self->{WIDTH}] != $aLastWidth || $self->{last}->[$self->{HEIGHT}] != $aLastHeight) {
-                $stringMaker->delete(0, $stringMaker->length());
-                $self->{logUtil}->putF($stringMaker->append($self->{UPDATE_FROM_ORIENTATION_CHANGE})->toString(), $self, $self->{commonStrings}->{UPDATE});
-                my $operatingSystemInterface = 'org::allbinary::logic::system::os::OperatingSystemFactory'->getInstance()->getOperatingSystemInstance();
-                if ($operatingSystemInterface->isOverScan()) {
-                    $aLastWidth = $aLastWidth * $operatingSystemInterface->getOverScanXPercent() / 100;
-                    $aLastHeight = $aLastHeight * $operatingSystemInterface->getOverScanYPercent() / 100;
+    method update {displayable reason} {
+        set aLastWidth [$displayable getWidth]
+        set aLastHeight [$displayable getHeight]
+        set aFullWidth $aLastWidth
+        set aFullHeight $aLastHeight
+        set stringMaker [::StringMaker new]
+        [my jget logUtil] putF [[[[[[[[[$stringMaker append [[::CommonLabels::getInstance] jget START_LABEL]] append $reason] append [my jget LAST_WIDTH]] appendint $aLastWidth] append [my jget LAST_HEIGHT]] appendint $aLastHeight] append [[my jget commonSeps] jget SPACE]] append [my toString]] toString] [self] [[my jget commonStrings] jget UPDATE]
+        if {[expr {[expr {$aLastWidth > 0}] && [expr {$aLastHeight > 0}]}]} {
+            set features [::Features::getInstance]
+            set openGLFeatureFactory [::OpenGLFeatureFactory::getInstance]
+            if {[expr {[expr {[expr {![$features isDefault [$openGLFeatureFactory jget OPENGL]]}] || [expr {[[my jget last] get [my jget WIDTH]] != $aLastWidth}]}] || [expr {[[my jget last] get [my jget HEIGHT]] != $aLastHeight}]}]} {
+                $stringMaker delete 0 [$stringMaker length]
+                [my jget logUtil] putF [[$stringMaker append [my jget UPDATE_FROM_ORIENTATION_CHANGE]] toString] [self] [[my jget commonStrings] jget UPDATE]
+                set operatingSystemInterface [[::OperatingSystemFactory::getInstance] getOperatingSystemInstance]
+                if {[$operatingSystemInterface isOverScan]} {
+                    set aLastWidth [expr {[expr {$aLastWidth * [$operatingSystemInterface getOverScanXPercent]}] / 100}]
+                    set aLastHeight [expr {[expr {$aLastHeight * [$operatingSystemInterface getOverScanYPercent]}] / 100}]
                 }
-                if ($operatingSystemInterface->isScalable()) {
-                    if ($self->isPortraitWH($aLastWidth, $aLastHeight)) {
-                        if ($aLastHeight > $self->{scaleLargestTo}) {
-                            $self->{displayRatio} = $self->{scaleLargestTo} / $aLastHeight;
-                            $self->{ratio} = $aLastHeight / $self->{scaleLargestTo};
-                            $stringMaker->delete(0, $stringMaker->length());
-                            $self->{logUtil}->putF($stringMaker->append($self->{ADJUSTING_FOR_SCALING_IN_PORTRAIT})->appendfloat($self->{displayRatio})->toString(), $self, $self->{commonStrings}->{UPDATE});
-                            $aLastWidth = int(($aLastWidth * $self->{displayRatio}));
-                            $aLastHeight = int(($aLastHeight * $self->{displayRatio}));
-                            $self->{scalableListener}->scale($self->{ratio});
+                if {[$operatingSystemInterface isScalable]} {
+                    if {[my isPortraitWH $aLastWidth $aLastHeight]} {
+                        if {[expr {[expr {double($aLastHeight)}] > [my jget scaleLargestTo]}]} {
+                            my jset displayRatio [expr {[my jget scaleLargestTo] / [expr {double($aLastHeight)}]}]
+                            my jset ratio [expr {[expr {double($aLastHeight)}] / [my jget scaleLargestTo]}]
+                            $stringMaker delete 0 [$stringMaker length]
+                            [my jget logUtil] putF [[[$stringMaker append [my jget ADJUSTING_FOR_SCALING_IN_PORTRAIT]] appendfloat [my jget displayRatio]] toString] [self] [[my jget commonStrings] jget UPDATE]
+                            set aLastWidth [jint [jd2i ([expr {[expr {double($aLastWidth)}] * [my jget displayRatio]}])]]
+                            set aLastHeight [jint [jd2i ([expr {[expr {double($aLastHeight)}] * [my jget displayRatio]}])]]
+                            [my jget scalableListener] scale [my jget ratio]
                         } else {
-                            $self->{ratio} = 1.0;
-                            $self->{scalableListener}->scale($self->{ratio});
+                            my jset ratio 1.0
+                            [my jget scalableListener] scale [my jget ratio]
                         }
                     } else {
-                        if ($aLastWidth > $self->{scaleLargestTo}) {
-                            $self->{displayRatio} = $self->{scaleLargestTo} / $aLastWidth;
-                            $self->{ratio} = $aLastWidth / $self->{scaleLargestTo};
-                            $stringMaker->delete(0, $stringMaker->length());
-                            $self->{logUtil}->putF($stringMaker->append($self->{ADJUSTING_FOR_SCALING_IN_LANDSCAPE})->appendfloat($self->{displayRatio})->toString(), $self, $self->{commonStrings}->{UPDATE});
-                            $aLastWidth = int(($aLastWidth * $self->{displayRatio}));
-                            $aLastHeight = int(($aLastHeight * $self->{displayRatio}));
-                            $self->{scalableListener}->scale($self->{ratio});
+                        if {[expr {[expr {double($aLastWidth)}] > [my jget scaleLargestTo]}]} {
+                            my jset displayRatio [expr {[my jget scaleLargestTo] / [expr {double($aLastWidth)}]}]
+                            my jset ratio [expr {[expr {double($aLastWidth)}] / [my jget scaleLargestTo]}]
+                            $stringMaker delete 0 [$stringMaker length]
+                            [my jget logUtil] putF [[[$stringMaker append [my jget ADJUSTING_FOR_SCALING_IN_LANDSCAPE]] appendfloat [my jget displayRatio]] toString] [self] [[my jget commonStrings] jget UPDATE]
+                            set aLastWidth [jint [jd2i ([expr {[expr {double($aLastWidth)}] * [my jget displayRatio]}])]]
+                            set aLastHeight [jint [jd2i ([expr {[expr {double($aLastHeight)}] * [my jget displayRatio]}])]]
+                            [my jget scalableListener] scale [my jget ratio]
                         } else {
-                            $self->{ratio} = 1.0;
-                            $self->{scalableListener}->scale($self->{ratio});
+                            my jset ratio 1.0
+                            [my jget scalableListener] scale [my jget ratio]
                         }
                     }
                 }
-                $stringMaker->delete(0, $stringMaker->length());
-                $self->{logUtil}->putF($stringMaker->append($self->{UPDATE_FROM_ORIENTATION_CHANGE})->append($self->{LAST_WIDTH})->appendint($aLastWidth)->append($self->{LAST_HEIGHT})->appendint($aLastHeight)->toString(), $self, $self->{commonStrings}->{UPDATE});
-                $self->{xOffset} = $aFullWidth - $aLastWidth;
-                $self->{yOffset} = $aFullHeight - $aLastHeight;
-                $self->{left} = $self->{scalableListener}->getLeft($self->{xOffset});
-                $self->{top} = $self->{scalableListener}->getTop($self->{yOffset});
-                $self->{full}->[$self->{WIDTH}] = $aFullWidth;
-                $self->{full}->[$self->{HEIGHT}] = $aFullHeight;
-                $self->{last}->[$self->{WIDTH}] = $aLastWidth;
-                $self->{lastHalf}->[$self->{WIDTH}] = (POSIX::floor(($self->{last}->[$self->{WIDTH}]) / (2 ** (1))));
-                $self->{last}->[$self->{HEIGHT}] = $aLastHeight;
-                $self->{lastHalf}->[$self->{HEIGHT}] = (POSIX::floor(($self->{last}->[$self->{HEIGHT}]) / (2 ** (1))));
-                'org::allbinary::graphics::threed::SWTJOGLProcessor'->getInstance()->setCustom($aLastWidth, $aLastHeight, $self->{ratio});
-                $self->add($self->{commonStrings}->{UPDATE});
+                $stringMaker delete 0 [$stringMaker length]
+                [my jget logUtil] putF [[[[[[$stringMaker append [my jget UPDATE_FROM_ORIENTATION_CHANGE]] append [my jget LAST_WIDTH]] appendint $aLastWidth] append [my jget LAST_HEIGHT]] appendint $aLastHeight] toString] [self] [[my jget commonStrings] jget UPDATE]
+                my jset xOffset [jint [expr {$aFullWidth - $aLastWidth}]]
+                my jset yOffset [jint [expr {$aFullHeight - $aLastHeight}]]
+                my jset left [[my jget scalableListener] getLeft [my jget xOffset]]
+                my jset top [[my jget scalableListener] getTop [my jget yOffset]]
+                [my jget full] set [my jget WIDTH] $aFullWidth
+                [my jget full] set [my jget HEIGHT] $aFullHeight
+                [my jget last] set [my jget WIDTH] $aLastWidth
+                [my jget lastHalf] set [my jget WIDTH] ([expr {[[my jget last] get [my jget WIDTH]] >> 1}])
+                [my jget last] set [my jget HEIGHT] $aLastHeight
+                [my jget lastHalf] set [my jget HEIGHT] ([expr {[[my jget last] get [my jget HEIGHT]] >> 1}])
+                [::SWTJOGLProcessor::getInstance] setCustom $aLastWidth $aLastHeight [my jget ratio]
+                my add [[my jget commonStrings] jget UPDATE]
             }
         }
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        return [my toStringAppend $stringBuffer]
+    }
+    
+
+    method toStringAppend {stringBuffer} {
+        $stringBuffer append [my jget DISPLAY_INFO]
+        $stringBuffer append [my jget FULL]
+        $stringBuffer append [[my jget commonLabels] jget WIDTH_LABEL]
+        $stringBuffer appendint [[my jget full] get [my jget WIDTH]]
+        $stringBuffer append [[my jget commonSeps] jget SPACE]
+        $stringBuffer append [my jget FULL]
+        $stringBuffer append [[my jget commonLabels] jget HEIGHT_LABEL]
+        $stringBuffer appendint [[my jget full] get [my jget HEIGHT]]
+        $stringBuffer append [[my jget commonSeps] jget SPACE]
+        $stringBuffer append [my jget LAST]
+        $stringBuffer append [[my jget commonLabels] jget WIDTH_LABEL]
+        $stringBuffer appendint [[my jget last] get [my jget WIDTH]]
+        $stringBuffer append [[my jget commonSeps] jget SPACE]
+        $stringBuffer append [my jget LAST]
+        $stringBuffer append [[my jget commonLabels] jget HEIGHT_LABEL]
+        $stringBuffer appendint [[my jget last] get [my jget HEIGHT]]
+        $stringBuffer append [[my jget commonSeps] jget SPACE]
+        $stringBuffer append [my jget LAST_HALF]
+        $stringBuffer append [[my jget commonLabels] jget WIDTH_LABEL]
+        $stringBuffer appendint [[my jget lastHalf] get [my jget WIDTH]]
+        $stringBuffer append [[my jget commonSeps] jget SPACE]
+        $stringBuffer append [my jget LAST_HALF]
+        $stringBuffer append [[my jget commonLabels] jget HEIGHT_LABEL]
+        $stringBuffer appendint [[my jget lastHalf] get [my jget HEIGHT]]
+        $stringBuffer append [[my jget commonSeps] jget SPACE]
+        $stringBuffer append [expr {[my isPortrait] ? [my jget PORTRAIT] : [my jget LANDSCAPE]}]
+        return [$stringBuffer toString]
+    }
+    
+
+    method getTop {} {
+        return [my jget top]
+    }
+    
+
+    method getLeft {} {
+        return [my jget left]
+    }
+    
+
+    method getLastWidth {} {
+        return [[my jget last] get [my jget WIDTH]]
+    }
+    
+
+    method getLastHeight {} {
+        return [[my jget last] get [my jget HEIGHT]]
+    }
+    
+
+    method getLastHalfWidth {} {
+        return [[my jget lastHalf] get [my jget WIDTH]]
+    }
+    
+
+    method getLastHalfHeight {} {
+        return [[my jget lastHalf] get [my jget HEIGHT]]
+    }
+    
+
+    method getCustomLastWidth {} {
+        return [[my jget last] get [my jget CUSTOM_WIDTH]]
+    }
+    
+
+    method getCustomLastHeight {} {
+        return [[my jget last] get [my jget CUSTOM_HEIGHT]]
+    }
+    
+
+    method getRawLastWidth {} {
+        return [[my jget last] get [my jget WIDTH]]
+    }
+    
+
+    method getRawLastHeight {} {
+        return [[my jget last] get [my jget HEIGHT]]
+    }
+    
+
+    method setCustom {width height} {
+        [my jget last] set [my jget CUSTOM_WIDTH] $width
+        [my jget lastHalf] set [my jget CUSTOM_WIDTH] ([expr {[[my jget last] get [my jget CUSTOM_WIDTH]] >> 1}])
+        [my jget last] set [my jget CUSTOM_HEIGHT] $height
+        [my jget lastHalf] set [my jget CUSTOM_HEIGHT] ([expr {[[my jget last] get [my jget CUSTOM_HEIGHT]] >> 1}])
+    }
+    
+
+    method setScalableListener {scalableListener} {
+        my jset scalableListener $scalableListener
+    }
+    
+
+    method getScalableListener {} {
+        return [my jget scalableListener]
+    }
+    
+
+    method getRatio {} {
+        return [my jget ratio]
+    }
+    
+
+    method getDisplayRatio {} {
+        return [my jget displayRatio]
+    }
+    
+
+    method setOffset {left top} {
+        my jset left $left
+    }
+    
+
+    method getxOffset {} {
+        return [my jget xOffset]
+    }
+    
+
+    method getyOffset {} {
+        return [my jget yOffset]
+    }
 }
 
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        return $self->toStringAppend($stringBuffer);
+namespace eval ::DisplayInfoSingleton {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::DisplayInfoSingleton new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::DisplayInfoSingleton::staticGet_SINGLETON]
+    }
 }
 
-
-sub toStringAppend {
-    my ($self, $stringBuffer) = @_;
-        $stringBuffer->append($self->{DISPLAY_INFO});
-        $stringBuffer->append($self->{FULL});
-        $stringBuffer->append($self->{commonLabels}->{WIDTH_LABEL});
-        $stringBuffer->appendint($self->{full}->[$self->{WIDTH}]);
-        $stringBuffer->append($self->{commonSeps}->{SPACE});
-        $stringBuffer->append($self->{FULL});
-        $stringBuffer->append($self->{commonLabels}->{HEIGHT_LABEL});
-        $stringBuffer->appendint($self->{full}->[$self->{HEIGHT}]);
-        $stringBuffer->append($self->{commonSeps}->{SPACE});
-        $stringBuffer->append($self->{LAST});
-        $stringBuffer->append($self->{commonLabels}->{WIDTH_LABEL});
-        $stringBuffer->appendint($self->{last}->[$self->{WIDTH}]);
-        $stringBuffer->append($self->{commonSeps}->{SPACE});
-        $stringBuffer->append($self->{LAST});
-        $stringBuffer->append($self->{commonLabels}->{HEIGHT_LABEL});
-        $stringBuffer->appendint($self->{last}->[$self->{HEIGHT}]);
-        $stringBuffer->append($self->{commonSeps}->{SPACE});
-        $stringBuffer->append($self->{LAST_HALF});
-        $stringBuffer->append($self->{commonLabels}->{WIDTH_LABEL});
-        $stringBuffer->appendint($self->{lastHalf}->[$self->{WIDTH}]);
-        $stringBuffer->append($self->{commonSeps}->{SPACE});
-        $stringBuffer->append($self->{LAST_HALF});
-        $stringBuffer->append($self->{commonLabels}->{HEIGHT_LABEL});
-        $stringBuffer->appendint($self->{lastHalf}->[$self->{HEIGHT}]);
-        $stringBuffer->append($self->{commonSeps}->{SPACE});
-        $stringBuffer->append(($self->isPortrait() ? $self->{PORTRAIT} : $self->{LANDSCAPE}));
-        return $stringBuffer->toString();
-}
-
-
-sub getTop {
-    my ($self) = @_;
-        return $self->{top};
-}
-
-
-sub getLeft {
-    my ($self) = @_;
-        return $self->{left};
-}
-
-
-sub getLastWidth {
-    my ($self) = @_;
-        return $self->{last}->[$self->{WIDTH}];
-}
-
-
-sub getLastHeight {
-    my ($self) = @_;
-        return $self->{last}->[$self->{HEIGHT}];
-}
-
-
-sub getLastHalfWidth {
-    my ($self) = @_;
-        return $self->{lastHalf}->[$self->{WIDTH}];
-}
-
-
-sub getLastHalfHeight {
-    my ($self) = @_;
-        return $self->{lastHalf}->[$self->{HEIGHT}];
-}
-
-
-sub getCustomLastWidth {
-    my ($self) = @_;
-        return $self->{last}->[$self->{CUSTOM_WIDTH}];
-}
-
-
-sub getCustomLastHeight {
-    my ($self) = @_;
-        return $self->{last}->[$self->{CUSTOM_HEIGHT}];
-}
-
-
-sub getRawLastWidth {
-    my ($self) = @_;
-        return $self->{last}->[$self->{WIDTH}];
-}
-
-
-sub getRawLastHeight {
-    my ($self) = @_;
-        return $self->{last}->[$self->{HEIGHT}];
-}
-
-
-sub setCustom {
-    my ($self, $width, $height) = @_;
-        $self->{last}->[$self->{CUSTOM_WIDTH}] = $width;
-        $self->{lastHalf}->[$self->{CUSTOM_WIDTH}] = (POSIX::floor(($self->{last}->[$self->{CUSTOM_WIDTH}]) / (2 ** (1))));
-        $self->{last}->[$self->{CUSTOM_HEIGHT}] = $height;
-        $self->{lastHalf}->[$self->{CUSTOM_HEIGHT}] = (POSIX::floor(($self->{last}->[$self->{CUSTOM_HEIGHT}]) / (2 ** (1))));
-}
-
-
-sub setScalableListener {
-    my ($self, $scalableListener) = @_;
-        $self->{scalableListener} = $scalableListener;
-}
-
-
-sub getScalableListener {
-    my ($self) = @_;
-        return $self->{scalableListener};
-}
-
-
-sub getRatio {
-    my ($self) = @_;
-        return $self->{ratio};
-}
-
-
-sub getDisplayRatio {
-    my ($self) = @_;
-        return $self->{displayRatio};
-}
-
-
-sub setOffset {
-    my ($self, $left, $top) = @_;
-        $self->{left} = $left;
-}
-
-
-sub getxOffset {
-    my ($self) = @_;
-        return $self->{xOffset};
-}
-
-
-sub getyOffset {
-    my ($self) = @_;
-        return $self->{yOffset};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Displayable ();
-use org::allbinary::AndroidUtil ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::graphics::displayable::event::DisplayChangeEvent ();
-use org::allbinary::graphics::displayable::event::DisplayChangeEventHandler ();
-use org::allbinary::graphics::displayable::event::LastDisplayChangeEventHandler ();
-use org::allbinary::graphics::opengles::OpenGLFeatureFactory ();
-use org::allbinary::graphics::threed::SWTJOGLProcessor ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::system::os::GenericOperatingSystem ();
-use org::allbinary::logic::system::os::OperatingSystemFactory ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::graphics::displayable::BaseScalable ();
-
-1;
 

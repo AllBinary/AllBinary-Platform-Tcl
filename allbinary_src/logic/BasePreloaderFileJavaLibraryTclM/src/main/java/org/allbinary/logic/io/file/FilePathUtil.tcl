@@ -11,40 +11,37 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io.file
 
 #Used to correct user input for paths
-package org::allbinary::logic::io::file::FilePathUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::FilePathUtil {
+    superclass ::JObject
 }
 
+oo::define ::FilePathUtil {
+    method initFields_FilePathUtil {} {
+        return
+    }
+    
 
-sub adjust {
-    my ($class, $path) = @_;
-        my $abPathData = 'org::allbinary::logic::io::path::AbPathData'->getInstance();
-        my $stringValidationUtil = 'org::allbinary::logic::string::StringValidationUtil'->getInstance();
-        my $filePathData = 'org::allbinary::logic::io::file::FilePathData'->getInstance();
-        if ($stringValidationUtil->isEmpty($path)) {
-            return $filePathData->{PATH_START};
+    constructor {} {
+        next
+        my initFields_FilePathUtil
+    }
+    
+}
+
+namespace eval ::FilePathUtil {
+    proc adjust {path} {
+        set abPathData [::AbPathData::getInstance]
+        set stringValidationUtil [::StringValidationUtil::getInstance]
+        set filePathData [::FilePathData::getInstance]
+        if {[$stringValidationUtil isEmpty $path]} {
+            return [$filePathData jget PATH_START]
         }
-        $path = join($filePathData->{SEPARATORCHAR}, split(quotemeta($abPathData->{SEPARATORCHAR}), $path, -1));
-        return $path;
+        set path [jreplace $path [$abPathData jget SEPARATORCHAR] [$filePathData jget SEPARATORCHAR]]
+        return $path
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::io::path::AbPathData ();
-use org::allbinary::logic::string::StringValidationUtil ();
-use org::allbinary::logic::io::file::FilePathData ();
-
-1;
 

@@ -11,145 +11,123 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::HorizontaRotationManeuverAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ai::BasicAI','org::allbinary::ai::ArtificialIntelligenceTransitionInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstanceAt(10, 2147483647);
-    $self->{currentSpeedDivisor} = 5;
-    $self->{rotationAnimationInterface} = undef;
-    $self->{baseVelocityInterface} = undef;
-    $self->{velocityInterface} = undef;
+oo::class create ::HorizontaRotationManeuverAI {
+    superclass ::BasicAI
 }
 
+oo::define ::HorizontaRotationManeuverAI {
+    method initFields_HorizontaRotationManeuverAI {} {
+        my jset circularIndexUtil {}
+        my jset currentSpeedDivisor 0
+        my jset rotationAnimationInterface {}
+        my jset baseVelocityInterface {}
+        my jset velocityInterface {}
+        my jset circularIndexUtil [::CircularIndexUtil::createInstanceAt 10 [::Integer::staticGet_MAX_VALUE]]
+        my jset currentSpeedDivisor 5
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        my $rotationAnimationInterfaceCompositeInterface = $self->getOwnerLayerInterface();
-        $self->{rotationAnimationInterface} = $rotationAnimationInterfaceCompositeInterface->getRotationAnimationInterface();
-        my $velocityInterfaceCompositeInterface = $self->getOwnerLayerInterface();
-        $self->{baseVelocityInterface} = $velocityInterfaceCompositeInterface->getVelocityProperties();
-        $self->{velocityInterface} = $self->{baseVelocityInterface};
-        my $rotationAnimationInterface = $self->{rotationAnimationInterface};
-        my $angleIncrementInfo = $rotationAnimationInterface->getAngleInfoP()->getAngleIncrementInfo();
-        $rotationAnimationInterfaceCompositeInterface->setFrame(int($angleIncrementInfo->{RIGHT_FRAME}));
-    return $self;
-}
+    constructor {ownerLayerInterface gameInput} {
+        next $ownerLayerInterface $gameInput
+        my initFields_HorizontaRotationManeuverAI
+        set rotationAnimationInterfaceCompositeInterface [my getOwnerLayerInterface]
+        my jset rotationAnimationInterface [$rotationAnimationInterfaceCompositeInterface getRotationAnimationInterface]
+        set velocityInterfaceCompositeInterface [my getOwnerLayerInterface]
+        my jset baseVelocityInterface [$velocityInterfaceCompositeInterface getVelocityProperties]
+        my jset velocityInterface [my jget baseVelocityInterface]
+        set rotationAnimationInterface [my jget rotationAnimationInterface]
+        set angleIncrementInfo [[$rotationAnimationInterface getAngleInfoP] getAngleIncrementInfo]
+        $rotationAnimationInterfaceCompositeInterface setFrame [[$angleIncrementInfo jget RIGHT_FRAME] intValue]
+    }
+    
 
+    method transition {} {
+        set rotationAnimationInterface [my jget rotationAnimationInterface]
+        set angleIncrementInfo [[$rotationAnimationInterface getAngleInfoP] getAngleIncrementInfo]
+        set rotationAnimationInterfaceCompositeInterface [my getOwnerLayerInterface]
+        $rotationAnimationInterfaceCompositeInterface setFrame [[$angleIncrementInfo jget RIGHT_FRAME] intValue]
+        set allbinaryLayer [my getOwnerLayerInterface]
+        $allbinaryLayer setPosition [$allbinaryLayer getXP] 1 [$allbinaryLayer getZP]
+    }
+    
 
-sub transition {
-    my ($self) = @_;
-        my $rotationAnimationInterface = $self->{rotationAnimationInterface};
-        my $angleIncrementInfo = $rotationAnimationInterface->getAngleInfoP()->getAngleIncrementInfo();
-        my $rotationAnimationInterfaceCompositeInterface = $self->getOwnerLayerInterface();
-        $rotationAnimationInterfaceCompositeInterface->setFrame(int($angleIncrementInfo->{RIGHT_FRAME}));
-        my $allbinaryLayer = $self->getOwnerLayerInterface();
-        $allbinaryLayer->setPosition($allbinaryLayer->getXP(), 1, $allbinaryLayer->getZP());
-}
-
-
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        my $rotationAnimationInterface = ($self->{rotationAnimationInterface});
-        my $angleIncrementInfo = $rotationAnimationInterface->getAngleInfoP()->getAngleIncrementInfo();
-        my $frame = $self->{rotationAnimationInterface}->getFrame();
-        my $ownerLayerInterface = $self->getOwnerLayerInterface();
-        if ($ownerLayerInterface->getXP() - $ownerLayerInterface->getWidth() <= 0 && $frame == int($angleIncrementInfo->{LEFT_FRAME})) {
-            $self->reverse();
-            $self->drop();
+    method processAI {allBinaryLayerManager} {
+        set rotationAnimationInterface ([my jget rotationAnimationInterface])
+        set angleIncrementInfo [[$rotationAnimationInterface getAngleInfoP] getAngleIncrementInfo]
+        set frame [[my jget rotationAnimationInterface] getFrame]
+        set ownerLayerInterface [my getOwnerLayerInterface]
+        if {[expr {[expr {[expr {[$ownerLayerInterface getXP] - [$ownerLayerInterface getWidth]}] <= 0}] && [expr {$frame == [[$angleIncrementInfo jget LEFT_FRAME] intValue]}]}]} {
+            my reverse
+            my drop
         }
-        my $displayInfo = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-        if ($ownerLayerInterface->getX2() + $ownerLayerInterface->getWidth() > $displayInfo->getLastWidth() && $frame == int($angleIncrementInfo->{RIGHT_FRAME})) {
-            $self->reverse();
-            $self->accelerate();
-            $self->drop();
+        set displayInfo [::DisplayInfoSingleton::getInstance]
+        if {[expr {[expr {[expr {[$ownerLayerInterface getX2] + [$ownerLayerInterface getWidth]}] > [$displayInfo getLastWidth]}] && [expr {$frame == [[$angleIncrementInfo jget RIGHT_FRAME] intValue]}]}]} {
+            my reverse
+            my accelerate
+            my drop
         }
-        my $index = $self->{circularIndexUtil}->getIndex();
-        if ($index % $self->{currentSpeedDivisor} == 0 && $index % 2 == 0) {
-            $self->SUPER::processKeyAI($javax::microedition::lcdui::Canvas::UP);
-            $self->{velocityInterface}->limitMaxXYVelocity($self->{velocityInterface}->getMaxForwardVelocity() / $self->{currentSpeedDivisor});
+        set index [[my jget circularIndexUtil] getIndex]
+        if {[expr {[expr {[jrem $index [my jget currentSpeedDivisor]] == 0}] && [expr {[jrem $index 2] == 0}]}]} {
+            next [::Canvas::staticGet_UP]
+            [my jget velocityInterface] limitMaxXYVelocity [expr {[[my jget velocityInterface] getMaxForwardVelocity] / [my jget currentSpeedDivisor]}]
         }
-        $self->{circularIndexUtil}->next();
-        if ($frame == int($angleIncrementInfo->{LEFT_FRAME})) {
-            $self->SUPER::processKeyAI($javax::microedition::lcdui::Canvas::KEY_NUM0);
-        } elsif ($frame == int($angleIncrementInfo->{RIGHT_FRAME})) {
-            $self->SUPER::processKeyAI($javax::microedition::lcdui::Canvas::KEY_POUND);
+        [my jget circularIndexUtil] next
+        if {[expr {$frame == [[$angleIncrementInfo jget LEFT_FRAME] intValue]}]} {
+            next [::Canvas::staticGet_KEY_NUM0]
+        } elseif {[expr {$frame == [[$angleIncrementInfo jget RIGHT_FRAME] intValue]}]} {
+            next [::Canvas::staticGet_KEY_POUND]
         }
-}
+    }
+    
 
-
-sub reverse {
-    my ($self) = @_;
-        my $rotationAnimationInterface = $self->{rotationAnimationInterface};
-        my $angleIncrementInfo = $rotationAnimationInterface->getAngleInfoP()->getAngleIncrementInfo();
-        my $frame = $self->{rotationAnimationInterface}->getFrame();
-        if ($frame == int($angleIncrementInfo->{LEFT_FRAME})) {
-            my $rotationAnimationInterfaceCompositeInterface = $self->getOwnerLayerInterface();
-            $rotationAnimationInterfaceCompositeInterface->setFrame(int($angleIncrementInfo->{RIGHT_FRAME}));
-            $self->{baseVelocityInterface}->zero();
-        } elsif ($frame == int($angleIncrementInfo->{RIGHT_FRAME})) {
-            my $rotationAnimationInterfaceCompositeInterface = $self->getOwnerLayerInterface();
-            $rotationAnimationInterfaceCompositeInterface->setFrame(int($angleIncrementInfo->{LEFT_FRAME}));
-            $self->{baseVelocityInterface}->zero();
+    method reverse {} {
+        set rotationAnimationInterface [my jget rotationAnimationInterface]
+        set angleIncrementInfo [[$rotationAnimationInterface getAngleInfoP] getAngleIncrementInfo]
+        set frame [[my jget rotationAnimationInterface] getFrame]
+        if {[expr {$frame == [[$angleIncrementInfo jget LEFT_FRAME] intValue]}]} {
+            set rotationAnimationInterfaceCompositeInterface [my getOwnerLayerInterface]
+            $rotationAnimationInterfaceCompositeInterface setFrame [[$angleIncrementInfo jget RIGHT_FRAME] intValue]
+            [my jget baseVelocityInterface] zero
+        } elseif {[expr {$frame == [[$angleIncrementInfo jget RIGHT_FRAME] intValue]}]} {
+            set rotationAnimationInterfaceCompositeInterface [my getOwnerLayerInterface]
+            $rotationAnimationInterfaceCompositeInterface setFrame [[$angleIncrementInfo jget LEFT_FRAME] intValue]
+            [my jget baseVelocityInterface] zero
         }
-}
+    }
+    
 
-
-sub accelerate {
-    my ($self) = @_;
-        if ($self->{currentSpeedDivisor} > 1) {
-            $self->{currentSpeedDivisor}--;
+    method accelerate {} {
+        if {[expr {[my jget currentSpeedDivisor] > 1}]} {
+            my jpostinc currentSpeedDivisor -1
         }
-}
+    }
+    
 
-
-sub drop {
-    my ($self) = @_;
-        my $displayInfo = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-        my $ownerLayerInterface = $self->getOwnerLayerInterface();
-        my $y = $ownerLayerInterface->getYP();
-        if ($ownerLayerInterface->getY2() + $ownerLayerInterface->getHeight() > $displayInfo->getLastHeight()) {
-            $y = 0;
+    method drop {} {
+        set displayInfo [::DisplayInfoSingleton::getInstance]
+        set ownerLayerInterface [my getOwnerLayerInterface]
+        set y [$ownerLayerInterface getYP]
+        if {[expr {[expr {[$ownerLayerInterface getY2] + [$ownerLayerInterface getHeight]}] > [$displayInfo getLastHeight]}]} {
+            set y 0
         } else {
-            $y += $ownerLayerInterface->getHeight() + 1;
+            set y [jint [expr {$y + [expr {[$ownerLayerInterface getHeight] + 1}]}]]
         }
-        $ownerLayerInterface->setPosition($ownerLayerInterface->getXP(), $y, $ownerLayerInterface->getZP());
+        $ownerLayerInterface setPosition [$ownerLayerInterface getXP] $y [$ownerLayerInterface getZP]
+    }
+    
+
+    method getId {} {
+        return [::ArtificialIntelligence::staticGet_AI_ID]
+    }
 }
 
-
-sub getId {
-    my ($self) = @_;
-        return $org::allbinary::ai::ArtificialIntelligence::AI_ID;
+namespace eval ::HorizontaRotationManeuverAI {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::ai::ArtificialIntelligence ();
-use org::allbinary::ai::ArtificialIntelligenceTransitionInterface ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::animation::RotationAnimationInterface ();
-use org::allbinary::animation::RotationAnimationInterfaceCompositeInterface ();
-use org::allbinary::game::ai::BasicAI ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::game::physics::velocity::BasicVelocityProperties ();
-use org::allbinary::game::physics::velocity::VelocityInterface ();
-use org::allbinary::game::physics::velocity::VelocityInterfaceCompositeInterface ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::math::AngleIncrementInfo ();
-use org::allbinary::util::CircularIndexUtil ();
-
-1;
 

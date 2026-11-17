@@ -11,152 +11,147 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
-package org::allbinary::game::configuration::GameConfiguration;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $MIN_VALUE, 'java::lang::LazyStatic', sub { (-2147483648) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{name} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{defaultValue} = 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt(0);
-    $self->{value} = $org::allbinary::game::configuration::GameConfiguration::MIN_VALUE;
-    $self->{minValue} = $self->{defaultValue};
-    $self->{maxValue} = $self->{defaultValue};
-    $self->{modifiable} = 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{TRUE};
+oo::class create ::GameConfiguration {
+    superclass ::JObject
 }
 
+oo::define ::GameConfiguration {
+    method initFields_GameConfiguration {} {
+        my jset name {}
+        my jset defaultValue {}
+        my jset value {}
+        my jset minValue {}
+        my jset maxValue {}
+        my jset modifiable {}
+        my jset name [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset defaultValue [[::SmallIntegerSingletonFactory::getInstance] getAt 0]
+        my jset value [::GameConfiguration::staticGet_MIN_VALUE]
+        my jset minValue [my jget defaultValue]
+        my jset maxValue [my jget defaultValue]
+        my jset modifiable [[::BooleanFactory::getInstance] jget TRUE]
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $defaultValue, $minValue, $maxValue) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->setName($name);
-        $self->setDefaultValue($defaultValue);
-        $self->{value} = $self->getDefaultValue();
-        $self->setMinValue($minValue);
-        $self->setMaxValue($maxValue);
-        'org::allbinary::game::configuration::GameConfigurationSingleton'->getInstance()->getHashtable()->put($self->getName(), $self);
-    return $self;
-}
+    constructor {name defaultValue minValue maxValue} {
+        next
+        my initFields_GameConfiguration
+        my setName $name
+        my setDefaultValue $defaultValue
+        my jset value [my getDefaultValue]
+        my setMinValue $minValue
+        my setMaxValue $maxValue
+        [[::GameConfigurationSingleton::getInstance] getHashtable] put [my getName] [self]
+    }
+    
 
-
-# throws Exception
-sub setValue {
-    my ($self, $value) = @_;
-        if ($self->{value} != $value) {
-            my $oldValue = $self->{value};
-            $self->{value} = $value;
-            'org::allbinary::game::configuration::event::GameFeatureEventHandler'->getInstance()->fireEvent('org::allbinary::game::configuration::event::GameFeatureEvent'->new($self, 'org::allbinary::logic::string::StringMaker'->new()->append($self->{name})->append(" value: from: ")->appendint(int(int($oldValue)))->append(" to ")->appendint(int(int($self->{value})))->toString()));
+    method setValue {value} {
+        if {[expr {[my jget value] ne $value}]} {
+            set oldValue [my jget value]
+            my jset value $value
+            [::GameFeatureEventHandler::getInstance] fireEvent [::GameFeatureEvent new [self] [[[[[[[::StringMaker new] append [my jget name]] append " value: from: "] appendint [jint [$oldValue intValue]]] append " to "] appendint [jint [[my jget value] intValue]]] toString]]
         }
+    }
+    
+
+    method getValue {} {
+        return [my jget value]
+    }
+    
+
+    method setMaxValue {maxValue} {
+        my jset maxValue $maxValue
+    }
+    
+
+    method getMaxValue {} {
+        return [my jget maxValue]
+    }
+    
+
+    method setMinValue {minValue} {
+        my jset minValue $minValue
+    }
+    
+
+    method getMinValue {} {
+        return [my jget minValue]
+    }
+    
+
+    method setName {name} {
+        my jset name $name
+    }
+    
+
+    method getName {} {
+        return [my jget name]
+    }
+    
+
+    method setDefaultValue {defaultValue} {
+        my jset defaultValue $defaultValue
+    }
+    
+
+    method getDefaultValue {} {
+        return [my jget defaultValue]
+    }
+    
+
+    method setDefault {} {
+        my setValue [my getDefaultValue]
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "Name: "
+        $stringBuffer append [my jget name]
+        $stringBuffer append " Min: "
+        $stringBuffer appendint [jint [[my getMinValue] intValue]]
+        $stringBuffer append " Max: "
+        $stringBuffer appendint [jint [[my getMaxValue] intValue]]
+        $stringBuffer append " Value: "
+        $stringBuffer appendint [jint [[my getValue] intValue]]
+        $stringBuffer append " Default: "
+        $stringBuffer appendint [jint [[my getDefaultValue] intValue]]
+        $stringBuffer append " Modifiable: "
+        $stringBuffer appendboolean [[my isModifiable] booleanValue]
+        return [$stringBuffer toString]
+    }
+    
+
+    method setModifiable {modifiable} {
+        my jset modifiable $modifiable
+    }
+    
+
+    method isModifiable {} {
+        return [my jget modifiable]
+    }
 }
 
-
-sub getValue {
-    my ($self) = @_;
-        return $self->{value};
+namespace eval ::GameConfiguration {
+    variable MIN_VALUEValue {}
+    variable MIN_VALUESet 0
+    proc staticGet_MIN_VALUE {} {
+        variable MIN_VALUEValue
+        variable MIN_VALUESet
+        if {!$MIN_VALUESet} {
+            set MIN_VALUESet 1
+            set MIN_VALUEValue [::Integer::staticGet_MIN_VALUE]
+        }
+        return $MIN_VALUEValue
+    }
+    proc staticSet_MIN_VALUE {value} {
+        variable MIN_VALUEValue
+        variable MIN_VALUESet
+        set MIN_VALUESet 1
+        set MIN_VALUEValue $value
+    }
 }
 
-
-sub setMaxValue {
-    my ($self, $maxValue) = @_;
-        $self->{maxValue} = $maxValue;
-}
-
-
-sub getMaxValue {
-    my ($self) = @_;
-        return $self->{maxValue};
-}
-
-
-sub setMinValue {
-    my ($self, $minValue) = @_;
-        $self->{minValue} = $minValue;
-}
-
-
-sub getMinValue {
-    my ($self) = @_;
-        return $self->{minValue};
-}
-
-
-sub setName {
-    my ($self, $name) = @_;
-        $self->{name} = $name;
-}
-
-
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
-}
-
-
-sub setDefaultValue {
-    my ($self, $defaultValue) = @_;
-        $self->{defaultValue} = $defaultValue;
-}
-
-
-sub getDefaultValue {
-    my ($self) = @_;
-        return $self->{defaultValue};
-}
-
-
-# throws Exception
-sub setDefault {
-    my ($self) = @_;
-        $self->setValue($self->getDefaultValue());
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("Name: ");
-        $stringBuffer->append($self->{name});
-        $stringBuffer->append(" Min: ");
-        $stringBuffer->appendint(int(int($self->getMinValue())));
-        $stringBuffer->append(" Max: ");
-        $stringBuffer->appendint(int(int($self->getMaxValue())));
-        $stringBuffer->append(" Value: ");
-        $stringBuffer->appendint(int(int($self->getValue())));
-        $stringBuffer->append(" Default: ");
-        $stringBuffer->appendint(int(int($self->getDefaultValue())));
-        $stringBuffer->append(" Modifiable: ");
-        $stringBuffer->appendboolean($self->isModifiable());
-        return $stringBuffer->toString();
-}
-
-
-sub setModifiable {
-    my ($self, $modifiable) = @_;
-        $self->{modifiable} = $modifiable;
-}
-
-
-sub isModifiable {
-    my ($self) = @_;
-        return $self->{modifiable};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::configuration::event::GameFeatureEvent ();
-use org::allbinary::game::configuration::event::GameFeatureEventHandler ();
-use org::allbinary::logic::java::bool::BooleanFactory ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::game::configuration::GameConfigurationSingleton ();
-
-1;
 

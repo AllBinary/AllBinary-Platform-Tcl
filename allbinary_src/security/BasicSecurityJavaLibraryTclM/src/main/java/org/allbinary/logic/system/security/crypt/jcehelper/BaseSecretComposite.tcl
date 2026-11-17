@@ -11,39 +11,51 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.crypt.jcehelper
 
-package org::allbinary::logic::system::security::crypt::jcehelper::BaseSecretComposite;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_SECRET_COMPOSITE, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::system::security::crypt::jcehelper::BaseSecretComposite'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::BaseSecretComposite {
+    superclass ::JObject
 }
 
+oo::define ::BaseSecretComposite {
+    method initFields_BaseSecretComposite {} {
+        return
+    }
 
-# throws Exception
-sub encrypt {
-    my ($self, $array) = @_;
-        return 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_BYTE_ARRAY};
+    constructor {} {
+        next
+        my initFields_BaseSecretComposite
+    }
+    
+
+    method encrypt {array} {
+        return [[::NullUtil::getInstance] jget NULL_BYTE_ARRAY]
+    }
+    
+
+    method decrypt {array} {
+        return [[::NullUtil::getInstance] jget NULL_BYTE_ARRAY]
+    }
 }
 
-
-# throws Exception
-sub decrypt {
-    my ($self, $array) = @_;
-        return 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_BYTE_ARRAY};
+namespace eval ::BaseSecretComposite {
+    variable NULL_SECRET_COMPOSITEValue {}
+    variable NULL_SECRET_COMPOSITESet 0
+    proc staticGet_NULL_SECRET_COMPOSITE {} {
+        variable NULL_SECRET_COMPOSITEValue
+        variable NULL_SECRET_COMPOSITESet
+        if {!$NULL_SECRET_COMPOSITESet} {
+            set NULL_SECRET_COMPOSITESet 1
+            set NULL_SECRET_COMPOSITEValue [::BaseSecretComposite new]
+        }
+        return $NULL_SECRET_COMPOSITEValue
+    }
+    proc staticSet_NULL_SECRET_COMPOSITE {value} {
+        variable NULL_SECRET_COMPOSITEValue
+        variable NULL_SECRET_COMPOSITESet
+        set NULL_SECRET_COMPOSITESet 1
+        set NULL_SECRET_COMPOSITEValue $value
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::NullUtil ();
-
-1;
 

@@ -11,55 +11,68 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.gyro
 
-package org::allbinary::input::gyro::OrientationMotionGestureFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{LEFT} = undef;
-    $self->{RIGHT} = undef;
-    $self->{UP} = undef;
-    $self->{DOWN} = undef;
-    $self->{ROLL_LEFT} = undef;
-    $self->{ROLL_RIGHT} = undef;
+oo::class create ::OrientationMotionGestureFactory {
+    superclass ::JObject
 }
 
+oo::define ::OrientationMotionGestureFactory {
+    method initFields_OrientationMotionGestureFactory {} {
+        my jset LEFT {}
+        my jset RIGHT {}
+        my jset UP {}
+        my jset DOWN {}
+        my jset ROLL_LEFT {}
+        my jset ROLL_RIGHT {}
+        
+        
+        
+        
+        
+        
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::input::gyro::OrientationMotionGestureFactory::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::input::gyro::OrientationMotionGestureFactory::instance = 'org::allbinary::input::gyro::OrientationMotionGestureFactory'->new();
+    constructor {} {
+        next
+        my initFields_OrientationMotionGestureFactory
+        set MAX [[::InputFactory::getInstance] jget MAX]
+        my jset LEFT [::MotionGestureInput new [jint [expr {$MAX - 20}]] "Left Orient"]
+        my jset RIGHT [::MotionGestureInput new [jint [expr {$MAX - 21}]] "Right Orient"]
+        my jset UP [::MotionGestureInput new [jint [expr {$MAX - 22}]] "Up Orient"]
+        my jset DOWN [::MotionGestureInput new [jint [expr {$MAX - 23}]] "Down Orient"]
+        my jset ROLL_LEFT [::MotionGestureInput new [jint [expr {$MAX - 24}]] "Roll Left"]
+        my jset ROLL_RIGHT [::MotionGestureInput new [jint [expr {$MAX - 25}]] "Roll Right"]
+    }
+}
+
+namespace eval ::OrientationMotionGestureFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::input::gyro::OrientationMotionGestureFactory::instance;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::OrientationMotionGestureFactory::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::OrientationMotionGestureFactory::staticSet_instance [::OrientationMotionGestureFactory new]
+        }
+        return [::OrientationMotionGestureFactory::staticGet_instance]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $MAX = 'org::allbinary::game::input::InputFactory'->getInstance()->{MAX};
-        $self->{LEFT} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 20, "Left Orient");
-        $self->{RIGHT} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 21, "Right Orient");
-        $self->{UP} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 22, "Up Orient");
-        $self->{DOWN} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 23, "Down Orient");
-        $self->{ROLL_LEFT} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 24, "Roll Left");
-        $self->{ROLL_RIGHT} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 25, "Roll Right");
-    return $self;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::InputFactory ();
-use org::allbinary::input::motion::gesture::MotionGestureInput ();
-use org::allbinary::logic::NullUtil ();
-
-1;
 

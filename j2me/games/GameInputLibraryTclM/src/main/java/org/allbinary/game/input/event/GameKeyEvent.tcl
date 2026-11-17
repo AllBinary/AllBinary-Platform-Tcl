@@ -11,113 +11,114 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.event
 
-package org::allbinary::game::input::event::GameKeyEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject';
-
-tie our $NONE, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::event::GameKeyEvent'->new('org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}, -1, -1, -1, -1, 0) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{sourceId} = undef;
-    $self->{repeated} = 0;
-    $self->{key} = undef;
-    $self->{gameActionKey} = 0;
-    $self->{originalKey} = 0;
+oo::class create ::GameKeyEvent {
+    superclass ::AllBinaryEventObject
 }
 
+oo::define ::GameKeyEvent {
+    method initFields_GameKeyEvent {} {
+        my jset sourceId 0
+        my jset repeated false
+        my jset key 0
+        my jset gameActionKey 0
+        my jset originalKey 0
+        
+        my jset repeated false
+        
+        my jset gameActionKey 0
+        my jset originalKey 0
+        return
+    }
+    
+    
 
-sub createEvent {
-    my ($class, $anyType, $sourceId, $key) = @_;
-        return 'org::allbinary::game::input::event::GameKeyEvent'->new($anyType, $sourceId, 0, 0, $key, 0);
+    constructor {anyType sourceId originalKey gameActionKey key repeated} {
+        next $anyType
+        my initFields_GameKeyEvent
+        my jset sourceId $sourceId
+        my setOriginalKey $originalKey
+        my jset key $key
+        my setGameActionKey $gameActionKey
+        my setRepeatEvents $repeated
+    }
+    
+
+    method init {anyType} {
+        my setSource $anyType
+    }
+    
+
+    method setRepeatEvents {repeated} {
+        my jset repeated $repeated
+    }
+    
+
+    method hasRepeatEvents {} {
+        return [my jget repeated]
+    }
+    
+
+    method getKey {} {
+        return [my jget key]
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "\nKey: "
+        $stringBuffer appendint [my getKey]
+        return [$stringBuffer toString]
+    }
+    
+
+    method getOriginalKey {} {
+        return [my jget originalKey]
+    }
+    
+
+    method setOriginalKey {originalKey} {
+        my jset originalKey $originalKey
+    }
+    
+
+    method getGameActionKey {} {
+        return [my jget gameActionKey]
+    }
+    
+
+    method setGameActionKey {gameActionKey} {
+        my jset gameActionKey $gameActionKey
+    }
+    
+
+    method getSourceId {} {
+        return [my jget sourceId]
+    }
 }
 
-
-sub new {
-    my ($class, $anyType, $sourceId, $originalKey, $gameActionKey, $key, $repeated) = @_;
-    my $self = $class->SUPER::new($anyType);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{sourceId} = $sourceId;
-        $self->setOriginalKey($originalKey);
-        $self->{key} = $key;
-        $self->setGameActionKey($gameActionKey);
-        $self->setRepeatEvents($repeated);
-    return $self;
+namespace eval ::GameKeyEvent {
+    variable NONEValue {}
+    variable NONESet 0
+    proc staticGet_NONE {} {
+        variable NONEValue
+        variable NONESet
+        if {!$NONESet} {
+            set NONESet 1
+            set NONEValue [::GameKeyEvent new [[::NullUtil::getInstance] jget NULL_OBJECT] [expr {-1}] [expr {-1}] [expr {-1}] [expr {-1}] false]
+        }
+        return $NONEValue
+    }
+    proc staticSet_NONE {value} {
+        variable NONEValue
+        variable NONESet
+        set NONESet 1
+        set NONEValue $value
+    }
+    proc createEvent {anyType sourceId key} {
+        return [::GameKeyEvent new $anyType $sourceId 0 0 $key false]
+    }
 }
 
-
-sub init {
-    my ($self, $anyType) = @_;
-        $self->setSource($anyType);
-}
-
-
-sub setRepeatEvents {
-    my ($self, $repeated) = @_;
-        $self->{repeated} = $repeated;
-}
-
-
-sub hasRepeatEvents {
-    my ($self) = @_;
-        return $self->{repeated};
-}
-
-
-sub getKey {
-    my ($self) = @_;
-        return $self->{key};
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("\nKey: ");
-        $stringBuffer->appendint($self->getKey());
-        return $stringBuffer->toString();
-}
-
-
-sub getOriginalKey {
-    my ($self) = @_;
-        return $self->{originalKey};
-}
-
-
-sub setOriginalKey {
-    my ($self, $originalKey) = @_;
-        $self->{originalKey} = $originalKey;
-}
-
-
-sub getGameActionKey {
-    my ($self) = @_;
-        return $self->{gameActionKey};
-}
-
-
-sub setGameActionKey {
-    my ($self, $gameActionKey) = @_;
-        $self->{gameActionKey} = $gameActionKey;
-}
-
-
-sub getSourceId {
-    my ($self) = @_;
-        return $self->{sourceId};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-
-1;
 

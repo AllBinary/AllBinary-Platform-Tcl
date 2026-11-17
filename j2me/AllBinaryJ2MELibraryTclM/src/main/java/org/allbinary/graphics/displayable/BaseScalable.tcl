@@ -11,46 +11,43 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable
 
-package org::allbinary::graphics::displayable::BaseScalable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::graphics::displayable::ScalableListener';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::BaseScalable {
+    superclass ::JObject
 }
 
+oo::define ::BaseScalable {
+    method initFields_BaseScalable {} {
+        return
+    }
 
-sub getRatio {
-    my ($self, $ratio) = @_;
-        return 1.0;
+    constructor {} {
+        next
+        my initFields_BaseScalable
+    }
+    
+
+    method getRatio {ratio} {
+        return 1.0
+    }
+    
+
+    method getLeft {xOffset} {
+        return [expr {-1}]
+    }
+    
+
+    method getTop {yOffset} {
+        return [expr {-1}]
+    }
+    
+
+    method scale {ratio} {
+    }
 }
 
-
-sub getLeft {
-    my ($self, $xOffset) = @_;
-        return -1;
+namespace eval ::BaseScalable {
 }
 
-
-sub getTop {
-    my ($self, $yOffset) = @_;
-        return -1;
-}
-
-
-sub scale {
-    my ($self, $ratio) = @_;
-}
-
-use java::lang::Object ();
-use org::allbinary::graphics::displayable::ScalableListener ();
-
-1;
 

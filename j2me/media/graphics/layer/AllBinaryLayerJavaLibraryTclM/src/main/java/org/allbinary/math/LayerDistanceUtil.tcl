@@ -11,64 +11,69 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.math
 
-package org::allbinary::math::LayerDistanceUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::math::LayerDistanceUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{mathUtil} = 'org::allbinary::logic::math::MathUtil'->getInstance();
+oo::class create ::LayerDistanceUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::LayerDistanceUtil {
+    method initFields_LayerDistanceUtil {} {
+        my jset mathUtil {}
+        my jset mathUtil [::MathUtil::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_LayerDistanceUtil
+    }
+    
+    
+
+    method getDistance {layerInterface layerInterface2} {
+        set dx [expr {([expr {[$layerInterface getXP] + [$layerInterface getHalfWidth]}]) - ([expr {[$layerInterface2 getXP] + [$layerInterface2 getHalfWidth]}])}]
+        set dy [expr {([expr {[$layerInterface getYP] + [$layerInterface getHalfHeight]}]) - ([expr {[$layerInterface2 getYP] + [$layerInterface2 getHalfHeight]}])}]
+        return [jint [[my jget mathUtil] sqrt [jint [expr {([jint [expr {$dx * $dx}]]) + ([jint [expr {$dy * $dy}]])}]]]]
+    }
+    
+
+    method getDistance3D {layerInterface layerInterface2} {
+        set dx [expr {([expr {[$layerInterface getXP] + [$layerInterface getHalfWidth]}]) - ([expr {[$layerInterface2 getXP] + [$layerInterface2 getHalfWidth]}])}]
+        set dy [expr {([expr {[$layerInterface getYP] + [$layerInterface getHalfHeight]}]) - ([expr {[$layerInterface2 getYP] + [$layerInterface2 getHalfHeight]}])}]
+        set dz [expr {([expr {[$layerInterface getZP] + [$layerInterface getHalfDepth]}]) - ([expr {[$layerInterface2 getZP] + [$layerInterface2 getHalfDepth]}])}]
+        return [jint [[my jget mathUtil] sqrt [jint [expr {[jint [expr {([jint [expr {$dx * $dx}]]) + ([jint [expr {$dy * $dy}]])}]] + ([jint [expr {$dz * $dz}]])}]]]]
+    }
+    
+
+    method getDistanceAt {layerInterface point} {
+        set dx [expr {[$layerInterface getXP] - [$point getX]}]
+        set dy [expr {[$layerInterface getYP] - [$point getY]}]
+        return [jint [[my jget mathUtil] sqrt [jint [expr {([jint [expr {$dx * $dx}]]) + ([jint [expr {$dy * $dy}]])}]]]]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::math::LayerDistanceUtil::instance;
+namespace eval ::LayerDistanceUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LayerDistanceUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LayerDistanceUtil::staticGet_instance]
+    }
 }
 
-
-sub getDistance {
-    my ($self, $layerInterface, $layerInterface2) = @_;
-        my $dx = ($layerInterface->getXP() + $layerInterface->getHalfWidth()) - ($layerInterface2->getXP() + $layerInterface2->getHalfWidth());
-        my $dy = ($layerInterface->getYP() + $layerInterface->getHalfHeight()) - ($layerInterface2->getYP() + $layerInterface2->getHalfHeight());
-        return int($self->{mathUtil}->sqrt(($dx * $dx) + ($dy * $dy)));
-}
-
-
-sub getDistance3D {
-    my ($self, $layerInterface, $layerInterface2) = @_;
-        my $dx = ($layerInterface->getXP() + $layerInterface->getHalfWidth()) - ($layerInterface2->getXP() + $layerInterface2->getHalfWidth());
-        my $dy = ($layerInterface->getYP() + $layerInterface->getHalfHeight()) - ($layerInterface2->getYP() + $layerInterface2->getHalfHeight());
-        my $dz = ($layerInterface->getZP() + $layerInterface->getHalfDepth()) - ($layerInterface2->getZP() + $layerInterface2->getHalfDepth());
-        return int($self->{mathUtil}->sqrt(($dx * $dx) + ($dy * $dy) + ($dz * $dz)));
-}
-
-
-sub getDistanceAt {
-    my ($self, $layerInterface, $point) = @_;
-        my $dx = $layerInterface->getXP() - $point->getX();
-        my $dy = $layerInterface->getYP() - $point->getY();
-        return int($self->{mathUtil}->sqrt(($dx * $dx) + ($dy * $dy)));
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::GPoint ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::logic::math::MathUtil ();
-
-1;
 

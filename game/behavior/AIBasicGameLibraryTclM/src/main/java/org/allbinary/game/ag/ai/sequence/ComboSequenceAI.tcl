@@ -11,41 +11,35 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.sequence
 
-package org::allbinary::game::ag::ai::sequence::ComboSequenceAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ag::ai::sequence::SequenceAI';
-
-
-
-sub new {
-    my ($class, $artificialIntelligenceInterface, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($artificialIntelligenceInterface, $ownerLayerInterface, $gameInput);
-        # super(...) made $self above
-    return $self;
+oo::class create ::ComboSequenceAI {
+    superclass ::SequenceAI
 }
 
+oo::define ::ComboSequenceAI {
+    method initFields_ComboSequenceAI {} {
+        return
+    }
+    
 
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        my $artificialIntelligenceInterfaceArray = $self->getArtificialIntelligenceInterface();
-        my $size = scalar(@{$artificialIntelligenceInterfaceArray});
-        for (my $index = 0; $index < $size; $index++) {
-            $self->setIndex($index);
-            $self->SUPER::processAI($allBinaryLayerManager);
+    constructor {artificialIntelligenceInterface ownerLayerInterface gameInput} {
+        next $artificialIntelligenceInterface $ownerLayerInterface $gameInput
+        my initFields_ComboSequenceAI
+    }
+    
+
+    method processAI {allBinaryLayerManager} {
+        set artificialIntelligenceInterfaceArray [my getArtificialIntelligenceInterface]
+        set size [$artificialIntelligenceInterfaceArray length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            my setIndex $index
+            next $allBinaryLayerManager
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::game::ag::ai::sequence::SequenceAI ();
+namespace eval ::ComboSequenceAI {
+}
 
-1;
 

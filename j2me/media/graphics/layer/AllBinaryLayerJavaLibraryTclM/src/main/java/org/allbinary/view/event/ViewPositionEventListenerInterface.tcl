@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.view.event
 
-# Java interface
-package org::allbinary::view::event::ViewPositionEventListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-# throws Exception
-sub onChangeEvent {
-    my ($self, $layerManagerEvent) = @_;
-    die "abstract method onChangeEvent";
+oo::class create ::ViewPositionEventListenerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::ViewPositionEventListenerInterface {
+    method initFields_ViewPositionEventListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onChangeEvent {layerManagerEvent} {
+        error [jexception AbstractMethodError onChangeEvent]
+    }
+}
+
+namespace eval ::ViewPositionEventListenerInterface {
+}
+
 

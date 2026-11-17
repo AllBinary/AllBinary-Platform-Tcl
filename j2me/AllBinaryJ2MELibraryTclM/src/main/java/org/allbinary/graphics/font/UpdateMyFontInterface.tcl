@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.font
 
-# Java interface
-package org::allbinary::graphics::font::UpdateMyFontInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-    die "abstract method updateMeasurement";
+oo::class create ::UpdateMyFontInterface {
+    superclass ::JObject
 }
 
-use javax::microedition::lcdui::Graphics ();
+oo::define ::UpdateMyFontInterface {
+    method initFields_UpdateMyFontInterface {} {
+        return
+    }
+    
 
-1;
+    method updateMeasurement {graphics} {
+        error [jexception AbstractMethodError updateMeasurement]
+    }
+}
+
+namespace eval ::UpdateMyFontInterface {
+}
+
 

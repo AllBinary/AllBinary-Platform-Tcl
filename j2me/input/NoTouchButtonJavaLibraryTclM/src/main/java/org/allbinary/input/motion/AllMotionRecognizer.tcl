@@ -11,67 +11,70 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion
 
-package org::allbinary::input::motion::AllMotionRecognizer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $index = 0;
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{id} = undef;
+oo::class create ::AllMotionRecognizer {
+    superclass ::JObject
 }
 
+oo::define ::AllMotionRecognizer {
+    method initFields_AllMotionRecognizer {} {
+        my jset id 0
+        
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{id} = $org::allbinary::input::motion::AllMotionRecognizer::index++;
-    return $self;
+    constructor {} {
+        next
+        my initFields_AllMotionRecognizer
+        my jset id [AllMotionRecognizer jpostinc index 1]
+    }
+    
+
+    method processStartMotionEvent {x y deviceId modifiers} {
+    }
+    
+
+    method processEndMotionEvent {x y deviceId modifiers} {
+    }
+    
+
+    method processDraggedMotionEvent {x y deviceId modifiers} {
+    }
+    
+
+    method processMovedMotionEvent {x y deviceId modifiers} {
+    }
+    
+
+    method processScrolledMotionEvent {x y deviceId modifiers} {
+    }
+    
+
+    method getId {} {
+        return [my jget id]
+    }
 }
 
-
-# throws Exception
-sub processStartMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
+namespace eval ::AllMotionRecognizer {
+    variable indexValue {}
+    variable indexSet 0
+    proc staticGet_index {} {
+        variable indexValue
+        variable indexSet
+        if {!$indexSet} {
+            set indexSet 1
+            set indexValue 0
+        }
+        return $indexValue
+    }
+    proc staticSet_index {value} {
+        variable indexValue
+        variable indexSet
+        set indexSet 1
+        set indexValue $value
+    }
 }
 
-
-# throws Exception
-sub processEndMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-}
-
-
-# throws Exception
-sub processDraggedMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-}
-
-
-# throws Exception
-sub processMovedMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-}
-
-
-# throws Exception
-sub processScrolledMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-}
-
-
-sub getId {
-    my ($self) = @_;
-        return $self->{id};
-}
-
-use java::lang::Object ();
-
-1;
 

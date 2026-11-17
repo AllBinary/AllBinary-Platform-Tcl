@@ -11,36 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game
 
-package org::allbinary::game::GameType;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{name} = undef;
+oo::class create ::GameType {
+    superclass ::JObject
 }
 
+oo::define ::GameType {
+    method initFields_GameType {} {
+        my jset name {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $name) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{name} = $name;
-    return $self;
+    constructor {name} {
+        next
+        my initFields_GameType
+        my jset name $name
+    }
+    
+
+    method toString {} {
+        return [my jget name]
+    }
 }
 
-
-sub toString {
-    my ($self) = @_;
-        return $self->{name};
+namespace eval ::GameType {
 }
 
-use java::lang::Object ();
-
-1;
 

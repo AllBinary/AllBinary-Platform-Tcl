@@ -11,51 +11,44 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::LastKeyAIVisitor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::visitor::Visitor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{TRUE} = 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{TRUE};
+oo::class create ::LastKeyAIVisitor {
+    superclass ::Visitor
 }
 
+oo::define ::LastKeyAIVisitor {
+    method initFields_LastKeyAIVisitor {} {
+        my jset logUtil {}
+        my jset TRUE {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset TRUE [[::BooleanFactory::getInstance] jget TRUE]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_LastKeyAIVisitor
+    }
+    
 
-
-sub visit {
-    my ($self, $anyType) = @_;
+    method visit {anyType} {
         try {
-            my $basicAI = $anyType;
-            my $key = $basicAI->getLastKey();
-            if ($key != -1) {
-                $basicAI->processKeyAI($key);
+            set basicAI $anyType
+            set key [$basicAI getLastKey]
+            if {[expr {$key != [expr {-1}]}]} {
+                $basicAI processKeyAI $key
             }
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{VISIT}, $e);
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget VISIT] $e
         }
-        return $self->{TRUE};
+        return [my jget TRUE]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::ai::BasicAI ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::java::bool::BooleanFactory ();
-use org::allbinary::logic::util::visitor::Visitor ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::LastKeyAIVisitor {
+}
 
-1;
 

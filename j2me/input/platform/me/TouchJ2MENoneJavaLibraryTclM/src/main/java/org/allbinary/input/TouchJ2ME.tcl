@@ -11,39 +11,38 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input
 
 #TouchJ2MENone
-package org::allbinary::input::TouchJ2ME;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::TouchJ2ME {
+    superclass ::JObject
 }
 
+oo::define ::TouchJ2ME {
+    method initFields_TouchJ2ME {} {
+        return
+    }
+    
 
-sub pointerDragged {
-    my ($self, $x, $y) = @_;
+    constructor {} {
+        next
+        my initFields_TouchJ2ME
+    }
+    
+
+    method pointerDragged {x y} {
+    }
+    
+
+    method pointerPressed {x y} {
+    }
+    
+
+    method pointerReleased {x y} {
+    }
 }
 
-
-sub pointerPressed {
-    my ($self, $x, $y) = @_;
+namespace eval ::TouchJ2ME {
 }
 
-
-sub pointerReleased {
-    my ($self, $x, $y) = @_;
-}
-
-use java::lang::Object ();
-
-1;
 

@@ -1,13 +1,17 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
-# Java interface
-package org::allbinary::graphics::form::item::ABCustomItemCommandListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
+oo::class create ::ABCustomItemCommandListener {
+    superclass ::JObject
+}
 
+oo::define ::ABCustomItemCommandListener {
+    method initFields_ABCustomItemCommandListener {} {
+        return
+    }
+}
 
+namespace eval ::ABCustomItemCommandListener {
+}
 
-1;
 

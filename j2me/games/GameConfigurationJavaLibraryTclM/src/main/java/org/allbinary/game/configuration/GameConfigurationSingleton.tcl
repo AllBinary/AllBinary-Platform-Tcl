@@ -11,68 +11,72 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
-package org::allbinary::game::configuration::GameConfigurationSingleton;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::GameConfigurationSingleton'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = undef;
-    $self->{hashtable} = undef;
+oo::class create ::GameConfigurationSingleton {
+    superclass ::JObject
 }
 
+oo::define ::GameConfigurationSingleton {
+    method initFields_GameConfigurationSingleton {} {
+        my jset list {}
+        my jset hashtable {}
+        
+        
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::GameConfigurationSingleton::SINGLETON;
+    constructor {} {
+        next
+        my initFields_GameConfigurationSingleton
+        my jset list [::BasicArrayListD new]
+        my jset hashtable [[::StdUtil::getInstance] createHashtable]
+    }
+    
+
+    method getInstanceByName {name} {
+        return [[my jget hashtable] get $name]
+    }
+    
+
+    method getOptionsBasicArrayList {} {
+        return [my jget list]
+    }
+    
+
+    method add {gameConfiguration} {
+        [my jget list] add $gameConfiguration
+    }
+    
+
+    method getHashtable {} {
+        return [my jget hashtable]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
-        $self->{hashtable} = 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable();
-    return $self;
+namespace eval ::GameConfigurationSingleton {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::GameConfigurationSingleton new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::GameConfigurationSingleton::staticGet_SINGLETON]
+    }
 }
 
-
-sub getInstanceByName {
-    my ($self, $name) = @_;
-        return $self->{hashtable}->get($name);
-}
-
-
-sub getOptionsBasicArrayList {
-    my ($self) = @_;
-        return $self->{list};
-}
-
-
-sub add {
-    my ($self, $gameConfiguration) = @_;
-        $self->{list}->add($gameConfiguration);
-}
-
-
-sub getHashtable {
-    my ($self) = @_;
-        return $self->{hashtable};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

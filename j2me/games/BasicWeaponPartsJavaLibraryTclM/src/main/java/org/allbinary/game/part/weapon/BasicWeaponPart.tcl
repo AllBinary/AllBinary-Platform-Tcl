@@ -11,129 +11,118 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.part.weapon
 
-package org::allbinary::game::part::weapon::BasicWeaponPart;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::part::PartInterface','org::allbinary::game::part::weapon::SalvoInterface';
-
-tie our $NULL_BASIC_WEAPON_PART, 'java::lang::LazyStatic', sub { 'org::allbinary::game::part::weapon::BasicWeaponPart'->createBasicWeaponPart('org::allbinary::animation::NullAnimationFactory'->getFactoryInstance()->getInstance(0)) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{animationInterface} = 'org::allbinary::animation::NullAnimationFactory'->getFactoryInstance()->getInstance(0);
-    $self->{ownerLayerInterface} = $org::allbinary::layer::AllBinaryLayer::NULL_ALLBINARY_LAYER;
-    $self->{weaponProperties} = $org::allbinary::game::combat::weapon::WeaponProperties::NULL_WEAPON_PROPERTIES;
-    $self->{scoreableInterface} = 'org::allbinary::game::score::NoScoreable'->getInstance();
-    $self->{relativeRelationship} = $org::allbinary::graphics::RelativeRelationship::NULL_RELATIVE_RELATIONSHIP;
+oo::class create ::BasicWeaponPart {
+    superclass ::JObject
 }
 
+oo::define ::BasicWeaponPart {
+    method initFields_BasicWeaponPart {} {
+        my jset animationInterface {}
+        my jset ownerLayerInterface {}
+        my jset weaponProperties {}
+        my jset scoreableInterface {}
+        my jset relativeRelationship {}
+        my jset animationInterface [[::NullAnimationFactory::getFactoryInstance] getInstance 0]
+        my jset ownerLayerInterface [::AllBinaryLayer::staticGet_NULL_ALLBINARY_LAYER]
+        my jset weaponProperties [::WeaponProperties::staticGet_NULL_WEAPON_PROPERTIES]
+        my jset scoreableInterface [::NoScoreable::getInstance]
+        my jset relativeRelationship [::RelativeRelationship::staticGet_NULL_RELATIVE_RELATIONSHIP]
+        return
+    }
+    
+    
 
-sub createBasicWeaponPart {
-    my ($class, $animationInterface) = @_;
-        return 'org::allbinary::game::part::weapon::BasicWeaponPart'->new($animationInterface, $org::allbinary::layer::AllBinaryLayer::NULL_ALLBINARY_LAYER, $org::allbinary::game::combat::weapon::WeaponProperties::NULL_WEAPON_PROPERTIES, 'org::allbinary::game::score::NoScoreable'->getInstance(), $org::allbinary::graphics::RelativeRelationship::NULL_RELATIVE_RELATIONSHIP);
+    constructor {animationInterface sourceLayerInterface weaponProperties scoreableInterface relativeRelationship} {
+        next
+        my initFields_BasicWeaponPart
+        my init $sourceLayerInterface $weaponProperties $scoreableInterface $relativeRelationship
+        my setAnimationInterface $animationInterface
+    }
+    
+
+    method init {sourceLayerInterface weaponProperties scoreableInterface relativeRelationship} {
+        my setOwnerLayerInterface $sourceLayerInterface
+        my setWeaponProperties $weaponProperties
+        my jset scoreableInterface $scoreableInterface
+        my jset relativeRelationship $relativeRelationship
+    }
+    
+
+    method process {allbinaryLayerManager angle otherAngle} {
+        my processScore $allbinaryLayerManager $angle $otherAngle [my getWeaponProperties] [my jget scoreableInterface]
+    }
+    
+
+    method processScore {allbinaryLayerManager angle otherAngle weaponProperties scoreableInterface} {
+        error [jexception Exception [[::CommonStrings::getInstance] jget NOT_IMPLEMENTED]]
+    }
+    
+
+    method getOwnerLayerInterface {} {
+        return [my jget ownerLayerInterface]
+    }
+    
+
+    method setOwnerLayerInterface {ownerLayerInterface} {
+        my jset ownerLayerInterface $ownerLayerInterface
+    }
+    
+
+    method getAnimationInterface {} {
+        return [my jget animationInterface]
+    }
+    
+
+    method setAnimationInterface {animationInterface} {
+        my jset animationInterface $animationInterface
+    }
+    
+
+    method paint {graphics} {
+        set viewPosition [[my getOwnerLayerInterface] getViewPosition]
+        set viewX [$viewPosition getX]
+        set viewY [$viewPosition getY]
+        [my jget animationInterface] paintXY $graphics $viewX $viewY
+    }
+    
+
+    method paintThreed {graphics} {
+    }
+    
+
+    method getWeaponProperties {} {
+        return [my jget weaponProperties]
+    }
+    
+
+    method setWeaponProperties {weaponProperties} {
+        my jset weaponProperties $weaponProperties
+    }
 }
 
-
-sub new {
-    my ($class, $animationInterface, $sourceLayerInterface, $weaponProperties, $scoreableInterface, $relativeRelationship) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->init($sourceLayerInterface, $weaponProperties, $scoreableInterface, $relativeRelationship);
-        $self->setAnimationInterface($animationInterface);
-    return $self;
+namespace eval ::BasicWeaponPart {
+    variable NULL_BASIC_WEAPON_PARTValue {}
+    variable NULL_BASIC_WEAPON_PARTSet 0
+    proc staticGet_NULL_BASIC_WEAPON_PART {} {
+        variable NULL_BASIC_WEAPON_PARTValue
+        variable NULL_BASIC_WEAPON_PARTSet
+        if {!$NULL_BASIC_WEAPON_PARTSet} {
+            set NULL_BASIC_WEAPON_PARTSet 1
+            set NULL_BASIC_WEAPON_PARTValue [::BasicWeaponPart::createBasicWeaponPart [[::NullAnimationFactory::getFactoryInstance] getInstance 0]]
+        }
+        return $NULL_BASIC_WEAPON_PARTValue
+    }
+    proc staticSet_NULL_BASIC_WEAPON_PART {value} {
+        variable NULL_BASIC_WEAPON_PARTValue
+        variable NULL_BASIC_WEAPON_PARTSet
+        set NULL_BASIC_WEAPON_PARTSet 1
+        set NULL_BASIC_WEAPON_PARTValue $value
+    }
+    proc createBasicWeaponPart {animationInterface} {
+        return [::BasicWeaponPart new $animationInterface [::AllBinaryLayer::staticGet_NULL_ALLBINARY_LAYER] [::WeaponProperties::staticGet_NULL_WEAPON_PROPERTIES] [::NoScoreable::getInstance] [::RelativeRelationship::staticGet_NULL_RELATIVE_RELATIONSHIP]]
+    }
 }
 
-
-sub init {
-    my ($self, $sourceLayerInterface, $weaponProperties, $scoreableInterface, $relativeRelationship) = @_;
-        $self->setOwnerLayerInterface($sourceLayerInterface);
-        $self->setWeaponProperties($weaponProperties);
-        $self->{scoreableInterface} = $scoreableInterface;
-        $self->{relativeRelationship} = $relativeRelationship;
-}
-
-
-# throws Exception
-sub process {
-    my ($self, $allbinaryLayerManager, $angle, $otherAngle) = @_;
-        $self->processScore($allbinaryLayerManager, $angle, $otherAngle, $self->getWeaponProperties(), $self->{scoreableInterface});
-}
-
-
-# throws Exception
-sub processScore {
-    my ($self, $allbinaryLayerManager, $angle, $otherAngle, $weaponProperties, $scoreableInterface) = @_;
-        die ('org::allbinary::string::CommonStrings'->getInstance()->{NOT_IMPLEMENTED});
-}
-
-
-sub getOwnerLayerInterface {
-    my ($self) = @_;
-        return $self->{ownerLayerInterface};
-}
-
-
-sub setOwnerLayerInterface {
-    my ($self, $ownerLayerInterface) = @_;
-        $self->{ownerLayerInterface} = $ownerLayerInterface;
-}
-
-
-sub getAnimationInterface {
-    my ($self) = @_;
-        return $self->{animationInterface};
-}
-
-
-sub setAnimationInterface {
-    my ($self, $animationInterface) = @_;
-        $self->{animationInterface} = $animationInterface;
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        my $viewPosition = $self->getOwnerLayerInterface()->getViewPosition();
-        my $viewX = $viewPosition->getX();
-        my $viewY = $viewPosition->getY();
-        $self->{animationInterface}->paintXY($graphics, $viewX, $viewY);
-}
-
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
-}
-
-
-sub getWeaponProperties {
-    my ($self) = @_;
-        return $self->{weaponProperties};
-}
-
-
-sub setWeaponProperties {
-    my ($self, $weaponProperties) = @_;
-        $self->{weaponProperties} = $weaponProperties;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::NullAnimationFactory ();
-use org::allbinary::game::combat::weapon::WeaponProperties ();
-use org::allbinary::game::part::PartInterface ();
-use org::allbinary::game::score::NoScoreable ();
-use org::allbinary::game::score::ScoreableInterface ();
-use org::allbinary::graphics::RelativeRelationship ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::view::ViewPositionBase ();
-use org::allbinary::game::part::weapon::SalvoInterface ();
-
-1;
 

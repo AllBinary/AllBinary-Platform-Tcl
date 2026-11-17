@@ -11,192 +11,162 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
 #BasicPlayerMIDP2
-package org::allbinary::media::audio::PlayerComposite;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','javax::microedition::media::Controllable','javax::microedition::media::Player';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{player} = undef;
-    $self->{timeElapsedHelper} = 'org::allbinary::time::TimeDelayHelper'->new(0);
-    $self->{gameTickTimeDelayHelper} = 'org::allbinary::time::GameTickTimeDelayHelperFactory'->getInstance();
+oo::class create ::PlayerComposite {
+    superclass ::JObject
 }
 
+oo::define ::PlayerComposite {
+    method initFields_PlayerComposite {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset player {}
+        my jset timeElapsedHelper {}
+        my jset gameTickTimeDelayHelper {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        
+        my jset timeElapsedHelper [::TimeDelayHelper new 0]
+        my jset gameTickTimeDelayHelper [::GameTickTimeDelayHelperFactory::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $player, $repeatTime) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{player} = $player;
-        $self->{timeElapsedHelper}->{delay} = $repeatTime;
-    return $self;
-}
+    constructor {player repeatTime} {
+        next
+        my initFields_PlayerComposite
+        my jset player $player
+        [my jget timeElapsedHelper] jset delay $repeatTime
+    }
+    
 
+    method addPlayerListener {playerListener} {
+        [my jget player] addPlayerListener $playerListener
+    }
+    
 
-sub addPlayerListener {
-    my ($self, $playerListener) = @_;
-        $self->{player}->addPlayerListener($playerListener);
-}
+    method removePlayerListener {playerListener} {
+        [my jget player] removePlayerListener $playerListener
+    }
+    
 
+    method close {} {
+        [my jget player] close
+    }
+    
 
-sub removePlayerListener {
-    my ($self, $playerListener) = @_;
-        $self->{player}->removePlayerListener($playerListener);
-}
+    method deallocate {} {
+        [my jget player] deallocate
+    }
+    
 
+    method getContentType {} {
+        return [[my jget player] getContentType]
+    }
+    
 
-sub close {
-    my ($self) = @_;
-        $self->{player}->close();
-}
+    method getDuration {} {
+        return [[my jget player] getDuration]
+    }
+    
 
+    method getMediaTime {} {
+        return [[my jget player] getMediaTime]
+    }
+    
 
-sub deallocate {
-    my ($self) = @_;
-        $self->{player}->deallocate();
-}
+    method getTimeBase {} {
+        return [([my jget player]) getTimeBase]
+    }
+    
 
+    method setTimeBase {timeBase} {
+        ([my jget player]) setTimeBase $timeBase
+    }
+    
 
-sub getContentType {
-    my ($self) = @_;
-        return $self->{player}->getContentType();
-}
-
-
-sub getDuration {
-    my ($self) = @_;
-        return $self->{player}->getDuration();
-}
-
-
-sub getMediaTime {
-    my ($self) = @_;
-        return $self->{player}->getMediaTime();
-}
-
-
-sub getTimeBase {
-    my ($self) = @_;
-        return ($self->{player})->getTimeBase();
-}
-
-
-# throws MediaException
-sub setTimeBase {
-    my ($self, $timeBase) = @_;
-        ($self->{player})->setTimeBase($timeBase);
-}
-
-
-sub prefetch {
-    my ($self) = @_;
+    method prefetch {} {
         try {
-            $self->{player}->prefetch();
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "prefetch", $e);
+            [my jget player] prefetch
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "prefetch" $e
         }
-}
+    }
+    
 
-
-sub realize {
-    my ($self) = @_;
+    method realize {} {
         try {
-            $self->{player}->realize();
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "realize", $e);
+            [my jget player] realize
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "realize" $e
         }
-}
+    }
+    
 
+    method getState {} {
+        return [[my jget player] getState]
+    }
+    
 
-sub getState {
-    my ($self) = @_;
-        return $self->{player}->getState();
-}
+    method setLoopCount {count} {
+        [my jget player] setLoopCount $count
+    }
+    
 
-
-sub setLoopCount {
-    my ($self, $count) = @_;
-        $self->{player}->setLoopCount($count);
-}
-
-
-sub setMediaTime {
-    my ($self, $now) = @_;
+    method setMediaTime {now} {
         try {
-            return $self->{player}->setMediaTime($now);
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "setMediaTime", $e);
-            return -1;
+            return [[my jget player] setMediaTime $now]
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "setMediaTime" $e
+            return [expr {-1}]
         }
-}
+    }
+    
 
-
-sub start {
-    my ($self) = @_;
+    method start {} {
         try {
-            if ($self->{timeElapsedHelper}->isTime($self->{gameTickTimeDelayHelper}->{startTime})) {
-                $self->{player}->start();
+            if {[[my jget timeElapsedHelper] isTime [[my jget gameTickTimeDelayHelper] jget startTime]]} {
+                [my jget player] start
             }
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{START_METHOD_NAME}, $e);
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget START_METHOD_NAME] $e
         }
-}
+    }
+    
 
-
-sub stop {
-    my ($self) = @_;
+    method stop {} {
         try {
-            $self->{player}->stop();
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "stop", $e);
+            [my jget player] stop
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "stop" $e
         }
+    }
+    
+
+    method getControl {controlType} {
+        return [[my jget player] getControl $controlType]
+    }
+    
+
+    method getControls {} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method setVolume {leftVolume rightVolume} {
+        set controllable2 ([my jget player])
+        $controllable2 setVolume $leftVolume $rightVolume
+    }
+    
+
+    method getPlayerP {} {
+        return [my jget player]
+    }
 }
 
-
-sub getControl {
-    my ($self, $controlType) = @_;
-        return $self->{player}->getControl($controlType);
+namespace eval ::PlayerComposite {
 }
 
-
-sub getControls {
-    my ($self) = @_;
-        die ("RuntimeException");
-}
-
-
-sub setVolume {
-    my ($self, $leftVolume, $rightVolume) = @_;
-        my $controllable2 = ($self->{player});
-        $controllable2->setVolume($leftVolume, $rightVolume);
-}
-
-
-sub getPlayerP {
-    my ($self) = @_;
-        return $self->{player};
-}
-
-use java::lang::Object ();
-use javax::microedition::media::Control ();
-use javax::microedition::media::Controllable ();
-use javax::microedition::media::MediaException ();
-use javax::microedition::media::Player ();
-use javax::microedition::media::PlayerListener ();
-use javax::microedition::media::TimeBase ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::time::GameTickTimeDelayHelper ();
-use org::allbinary::time::GameTickTimeDelayHelperFactory ();
-use org::allbinary::time::TimeDelayHelper ();
-
-1;
 

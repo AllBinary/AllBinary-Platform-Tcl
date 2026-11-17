@@ -11,118 +11,116 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer.event
 
-package org::allbinary::layer::event::LayerManagerEventHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::handler::BasicEventHandler';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::layer::event::LayerManagerEventHandler'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{CREATE} = "Create";
-    $self->{DELETE} = "Delete";
+oo::class create ::LayerManagerEventHandler {
+    superclass ::BasicEventHandler
 }
 
+oo::define ::LayerManagerEventHandler {
+    method initFields_LayerManagerEventHandler {} {
+        my jset list {}
+        my jset CREATE {}
+        my jset DELETE {}
+        my jset list [::BasicArrayListD new]
+        my jset CREATE "Create"
+        my jset DELETE "Delete"
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::layer::event::LayerManagerEventHandler::instance;
-}
+    constructor {} {
+        next
+        my initFields_LayerManagerEventHandler
+    }
+    
 
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
-
-
-sub addListener {
-    my ($self, $layerManagerEventListener) = @_;
-        if (!$self->{list}->contains($layerManagerEventListener)) {
-            $self->{list}->add($layerManagerEventListener);
+    method addListener {layerManagerEventListener} {
+        if {[expr {![[my jget list] contains $layerManagerEventListener]}]} {
+            [my jget list] add $layerManagerEventListener
         }
-}
+    }
+    
 
+    method removeAllListeners {} {
+        [my jget list] clear
+        next
+    }
+    
 
-sub removeAllListeners {
-    my ($self) = @_;
-        $self->{list}->clear();
-        $self->SUPER::removeAllListeners();
-}
+    method removeListener {eventListenerInterface} {
+        [my jget list] remove $eventListenerInterface
+        next $eventListenerInterface
+    }
+    
 
-
-sub removeListener {
-    my ($self, $eventListenerInterface) = @_;
-        $self->{list}->remove($eventListenerInterface);
-        $self->SUPER::removeListener($eventListenerInterface);
-}
-
-
-# throws Exception
-sub fireEvent {
-    my ($self, $eventObject) = @_;
-        for (my $index = $self->{list}->size(); --$index >= 0; ) {
+    method fireEvent {eventObject} {
+        for {set index [[my jget list] size]} {[expr {[jpreincr index -1] >= 0}]} {} {
             try {
-                my $layerManagerEventListener = $self->{list}->{objectArray}->[$index];
-                $layerManagerEventListener->onCreateLayerManagerEvent($eventObject);
-            } catch ($e) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, 'org::allbinary::logic::util::event::EventStrings'->getInstance()->{FIRE_EVENT}, $e);
+                set layerManagerEventListener [[[my jget list] jget objectArray] get $index]
+                $layerManagerEventListener onCreateLayerManagerEvent $eventObject
+            } on error {e} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[::EventStrings::getInstance] jget FIRE_EVENT] $e
             }
         }
-        $self->SUPER::fireEvent($eventObject);
-}
+        next $eventObject
+    }
+    
 
-
-# throws Exception
-sub fireDeleteEvent {
-    my ($self, $eventObject) = @_;
-        for (my $index = $self->{list}->size(); --$index >= 0; ) {
+    method fireDeleteEvent {eventObject} {
+        for {set index [[my jget list] size]} {[expr {[jpreincr index -1] >= 0}]} {} {
             try {
-                my $layerManagerEventListener = $self->{list}->{objectArray}->[$index];
-                $layerManagerEventListener->onDeleteLayerManagerEvent($eventObject);
-            } catch ($e) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, 'org::allbinary::logic::util::event::EventStrings'->getInstance()->{FIRE_EVENT}, $e);
+                set layerManagerEventListener [[[my jget list] jget objectArray] get $index]
+                $layerManagerEventListener onDeleteLayerManagerEvent $eventObject
+            } on error {e} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[::EventStrings::getInstance] jget FIRE_EVENT] $e
             }
         }
-        my $eventListenerInterfaceList = $self->{eventListenerInterfaceList};
-        my $eventListenerInterface = undef;
-        my $layerManagerEventListenerInterface = undef;
-        my $listenerIndex = 0;
-        while ($listenerIndex < $eventListenerInterfaceList->size()) {
+        set eventListenerInterfaceList [my jget eventListenerInterfaceList]
+        set eventListenerInterface {}
+        set layerManagerEventListenerInterface {}
+        set listenerIndex 0
+        while {[expr {$listenerIndex < [$eventListenerInterfaceList size]}]} {
             try {
-                $eventListenerInterface = $eventListenerInterfaceList->{objectArray}->[$listenerIndex];
-                $layerManagerEventListenerInterface = ($eventListenerInterface);
-                $layerManagerEventListenerInterface->onDeleteLayerManagerEvent($eventObject);
-            } catch ($e) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, 'org::allbinary::logic::util::event::EventStrings'->getInstance()->{FIRE_EVENT}, $e);
+                set eventListenerInterface [[$eventListenerInterfaceList jget objectArray] get $listenerIndex]
+                set layerManagerEventListenerInterface ($eventListenerInterface)
+                $layerManagerEventListenerInterface onDeleteLayerManagerEvent $eventObject
+            } on error {e} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[::EventStrings::getInstance] jget FIRE_EVENT] $e
             }
-            $listenerIndex++;
+            jpostincr listenerIndex 1
         }
+    }
+    
+
+    method process {eventObject eventListenerInterface} {
+        set layerManagerEventListenerInterface ($eventListenerInterface)
+        $layerManagerEventListenerInterface onCreateLayerManagerEvent $eventObject
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $eventObject, $eventListenerInterface) = @_;
-        my $layerManagerEventListenerInterface = ($eventListenerInterface);
-        $layerManagerEventListenerInterface->onCreateLayerManagerEvent($eventObject);
+namespace eval ::LayerManagerEventHandler {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LayerManagerEventHandler new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LayerManagerEventHandler::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

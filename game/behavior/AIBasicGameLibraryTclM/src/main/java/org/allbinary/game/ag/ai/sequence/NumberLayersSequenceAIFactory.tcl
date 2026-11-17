@@ -11,32 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.sequence
 
-package org::allbinary::game::ag::ai::sequence::NumberLayersSequenceAIFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NumberLayersSequenceAIFactory {
+    superclass ::JObject
 }
 
+oo::define ::NumberLayersSequenceAIFactory {
+    method initFields_NumberLayersSequenceAIFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($self, $numberOfEnemiesLeft, $artificialIntelligenceInterface, $ownerLayerInterface, $gameInput) = @_;
-        return 'org::allbinary::game::ag::ai::sequence::NumberLayersSequenceAI'->new($numberOfEnemiesLeft, $artificialIntelligenceInterface, $ownerLayerInterface, $gameInput);
+    constructor {} {
+        next
+        my initFields_NumberLayersSequenceAIFactory
+    }
+    
+
+    method getInstance {numberOfEnemiesLeft artificialIntelligenceInterface ownerLayerInterface gameInput} {
+        return [::NumberLayersSequenceAI new $numberOfEnemiesLeft $artificialIntelligenceInterface $ownerLayerInterface $gameInput]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::game::ag::ai::sequence::NumberLayersSequenceAI ();
+namespace eval ::NumberLayersSequenceAIFactory {
+}
 
-1;
 

@@ -11,109 +11,99 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic.health
 
-package org::allbinary::game::ag::layer::hud::basic::health::HealthHudWidget;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::graphics::hud::BasicHud','org::allbinary::graphics::paint::PaintableInterface','org::allbinary::game::health::HealthListenerInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{healthScale} = undef;
-    $self->{animationInterface} = undef;
-    $self->{healthInterface} = undef;
-    $self->{max} = 0;
-    $self->{xArray} = undef;
-    $self->{gameTickTimeDelayHelper} = 'org::allbinary::time::GameTickTimeDelayHelperFactory'->getInstance();
-    $self->{timeDelayHelper} = $org::allbinary::time::NoTimeDelayHelper::SINGLETON;
-    $self->{slowBeatTimeDelayHelper} = 'org::allbinary::time::TimeDelayHelper'->new(1280);
-    $self->{mediumBeatTimeDelayHelper} = 'org::allbinary::time::TimeDelayHelper'->new(640);
-    $self->{fastBeatTimeDelayHelper} = 'org::allbinary::time::TimeDelayHelper'->new(320);
+oo::class create ::HealthHudWidget {
+    superclass ::BasicHud
 }
 
+oo::define ::HealthHudWidget {
+    method initFields_HealthHudWidget {} {
+        my jset healthScale 0
+        my jset animationInterface {}
+        my jset healthInterface {}
+        my jset max 0
+        my jset xArray {}
+        my jset gameTickTimeDelayHelper {}
+        my jset timeDelayHelper {}
+        my jset slowBeatTimeDelayHelper {}
+        my jset mediumBeatTimeDelayHelper {}
+        my jset fastBeatTimeDelayHelper {}
+        
+        
+        
+        my jset max 0
+        
+        my jset gameTickTimeDelayHelper [::GameTickTimeDelayHelperFactory::getInstance]
+        my jset timeDelayHelper [::NoTimeDelayHelper::staticGet_SINGLETON]
+        my jset slowBeatTimeDelayHelper [::TimeDelayHelper new 1280]
+        my jset mediumBeatTimeDelayHelper [::TimeDelayHelper new 640]
+        my jset fastBeatTimeDelayHelper [::TimeDelayHelper new 320]
+        return
+    }
+    
 
-sub new {
-    my ($class, $animationInterface, $healthInterface, $location, $direction) = @_;
-    my $self = $class->SUPER::new($location, $direction, 2, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE});
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{animationInterface} = $animationInterface;
-        $self->{healthInterface} = $healthInterface;
-        $self->{healthInterface}->addListener($self);
-        $self->{healthScale} = ($self->{healthInterface}->getMaxHealth() / 6) + 1;
-        $self->onHealthChange();
-        $self->{updateMaxWidth} = $healthInterface->getMaxHealth() * 16;
-        $self->{updateMaxHeight} = 16;
-        $self->{xArray} = [(0) x (30)];
-        $self->update();
-    return $self;
-}
+    constructor {animationInterface healthInterface location direction} {
+        next $location $direction 2 [[::BasicColorFactory::getInstance] jget WHITE]
+        my initFields_HealthHudWidget
+        my jset animationInterface $animationInterface
+        my jset healthInterface $healthInterface
+        [my jget healthInterface] addListener [self]
+        my jset healthScale [expr {([expr {[[my jget healthInterface] getMaxHealth] / 6}]) + 1}]
+        my onHealthChange
+        my jset updateMaxWidth [expr {[$healthInterface getMaxHealth] * 16}]
+        my jset updateMaxHeight 16
+        my jset xArray [jarray 30 0]
+        my update
+    }
+    
 
-
-sub update {
-    my ($self) = @_;
-        if (defined($self->{xArray})) {
-            for (my $index = 0; $index < scalar(@{$self->{xArray}}); $index++) {
-                $self->{xArray}->[$index] = $self->getX() + ($index * 16);
+    method update {} {
+        if {[expr {[my jget xArray] ne {}}]} {
+            for {set index 0} {[expr {$index < [[my jget xArray] length]}]} {jpostincr index 1} {
+                [my jget xArray] set $index [expr {[my getX] + ([jint [expr {$index * 16}]])}]
             }
         }
-}
+    }
+    
 
+    method setX {x} {
+        next $x
+        my update
+    }
+    
 
-sub setX {
-    my ($self, $x) = @_;
-        $self->SUPER::setX($x);
-        $self->update();
-}
-
-
-sub onHealthChange {
-    my ($self) = @_;
-        $self->{max} = ($self->{healthInterface}->getHealth() / $self->{healthScale});
-        $self->{timeDelayHelper} = $org::allbinary::time::NoTimeDelayHelper::SINGLETON;
-        if ($self->{max} <= 1 && $self->{healthInterface}->isAlive()) {
-            $self->{max} = 1;
-            if ($self->{healthScale} - $self->{healthInterface}->getHealth() > int(($self->{healthScale} * 2) / 3)) {
-                $self->{timeDelayHelper} = $self->{slowBeatTimeDelayHelper};
-            } elsif ($self->{healthScale} - $self->{healthInterface}->getHealth() > int($self->{healthScale} / 3)) {
-                $self->{timeDelayHelper} = $self->{mediumBeatTimeDelayHelper};
+    method onHealthChange {} {
+        my jset max ([expr {[[my jget healthInterface] getHealth] / [my jget healthScale]}])
+        my jset timeDelayHelper [::NoTimeDelayHelper::staticGet_SINGLETON]
+        if {[expr {[expr {[my jget max] <= 1}] && [[my jget healthInterface] isAlive]}]} {
+            my jset max 1
+            if {[expr {[expr {[my jget healthScale] - [[my jget healthInterface] getHealth]}] > [jdiv ([jint [expr {[my jget healthScale] * 2}]]) 3]}]} {
+                my jset timeDelayHelper [my jget slowBeatTimeDelayHelper]
+            } elseif {[expr {[expr {[my jget healthScale] - [[my jget healthInterface] getHealth]}] > [jdiv [my jget healthScale] 3]}]} {
+                my jset timeDelayHelper [my jget mediumBeatTimeDelayHelper]
             } else {
-                $self->{timeDelayHelper} = $self->{fastBeatTimeDelayHelper};
+                my jset timeDelayHelper [my jget fastBeatTimeDelayHelper]
             }
         }
-}
+    }
+    
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        for (my $index = 0; $index < $self->{max}; $index++) {
-            if ($self->{timeDelayHelper}->isTime($self->{gameTickTimeDelayHelper}->{startTime})) {
-                $self->{animationInterface}->paintXY($graphics, $self->{xArray}->[$index], $self->getY());
+    method paint {graphics} {
+        [my jget myFontProcessor] process $graphics
+        for {set index 0} {[expr {$index < [my jget max]}]} {jpostincr index 1} {
+            if {[[my jget timeDelayHelper] isTime [[my jget gameTickTimeDelayHelper] jget startTime]]} {
+                [my jget animationInterface] paintXY $graphics [[my jget xArray] get $index] [my getY]
             }
         }
+    }
+    
+
+    method paintThreed {graphics} {
+    }
 }
 
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
+namespace eval ::HealthHudWidget {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::game::graphics::hud::BasicHud ();
-use org::allbinary::game::health::Health ();
-use org::allbinary::game::health::HealthListenerInterface ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::paint::PaintableInterface ();
-use org::allbinary::time::GameTickTimeDelayHelper ();
-use org::allbinary::time::GameTickTimeDelayHelperFactory ();
-use org::allbinary::time::NoTimeDelayHelper ();
-use org::allbinary::time::TimeDelayHelper ();
-
-1;
 

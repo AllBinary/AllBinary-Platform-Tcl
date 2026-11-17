@@ -11,50 +11,38 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
-package org::allbinary::physics::movement::DelayedConstantVelocityMovement;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::physics::movement::BasicConstantVelocityMovement';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{timeDelayHelper} = 'org::allbinary::time::TimeDelayHelper'->new(60);
+oo::class create ::DelayedConstantVelocityMovement {
+    superclass ::BasicConstantVelocityMovement
 }
 
+oo::define ::DelayedConstantVelocityMovement {
+    method initFields_DelayedConstantVelocityMovement {} {
+        my jset timeDelayHelper {}
+        my jset timeDelayHelper [::TimeDelayHelper new 60]
+        return
+    }
+    
 
-sub new {
-    my ($class, $basicDecimal, $velocityProperties) = @_;
-    my $self = $class->SUPER::new($basicDecimal, $velocityProperties);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
-}
+    constructor {basicDecimal velocityProperties} {
+        next $basicDecimal $velocityProperties
+        my initFields_DelayedConstantVelocityMovement
+    }
+    
 
+    method init {speedBasicDecimal angle otherAngle} {
+    }
+    
 
-sub init {
-    my ($self, $speedBasicDecimal, $angle, $otherAngle) = @_;
-}
-
-
-# throws Exception
-sub process {
-    my ($self, $layer) = @_;
-        if ($self->{timeDelayHelper}->isTime('org::allbinary::time::GameTickTimeDelayHelperFactory'->getInstance()->{startTime})) {
-            $self->SUPER::process($layer);
+    method process {layer} {
+        if {[[my jget timeDelayHelper] isTime [[::GameTickTimeDelayHelperFactory::getInstance] jget startTime]]} {
+            next $layer
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::layer::AllBinaryGameLayer ();
-use org::allbinary::game::physics::velocity::BasicVelocityProperties ();
-use org::allbinary::logic::math::BasicDecimal ();
-use org::allbinary::time::GameTickTimeDelayHelperFactory ();
-use org::allbinary::time::TimeDelayHelper ();
-use org::allbinary::physics::movement::BasicConstantVelocityMovement ();
+namespace eval ::DelayedConstantVelocityMovement {
+}
 
-1;
 

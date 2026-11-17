@@ -11,61 +11,62 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.touch.action
 
-package org::allbinary::input::motion::touch::action::ReleaseTouchInputToGameKeyEventAction;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::motion::action::GameKeyCompleteMotionGestureInputEvent';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NONE} = 'org::allbinary::game::input::GameKeyFactory'->getInstance()->{NONE};
+oo::class create ::ReleaseTouchInputToGameKeyEventAction {
+    superclass ::GameKeyCompleteMotionGestureInputEvent
 }
 
+oo::define ::ReleaseTouchInputToGameKeyEventAction {
+    method initFields_ReleaseTouchInputToGameKeyEventAction {} {
+        my jset NONE {}
+        my jset NONE [[::GameKeyFactory::getInstance] jget NONE]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::input::motion::touch::action::ReleaseTouchInputToGameKeyEventAction::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::input::motion::touch::action::ReleaseTouchInputToGameKeyEventAction::instance = 'org::allbinary::input::motion::touch::action::ReleaseTouchInputToGameKeyEventAction'->new();
-        }
-        return $org::allbinary::input::motion::touch::action::ReleaseTouchInputToGameKeyEventAction::instance;
-}
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new("Release Action", 'org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance()->{RELEASED}, 'org::allbinary::game::input::PlatformInputMappingFactory'->getInstance()->getPersistentInputMappingInstance()->getInputMapping());
-    _init_fields($self);
-        # super(...) made $self above
+    constructor {} {
+        next "Release Action" [[::TouchMotionGestureFactory::getInstance] jget RELEASED] [[[::PlatformInputMappingFactory::getInstance] getPersistentInputMappingInstance] getInputMapping]
+        my initFields_ReleaseTouchInputToGameKeyEventAction
         try {
-            $self->setGameKey($self->{NONE});
-            $self->setGameKeyEvent('org::allbinary::game::input::event::GameKeyEventFactory'->getInstance()->getInstanceForInput($self, $self->{NONE}));
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{CONSTRUCTOR}, $e);
+            my setGameKey [my jget NONE]
+            my setGameKeyEvent [[::GameKeyEventFactory::getInstance] getInstanceForInput [self] [my jget NONE]]
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget CONSTRUCTOR] $e
         }
-    return $self;
+    }
+    
+
+    method update {} {
+    }
 }
 
-
-sub update {
-    my ($self) = @_;
+namespace eval ::ReleaseTouchInputToGameKeyEventAction {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::ReleaseTouchInputToGameKeyEventAction::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::ReleaseTouchInputToGameKeyEventAction::staticSet_instance [::ReleaseTouchInputToGameKeyEventAction new]
+        }
+        return [::ReleaseTouchInputToGameKeyEventAction::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::GameKey ();
-use org::allbinary::game::input::GameKeyFactory ();
-use org::allbinary::game::input::PlatformInputMappingFactory ();
-use org::allbinary::game::input::event::GameKeyEventFactory ();
-use org::allbinary::game::input::motion::action::GameKeyCompleteMotionGestureInputEvent ();
-use org::allbinary::input::motion::gesture::TouchMotionGestureFactory ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

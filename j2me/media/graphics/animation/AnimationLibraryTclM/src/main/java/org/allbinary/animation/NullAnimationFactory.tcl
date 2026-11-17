@@ -11,71 +11,81 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::NullAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::AnimationInterfaceFactoryInterface','org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface';
+oo::class create ::NullAnimationFactory {
+    superclass ::JObject
+}
 
-tie our $NULL_NOT_FOR_USE_ANIMATION_FACTORY, 'java::lang::LazyStatic', sub { 'org::allbinary::animation::NullAnimationFactory'->new() };
-tie our $NULL_ANIMATION_FACTORY, 'java::lang::LazyStatic', sub { 'org::allbinary::animation::NullAnimationFactory'->new() };
+oo::define ::NullAnimationFactory {
+    method initFields_NullAnimationFactory {} {
+        my jset NULL_ANIMATION {}
+        my jset EMPTY_ARRAY {}
+        my jset NULL_ANIMATION [::Animation new]
+        my jset EMPTY_ARRAY [jarray 0 {}]
+        return
+    }
+    
 
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NULL_ANIMATION} = do {
-        package org::allbinary::animation::Animation::AnonymousN65758 { our @ISA = ('org::allbinary::animation::Animation', 'java::lang::Object');
-        
+    constructor {} {
+        next
+        my initFields_NullAnimationFactory
+    }
+    
+    
 
-        sub paintXY {
-            my ($self, $graphics, $x, $y) = @_;
+    method getInstance {instanceId} {
+        return [my jget NULL_ANIMATION]
+    }
+    
+
+    method getInstanceAnimation {animationInterface} {
+        return [my jget NULL_ANIMATION]
+    }
+    
+
+    method setInitialScale {scaleProperties} {
+    }
+}
+
+namespace eval ::NullAnimationFactory {
+    variable NULL_NOT_FOR_USE_ANIMATION_FACTORYValue {}
+    variable NULL_NOT_FOR_USE_ANIMATION_FACTORYSet 0
+    proc staticGet_NULL_NOT_FOR_USE_ANIMATION_FACTORY {} {
+        variable NULL_NOT_FOR_USE_ANIMATION_FACTORYValue
+        variable NULL_NOT_FOR_USE_ANIMATION_FACTORYSet
+        if {!$NULL_NOT_FOR_USE_ANIMATION_FACTORYSet} {
+            set NULL_NOT_FOR_USE_ANIMATION_FACTORYSet 1
+            set NULL_NOT_FOR_USE_ANIMATION_FACTORYValue [::NullAnimationFactory new]
         }
+        return $NULL_NOT_FOR_USE_ANIMATION_FACTORYValue
+    }
+    proc staticSet_NULL_NOT_FOR_USE_ANIMATION_FACTORY {value} {
+        variable NULL_NOT_FOR_USE_ANIMATION_FACTORYValue
+        variable NULL_NOT_FOR_USE_ANIMATION_FACTORYSet
+        set NULL_NOT_FOR_USE_ANIMATION_FACTORYSet 1
+        set NULL_NOT_FOR_USE_ANIMATION_FACTORYValue $value
+    }
+    variable NULL_ANIMATION_FACTORYValue {}
+    variable NULL_ANIMATION_FACTORYSet 0
+    proc staticGet_NULL_ANIMATION_FACTORY {} {
+        variable NULL_ANIMATION_FACTORYValue
+        variable NULL_ANIMATION_FACTORYSet
+        if {!$NULL_ANIMATION_FACTORYSet} {
+            set NULL_ANIMATION_FACTORYSet 1
+            set NULL_ANIMATION_FACTORYValue [::NullAnimationFactory new]
         }
-        'org::allbinary::animation::Animation::AnonymousN65758'->can('new') ? 'org::allbinary::animation::Animation::AnonymousN65758'->new() : bless({}, 'org::allbinary::animation::Animation::AnonymousN65758')
-    };
-    $self->{EMPTY_ARRAY} = [(undef) x (0)];
+        return $NULL_ANIMATION_FACTORYValue
+    }
+    proc staticSet_NULL_ANIMATION_FACTORY {value} {
+        variable NULL_ANIMATION_FACTORYValue
+        variable NULL_ANIMATION_FACTORYSet
+        set NULL_ANIMATION_FACTORYSet 1
+        set NULL_ANIMATION_FACTORYValue $value
+    }
+    proc getFactoryInstance {} {
+        return [::NullAnimationFactory::staticGet_NULL_ANIMATION_FACTORY]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-sub getFactoryInstance {
-    my ($class) = @_;
-        return $org::allbinary::animation::NullAnimationFactory::NULL_ANIMATION_FACTORY;
-}
-
-
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        return $self->{NULL_ANIMATION};
-}
-
-
-# throws Exception
-sub getInstanceAnimation {
-    my ($self, $animationInterface) = @_;
-        return $self->{NULL_ANIMATION};
-}
-
-
-sub setInitialScale {
-    my ($self, $scaleProperties) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::media::ScaleProperties ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::Animation ();
-
-1;
 

@@ -11,35 +11,35 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.emulator.device
 
-package org::allbinary::emulator::device::TrueTypeFontUtilBase;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class, $scale) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::TrueTypeFontUtilBase {
+    superclass ::JObject
 }
 
+oo::define ::TrueTypeFontUtilBase {
+    method initFields_TrueTypeFontUtilBase {} {
+        return
+    }
+    
 
-sub getAsTextureSize {
-    my ($self, $textureSize) = @_;
-        return -1;
+    constructor {scale} {
+        next
+        my initFields_TrueTypeFontUtilBase
+    }
+    
+
+    method getAsTextureSize {textureSize} {
+        return [expr {-1}]
+    }
+    
+
+    method getCellSize {cellSize} {
+        return [expr {-1}]
+    }
 }
 
-
-sub getCellSize {
-    my ($self, $cellSize) = @_;
-        return -1;
+namespace eval ::TrueTypeFontUtilBase {
 }
 
-use java::lang::Object ();
-
-1;
 

@@ -11,31 +11,29 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.layer.event
 
-# Java interface
-package org::allbinary::layer::event::LayerManagerEventListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-# throws Exception
-sub onCreateLayerManagerEvent {
-    my ($self, $layerManagerEvent) = @_;
-    die "abstract method onCreateLayerManagerEvent";
+oo::class create ::LayerManagerEventListenerInterface {
+    superclass ::JObject
 }
 
+oo::define ::LayerManagerEventListenerInterface {
+    method initFields_LayerManagerEventListenerInterface {} {
+        return
+    }
+    
 
-# throws Exception
-sub onDeleteLayerManagerEvent {
-    my ($self, $layerManagerEvent) = @_;
-    die "abstract method onDeleteLayerManagerEvent";
+    method onCreateLayerManagerEvent {layerManagerEvent} {
+        error [jexception AbstractMethodError onCreateLayerManagerEvent]
+    }
+    
+
+    method onDeleteLayerManagerEvent {layerManagerEvent} {
+        error [jexception AbstractMethodError onDeleteLayerManagerEvent]
+    }
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+namespace eval ::LayerManagerEventListenerInterface {
+}
 
-1;
 

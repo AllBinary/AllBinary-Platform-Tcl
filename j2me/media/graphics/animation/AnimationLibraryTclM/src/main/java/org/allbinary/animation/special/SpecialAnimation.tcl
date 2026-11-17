@@ -11,69 +11,73 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.special
 
-package org::allbinary::animation::special::SpecialAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::IndexedAnimation','org::allbinary::animation::special::SpecialAnimationInterface';
-
-tie our $NULL_SPECIAL_ANIMATION, 'java::lang::LazyStatic', sub { 'org::allbinary::animation::special::SpecialAnimation'->new('org::allbinary::animation::IndexedAnimationBehavior'->new(1, 250)) };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::animation::special::SpecialAnimation::NULL_SPECIAL_ANIMATION;
+oo::class create ::SpecialAnimation {
+    superclass ::IndexedAnimation
 }
 
+oo::define ::SpecialAnimation {
+    method initFields_SpecialAnimation {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($animationBehavior);
-        # super(...) made $self above
-    return $self;
+    constructor {animationBehavior} {
+        next $animationBehavior
+        my initFields_SpecialAnimation
+    }
+    
+
+    method nextFrame {} {
+        set indexedAnimationBehavior ([my jget animationBehaviorP])
+        $indexedAnimationBehavior jpostinc loopIndex 1
+    }
+    
+
+    method setLastFrame {} {
+    }
+    
+
+    method isComplete {} {
+        return false
+    }
+    
+
+    method open {} {
+    }
+    
+
+    method close {} {
+    }
+    
+
+    method process {} {
+    }
 }
 
-
-sub nextFrame {
-    my ($self) = @_;
-        my $indexedAnimationBehavior = ($self->{animationBehaviorP});
-        $indexedAnimationBehavior->{loopIndex}++;
+namespace eval ::SpecialAnimation {
+    variable NULL_SPECIAL_ANIMATIONValue {}
+    variable NULL_SPECIAL_ANIMATIONSet 0
+    proc staticGet_NULL_SPECIAL_ANIMATION {} {
+        variable NULL_SPECIAL_ANIMATIONValue
+        variable NULL_SPECIAL_ANIMATIONSet
+        if {!$NULL_SPECIAL_ANIMATIONSet} {
+            set NULL_SPECIAL_ANIMATIONSet 1
+            set NULL_SPECIAL_ANIMATIONValue [::SpecialAnimation new [::IndexedAnimationBehavior new 1 250]]
+        }
+        return $NULL_SPECIAL_ANIMATIONValue
+    }
+    proc staticSet_NULL_SPECIAL_ANIMATION {value} {
+        variable NULL_SPECIAL_ANIMATIONValue
+        variable NULL_SPECIAL_ANIMATIONSet
+        set NULL_SPECIAL_ANIMATIONSet 1
+        set NULL_SPECIAL_ANIMATIONValue $value
+    }
+    proc getInstance {} {
+        return [::SpecialAnimation::staticGet_NULL_SPECIAL_ANIMATION]
+    }
 }
 
-
-sub setLastFrame {
-    my ($self) = @_;
-}
-
-
-sub isComplete {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub open {
-    my ($self) = @_;
-}
-
-
-sub close {
-    my ($self) = @_;
-}
-
-
-sub process {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::animation::IndexedAnimationBehavior ();
-use org::allbinary::animation::special::SpecialAnimationInterface ();
-
-1;
 

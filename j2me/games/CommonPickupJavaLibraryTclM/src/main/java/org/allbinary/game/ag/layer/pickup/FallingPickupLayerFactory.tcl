@@ -11,33 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.pickup
 
-package org::allbinary::game::ag::layer::pickup::FallingPickupLayerFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::layer::AllBinaryLayerFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::FallingPickupLayerFactory {
+    superclass ::JObject
 }
 
+oo::define ::FallingPickupLayerFactory {
+    method initFields_FallingPickupLayerFactory {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($self) = @_;
-        return 'org::allbinary::game::ag::layer::pickup::FallingPickupLayer'->new($org::allbinary::game::multiplayer::layer::RemoteInfo::REMOTE_INFO);
+    constructor {} {
+        next
+        my initFields_FallingPickupLayerFactory
+    }
+    
+
+    method getInstance {} {
+        return [::FallingPickupLayer new [::RemoteInfo::staticGet_REMOTE_INFO]]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::multiplayer::layer::RemoteInfo ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerFactoryInterface ();
-use org::allbinary::game::ag::layer::pickup::FallingPickupLayer ();
+namespace eval ::FallingPickupLayerFactory {
+}
 
-1;
 

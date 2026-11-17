@@ -11,39 +11,51 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.emulator.swt
 
-package org::allbinary::emulator::swt::SWTRunnableProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::emulator::swt::SWTProcessor';
-
-tie our $instanceR, 'java::lang::LazyStatic', sub { 'org::allbinary::emulator::swt::SWTRunnableProcessor'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::emulator::swt::SWTRunnableProcessor::instanceR;
+oo::class create ::SWTRunnableProcessor {
+    superclass ::SWTProcessor
 }
 
+oo::define ::SWTRunnableProcessor {
+    method initFields_SWTRunnableProcessor {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+    constructor {} {
+        next
+        my initFields_SWTRunnableProcessor
+    }
+    
+
+    method process {display} {
+        [my jget runnable] run
+    }
 }
 
-
-sub process {
-    my ($self, $display) = @_;
-        $self->{runnable}->run();
+namespace eval ::SWTRunnableProcessor {
+    variable instanceRValue {}
+    variable instanceRSet 0
+    proc staticGet_instanceR {} {
+        variable instanceRValue
+        variable instanceRSet
+        if {!$instanceRSet} {
+            set instanceRSet 1
+            set instanceRValue [::SWTRunnableProcessor new]
+        }
+        return $instanceRValue
+    }
+    proc staticSet_instanceR {value} {
+        variable instanceRValue
+        variable instanceRSet
+        set instanceRSet 1
+        set instanceRValue $value
+    }
+    proc getInstance {} {
+        return [::SWTRunnableProcessor::staticGet_instanceR]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::eclipse::swt::widgets::Display ();
-use org::allbinary::emulator::swt::SWTProcessor ();
-
-1;
 

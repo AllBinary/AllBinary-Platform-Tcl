@@ -11,36 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-package org::allbinary::layer::AllBinaryLayerCircularPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::cache::BaseCircularPool';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::AllBinaryLayerCircularPool {
+    superclass ::BaseCircularPool
 }
 
+oo::define ::AllBinaryLayerCircularPool {
+    method initFields_AllBinaryLayerCircularPool {} {
+        return
+    }
+    
 
-# throws Exception
-sub initAllBinaryLayerCircularPool {
-    my ($self, $allbinaryLayerFactoryInterface, $total) = @_;
-        $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstance($total);
-        $self->{OBJECT_ARRAY} = [(undef) x ($total)];
-        for (my $localIndex = 0; $localIndex < $total; $localIndex++) {
-            $self->{OBJECT_ARRAY}->[$localIndex] = $allbinaryLayerFactoryInterface->getInstance();
+    constructor {} {
+        next
+        my initFields_AllBinaryLayerCircularPool
+    }
+    
+
+    method initAllBinaryLayerCircularPool {allbinaryLayerFactoryInterface total} {
+        my jset circularIndexUtil [::CircularIndexUtil::createInstance $total]
+        my jset OBJECT_ARRAY [jarray $total {}]
+        for {set localIndex 0} {[expr {$localIndex < $total}]} {jpostincr localIndex 1} {
+            [my jget OBJECT_ARRAY] set $localIndex [$allbinaryLayerFactoryInterface getInstance]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::util::cache::BaseCircularPool ();
-use org::allbinary::util::CircularIndexUtil ();
+namespace eval ::AllBinaryLayerCircularPool {
+}
 
-1;
 

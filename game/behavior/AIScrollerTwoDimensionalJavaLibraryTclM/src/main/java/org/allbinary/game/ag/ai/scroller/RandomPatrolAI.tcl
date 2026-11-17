@@ -11,64 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.scroller
 
-package org::allbinary::game::ag::ai::scroller::RandomPatrolAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ag::ai::scroller::BasePatrolAI';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{changedDirection} = 1;
+oo::class create ::RandomPatrolAI {
+    superclass ::BasePatrolAI
 }
 
+oo::define ::RandomPatrolAI {
+    method initFields_RandomPatrolAI {} {
+        my jset changedDirection false
+        my jset changedDirection true
+        return
+    }
+    
 
-sub new {
-    my ($class, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($hashtable, $ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->updateRandomDistance();
-    return $self;
-}
+    constructor {hashtable ownerLayerInterface gameInput} {
+        next $hashtable $ownerLayerInterface $gameInput
+        my initFields_RandomPatrolAI
+        my updateRandomDistance
+    }
+    
 
+    method updateRandomDistance {} {
+        my jset currentDistance [[::MyRandomFactory::getInstance] getAbsoluteNextInt [[my jget maxDistance] intValue]]
+    }
+    
 
-sub updateRandomDistance {
-    my ($self) = @_;
-        $self->{currentDistance} = 'org::allbinary::game::rand::MyRandomFactory'->getInstance()->getAbsoluteNextInt(int($self->{maxDistance}));
-}
-
-
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        $self->SUPER::update();
-        $self->SUPER::processKeyAI($self->{keyDirection});
-        if ($self->{changedDirection}) {
-            $self->SUPER::processKeyAI($javax::microedition::lcdui::Canvas::KEY_NUM1);
-            $self->updateRandomDistance();
-            $self->{changedDirection} = 0;
+    method processAI {allBinaryLayerManager} {
+        next
+        next [my jget keyDirection]
+        if {[my jget changedDirection]} {
+            next [::Canvas::staticGet_KEY_NUM1]
+            my updateRandomDistance
+            my jset changedDirection false
         }
+    }
+    
+
+    method nextDirection {} {
+        next
+        my jset changedDirection true
+    }
 }
 
-
-sub nextDirection {
-    my ($self) = @_;
-        $self->SUPER::nextDirection();
-        $self->{changedDirection} = 1;
+namespace eval ::RandomPatrolAI {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::game::rand::MyRandomFactory ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::ag::ai::scroller::BasePatrolAI ();
-
-1;
 

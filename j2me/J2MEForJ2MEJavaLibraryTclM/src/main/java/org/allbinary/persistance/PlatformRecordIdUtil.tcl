@@ -11,45 +11,52 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.persistance
 
-package org::allbinary::persistance::PlatformRecordIdUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::persistance::PlatformRecordIdUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{PLATFORM_SHORT_NAME} = "JME";
+oo::class create ::PlatformRecordIdUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::PlatformRecordIdUtil {
+    method initFields_PlatformRecordIdUtil {} {
+        my jset PLATFORM_SHORT_NAME {}
+        my jset PLATFORM_SHORT_NAME "JME"
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_PlatformRecordIdUtil
+    }
+    
+    
+
+    method getRecordId {abeClientInformation baseRecordId} {
+        return [[[[[[::StringMaker new] append [$abeClientInformation toShortString]] append [[::CommonSeps::getInstance] jget UNDERSCORE]] append [my jget PLATFORM_SHORT_NAME]] append $baseRecordId] toString]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::persistance::PlatformRecordIdUtil::instance;
+namespace eval ::PlatformRecordIdUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::PlatformRecordIdUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::PlatformRecordIdUtil::staticGet_instance]
+    }
 }
 
-
-sub getRecordId {
-    my ($self, $abeClientInformation, $baseRecordId) = @_;
-        return 'org::allbinary::logic::string::StringMaker'->new()->append($abeClientInformation->toShortString())->append('org::allbinary::string::CommonSeps'->getInstance()->{UNDERSCORE})->append($self->{PLATFORM_SHORT_NAME})->append($baseRecordId)->toString();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::string::CommonSeps ();
-
-1;
 

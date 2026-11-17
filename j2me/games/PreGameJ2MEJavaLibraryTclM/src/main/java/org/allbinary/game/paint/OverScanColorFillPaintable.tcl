@@ -11,34 +11,31 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.paint
 
-package org::allbinary::game::paint::OverScanColorFillPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::paint::ColorFillPaintable';
-
-
-
-sub new {
-    my ($class, $basicColor) = @_;
-    my $self = $class->SUPER::new($basicColor);
-        # super(...) made $self above
-    return $self;
+oo::class create ::OverScanColorFillPaintable {
+    superclass ::ColorFillPaintable
 }
 
+oo::define ::OverScanColorFillPaintable {
+    method initFields_OverScanColorFillPaintable {} {
+        return
+    }
+    
 
-sub paint {
-    my ($self, $graphics) = @_;
-        $graphics->setColor($self->{colorP});
-        $graphics->fillRect(-$graphics->getClipX(), -$graphics->getClipY(), $self->{displayInfoSingleton}->getLastWidth() + ($graphics->getClipX() * 2), $self->{displayInfoSingleton}->getLastHeight() + ($graphics->getClipY() * 2));
+    constructor {basicColor} {
+        next $basicColor
+        my initFields_OverScanColorFillPaintable
+    }
+    
+
+    method paint {graphics} {
+        $graphics setColor [my jget colorP]
+        $graphics fillRect [expr {-[$graphics getClipX]}] [expr {-[$graphics getClipY]}] [expr {[[my jget displayInfoSingleton] getLastWidth] + ([expr {[$graphics getClipX] * 2}])}] [expr {[[my jget displayInfoSingleton] getLastHeight] + ([expr {[$graphics getClipY] * 2}])}]
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::game::paint::ColorFillPaintable ();
+namespace eval ::OverScanColorFillPaintable {
+}
 
-1;
 

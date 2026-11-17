@@ -11,150 +11,122 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.compound
 
-package org::allbinary::animation::compound::CompoundIndexedAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::IndexedAnimation','org::allbinary::animation::compound::CompoundAnimationInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{circularIndexUtil} = undef;
-    $self->{animationInterfaceArray} = undef;
+oo::class create ::CompoundIndexedAnimation {
+    superclass ::IndexedAnimation
 }
 
+oo::define ::CompoundIndexedAnimation {
+    method initFields_CompoundIndexedAnimation {} {
+        my jset circularIndexUtil {}
+        my jset animationInterfaceArray {}
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $animationInterfaceArray, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{animationInterfaceArray} = $animationInterfaceArray;
-        $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstance(scalar(@{$self->{animationInterfaceArray}}));
-    return $self;
-}
+    constructor {animationInterfaceArray animationBehavior} {
+        next $animationBehavior
+        my initFields_CompoundIndexedAnimation
+        my jset animationInterfaceArray $animationInterfaceArray
+        my jset circularIndexUtil [::CircularIndexUtil::createInstance [[my jget animationInterfaceArray] length]]
+    }
+    
 
+    method setFrame {index} {
+        set indexedAnimation [[my jget animationInterfaceArray] get [[my jget circularIndexUtil] getIndex]]
+        $indexedAnimation setFrame $index
+    }
+    
 
-sub setFrame {
-    my ($self, $index) = @_;
-        my $indexedAnimation = $self->{animationInterfaceArray}->[$self->{circularIndexUtil}->getIndex()];
-        $indexedAnimation->setFrame($index);
-}
+    method getFrame {} {
+        set indexedAnimation [[my jget animationInterfaceArray] get [[my jget circularIndexUtil] getIndex]]
+        return [$indexedAnimation getFrame]
+    }
+    
 
+    method getSize {} {
+        set indexedAnimation [[my jget animationInterfaceArray] get [[my jget circularIndexUtil] getIndex]]
+        return [$indexedAnimation getSize]
+    }
+    
 
-sub getFrame {
-    my ($self) = @_;
-        my $indexedAnimation = $self->{animationInterfaceArray}->[$self->{circularIndexUtil}->getIndex()];
-        return $indexedAnimation->getFrame();
-}
+    method previousFrame {} {
+        set indexedAnimation [[my jget animationInterfaceArray] get [[my jget circularIndexUtil] getIndex]]
+        $indexedAnimation previousFrame
+    }
+    
 
+    method setSequence {sequence} {
+    }
+    
 
-sub getSize {
-    my ($self) = @_;
-        my $indexedAnimation = $self->{animationInterfaceArray}->[$self->{circularIndexUtil}->getIndex()];
-        return $indexedAnimation->getSize();
-}
+    method getSequence {} {
+        return [::PrimitiveIntUtil::getArrayInstance]
+    }
+    
 
+    method nextFrame {} {
+        [[my jget animationInterfaceArray] get [[my jget circularIndexUtil] getIndex]] nextFrame
+    }
+    
 
-sub previousFrame {
-    my ($self) = @_;
-        my $indexedAnimation = $self->{animationInterfaceArray}->[$self->{circularIndexUtil}->getIndex()];
-        $indexedAnimation->previousFrame();
-}
+    method paintXY {graphics x y} {
+        [[my jget animationInterfaceArray] get [[my jget circularIndexUtil] getIndex]] paintXY $graphics $x $y
+    }
+    
 
+    method paintThreedXYZ {graphics x y z} {
+        [[my jget animationInterfaceArray] get [[my jget circularIndexUtil] getIndex]] paintThreedXYZ $graphics $x $y $z
+    }
+    
 
-sub setSequence {
-    my ($self, $sequence) = @_;
-}
+    method getCurrentAnimation {} {
+        return [[my jget animationInterfaceArray] get [[my jget circularIndexUtil] getIndex]]
+    }
+    
 
+    method nextAnimation {} {
+        set frame [my getFrame]
+        [my jget circularIndexUtil] next
+        my setFrame $frame
+    }
+    
 
-sub getSequence {
-    my ($self) = @_;
-        return 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance();
-}
+    method previousAnimation {} {
+        set frame [my getFrame]
+        [my jget circularIndexUtil] previous
+        my setFrame $frame
+    }
+    
 
+    method setAnimation {index} {
+        set frame [my getFrame]
+        [my jget circularIndexUtil] setIndex $index
+        my setFrame $frame
+    }
+    
 
-# throws Exception
-sub nextFrame {
-    my ($self) = @_;
-        $self->{animationInterfaceArray}->[$self->{circularIndexUtil}->getIndex()]->nextFrame();
-}
+    method getAnimationInterfaceArray {} {
+        return [my jget animationInterfaceArray]
+    }
+    
 
+    method setAnimationInterfaceArray {animationInterfaceArray} {
+        my jset animationInterfaceArray $animationInterfaceArray
+    }
+    
 
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->{animationInterfaceArray}->[$self->{circularIndexUtil}->getIndex()]->paintXY($graphics, $x, $y);
-}
-
-
-sub paintThreedXYZ {
-    my ($self, $graphics, $x, $y, $z) = @_;
-        $self->{animationInterfaceArray}->[$self->{circularIndexUtil}->getIndex()]->paintThreedXYZ($graphics, $x, $y, $z);
-}
-
-
-sub getCurrentAnimation {
-    my ($self) = @_;
-        return $self->{animationInterfaceArray}->[$self->{circularIndexUtil}->getIndex()];
-}
-
-
-sub nextAnimation {
-    my ($self) = @_;
-        my $frame = $self->getFrame();
-        $self->{circularIndexUtil}->next();
-        $self->setFrame($frame);
-}
-
-
-sub previousAnimation {
-    my ($self) = @_;
-        my $frame = $self->getFrame();
-        $self->{circularIndexUtil}->previous();
-        $self->setFrame($frame);
-}
-
-
-sub setAnimation {
-    my ($self, $index) = @_;
-        my $frame = $self->getFrame();
-        $self->{circularIndexUtil}->setIndex($index);
-        $self->setFrame($frame);
-}
-
-
-sub getAnimationInterfaceArray {
-    my ($self) = @_;
-        return $self->{animationInterfaceArray};
-}
-
-
-sub setAnimationInterfaceArray {
-    my ($self, $animationInterfaceArray) = @_;
-        $self->{animationInterfaceArray} = $animationInterfaceArray;
-}
-
-
-# throws Exception
-sub set {
-    my ($self, $gl) = @_;
-        for (my $index = scalar(@{$self->{animationInterfaceArray}}); --$index >= 0; ) {
-            $self->{animationInterfaceArray}->[$index]->set($gl);
+    method set {gl} {
+        for {set index [[my jget animationInterfaceArray] length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            [[my jget animationInterfaceArray] get $index] set $gl
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::khronos::opengles::GL ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::util::CircularIndexUtil ();
-use org::allbinary::animation::compound::CompoundAnimationInterface ();
+namespace eval ::CompoundIndexedAnimation {
+}
 
-1;
 

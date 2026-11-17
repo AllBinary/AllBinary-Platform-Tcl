@@ -1,44 +1,38 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-package org::allbinary::graphics::OpenGLBitmap;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::platform::graphics::PlatformBitmapBase';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{bitmap} = undef;
+oo::class create ::OpenGLBitmap {
+    superclass ::PlatformBitmapBase
 }
 
+oo::define ::OpenGLBitmap {
+    method initFields_OpenGLBitmap {} {
+        my jset bitmap {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $bitmap) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{bitmap} = $bitmap;
-    return $self;
+    constructor {bitmap} {
+        next
+        my initFields_OpenGLBitmap
+        my jset bitmap $bitmap
+    }
+    
+
+    method getPixels {pixels offset stride x y width height} {
+    }
+    
+
+    method setPixels {pixels offset stride x y width height} {
+    }
+    
+
+    method recycle {} {
+    }
 }
 
-
-sub getPixels {
-    my ($self, $pixels, $offset, $stride, $x, $y, $width, $height) = @_;
+namespace eval ::OpenGLBitmap {
 }
 
-
-sub setPixels {
-    my ($self, $pixels, $offset, $stride, $x, $y, $width, $height) = @_;
-}
-
-
-sub recycle {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-use org::allbinary::platform::graphics::PlatformBitmapBase ();
-
-1;
 

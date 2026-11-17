@@ -11,68 +11,56 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchButtonInput;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::Input','org::allbinary::game::input::GameKeyEventSourceInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{gameKeyEventFactory} = 'org::allbinary::game::input::event::GameKeyEventFactory'->getInstance();
-    $self->{TOUCH_BUTTON_SOURCE_ID} = $self->{gameKeyEventFactory}->{TOUCH_BUTTON_SOURCE_ID};
-    $self->{gameKeyEvent} = $org::allbinary::game::input::event::GameKeyEvent::NONE;
+oo::class create ::TouchButtonInput {
+    superclass ::Input
 }
 
+oo::define ::TouchButtonInput {
+    method initFields_TouchButtonInput {} {
+        my jset logUtil {}
+        my jset gameKeyEventFactory {}
+        my jset TOUCH_BUTTON_SOURCE_ID 0
+        my jset gameKeyEvent {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset gameKeyEventFactory [::GameKeyEventFactory::getInstance]
+        my jset TOUCH_BUTTON_SOURCE_ID [[my jget gameKeyEventFactory] jget TOUCH_BUTTON_SOURCE_ID]
+        my jset gameKeyEvent [::GameKeyEvent::staticGet_NONE]
+        return
+    }
+    
 
-sub new {
-    my ($class, $id, $name) = @_;
-    my $self = $class->SUPER::new($id, $name);
-    _init_fields($self);
-        # super(...) made $self above
-        my $inputFactory = 'org::allbinary::game::input::InputFactory'->getInstance();
-        $inputFactory->add($self->getId(), $self);
-    return $self;
-}
+    constructor {id name} {
+        next $id $name
+        my initFields_TouchButtonInput
+        set inputFactory [::InputFactory::getInstance]
+        $inputFactory add [my getId] [self]
+    }
+    
 
-
-sub update {
-    my ($self, $inputToGameKeyMapping) = @_;
+    method update {inputToGameKeyMapping} {
         try {
-            my $gameKey = $inputToGameKeyMapping->getInstance($self->getId());
-            $self->{gameKeyEvent} = $self->{gameKeyEventFactory}->getInstanceForInput($self, $gameKey);
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{UPDATE}, $e);
+            set gameKey [$inputToGameKeyMapping getInstance [my getId]]
+            my jset gameKeyEvent [[my jget gameKeyEventFactory] getInstanceForInput [self] $gameKey]
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget UPDATE] $e
         }
+    }
+    
+
+    method getSourceId {} {
+        return [my jget TOUCH_BUTTON_SOURCE_ID]
+    }
+    
+
+    method getGameKeyEvent {} {
+        return [my jget gameKeyEvent]
+    }
 }
 
-
-sub getSourceId {
-    my ($self) = @_;
-        return $self->{TOUCH_BUTTON_SOURCE_ID};
+namespace eval ::TouchButtonInput {
 }
 
-
-sub getGameKeyEvent {
-    my ($self) = @_;
-        return $self->{gameKeyEvent};
-}
-
-use java::lang::Object ();
-use org::allbinary::game::input::GameKey ();
-use org::allbinary::game::input::GameKeyEventSourceInterface ();
-use org::allbinary::game::input::Input ();
-use org::allbinary::game::input::InputFactory ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::game::input::event::GameKeyEventFactory ();
-use org::allbinary::game::input::mapping::InputToGameKeyMapping ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

@@ -11,38 +11,50 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::ItemIndexDx;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::form::ItemIndexDx'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ItemIndexDx {
+    superclass ::JObject
 }
 
+oo::define ::ItemIndexDx {
+    method initFields_ItemIndexDx {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::form::ItemIndexDx::instance;
+    constructor {} {
+        next
+        my initFields_ItemIndexDx
+    }
+    
+    
+
+    method getDx {index item dx dy} {
+        return 0
+    }
 }
 
-
-# throws Exception
-sub getDx {
-    my ($self, $index, $item, $dx, $dy) = @_;
-        return 0;
+namespace eval ::ItemIndexDx {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ItemIndexDx new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ItemIndexDx::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
-
-1;
 

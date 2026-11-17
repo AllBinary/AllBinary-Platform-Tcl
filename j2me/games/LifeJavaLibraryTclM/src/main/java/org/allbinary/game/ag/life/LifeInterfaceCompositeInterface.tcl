@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.life
 
-# Java interface
-package org::allbinary::game::ag::life::LifeInterfaceCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getLifeInterface {
-    my ($self) = @_;
-    die "abstract method getLifeInterface";
+oo::class create ::LifeInterfaceCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::LifeInterfaceCompositeInterface {
+    method initFields_LifeInterfaceCompositeInterface {} {
+        return
+    }
+    
 
-1;
+    method getLifeInterface {} {
+        error [jexception AbstractMethodError getLifeInterface]
+    }
+}
+
+namespace eval ::LifeInterfaceCompositeInterface {
+}
+
 

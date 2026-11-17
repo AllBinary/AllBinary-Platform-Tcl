@@ -11,65 +11,62 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
-package org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::pickup::PickedUpLayerInterfaceFactory','org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactoryInterface';
-
-tie our $NULL_COUNTED_PICKUP_LAYER_FACTORY, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactory'->new('org::allbinary::game::layer::pickup::PickedUpLayerTypeFactory'->getInstance()->{NONE}, $org::allbinary::game::layer::pickup::IconLayer::NULL_ICON_LAYER, 'org::allbinary::animation::NullAnimationFactory'->getFactoryInstance()->getInstance(0)) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{id} = undef;
+oo::class create ::CountedPickedUpLayerInterfaceFactory {
+    superclass ::PickedUpLayerInterfaceFactory
 }
 
+oo::define ::CountedPickedUpLayerInterfaceFactory {
+    method initFields_CountedPickedUpLayerInterfaceFactory {} {
+        my jset id 0
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $pickeUpLayerType, $iconLayer, $animationInterface) = @_;
-    my $self = $class->SUPER::new($pickeUpLayerType, $iconLayer, $animationInterface);
-    _init_fields($self);
-        # super(...) made $self above
-        my $list = 'org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactoryPool'->getInstance()->getList();
-        $self->{id} = $list->size();
-        $list->add($self);
-    return $self;
+    constructor {pickeUpLayerType iconLayer animationInterface} {
+        next $pickeUpLayerType $iconLayer $animationInterface
+        my initFields_CountedPickedUpLayerInterfaceFactory
+        set list [[::CountedPickedUpLayerInterfaceFactoryPool::getInstance] getList]
+        my jset id [$list size]
+        $list add [self]
+    }
+    
+
+    method getNextInstance {hashtable x y z} {
+        error [jexception Exception [[::CommonStrings::getInstance] jget NOT_IMPLEMENTED]]
+    }
+    
+
+    method getTotal {} {
+        return [expr {-1}]
+    }
+    
+
+    method getId {} {
+        return [my jget id]
+    }
 }
 
-
-# throws Exception
-sub getNextInstance {
-    my ($self, $hashtable, $x, $y, $z) = @_;
-        die ('org::allbinary::string::CommonStrings'->getInstance()->{NOT_IMPLEMENTED});
+namespace eval ::CountedPickedUpLayerInterfaceFactory {
+    variable NULL_COUNTED_PICKUP_LAYER_FACTORYValue {}
+    variable NULL_COUNTED_PICKUP_LAYER_FACTORYSet 0
+    proc staticGet_NULL_COUNTED_PICKUP_LAYER_FACTORY {} {
+        variable NULL_COUNTED_PICKUP_LAYER_FACTORYValue
+        variable NULL_COUNTED_PICKUP_LAYER_FACTORYSet
+        if {!$NULL_COUNTED_PICKUP_LAYER_FACTORYSet} {
+            set NULL_COUNTED_PICKUP_LAYER_FACTORYSet 1
+            set NULL_COUNTED_PICKUP_LAYER_FACTORYValue [::CountedPickedUpLayerInterfaceFactory new [[::PickedUpLayerTypeFactory::getInstance] jget NONE] [::IconLayer::staticGet_NULL_ICON_LAYER] [[::NullAnimationFactory::getFactoryInstance] getInstance 0]]
+        }
+        return $NULL_COUNTED_PICKUP_LAYER_FACTORYValue
+    }
+    proc staticSet_NULL_COUNTED_PICKUP_LAYER_FACTORY {value} {
+        variable NULL_COUNTED_PICKUP_LAYER_FACTORYValue
+        variable NULL_COUNTED_PICKUP_LAYER_FACTORYSet
+        set NULL_COUNTED_PICKUP_LAYER_FACTORYSet 1
+        set NULL_COUNTED_PICKUP_LAYER_FACTORYValue $value
+    }
 }
 
-
-sub getTotal {
-    my ($self) = @_;
-        return -1;
-}
-
-
-sub getId {
-    my ($self) = @_;
-        return $self->{id};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::NullAnimationFactory ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::game::layer::pickup::PickedUpLayerInterfaceFactory ();
-use org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactoryInterface ();
-use org::allbinary::game::layer::pickup::PickedUpLayerTypeFactory ();
-use org::allbinary::game::layer::pickup::IconLayer ();
-use org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactoryPool ();
-
-1;
 

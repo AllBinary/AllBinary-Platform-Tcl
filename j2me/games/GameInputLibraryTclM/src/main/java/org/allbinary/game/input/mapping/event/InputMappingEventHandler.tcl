@@ -11,42 +11,52 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.mapping.event
 
-package org::allbinary::game::input::mapping::event::InputMappingEventHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::handler::BasicEventHandler';
-
-tie our $gameKeyEventHandler, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::mapping::event::InputMappingEventHandler'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::InputMappingEventHandler {
+    superclass ::BasicEventHandler
 }
 
+oo::define ::InputMappingEventHandler {
+    method initFields_InputMappingEventHandler {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::mapping::event::InputMappingEventHandler::gameKeyEventHandler;
+    constructor {} {
+        next
+        my initFields_InputMappingEventHandler
+    }
+    
+    
+
+    method process {eventObject eventListenerInterface} {
+        set inputMappingEventListenerInterface $eventListenerInterface
+        $inputMappingEventListenerInterface onInputMappingEvent $eventObject
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $eventObject, $eventListenerInterface) = @_;
-        my $inputMappingEventListenerInterface = $eventListenerInterface;
-        $inputMappingEventListenerInterface->onInputMappingEvent($eventObject);
+namespace eval ::InputMappingEventHandler {
+    variable gameKeyEventHandlerValue {}
+    variable gameKeyEventHandlerSet 0
+    proc staticGet_gameKeyEventHandler {} {
+        variable gameKeyEventHandlerValue
+        variable gameKeyEventHandlerSet
+        if {!$gameKeyEventHandlerSet} {
+            set gameKeyEventHandlerSet 1
+            set gameKeyEventHandlerValue [::InputMappingEventHandler new]
+        }
+        return $gameKeyEventHandlerValue
+    }
+    proc staticSet_gameKeyEventHandler {value} {
+        variable gameKeyEventHandlerValue
+        variable gameKeyEventHandlerSet
+        set gameKeyEventHandlerSet 1
+        set gameKeyEventHandlerValue $value
+    }
+    proc getInstance {} {
+        return [::InputMappingEventHandler::staticGet_gameKeyEventHandler]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
-
-1;
 

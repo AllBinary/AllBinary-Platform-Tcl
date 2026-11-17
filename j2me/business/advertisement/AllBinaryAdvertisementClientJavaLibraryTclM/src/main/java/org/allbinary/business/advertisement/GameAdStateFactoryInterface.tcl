@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.business.advertisement
 
-# Java interface
-package org::allbinary::business::advertisement::GameAdStateFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub getInstanceForApp {
-    my ($self, $softwareInformation) = @_;
-    die "abstract method getInstanceForApp";
+oo::class create ::GameAdStateFactoryInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::system::SoftwareInformation ();
+oo::define ::GameAdStateFactoryInterface {
+    method initFields_GameAdStateFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getInstanceForApp {softwareInformation} {
+        error [jexception AbstractMethodError getInstanceForApp]
+    }
+}
+
+namespace eval ::GameAdStateFactoryInterface {
+}
+
 

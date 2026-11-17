@@ -11,69 +11,78 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.image
 
-package org::allbinary::media::image::ImageJ2MEScaleUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::media::image::ImageJ2MEScaleUtil'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::media::image::ImageJ2MEScaleUtil::instance;
+oo::class create ::ImageJ2MEScaleUtil {
+    superclass ::JObject
 }
 
+oo::define ::ImageJ2MEScaleUtil {
+    method initFields_ImageJ2MEScaleUtil {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_ImageJ2MEScaleUtil
+    }
+    
 
-
-# throws Exception
-sub scaleArray {
-    my ($self, $images, $width, $height) = @_;
-        my $scaledImages = [(undef) x (scalar(@{$images}))];
-        for (my $index = scalar(@{$images}); --$index >= 0; ) {
-            $scaledImages->[$index] = $self->scale($images->[$index], $width, $height);
+    method scaleArray {images width height} {
+        set scaledImages [jarray [$images length] {}]
+        for {set index [$images length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            $scaledImages set $index [my scale [$images get $index] $width $height]
         }
-        return $scaledImages;
-}
+        return $scaledImages
+    }
+    
 
-
-# throws Exception
-sub scale {
-    my ($self, $image, $width, $height) = @_;
-        my $sourceWidth = $image->getWidth();
-        my $sourceHeight = $image->getHeight();
-        my $originalData = [(0) x ($image->getWidth() * $image->getHeight())];
-        $image->getRGB($originalData, 0, $image->getWidth(), 0, 0, $image->getWidth(), $image->getHeight());
-        my $scaledData = [(0) x ($width * $height)];
-        my $heightRatioFactor = int((8 * $sourceHeight) / $height);
-        my $widthRatioFactor = int((8 * $sourceWidth) / $width);
-        my $scaledIndex = scalar(@{$scaledData}) - 1;
-        my $dx = 0;
-        my $dy = 0;
-        for (my $index = $height; --$index >= 0; ) {
-            $dy = POSIX::floor((($index * $heightRatioFactor)) / (2 ** (3)));
-            for (my $index2 = $width; --$index2 >= 0; ) {
-                $dx = POSIX::floor((($index2 * $widthRatioFactor)) / (2 ** (3)));
-                $scaledData->[$scaledIndex--] = $originalData->[($sourceWidth * $dy) + $dx];
+    method scale {image width height} {
+        set sourceWidth [$image getWidth]
+        set sourceHeight [$image getHeight]
+        set originalData [jarray [expr {[$image getWidth] * [$image getHeight]}] 0]
+        $image getRGB $originalData 0 [$image getWidth] 0 0 [$image getWidth] [$image getHeight]
+        set scaledData [jarray [jint [expr {$width * $height}]] 0]
+        set heightRatioFactor [jdiv ([jint [expr {8 * $sourceHeight}]]) $height]
+        set widthRatioFactor [jdiv ([jint [expr {8 * $sourceWidth}]]) $width]
+        set scaledIndex [jint [expr {[$scaledData length] - 1}]]
+        set dx 0
+        set dy 0
+        for {set index $height} {[expr {[jpreincr index -1] >= 0}]} {} {
+            set dy [expr {([jint [expr {$index * $heightRatioFactor}]]) >> 3}]
+            for {set index2 $width} {[expr {[jpreincr index2 -1] >= 0}]} {} {
+                set dx [expr {([jint [expr {$index2 * $widthRatioFactor}]]) >> 3}]
+                $scaledData set [jpostincr scaledIndex -1] [$originalData get [jint [expr {([jint [expr {$sourceWidth * $dy}]]) + $dx}]]]
             }
         }
-        my $scaledImage = 'javax::microedition::lcdui::Image'->createRGBImage($scaledData, $width, $height, 1);
-        return $scaledImage;
+        set scaledImage [::Image::createRGBImage $scaledData $width $height true]
+        return $scaledImage
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Image ();
+namespace eval ::ImageJ2MEScaleUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ImageJ2MEScaleUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ImageJ2MEScaleUtil::staticGet_instance]
+    }
+}
 
-1;
 

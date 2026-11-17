@@ -11,35 +11,32 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.health
 
-package org::allbinary::game::health::HealthBarTwodAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::health::HealthBarAnimation';
-
-
-
-sub new {
-    my ($class, $layerInterface, $location) = @_;
-    my $self = $class->SUPER::new($layerInterface, $location);
-        # super(...) made $self above
-    return $self;
+oo::class create ::HealthBarTwodAnimation {
+    superclass ::HealthBarAnimation
 }
 
+oo::define ::HealthBarTwodAnimation {
+    method initFields_HealthBarTwodAnimation {} {
+        return
+    }
+    
 
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        my $ax = $self->{allbinaryLayer}->getViewPosition()->getX();
-        $self->{basicSetColorUtil}->setBasicColorP3($graphics, $self->{basicColor}, $self->{colorP});
-        $graphics->fillRect($ax, $self->getY() - 1, $self->{x2}, $self->{thickness});
+    constructor {layerInterface location} {
+        next $layerInterface $location
+        my initFields_HealthBarTwodAnimation
+    }
+    
+
+    method paintXY {graphics x y} {
+        set ax [[[my jget allbinaryLayer] getViewPosition] getX]
+        [my jget basicSetColorUtil] setBasicColorP3 $graphics [my jget basicColor] [my jget colorP]
+        $graphics fillRect $ax [expr {[my getY] - 1}] [my jget x2] [my jget thickness]
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::game::health::HealthBarAnimation ();
+namespace eval ::HealthBarTwodAnimation {
+}
 
-1;
 

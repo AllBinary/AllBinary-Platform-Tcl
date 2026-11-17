@@ -11,187 +11,159 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
 #In general allow scrolling of the menu and selection the center item
-package org::allbinary::game::displayable::canvas::CommandFormInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::displayable::canvas::BasicMenuInputProcessor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{MOTION_GESTURE_SOURCE_ID} = 'org::allbinary::game::input::event::GameKeyEventFactory'->getInstance()->{MOTION_GESTURE_SOURCE_ID};
-    $self->{CLICK_DELAY} = 150;
-    $self->{clickTimeHelper} = 'org::allbinary::time::TimeDelayHelper'->new($self->{CLICK_DELAY});
-    $self->{DOUBLE_CLICK_DELAY} = 1200;
-    $self->{doubleClickTimeHelper} = 'org::allbinary::time::TimeDelayHelper'->new($self->{DOUBLE_CLICK_DELAY});
-    $self->{isSingleKeyProcessing} = 'org::allbinary::game::configuration::feature::InputFeatureFactory'->getInstance()->isSingleKeyProcessing();
-    $self->{form} = undef;
-    $self->{hasPressed} = 0;
-    $self->{PROCESS_COMMAND} = "processCommand";
-    $self->{NAME_LABEL} = " ScrollSelectionForm: ";
+oo::class create ::CommandFormInputProcessor {
+    superclass ::BasicMenuInputProcessor
 }
 
+oo::define ::CommandFormInputProcessor {
+    method initFields_CommandFormInputProcessor {} {
+        my jset MOTION_GESTURE_SOURCE_ID 0
+        my jset CLICK_DELAY 0
+        my jset clickTimeHelper {}
+        my jset DOUBLE_CLICK_DELAY 0
+        my jset doubleClickTimeHelper {}
+        my jset isSingleKeyProcessing false
+        my jset form {}
+        my jset hasPressed false
+        my jset PROCESS_COMMAND {}
+        my jset NAME_LABEL {}
+        my jset MOTION_GESTURE_SOURCE_ID [[::GameKeyEventFactory::getInstance] jget MOTION_GESTURE_SOURCE_ID]
+        my jset CLICK_DELAY 150
+        my jset clickTimeHelper [::TimeDelayHelper new [my jget CLICK_DELAY]]
+        my jset DOUBLE_CLICK_DELAY 1200
+        my jset doubleClickTimeHelper [::TimeDelayHelper new [my jget DOUBLE_CLICK_DELAY]]
+        my jset isSingleKeyProcessing [[::InputFeatureFactory::getInstance] isSingleKeyProcessing]
+        
+        my jset hasPressed false
+        my jset PROCESS_COMMAND "processCommand"
+        my jset NAME_LABEL " ScrollSelectionForm: "
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameKeyEventList, $playerInputId, $gameCanvas, $form) = @_;
-    my $self = $class->SUPER::new($gameKeyEventList, $playerInputId, $gameCanvas);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{form} = $form;
-    return $self;
-}
+    constructor {gameKeyEventList playerInputId gameCanvas form} {
+        next $gameKeyEventList $playerInputId $gameCanvas
+        my initFields_CommandFormInputProcessor
+        my jset form $form
+    }
+    
 
-
-# throws Exception
-sub processInput {
-    my ($self, $key) = @_;
-        if ($key == $javax::microedition::lcdui::Canvas::LEFT || $key == $javax::microedition::lcdui::Canvas::RIGHT || $key == $javax::microedition::lcdui::Canvas::UP || $key == $javax::microedition::lcdui::Canvas::DOWN) {
-            'org::allbinary::media::audio::PrimaryPlayerQueueFactory'->getInstance()->add('org::allbinary::media::audio::SelectSound'->getInstance());
-            $self->{form}->processInputKey($key);
-            return 1;
-        } elsif ($key == $javax::microedition::lcdui::Canvas::FIRE) {
-            'org::allbinary::media::audio::PrimaryPlayerQueueFactory'->getInstance()->add('org::allbinary::media::audio::SelectSound'->getInstance());
-            return $self->processCommand();
+    method processInput {key} {
+        if {[expr {[expr {[expr {[expr {$key == [::Canvas::staticGet_LEFT]}] || [expr {$key == [::Canvas::staticGet_RIGHT]}]}] || [expr {$key == [::Canvas::staticGet_UP]}]}] || [expr {$key == [::Canvas::staticGet_DOWN]}]}]} {
+            [::PrimaryPlayerQueueFactory::getInstance] add [::SelectSound::getInstance]
+            [my jget form] processInputKey $key
+            return 1
+        } elseif {[expr {$key == [::Canvas::staticGet_FIRE]}]} {
+            [::PrimaryPlayerQueueFactory::getInstance] add [::SelectSound::getInstance]
+            return [my processCommand]
         }
-        return 0;
-}
+        return 0
+    }
+    
 
-
-sub processCommand {
-    my ($self) = @_;
-        my $commandCurrentSelectionForm = $self->{form};
-        my $command = $commandCurrentSelectionForm->getSelectedCommand();
-        $self->{logUtil}->putF($command->toString(), $self, $self->{PROCESS_COMMAND});
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        my $openGLFeatureFactory = 'org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance();
-        if ($org::allbinary::game::layer::SWTUtil::isSWT && $features->isFeature($openGLFeatureFactory->{OPENGL}) && $command != 'org::allbinary::game::commands::GameCommandsFactory'->getInstance()->{EXIT_COMMAND}) {
-            'org::allbinary::game::displayable::canvas::CommandRunnable'->new($self, $command)->run();
+    method processCommand {} {
+        set commandCurrentSelectionForm [my jget form]
+        set command [$commandCurrentSelectionForm getSelectedCommand]
+        [my jget logUtil] putF [$command toString] [self] [my jget PROCESS_COMMAND]
+        set features [::Features::getInstance]
+        set openGLFeatureFactory [::OpenGLFeatureFactory::getInstance]
+        if {[expr {[expr {[::SWTUtil::staticGet_isSWT] && [$features isFeature [$openGLFeatureFactory jget OPENGL]]}] && [expr {$command ne [[::GameCommandsFactory::getInstance] jget EXIT_COMMAND]}]}]} {
+            [::CommandRunnable new [self] $command] run
         } else {
-            'org::allbinary::thread::PrimaryThreadPool'->getInstance()->runTask('org::allbinary::game::displayable::canvas::CommandRunnable'->new($self, $command));
+            [::PrimaryThreadPool::getInstance] runTask [::CommandRunnable new [self] $command]
         }
-        if ($command == 'org::allbinary::game::commands::GameCommandsFactory'->getInstance()->{QUIT_COMMAND}) {
-            return -1;
+        if {[expr {$command eq [[::GameCommandsFactory::getInstance] jget QUIT_COMMAND]}]} {
+            return [expr {-1}]
         } else {
-            return 1;
+            return 1
         }
-}
+    }
+    
 
-
-# throws Exception
-sub processInputList {
-    my ($self) = @_;
+    method processInputList {} {
         try {
-            my $motionInputsIndex = $self->processMotionInputs();
-            my $list = $self->getGameKeyEventList();
-            my $size = $list->size();
-            my $key = 0;
-            my $gameKeyEvent = undef;
-            for (my $index = 0; $index < $size; $index++) {
-                $gameKeyEvent = $list->{objectArray}->[$index];
-                $key = $gameKeyEvent->getKey();
-                if ($gameKeyEvent->getSourceId() != $self->{MOTION_GESTURE_SOURCE_ID}) {
-                    if ($self->processInput($key) == 1) {
-                        last;
+            set motionInputsIndex [my processMotionInputs]
+            set list [my getGameKeyEventList]
+            set size [$list size]
+            set key 0
+            set gameKeyEvent {}
+            for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+                set gameKeyEvent [[$list jget objectArray] get $index]
+                set key [$gameKeyEvent getKey]
+                if {[expr {[$gameKeyEvent getSourceId] != [my jget MOTION_GESTURE_SOURCE_ID]}]} {
+                    if {[expr {[my processInput $key] == 1}]} {
+                        break
                     }
                 }
             }
-            $self->clear();
-            if ($size > 0 || $motionInputsIndex >= 0) {
-                return 1;
+            my clear
+            if {[expr {[expr {$size > 0}] || [expr {$motionInputsIndex >= 0}]}]} {
+                return 1
             } else {
-                return -1;
+                return [expr {-1}]
             }
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{gameInputStrings}->{PROCESS_INPUT}, $e);
-            return -1;
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget gameInputStrings] jget PROCESS_INPUT] $e
+            return [expr {-1}]
         }
-}
+    }
+    
 
-
-# throws Exception
-sub processMotionInputs {
-    my ($self) = @_;
-        my $lastIndex = $self->{motionGestureEventList}->size() - 1;
-        if ($lastIndex >= 0) {
-            my $motionGestureEvent = $self->{motionGestureEventList}->{objectArray}->[$lastIndex];
-            $self->processMotionInput($motionGestureEvent);
+    method processMotionInputs {} {
+        set lastIndex [jint [expr {[[my jget motionGestureEventList] size] - 1}]]
+        if {[expr {$lastIndex >= 0}]} {
+            set motionGestureEvent [[[my jget motionGestureEventList] jget objectArray] get $lastIndex]
+            my processMotionInput $motionGestureEvent
         }
-        $self->{motionGestureEventList}->clear();
-        return $lastIndex;
-}
+        [my jget motionGestureEventList] clear
+        return $lastIndex
+    }
+    
 
-
-# throws Exception
-sub processMotionInput {
-    my ($self, $motionGestureEvent) = @_;
-        my $touchMotionGestureFactory = 'org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance();
-        my $motionGestureInput = $motionGestureEvent->getMotionGesture();
-        if ($motionGestureInput == $touchMotionGestureFactory->{RELEASED}) {
-            my $point = $motionGestureEvent->getCurrentPoint();
-            if ($self->{form}->isInForm($point)) {
-                my $index = $self->{form}->getSelectedIndexForPoint($point);
-                if ($index != -1) {
-                    'org::allbinary::media::audio::PrimaryPlayerQueueFactory'->getInstance()->add('org::allbinary::media::audio::SelectSound'->getInstance());
-                    if ($index == $self->{form}->getSelectedIndex()) {
-                        if ($self->{clickTimeHelper}->isTimeTNT()) {
-                            $self->processCommand();
+    method processMotionInput {motionGestureEvent} {
+        set touchMotionGestureFactory [::TouchMotionGestureFactory::getInstance]
+        set motionGestureInput [$motionGestureEvent getMotionGesture]
+        if {[expr {$motionGestureInput eq [$touchMotionGestureFactory jget RELEASED]}]} {
+            set point [$motionGestureEvent getCurrentPoint]
+            if {[[my jget form] isInForm $point]} {
+                set index [[my jget form] getSelectedIndexForPoint $point]
+                if {[expr {$index != [expr {-1}]}]} {
+                    [::PrimaryPlayerQueueFactory::getInstance] add [::SelectSound::getInstance]
+                    if {[expr {$index == [[my jget form] getSelectedIndex]}]} {
+                        if {[[my jget clickTimeHelper] isTimeTNT]} {
+                            my processCommand
                         }
                     } else {
-                        $self->{form}->setSelectedIndex($index);
+                        [my jget form] setSelectedIndex $index
                     }
                 } else {
                 }
             }
-            if ($self->{hasPressed}) {
-                if (!$self->{doubleClickTimeHelper}->isTimeTNT()) {
-                    $self->{logUtil}->putF("Double Press", $self, $self->{gameInputStrings}->{PROCESS_MOTION_INPUT});
-                    $self->processCommand();
+            if {[my jget hasPressed]} {
+                if {[expr {![[my jget doubleClickTimeHelper] isTimeTNT]}]} {
+                    [my jget logUtil] putF "Double Press" [self] [[my jget gameInputStrings] jget PROCESS_MOTION_INPUT]
+                    my processCommand
                 }
-                $self->{doubleClickTimeHelper}->{delay} = $self->{DOUBLE_CLICK_DELAY};
-                $self->{doubleClickTimeHelper}->setStartTimeTNT();
+                [my jget doubleClickTimeHelper] jset delay [my jget DOUBLE_CLICK_DELAY]
+                [my jget doubleClickTimeHelper] setStartTimeTNT
             }
-            $self->{hasPressed} = 0;
-        } elsif ($motionGestureInput == $touchMotionGestureFactory->{PRESSED}) {
-            $self->{doubleClickTimeHelper}->{delay} = 0;
-            $self->{hasPressed} = 1;
+            my jset hasPressed false
+        } elseif {[expr {$motionGestureInput eq [$touchMotionGestureFactory jget PRESSED]}]} {
+            [my jget doubleClickTimeHelper] jset delay 0
+            my jset hasPressed true
         }
+    }
+    
+
+    method toString {} {
+        return [[[[[::StringMaker new] append [next]] append [my jget NAME_LABEL]] append [[my jget form] toString]] toString]
+    }
 }
 
-
-sub toString {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringMaker'->new()->append($self->SUPER::toString())->append($self->{NAME_LABEL})->append($self->{form}->toString())->toString();
+namespace eval ::CommandFormInputProcessor {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use javax::microedition::lcdui::Command ();
-use org::allbinary::game::commands::GameCommandsFactory ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::InputFeatureFactory ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::game::input::event::GameKeyEventFactory ();
-use org::allbinary::game::layer::SWTUtil ();
-use org::allbinary::graphics::GPoint ();
-use org::allbinary::graphics::displayable::MyCanvas ();
-use org::allbinary::graphics::form::CommandCurrentSelectionForm ();
-use org::allbinary::graphics::form::ScrollSelectionForm ();
-use org::allbinary::graphics::opengles::OpenGLFeatureFactory ();
-use org::allbinary::input::motion::gesture::MotionGestureInput ();
-use org::allbinary::input::motion::gesture::TouchMotionGestureFactory ();
-use org::allbinary::input::motion::gesture::observer::MotionGestureEvent ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::media::audio::PrimaryPlayerQueueFactory ();
-use org::allbinary::media::audio::SelectSound ();
-use org::allbinary::thread::PrimaryThreadPool ();
-use org::allbinary::time::TimeDelayHelper ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::game::displayable::canvas::BasicMenuInputProcessor ();
-use org::allbinary::game::displayable::canvas::CommandRunnable ();
-
-1;
 

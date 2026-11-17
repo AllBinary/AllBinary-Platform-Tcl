@@ -11,37 +11,36 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-package org::allbinary::graphics::ScreenCapture;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ScreenCapture {
+    superclass ::JObject
 }
 
+oo::define ::ScreenCapture {
+    method initFields_ScreenCapture {} {
+        return
+    }
 
-sub saveFrame {
-    my ($self) = @_;
+    constructor {} {
+        next
+        my initFields_ScreenCapture
+    }
+    
+
+    method saveFrame {} {
+    }
+    
+
+    method startRecording {} {
+    }
+    
+
+    method endRecording {} {
+    }
 }
 
-
-sub startRecording {
-    my ($self) = @_;
+namespace eval ::ScreenCapture {
 }
 
-
-sub endRecording {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-
-1;
 

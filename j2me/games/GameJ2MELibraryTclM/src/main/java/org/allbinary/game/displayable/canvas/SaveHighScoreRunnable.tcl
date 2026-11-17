@@ -11,55 +11,49 @@
 # Created By: Travis Berthelot
 # 
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::SaveHighScoreRunnable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{progressCanvas} = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-    $self->{isLast} = undef;
-    $self->{textBox} = undef;
+oo::class create ::SaveHighScoreRunnable {
+    superclass ::JObject
 }
 
+oo::define ::SaveHighScoreRunnable {
+    method initFields_SaveHighScoreRunnable {} {
+        my jset progressCanvas {}
+        my jset isLast false
+        my jset textBox {}
+        my jset progressCanvas [::ProgressCanvasFactory::getInstance]
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $isLast, $textBox) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{isLast} = $isLast;
-        $self->{textBox} = $textBox;
-    return $self;
-}
+    constructor {isLast textBox} {
+        next
+        my initFields_SaveHighScoreRunnable
+        my jset isLast $isLast
+        my jset textBox $textBox
+    }
+    
 
-
-sub run {
-    my ($self) = @_;
-        my $logUtil = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+    method run {} {
+        set logUtil [::LogUtil::getInstance]
         try {
-            if ($self->{isLast}) {
-                $self->{textBox}->submit();
+            if {[my jget isLast]} {
+                [my jget textBox] submit
             } else {
-                $self->{textBox}->saveHighScore();
+                [my jget textBox] saveHighScore
             }
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $logUtil->put($commonStrings->{EXCEPTION}, $self, "run", $e);
-            $self->{progressCanvas}->end();
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            $logUtil put [$commonStrings jget EXCEPTION] [self] "run" $e
+            [my jget progressCanvas] end
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::score::displayable::HighScoreTextBox ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvas ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::SaveHighScoreRunnable {
+}
 
-1;
 

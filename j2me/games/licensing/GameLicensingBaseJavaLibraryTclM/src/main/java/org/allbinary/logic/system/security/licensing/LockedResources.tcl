@@ -11,36 +11,47 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
-package org::allbinary::logic::system::security::licensing::LockedResources;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::system::security::licensing::LockedResources'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{LOCKED_DEMO_GAME_FEATURE_RESOURCE} = "/locked_demo_game_feature_64_by_64.png";
+oo::class create ::LockedResources {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::LockedResources {
+    method initFields_LockedResources {} {
+        my jset LOCKED_DEMO_GAME_FEATURE_RESOURCE {}
+        my jset LOCKED_DEMO_GAME_FEATURE_RESOURCE "/locked_demo_game_feature_64_by_64.png"
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_LockedResources
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::system::security::licensing::LockedResources::instance;
+namespace eval ::LockedResources {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LockedResources new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LockedResources::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

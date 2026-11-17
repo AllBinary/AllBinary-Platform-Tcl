@@ -11,48 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.gyro
 
-package org::allbinary::input::gyro::AllBinaryOrientationSensor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::AllBinarySensor';
-
-tie our $NULL_ALLBINARY_ORIENTATION_SENSOR, 'java::lang::LazyStatic', sub { 'org::allbinary::input::gyro::AllBinaryOrientationSensor'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{listener} = 'org::allbinary::game::input::motion::action::NoCompleteMotionGestureInputEventListener'->getInstance();
+oo::class create ::AllBinaryOrientationSensor {
+    superclass ::AllBinarySensor
 }
 
+oo::define ::AllBinaryOrientationSensor {
+    method initFields_AllBinaryOrientationSensor {} {
+        my jset listener {}
+        my jset listener [::NoCompleteMotionGestureInputEventListener::getInstance]
+        return
+    }
+    
 
-sub setListener {
-    my ($self, $completeMotionGestureInputEventListenerInterface) = @_;
-        $self->{listener} = $completeMotionGestureInputEventListenerInterface;
+    method setListener {completeMotionGestureInputEventListenerInterface} {
+        my jset listener $completeMotionGestureInputEventListenerInterface
+    }
+    
+
+    constructor {} {
+        next
+        my initFields_AllBinaryOrientationSensor
+    }
+    
+
+    method getOrientation {} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
+namespace eval ::AllBinaryOrientationSensor {
+    variable NULL_ALLBINARY_ORIENTATION_SENSORValue {}
+    variable NULL_ALLBINARY_ORIENTATION_SENSORSet 0
+    proc staticGet_NULL_ALLBINARY_ORIENTATION_SENSOR {} {
+        variable NULL_ALLBINARY_ORIENTATION_SENSORValue
+        variable NULL_ALLBINARY_ORIENTATION_SENSORSet
+        if {!$NULL_ALLBINARY_ORIENTATION_SENSORSet} {
+            set NULL_ALLBINARY_ORIENTATION_SENSORSet 1
+            set NULL_ALLBINARY_ORIENTATION_SENSORValue [::AllBinaryOrientationSensor new]
+        }
+        return $NULL_ALLBINARY_ORIENTATION_SENSORValue
+    }
+    proc staticSet_NULL_ALLBINARY_ORIENTATION_SENSOR {value} {
+        variable NULL_ALLBINARY_ORIENTATION_SENSORValue
+        variable NULL_ALLBINARY_ORIENTATION_SENSORSet
+        set NULL_ALLBINARY_ORIENTATION_SENSORSet 1
+        set NULL_ALLBINARY_ORIENTATION_SENSORValue $value
+    }
 }
 
-
-# throws Exception
-sub getOrientation {
-    my ($self) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::CompleteMotionGestureInputEventListenerInterface ();
-use org::allbinary::game::input::motion::action::NoCompleteMotionGestureInputEventListener ();
-use org::allbinary::input::AllBinarySensor ();
-use org::allbinary::logic::math::Orientation ();
-
-1;
 

@@ -11,75 +11,64 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.identification
 
-package org::allbinary::game::identification::CompositeGroup;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{groupInterface} = undef;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::CompositeGroup {
+    superclass ::JObject
 }
 
+oo::define ::CompositeGroup {
+    method initFields_CompositeGroup {} {
+        my jset logUtil {}
+        my jset groupInterface {}
+        my jset list {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        my jset list [::BasicArrayListD new]
+        return
+    }
+    
 
-sub new {
-    my ($class, $groupInterface) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{groupInterface} = $groupInterface;
-    return $self;
-}
+    constructor {groupInterface} {
+        next
+        my initFields_CompositeGroup
+        my jset groupInterface $groupInterface
+    }
+    
 
+    method clear {} {
+        [my jget list] clear
+    }
+    
 
-sub clear {
-    my ($self) = @_;
-        $self->{list}->clear();
-}
+    method add {groupInterface} {
+        set commonStrings [::CommonStrings::getInstance]
+        set groupCommonFactory [::GroupCommonFactory::getInstance]
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append [$groupCommonFactory jget ADDING_LABEL]
+        $stringBuffer append [$groupInterface toString]
+        $stringBuffer append [$groupCommonFactory jget TO_LABEL]
+        $stringBuffer append [[::StringUtil::getInstance] toString1 [my jget groupInterface]]
+        [my jget logUtil] putF [$stringBuffer toString] [self] [$commonStrings jget ADD]
+        [my jget list] add $groupInterface
+    }
+    
 
-
-sub add {
-    my ($self, $groupInterface) = @_;
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-        my $groupCommonFactory = 'org::allbinary::game::identification::GroupCommonFactory'->getInstance();
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append($groupCommonFactory->{ADDING_LABEL});
-        $stringBuffer->append($groupInterface->toString());
-        $stringBuffer->append($groupCommonFactory->{TO_LABEL});
-        $stringBuffer->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($self->{groupInterface}));
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, $commonStrings->{ADD});
-        $self->{list}->add($groupInterface);
-}
-
-
-sub isInGroup {
-    my ($self, $groupInterface) = @_;
-        if ($self->{list}->contains($groupInterface)) {
-            return 1;
+    method isInGroup {groupInterface} {
+        if {[[my jget list] contains $groupInterface]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
+    
+
+    method getGroup {} {
+        return [my jget groupInterface]
+    }
 }
 
-
-sub getGroup {
-    my ($self) = @_;
-        return $self->{groupInterface};
+namespace eval ::CompositeGroup {
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::game::identification::GroupCommonFactory ();
-
-1;
 

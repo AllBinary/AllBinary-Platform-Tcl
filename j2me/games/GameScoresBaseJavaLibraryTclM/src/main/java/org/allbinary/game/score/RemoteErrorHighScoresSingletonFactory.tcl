@@ -11,32 +11,45 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::RemoteErrorHighScoresSingletonFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::score::HighScores'->new('org::allbinary::string::CommonStrings'->getInstance()->{LOADING}, "Remote High Scores Did Not Load", 'org::allbinary::string::CommonStrings'->getInstance()->{PERIODS}) };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::RemoteErrorHighScoresSingletonFactory {
+    superclass ::JObject
 }
 
+oo::define ::RemoteErrorHighScoresSingletonFactory {
+    method initFields_RemoteErrorHighScoresSingletonFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::score::RemoteErrorHighScoresSingletonFactory::SINGLETON;
+    constructor {} {
+        next
+        my initFields_RemoteErrorHighScoresSingletonFactory
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::score::HighScores ();
+namespace eval ::RemoteErrorHighScoresSingletonFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::HighScores new [[::CommonStrings::getInstance] jget LOADING] "Remote High Scores Did Not Load" [[::CommonStrings::getInstance] jget PERIODS]]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::RemoteErrorHighScoresSingletonFactory::staticGet_SINGLETON]
+    }
+}
 
-1;
 

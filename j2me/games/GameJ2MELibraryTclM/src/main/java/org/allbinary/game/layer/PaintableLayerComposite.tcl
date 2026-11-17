@@ -11,52 +11,44 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-package org::allbinary::game::layer::PaintableLayerComposite;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{paintableArray} = undef;
+oo::class create ::PaintableLayerComposite {
+    superclass ::Paintable
 }
 
+oo::define ::PaintableLayerComposite {
+    method initFields_PaintableLayerComposite {} {
+        my jset paintableArray {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $paintableArray) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{paintableArray} = $paintableArray;
-    return $self;
-}
+    constructor {paintableArray} {
+        next
+        my initFields_PaintableLayerComposite
+        my jset paintableArray $paintableArray
+    }
+    
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        for (my $index = scalar(@{$self->{paintableArray}}); --$index >= 0; ) {
-            $self->{paintableArray}->[$index]->paint($graphics);
+    method paint {graphics} {
+        for {set index [[my jget paintableArray] length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            [[my jget paintableArray] get $index] paint $graphics
         }
-}
+    }
+    
 
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
-        my $paintableInterface = undef;
-        for (my $index = scalar(@{$self->{paintableArray}}); --$index >= 0; ) {
-            $paintableInterface = $self->{paintableArray}->[$index];
-            $paintableInterface->paintThreed($graphics);
+    method paintThreed {graphics} {
+        set paintableInterface {}
+        for {set index [[my jget paintableArray] length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            set paintableInterface [[my jget paintableArray] get $index]
+            $paintableInterface paintThreed $graphics
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::graphics::paint::PaintableInterface ();
-use org::allbinary::layer::Layer ();
+namespace eval ::PaintableLayerComposite {
+}
 
-1;
 

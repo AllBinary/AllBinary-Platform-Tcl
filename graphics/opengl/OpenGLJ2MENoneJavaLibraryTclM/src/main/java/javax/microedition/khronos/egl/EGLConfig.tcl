@@ -1,22 +1,24 @@
 # Generated Code Do Not Modify
+# package javax.microedition.khronos.egl
 
-package javax::microedition::khronos::egl::EGLConfig;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-        die ("RuntimeException");
-    return $self;
+oo::class create ::EGLConfig {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
+oo::define ::EGLConfig {
+    method initFields_EGLConfig {} {
+        return
+    }
+    
 
-1;
+    constructor {} {
+        next
+        my initFields_EGLConfig
+        error [jexception RuntimeException {}]
+    }
+}
+
+namespace eval ::EGLConfig {
+}
+
 

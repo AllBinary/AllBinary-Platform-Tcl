@@ -1,62 +1,60 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-package org::allbinary::graphics::OpenGLBitmapFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::platform::graphics::PlatformBitmapBaseFactory';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::OpenGLBitmapFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{ARGB_8888} = 'org::allbinary::graphics::OpenGLBitmapConfig'->new('org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT});
+oo::class create ::OpenGLBitmapFactory {
+    superclass ::PlatformBitmapBaseFactory
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
+oo::define ::OpenGLBitmapFactory {
+    method initFields_OpenGLBitmapFactory {} {
+        my jset ARGB_8888 {}
+        my jset ARGB_8888 [::OpenGLBitmapConfig new [[::NullUtil::getInstance] jget NULL_OBJECT]]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_OpenGLBitmapFactory
+    }
+    
+    
+
+    method createBitmap {width height config} {
+        return [::OpenGLBitmap new [[::NullUtil::getInstance] jget NULL_OBJECT]]
+    }
+    
+
+    method decodeStream {inputStream} {
+        return [::OpenGLBitmap new [[::NullUtil::getInstance] jget NULL_OBJECT]]
+    }
+    
+
+    method createBitmap {image} {
+        return [::OpenGLBitmap new [[::NullUtil::getInstance] jget NULL_OBJECT]]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::OpenGLBitmapFactory::instance;
+namespace eval ::OpenGLBitmapFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::OpenGLBitmapFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::OpenGLBitmapFactory::staticGet_instance]
+    }
 }
 
-
-sub createBitmap {
-    my ($self, $width, $height, $config) = @_;
-        return 'org::allbinary::graphics::OpenGLBitmap'->new('org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT});
-}
-
-
-# throws IOException
-sub decodeStream {
-    my ($self, $inputStream) = @_;
-        return 'org::allbinary::graphics::OpenGLBitmap'->new('org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT});
-}
-
-
-# Java overloaded method: Perl keeps the last definition
-sub createBitmap {
-    my ($self, $image) = @_;
-        return 'org::allbinary::graphics::OpenGLBitmap'->new('org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT});
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::IOException ();
-# use java::io::InputStream ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::platform::graphics::PlatformBitmapBase ();
-use org::allbinary::platform::graphics::PlatformBitmapBaseFactory ();
-use org::allbinary::graphics::OpenGLBitmapConfig ();
-use org::allbinary::graphics::OpenGLBitmap ();
-
-1;
 

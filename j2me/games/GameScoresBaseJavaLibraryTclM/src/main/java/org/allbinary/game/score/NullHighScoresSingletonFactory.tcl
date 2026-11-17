@@ -11,32 +11,45 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::NullHighScoresSingletonFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::score::HighScores'->new('org::allbinary::string::CommonStrings'->getInstance()->{LOADING}, "High Scores Not Loaded", 'org::allbinary::string::CommonStrings'->getInstance()->{PERIODS}) };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullHighScoresSingletonFactory {
+    superclass ::JObject
 }
 
+oo::define ::NullHighScoresSingletonFactory {
+    method initFields_NullHighScoresSingletonFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::score::NullHighScoresSingletonFactory::SINGLETON;
+    constructor {} {
+        next
+        my initFields_NullHighScoresSingletonFactory
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::score::HighScores ();
+namespace eval ::NullHighScoresSingletonFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::HighScores new [[::CommonStrings::getInstance] jget LOADING] "High Scores Not Loaded" [[::CommonStrings::getInstance] jget PERIODS]]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::NullHighScoresSingletonFactory::staticGet_SINGLETON]
+    }
+}
 
-1;
 

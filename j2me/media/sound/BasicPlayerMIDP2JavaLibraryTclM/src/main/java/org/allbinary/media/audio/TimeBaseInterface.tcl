@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-# Java interface
-package org::allbinary::media::audio::TimeBaseInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getTimeBase {
-    my ($self) = @_;
-    die "abstract method getTimeBase";
+oo::class create ::TimeBaseInterface {
+    superclass ::JObject
 }
 
+oo::define ::TimeBaseInterface {
+    method initFields_TimeBaseInterface {} {
+        return
+    }
+    
 
-# throws MediaException
-sub setTimeBase {
-    my ($self, $timeBase) = @_;
-    die "abstract method setTimeBase";
+    method getTimeBase {} {
+        error [jexception AbstractMethodError getTimeBase]
+    }
+    
+
+    method setTimeBase {timeBase} {
+        error [jexception AbstractMethodError setTimeBase]
+    }
 }
 
-use javax::microedition::media::MediaException ();
-use javax::microedition::media::TimeBase ();
+namespace eval ::TimeBaseInterface {
+}
 
-1;
 

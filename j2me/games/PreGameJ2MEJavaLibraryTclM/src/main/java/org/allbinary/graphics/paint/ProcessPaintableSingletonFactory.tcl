@@ -11,32 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-package org::allbinary::graphics::paint::ProcessPaintableSingletonFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::paint::ProcessPaintable'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ProcessPaintableSingletonFactory {
+    superclass ::JObject
 }
 
+oo::define ::ProcessPaintableSingletonFactory {
+    method initFields_ProcessPaintableSingletonFactory {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::paint::ProcessPaintableSingletonFactory::SINGLETON;
+    constructor {} {
+        next
+        my initFields_ProcessPaintableSingletonFactory
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::paint::ProcessPaintable ();
+namespace eval ::ProcessPaintableSingletonFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::ProcessPaintable new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::ProcessPaintableSingletonFactory::staticGet_SINGLETON]
+    }
+}
 
-1;
 

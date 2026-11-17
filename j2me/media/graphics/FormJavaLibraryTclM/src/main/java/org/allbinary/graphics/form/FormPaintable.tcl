@@ -11,44 +11,38 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::FormPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{form} = undef;
+oo::class create ::FormPaintable {
+    superclass ::Paintable
 }
 
+oo::define ::FormPaintable {
+    method initFields_FormPaintable {} {
+        my jset form {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $form) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{form} = $form;
-    return $self;
+    constructor {form} {
+        next
+        my initFields_FormPaintable
+        my jset form $form
+    }
+    
+
+    method paint {graphics} {
+        [my jget form] paint $graphics
+    }
+    
+
+    method getForm {} {
+        return [my jget form]
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{form}->paint($graphics);
+namespace eval ::FormPaintable {
 }
 
-
-sub getForm {
-    my ($self) = @_;
-        return $self->{form};
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::paint::Paintable ();
-
-1;
 

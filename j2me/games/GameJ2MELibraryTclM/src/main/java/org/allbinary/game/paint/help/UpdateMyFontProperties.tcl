@@ -11,36 +11,38 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.paint.help
 
-package org::allbinary::game::paint::help::UpdateMyFontProperties;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{actionStringArray} = 'org::allbinary::logic::string::StringUtil'->getInstance()->getArrayInstance();
-    $self->{keymappingBeginWidthArray} = 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_INT_ARRAY};
-    $self->{actionStringDeltaXArray} = 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_INT_ARRAY};
-    $self->{inputDeltaXArray} = 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_INT_ARRAY_ARRAY};
-    $self->{sepArray} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{ONE_EMPTY_STRING_ARRAY_OF_ARRAYS};
-    $self->{sepWidthArray} = 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_INT_ARRAY_ARRAY};
-    $self->{charHeight} = 0;
+oo::class create ::UpdateMyFontProperties {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::UpdateMyFontProperties {
+    method initFields_UpdateMyFontProperties {} {
+        my jset actionStringArray {}
+        my jset keymappingBeginWidthArray {}
+        my jset actionStringDeltaXArray {}
+        my jset inputDeltaXArray {}
+        my jset sepArray {}
+        my jset sepWidthArray {}
+        my jset charHeight 0
+        my jset actionStringArray [[::StringUtil::getInstance] getArrayInstance]
+        my jset keymappingBeginWidthArray [[::NullUtil::getInstance] jget NULL_INT_ARRAY]
+        my jset actionStringDeltaXArray [[::NullUtil::getInstance] jget NULL_INT_ARRAY]
+        my jset inputDeltaXArray [[::NullUtil::getInstance] jget NULL_INT_ARRAY_ARRAY]
+        my jset sepArray [[::StringUtil::getInstance] jget ONE_EMPTY_STRING_ARRAY_OF_ARRAYS]
+        my jset sepWidthArray [[::NullUtil::getInstance] jget NULL_INT_ARRAY_ARRAY]
+        my jset charHeight 0
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_UpdateMyFontProperties
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::string::StringUtil ();
+namespace eval ::UpdateMyFontProperties {
+}
 
-1;
 

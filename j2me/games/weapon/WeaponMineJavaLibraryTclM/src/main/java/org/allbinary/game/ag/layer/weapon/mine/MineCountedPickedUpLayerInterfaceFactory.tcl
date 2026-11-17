@@ -11,76 +11,69 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.weapon.mine
 
-package org::allbinary::game::ag::layer::weapon::mine::MineCountedPickedUpLayerInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactory';
-
-tie our $pickedUpLayerInterfaceFactoryInterface, 'java::lang::LazyStatic', sub { $org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactory::NULL_COUNTED_PICKUP_LAYER_FACTORY };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{weaponLayerCircularStaticPool} = 'org::allbinary::game::ag::layer::weapon::mine::MineLayerCircularStaticPool'->getInstance();
-    $self->{weaponProperties} = 'org::allbinary::game::combat::weapon::WeaponProperties'->new(-1, -1, 0, 8000, ((int(10) + 32768) % 65536 - 32768));
-    $self->{smallIntegerSingletonFactory} = 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance();
+oo::class create ::MineCountedPickedUpLayerInterfaceFactory {
+    superclass ::CountedPickedUpLayerInterfaceFactory
 }
 
+oo::define ::MineCountedPickedUpLayerInterfaceFactory {
+    method initFields_MineCountedPickedUpLayerInterfaceFactory {} {
+        my jset weaponLayerCircularStaticPool {}
+        my jset weaponProperties {}
+        my jset smallIntegerSingletonFactory {}
+        my jset weaponLayerCircularStaticPool [::MineLayerCircularStaticPool::getInstance]
+        my jset weaponProperties [::WeaponProperties new [expr {-1}] [expr {-1}] 0 8000 [jshort 10]]
+        my jset smallIntegerSingletonFactory [::SmallIntegerSingletonFactory::getInstance]
+        return
+    }
+    
+    
 
-# throws Exception
-sub init {
-    my ($class) = @_;
-        $org::allbinary::game::ag::layer::weapon::mine::MineCountedPickedUpLayerInterfaceFactory::pickedUpLayerInterfaceFactoryInterface = 'org::allbinary::game::ag::layer::weapon::mine::MineCountedPickedUpLayerInterfaceFactory'->new();
+    constructor {} {
+        next [[::PickedUpLayerTypeFactory::getInstance] jget MINE] [::IconLayerFactory::getInstance [[[::FeaturedAnimationInterfaceFactoryInterfaceFactory::getInstance] get [[::MineWeaponResources::getInstance] jget DROP_ICON_RESOURCE]] getInstance 0] 10 10] [[[::FeaturedAnimationInterfaceFactoryInterfaceFactory::getInstance] get [[::MineWeaponResources::getInstance] jget DROP_RESOURCE]] getInstance 0]
+        my initFields_MineCountedPickedUpLayerInterfaceFactory
+    }
+    
+    
+
+    method getTotal {} {
+        return 3
+    }
+    
+
+    method getNextInstance {hashtable x y z} {
+        set sourceLayerInterface [$hashtable get [[my jget smallIntegerSingletonFactory] getAt 0]]
+        set angle [$hashtable get [[my jget smallIntegerSingletonFactory] getAt 1]]
+        set scoreableInterface $sourceLayerInterface
+        return [[my jget weaponLayerCircularStaticPool] getInstanceWeaponLayer $sourceLayerInterface $x $y $z [jint [$angle intValue]] 0 [my jget weaponProperties] $scoreableInterface]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::game::layer::pickup::PickedUpLayerTypeFactory'->getInstance()->{MINE}, 'org::allbinary::game::layer::pickup::IconLayerFactory'->getInstance('org::allbinary::animation::FeaturedAnimationInterfaceFactoryInterfaceFactory'->getInstance()->get('org::allbinary::game::ag::layer::weapon::mine::MineWeaponResources'->getInstance()->{DROP_ICON_RESOURCE})->getInstance(0), 10, 10), 'org::allbinary::animation::FeaturedAnimationInterfaceFactoryInterfaceFactory'->getInstance()->get('org::allbinary::game::ag::layer::weapon::mine::MineWeaponResources'->getInstance()->{DROP_RESOURCE})->getInstance(0));
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
+namespace eval ::MineCountedPickedUpLayerInterfaceFactory {
+    variable pickedUpLayerInterfaceFactoryInterfaceValue {}
+    variable pickedUpLayerInterfaceFactoryInterfaceSet 0
+    proc staticGet_pickedUpLayerInterfaceFactoryInterface {} {
+        variable pickedUpLayerInterfaceFactoryInterfaceValue
+        variable pickedUpLayerInterfaceFactoryInterfaceSet
+        if {!$pickedUpLayerInterfaceFactoryInterfaceSet} {
+            set pickedUpLayerInterfaceFactoryInterfaceSet 1
+            set pickedUpLayerInterfaceFactoryInterfaceValue [::CountedPickedUpLayerInterfaceFactory::staticGet_NULL_COUNTED_PICKUP_LAYER_FACTORY]
+        }
+        return $pickedUpLayerInterfaceFactoryInterfaceValue
+    }
+    proc staticSet_pickedUpLayerInterfaceFactoryInterface {value} {
+        variable pickedUpLayerInterfaceFactoryInterfaceValue
+        variable pickedUpLayerInterfaceFactoryInterfaceSet
+        set pickedUpLayerInterfaceFactoryInterfaceSet 1
+        set pickedUpLayerInterfaceFactoryInterfaceValue $value
+    }
+    proc init {} {
+        ::MineCountedPickedUpLayerInterfaceFactory::staticSet_pickedUpLayerInterfaceFactoryInterface [::MineCountedPickedUpLayerInterfaceFactory new]
+    }
+    proc getInstance {} {
+        return [::MineCountedPickedUpLayerInterfaceFactory::staticGet_pickedUpLayerInterfaceFactoryInterface]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::ag::layer::weapon::mine::MineCountedPickedUpLayerInterfaceFactory::pickedUpLayerInterfaceFactoryInterface;
-}
-
-
-sub getTotal {
-    my ($self) = @_;
-        return 3;
-}
-
-
-# throws Exception
-sub getNextInstance {
-    my ($self, $hashtable, $x, $y, $z) = @_;
-        my $sourceLayerInterface = $hashtable->get($self->{smallIntegerSingletonFactory}->getAt(0));
-        my $angle = $hashtable->get($self->{smallIntegerSingletonFactory}->getAt(1));
-        my $scoreableInterface = $sourceLayerInterface;
-        return $self->{weaponLayerCircularStaticPool}->getInstanceWeaponLayer($sourceLayerInterface, $x, $y, $z, int(int($angle)), 0, $self->{weaponProperties}, $scoreableInterface);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::animation::FeaturedAnimationInterfaceFactoryInterfaceFactory ();
-use org::allbinary::game::combat::weapon::WeaponProperties ();
-use org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactory ();
-use org::allbinary::game::layer::pickup::IconLayerFactory ();
-use org::allbinary::game::layer::pickup::PickedUpLayerInterfaceFactoryInterface ();
-use org::allbinary::game::layer::pickup::PickedUpLayerTypeFactory ();
-use org::allbinary::game::layer::weapon::WeaponLayerCircularPool ();
-use org::allbinary::game::score::ScoreableInterface ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::ag::layer::weapon::mine::MineLayerCircularStaticPool ();
-use org::allbinary::game::ag::layer::weapon::mine::MineWeaponResources ();
-
-1;
 

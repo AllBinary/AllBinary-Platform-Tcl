@@ -11,108 +11,80 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.special
 
-package org::allbinary::game::layer::special::SpecialGameInput;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::layer::special::SpecialGameInputInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::SpecialGameInput {
+    superclass ::JObject
 }
 
+oo::define ::SpecialGameInput {
+    method initFields_SpecialGameInput {} {
+        return
+    }
 
-# throws Exception
-sub up {
-    my ($self) = @_;
+    constructor {} {
+        next
+        my initFields_SpecialGameInput
+    }
+    
+
+    method up {} {
+    }
+    
+
+    method down {} {
+    }
+    
+
+    method right {} {
+    }
+    
+
+    method left {} {
+    }
+    
+
+    method strafeLeft {} {
+    }
+    
+
+    method strafeRight {} {
+    }
+    
+
+    method fire {layerManager gameKeyEvent} {
+    }
+    
+
+    method special1 {layerManager gameKeyEvent} {
+    }
+    
+
+    method special2 {layerManager gameKeyEvent} {
+    }
+    
+
+    method special3 {layerManager gameKeyEvent} {
+    }
+    
+
+    method special4 {layerManager gameKeyEvent} {
+    }
+    
+
+    method special5 {layerManager gameKeyEvent} {
+    }
+    
+
+    method paint {graphics} {
+    }
+    
+
+    method paintThreed {graphics} {
+    }
 }
 
-
-# throws Exception
-sub down {
-    my ($self) = @_;
+namespace eval ::SpecialGameInput {
 }
 
-
-# throws Exception
-sub right {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub left {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub strafeLeft {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub strafeRight {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub fire {
-    my ($self, $layerManager, $gameKeyEvent) = @_;
-}
-
-
-# throws Exception
-sub special1 {
-    my ($self, $layerManager, $gameKeyEvent) = @_;
-}
-
-
-# throws Exception
-sub special2 {
-    my ($self, $layerManager, $gameKeyEvent) = @_;
-}
-
-
-# throws Exception
-sub special3 {
-    my ($self, $layerManager, $gameKeyEvent) = @_;
-}
-
-
-# throws Exception
-sub special4 {
-    my ($self, $layerManager, $gameKeyEvent) = @_;
-}
-
-
-# throws Exception
-sub special5 {
-    my ($self, $layerManager, $gameKeyEvent) = @_;
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-}
-
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::game::layer::special::SpecialGameInputInterface ();
-
-1;
 

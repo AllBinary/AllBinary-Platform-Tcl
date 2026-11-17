@@ -11,44 +11,52 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion
 
-package org::allbinary::input::motion::CompleteMotionGestureInputToGameMotionGestureInput;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::input::motion::CompleteMotionGestureInputToGameMotionGestureInput'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
+oo::class create ::CompleteMotionGestureInputToGameMotionGestureInput {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::CompleteMotionGestureInputToGameMotionGestureInput {
+    method initFields_CompleteMotionGestureInputToGameMotionGestureInput {} {
+        my jset commonStrings {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_CompleteMotionGestureInputToGameMotionGestureInput
+    }
+    
+    
+
+    method init {} {
+        ::PreLogUtil::put "No Touch Button = No Compound Motion Gestures" [self] [[my jget commonStrings] jget INIT]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::motion::CompleteMotionGestureInputToGameMotionGestureInput::instance;
+namespace eval ::CompleteMotionGestureInputToGameMotionGestureInput {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::CompleteMotionGestureInputToGameMotionGestureInput new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::CompleteMotionGestureInputToGameMotionGestureInput::staticGet_instance]
+    }
 }
 
-
-sub init {
-    my ($self) = @_;
-        'org::allbinary::logic::communication::log::PreLogUtil'->put("No Touch Button = No Compound Motion Gestures", $self, $self->{commonStrings}->{INIT});
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

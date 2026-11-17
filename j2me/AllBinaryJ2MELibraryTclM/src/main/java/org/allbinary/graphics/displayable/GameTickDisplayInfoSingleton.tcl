@@ -11,74 +11,83 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable
 
-package org::allbinary::graphics::displayable::GameTickDisplayInfoSingleton;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::displayable::GameTickDisplayInfoSingleton'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{displayInfoSingleton} = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-    $self->{lastWidth} = $self->{displayInfoSingleton}->getLastWidth();
-    $self->{lastHeight} = $self->{displayInfoSingleton}->getLastHeight();
-    $self->{lastHalfWidth} = $self->{displayInfoSingleton}->getLastHalfWidth();
-    $self->{lastHalfHeight} = $self->{displayInfoSingleton}->getLastHalfHeight();
+oo::class create ::GameTickDisplayInfoSingleton {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::GameTickDisplayInfoSingleton {
+    method initFields_GameTickDisplayInfoSingleton {} {
+        my jset displayInfoSingleton {}
+        my jset lastWidth 0
+        my jset lastHeight 0
+        my jset lastHalfWidth 0
+        my jset lastHalfHeight 0
+        my jset displayInfoSingleton [::DisplayInfoSingleton::getInstance]
+        my jset lastWidth [[my jget displayInfoSingleton] getLastWidth]
+        my jset lastHeight [[my jget displayInfoSingleton] getLastHeight]
+        my jset lastHalfWidth [[my jget displayInfoSingleton] getLastHalfWidth]
+        my jset lastHalfHeight [[my jget displayInfoSingleton] getLastHalfHeight]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_GameTickDisplayInfoSingleton
+    }
+    
+    
+
+    method update {} {
+        my jset lastWidth [[my jget displayInfoSingleton] getLastWidth]
+        my jset lastHeight [[my jget displayInfoSingleton] getLastHeight]
+        my jset lastHalfWidth [[my jget displayInfoSingleton] getLastHalfWidth]
+        my jset lastHalfHeight [[my jget displayInfoSingleton] getLastHalfHeight]
+    }
+    
+
+    method getLastWidth {} {
+        return [my jget lastWidth]
+    }
+    
+
+    method getLastHeight {} {
+        return [my jget lastHeight]
+    }
+    
+
+    method getLastHalfWidth {} {
+        return [my jget lastHalfWidth]
+    }
+    
+
+    method getLastHalfHeight {} {
+        return [my jget lastHalfHeight]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::displayable::GameTickDisplayInfoSingleton::instance;
+namespace eval ::GameTickDisplayInfoSingleton {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameTickDisplayInfoSingleton new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameTickDisplayInfoSingleton::staticGet_instance]
+    }
 }
 
-
-sub update {
-    my ($self) = @_;
-        $self->{lastWidth} = $self->{displayInfoSingleton}->getLastWidth();
-        $self->{lastHeight} = $self->{displayInfoSingleton}->getLastHeight();
-        $self->{lastHalfWidth} = $self->{displayInfoSingleton}->getLastHalfWidth();
-        $self->{lastHalfHeight} = $self->{displayInfoSingleton}->getLastHalfHeight();
-}
-
-
-sub getLastWidth {
-    my ($self) = @_;
-        return $self->{lastWidth};
-}
-
-
-sub getLastHeight {
-    my ($self) = @_;
-        return $self->{lastHeight};
-}
-
-
-sub getLastHalfWidth {
-    my ($self) = @_;
-        return $self->{lastHalfWidth};
-}
-
-
-sub getLastHalfHeight {
-    my ($self) = @_;
-        return $self->{lastHalfHeight};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-
-1;
 

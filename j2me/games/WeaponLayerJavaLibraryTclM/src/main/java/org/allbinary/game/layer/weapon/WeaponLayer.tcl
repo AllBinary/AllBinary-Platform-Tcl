@@ -11,308 +11,259 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.weapon
 
-package org::allbinary::game::layer::weapon::WeaponLayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::multiplayer::layer::MultiPlayerGameLayer','org::allbinary::game::tick::TickableInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{animationInterface} = 'org::allbinary::animation::NullAnimationFactory'->getFactoryInstance()->getInstance(0);
-    $self->{initAnimationInterface} = undef;
-    $self->{destroyedAnimationInterface} = undef;
-    $self->{sourceLayerInterface} = $org::allbinary::layer::AllBinaryLayer::NULL_ALLBINARY_LAYER;
-    $self->{totalDamage} = 0;
-    $self->{initDamage} = 0;
-    $self->{destroyed} = 1;
-    $self->{scoreableInterface} = 'org::allbinary::game::score::NoScoreable'->getInstance();
-    $self->{movement} = undef;
-    $self->{weaponProperties} = $org::allbinary::game::combat::weapon::WeaponProperties::NULL_WEAPON_PROPERTIES;
-    $self->{multiPlayerType} = undef;
-    $self->{collidableWeaponBehavior} = 'org::allbinary::game::layer::weapon::CollidableWeaponBehavior'->getNullInstance();
+oo::class create ::WeaponLayer {
+    superclass ::MultiPlayerGameLayer
 }
 
+oo::define ::WeaponLayer {
+    method initFields_WeaponLayer {} {
+        my jset animationInterface {}
+        my jset initAnimationInterface {}
+        my jset destroyedAnimationInterface {}
+        my jset sourceLayerInterface {}
+        my jset totalDamage 0
+        my jset initDamage 0
+        my jset destroyed false
+        my jset scoreableInterface {}
+        my jset movement {}
+        my jset weaponProperties {}
+        my jset multiPlayerType 0
+        my jset collidableWeaponBehavior {}
+        my jset animationInterface [[::NullAnimationFactory::getFactoryInstance] getInstance 0]
+        
+        
+        my jset sourceLayerInterface [::AllBinaryLayer::staticGet_NULL_ALLBINARY_LAYER]
+        my jset totalDamage 0
+        my jset initDamage 0
+        my jset destroyed true
+        my jset scoreableInterface [::NoScoreable::getInstance]
+        
+        my jset weaponProperties [::WeaponProperties::staticGet_NULL_WEAPON_PROPERTIES]
+        
+        my jset collidableWeaponBehavior [::CollidableWeaponBehavior::getNullInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $remoteInfo, $multiPlayerType, $movement, $animationInterface, $destroyedAnimationInterface, $rectangle, $viewPosition) = @_;
-    my $self = $class->SUPER::new($remoteInfo, 'org::allbinary::game::identification::BasicGroupFactory'->getInstance()->{NONE_ARRAY}, $name, $rectangle, $viewPosition);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{initAnimationInterface} = $animationInterface;
-        $self->setAnimationInterface($animationInterface);
-        $self->{destroyedAnimationInterface} = $destroyedAnimationInterface;
-        $self->{movement} = $movement;
-        $self->{multiPlayerType} = $multiPlayerType;
-    return $self;
-}
+    constructor {name remoteInfo multiPlayerType movement animationInterface destroyedAnimationInterface rectangle viewPosition} {
+        next $remoteInfo [[::BasicGroupFactory::getInstance] jget NONE_ARRAY] $name $rectangle $viewPosition
+        my initFields_WeaponLayer
+        my jset initAnimationInterface $animationInterface
+        my setAnimationInterface $animationInterface
+        my jset destroyedAnimationInterface $destroyedAnimationInterface
+        my jset movement $movement
+        my jset multiPlayerType $multiPlayerType
+    }
+    
 
+    method setCollidableInferface {collidableInferface} {
+        next $collidableInferface
+        my jset collidableWeaponBehavior [my getCollidableInferface]
+    }
+    
 
-sub setCollidableInferface {
-    my ($self, $collidableInferface) = @_;
-        $self->SUPER::setCollidableInferface($collidableInferface);
-        $self->{collidableWeaponBehavior} = $self->getCollidableInferface();
-}
+    method initXYZ {x y z} {
+        my jset x $x
+        my jset y $y
+        my jset z $z
+    }
+    
 
-
-# throws Exception
-sub initXYZ {
-    my ($self, $x, $y, $z) = @_;
-        $self->{x} = $x;
-        $self->{y} = $y;
-        $self->{z} = $z;
-}
-
-
-# throws Exception
-sub init {
-    my ($self, $sourceLayerInterface, $angle, $otherAngle, $weaponProperties, $scoreable) = @_;
-        $self->setWeaponPropertiesP($weaponProperties);
-        $self->setReadyForExplosion(0);
-        $self->setAnimationInterface($self->getInitAnimationInterfaceP());
-        $self->setOwnerLayerInterface($sourceLayerInterface);
-        $self->{collidableWeaponBehavior}->init($sourceLayerInterface);
-        $self->setGroupInterfaces();
-        if (defined($scoreable)) {
-            $self->{scoreableInterface} = $scoreable;
+    method init {sourceLayerInterface angle otherAngle weaponProperties scoreable} {
+        my setWeaponPropertiesP $weaponProperties
+        my setReadyForExplosion false
+        my setAnimationInterface [my getInitAnimationInterfaceP]
+        my setOwnerLayerInterface $sourceLayerInterface
+        [my jget collidableWeaponBehavior] init $sourceLayerInterface
+        my setGroupInterfaces
+        if {[expr {$scoreable ne {}}]} {
+            my jset scoreableInterface $scoreable
         }
-        $self->{totalDamage} = 0;
-        $self->{initDamage} = $weaponProperties->getDamage();
-        $self->setDestroyed(0);
-        $self->{movement}->init($weaponProperties->getSpeed(), $angle, $otherAngle);
-}
+        my jset totalDamage 0
+        my jset initDamage [$weaponProperties getDamage]
+        my setDestroyed false
+        [my jget movement] init [$weaponProperties getSpeed] $angle $otherAngle
+    }
+    
 
-
-sub setGroupInterfaces {
-    my ($self) = @_;
-        my $basicGroupFactory = 'org::allbinary::game::identification::BasicGroupFactory'->getInstance();
-        if ($self->{sourceLayerInterface}->getGroupInterface()->[0] == $basicGroupFactory->{ENEMY}) {
-            $self->setGroupInterface($basicGroupFactory->{ENEMY_ARRAY});
+    method setGroupInterfaces {} {
+        set basicGroupFactory [::BasicGroupFactory::getInstance]
+        if {[expr {[[[my jget sourceLayerInterface] getGroupInterface] get 0] == [$basicGroupFactory jget ENEMY]}]} {
+            my setGroupInterface [$basicGroupFactory jget ENEMY_ARRAY]
         } else {
-            $self->setGroupInterface($self->{sourceLayerInterface}->getGroupInterface());
+            my setGroupInterface [[my jget sourceLayerInterface] getGroupInterface]
         }
-}
+    }
+    
 
-
-# throws Exception
-sub processTick {
-    my ($self, $allBinaryLayerManager) = @_;
-        if ($self->isExhausted() && !$self->isDestroyed()) {
-            if ($self->isReadyForExplosion()) {
-                my $indexedAnimationInterface = $self->getAnimationInterface();
-                my $currentFrame = $indexedAnimationInterface->getFrame();
-                if ($currentFrame < $indexedAnimationInterface->getAnimationSize() - 1) {
-                    $indexedAnimationInterface->nextFrame();
+    method processTick {allBinaryLayerManager} {
+        if {[expr {[my isExhausted] && [expr {![my isDestroyed]}]}]} {
+            if {[my isReadyForExplosion]} {
+                set indexedAnimationInterface [my getAnimationInterface]
+                set currentFrame [$indexedAnimationInterface getFrame]
+                if {[expr {$currentFrame < [expr {[$indexedAnimationInterface getAnimationSize] - 1}]}]} {
+                    $indexedAnimationInterface nextFrame
                 } else {
-                    $self->setDestroyed(1);
+                    my setDestroyed true
                 }
             } else {
-                my $collidableWeaponBehavior = $self->getCollidableInferface();
-                if ($collidableWeaponBehavior->isCollided()) {
-                    $self->setAnimationInterface($self->{destroyedAnimationInterface});
-                    $self->getMovement()->stop();
-                    $self->setReadyForExplosion(1);
+                set collidableWeaponBehavior [my getCollidableInferface]
+                if {[$collidableWeaponBehavior isCollided]} {
+                    my setAnimationInterface [my jget destroyedAnimationInterface]
+                    [my getMovement] stop
+                    my setReadyForExplosion true
                 } else {
-                    $self->setDestroyed(1);
+                    my setDestroyed true
                 }
             }
         }
-        $self->{movement}->process($self);
-        $self->{totalDamage} += $self->{weaponProperties}->getDissipation();
-}
+        [my jget movement] process [self]
+        my jset totalDamage [jint [expr {[my jget totalDamage] + [[my jget weaponProperties] getDissipation]}]]
+    }
+    
 
+    method isDestroyed {} {
+        return [my jget destroyed]
+    }
+    
 
-sub isDestroyed {
-    my ($self) = @_;
-        return $self->{destroyed};
-}
+    method damage {damage damageType} {
+        my jset totalDamage [jint [expr {[my jget totalDamage] + [jint [expr {$damage * $damage}]]}]]
+    }
+    
 
+    method givePoints {total} {
+        [my jget scoreableInterface] addPoints [expr {[[::GameConfigurationUtil::getInstance] getCompetitionValue] * $total}]
+    }
+    
 
-sub damage {
-    my ($self, $damage, $damageType) = @_;
-        $self->{totalDamage} += $damage * $damage;
-}
-
-
-sub givePoints {
-    my ($self, $total) = @_;
-        $self->{scoreableInterface}->addPoints('org::allbinary::game::configuration::GameConfigurationUtil'->getInstance()->getCompetitionValue() * $total);
-}
-
-
-sub isExhausted {
-    my ($self) = @_;
-        if ($self->{totalDamage} > $self->getInitDamage() || $self->{totalDamage} < 0) {
-            return 1;
+    method isExhausted {} {
+        if {[expr {[expr {[my jget totalDamage] > [my getInitDamage]}] || [expr {[my jget totalDamage] < 0}]}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
-}
+    }
+    
 
-
-sub getDamage {
-    my ($self, $damageType) = @_;
-        if (!$self->isExhausted()) {
-            my $total = $self->getInitDamage() - $self->{totalDamage};
-            $self->givePoints($total);
-            return $total;
+    method getDamage {damageType} {
+        if {[expr {![my isExhausted]}]} {
+            set total [jint [expr {[my getInitDamage] - [my jget totalDamage]}]]
+            my givePoints $total
+            return $total
         }
-        return 0;
-}
+        return 0
+    }
+    
 
-
-sub setDestroyed {
-    my ($self, $destroyed) = @_;
-        $self->{destroyed} = $destroyed;
-        if ($self->isDestroyed()) {
-            $self->{scoreableInterface} = 'org::allbinary::game::score::NoScoreable'->getInstance();
-            'org::allbinary::game::combat::destroy::DestroyedLayerProcessor'->getInstance()->add($self);
+    method setDestroyed {destroyed} {
+        my jset destroyed $destroyed
+        if {[my isDestroyed]} {
+            my jset scoreableInterface [::NoScoreable::getInstance]
+            [::DestroyedLayerProcessor::getInstance] add [self]
         }
+    }
+    
+
+    method getInitDamage {} {
+        return [my jget initDamage]
+    }
+    
+
+    method setAnimationInterface {animationInterface} {
+        my jset animationInterface $animationInterface
+    }
+    
+
+    method getAnimationInterface {} {
+        return [my jget animationInterface]
+    }
+    
+
+    method getInitAnimationInterfaceP {} {
+        return [my jget initAnimationInterface]
+    }
+    
+
+    method setInitAnimationInterfaceP {initAnimationInterface} {
+        my jset initAnimationInterface $initAnimationInterface
+    }
+    
+
+    method getDestroyedAnimationInterface {} {
+        return [my jget destroyedAnimationInterface]
+    }
+    
+
+    method getOwnerLayerInterface {} {
+        return [my jget sourceLayerInterface]
+    }
+    
+
+    method setOwnerLayerInterface {sourceLayerInterface} {
+        my jset sourceLayerInterface $sourceLayerInterface
+    }
+    
+
+    method paint {graphics} {
+        set viewPosition [my getViewPosition]
+        [my jget animationInterface] paintXY $graphics [expr {[$viewPosition getX] - [my getHalfWidth]}] [expr {[$viewPosition getY] - [my getHalfHeight]}]
+    }
+    
+
+    method paintThreed {graphics} {
+        set viewPosition [my getViewPosition]
+        [my jget animationInterface] paintThreedXYZ $graphics [expr {[$viewPosition getX] - [my getHalfWidth]}] [expr {[$viewPosition getY] - [my getHalfHeight]}] [expr {[$viewPosition getZ] - [my getHalfDepth]}]
+    }
+    
+
+    method getMovement {} {
+        return [my jget movement]
+    }
+    
+
+    method setMovement {movement} {
+        my jset movement $movement
+    }
+    
+
+    method getType {} {
+        return [::WeaponLayer::getStaticType]
+    }
+    
+    
+
+    method getMultiPlayerType {} {
+        return [my jget multiPlayerType]
+    }
+    
+
+    method setWeaponPropertiesP {weaponProperties} {
+        my jset weaponProperties $weaponProperties
+    }
+    
+
+    method getWeaponPropertiesP {} {
+        return [my jget weaponProperties]
+    }
+    
+
+    method implmentsTickableInterface {} {
+        return true
+    }
+    
+
+    method set {gl} {
+        [my jget initAnimationInterface] set $gl
+    }
 }
 
-
-sub getInitDamage {
-    my ($self) = @_;
-        return $self->{initDamage};
+namespace eval ::WeaponLayer {
+    proc getStaticType {} {
+        return 0
+    }
 }
 
-
-sub setAnimationInterface {
-    my ($self, $animationInterface) = @_;
-        $self->{animationInterface} = $animationInterface;
-}
-
-
-sub getAnimationInterface {
-    my ($self) = @_;
-        return $self->{animationInterface};
-}
-
-
-sub getInitAnimationInterfaceP {
-    my ($self) = @_;
-        return $self->{initAnimationInterface};
-}
-
-
-sub setInitAnimationInterfaceP {
-    my ($self, $initAnimationInterface) = @_;
-        $self->{initAnimationInterface} = $initAnimationInterface;
-}
-
-
-sub getDestroyedAnimationInterface {
-    my ($self) = @_;
-        return $self->{destroyedAnimationInterface};
-}
-
-
-sub getOwnerLayerInterface {
-    my ($self) = @_;
-        return $self->{sourceLayerInterface};
-}
-
-
-sub setOwnerLayerInterface {
-    my ($self, $sourceLayerInterface) = @_;
-        $self->{sourceLayerInterface} = $sourceLayerInterface;
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        my $viewPosition = $self->getViewPosition();
-        $self->{animationInterface}->paintXY($graphics, $viewPosition->getX() - $self->getHalfWidth(), $viewPosition->getY() - $self->getHalfHeight());
-}
-
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
-        my $viewPosition = $self->getViewPosition();
-        $self->{animationInterface}->paintThreedXYZ($graphics, $viewPosition->getX() - $self->getHalfWidth(), $viewPosition->getY() - $self->getHalfHeight(), $viewPosition->getZ() - $self->getHalfDepth());
-}
-
-
-sub getMovement {
-    my ($self) = @_;
-        return $self->{movement};
-}
-
-
-sub setMovement {
-    my ($self, $movement) = @_;
-        $self->{movement} = $movement;
-}
-
-
-sub getType {
-    my ($self) = @_;
-        return 'org::allbinary::game::layer::weapon::WeaponLayer'->getStaticType();
-}
-
-
-sub getStaticType {
-    my ($class) = @_;
-        return 0;
-}
-
-
-sub getMultiPlayerType {
-    my ($self) = @_;
-        return $self->{multiPlayerType};
-}
-
-
-sub setWeaponPropertiesP {
-    my ($self, $weaponProperties) = @_;
-        $self->{weaponProperties} = $weaponProperties;
-}
-
-
-sub getWeaponPropertiesP {
-    my ($self) = @_;
-        return $self->{weaponProperties};
-}
-
-
-sub implmentsTickableInterface {
-    my ($self) = @_;
-        return 1;
-}
-
-
-# throws Exception
-sub set {
-    my ($self, $gl) = @_;
-        $self->{initAnimationInterface}->set($gl);
-}
-
-use java::lang::Object ();
-use javax::microedition::khronos::opengles::GL ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::animation::NullAnimationFactory ();
-use org::allbinary::game::collision::CollidableBaseBehavior ();
-use org::allbinary::game::combat::destroy::DestroyedLayerProcessor ();
-use org::allbinary::game::combat::weapon::WeaponProperties ();
-use org::allbinary::game::configuration::GameConfigurationUtil ();
-use org::allbinary::game::identification::BasicGroupFactory ();
-use org::allbinary::game::multiplayer::layer::MultiPlayerGameLayer ();
-use org::allbinary::game::multiplayer::layer::RemoteInfo ();
-use org::allbinary::game::score::NoScoreable ();
-use org::allbinary::game::score::ScoreableInterface ();
-use org::allbinary::game::tick::TickableInterface ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::physics::movement::Movement ();
-use org::allbinary::view::ViewPosition ();
-use org::allbinary::view::ViewPositionBase ();
-use org::allbinary::game::layer::weapon::CollidableWeaponBehavior ();
-
-1;
 

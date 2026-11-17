@@ -11,75 +11,101 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.time
 
-package org::allbinary::time::TimeUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::time::TimeUtil'->new() };
-tie our $calendar, 'java::lang::LazyStatic', sub { 'java::util::Calendar'->getInstance() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::TimeUtil {
+    superclass ::JObject
 }
 
+oo::define ::TimeUtil {
+    method initFields_TimeUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::time::TimeUtil::instance;
+    constructor {} {
+        next
+        my initFields_TimeUtil
+    }
+    
+    
+
+    method setCalendar {calendar yearString monthString dayString hourString} {
+        set year [$yearString intValue]
+        set month [$monthString intValue]
+        set day [$dayString intValue]
+        set hour [$hourString intValue]
+        $calendar set $year $month $day $hour 0
+    }
+    
+
+    method setCalendarWithTime {calendar yearString monthString dayString hourString minuteString secondString} {
+        set year [$yearString intValue]
+        set month [$monthString intValue]
+        set day [$dayString intValue]
+        set hour [$hourString intValue]
+        set minute [$minuteString intValue]
+        set second [$secondString intValue]
+        $calendar set $year $month $day $hour $minute $second
+    }
+    
+
+    method setExpirationCalendar {calendar yearsString monthsString daysString hoursString minutesString secondsString} {
+        set year [expr {[$calendar get [::Calendar::staticGet_YEAR]] + [$yearsString intValue]}]
+        set month [expr {[$calendar get [::Calendar::staticGet_MONTH]] + [$monthsString intValue]}]
+        set day [expr {[$calendar get [::Calendar::staticGet_DAY_OF_MONTH]] + [$daysString intValue]}]
+        set hour [expr {[$calendar get [::Calendar::staticGet_HOUR]] + [$hoursString intValue]}]
+        set minute [expr {[$calendar get [::Calendar::staticGet_MINUTE]] + [$minutesString intValue]}]
+        set second [expr {[$calendar get [::Calendar::staticGet_SECOND]] + [$secondsString intValue]}]
+        $calendar set $year $month $day $hour $minute $second
+    }
+    
+
+    method getTotalTime {yearString monthString dayString hourString minuteString secondString} {
+        set time [[::TimeUtil::staticGet_calendar] getTimeInMillis]
+        my setExpirationCalendar [::TimeUtil::staticGet_calendar] $yearString $monthString $dayString $hourString $minuteString $secondString
+        set timeDelta [[::TimeUtil::staticGet_calendar] getTimeInMillis]
+        return [jlong [expr {$timeDelta - $time}]]
+    }
 }
 
-
-sub setCalendar {
-    my ($self, $calendar, $yearString, $monthString, $dayString, $hourString) = @_;
-        my $year = int($yearString);
-        my $month = int($monthString);
-        my $day = int($dayString);
-        my $hour = int($hourString);
-        $calendar->set($year, $month, $day, $hour, 0);
+namespace eval ::TimeUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::TimeUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    variable calendarValue {}
+    variable calendarSet 0
+    proc staticGet_calendar {} {
+        variable calendarValue
+        variable calendarSet
+        if {!$calendarSet} {
+            set calendarSet 1
+            set calendarValue [::Calendar::getInstance]
+        }
+        return $calendarValue
+    }
+    proc staticSet_calendar {value} {
+        variable calendarValue
+        variable calendarSet
+        set calendarSet 1
+        set calendarValue $value
+    }
+    proc getInstance {} {
+        return [::TimeUtil::staticGet_instance]
+    }
 }
 
-
-sub setCalendarWithTime {
-    my ($self, $calendar, $yearString, $monthString, $dayString, $hourString, $minuteString, $secondString) = @_;
-        my $year = int($yearString);
-        my $month = int($monthString);
-        my $day = int($dayString);
-        my $hour = int($hourString);
-        my $minute = int($minuteString);
-        my $second = int($secondString);
-        $calendar->set($year, $month, $day, $hour, $minute, $second);
-}
-
-
-sub setExpirationCalendar {
-    my ($self, $calendar, $yearsString, $monthsString, $daysString, $hoursString, $minutesString, $secondsString) = @_;
-        my $year = $calendar->get($java::util::Calendar::YEAR) + int($yearsString);
-        my $month = $calendar->get($java::util::Calendar::MONTH) + int($monthsString);
-        my $day = $calendar->get($java::util::Calendar::DAY_OF_MONTH) + int($daysString);
-        my $hour = $calendar->get($java::util::Calendar::HOUR) + int($hoursString);
-        my $minute = $calendar->get($java::util::Calendar::MINUTE) + int($minutesString);
-        my $second = $calendar->get($java::util::Calendar::SECOND) + int($secondsString);
-        $calendar->set($year, $month, $day, $hour, $minute, $second);
-}
-
-
-sub getTotalTime {
-    my ($self, $yearString, $monthString, $dayString, $hourString, $minuteString, $secondString) = @_;
-        my $time = $org::allbinary::time::TimeUtil::calendar->getTimeInMillis();
-        $self->setExpirationCalendar($org::allbinary::time::TimeUtil::calendar, $yearString, $monthString, $dayString, $hourString, $minuteString, $secondString);
-        my $timeDelta = $org::allbinary::time::TimeUtil::calendar->getTimeInMillis();
-        return $timeDelta - $time;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use java::util::Calendar ();
-
-1;
 

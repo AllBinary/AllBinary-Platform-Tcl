@@ -11,27 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media
 
-package org::allbinary::media::AllBinaryVibrationME;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AllBinaryVibrationME {
+    superclass ::JObject
 }
 
+oo::define ::AllBinaryVibrationME {
+    method initFields_AllBinaryVibrationME {} {
+        return
+    }
 
-sub vibrate {
-    my ($self, $duration, $type, $volume) = @_;
+    constructor {} {
+        next
+        my initFields_AllBinaryVibrationME
+    }
+    
+
+    method vibrate {duration type volume} {
+    }
 }
 
-use java::lang::Object ();
+namespace eval ::AllBinaryVibrationME {
+}
 
-1;
 

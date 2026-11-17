@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.life
 
-# Java interface
-package org::allbinary::game::ag::life::LifeVisitorInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub visit {
-    my ($self, $lifeInterface) = @_;
-    die "abstract method visit";
+oo::class create ::LifeVisitorInterface {
+    superclass ::JObject
 }
 
+oo::define ::LifeVisitorInterface {
+    method initFields_LifeVisitorInterface {} {
+        return
+    }
+    
 
-1;
+    method visit {lifeInterface} {
+        error [jexception AbstractMethodError visit]
+    }
+}
+
+namespace eval ::LifeVisitorInterface {
+}
+
 

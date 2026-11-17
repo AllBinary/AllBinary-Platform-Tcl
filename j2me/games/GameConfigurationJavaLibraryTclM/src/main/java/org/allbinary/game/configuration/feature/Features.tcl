@@ -11,159 +11,143 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
-package org::allbinary::game::configuration::feature::Features;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{list} = undef;
-    $self->{defaultList} = undef;
+oo::class create ::Features {
+    superclass ::JObject
 }
 
+oo::define ::Features {
+    method initFields_Features {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset list {}
+        my jset defaultList {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        
+        
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::configuration::feature::Features::SINGLETON == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::configuration::feature::Features::SINGLETON = 'org::allbinary::game::configuration::feature::Features'->new();
+    constructor {} {
+        next
+        my initFields_Features
+        my jset list [::BasicArrayListD new]
+        my jset defaultList [::BasicArrayListD new]
+        my init
+    }
+    
+
+    method addDefault {gameFeature} {
+        my add $gameFeature
+        if {[expr {![[my jget defaultList] contains $gameFeature]}]} {
+            [my jget defaultList] add $gameFeature
         }
-        return $org::allbinary::game::configuration::feature::Features::SINGLETON;
-}
+    }
+    
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
-        $self->{defaultList} = 'org::allbinary::util::BasicArrayListD'->new();
-        $self->init();
-    return $self;
-}
-
-
-# throws Exception
-sub addDefault {
-    my ($self, $gameFeature) = @_;
-        $self->add($gameFeature);
-        if (!$self->{defaultList}->contains($gameFeature)) {
-            $self->{defaultList}->add($gameFeature);
+    method add {gameFeature} {
+        if {[expr {![[my jget list] contains $gameFeature]}]} {
+            [my jget logUtil] putF [[[[::StringMaker new] append [[::CommonLabels::getInstance] jget START_LABEL]] append [$gameFeature toString]] toString] [self] [[my jget commonStrings] jget ADD]
+            [my jget list] add $gameFeature
+            [::GameFeatureEventHandler::getInstance] fireEvent [::GameFeatureEvent new $gameFeature [$gameFeature toString]]
         }
-}
+    }
+    
 
+    method removeDefault {gameFeature} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[::CommonLabels::getInstance] jget START_LABEL]] append [$gameFeature toString]] toString] [self] "removeDefault"
+        my remove $gameFeature
+        [my jget defaultList] remove $gameFeature
+    }
+    
 
-# throws Exception
-sub add {
-    my ($self, $gameFeature) = @_;
-        if (!$self->{list}->contains($gameFeature)) {
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{START_LABEL})->append($gameFeature->toString())->toString(), $self, $self->{commonStrings}->{ADD});
-            $self->{list}->add($gameFeature);
-            'org::allbinary::game::configuration::event::GameFeatureEventHandler'->getInstance()->fireEvent('org::allbinary::game::configuration::event::GameFeatureEvent'->new($gameFeature, $gameFeature->toString()));
+    method remove {gameFeature} {
+        if {[[my jget list] contains $gameFeature]} {
+            [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget REMOVE]
+            [my jget list] remove $gameFeature
+            [::GameFeatureEventHandler::getInstance] fireEvent [::GameFeatureEvent new $gameFeature [$gameFeature toString]]
         }
-}
+    }
+    
 
-
-# throws Exception
-sub removeDefault {
-    my ($self, $gameFeature) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{START_LABEL})->append($gameFeature->toString())->toString(), $self, "removeDefault");
-        $self->remove($gameFeature);
-        $self->{defaultList}->remove($gameFeature);
-}
-
-
-# throws Exception
-sub remove {
-    my ($self, $gameFeature) = @_;
-        if ($self->{list}->contains($gameFeature)) {
-            $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{REMOVE});
-            $self->{list}->remove($gameFeature);
-            'org::allbinary::game::configuration::event::GameFeatureEventHandler'->getInstance()->fireEvent('org::allbinary::game::configuration::event::GameFeatureEvent'->new($gameFeature, $gameFeature->toString()));
-        }
-}
-
-
-sub init {
-    my ($self) = @_;
+    method init {} {
         try {
-            my $gameFeatureFactory = 'org::allbinary::game::configuration::feature::GameFeatureFactory'->getInstance();
-            my $inputFeatureFactory = 'org::allbinary::game::configuration::feature::InputFeatureFactory'->getInstance();
-            my $sensorFeatureFactory = 'org::allbinary::game::configuration::feature::SensorFeatureFactory'->getInstance();
-            my $touchFeatureFactory = 'org::allbinary::game::configuration::feature::TouchFeatureFactory'->getInstance();
-            $self->addDefault($gameFeatureFactory->{ARTIFICIAL_INTELLEGENCE_PROCESSOR});
-            $self->addDefault($gameFeatureFactory->{COLLIDABLE_INTERFACE_LAYER_PROCESSOR});
-            $self->addDefault($gameFeatureFactory->{GAME_INPUT_LAYER_PROCESSOR});
-            $self->addDefault($gameFeatureFactory->{TICKABLE_LAYER_PROCESSOR});
-            $self->addDefault($inputFeatureFactory->{MULTI_KEY_PRESS});
-            $self->addDefault($inputFeatureFactory->{REMOVE_DUPLICATE_KEY_PRESSES});
-            $self->addDefault($gameFeatureFactory->{SCREEN_SHAKE});
-            $self->addDefault($gameFeatureFactory->{POST_IMAGE_LOADING_MODIFICATION});
-            my $operatingSystemInterface = 'org::allbinary::logic::system::os::OperatingSystemFactory'->getInstance()->getOperatingSystemInstance();
-            if ($operatingSystemInterface->isOverScan()) {
-                $self->addDefault($sensorFeatureFactory->{NO_ORIENTATION});
-                $self->addDefault($touchFeatureFactory->{HIDE_SCREEN_BUTTONS});
+            set gameFeatureFactory [::GameFeatureFactory::getInstance]
+            set inputFeatureFactory [::InputFeatureFactory::getInstance]
+            set sensorFeatureFactory [::SensorFeatureFactory::getInstance]
+            set touchFeatureFactory [::TouchFeatureFactory::getInstance]
+            my addDefault [$gameFeatureFactory jget ARTIFICIAL_INTELLEGENCE_PROCESSOR]
+            my addDefault [$gameFeatureFactory jget COLLIDABLE_INTERFACE_LAYER_PROCESSOR]
+            my addDefault [$gameFeatureFactory jget GAME_INPUT_LAYER_PROCESSOR]
+            my addDefault [$gameFeatureFactory jget TICKABLE_LAYER_PROCESSOR]
+            my addDefault [$inputFeatureFactory jget MULTI_KEY_PRESS]
+            my addDefault [$inputFeatureFactory jget REMOVE_DUPLICATE_KEY_PRESSES]
+            my addDefault [$gameFeatureFactory jget SCREEN_SHAKE]
+            my addDefault [$gameFeatureFactory jget POST_IMAGE_LOADING_MODIFICATION]
+            set operatingSystemInterface [[::OperatingSystemFactory::getInstance] getOperatingSystemInstance]
+            if {[$operatingSystemInterface isOverScan]} {
+                my addDefault [$sensorFeatureFactory jget NO_ORIENTATION]
+                my addDefault [$touchFeatureFactory jget HIDE_SCREEN_BUTTONS]
             } else {
-                $self->addDefault($sensorFeatureFactory->{ORIENTATION_SENSORS});
-                $self->addDefault($touchFeatureFactory->{AUTO_HIDE_SHOW_SCREEN_BUTTONS});
+                my addDefault [$sensorFeatureFactory jget ORIENTATION_SENSORS]
+                my addDefault [$touchFeatureFactory jget AUTO_HIDE_SHOW_SCREEN_BUTTONS]
             }
-            $self->addDefault($touchFeatureFactory->{TOUCH_ENABLED});
-            $self->addDefault('org::allbinary::game::configuration::feature::MainFeatureFactory'->getInstance()->{FULL_SCREEN});
-            $self->addDefault('org::allbinary::game::configuration::feature::MainFeatureFactory'->getInstance()->{LOAD_ONDEMAND});
-        } catch ($e) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->putOE($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{INIT}, $e);
+            my addDefault [$touchFeatureFactory jget TOUCH_ENABLED]
+            my addDefault [[::MainFeatureFactory::getInstance] jget FULL_SCREEN]
+            my addDefault [[::MainFeatureFactory::getInstance] jget LOAD_ONDEMAND]
+        } on error {e} {
+            ::PreLogUtil::putOE [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget INIT] $e
         }
-}
+    }
+    
 
+    method isDefault {gameFeature} {
+        return [[my jget defaultList] contains $gameFeature]
+    }
+    
 
-sub isDefault {
-    my ($self, $gameFeature) = @_;
-        return $self->{defaultList}->contains($gameFeature);
-}
+    method isFeature {gameFeature} {
+        return [[my jget list] contains $gameFeature]
+    }
+    
 
-
-sub isFeature {
-    my ($self, $gameFeature) = @_;
-        return $self->{list}->contains($gameFeature);
-}
-
-
-# throws Exception
-sub toggle {
-    my ($self, $gameFeature) = @_;
-        if ($self->isFeature($gameFeature)) {
-            $self->remove($gameFeature);
+    method toggle {gameFeature} {
+        if {[my isFeature $gameFeature]} {
+            my remove $gameFeature
         } else {
-            $self->add($gameFeature);
+            my add $gameFeature
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::configuration::event::GameFeatureEvent ();
-use org::allbinary::game::configuration::event::GameFeatureEventHandler ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::system::os::GenericOperatingSystem ();
-use org::allbinary::logic::system::os::OperatingSystemFactory ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::game::configuration::feature::GameFeatureFactory ();
-use org::allbinary::game::configuration::feature::InputFeatureFactory ();
-use org::allbinary::game::configuration::feature::SensorFeatureFactory ();
-use org::allbinary::game::configuration::feature::TouchFeatureFactory ();
-use org::allbinary::game::configuration::feature::MainFeatureFactory ();
+namespace eval ::Features {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [[::NullUtil::getInstance] jget NULL_OBJECT]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::Features::staticGet_SINGLETON] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::Features::staticSet_SINGLETON [::Features new]
+        }
+        return [::Features::staticGet_SINGLETON]
+    }
+}
 
-1;
 

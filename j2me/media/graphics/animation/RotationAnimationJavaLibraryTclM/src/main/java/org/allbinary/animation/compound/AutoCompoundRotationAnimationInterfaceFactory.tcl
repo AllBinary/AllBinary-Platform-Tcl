@@ -11,42 +11,35 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.compound
 
-package org::allbinary::animation::compound::AutoCompoundRotationAnimationInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::compound::CompoundAnimationInterfaceFactory';
-
-
-
-sub new {
-    my ($class, $basicAnimationInterfaceFactoryInterfaceArray, $animationBehaviorFactory) = @_;
-    my $self = $class->SUPER::new($basicAnimationInterfaceFactoryInterfaceArray, $animationBehaviorFactory);
-        # super(...) made $self above
-    return $self;
+oo::class create ::AutoCompoundRotationAnimationInterfaceFactory {
+    superclass ::CompoundAnimationInterfaceFactory
 }
 
+oo::define ::AutoCompoundRotationAnimationInterfaceFactory {
+    method initFields_AutoCompoundRotationAnimationInterfaceFactory {} {
+        return
+    }
+    
 
-sub createArray {
-    my ($self, $size) = @_;
-        return [(undef) x ($size)];
+    constructor {basicAnimationInterfaceFactoryInterfaceArray animationBehaviorFactory} {
+        next $basicAnimationInterfaceFactoryInterfaceArray $animationBehaviorFactory
+        my initFields_AutoCompoundRotationAnimationInterfaceFactory
+    }
+    
+
+    method createArray {size} {
+        return [jarray $size {}]
+    }
+    
+
+    method createAnimation {animationInterfaceArray} {
+        return [::AutoCompoundRotationAnimation new $animationInterfaceArray [[my jget animationBehaviorFactory] getOrCreateInstance]]
+    }
 }
 
-
-sub createAnimation {
-    my ($self, $animationInterfaceArray) = @_;
-        return 'org::allbinary::animation::compound::AutoCompoundRotationAnimation'->new($animationInterfaceArray, $self->{animationBehaviorFactory}->getOrCreateInstance());
+namespace eval ::AutoCompoundRotationAnimationInterfaceFactory {
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::RotationAnimation ();
-use org::allbinary::animation::compound::CompoundAnimationInterfaceFactory ();
-use org::allbinary::animation::compound::AutoCompoundRotationAnimation ();
-
-1;
 

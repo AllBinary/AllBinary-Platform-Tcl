@@ -11,50 +11,61 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.view
 
-package org::allbinary::view::ViewPositionBase;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::GPoint';
-
-tie our $NULL_VIEW_POSITION, 'java::lang::LazyStatic', sub { 'org::allbinary::view::ViewPositionBase'->new(0, 0, 0) };
-
-
-sub new {
-    my ($class, $x, $y, $z) = @_;
-    my $self = $class->SUPER::new($x, $y, $z);
-        # super(...) made $self above
-    return $self;
+oo::class create ::ViewPositionBase {
+    superclass ::GPoint
 }
 
+oo::define ::ViewPositionBase {
+    method initFields_ViewPositionBase {} {
+        return
+    }
+    
 
-sub getX2 {
-    my ($self) = @_;
-        return $self->getX();
+    constructor {x y z} {
+        next $x $y $z
+        my initFields_ViewPositionBase
+    }
+    
+
+    method getX2 {} {
+        return [my getX]
+    }
+    
+
+    method getY2 {} {
+        return [my getY]
+    }
+    
+
+    method getZ2 {} {
+        return [my getZ]
+    }
+    
+
+    method setAllbinaryLayer {allbinaryLayer} {
+    }
 }
 
-
-sub getY2 {
-    my ($self) = @_;
-        return $self->getY();
+namespace eval ::ViewPositionBase {
+    variable NULL_VIEW_POSITIONValue {}
+    variable NULL_VIEW_POSITIONSet 0
+    proc staticGet_NULL_VIEW_POSITION {} {
+        variable NULL_VIEW_POSITIONValue
+        variable NULL_VIEW_POSITIONSet
+        if {!$NULL_VIEW_POSITIONSet} {
+            set NULL_VIEW_POSITIONSet 1
+            set NULL_VIEW_POSITIONValue [::ViewPositionBase new 0 0 0]
+        }
+        return $NULL_VIEW_POSITIONValue
+    }
+    proc staticSet_NULL_VIEW_POSITION {value} {
+        variable NULL_VIEW_POSITIONValue
+        variable NULL_VIEW_POSITIONSet
+        set NULL_VIEW_POSITIONSet 1
+        set NULL_VIEW_POSITIONValue $value
+    }
 }
 
-
-sub getZ2 {
-    my ($self) = @_;
-        return $self->getZ();
-}
-
-
-sub setAllbinaryLayer {
-    my ($self, $allbinaryLayer) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::GPoint ();
-
-1;
 

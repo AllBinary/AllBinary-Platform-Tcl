@@ -11,39 +11,35 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.gyro
 
-package org::allbinary::input::gyro::NoGyroSensor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::gyro::AllBinaryOrientationSensor','org::allbinary::input::AllBinarySensorListener';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{CONSTRUCTOR});
-    return $self;
+oo::class create ::NoGyroSensor {
+    superclass ::AllBinaryOrientationSensor
 }
 
+oo::define ::NoGyroSensor {
+    method initFields_NoGyroSensor {} {
+        return
+    }
+    
 
-# throws Exception
-sub getOrientation {
-    my ($self) = @_;
-        return $org::allbinary::logic::math::Orientation::NONE;
+    constructor {} {
+        next
+        my initFields_NoGyroSensor
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+    }
+    
+
+    method getOrientation {} {
+        return [::Orientation::staticGet_NONE]
+    }
+    
+
+    method onSensorChange {} {
+    }
 }
 
-
-sub onSensorChange {
-    my ($self) = @_;
+namespace eval ::NoGyroSensor {
 }
 
-use java::lang::Object ();
-use org::allbinary::input::AllBinarySensorListener ();
-use org::allbinary::logic::math::Orientation ();
-use org::allbinary::input::gyro::AllBinaryOrientationSensor ();
-
-1;
 

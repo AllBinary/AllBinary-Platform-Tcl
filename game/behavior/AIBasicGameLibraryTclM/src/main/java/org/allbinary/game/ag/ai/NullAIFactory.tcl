@@ -11,43 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::NullAIFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface';
-
-tie our $NULL_AI, 'java::lang::LazyStatic', sub { 'org::allbinary::game::ag::ai::NullAI'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullAIFactory {
+    superclass ::JObject
 }
 
+oo::define ::NullAIFactory {
+    method initFields_NullAIFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($self, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-        return $org::allbinary::game::ag::ai::NullAIFactory::NULL_AI;
+    constructor {} {
+        next
+        my initFields_NullAIFactory
+    }
+    
+
+    method getInstance {hashtable ownerLayerInterface gameInput} {
+        return [::NullAIFactory::staticGet_NULL_AI]
+    }
+    
 }
 
-
-# Java overloaded method: Perl keeps the last definition
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::ag::ai::NullAIFactory::NULL_AI;
+namespace eval ::NullAIFactory {
+    variable NULL_AIValue {}
+    variable NULL_AISet 0
+    proc staticGet_NULL_AI {} {
+        variable NULL_AIValue
+        variable NULL_AISet
+        if {!$NULL_AISet} {
+            set NULL_AISet 1
+            set NULL_AIValue [::NullAI new]
+        }
+        return $NULL_AIValue
+    }
+    proc staticSet_NULL_AI {value} {
+        variable NULL_AIValue
+        variable NULL_AISet
+        set NULL_AISet 1
+        set NULL_AIValue $value
+    }
+    proc getInstance {} {
+        return [::NullAIFactory::staticGet_NULL_AI]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-use org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::ag::ai::NullAI ();
-
-1;
 

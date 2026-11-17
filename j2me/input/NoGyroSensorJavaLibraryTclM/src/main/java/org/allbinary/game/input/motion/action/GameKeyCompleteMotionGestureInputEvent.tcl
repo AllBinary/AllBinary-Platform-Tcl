@@ -11,72 +11,58 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.motion.action
 
-package org::allbinary::game::input::motion::action::GameKeyCompleteMotionGestureInputEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::CompleteMotionGestureInputEvent','org::allbinary::game::input::GameKeyEventSourceInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gameKey} = $org::allbinary::game::input::GameKey::NULL_GAME_KEY;
-    $self->{gameKeyEvent} = $org::allbinary::game::input::event::GameKeyEvent::NONE;
+oo::class create ::GameKeyCompleteMotionGestureInputEvent {
+    superclass ::CompleteMotionGestureInputEvent
 }
 
+oo::define ::GameKeyCompleteMotionGestureInputEvent {
+    method initFields_GameKeyCompleteMotionGestureInputEvent {} {
+        my jset gameKey {}
+        my jset gameKeyEvent {}
+        my jset gameKey [::GameKey::staticGet_NULL_GAME_KEY]
+        my jset gameKeyEvent [::GameKeyEvent::staticGet_NONE]
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $motionGestureInput, $inputToGameKeyMapping) = @_;
-    my $self = $class->SUPER::new($name, $motionGestureInput);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
+    constructor {name motionGestureInput inputToGameKeyMapping} {
+        next $name $motionGestureInput
+        my initFields_GameKeyCompleteMotionGestureInputEvent
+    }
+    
+
+    method getSourceId {} {
+        return 0
+    }
+    
+
+    method update {} {
+    }
+    
+
+    method setGameKeyEvent {gameKeyEvent} {
+        my jset gameKeyEvent $gameKeyEvent
+    }
+    
+
+    method getGameKeyEvent {} {
+        return [my jget gameKeyEvent]
+    }
+    
+
+    method setGameKey {gameKey} {
+        my jset gameKey $gameKey
+    }
+    
+
+    method getGameKey {} {
+        return [my jget gameKey]
+    }
 }
 
-
-sub getSourceId {
-    my ($self) = @_;
-        return 0;
+namespace eval ::GameKeyCompleteMotionGestureInputEvent {
 }
 
-
-sub update {
-    my ($self) = @_;
-}
-
-
-sub setGameKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
-        $self->{gameKeyEvent} = $gameKeyEvent;
-}
-
-
-sub getGameKeyEvent {
-    my ($self) = @_;
-        return $self->{gameKeyEvent};
-}
-
-
-sub setGameKey {
-    my ($self, $gameKey) = @_;
-        $self->{gameKey} = $gameKey;
-}
-
-
-sub getGameKey {
-    my ($self) = @_;
-        return $self->{gameKey};
-}
-
-use java::lang::Object ();
-use org::allbinary::game::input::CompleteMotionGestureInputEvent ();
-use org::allbinary::game::input::GameKey ();
-use org::allbinary::game::input::GameKeyEventSourceInterface ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::game::input::mapping::InputToGameKeyMapping ();
-use org::allbinary::input::motion::gesture::MotionGestureInput ();
-
-1;
 

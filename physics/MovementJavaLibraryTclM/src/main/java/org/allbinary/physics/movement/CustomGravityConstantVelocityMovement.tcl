@@ -11,47 +11,38 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
-package org::allbinary::physics::movement::CustomGravityConstantVelocityMovement;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::physics::movement::BasicConstantVelocityMovement';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{customGravity} = undef;
-    $self->{gravityUtil} = 'org::allbinary::game::physics::acceleration::GravityUtil'->getInstance();
+oo::class create ::CustomGravityConstantVelocityMovement {
+    superclass ::BasicConstantVelocityMovement
 }
 
+oo::define ::CustomGravityConstantVelocityMovement {
+    method initFields_CustomGravityConstantVelocityMovement {} {
+        my jset customGravity 0
+        my jset gravityUtil {}
+        
+        my jset gravityUtil [::GravityUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $speedBasicDecimal, $customGravity) = @_;
-    my $self = $class->SUPER::new($speedBasicDecimal, 'org::allbinary::game::physics::velocity::VelocityProperties'->new(int($speedBasicDecimal->getUnscaled()), int($speedBasicDecimal->getUnscaled())));
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{customGravity} = $customGravity;
-    return $self;
+    constructor {speedBasicDecimal customGravity} {
+        next $speedBasicDecimal [::VelocityProperties new [jint [$speedBasicDecimal getUnscaled]] [jint [$speedBasicDecimal getUnscaled]]]
+        my initFields_CustomGravityConstantVelocityMovement
+        my jset customGravity $customGravity
+    }
+    
+
+    method process {layer} {
+        next $layer
+        [my jget gravityUtil] process [my getVelocityProperties] [my jget customGravity]
+        set velocityProperties [my getVelocityProperties]
+        $velocityProperties limitMaxYForwardVelocity
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $layer) = @_;
-        $self->SUPER::process($layer);
-        $self->{gravityUtil}->process($self->getVelocityProperties(), $self->{customGravity});
-        my $velocityProperties = $self->getVelocityProperties();
-        $velocityProperties->limitMaxYForwardVelocity();
+namespace eval ::CustomGravityConstantVelocityMovement {
 }
 
-use java::lang::Object ();
-use org::allbinary::game::layer::AllBinaryGameLayer ();
-use org::allbinary::game::physics::acceleration::GravityUtil ();
-use org::allbinary::game::physics::velocity::VelocityProperties ();
-use org::allbinary::logic::math::BasicDecimal ();
-use org::allbinary::physics::movement::BasicConstantVelocityMovement ();
-
-1;
 

@@ -11,128 +11,101 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
-package org::allbinary::graphics::form::item::CustomTextBox;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::displayable::canvas::GameCommandCanvas','org::allbinary::game::input::event::RawKeyEventListener';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{textFieldItem} = undef;
-    $self->{inputFactory} = 'org::allbinary::game::input::InputFactory'->getInstance();
+oo::class create ::CustomTextBox {
+    superclass ::GameCommandCanvas
 }
 
+oo::define ::CustomTextBox {
+    method initFields_CustomTextBox {} {
+        my jset textFieldItem {}
+        my jset inputFactory {}
+        
+        my jset inputFactory [::InputFactory::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $cmdListener, $label, $text, $maxSize, $constraints, $font, $backgroundBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($cmdListener, $label, $backgroundBasicColor, $foregroundBasicColor);
-    _init_fields($self);
-        # super(...) made $self above
-        my $stringUtil = 'org::allbinary::logic::string::StringUtil'->getInstance();
-        my $textFieldItem = 'org::allbinary::graphics::form::item::ABTextFieldItem'->new($self, 'org::allbinary::graphics::form::item::validation::TextItemVisitor'->new(), $stringUtil->{EMPTY_STRING}, $stringUtil->{EMPTY_STRING}, $maxSize, 0, $stringUtil->{EMPTY_STRING}, $font, $backgroundBasicColor, $foregroundBasicColor);
-        $textFieldItem->setString($text);
-        $self->{textFieldItem} = $textFieldItem;
-        $self->setTitle($label);
-    return $self;
-}
+    constructor {cmdListener label text maxSize constraints font backgroundBasicColor foregroundBasicColor} {
+        next $cmdListener $label $backgroundBasicColor $foregroundBasicColor
+        my initFields_CustomTextBox
+        set stringUtil [::StringUtil::getInstance]
+        set textFieldItem [::ABTextFieldItem new [self] [::TextItemVisitor new] [$stringUtil jget EMPTY_STRING] [$stringUtil jget EMPTY_STRING] $maxSize 0 [$stringUtil jget EMPTY_STRING] $font $backgroundBasicColor $foregroundBasicColor]
+        $textFieldItem setString $text
+        my jset textFieldItem $textFieldItem
+        my setTitle $label
+    }
+    
 
+    method submit {} {
+    }
+    
 
-sub submit {
-    my ($self) = @_;
-}
+    method onEventRaw {keyCode deviceId repeated} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[my jget commonStrings] jget START]] appendint $keyCode] toString] [self] "onEvent"
+        my keyPressedByDevice $keyCode $deviceId
+    }
+    
 
+    method keyPressed {keyCode} {
+        my keyPressedByDevice $keyCode 0
+    }
+    
 
-sub onEventRaw {
-    my ($self, $keyCode, $deviceId, $repeated) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonStrings}->{START})->appendint($keyCode)->toString(), $self, "onEvent");
-        $self->keyPressedByDevice($keyCode, $deviceId);
-}
+    method keyReleased {keyCode} {
+        my keyReleasedByDevice $keyCode 0
+    }
+    
 
+    method keyRepeated {keyCode} {
+        my keyRepeatedByDevice $keyCode 0
+    }
+    
 
-sub keyPressed {
-    my ($self, $keyCode) = @_;
-        $self->keyPressedByDevice($keyCode, 0);
-}
-
-
-sub keyReleased {
-    my ($self, $keyCode) = @_;
-        $self->keyReleasedByDevice($keyCode, 0);
-}
-
-
-sub keyRepeated {
-    my ($self, $keyCode) = @_;
-        $self->keyRepeatedByDevice($keyCode, 0);
-}
-
-
-sub keyPressedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
+    method keyPressedByDevice {keyCode deviceId} {
         try {
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE})->appendint($keyCode)->toString(), $self, $self->{gameInputStrings}->{KEY_PRESSED});
-            my $platformKeyFactory = 'org::allbinary::game::input::PlatformKeyFactory'->getInstance();
-            my $input = $self->{inputFactory}->getInstanceById($keyCode);
-            if ($platformKeyFactory->isSubmission($input)) {
-                $self->submit();
+            [my jget logUtil] putF [[[[::StringMaker new] append [[::CommonSeps::getInstance] jget SPACE]] appendint $keyCode] toString] [self] [[my jget gameInputStrings] jget KEY_PRESSED]
+            set platformKeyFactory [::PlatformKeyFactory::getInstance]
+            set input [[my jget inputFactory] getInstanceById $keyCode]
+            if {[$platformKeyFactory isSubmission $input]} {
+                my submit
             } else {
-                $self->{textFieldItem}->keyPressed($keyCode);
+                [my jget textFieldItem] keyPressed $keyCode
             }
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{gameInputStrings}->{KEY_PRESSED}, $e);
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget gameInputStrings] jget KEY_PRESSED] $e
         }
-}
+    }
+    
 
+    method keyReleasedByDevice {keyCode deviceId} {
+    }
+    
 
-sub keyReleasedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $graphics->setColor($self->{backgroundColor});
-        $graphics->fillRect(0, 0, $self->{displayInfo}->getLastWidth(), $self->{displayInfo}->getLastHeight());
-        $graphics->setColor($self->{foregroundColor});
-        if (!'org::allbinary::J2MEUtil'->isJ2ME()) {
-            $graphics->drawString($self->getTitle(), 8, 1, 0);
+    method paint {graphics} {
+        $graphics setColor [my jget backgroundColor]
+        $graphics fillRect 0 0 [[my jget displayInfo] getLastWidth] [[my jget displayInfo] getLastHeight]
+        $graphics setColor [my jget foregroundColor]
+        if {[expr {![::J2MEUtil::isJ2ME]}]} {
+            $graphics drawString [my getTitle] 8 1 0
         }
-        $self->paintXY($graphics, 8, $graphics->getFont()->getHeight() + 2);
-        $self->SUPER::paint($graphics);
+        my paintXY $graphics 8 [expr {[[$graphics getFont] getHeight] + 2}]
+        next $graphics
+    }
+    
+
+    method paintXY {graphics x y} {
+        [my jget textFieldItem] paintXY $graphics $x $y
+    }
+    
+
+    method getTextFieldItem {} {
+        return [my jget textFieldItem]
+    }
 }
 
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->{textFieldItem}->paintXY($graphics, $x, $y);
+namespace eval ::CustomTextBox {
 }
 
-
-sub getTextFieldItem {
-    my ($self) = @_;
-        return $self->{textFieldItem};
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::CommandListener ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::J2MEUtil ();
-use org::allbinary::game::displayable::canvas::GameCommandCanvas ();
-use org::allbinary::game::input::Input ();
-use org::allbinary::game::input::InputFactory ();
-use org::allbinary::game::input::PlatformKeyFactory ();
-use org::allbinary::game::input::event::RawKeyEventListener ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::form::item::validation::TextItemVisitor ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::graphics::form::item::ABTextFieldItem ();
-
-1;
 

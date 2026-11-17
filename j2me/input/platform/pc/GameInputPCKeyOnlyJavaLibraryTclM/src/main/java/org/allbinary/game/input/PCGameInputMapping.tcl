@@ -11,57 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::PCGameInputMapping;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::mapping::PersistentInputMapping';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::game::configuration::persistance::GamePersistanceStrings'->getInstance()->{SAVED_INPUT_CONFIGURATION_RECORD_ID});
-        # super(...) made $self above
-    return $self;
+oo::class create ::PCGameInputMapping {
+    superclass ::PersistentInputMapping
 }
 
+oo::define ::PCGameInputMapping {
+    method initFields_PCGameInputMapping {} {
+        return
+    }
+    
 
-# throws Exception
-sub init {
-    my ($self, $abeClientInformation) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{INIT});
-        'org::allbinary::game::input::PCKeyFactory'->getInstance();
-        $self->SUPER::init($abeClientInformation);
-        if ($self->getTotalMapped() == 0 || $self->isDefaultNew()) {
-            $self->getInputMapping()->addMapping($self->getDefault());
-            $self->save($abeClientInformation);
+    constructor {} {
+        next [[::GamePersistanceStrings::getInstance] jget SAVED_INPUT_CONFIGURATION_RECORD_ID]
+        my initFields_PCGameInputMapping
+    }
+    
+
+    method init {abeClientInformation} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget INIT]
+        ::PCKeyFactory::getInstance
+        next $abeClientInformation
+        if {[expr {[expr {[my getTotalMapped] == 0}] || [my isDefaultNew]}]} {
+            [my getInputMapping] addMapping [my getDefault]
+            my save $abeClientInformation
         }
-}
+    }
+    
 
-
-sub isDelete {
-    my ($self, $input) = @_;
-        if ($input == 'org::allbinary::game::input::PCKeyFactory'->getInstance()->{DEL}) {
-            return 1;
+    method isDelete {input} {
+        if {[expr {$input eq [[::PCKeyFactory::getInstance] jget DEL]}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
+    
+
+    method isSystemInput {input} {
+        return false
+    }
 }
 
-
-sub isSystemInput {
-    my ($self, $input) = @_;
-        return 0;
+namespace eval ::PCGameInputMapping {
 }
 
-use java::lang::Object ();
-use org::allbinary::game::configuration::persistance::GamePersistanceStrings ();
-use org::allbinary::game::input::mapping::PersistentInputMapping ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::game::input::PCKeyFactory ();
-
-1;
 

@@ -11,69 +11,61 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::HighScoresHelper2;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::score::HighScoresHelperBase';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstanceAt(0, 0);
-    $self->{selectedHighScores} = 'org::allbinary::game::score::NullHighScoresSingletonFactory'->getInstance();
+oo::class create ::HighScoresHelper2 {
+    superclass ::HighScoresHelperBase
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+oo::define ::HighScoresHelper2 {
+    method initFields_HighScoresHelper2 {} {
+        my jset circularIndexUtil {}
+        my jset selectedHighScores {}
+        my jset circularIndexUtil [::CircularIndexUtil::createInstanceAt 0 0]
+        my jset selectedHighScores [::NullHighScoresSingletonFactory::getInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_HighScoresHelper2
+    }
+    
 
-sub setSelectedHighScores {
-    my ($self, $selectedHighScores) = @_;
-        $self->{selectedHighScores} = $selectedHighScores;
-}
+    method setSelectedHighScores {selectedHighScores} {
+        my jset selectedHighScores $selectedHighScores
+    }
+    
 
+    method getSelectedHighScores {} {
+        return [my jget selectedHighScores]
+    }
+    
 
-sub getSelectedHighScores {
-    my ($self) = @_;
-        return $self->{selectedHighScores};
-}
+    method setHighScoresArray {highScoresArrayP} {
+        next $highScoresArrayP
+        [my jget circularIndexUtil] setSize [[my jget highScoresArrayP] length]
+        my selectHighScores
+    }
+    
 
-
-sub setHighScoresArray {
-    my ($self, $highScoresArrayP) = @_;
-        $self->SUPER::setHighScoresArray($highScoresArrayP);
-        $self->{circularIndexUtil}->setSize(scalar(@{$self->{highScoresArrayP}}));
-        $self->selectHighScores();
-}
-
-
-sub selectHighScores {
-    my ($self) = @_;
-        if (scalar(@{$self->{highScoresArrayP}}) == 0) {
-            $self->setSelectedHighScores('org::allbinary::game::score::NullHighScoresSingletonFactory'->getInstance());
-            return;
+    method selectHighScores {} {
+        if {[expr {[[my jget highScoresArrayP] length] == 0}]} {
+            my setSelectedHighScores [::NullHighScoresSingletonFactory::getInstance]
+            return
         }
-        $self->{circularIndexUtil}->next();
-        my $highScores = $self->{highScoresArrayP}->[$self->{circularIndexUtil}->getIndex()];
-        my $index = 0;
-        while ($highScores->getTotal() < 1 && $index < scalar(@{$self->{highScoresArrayP}})) {
-            $highScores = $self->{highScoresArrayP}->[$self->{circularIndexUtil}->next()];
-            $index++;
+        [my jget circularIndexUtil] next
+        set highScores [[my jget highScoresArrayP] get [[my jget circularIndexUtil] getIndex]]
+        set index 0
+        while {[expr {[expr {[$highScores getTotal] < 1}] && [expr {$index < [[my jget highScoresArrayP] length]}]}]} {
+            set highScores [[my jget highScoresArrayP] get [[my jget circularIndexUtil] next]]
+            jpostincr index 1
         }
-        $self->setSelectedHighScores($highScores);
+        my setSelectedHighScores $highScores
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::util::CircularIndexUtil ();
-use org::allbinary::game::score::HighScoresHelperBase ();
-use org::allbinary::game::score::NullHighScoresSingletonFactory ();
+namespace eval ::HighScoresHelper2 {
+}
 
-1;
 

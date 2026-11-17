@@ -11,74 +11,61 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::RightToLeftImageAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::image::ImageSegmentAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{startWidth} = 0;
-    $self->{currentWidth} = 0;
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
+oo::class create ::RightToLeftImageAnimation {
+    superclass ::ImageSegmentAnimation
 }
 
+oo::define ::RightToLeftImageAnimation {
+    method initFields_RightToLeftImageAnimation {} {
+        my jset startWidth 0
+        my jset currentWidth 0
+        my jset anchor 0
+        my jset startWidth 0
+        my jset currentWidth 0
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        return
+    }
+    
 
-sub new {
-    my ($class, $image, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->setFrame($self->getSize() - 1);
-    return $self;
+    constructor {image animationBehavior} {
+        next $image [::PrimitiveIntUtil::getArrayInstance] $animationBehavior
+        my initFields_RightToLeftImageAnimation
+        my setFrame [expr {[my getSize] - 1}]
+    }
+    
+
+    method nextFrame {} {
+        next
+        my update
+    }
+    
+
+    method previousFrame {} {
+        next
+        my update
+    }
+    
+
+    method setFrame {index} {
+        next $index
+        my update
+    }
+    
+
+    method update {} {
+        my jset startWidth [expr {[expr {[my getDrawWidth] * [my getFrame]}] / [my getSize]}]
+        my jset currentWidth [expr {[my getDrawWidth] - [my jget startWidth]}]
+    }
+    
+
+    method paintXY {graphics x y} {
+        $graphics drawRegion [my getImage] [my jget startWidth] [my getStartY] [my jget currentWidth] [my getDrawHeight] [::Sprite::staticGet_TRANS_NONE] [jint [expr {$x + [my jget startWidth]}]] $y [my jget anchor]
+    }
 }
 
-
-sub nextFrame {
-    my ($self) = @_;
-        $self->SUPER::previousFrame();
-        $self->update();
+namespace eval ::RightToLeftImageAnimation {
 }
 
-
-sub previousFrame {
-    my ($self) = @_;
-        $self->SUPER::nextFrame();
-        $self->update();
-}
-
-
-sub setFrame {
-    my ($self, $index) = @_;
-        $self->SUPER::setFrame($index);
-        $self->update();
-}
-
-
-sub update {
-    my ($self) = @_;
-        $self->{startWidth} = $self->getDrawWidth() * $self->getFrame() / $self->getSize();
-        $self->{currentWidth} = $self->getDrawWidth() - $self->{startWidth};
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $graphics->drawRegion($self->getImage(), $self->{startWidth}, $self->getStartY(), $self->{currentWidth}, $self->getDrawHeight(), $javax::microedition::lcdui::game::Sprite::TRANS_NONE, $x + $self->{startWidth}, $y, $self->{anchor});
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::game::Sprite ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::animation::image::ImageSegmentAnimation ();
-
-1;
 

@@ -11,44 +11,51 @@
 # Created By: Travis Berthelot
 # 
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.screen
 
-package org::allbinary::graphics::displayable::screen::AboutPaintableFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::displayable::screen::AboutPaintableFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{paintableArray} = ['org::allbinary::graphics::paint::NullPaintable'->getInstance()];
+oo::class create ::AboutPaintableFactory {
+    superclass ::JObject
 }
 
+oo::define ::AboutPaintableFactory {
+    method initFields_AboutPaintableFactory {} {
+        my jset paintableArray {}
+        my jset paintableArray [jarrayfrom [list [::NullPaintable::getInstance]]]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::displayable::screen::AboutPaintableFactory::instance;
+    constructor {} {
+        next
+        my initFields_AboutPaintableFactory
+        set INFO [jarrayfrom [list "Built with the" "AllBinary Platform" [[::StringUtil::getInstance] jget EMPTY_STRING] "Comments or Questions:" "support@allbinary.com"]]
+        set DEVELOPERS [jarrayfrom [list "Developed By:" "Travis Berthelot"]]
+        my jset paintableArray [[::AboutPaintable::getInstance $INFO $DEVELOPERS] getPaintableArrayInstance]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $INFO = ["Built with the", "AllBinary Platform", 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, "Comments or Questions:", "support\@allbinary.com"];
-        my $DEVELOPERS = ["Developed By:", "Travis Berthelot"];
-        $self->{paintableArray} = 'org::allbinary::game::paint::AboutPaintable'->getInstance($INFO, $DEVELOPERS)->getPaintableArrayInstance();
-    return $self;
+namespace eval ::AboutPaintableFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AboutPaintableFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AboutPaintableFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::paint::AboutPaintable ();
-use org::allbinary::graphics::paint::NullPaintable ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::logic::string::StringUtil ();
-
-1;
 

@@ -11,45 +11,55 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.screen
 
-package org::allbinary::graphics::displayable::screen::ScreenRepaintProcessorFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::displayable::screen::ScreenRepaintProcessorFactory'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::displayable::screen::ScreenRepaintProcessorFactory::instance;
+oo::class create ::ScreenRepaintProcessorFactory {
+    superclass ::JObject
 }
 
+oo::define ::ScreenRepaintProcessorFactory {
+    method initFields_ScreenRepaintProcessorFactory {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_ScreenRepaintProcessorFactory
+    }
+    
 
-
-sub create {
-    my ($self, $displayable) = @_;
-        if (!'org::allbinary::J2MEUtil'->isJ2ME()) {
-            return 'org::allbinary::graphics::displayable::screen::ScreenRepaintProcessor'->new($displayable);
+    method create {displayable} {
+        if {[expr {![::J2MEUtil::isJ2ME]}]} {
+            return [::ScreenRepaintProcessor new $displayable]
         } else {
-            return 'org::allbinary::canvas::Processor'->getInstance();
+            return [::Processor::getInstance]
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Displayable ();
-use org::allbinary::J2MEUtil ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::graphics::displayable::screen::ScreenRepaintProcessor ();
+namespace eval ::ScreenRepaintProcessorFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ScreenRepaintProcessorFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ScreenRepaintProcessorFactory::staticGet_instance]
+    }
+}
 
-1;
 

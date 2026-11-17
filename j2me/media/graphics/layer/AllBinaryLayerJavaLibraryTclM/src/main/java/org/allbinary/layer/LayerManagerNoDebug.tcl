@@ -11,31 +11,45 @@
 # Created By: Travis Berthelot
 # 
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-package org::allbinary::layer::LayerManagerNoDebug;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::LayerManagerLoggingBase';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::layer::LayerManagerNoDebug'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::LayerManagerNoDebug {
+    superclass ::LayerManagerLoggingBase
 }
 
+oo::define ::LayerManagerNoDebug {
+    method initFields_LayerManagerNoDebug {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::layer::LayerManagerNoDebug::instance;
+    constructor {} {
+        next
+        my initFields_LayerManagerNoDebug
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::layer::LayerManagerLoggingBase ();
+namespace eval ::LayerManagerNoDebug {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LayerManagerNoDebug new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LayerManagerNoDebug::staticGet_instance]
+    }
+}
 
-1;
 

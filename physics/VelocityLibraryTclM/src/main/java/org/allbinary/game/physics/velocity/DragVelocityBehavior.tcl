@@ -11,61 +11,73 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.physics.velocity
 
-package org::allbinary::game::physics::velocity::DragVelocityBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::physics::velocity::VelocityBehaviorBase';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::physics::velocity::DragVelocityBehavior'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::DragVelocityBehavior {
+    superclass ::VelocityBehaviorBase
 }
 
+oo::define ::DragVelocityBehavior {
+    method initFields_DragVelocityBehavior {} {
+        return
+    }
 
-sub reduce {
-    my ($self, $velocityProperties, $nominator, $denominator) = @_;
-        if ($velocityProperties->getVelocityXBasicDecimalP()->getUnscaled() != 0) {
-            my $basicDecimal = $velocityProperties->getVelocityXBasicDecimalP();
-            $basicDecimal->multiplyint($nominator);
-            $basicDecimal->divideint($denominator);
+    constructor {} {
+        next
+        my initFields_DragVelocityBehavior
+    }
+    
+
+    method reduce {velocityProperties nominator denominator} {
+        if {[expr {[[$velocityProperties getVelocityXBasicDecimalP] getUnscaled] != 0}]} {
+            set basicDecimal [$velocityProperties getVelocityXBasicDecimalP]
+            $basicDecimal multiplyint $nominator
+            $basicDecimal divideint $denominator
         }
-        if ($velocityProperties->getVelocityYBasicDecimalP()->getUnscaled() != 0) {
-            my $basicDecimal = $velocityProperties->getVelocityYBasicDecimalP();
-            $basicDecimal->multiplyint($nominator);
-            $basicDecimal->divideint($denominator);
+        if {[expr {[[$velocityProperties getVelocityYBasicDecimalP] getUnscaled] != 0}]} {
+            set basicDecimal [$velocityProperties getVelocityYBasicDecimalP]
+            $basicDecimal multiplyint $nominator
+            $basicDecimal divideint $denominator
         }
+    }
+    
+
+    method reduceX {velocityProperties nominator denominator} {
+        set basicDecimal [$velocityProperties getVelocityXBasicDecimalP]
+        if {[expr {[$basicDecimal getUnscaled] != 0}]} {
+            $basicDecimal multiplyint $nominator
+            $basicDecimal divideint $denominator
+        }
+    }
+    
+
+    method reduceY {velocityProperties nominator denominator} {
+        if {[expr {[[$velocityProperties getVelocityYBasicDecimalP] getUnscaled] != 0}]} {
+            set basicDecimal [$velocityProperties getVelocityYBasicDecimalP]
+            $basicDecimal multiplyint $nominator
+            $basicDecimal divideint $denominator
+        }
+    }
 }
 
-
-sub reduceX {
-    my ($self, $velocityProperties, $nominator, $denominator) = @_;
-        my $basicDecimal = $velocityProperties->getVelocityXBasicDecimalP();
-        if ($basicDecimal->getUnscaled() != 0) {
-            $basicDecimal->multiplyint($nominator);
-            $basicDecimal->divideint($denominator);
+namespace eval ::DragVelocityBehavior {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::DragVelocityBehavior new]
         }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
 }
 
-
-sub reduceY {
-    my ($self, $velocityProperties, $nominator, $denominator) = @_;
-        if ($velocityProperties->getVelocityYBasicDecimalP()->getUnscaled() != 0) {
-            my $basicDecimal = $velocityProperties->getVelocityYBasicDecimalP();
-            $basicDecimal->multiplyint($nominator);
-            $basicDecimal->divideint($denominator);
-        }
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::math::BasicDecimal ();
-use org::allbinary::game::physics::velocity::VelocityBehaviorBase ();
-
-1;
 

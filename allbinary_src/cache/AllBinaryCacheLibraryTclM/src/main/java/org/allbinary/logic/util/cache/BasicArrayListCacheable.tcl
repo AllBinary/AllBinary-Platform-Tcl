@@ -11,31 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-package org::allbinary::logic::util::cache::BasicArrayListCacheable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::util::BasicArrayListD','org::allbinary::logic::util::cache::CacheableInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::BasicArrayListCacheable {
+    superclass ::BasicArrayListD
 }
 
+oo::define ::BasicArrayListCacheable {
+    method initFields_BasicArrayListCacheable {} {
+        return
+    }
 
-sub getKey {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+    constructor {} {
+        next
+        my initFields_BasicArrayListCacheable
+    }
+    
+
+    method getKey {} {
+        return [[::StringUtil::getInstance] jget EMPTY_STRING]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::logic::util::cache::CacheableInterface ();
+namespace eval ::BasicArrayListCacheable {
+}
 
-1;
 

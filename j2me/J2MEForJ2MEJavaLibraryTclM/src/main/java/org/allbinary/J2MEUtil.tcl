@@ -11,41 +11,37 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary
 
-package org::allbinary::J2MEUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::J2MEUtil {
+    superclass ::JObject
 }
 
+oo::define ::J2MEUtil {
+    method initFields_J2MEUtil {} {
+        return
+    }
+    
 
-sub isJ2ME {
-    my ($class) = @_;
-        return 1;
+    constructor {} {
+        next
+        my initFields_J2MEUtil
+    }
+    
+    
+    
 }
 
-
-sub isJ2SE {
-    my ($class) = @_;
-        return 0;
+namespace eval ::J2MEUtil {
+    proc isJ2ME {} {
+        return true
+    }
+    proc isJ2SE {} {
+        return false
+    }
+    proc isHTML {} {
+        return false
+    }
 }
 
-
-sub isHTML {
-    my ($class) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-
-1;
 

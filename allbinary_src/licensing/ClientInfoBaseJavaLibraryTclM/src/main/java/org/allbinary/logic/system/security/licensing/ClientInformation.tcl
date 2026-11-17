@@ -11,196 +11,170 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
 # This is the information sent to the license server
-package org::allbinary::logic::system::security::licensing::ClientInformation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::logic::system::security::licensing::AbeClientInformationInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{operatingSystemInterface} = $org::allbinary::logic::system::os::NoOperatingSystem::NO_OPERATING_SYSTEM;
-    $self->{tsUtil} = 'org::allbinary::TsUtil'->getInstance();
-    $self->{name} = undef;
-    $self->{shortName} = undef;
-    $self->{version} = undef;
-    $self->{specialName} = undef;
-    $self->{hardSale} = 1;
-    $self->{licenseId} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{licenseServers} = 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance();
+oo::class create ::ClientInformation {
+    superclass ::JObject
 }
 
+oo::define ::ClientInformation {
+    method initFields_ClientInformation {} {
+        my jset operatingSystemInterface {}
+        my jset tsUtil {}
+        my jset name {}
+        my jset shortName {}
+        my jset version {}
+        my jset specialName {}
+        my jset hardSale false
+        my jset licenseId {}
+        my jset licenseServers {}
+        my jset operatingSystemInterface [::NoOperatingSystem::staticGet_NO_OPERATING_SYSTEM]
+        my jset tsUtil [::TsUtil::getInstance]
+        
+        
+        
+        
+        my jset hardSale true
+        my jset licenseId [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset licenseServers [[::BasicArrayListUtil::getInstance] getImmutableInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $version, $specialName, $shortName) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{name} = $name;
-        $self->{version} = $version;
-        $self->{specialName} = $specialName;
-        $self->{shortName} = 'org::allbinary::logic::string::StringMaker'->new()->append($shortName)->append('org::allbinary::string::CommonSeps'->getInstance()->{UNDERSCORE})->append($version)->toString();
-        $self->init();
-    return $self;
-}
+    constructor {name version specialName shortName} {
+        next
+        my initFields_ClientInformation
+        my jset name $name
+        my jset version $version
+        my jset specialName $specialName
+        my jset shortName [[[[[::StringMaker new] append $shortName] append [[::CommonSeps::getInstance] jget UNDERSCORE]] append $version] toString]
+        my init
+    }
+    
 
+    method init {} {
+    }
+    
 
-sub init {
-    my ($self) = @_;
-}
+    method getOperatingSystemInterface {} {
+        return [my jget operatingSystemInterface]
+    }
+    
 
+    method getName {} {
+        return [my jget name]
+    }
+    
 
-sub getOperatingSystemInterface {
-    my ($self) = @_;
-        return $self->{operatingSystemInterface};
-}
+    method getSpecialName {} {
+        return [my jget specialName]
+    }
+    
 
+    method getVersion {} {
+        return [my jget version]
+    }
+    
 
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
-}
+    method getLicenseId {} {
+        return [my jget licenseId]
+    }
+    
 
+    method getLicenseServers {} {
+        return [my jget licenseServers]
+    }
+    
 
-sub getSpecialName {
-    my ($self) = @_;
-        return $self->{specialName};
-}
+    method getLicenseServer {index} {
+        return [[[my jget licenseServers] jget objectArray] get $index]
+    }
+    
 
+    method getNumberOfLicenseServers {} {
+        return [[my jget licenseServers] size]
+    }
+    
 
-sub getVersion {
-    my ($self) = @_;
-        return $self->{version};
-}
+    method toHashtable {} {
+        set abeClientInformationData [::AbeClientInformationData::getInstance]
+        set genericOperatingSystem [my getOperatingSystemInterface]
+        set clientInfoHashtable [[::StdUtil::getInstance] createHashtable]
+        $clientInfoHashtable put [$abeClientInformationData jget NAME] [my jget name]
+        $clientInfoHashtable put [$abeClientInformationData jget VERSION] [my jget version]
+        $clientInfoHashtable put [$abeClientInformationData jget SPECIALNAME] [my jget specialName]
+        $clientInfoHashtable put [$abeClientInformationData jget LICENSEID] [my getLicenseId]
+        $clientInfoHashtable put [$abeClientInformationData jget OSNAME] [$genericOperatingSystem getName]
+        $clientInfoHashtable put [$abeClientInformationData jget OSARCH] [$genericOperatingSystem getArch]
+        $clientInfoHashtable put [$abeClientInformationData jget OSVERSION] [$genericOperatingSystem getVersion]
+        $clientInfoHashtable put [$abeClientInformationData jget OS] [$genericOperatingSystem toString]
+        set hardwareInterface [[::SystemHardwareFactory::getInstance] getInstance $genericOperatingSystem]
+        set hardwareString [$hardwareInterface toString]
+        $clientInfoHashtable put [$abeClientInformationData jget HARDWARE] $hardwareString
+        return $clientInfoHashtable
+    }
+    
 
-
-sub getLicenseId {
-    my ($self) = @_;
-        return $self->{licenseId};
-}
-
-
-sub getLicenseServers {
-    my ($self) = @_;
-        return $self->{licenseServers};
-}
-
-
-sub getLicenseServer {
-    my ($self, $index) = @_;
-        return $self->{licenseServers}->{objectArray}->[$index];
-}
-
-
-sub getNumberOfLicenseServers {
-    my ($self) = @_;
-        return $self->{licenseServers}->size();
-}
-
-
-sub toHashtable {
-    my ($self) = @_;
-        my $abeClientInformationData = 'org::allbinary::logic::system::security::licensing::AbeClientInformationData'->getInstance();
-        my $genericOperatingSystem = $self->getOperatingSystemInterface();
-        my $clientInfoHashtable = 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable();
-        $clientInfoHashtable->put($abeClientInformationData->{NAME}, $self->{name});
-        $clientInfoHashtable->put($abeClientInformationData->{VERSION}, $self->{version});
-        $clientInfoHashtable->put($abeClientInformationData->{SPECIALNAME}, $self->{specialName});
-        $clientInfoHashtable->put($abeClientInformationData->{LICENSEID}, $self->getLicenseId());
-        $clientInfoHashtable->put($abeClientInformationData->{OSNAME}, $genericOperatingSystem->getName());
-        $clientInfoHashtable->put($abeClientInformationData->{OSARCH}, $genericOperatingSystem->getArch());
-        $clientInfoHashtable->put($abeClientInformationData->{OSVERSION}, $genericOperatingSystem->getVersion());
-        $clientInfoHashtable->put($abeClientInformationData->{OS}, $genericOperatingSystem->toString());
-        my $hardwareInterface = 'org::allbinary::logic::system::hardware::SystemHardwareFactory'->getInstance()->getInstance($genericOperatingSystem);
-        my $hardwareString = $hardwareInterface->toString();
-        $clientInfoHashtable->put($abeClientInformationData->{HARDWARE}, $hardwareString);
-        return $clientInfoHashtable;
-}
-
-
-sub isSameId {
-    my ($self, $alicenseId) = @_;
-        if ($self->{tsUtil}->compareTo($self->getLicenseId(), $alicenseId) == 0) {
-            return 1;
+    method isSameId {alicenseId} {
+        if {[expr {[[my jget tsUtil] compareTo [my getLicenseId] $alicenseId] == 0}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
-}
+    }
+    
 
-
-sub isLargerOrDifferentServerList {
-    my ($self, $list) = @_;
-        my $size = $list->size() - 1;
-        my $currentSize = $self->{licenseServers}->size() - 1;
-        if ($size > $currentSize) {
-            return 1;
+    method isLargerOrDifferentServerList {list} {
+        set size [jint [expr {[$list size] - 1}]]
+        set currentSize [jint [expr {[[my jget licenseServers] size] - 1}]]
+        if {[expr {$size > $currentSize}]} {
+            return true
         }
-        for (my $index = $size; $index >= 0; $index--) {
-            my $newServerName = $list->{objectArray}->[$index];
-            for (my $index2 = $currentSize; $index2 >= 0; $index2--) {
-                my $nextOldServerName = $self->{licenseServers}->{objectArray}->[$index];
-                if ($self->{tsUtil}->compareTo($newServerName, $nextOldServerName) != 0) {
-                    return 1;
+        for {set index $size} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set newServerName [[$list jget objectArray] get $index]
+            for {set index2 $currentSize} {[expr {$index2 >= 0}]} {jpostincr index2 -1} {
+                set nextOldServerName [[[my jget licenseServers] jget objectArray] get $index]
+                if {[expr {[[my jget tsUtil] compareTo $newServerName $nextOldServerName] != 0}]} {
+                    return true
                 }
             }
         }
-        return 0;
+        return false
+    }
+    
+
+    method setHardSale {hardSale} {
+        my jset hardSale $hardSale
+    }
+    
+
+    method isHardSale {} {
+        return [my jget hardSale]
+    }
+    
+
+    method setOperatingSystemInterface {operatingSystemInterface} {
+        my jset operatingSystemInterface $operatingSystemInterface
+    }
+    
+
+    method setLicenseId {licenseId} {
+        my jset licenseId $licenseId
+    }
+    
+
+    method setLicenseServers {licenseServers} {
+        my jset licenseServers $licenseServers
+    }
+    
+
+    method toShortString {} {
+        return [my jget shortName]
+    }
 }
 
-
-sub setHardSale {
-    my ($self, $hardSale) = @_;
-        $self->{hardSale} = $hardSale;
+namespace eval ::ClientInformation {
 }
 
-
-sub isHardSale {
-    my ($self) = @_;
-        return $self->{hardSale};
-}
-
-
-sub setOperatingSystemInterface {
-    my ($self, $operatingSystemInterface) = @_;
-        $self->{operatingSystemInterface} = $operatingSystemInterface;
-}
-
-
-sub setLicenseId {
-    my ($self, $licenseId) = @_;
-        $self->{licenseId} = $licenseId;
-}
-
-
-sub setLicenseServers {
-    my ($self, $licenseServers) = @_;
-        $self->{licenseServers} = $licenseServers;
-}
-
-
-sub toShortString {
-    my ($self) = @_;
-        return $self->{shortName};
-}
-
-use java::lang::Object ();
-use org::allbinary::TsUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::system::hardware::HardwareInterface ();
-use org::allbinary::logic::system::hardware::SystemHardwareFactory ();
-use org::allbinary::logic::system::os::GenericOperatingSystem ();
-use org::allbinary::logic::system::os::NoOperatingSystem ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListUtil ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationData ();
-
-1;
 

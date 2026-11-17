@@ -11,147 +11,145 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-package org::allbinary::layer::Layer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $ID, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt(0) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{x} = 0;
-    $self->{y} = 0;
-    $self->{z} = 3;
-    $self->{width} = 0;
-    $self->{height} = 0;
-    $self->{visible} = 1;
+oo::class create ::Layer {
+    superclass ::JObject
 }
 
+oo::define ::Layer {
+    method initFields_Layer {} {
+        my jset logUtil {}
+        my jset x 0
+        my jset y 0
+        my jset z 0
+        my jset width 0
+        my jset height 0
+        my jset visible false
+        my jset logUtil [::LogUtil::getInstance]
+        my jset x 0
+        my jset y 0
+        my jset z 3
+        my jset width 0
+        my jset height 0
+        my jset visible true
+        return
+    }
+    
 
-sub new {
-    my ($class, $width, $height) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->setLayerWidth($width);
-        $self->setLayerHeight($height);
-    return $self;
-}
+    constructor {width height} {
+        next
+        my initFields_Layer
+        my setLayerWidth $width
+        my setLayerHeight $height
+    }
+    
 
+    method setPosition {x y z} {
+        my jset x $x
+        my jset y $y
+        my jset z $z
+    }
+    
 
-sub setPosition {
-    my ($self, $x, $y, $z) = @_;
-        $self->{x} = $x;
-        $self->{y} = $y;
-        $self->{z} = $z;
-}
+    method moveDXY {dx dy} {
+        my jset x [jint [expr {[my jget x] + $dx}]]
+        my jset y [jint [expr {[my jget y] + $dy}]]
+    }
+    
 
+    method moveDXYZ {dx dy dz} {
+        my jset x [jint [expr {[my jget x] + $dx}]]
+        my jset y [jint [expr {[my jget y] + $dy}]]
+        my jset z [jint [expr {[my jget z] + $dz}]]
+    }
+    
 
-sub moveDXY {
-    my ($self, $dx, $dy) = @_;
-        $self->{x} += $dx;
-        $self->{y} += $dy;
-}
+    method getXP {} {
+        return [my jget x]
+    }
+    
 
+    method getYP {} {
+        return [my jget y]
+    }
+    
 
-sub moveDXYZ {
-    my ($self, $dx, $dy, $dz) = @_;
-        $self->{x} += $dx;
-        $self->{y} += $dy;
-        $self->{z} += $dz;
-}
+    method getZP {} {
+        return [my jget z]
+    }
+    
 
+    method getWidth {} {
+        return [my jget width]
+    }
+    
 
-sub getXP {
-    my ($self) = @_;
-        return $self->{x};
-}
+    method getHeight {} {
+        return [my jget height]
+    }
+    
 
+    method getDepth {} {
+        return 0
+    }
+    
 
-sub getYP {
-    my ($self) = @_;
-        return $self->{y};
-}
+    method setVisible {visible} {
+        my jset visible $visible
+    }
+    
 
+    method isVisible {} {
+        return [my jget visible]
+    }
+    
 
-sub getZP {
-    my ($self) = @_;
-        return $self->{z};
-}
+    method paint {graphics} {
+        set commonStrings [::CommonStrings::getInstance]
+        set canvasStrings [::CanvasStrings::getInstance]
+        [my jget logUtil] putF [$commonStrings jget NOT_IMPLEMENTED] [self] [$canvasStrings jget PAINT]
+    }
+    
 
-
-sub getWidth {
-    my ($self) = @_;
-        return $self->{width};
-}
-
-
-sub getHeight {
-    my ($self) = @_;
-        return $self->{height};
-}
-
-
-sub getDepth {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub setVisible {
-    my ($self, $visible) = @_;
-        $self->{visible} = $visible;
-}
-
-
-sub isVisible {
-    my ($self) = @_;
-        return $self->{visible};
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-        my $canvasStrings = 'org::allbinary::graphics::displayable::CanvasStrings'->getInstance();
-        $self->{logUtil}->putF($commonStrings->{NOT_IMPLEMENTED}, $self, $canvasStrings->{PAINT});
-}
-
-
-sub setLayerWidth {
-    my ($self, $width) = @_;
-        if ($width < 0) {
-            die ("IllegalArgumentException");
+    method setLayerWidth {width} {
+        if {[expr {$width < 0}]} {
+            error [jexception IllegalArgumentException {}]
         }
-        $self->{width} = $width;
-}
+        my jset width $width
+    }
+    
 
-
-sub setLayerHeight {
-    my ($self, $height) = @_;
-        if ($height < 0) {
-            die ("IllegalArgumentException");
+    method setLayerHeight {height} {
+        if {[expr {$height < 0}]} {
+            error [jexception IllegalArgumentException {}]
         }
-        $self->{height} = $height;
+        my jset height $height
+    }
+    
+
+    method toStringAppend {stringBuffer} {
+    }
 }
 
-
-sub toStringAppend {
-    my ($self, $stringBuffer) = @_;
+namespace eval ::Layer {
+    variable IDValue {}
+    variable IDSet 0
+    proc staticGet_ID {} {
+        variable IDValue
+        variable IDSet
+        if {!$IDSet} {
+            set IDSet 1
+            set IDValue [[::SmallIntegerSingletonFactory::getInstance] getAt 0]
+        }
+        return $IDValue
+    }
+    proc staticSet_ID {value} {
+        variable IDValue
+        variable IDSet
+        set IDSet 1
+        set IDValue $value
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::displayable::CanvasStrings ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

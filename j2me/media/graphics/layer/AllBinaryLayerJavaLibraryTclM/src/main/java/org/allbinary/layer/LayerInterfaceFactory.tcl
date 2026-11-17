@@ -11,70 +11,70 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-package org::allbinary::layer::LayerInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::layer::LayerInterfaceFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{list} = 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance();
-    $self->{HASHTABLE_LABEL} = "Hashtable: ";
+oo::class create ::LayerInterfaceFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::LayerInterfaceFactory {
+    method initFields_LayerInterfaceFactory {} {
+        my jset logUtil {}
+        my jset list {}
+        my jset HASHTABLE_LABEL {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset list [[::BasicArrayListUtil::getInstance] getImmutableInstance]
+        my jset HASHTABLE_LABEL "Hashtable: "
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_LayerInterfaceFactory
+    }
+    
+    
+
+    method init {} {
+        my jset list [::BasicArrayListD new]
+    }
+    
+
+    method getNexInstance {hashtable x y z} {
+        set commonStrings [::CommonStrings::getInstance]
+        [my jget logUtil] putF [[[[::StringMaker new] append [my jget HASHTABLE_LABEL]] append [[::StringUtil::getInstance] toString1 $hashtable]] toString] [self] [$commonStrings jget GET_INSTANCE]
+        set typeInteger [$hashtable get [::Layer::staticGet_ID]]
+        set layerInterfaceFactoryInterface [[[my jget list] jget objectArray] get [expr {[$typeInteger intValue] - 1}]]
+        return [$layerInterfaceFactoryInterface getNextInstance $hashtable $x $y $z]
+    }
+    
+
+    method add {layerInterfaceFactoryInterface} {
+        [my jget list] add $layerInterfaceFactoryInterface
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::layer::LayerInterfaceFactory::SINGLETON;
+namespace eval ::LayerInterfaceFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::LayerInterfaceFactory new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::LayerInterfaceFactory::staticGet_SINGLETON]
+    }
 }
 
-
-sub init {
-    my ($self) = @_;
-        $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
-}
-
-
-# throws Exception
-sub getNexInstance {
-    my ($self, $hashtable, $x, $y, $z) = @_;
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{HASHTABLE_LABEL})->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($hashtable))->toString(), $self, $commonStrings->{GET_INSTANCE});
-        my $typeInteger = $hashtable->get($org::allbinary::layer::Layer::ID);
-        my $layerInterfaceFactoryInterface = $self->{list}->{objectArray}->[int($typeInteger) - 1];
-        return $layerInterfaceFactoryInterface->getNextInstance($hashtable, $x, $y, $z);
-}
-
-
-sub add {
-    my ($self, $layerInterfaceFactoryInterface) = @_;
-        $self->{list}->add($layerInterfaceFactoryInterface);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::util::BasicArrayListUtil ();
-use org::allbinary::layer::Layer ();
-
-1;
 

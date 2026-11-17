@@ -11,62 +11,64 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.data
 
-package org::allbinary::data::CamelCaseUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::data::CamelCaseUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonSeps} = 'org::allbinary::string::CommonSeps'->getInstance();
+oo::class create ::CamelCaseUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::CamelCaseUtil {
+    method initFields_CamelCaseUtil {} {
+        my jset commonSeps {}
+        my jset commonSeps [::CommonSeps::getInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_CamelCaseUtil
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::data::CamelCaseUtil::instance;
-}
-
-
-# throws Exception
-sub getAsCamelCase {
-    my ($self, $string, $stringBuilder) = @_;
-        my $stringValidationUtil = 'org::allbinary::logic::string::StringValidationUtil'->getInstance();
-        $stringBuilder->delete(0, $stringBuilder->length());
-        my $list = 'org::allbinary::util::BasicArrayListD'->new();
-        my $tokenizer = 'org::allbinary::logic::string::tokens::Tokenizer'->new($self->{commonSeps}->{UNDERSCORE});
-        $tokenizer->getTokensFromString($string, $list);
-        my $size = $list->size();
-        my $word = undef;
-        for (my $i = 0; $i < $size; $i++) {
-            $word = $list->get($i);
-            $word = ($stringValidationUtil->isEmpty($word) ? $word : 'org::allbinary::logic::string::StringMaker'->new()->appendchar(uc(substr($word, 0, 1)))->append(lc(substr($word, 1)))->toString());
-            $stringBuilder->append($word);
+    method getAsCamelCase {string stringBuilder} {
+        set stringValidationUtil [::StringValidationUtil::getInstance]
+        $stringBuilder delete 0 [$stringBuilder length]
+        set list [::BasicArrayListD new]
+        set tokenizer [::Tokenizer new [[my jget commonSeps] jget UNDERSCORE]]
+        $tokenizer getTokensFromString $string $list
+        set size [$list size]
+        set word {}
+        for {set i 0} {[expr {$i < $size}]} {jpostincr i 1} {
+            set word [$list get $i]
+            set word [expr {[$stringValidationUtil isEmpty $word] ? $word : [[[[::StringMaker new] appendchar [::Character::toUpperCase [scan [string index $word 0] %c]]] append [string tolower [jsubstring $word 1]]] toString]}]
+            $stringBuilder append $word
         }
-        return $stringBuilder->toString();
+        return [$stringBuilder toString]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::string::StringValidationUtil ();
-use org::allbinary::logic::string::tokens::Tokenizer ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
+namespace eval ::CamelCaseUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::CamelCaseUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::CamelCaseUtil::staticGet_instance]
+    }
+}
 
-1;
 

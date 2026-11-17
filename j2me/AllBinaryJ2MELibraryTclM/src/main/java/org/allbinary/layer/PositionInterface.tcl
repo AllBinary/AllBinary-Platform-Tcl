@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-# Java interface
-package org::allbinary::layer::PositionInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub setPosition {
-    my ($self, $x, $y, $z) = @_;
-    die "abstract method setPosition";
+oo::class create ::PositionInterface {
+    superclass ::JObject
 }
 
+oo::define ::PositionInterface {
+    method initFields_PositionInterface {} {
+        return
+    }
+    
 
-1;
+    method setPosition {x y z} {
+        error [jexception AbstractMethodError setPosition]
+    }
+}
+
+namespace eval ::PositionInterface {
+}
+
 

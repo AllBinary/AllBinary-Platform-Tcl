@@ -11,59 +11,68 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.debug
 
-package org::allbinary::debug::NoDebug;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::debug::DebugInterface';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::debug::NoDebug'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NoDebug {
+    superclass ::JObject
 }
 
+oo::define ::NoDebug {
+    method initFields_NoDebug {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::debug::NoDebug::SINGLETON;
+    constructor {} {
+        next
+        my initFields_NoDebug
+    }
+    
+    
+
+    method start {} {
+    }
+    
+
+    method stop {} {
+    }
+    
+
+    method getMaxTime {} {
+        return 10000
+    }
+    
+
+    method getStartTime {} {
+        return 0
+    }
+    
+
+    method isRunning {} {
+        return false
+    }
 }
 
-
-sub start {
-    my ($self) = @_;
+namespace eval ::NoDebug {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::NoDebug new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::NoDebug::staticGet_SINGLETON]
+    }
 }
 
-
-sub stop {
-    my ($self) = @_;
-}
-
-
-sub getMaxTime {
-    my ($self) = @_;
-        return 10000;
-}
-
-
-sub getStartTime {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub isRunning {
-    my ($self) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::debug::DebugInterface ();
-
-1;
 

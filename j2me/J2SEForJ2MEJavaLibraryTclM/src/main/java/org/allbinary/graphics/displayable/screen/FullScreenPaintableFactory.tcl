@@ -11,38 +11,47 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.screen
 
-package org::allbinary::graphics::displayable::screen::FullScreenPaintableFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::displayable::screen::FullScreenPaintableFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{paintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
+oo::class create ::FullScreenPaintableFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::FullScreenPaintableFactory {
+    method initFields_FullScreenPaintableFactory {} {
+        my jset paintable {}
+        my jset paintable [::NullPaintable::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_FullScreenPaintableFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::displayable::screen::FullScreenPaintableFactory::instance;
+namespace eval ::FullScreenPaintableFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::FullScreenPaintableFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::FullScreenPaintableFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::paint::NullPaintable ();
-use org::allbinary::graphics::paint::Paintable ();
-
-1;
 

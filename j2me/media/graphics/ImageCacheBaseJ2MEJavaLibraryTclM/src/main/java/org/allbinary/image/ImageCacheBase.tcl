@@ -11,168 +11,147 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.image
 
-package org::allbinary::image::ImageCacheBase;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{imageFactory} = 'org::allbinary::image::ImageFactory'->getInstance();
-    $self->{hashtable} = 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable();
-    $self->{SIZE} = 128;
-    $self->{widths} = [(0) x ($self->{SIZE})];
-    $self->{heights} = [(0) x ($self->{SIZE})];
-    $self->{listOfList} = [(undef) x ($self->{SIZE})];
-    $self->{availableListOfList} = [(undef) x ($self->{SIZE})];
-    $self->{volume} = 0;
-    $self->{nextIndex} = 0;
+oo::class create ::ImageCacheBase {
+    superclass ::JObject
 }
 
+oo::define ::ImageCacheBase {
+    method initFields_ImageCacheBase {} {
+        my jset logUtil {}
+        my jset imageFactory {}
+        my jset hashtable {}
+        my jset SIZE 0
+        my jset widths {}
+        my jset heights {}
+        my jset listOfList {}
+        my jset availableListOfList {}
+        my jset volume 0
+        my jset nextIndex 0
+        my jset logUtil [::LogUtil::getInstance]
+        my jset imageFactory [::ImageFactory::getInstance]
+        my jset hashtable [[::StdUtil::getInstance] createHashtable]
+        my jset SIZE 128
+        my jset widths [jarray [my jget SIZE] 0]
+        my jset heights [jarray [my jget SIZE] 0]
+        my jset listOfList [jarray [my jget SIZE] {}]
+        my jset availableListOfList [jarray [my jget SIZE] {}]
+        my jset volume 0
+        my jset nextIndex 0
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        for (my $index = scalar(@{$self->{listOfList}}) - 1; $index >= 0; $index--) {
-            $self->{listOfList}->[$index] = 'org::allbinary::util::BasicArrayListD'->new();
+    constructor {} {
+        next
+        my initFields_ImageCacheBase
+        for {set index [jint [expr {[[my jget listOfList] length] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            [my jget listOfList] set $index [::BasicArrayListD new]
         }
-        for (my $index = scalar(@{$self->{availableListOfList}}) - 1; $index >= 0; $index--) {
-            $self->{availableListOfList}->[$index] = 'org::allbinary::util::BasicArrayListD'->new();
+        for {set index [jint [expr {[[my jget availableListOfList] length] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            [my jget availableListOfList] set $index [::BasicArrayListD new]
         }
-    return $self;
-}
+    }
+    
 
-
-sub getImage {
-    my ($self, $resourceId) = @_;
-        my $imageCanBeNull = $self->{hashtable}->get($resourceId);
-        if (!defined($imageCanBeNull)) {
-            return $javax::microedition::lcdui::NullImage::NULL_IMAGE;
+    method getImage {resourceId} {
+        set imageCanBeNull [[my jget hashtable] get $resourceId]
+        if {[expr {$imageCanBeNull eq {}}]} {
+            return [::NullImage::staticGet_NULL_IMAGE]
         }
-        return $imageCanBeNull;
-}
+        return $imageCanBeNull
+    }
+    
 
-
-sub releaseAll {
-    my ($self) = @_;
-        for (my $index = scalar(@{$self->{listOfList}}) - 1; $index >= 0; $index--) {
-            $self->{availableListOfList}->[$index]->clear();
-            $self->{availableListOfList}->[$index]->addAllList($self->{listOfList}->[$index]);
+    method releaseAll {} {
+        for {set index [jint [expr {[[my jget listOfList] length] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            [[my jget availableListOfList] get $index] clear
+            [[my jget availableListOfList] get $index] addAllList [[my jget listOfList] get $index]
         }
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("ImageCache: ")->append($self->toString())->toString(), $self, "releaseAll");
-}
+        [my jget logUtil] putF [[[[::StringMaker new] append "ImageCache: "] append [my toString]] toString] [self] "releaseAll"
+    }
+    
 
-
-sub getIndexWH {
-    my ($self, $width, $height) = @_;
-        my $foundIndex = -1;
-        my $size = scalar(@{$self->{widths}});
-        for (my $index = 0; $index < $size; $index++) {
-            if ($self->{widths}->[$index] == $width && $self->{heights}->[$index] == $height) {
-                $foundIndex = $index;
-                return $foundIndex;
+    method getIndexWH {width height} {
+        set foundIndex [expr {-1}]
+        set size [[my jget widths] length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            if {[expr {[expr {[[my jget widths] get $index] == $width}] && [expr {[[my jget heights] get $index] == $height}]}]} {
+                set foundIndex $index
+                return $foundIndex
             }
         }
-        return $foundIndex;
-}
+        return $foundIndex
+    }
+    
 
-
-sub getFromAvailable {
-    my ($self, $foundIndex, $width, $height) = @_;
-        if ($foundIndex != -1) {
-            if ($self->{availableListOfList}->[$foundIndex]->size() > 0) {
-                my $list = $self->{availableListOfList}->[$foundIndex];
-                return $list->removeAt($list->size() - 1);
+    method getFromAvailable {foundIndex width height} {
+        if {[expr {$foundIndex != [expr {-1}]}]} {
+            if {[expr {[[[my jget availableListOfList] get $foundIndex] size] > 0}]} {
+                set list [[my jget availableListOfList] get $foundIndex]
+                return [$list removeAt [jint [expr {[$list size] - 1}]]]
             }
         }
-        return $javax::microedition::lcdui::NullImage::NULL_IMAGE;
-}
+        return [::NullImage::staticGet_NULL_IMAGE]
+    }
+    
 
+    method get {caller width height} {
+        error [jexception RuntimeException {}]
+    }
+    
 
-# throws Exception
-sub get {
-    my ($self, $caller, $width, $height) = @_;
-        die ("RuntimeException");
-}
+    method getWithKey {key} {
+        error [jexception RuntimeException {}]
+    }
+    
 
+    method createImage {caller width height} {
+        return [[my jget imageFactory] createImage $caller $width $height]
+    }
+    
 
-# throws Exception
-sub getWithKey {
-    my ($self, $key) = @_;
-        die ("RuntimeException");
-}
+    method createImageFromInputStream {key inputStream} {
+        return [[my jget imageFactory] createImageFromInputStream $key $inputStream]
+    }
+    
 
-
-# throws Exception
-sub createImage {
-    my ($self, $caller, $width, $height) = @_;
-        return $self->{imageFactory}->createImage($caller, $width, $height);
-}
-
-
-# throws Exception
-sub createImageFromInputStream {
-    my ($self, $key, $inputStream) = @_;
-        return $self->{imageFactory}->createImageFromInputStream($key, $inputStream);
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        for (my $index = $self->{nextIndex} - 1; $index >= 0; $index--) {
-            my $width = $self->{widths}->[$index];
-            my $height = $self->{heights}->[$index];
-            my $total = $self->{listOfList}->[$index]->size();
-            my $totalAvailable = $self->{availableListOfList}->[$index]->size();
-            $stringBuffer->append(" w: ");
-            $stringBuffer->appendint($width);
-            $stringBuffer->append(" h: ");
-            $stringBuffer->appendint($height);
-            $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
-            $stringBuffer->append('org::allbinary::string::CommonLabels'->getInstance()->{TOTAL_LABEL});
-            $stringBuffer->appendint($total);
-            $stringBuffer->append(" available: ");
-            $stringBuffer->appendint($totalAvailable);
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        for {set index [jint [expr {[my jget nextIndex] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set width [[my jget widths] get $index]
+            set height [[my jget heights] get $index]
+            set total [[[my jget listOfList] get $index] size]
+            set totalAvailable [[[my jget availableListOfList] get $index] size]
+            $stringBuffer append " w: "
+            $stringBuffer appendint $width
+            $stringBuffer append " h: "
+            $stringBuffer appendint $height
+            $stringBuffer append [[::CommonSeps::getInstance] jget SPACE]
+            $stringBuffer append [[::CommonLabels::getInstance] jget TOTAL_LABEL]
+            $stringBuffer appendint $total
+            $stringBuffer append " available: "
+            $stringBuffer appendint $totalAvailable
         }
-        return $stringBuffer->toString();
+        return [$stringBuffer toString]
+    }
+    
+
+    method getHashtableP {} {
+        return [my jget hashtable]
+    }
+    
+
+    method init {image} {
+    }
+    
+
+    method initProgress {} {
+    }
 }
 
-
-sub getHashtableP {
-    my ($self) = @_;
-        return $self->{hashtable};
+namespace eval ::ImageCacheBase {
 }
 
-
-sub init {
-    my ($self, $image) = @_;
-}
-
-
-sub initProgress {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-# use java::io::InputStream ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::NullImage ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::image::ImageFactory ();
-
-1;
 

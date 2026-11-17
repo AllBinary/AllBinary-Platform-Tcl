@@ -11,42 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
-package org::allbinary::game::layer::pickup::PickupLayerCircularStaticPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::AllBinaryLayerCircularPool';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::pickup::PickupLayerCircularStaticPool'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::PickupLayerCircularStaticPool {
+    superclass ::AllBinaryLayerCircularPool
 }
 
+oo::define ::PickupLayerCircularStaticPool {
+    method initFields_PickupLayerCircularStaticPool {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::layer::pickup::PickupLayerCircularStaticPool::SINGLETON;
+    constructor {} {
+        next
+        my initFields_PickupLayerCircularStaticPool
+    }
+    
+    
+
+    method getInstanceXYZ {pickedUpLayerInterfaceFactoryInterface x y z} {
+        set pickupLayer [my getNextInstance]
+        $pickupLayer initXYZ $x $y $z
+        $pickupLayer init $pickedUpLayerInterfaceFactoryInterface [$pickedUpLayerInterfaceFactoryInterface getAnimationInterface]
+        return $pickupLayer
+    }
 }
 
-
-# throws Exception
-sub getInstanceXYZ {
-    my ($self, $pickedUpLayerInterfaceFactoryInterface, $x, $y, $z) = @_;
-        my $pickupLayer = $self->getNextInstance();
-        $pickupLayer->initXYZ($x, $y, $z);
-        $pickupLayer->init($pickedUpLayerInterfaceFactoryInterface, $pickedUpLayerInterfaceFactoryInterface->getAnimationInterface());
-        return $pickupLayer;
+namespace eval ::PickupLayerCircularStaticPool {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::PickupLayerCircularStaticPool new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::PickupLayerCircularStaticPool::staticGet_SINGLETON]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::layer::AllBinaryLayerCircularPool ();
-
-1;
 

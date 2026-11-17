@@ -11,63 +11,71 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchScreenFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::input::motion::button::TouchScreenFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{multiTouch} = 0;
-    $self->{touch} = 0;
-    $self->{touchScreenType} = 'org::allbinary::input::motion::button::TouchScreenTypesFactory'->getInstance()->{NOTOUCH};
+oo::class create ::TouchScreenFactory {
+    superclass ::JObject
 }
 
+oo::define ::TouchScreenFactory {
+    method initFields_TouchScreenFactory {} {
+        my jset multiTouch false
+        my jset touch false
+        my jset touchScreenType {}
+        my jset multiTouch false
+        my jset touch false
+        my jset touchScreenType [[::TouchScreenTypesFactory::getInstance] jget NOTOUCH]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_TouchScreenFactory
+    }
+    
+    
+
+    method isMultiTouch {} {
+        return [my jget multiTouch]
+    }
+    
+
+    method setTouch {touch} {
+    }
+    
+
+    method isTouch {} {
+        return [my jget touch]
+    }
+    
+
+    method getTouchScreenType {} {
+        return [my jget touchScreenType]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::motion::button::TouchScreenFactory::SINGLETON;
+namespace eval ::TouchScreenFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::TouchScreenFactory new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::TouchScreenFactory::staticGet_SINGLETON]
+    }
 }
 
-
-sub isMultiTouch {
-    my ($self) = @_;
-        return $self->{multiTouch};
-}
-
-
-sub setTouch {
-    my ($self, $touch) = @_;
-}
-
-
-sub isTouch {
-    my ($self) = @_;
-        return $self->{touch};
-}
-
-
-sub getTouchScreenType {
-    my ($self) = @_;
-        return $self->{touchScreenType};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::input::motion::button::TouchScreenTypesFactory ();
-
-1;
 

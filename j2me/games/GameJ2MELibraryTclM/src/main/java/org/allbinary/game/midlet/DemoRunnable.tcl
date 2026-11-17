@@ -11,60 +11,51 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-package org::allbinary::game::midlet::DemoRunnable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{demoGameMidlet} = undef;
-    $self->{startDemoGameMidletEvent} = undef;
+oo::class create ::DemoRunnable {
+    superclass ::JObject
 }
 
+oo::define ::DemoRunnable {
+    method initFields_DemoRunnable {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset demoGameMidlet {}
+        my jset startDemoGameMidletEvent {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $demoGameMidlet) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{demoGameMidlet} = $demoGameMidlet;
-        $self->{startDemoGameMidletEvent} = 'org::allbinary::game::midlet::DemoGameMidletEvent'->new($self->{demoGameMidlet}, 'org::allbinary::game::midlet::DemoGameMidletStateFactory'->getInstance()->{START_DEMO});
-    return $self;
-}
+    constructor {demoGameMidlet} {
+        next
+        my initFields_DemoRunnable
+        my jset demoGameMidlet $demoGameMidlet
+        my jset startDemoGameMidletEvent [::DemoGameMidletEvent new [my jget demoGameMidlet] [[::DemoGameMidletStateFactory::getInstance] jget START_DEMO]]
+    }
+    
 
-
-sub run {
-    my ($self) = @_;
+    method run {} {
         try {
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{START_LABEL})->append("GameCanvasRunnableInterface")->toString(), $self, $self->{commonStrings}->{RUN});
-            $self->{demoGameMidlet}->commandAction('org::allbinary::graphics::displayable::command::MyCommandsFactory'->getInstance()->{SET_DISPLAYABLE}, 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance());
-            $self->{demoGameMidlet}->setGameCanvasRunnableInterface($self->{demoGameMidlet}->createDemoGameCanvasRunnableInterface());
-            $self->{demoGameMidlet}->demoSetup();
-            'org::allbinary::game::midlet::DemoGameMidletEventHandler'->getInstance()->fireEvent($self->{startDemoGameMidletEvent});
-            $self->{demoGameMidlet}->startGameCanvasRunnableInterface();
-            $self->{demoGameMidlet}->postDemoSetup();
-            $self->{logUtil}->putF($self->{commonStrings}->{END_RUNNABLE}, $self, $self->{commonStrings}->{RUN});
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{RUN}, $e);
+            [my jget logUtil] putF [[[[::StringMaker new] append [[::CommonLabels::getInstance] jget START_LABEL]] append "GameCanvasRunnableInterface"] toString] [self] [[my jget commonStrings] jget RUN]
+            [my jget demoGameMidlet] commandAction [[::MyCommandsFactory::getInstance] jget SET_DISPLAYABLE] [::ProgressCanvasFactory::getInstance]
+            [my jget demoGameMidlet] setGameCanvasRunnableInterface [[my jget demoGameMidlet] createDemoGameCanvasRunnableInterface]
+            [my jget demoGameMidlet] demoSetup
+            [::DemoGameMidletEventHandler::getInstance] fireEvent [my jget startDemoGameMidletEvent]
+            [my jget demoGameMidlet] startGameCanvasRunnableInterface
+            [my jget demoGameMidlet] postDemoSetup
+            [my jget logUtil] putF [[my jget commonStrings] jget END_RUNNABLE] [self] [[my jget commonStrings] jget RUN]
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget RUN] $e
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory ();
-use org::allbinary::graphics::displayable::command::MyCommandsFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::midlet::DemoGameMidletEvent ();
-use org::allbinary::game::midlet::DemoGameMidletStateFactory ();
-use org::allbinary::game::midlet::DemoGameMidletEventHandler ();
+namespace eval ::DemoRunnable {
+}
 
-1;
 

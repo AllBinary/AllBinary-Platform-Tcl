@@ -11,45 +11,44 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.debug
 
-# Java interface
-package org::allbinary::debug::DebugInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub start {
-    my ($self) = @_;
-    die "abstract method start";
+oo::class create ::DebugInterface {
+    superclass ::JObject
 }
 
+oo::define ::DebugInterface {
+    method initFields_DebugInterface {} {
+        return
+    }
+    
 
-sub stop {
-    my ($self) = @_;
-    die "abstract method stop";
+    method start {} {
+        error [jexception AbstractMethodError start]
+    }
+    
+
+    method stop {} {
+        error [jexception AbstractMethodError stop]
+    }
+    
+
+    method getStartTime {} {
+        error [jexception AbstractMethodError getStartTime]
+    }
+    
+
+    method getMaxTime {} {
+        error [jexception AbstractMethodError getMaxTime]
+    }
+    
+
+    method isRunning {} {
+        error [jexception AbstractMethodError isRunning]
+    }
 }
 
-
-sub getStartTime {
-    my ($self) = @_;
-    die "abstract method getStartTime";
+namespace eval ::DebugInterface {
 }
 
-
-sub getMaxTime {
-    my ($self) = @_;
-    die "abstract method getMaxTime";
-}
-
-
-sub isRunning {
-    my ($self) = @_;
-    die "abstract method isRunning";
-}
-
-
-1;
 

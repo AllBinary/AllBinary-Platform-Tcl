@@ -11,58 +11,51 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.mapping
 
-package org::allbinary::game::input::mapping::GameInputMapping;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{name} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{gameKey} = $org::allbinary::game::input::GameKey::NULL_GAME_KEY;
+oo::class create ::GameInputMapping {
+    superclass ::JObject
 }
 
+oo::define ::GameInputMapping {
+    method initFields_GameInputMapping {} {
+        my jset name {}
+        my jset gameKey {}
+        my jset name [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset gameKey [::GameKey::staticGet_NULL_GAME_KEY]
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $gameKey) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->setName($name);
-        $self->setGameKey($gameKey);
-    return $self;
+    constructor {name gameKey} {
+        next
+        my initFields_GameInputMapping
+        my setName $name
+        my setGameKey $gameKey
+    }
+    
+
+    method setGameKey {gameKey} {
+        my jset gameKey $gameKey
+    }
+    
+
+    method getGameKey {} {
+        return [my jget gameKey]
+    }
+    
+
+    method setName {name} {
+        my jset name $name
+    }
+    
+
+    method getName {} {
+        return [my jget name]
+    }
 }
 
-
-sub setGameKey {
-    my ($self, $gameKey) = @_;
-        $self->{gameKey} = $gameKey;
+namespace eval ::GameInputMapping {
 }
 
-
-sub getGameKey {
-    my ($self) = @_;
-        return $self->{gameKey};
-}
-
-
-sub setName {
-    my ($self, $name) = @_;
-        $self->{name} = $name;
-}
-
-
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
-}
-
-use java::lang::Object ();
-use org::allbinary::game::input::GameKey ();
-use org::allbinary::logic::string::StringUtil ();
-
-1;
 

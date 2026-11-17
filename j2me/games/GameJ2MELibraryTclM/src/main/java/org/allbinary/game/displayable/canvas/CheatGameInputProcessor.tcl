@@ -11,88 +11,91 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::CheatGameInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::PlayerGameInput';
-
-tie our $inputProcessor, 'java::lang::LazyStatic', sub { $org::allbinary::game::layer::special::SpecialGameInputFactory::NO_SPECIAL_GAME_INPUT };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{PROCESS_GAME} = "processGame";
-    $self->{gameCanvas} = undef;
-    $self->{gameKeyFactory} = 'org::allbinary::game::input::GameKeyFactory'->getInstance();
+oo::class create ::CheatGameInputProcessor {
+    superclass ::PlayerGameInput
 }
 
+oo::define ::CheatGameInputProcessor {
+    method initFields_CheatGameInputProcessor {} {
+        my jset PROCESS_GAME {}
+        my jset gameCanvas {}
+        my jset gameKeyFactory {}
+        my jset PROCESS_GAME "processGame"
+        
+        my jset gameKeyFactory [::GameKeyFactory::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameCanvas) = @_;
-    my $self = $class->SUPER::new('org::allbinary::util::BasicArrayListD'->new(), 'org::allbinary::util::BasicArrayListD'->new(), -1);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{gameCanvas} = $gameCanvas;
-    return $self;
-}
+    constructor {gameCanvas} {
+        next [::BasicArrayListD new] [::BasicArrayListD new] [expr {-1}]
+        my initFields_CheatGameInputProcessor
+        my jset gameCanvas $gameCanvas
+    }
+    
 
-
-sub update {
-    my ($self) = @_;
+    method update {} {
         try {
-            my $gameLayerManager = $self->{gameCanvas}->getLayerManager();
-            my $list = $self->getGameKeyEventList();
-            my $size = $list->size();
-            for (my $index = 0; $index < $size; $index++) {
-                my $anyType = $list->{objectArray}->[$index];
-                my $key = 'org::allbinary::game::input::event::GameKeyEventUtil'->getKey($anyType);
-                if ($key == $self->{gameKeyFactory}->{LEVEL_DOWN}->getId()) {
-                    $org::allbinary::game::displayable::canvas::CheatGameInputProcessor::inputProcessor->strafeLeft();
-                    last;
-                } elsif ($key == $self->{gameKeyFactory}->{LEVEL_UP}->getId()) {
-                    $org::allbinary::game::displayable::canvas::CheatGameInputProcessor::inputProcessor->strafeRight();
-                    last;
+            set gameLayerManager [[my jget gameCanvas] getLayerManager]
+            set list [my getGameKeyEventList]
+            set size [$list size]
+            for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+                set anyType [[$list jget objectArray] get $index]
+                set key [::GameKeyEventUtil::getKey $anyType]
+                if {[expr {$key == [[[my jget gameKeyFactory] jget LEVEL_DOWN] getId]}]} {
+                    [::CheatGameInputProcessor::staticGet_inputProcessor] strafeLeft
+                    break
+                } elseif {[expr {$key == [[[my jget gameKeyFactory] jget LEVEL_UP] getId]}]} {
+                    [::CheatGameInputProcessor::staticGet_inputProcessor] strafeRight
+                    break
                 }
-                if ($key == $self->{gameKeyFactory}->{LEFT}->getId()) {
-                    $org::allbinary::game::displayable::canvas::CheatGameInputProcessor::inputProcessor->left();
-                    last;
-                } elsif ($key == $self->{gameKeyFactory}->{RIGHT}->getId()) {
-                    $org::allbinary::game::displayable::canvas::CheatGameInputProcessor::inputProcessor->right();
-                    last;
-                } elsif ($key == $self->{gameKeyFactory}->{UP}->getId()) {
-                    $org::allbinary::game::displayable::canvas::CheatGameInputProcessor::inputProcessor->up();
-                    last;
-                } elsif ($key == $self->{gameKeyFactory}->{DOWN}->getId()) {
-                    $org::allbinary::game::displayable::canvas::CheatGameInputProcessor::inputProcessor->down();
-                    last;
-                } elsif ($key == $self->{gameKeyFactory}->{KEY_NUM1}->getId()) {
-                    $org::allbinary::game::displayable::canvas::CheatGameInputProcessor::inputProcessor->special1($gameLayerManager, $org::allbinary::game::input::event::GameKeyEvent::NONE);
-                    last;
-                } elsif ($key == $self->{gameKeyFactory}->{KEY_NUM3}->getId()) {
-                    $org::allbinary::game::displayable::canvas::CheatGameInputProcessor::inputProcessor->special2($gameLayerManager, $org::allbinary::game::input::event::GameKeyEvent::NONE);
-                    last;
+                if {[expr {$key == [[[my jget gameKeyFactory] jget LEFT] getId]}]} {
+                    [::CheatGameInputProcessor::staticGet_inputProcessor] left
+                    break
+                } elseif {[expr {$key == [[[my jget gameKeyFactory] jget RIGHT] getId]}]} {
+                    [::CheatGameInputProcessor::staticGet_inputProcessor] right
+                    break
+                } elseif {[expr {$key == [[[my jget gameKeyFactory] jget UP] getId]}]} {
+                    [::CheatGameInputProcessor::staticGet_inputProcessor] up
+                    break
+                } elseif {[expr {$key == [[[my jget gameKeyFactory] jget DOWN] getId]}]} {
+                    [::CheatGameInputProcessor::staticGet_inputProcessor] down
+                    break
+                } elseif {[expr {$key == [[[my jget gameKeyFactory] jget KEY_NUM1] getId]}]} {
+                    [::CheatGameInputProcessor::staticGet_inputProcessor] special1 $gameLayerManager [::GameKeyEvent::staticGet_NONE]
+                    break
+                } elseif {[expr {$key == [[[my jget gameKeyFactory] jget KEY_NUM3] getId]}]} {
+                    [::CheatGameInputProcessor::staticGet_inputProcessor] special2 $gameLayerManager [::GameKeyEvent::staticGet_NONE]
+                    break
                 }
             }
-            $list->clear();
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{UPDATE}, $e);
+            $list clear
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget UPDATE] $e
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::GameKeyFactory ();
-use org::allbinary::game::input::PlayerGameInput ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::game::input::event::GameKeyEventUtil ();
-use org::allbinary::game::layer::AllBinaryGameLayerManager ();
-use org::allbinary::game::layer::special::SpecialGameInputFactory ();
-use org::allbinary::game::layer::special::SpecialGameInputInterface ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
+namespace eval ::CheatGameInputProcessor {
+    variable inputProcessorValue {}
+    variable inputProcessorSet 0
+    proc staticGet_inputProcessor {} {
+        variable inputProcessorValue
+        variable inputProcessorSet
+        if {!$inputProcessorSet} {
+            set inputProcessorSet 1
+            set inputProcessorValue [::SpecialGameInputFactory::staticGet_NO_SPECIAL_GAME_INPUT]
+        }
+        return $inputProcessorValue
+    }
+    proc staticSet_inputProcessor {value} {
+        variable inputProcessorValue
+        variable inputProcessorSet
+        set inputProcessorSet 1
+        set inputProcessorValue $value
+    }
+}
 
-1;
 

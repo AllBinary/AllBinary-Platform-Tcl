@@ -1,42 +1,54 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
-package org::allbinary::graphics::form::item::ABStringComponent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_STRING_COMPONENT, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::form::item::ABStringComponent'->new('org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{BLACK}, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE}) };
-
-
-sub getBackgroundBasicColor {
-    my ($self) = @_;
-        return 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE};
+oo::class create ::ABStringComponent {
+    superclass ::JObject
 }
 
+oo::define ::ABStringComponent {
+    method initFields_ABStringComponent {} {
+        return
+    }
+    
 
-sub new {
-    my ($class, $backgroundBasicColor, $foregroundBasicColor) = @_;
-    my $self = bless({}, $class);
-    return $self;
+    method getBackgroundBasicColor {} {
+        return [[::BasicColorFactory::getInstance] jget WHITE]
+    }
+    
+
+    constructor {backgroundBasicColor foregroundBasicColor} {
+        next
+        my initFields_ABStringComponent
+    }
+    
+
+    method getForegroundBasicColor {} {
+        return [[::BasicColorFactory::getInstance] jget WHITE]
+    }
+    
+
+    method setForegroundBasicColor {foregroundBasicColor} {
+    }
 }
 
-
-sub getForegroundBasicColor {
-    my ($self) = @_;
-        return 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE};
+namespace eval ::ABStringComponent {
+    variable NULL_STRING_COMPONENTValue {}
+    variable NULL_STRING_COMPONENTSet 0
+    proc staticGet_NULL_STRING_COMPONENT {} {
+        variable NULL_STRING_COMPONENTValue
+        variable NULL_STRING_COMPONENTSet
+        if {!$NULL_STRING_COMPONENTSet} {
+            set NULL_STRING_COMPONENTSet 1
+            set NULL_STRING_COMPONENTValue [::ABStringComponent new [[::BasicColorFactory::getInstance] jget BLACK] [[::BasicColorFactory::getInstance] jget WHITE]]
+        }
+        return $NULL_STRING_COMPONENTValue
+    }
+    proc staticSet_NULL_STRING_COMPONENT {value} {
+        variable NULL_STRING_COMPONENTValue
+        variable NULL_STRING_COMPONENTSet
+        set NULL_STRING_COMPONENTSet 1
+        set NULL_STRING_COMPONENTValue $value
+    }
 }
 
-
-sub setForegroundBasicColor {
-    my ($self, $foregroundBasicColor) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-
-1;
 

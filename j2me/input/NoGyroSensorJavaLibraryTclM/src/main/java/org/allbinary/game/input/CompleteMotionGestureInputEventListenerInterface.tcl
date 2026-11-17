@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-# Java interface
-package org::allbinary::game::input::CompleteMotionGestureInputEventListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-sub onCompleteMotionGestureInputEvent {
-    my ($self, $completeMotionGestureInputEvent) = @_;
-    die "abstract method onCompleteMotionGestureInputEvent";
+oo::class create ::CompleteMotionGestureInputEventListenerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::CompleteMotionGestureInputEventListenerInterface {
+    method initFields_CompleteMotionGestureInputEventListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onCompleteMotionGestureInputEvent {completeMotionGestureInputEvent} {
+        error [jexception AbstractMethodError onCompleteMotionGestureInputEvent]
+    }
+}
+
+namespace eval ::CompleteMotionGestureInputEventListenerInterface {
+}
+
 

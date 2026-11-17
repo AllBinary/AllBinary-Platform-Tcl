@@ -11,79 +11,62 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.part.weapon
 
-package org::allbinary::game::part::weapon::StraightMultiProjectileWeaponPart;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::game::part::weapon::BasicWeaponPart';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{weaponLayerCircularStaticPool} = undef;
-    $self->{total} = undef;
-    $self->{noDecimalTrigTable} = 'org::allbinary::math::NoDecimalTrigTable'->getInstance();
+oo::class create ::StraightMultiProjectileWeaponPart {
+    superclass ::BasicWeaponPart
 }
 
+oo::define ::StraightMultiProjectileWeaponPart {
+    method initFields_StraightMultiProjectileWeaponPart {} {
+        my jset weaponLayerCircularStaticPool {}
+        my jset total 0
+        my jset noDecimalTrigTable {}
+        
+        
+        my jset noDecimalTrigTable [::NoDecimalTrigTable::getInstance]
+        return
+    }
+    
+    
 
-sub createStraightMultiProjectileWeaponPart {
-    my ($class, $animationInterface, $weaponLayerCircularStaticPool) = @_;
-        return 'org::allbinary::game::part::weapon::StraightMultiProjectileWeaponPart'->new($animationInterface, $org::allbinary::layer::AllBinaryLayer::NULL_ALLBINARY_LAYER, $weaponLayerCircularStaticPool, 2, $org::allbinary::game::combat::weapon::WeaponProperties::NULL_WEAPON_PROPERTIES, 'org::allbinary::game::score::NoScoreable'->getInstance(), $org::allbinary::graphics::RelativeRelationship::NULL_RELATIVE_RELATIONSHIP);
-}
+    constructor {animationInterface sourceLayerInterface weaponLayerCircularStaticPool total weaponProperties scoreableInterface relativeRelationship} {
+        next $animationInterface $sourceLayerInterface $weaponProperties $scoreableInterface $relativeRelationship
+        my initFields_StraightMultiProjectileWeaponPart
+        my jset total $total
+        my jset weaponLayerCircularStaticPool $weaponLayerCircularStaticPool
+    }
+    
 
-
-sub new {
-    my ($class, $animationInterface, $sourceLayerInterface, $weaponLayerCircularStaticPool, $total, $weaponProperties, $scoreableInterface, $relativeRelationship) = @_;
-    my $self = $class->SUPER::new($animationInterface, $sourceLayerInterface, $weaponProperties, $scoreableInterface, $relativeRelationship);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{total} = $total;
-        $self->{weaponLayerCircularStaticPool} = $weaponLayerCircularStaticPool;
-    return $self;
-}
-
-
-# throws Exception
-sub processScore {
-    my ($self, $allbinaryLayerManager, $angle, $otherAngle, $weaponProperties, $scoreableInterface) = @_;
-        my $sourceLayerInterface = $self->getOwnerLayerInterface();
-        my $reducedWidth = ($sourceLayerInterface->getWidth() * 8 / 10);
-        my $halfWidth = (POSIX::floor(($reducedWidth) / (2 ** (1))));
-        my $x = $self->{relativeRelationship}->getX();
-        my $y = $self->{relativeRelationship}->getY();
-        my $sine = 0;
-        my $beamX = 0;
-        my $cosine = 0;
-        my $beamY = 0;
-        my $weaponLayer = undef;
-        my $increment = int($reducedWidth / ($self->{total} - 1));
-        my $next = -$halfWidth;
-        for (my $index = 0; $index < $self->{total}; $index++) {
-            $sine = int(($next * $self->{noDecimalTrigTable}->sin($angle)));
-            $beamX = int(($sine / $self->{noDecimalTrigTable}->{SCALE}));
-            $cosine = int(($next * $self->{noDecimalTrigTable}->cos($angle)));
-            $beamY = -int(($cosine / $self->{noDecimalTrigTable}->{SCALE}));
-            $weaponLayer = $self->{weaponLayerCircularStaticPool}->getInstanceWeaponLayer($sourceLayerInterface, $x + $beamX, $y + $beamY, 0, $angle, $otherAngle, $weaponProperties, $scoreableInterface);
-            $allbinaryLayerManager->append($weaponLayer);
-            $next += $increment;
+    method processScore {allbinaryLayerManager angle otherAngle weaponProperties scoreableInterface} {
+        set sourceLayerInterface [my getOwnerLayerInterface]
+        set reducedWidth ([expr {[expr {[$sourceLayerInterface getWidth] * 8}] / 10}])
+        set halfWidth ([expr {$reducedWidth >> 1}])
+        set x [[my jget relativeRelationship] getX]
+        set y [[my jget relativeRelationship] getY]
+        set sine 0
+        set beamX 0
+        set cosine 0
+        set beamY 0
+        set weaponLayer {}
+        set increment [jdiv $reducedWidth ([jint [expr {[my jget total] - 1}]])]
+        set next [expr {-$halfWidth}]
+        for {set index 0} {[expr {$index < [my jget total]}]} {jpostincr index 1} {
+            set sine ([expr {$next * [[my jget noDecimalTrigTable] sin [jint $angle]]}])
+            set beamX [jint ([expr {$sine / [[my jget noDecimalTrigTable] jget SCALE]}])]
+            set cosine ([expr {$next * [[my jget noDecimalTrigTable] cos [jint $angle]]}])
+            set beamY [expr {-[jint ([expr {$cosine / [[my jget noDecimalTrigTable] jget SCALE]}])]}]
+            set weaponLayer [[my jget weaponLayerCircularStaticPool] getInstanceWeaponLayer $sourceLayerInterface [jint [expr {$x + $beamX}]] [jint [expr {$y + $beamY}]] 0 [jint $angle] [jint $otherAngle] $weaponProperties $scoreableInterface]
+            $allbinaryLayerManager append $weaponLayer
+            set next [jint [expr {$next + $increment}]]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::game::combat::weapon::WeaponProperties ();
-use org::allbinary::game::layer::weapon::WeaponLayer ();
-use org::allbinary::game::layer::weapon::WeaponLayerCircularPool ();
-use org::allbinary::game::score::NoScoreable ();
-use org::allbinary::game::score::ScoreableInterface ();
-use org::allbinary::graphics::RelativeRelationship ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::math::NoDecimalTrigTable ();
-use org::allbinary::game::part::weapon::BasicWeaponPart ();
+namespace eval ::StraightMultiProjectileWeaponPart {
+    proc createStraightMultiProjectileWeaponPart {animationInterface weaponLayerCircularStaticPool} {
+        return [::StraightMultiProjectileWeaponPart new $animationInterface [::AllBinaryLayer::staticGet_NULL_ALLBINARY_LAYER] $weaponLayerCircularStaticPool 2 [::WeaponProperties::staticGet_NULL_WEAPON_PROPERTIES] [::NoScoreable::getInstance] [::RelativeRelationship::staticGet_NULL_RELATIVE_RELATIONSHIP]]
+    }
+}
 
-1;
 

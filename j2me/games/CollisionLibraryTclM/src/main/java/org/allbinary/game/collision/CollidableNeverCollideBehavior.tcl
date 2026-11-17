@@ -11,49 +11,43 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-package org::allbinary::game::collision::CollidableNeverCollideBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::collision::CollidableBaseBehavior';
-
-
-
-sub new {
-    my ($class, $isCollidable) = @_;
-    my $self = $class->SUPER::new($isCollidable);
-        # super(...) made $self above
-    return $self;
+oo::class create ::CollidableNeverCollideBehavior {
+    superclass ::CollidableBaseBehavior
 }
 
+oo::define ::CollidableNeverCollideBehavior {
+    method initFields_CollidableNeverCollideBehavior {} {
+        return
+    }
+    
 
-sub isCollision {
-    my ($self, $ownerLayer, $allbinaryCollidableLayer) = @_;
-        return 0;
+    constructor {isCollidable} {
+        next $isCollidable
+        my initFields_CollidableNeverCollideBehavior
+    }
+    
+
+    method isCollision {ownerLayer allbinaryCollidableLayer} {
+        return false
+    }
+    
+
+    method collide {ownerLayer allbinaryCollidableLayer} {
+    }
+    
+
+    method collideInterface {ownerLayer collidableInterfaceCompositeInterface} {
+    }
+    
+
+    method isCollisionInterface {ownerLayer collidableInterfaceCompositeInterface} {
+        return false
+    }
 }
 
-
-# throws Exception
-sub collide {
-    my ($self, $ownerLayer, $allbinaryCollidableLayer) = @_;
+namespace eval ::CollidableNeverCollideBehavior {
 }
 
-
-sub collideInterface {
-    my ($self, $ownerLayer, $collidableInterfaceCompositeInterface) = @_;
-}
-
-
-sub isCollisionInterface {
-    my ($self, $ownerLayer, $collidableInterfaceCompositeInterface) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-use org::allbinary::game::layer::CollidableCompositeLayer ();
-use org::allbinary::game::collision::CollidableBaseBehavior ();
-
-1;
 

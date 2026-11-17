@@ -11,43 +11,37 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::GameCanvasPaintHelper;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::ProcessPaintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gameCanvas} = undef;
+oo::class create ::GameCanvasPaintHelper {
+    superclass ::ProcessPaintable
 }
 
+oo::define ::GameCanvasPaintHelper {
+    method initFields_GameCanvasPaintHelper {} {
+        my jset gameCanvas {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{gameCanvas} = $gameCanvas;
-    return $self;
+    constructor {gameCanvas} {
+        next
+        my initFields_GameCanvasPaintHelper
+        my jset gameCanvas $gameCanvas
+    }
+    
+
+    method process {} {
+    }
+    
+
+    method paint {graphics} {
+        [my jget gameCanvas] draw $graphics
+    }
 }
 
-
-sub process {
-    my ($self) = @_;
+namespace eval ::GameCanvasPaintHelper {
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{gameCanvas}->draw($graphics);
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::paint::ProcessPaintable ();
-
-1;
 

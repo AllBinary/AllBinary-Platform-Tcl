@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer.event
 
-# Java interface
-package org::allbinary::layer::event::ScrollMapEventListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-# throws Exception
-sub onMoveEvent {
-    my ($self, $layerManagerEvent) = @_;
-    die "abstract method onMoveEvent";
+oo::class create ::ScrollMapEventListenerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::ScrollMapEventListenerInterface {
+    method initFields_ScrollMapEventListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onMoveEvent {layerManagerEvent} {
+        error [jexception AbstractMethodError onMoveEvent]
+    }
+}
+
+namespace eval ::ScrollMapEventListenerInterface {
+}
+
 

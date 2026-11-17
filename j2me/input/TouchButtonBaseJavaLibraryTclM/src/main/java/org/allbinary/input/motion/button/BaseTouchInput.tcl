@@ -11,45 +11,39 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::BaseTouchInput;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{basicArrayListUtil} = 'org::allbinary::util::BasicArrayListUtil'->getInstance();
+oo::class create ::BaseTouchInput {
+    superclass ::JObject
 }
 
+oo::define ::BaseTouchInput {
+    method initFields_BaseTouchInput {} {
+        my jset commonStrings {}
+        my jset basicArrayListUtil {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset basicArrayListUtil [::BasicArrayListUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_BaseTouchInput
+    }
+    
+
+    method getList {} {
+        return [[my jget basicArrayListUtil] getImmutableInstance]
+    }
+    
+
+    method toString {} {
+        return [jclassname [self]]
+    }
 }
 
-
-sub getList {
-    my ($self) = @_;
-        return $self->{basicArrayListUtil}->getImmutableInstance();
+namespace eval ::BaseTouchInput {
 }
 
-
-sub toString {
-    my ($self) = @_;
-        return ref($self);
-}
-
-use java::lang::Object ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListUtil ();
-
-1;
 

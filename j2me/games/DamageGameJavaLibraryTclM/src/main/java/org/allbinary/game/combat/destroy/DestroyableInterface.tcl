@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.destroy
 
-# Java interface
-package org::allbinary::game::combat::destroy::DestroyableInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::NamedInterface';
-
-
-
-# throws Exception
-sub isDestroyed {
-    my ($self) = @_;
-    die "abstract method isDestroyed";
+oo::class create ::DestroyableInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::layer::NamedInterface ();
+oo::define ::DestroyableInterface {
+    method initFields_DestroyableInterface {} {
+        return
+    }
+    
 
-1;
+    method isDestroyed {} {
+        error [jexception AbstractMethodError isDestroyed]
+    }
+}
+
+namespace eval ::DestroyableInterface {
+}
+
 

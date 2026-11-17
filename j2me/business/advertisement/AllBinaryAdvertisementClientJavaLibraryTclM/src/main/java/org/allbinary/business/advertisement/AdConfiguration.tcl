@@ -11,68 +11,60 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.business.advertisement
 
-package org::allbinary::business::advertisement::AdConfiguration;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{INNERACTIVE} = undef;
-    $self->{LEADBOLT} = undef;
-    $self->{ADMOB} = undef;
+oo::class create ::AdConfiguration {
+    superclass ::JObject
 }
 
+oo::define ::AdConfiguration {
+    method initFields_AdConfiguration {} {
+        my jset INNERACTIVE {}
+        my jset LEADBOLT {}
+        my jset ADMOB {}
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $advertIdArray) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{INNERACTIVE} = $advertIdArray->[0];
-        $self->{ADMOB} = $advertIdArray->[1];
-        $self->{LEADBOLT} = $advertIdArray->[2];
-    return $self;
+    constructor {advertIdArray} {
+        next
+        my initFields_AdConfiguration
+        my jset INNERACTIVE [$advertIdArray get 0]
+        my jset ADMOB [$advertIdArray get 1]
+        my jset LEADBOLT [$advertIdArray get 2]
+    }
+    
+
+    method getValidAdSpots {} {
+        return [jarray 0 {}]
+    }
+    
+
+    method process {gameState} {
+    }
+    
+
+    method processDemo {state} {
+    }
+    
+
+    method setShowAds {} {
+    }
+    
+
+    method setToggleAds {showAds} {
+    }
+    
+
+    method isShowAds {} {
+        return true
+    }
 }
 
-
-sub getValidAdSpots {
-    my ($self) = @_;
-        return [(undef) x (0)];
+namespace eval ::AdConfiguration {
 }
 
-
-sub process {
-    my ($self, $gameState) = @_;
-}
-
-
-sub processDemo {
-    my ($self, $state) = @_;
-}
-
-
-sub setShowAds {
-    my ($self) = @_;
-}
-
-
-sub setToggleAds {
-    my ($self, $showAds) = @_;
-}
-
-
-sub isShowAds {
-    my ($self) = @_;
-        return 1;
-}
-
-use java::lang::Object ();
-use org::allbinary::direction::Direction ();
-use org::allbinary::game::state::GameState ();
-
-1;
 

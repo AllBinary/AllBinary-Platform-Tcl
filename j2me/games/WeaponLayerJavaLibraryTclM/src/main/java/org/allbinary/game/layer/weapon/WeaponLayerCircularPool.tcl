@@ -11,37 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.weapon
 
-package org::allbinary::game::layer::weapon::WeaponLayerCircularPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::AllBinaryLayerCircularPool';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::WeaponLayerCircularPool {
+    superclass ::AllBinaryLayerCircularPool
 }
 
+oo::define ::WeaponLayerCircularPool {
+    method initFields_WeaponLayerCircularPool {} {
+        return
+    }
+    
 
-# throws Exception
-sub getInstanceWeaponLayer {
-    my ($self, $sourceLayerInterface, $x, $y, $z, $angle, $otherAngle, $weaponProperties, $scoreable) = @_;
-        my $weaponLayer = $self->SUPER::getNextInstance();
-        $weaponLayer->initXYZ($x, $y, $z);
-        $weaponLayer->init($sourceLayerInterface, $angle, $otherAngle, $weaponProperties, $scoreable);
-        return $weaponLayer;
+    constructor {} {
+        next
+        my initFields_WeaponLayerCircularPool
+    }
+    
+
+    method getInstanceWeaponLayer {sourceLayerInterface x y z angle otherAngle weaponProperties scoreable} {
+        set weaponLayer [next]
+        $weaponLayer initXYZ $x $y $z
+        $weaponLayer init $sourceLayerInterface $angle $otherAngle $weaponProperties $scoreable
+        return $weaponLayer
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::combat::weapon::WeaponProperties ();
-use org::allbinary::game::score::ScoreableInterface ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerCircularPool ();
+namespace eval ::WeaponLayerCircularPool {
+}
 
-1;
 

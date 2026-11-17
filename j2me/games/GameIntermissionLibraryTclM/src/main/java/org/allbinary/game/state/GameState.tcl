@@ -11,36 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.state
 
-package org::allbinary::game::state::GameState;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{name} = undef;
+oo::class create ::GameState {
+    superclass ::JObject
 }
 
+oo::define ::GameState {
+    method initFields_GameState {} {
+        my jset name {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $state) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{name} = $name;
-    return $self;
+    constructor {name state} {
+        next
+        my initFields_GameState
+        my jset name $name
+    }
+    
+
+    method toString {} {
+        return [my jget name]
+    }
 }
 
-
-sub toString {
-    my ($self) = @_;
-        return $self->{name};
+namespace eval ::GameState {
 }
 
-use java::lang::Object ();
-
-1;
 

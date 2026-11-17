@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.event
 
-# Java interface
-package org::allbinary::game::configuration::event::GameFeatureListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-sub onGameFeatureChange {
-    my ($self, $gameFeatureEvent) = @_;
-    die "abstract method onGameFeatureChange";
+oo::class create ::GameFeatureListenerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::GameFeatureListenerInterface {
+    method initFields_GameFeatureListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onGameFeatureChange {gameFeatureEvent} {
+        error [jexception AbstractMethodError onGameFeatureChange]
+    }
+}
+
+namespace eval ::GameFeatureListenerInterface {
+}
+
 

@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-# Java interface
-package org::allbinary::animation::AnimationInterfaceCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getAnimationInterface {
-    my ($self) = @_;
-    die "abstract method getAnimationInterface";
+oo::class create ::AnimationInterfaceCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::AnimationInterfaceCompositeInterface {
+    method initFields_AnimationInterfaceCompositeInterface {} {
+        return
+    }
+    
 
-1;
+    method getAnimationInterface {} {
+        error [jexception AbstractMethodError getAnimationInterface]
+    }
+}
+
+namespace eval ::AnimationInterfaceCompositeInterface {
+}
+
 

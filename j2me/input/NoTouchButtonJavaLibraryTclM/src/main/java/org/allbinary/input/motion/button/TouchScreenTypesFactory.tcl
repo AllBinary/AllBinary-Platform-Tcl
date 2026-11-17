@@ -11,40 +11,53 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchScreenTypesFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::input::motion::button::TouchScreenTypesFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{FINGER} = 'org::allbinary::input::motion::button::TouchScreenType'->new("Finger");
-    $self->{NOTOUCH} = 'org::allbinary::input::motion::button::TouchScreenType'->new("No Touch");
-    $self->{STYLUS} = 'org::allbinary::input::motion::button::TouchScreenType'->new("Stylus");
-    $self->{UNDEFINED} = 'org::allbinary::input::motion::button::TouchScreenType'->new("Undefined");
+oo::class create ::TouchScreenTypesFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::TouchScreenTypesFactory {
+    method initFields_TouchScreenTypesFactory {} {
+        my jset FINGER {}
+        my jset NOTOUCH {}
+        my jset STYLUS {}
+        my jset UNDEFINED {}
+        my jset FINGER [::TouchScreenType new "Finger"]
+        my jset NOTOUCH [::TouchScreenType new "No Touch"]
+        my jset STYLUS [::TouchScreenType new "Stylus"]
+        my jset UNDEFINED [::TouchScreenType new "Undefined"]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_TouchScreenTypesFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::motion::button::TouchScreenTypesFactory::instance;
+namespace eval ::TouchScreenTypesFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::TouchScreenTypesFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::TouchScreenTypesFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::input::motion::button::TouchScreenType ();
-
-1;
 

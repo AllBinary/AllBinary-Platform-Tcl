@@ -11,61 +11,45 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::ImageRotationAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::image::BaseImageAnimationFactory';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{angleIncrement} = undef;
+oo::class create ::ImageRotationAnimationFactory {
+    superclass ::BaseImageAnimationFactory
 }
 
+oo::define ::ImageRotationAnimationFactory {
+    method initFields_ImageRotationAnimationFactory {} {
+        my jset angleIncrement 0
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $image, $width, $height, $dx, $dy, $angleIncrement, $animationBehaviorFactory) = @_;
-    my $self = $class->SUPER::new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $width, $height, 0, 0, $animationBehaviorFactory);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{angleIncrement} = $angleIncrement;
-        $self->{animationFactoryInitializationVisitor}->{dx} = $dx;
-        $self->{animationFactoryInitializationVisitor}->{dy} = $dy;
-    return $self;
-}
+    constructor {image width height dx dy angleIncrement animationBehaviorFactory} {
+        next $image [::PrimitiveIntUtil::getArrayInstance] $width $height 0 0 $animationBehaviorFactory
+        my initFields_ImageRotationAnimationFactory
+        my jset angleIncrement $angleIncrement
+        [my jget animationFactoryInitializationVisitor] jset dx $dx
+        [my jget animationFactoryInitializationVisitor] jset dy $dy
+    }
+    
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        if ($self->{animationFactoryInitializationVisitor}->{dx} != 0 || $self->{animationFactoryInitializationVisitor}->{dy} != 0) {
-            $self->{animationFactoryImageScaleUtil}->processAdjust($self);
-            return 'org::allbinary::animation::image::AdjustedImageBaseRotationAnimation'->new($self->getImage(), 'org::allbinary::math::AngleInfo'->getInstance($self->{angleIncrement}), 'org::allbinary::math::AngleFactory'->getInstance()->{TOTAL_ANGLE}, $self->{animationFactoryInitializationVisitor}->{dx}, $self->{animationFactoryInitializationVisitor}->{dy}, $self->{animationBehaviorFactory}->getOrCreateInstance());
+    method getInstance {instanceId} {
+        if {[expr {[expr {[[my jget animationFactoryInitializationVisitor] jget dx] != 0}] || [expr {[[my jget animationFactoryInitializationVisitor] jget dy] != 0}]}]} {
+            [my jget animationFactoryImageScaleUtil] processAdjust [self]
+            return [::AdjustedImageBaseRotationAnimation new [my getImage] [::AngleInfo::getInstance [my jget angleIncrement]] [[::AngleFactory::getInstance] jget TOTAL_ANGLE] [[my jget animationFactoryInitializationVisitor] jget dx] [[my jget animationFactoryInitializationVisitor] jget dy] [[my jget animationBehaviorFactory] getOrCreateInstance]]
         } else {
-            return 'org::allbinary::animation::image::ImageBaseRotationAnimation'->new($self->getImage(), 'org::allbinary::math::AngleInfo'->getInstance($self->{angleIncrement}), 'org::allbinary::math::AngleFactory'->getInstance()->{TOTAL_ANGLE}, $self->{animationBehaviorFactory}->getOrCreateInstance());
+            return [::ImageBaseRotationAnimation new [my getImage] [::AngleInfo::getInstance [my jget angleIncrement]] [[::AngleFactory::getInstance] jget TOTAL_ANGLE] [[my jget animationBehaviorFactory] getOrCreateInstance]]
         }
+    }
+    
+
+    method getAngleIncrementP {} {
+        return [my jget angleIncrement]
+    }
 }
 
-
-sub getAngleIncrementP {
-    my ($self) = @_;
-        return $self->{angleIncrement};
+namespace eval ::ImageRotationAnimationFactory {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::game::configuration::GameConfigurationCentral ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::math::AngleFactory ();
-use org::allbinary::math::AngleInfo ();
-use org::allbinary::animation::image::BaseImageAnimationFactory ();
-use org::allbinary::animation::image::ImageBaseRotationAnimation ();
-use org::allbinary::animation::image::AdjustedImageBaseRotationAnimation ();
-
-1;
 

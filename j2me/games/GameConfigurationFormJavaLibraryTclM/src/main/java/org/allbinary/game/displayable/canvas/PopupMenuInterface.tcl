@@ -11,35 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-# Java interface
-package org::allbinary::game::displayable::canvas::PopupMenuInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub popupMenu {
-    my ($self) = @_;
-    die "abstract method popupMenu";
+oo::class create ::PopupMenuInterface {
+    superclass ::JObject
 }
 
+oo::define ::PopupMenuInterface {
+    method initFields_PopupMenuInterface {} {
+        return
+    }
+    
 
-sub closeMenu {
-    my ($self) = @_;
-    die "abstract method closeMenu";
+    method popupMenu {} {
+        error [jexception AbstractMethodError popupMenu]
+    }
+    
+
+    method closeMenu {} {
+        error [jexception AbstractMethodError closeMenu]
+    }
+    
+
+    method toggleMenu {} {
+        error [jexception AbstractMethodError toggleMenu]
+    }
 }
 
-
-# throws Exception
-sub toggleMenu {
-    my ($self) = @_;
-    die "abstract method toggleMenu";
+namespace eval ::PopupMenuInterface {
 }
 
-
-1;
 

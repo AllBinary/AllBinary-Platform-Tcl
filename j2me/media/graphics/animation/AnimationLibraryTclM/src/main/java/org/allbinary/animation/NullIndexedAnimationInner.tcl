@@ -11,32 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::NullIndexedAnimationInner;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::NullIndexedAnimation';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::animation::IndexedAnimationBehavior'->new(1, 250));
-        # super(...) made $self above
-    return $self;
+oo::class create ::NullIndexedAnimationInner {
+    superclass ::NullIndexedAnimation
 }
 
+oo::define ::NullIndexedAnimationInner {
+    method initFields_NullIndexedAnimationInner {} {
+        return
+    }
+    
 
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
+    constructor {} {
+        next [::IndexedAnimationBehavior new 1 250]
+        my initFields_NullIndexedAnimationInner
+    }
+    
+
+    method paintXY {graphics x y} {
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::NullIndexedAnimation ();
-use org::allbinary::animation::IndexedAnimationBehavior ();
+namespace eval ::NullIndexedAnimationInner {
+}
 
-1;
 

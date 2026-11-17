@@ -11,42 +11,55 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game
 
-package org::allbinary::game::GameTypeFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::GameTypeFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NULL_GAME_TYPE_ARRAY} = [(undef) x (0)];
-    $self->{NONE} = 'org::allbinary::game::GameType'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{NULL_STRING});
-    $self->{SINGLE_PLAYER} = 'org::allbinary::game::GameType'->new("Single Player");
-    $self->{MULTI_PLAYER} = 'org::allbinary::game::GameType'->new("Multi Player");
-    $self->{BOT} = 'org::allbinary::game::GameType'->new("Artificial Player");
+oo::class create ::GameTypeFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::GameTypeFactory {
+    method initFields_GameTypeFactory {} {
+        my jset NULL_GAME_TYPE_ARRAY {}
+        my jset NONE {}
+        my jset SINGLE_PLAYER {}
+        my jset MULTI_PLAYER {}
+        my jset BOT {}
+        my jset NULL_GAME_TYPE_ARRAY [jarray 0 {}]
+        my jset NONE [::GameType new [[::StringUtil::getInstance] jget NULL_STRING]]
+        my jset SINGLE_PLAYER [::GameType new "Single Player"]
+        my jset MULTI_PLAYER [::GameType new "Multi Player"]
+        my jset BOT [::GameType new "Artificial Player"]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_GameTypeFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::GameTypeFactory::instance;
+namespace eval ::GameTypeFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameTypeFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameTypeFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::game::GameType ();
-
-1;
 

@@ -1,27 +1,27 @@
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-package org::allbinary::game::collision::CollisionProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::CollisionProcessor {
+    superclass ::JObject
 }
 
+oo::define ::CollisionProcessor {
+    method initFields_CollisionProcessor {} {
+        return
+    }
 
-sub isCollision {
-    my ($self, $myLayer, $myLayer2) = @_;
-        return 0;
+    constructor {} {
+        next
+        my initFields_CollisionProcessor
+    }
+    
+
+    method isCollision {myLayer myLayer2} {
+        return false
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::layer::AllBinaryLayer ();
+namespace eval ::CollisionProcessor {
+}
 
-1;
 

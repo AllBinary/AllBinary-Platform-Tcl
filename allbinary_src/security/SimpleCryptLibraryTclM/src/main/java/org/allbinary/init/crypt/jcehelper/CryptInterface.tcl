@@ -11,27 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.init.crypt.jcehelper
 
-# Java interface
-package org::allbinary::init::crypt::jcehelper::CryptInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub encrypt {
-    my ($self, $array) = @_;
-    die "abstract method encrypt";
+oo::class create ::CryptInterface {
+    superclass ::JObject
 }
 
+oo::define ::CryptInterface {
+    method initFields_CryptInterface {} {
+        return
+    }
+    
 
-sub decrypt {
-    my ($self, $array) = @_;
-    die "abstract method decrypt";
+    method encrypt {array} {
+        error [jexception AbstractMethodError encrypt]
+    }
+    
+
+    method decrypt {array} {
+        error [jexception AbstractMethodError decrypt]
+    }
 }
 
+namespace eval ::CryptInterface {
+}
 
-1;
 

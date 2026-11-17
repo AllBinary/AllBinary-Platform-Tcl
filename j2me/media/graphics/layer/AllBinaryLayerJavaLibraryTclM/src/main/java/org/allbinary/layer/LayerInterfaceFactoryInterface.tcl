@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-# Java interface
-package org::allbinary::layer::LayerInterfaceFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub getNextInstance {
-    my ($self, $hashtable, $x, $y, $z) = @_;
-    die "abstract method getNextInstance";
+oo::class create ::LayerInterfaceFactoryInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::util::ABHashtable ();
+oo::define ::LayerInterfaceFactoryInterface {
+    method initFields_LayerInterfaceFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getNextInstance {hashtable x y z} {
+        error [jexception AbstractMethodError getNextInstance]
+    }
+}
+
+namespace eval ::LayerInterfaceFactoryInterface {
+}
+
 

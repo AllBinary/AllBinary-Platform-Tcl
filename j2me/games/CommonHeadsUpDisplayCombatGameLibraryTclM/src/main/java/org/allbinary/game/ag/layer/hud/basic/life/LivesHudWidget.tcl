@@ -11,89 +11,75 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic.life
 
-package org::allbinary::game::ag::layer::hud::basic::life::LivesHudWidget;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::graphics::hud::BasicHud','org::allbinary::graphics::paint::PaintableInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{lifeInterface} = undef;
-    $self->{xArray} = undef;
-    $self->{animationInterface} = undef;
+oo::class create ::LivesHudWidget {
+    superclass ::BasicHud
 }
 
+oo::define ::LivesHudWidget {
+    method initFields_LivesHudWidget {} {
+        my jset lifeInterface {}
+        my jset xArray {}
+        my jset animationInterface {}
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $animationInterface, $lifeInterface, $location, $direction) = @_;
-    my $self = $class->SUPER::new($location, $direction, 2, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE});
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{lifeInterface} = $lifeInterface;
-        my $size = int($self->getLifeInterface()->getMaxlives());
-        $self->{xArray} = [(0) x ($size)];
-        $self->{animationInterface} = $animationInterface;
-        $self->{updateMaxWidth} = $self->{lifeInterface}->getMaxlives() * 16;
-        $self->{updateMaxHeight} = 16;
-    return $self;
-}
+    constructor {animationInterface lifeInterface location direction} {
+        next $location $direction 2 [[::BasicColorFactory::getInstance] jget WHITE]
+        my initFields_LivesHudWidget
+        my jset lifeInterface $lifeInterface
+        set size [jint [[my getLifeInterface] getMaxlives]]
+        my jset xArray [jarray $size 0]
+        my jset animationInterface $animationInterface
+        my jset updateMaxWidth [expr {[[my jget lifeInterface] getMaxlives] * 16}]
+        my jset updateMaxHeight 16
+    }
+    
 
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        $self->SUPER::updateMeasurement($graphics);
-        my $maxLives = int($self->getLifeInterface()->getMaxlives());
-        for (my $index = 0; $index < $maxLives; $index++) {
-            $self->{xArray}->[$index] = $self->getX() + ($index * 16);
+    method updateMeasurement {graphics} {
+        next $graphics
+        set maxLives [jint [[my getLifeInterface] getMaxlives]]
+        for {set index 0} {[expr {$index < $maxLives}]} {jpostincr index 1} {
+            [my jget xArray] set $index [expr {[my getX] + ([jint [expr {$index * 16}]])}]
         }
-}
+    }
+    
 
+    method onDisplayChangeEvent {displayChangeEvent} {
+        next $displayChangeEvent
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+    }
+    
 
-sub onDisplayChangeEvent {
-    my ($self, $displayChangeEvent) = @_;
-        $self->SUPER::onDisplayChangeEvent($displayChangeEvent);
-        $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-}
+    method setX {x} {
+        next $x
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+    }
+    
 
-
-sub setX {
-    my ($self, $x) = @_;
-        $self->SUPER::setX($x);
-        $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        for (my $index = int($self->getLifeInterface()->get()); --$index >= 0; ) {
-            $self->{animationInterface}->paintXY($graphics, $self->{xArray}->[$index], $self->getY());
+    method paint {graphics} {
+        [my jget myFontProcessor] process $graphics
+        for {set index [jint [[my getLifeInterface] get]]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            [my jget animationInterface] paintXY $graphics [[my jget xArray] get $index] [my getY]
         }
+    }
+    
+
+    method paintThreed {graphics} {
+    }
+    
+
+    method getLifeInterface {} {
+        return [my jget lifeInterface]
+    }
 }
 
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
+namespace eval ::LivesHudWidget {
 }
 
-
-sub getLifeInterface {
-    my ($self) = @_;
-        return $self->{lifeInterface};
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::game::ag::life::Life ();
-use org::allbinary::game::graphics::hud::BasicHud ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::displayable::event::DisplayChangeEvent ();
-use org::allbinary::graphics::paint::PaintableInterface ();
-
-1;
 

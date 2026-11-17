@@ -11,42 +11,37 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-package org::allbinary::logic::util::cache::ImageCacheable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{name} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+oo::class create ::ImageCacheable {
+    superclass ::JObject
 }
 
+oo::define ::ImageCacheable {
+    method initFields_ImageCacheable {} {
+        my jset name {}
+        my jset name [[::StringUtil::getInstance] jget EMPTY_STRING]
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $anyType) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {name anyType} {
+        next
+        my initFields_ImageCacheable
+    }
+    
+
+    method getKey {} {
+        return [my jget name]
+    }
+    
+
+    method toString {} {
+        return [my jget name]
+    }
 }
 
-
-sub getKey {
-    my ($self) = @_;
-        return $self->{name};
+namespace eval ::ImageCacheable {
 }
 
-
-sub toString {
-    my ($self) = @_;
-        return $self->{name};
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::string::StringUtil ();
-
-1;
 

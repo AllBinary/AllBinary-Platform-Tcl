@@ -11,45 +11,62 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
-package org::allbinary::game::configuration::feature::SensorFeatureFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::feature::SensorFeatureFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NO_ORIENTATION} = 'org::allbinary::game::configuration::feature::SensorFeature'->new("No Orientation");
-    $self->{ORIENTATION_SENSORS} = 'org::allbinary::game::configuration::feature::SensorFeature'->new("Orientation Sensors");
-    $self->{SIMULATED_ORIENTATION_SENSORS} = 'org::allbinary::game::configuration::feature::SensorFeature'->new("Simulated Orientation Sensors");
-    $self->{YAW} = 'org::allbinary::game::configuration::feature::SensorFeature'->new("Yaw");
-    $self->{YAW_MINUS_RIGHT_PLUS_LEFT} = 'org::allbinary::game::configuration::feature::SensorFeature'->new("Yaw -Right +Left");
-    $self->{YAW_MINUS_LEFT_PLUS_RIGHT} = 'org::allbinary::game::configuration::feature::SensorFeature'->new("Yaw -Left +Right ");
-    $self->{PITCH} = 'org::allbinary::game::configuration::feature::SensorFeature'->new("Pitch");
-    $self->{ROLL} = 'org::allbinary::game::configuration::feature::SensorFeature'->new("Roll");
+oo::class create ::SensorFeatureFactory {
+    superclass ::JObject
 }
 
+oo::define ::SensorFeatureFactory {
+    method initFields_SensorFeatureFactory {} {
+        my jset NO_ORIENTATION {}
+        my jset ORIENTATION_SENSORS {}
+        my jset SIMULATED_ORIENTATION_SENSORS {}
+        my jset YAW {}
+        my jset YAW_MINUS_RIGHT_PLUS_LEFT {}
+        my jset YAW_MINUS_LEFT_PLUS_RIGHT {}
+        my jset PITCH {}
+        my jset ROLL {}
+        my jset NO_ORIENTATION [::SensorFeature new "No Orientation"]
+        my jset ORIENTATION_SENSORS [::SensorFeature new "Orientation Sensors"]
+        my jset SIMULATED_ORIENTATION_SENSORS [::SensorFeature new "Simulated Orientation Sensors"]
+        my jset YAW [::SensorFeature new "Yaw"]
+        my jset YAW_MINUS_RIGHT_PLUS_LEFT [::SensorFeature new "Yaw -Right +Left"]
+        my jset YAW_MINUS_LEFT_PLUS_RIGHT [::SensorFeature new "Yaw -Left +Right "]
+        my jset PITCH [::SensorFeature new "Pitch"]
+        my jset ROLL [::SensorFeature new "Roll"]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::feature::SensorFeatureFactory::instance;
+    constructor {} {
+        next
+        my initFields_SensorFeatureFactory
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+namespace eval ::SensorFeatureFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::SensorFeatureFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::SensorFeatureFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::configuration::feature::SensorFeature ();
-
-1;
 

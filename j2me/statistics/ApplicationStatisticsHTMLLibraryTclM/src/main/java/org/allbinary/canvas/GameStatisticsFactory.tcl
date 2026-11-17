@@ -11,55 +11,62 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.canvas
 
 #ActualPlatform
-package org::allbinary::canvas::GameStatisticsFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::canvas::BaseGameStatistics';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::canvas::GameStatisticsFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{stringBuffer} = 'org::allbinary::logic::string::StringMaker'->new();
+oo::class create ::GameStatisticsFactory {
+    superclass ::BaseGameStatistics
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+oo::define ::GameStatisticsFactory {
+    method initFields_GameStatisticsFactory {} {
+        my jset stringBuffer {}
+        my jset stringBuffer [::StringMaker new]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_GameStatisticsFactory
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::canvas::GameStatisticsFactory::instance;
-}
-
-
-sub add {
-    my ($self, $string) = @_;
-        if ($self->{stringBuffer}->length() > 12000) {
-            $self->{stringBuffer}->delete(0, $self->{stringBuffer}->length());
-            $self->{stringBuffer}->append("Old Stats Cleared");
+    method add {string} {
+        if {[expr {[[my jget stringBuffer] length] > 12000}]} {
+            [my jget stringBuffer] delete 0 [[my jget stringBuffer] length]
+            [my jget stringBuffer] append "Old Stats Cleared"
         }
-        $self->{stringBuffer}->append($string);
+        [my jget stringBuffer] append $string
+    }
+    
+
+    method toString {} {
+        return [[[[::StringMaker new] append [next]] append [[my jget stringBuffer] toString]] toString]
+    }
 }
 
-
-sub toString {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringMaker'->new()->append($self->SUPER::toString())->append($self->{stringBuffer}->toString())->toString();
+namespace eval ::GameStatisticsFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameStatisticsFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameStatisticsFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::canvas::BaseGameStatistics ();
-
-1;
 

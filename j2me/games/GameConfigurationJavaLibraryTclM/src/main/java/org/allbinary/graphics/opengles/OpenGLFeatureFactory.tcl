@@ -11,59 +11,90 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles
 
-package org::allbinary::graphics::opengles::OpenGLFeatureFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::opengles::OpenGLFeatureFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{OPENGL_OPTIONS} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("OpenGL Options");
-    $self->{OPENGL} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("OpenGL");
-    $self->{OPENGL_SURFACE_VIEW} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("GLSurfaceView");
-    $self->{OPENGL_2D} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("OpenGL 2D");
-    $self->{OPENGL_3D} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("OpenGL 3D");
-    $self->{OPENGL_2D_AND_3D} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("OpenGL 2D/3D");
-    $self->{OPENGL_AUTO_SELECT} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("Auto Select");
-    $self->{OPENGL_MINIMUM} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("Minimum");
-    $self->{OPENGL_AS_GAME_THREAD} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("As game thread");
-    $self->{OPENGL_AND_GAME_HAVE_DIFFERENT_THREADS} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("As different threads");
-    $self->{IMAGE_COLOR_DEPTH_4444} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("4444");
-    $self->{IMAGE_COLOR_DEPTH_8888} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("8888");
-    $self->{IMAGE_COLOR_DEPTH_565} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("565");
-    $self->{OPENGL_COLOR_DEPTH_4444} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("4444");
-    $self->{OPENGL_COLOR_DEPTH_8888} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("8888");
-    $self->{OPENGL_COLOR_DEPTH_565} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("565");
-    $self->{OPENGL_DRAW_TEXTURE} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("GL_OES_draw_texture");
-    $self->{OPENGL_VERTEX_BUFFER_OBJECT} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("vertex_buffer_object");
-    $self->{OPENGL_SIMPLE_OBJECT3D_PROCESSOR} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("Simple Object3d Processor");
-    $self->{OPENGL_COMPLEX_OBJECT3D_PROCESSOR} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("Complex Object3d Processor");
-    $self->{OPENGL_SIMPLE_TEXTURE_PROCESSOR} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("Simple Texture Processor");
-    $self->{OPENGL_COMPLEX_TEXTURE_PROCESSOR} = 'org::allbinary::graphics::opengles::OpenGLFeature'->new("Complex Texture Processor");
+oo::class create ::OpenGLFeatureFactory {
+    superclass ::JObject
 }
 
+oo::define ::OpenGLFeatureFactory {
+    method initFields_OpenGLFeatureFactory {} {
+        my jset OPENGL_OPTIONS {}
+        my jset OPENGL {}
+        my jset OPENGL_SURFACE_VIEW {}
+        my jset OPENGL_2D {}
+        my jset OPENGL_3D {}
+        my jset OPENGL_2D_AND_3D {}
+        my jset OPENGL_AUTO_SELECT {}
+        my jset OPENGL_MINIMUM {}
+        my jset OPENGL_AS_GAME_THREAD {}
+        my jset OPENGL_AND_GAME_HAVE_DIFFERENT_THREADS {}
+        my jset IMAGE_COLOR_DEPTH_4444 {}
+        my jset IMAGE_COLOR_DEPTH_8888 {}
+        my jset IMAGE_COLOR_DEPTH_565 {}
+        my jset OPENGL_COLOR_DEPTH_4444 {}
+        my jset OPENGL_COLOR_DEPTH_8888 {}
+        my jset OPENGL_COLOR_DEPTH_565 {}
+        my jset OPENGL_DRAW_TEXTURE {}
+        my jset OPENGL_VERTEX_BUFFER_OBJECT {}
+        my jset OPENGL_SIMPLE_OBJECT3D_PROCESSOR {}
+        my jset OPENGL_COMPLEX_OBJECT3D_PROCESSOR {}
+        my jset OPENGL_SIMPLE_TEXTURE_PROCESSOR {}
+        my jset OPENGL_COMPLEX_TEXTURE_PROCESSOR {}
+        my jset OPENGL_OPTIONS [::OpenGLFeature new "OpenGL Options"]
+        my jset OPENGL [::OpenGLFeature new "OpenGL"]
+        my jset OPENGL_SURFACE_VIEW [::OpenGLFeature new "GLSurfaceView"]
+        my jset OPENGL_2D [::OpenGLFeature new "OpenGL 2D"]
+        my jset OPENGL_3D [::OpenGLFeature new "OpenGL 3D"]
+        my jset OPENGL_2D_AND_3D [::OpenGLFeature new "OpenGL 2D/3D"]
+        my jset OPENGL_AUTO_SELECT [::OpenGLFeature new "Auto Select"]
+        my jset OPENGL_MINIMUM [::OpenGLFeature new "Minimum"]
+        my jset OPENGL_AS_GAME_THREAD [::OpenGLFeature new "As game thread"]
+        my jset OPENGL_AND_GAME_HAVE_DIFFERENT_THREADS [::OpenGLFeature new "As different threads"]
+        my jset IMAGE_COLOR_DEPTH_4444 [::OpenGLFeature new "4444"]
+        my jset IMAGE_COLOR_DEPTH_8888 [::OpenGLFeature new "8888"]
+        my jset IMAGE_COLOR_DEPTH_565 [::OpenGLFeature new "565"]
+        my jset OPENGL_COLOR_DEPTH_4444 [::OpenGLFeature new "4444"]
+        my jset OPENGL_COLOR_DEPTH_8888 [::OpenGLFeature new "8888"]
+        my jset OPENGL_COLOR_DEPTH_565 [::OpenGLFeature new "565"]
+        my jset OPENGL_DRAW_TEXTURE [::OpenGLFeature new "GL_OES_draw_texture"]
+        my jset OPENGL_VERTEX_BUFFER_OBJECT [::OpenGLFeature new "vertex_buffer_object"]
+        my jset OPENGL_SIMPLE_OBJECT3D_PROCESSOR [::OpenGLFeature new "Simple Object3d Processor"]
+        my jset OPENGL_COMPLEX_OBJECT3D_PROCESSOR [::OpenGLFeature new "Complex Object3d Processor"]
+        my jset OPENGL_SIMPLE_TEXTURE_PROCESSOR [::OpenGLFeature new "Simple Texture Processor"]
+        my jset OPENGL_COMPLEX_TEXTURE_PROCESSOR [::OpenGLFeature new "Complex Texture Processor"]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::opengles::OpenGLFeatureFactory::instance;
+    constructor {} {
+        next
+        my initFields_OpenGLFeatureFactory
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+namespace eval ::OpenGLFeatureFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::OpenGLFeatureFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::OpenGLFeatureFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::opengles::OpenGLFeature ();
-
-1;
 

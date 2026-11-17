@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
-# Java interface
-package org::allbinary::input::motion::gesture::observer::CompleteMotionGestureListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub onMotionGestureCompleted {
-    my ($self, $list) = @_;
-    die "abstract method onMotionGestureCompleted";
+oo::class create ::CompleteMotionGestureListenerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::util::BasicArrayList ();
+oo::define ::CompleteMotionGestureListenerInterface {
+    method initFields_CompleteMotionGestureListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onMotionGestureCompleted {list} {
+        error [jexception AbstractMethodError onMotionGestureCompleted]
+    }
+}
+
+namespace eval ::CompleteMotionGestureListenerInterface {
+}
+
 

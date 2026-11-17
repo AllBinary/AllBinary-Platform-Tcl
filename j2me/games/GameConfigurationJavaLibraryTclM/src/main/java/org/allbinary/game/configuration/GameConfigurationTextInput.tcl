@@ -11,79 +11,113 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
-package org::allbinary::game::configuration::GameConfigurationTextInput;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $hashtable, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable() };
-tie our $SIMULATOR_IP, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::GameConfigurationTextInput'->new("IP: ", "192.168.1.3") };
-tie our $SIMULATOR_PORT, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::GameConfigurationTextInput'->new("Port: ", "8010") };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{label} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{text} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+oo::class create ::GameConfigurationTextInput {
+    superclass ::JObject
 }
 
+oo::define ::GameConfigurationTextInput {
+    method initFields_GameConfigurationTextInput {} {
+        my jset label {}
+        my jset text {}
+        my jset label [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset text [[::StringUtil::getInstance] jget EMPTY_STRING]
+        return
+    }
+    
 
-sub new {
-    my ($class, $label, $text) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->setText($text);
-        $self->setLabel($label);
-        $org::allbinary::game::configuration::GameConfigurationTextInput::hashtable->put($self->getLabel(), $self);
-    return $self;
+    constructor {label text} {
+        next
+        my initFields_GameConfigurationTextInput
+        my setText $text
+        my setLabel $label
+        [::GameConfigurationTextInput::staticGet_hashtable] put [my getLabel] [self]
+    }
+    
+    
+
+    method setText {text} {
+        my jset text $text
+    }
+    
+
+    method getText {} {
+        return [my jget text]
+    }
+    
+
+    method setLabel {label} {
+        my jset label $label
+    }
+    
+
+    method getLabel {} {
+        return [my jget label]
+    }
+    
 }
 
-
-sub update {
-    my ($class, $textField) = @_;
-        my $anyType = $textField->getLabel();
-        my $gameConfigurationTextInput = $org::allbinary::game::configuration::GameConfigurationTextInput::hashtable->get($anyType);
-        $gameConfigurationTextInput->setText($textField->getString());
+namespace eval ::GameConfigurationTextInput {
+    variable hashtableValue {}
+    variable hashtableSet 0
+    proc staticGet_hashtable {} {
+        variable hashtableValue
+        variable hashtableSet
+        if {!$hashtableSet} {
+            set hashtableSet 1
+            set hashtableValue [[::StdUtil::getInstance] createHashtable]
+        }
+        return $hashtableValue
+    }
+    proc staticSet_hashtable {value} {
+        variable hashtableValue
+        variable hashtableSet
+        set hashtableSet 1
+        set hashtableValue $value
+    }
+    variable SIMULATOR_IPValue {}
+    variable SIMULATOR_IPSet 0
+    proc staticGet_SIMULATOR_IP {} {
+        variable SIMULATOR_IPValue
+        variable SIMULATOR_IPSet
+        if {!$SIMULATOR_IPSet} {
+            set SIMULATOR_IPSet 1
+            set SIMULATOR_IPValue [::GameConfigurationTextInput new "IP: " "192.168.1.3"]
+        }
+        return $SIMULATOR_IPValue
+    }
+    proc staticSet_SIMULATOR_IP {value} {
+        variable SIMULATOR_IPValue
+        variable SIMULATOR_IPSet
+        set SIMULATOR_IPSet 1
+        set SIMULATOR_IPValue $value
+    }
+    variable SIMULATOR_PORTValue {}
+    variable SIMULATOR_PORTSet 0
+    proc staticGet_SIMULATOR_PORT {} {
+        variable SIMULATOR_PORTValue
+        variable SIMULATOR_PORTSet
+        if {!$SIMULATOR_PORTSet} {
+            set SIMULATOR_PORTSet 1
+            set SIMULATOR_PORTValue [::GameConfigurationTextInput new "Port: " "8010"]
+        }
+        return $SIMULATOR_PORTValue
+    }
+    proc staticSet_SIMULATOR_PORT {value} {
+        variable SIMULATOR_PORTValue
+        variable SIMULATOR_PORTSet
+        set SIMULATOR_PORTSet 1
+        set SIMULATOR_PORTValue $value
+    }
+    proc update {textField} {
+        set anyType [$textField getLabel]
+        set gameConfigurationTextInput [[::GameConfigurationTextInput::staticGet_hashtable] get $anyType]
+        $gameConfigurationTextInput setText [$textField getString]
+    }
+    proc getHashtable {} {
+        return [::GameConfigurationTextInput::staticGet_hashtable]
+    }
 }
 
-
-sub setText {
-    my ($self, $text) = @_;
-        $self->{text} = $text;
-}
-
-
-sub getText {
-    my ($self) = @_;
-        return $self->{text};
-}
-
-
-sub setLabel {
-    my ($self, $label) = @_;
-        $self->{label} = $label;
-}
-
-
-sub getLabel {
-    my ($self) = @_;
-        return $self->{label};
-}
-
-
-sub getHashtable {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::GameConfigurationTextInput::hashtable;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::TextField ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::util::ABHashtable ();
-
-1;
 

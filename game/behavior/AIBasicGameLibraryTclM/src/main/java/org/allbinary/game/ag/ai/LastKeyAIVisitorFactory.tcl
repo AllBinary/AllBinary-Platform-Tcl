@@ -11,31 +11,45 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::LastKeyAIVisitorFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::ag::ai::LastKeyAIVisitor'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::LastKeyAIVisitorFactory {
+    superclass ::JObject
 }
 
+oo::define ::LastKeyAIVisitorFactory {
+    method initFields_LastKeyAIVisitorFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::ag::ai::LastKeyAIVisitorFactory::instance;
+    constructor {} {
+        next
+        my initFields_LastKeyAIVisitorFactory
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::ag::ai::LastKeyAIVisitor ();
+namespace eval ::LastKeyAIVisitorFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LastKeyAIVisitor new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LastKeyAIVisitorFactory::staticGet_instance]
+    }
+}
 
-1;
 

@@ -11,48 +11,40 @@
 # Created By: Travis Berthelot 
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable
 
-package org::allbinary::game::displayable::RepaintRunnable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::thread::ARunnable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{canvas} = undef;
+oo::class create ::RepaintRunnable {
+    superclass ::ARunnable
 }
 
+oo::define ::RepaintRunnable {
+    method initFields_RepaintRunnable {} {
+        my jset canvas {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $canvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{canvas} = $canvas;
-    return $self;
-}
+    constructor {canvas} {
+        next
+        my initFields_RepaintRunnable
+        my jset canvas $canvas
+    }
+    
 
-
-sub run {
-    my ($self) = @_;
+    method run {} {
         try {
-            $self->{canvas}->repaint();
-            'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance()->process();
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            my $logUtil = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-            $logUtil->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{RUN}, $e);
+            [my jget canvas] repaint
+            [::DisplayInfoSingleton::getInstance] process
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            set logUtil [::LogUtil::getInstance]
+            $logUtil put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget RUN] $e
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::thread::ARunnable ();
+namespace eval ::RepaintRunnable {
+}
 
-1;
 

@@ -11,43 +11,40 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.view
 
-package org::allbinary::view::StaticViewPosition;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::view::ViewPosition';
-
-
-
-sub new {
-    my ($class, $x, $y, $z) = @_;
-    my $self = $class->SUPER::new($x, $y, $z);
-        # super(...) made $self above
-    return $self;
+oo::class create ::StaticViewPosition {
+    superclass ::ViewPosition
 }
 
+oo::define ::StaticViewPosition {
+    method initFields_StaticViewPosition {} {
+        return
+    }
+    
 
-sub getX {
-    my ($self) = @_;
-        return $self->getRawX();
+    constructor {x y z} {
+        next $x $y $z
+        my initFields_StaticViewPosition
+    }
+    
+
+    method getX {} {
+        return [my getRawX]
+    }
+    
+
+    method getY {} {
+        return [my getRawY]
+    }
+    
+
+    method getZ {} {
+        return [my getRawZ]
+    }
 }
 
-
-sub getY {
-    my ($self) = @_;
-        return $self->getRawY();
+namespace eval ::StaticViewPosition {
 }
 
-
-sub getZ {
-    my ($self) = @_;
-        return $self->getRawZ();
-}
-
-use java::lang::Object ();
-use org::allbinary::view::ViewPosition ();
-
-1;
 

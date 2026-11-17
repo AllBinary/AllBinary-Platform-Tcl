@@ -72,6 +72,16 @@ while {[llength $pending] > 0} {
         }
     }
     if {[llength $failed] == [llength $pending]} {
+        # A dependency class whose superclass is in an optional dependency of that dependency (ThreadPool of a platform
+        # thread library) can not be sourced: only a project file that can not be sourced fails the build
+        set projectFailed 0
+        foreach file $failed {
+            if {[lsearch -exact $projectFiles $file] >= 0} { set projectFailed 1 }
+        }
+        if {!$projectFailed} {
+            puts "Tcl dependency files not sourced (optional dependencies): [llength $failed]"
+            break
+        }
         puts stderr $lastError
         exit 1
     }

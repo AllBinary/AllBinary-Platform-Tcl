@@ -11,46 +11,40 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::GameInputLayerProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::LayerProcessor';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::game::input::GameInputLayerManager'->new());
-        # super(...) made $self above
-    return $self;
+oo::class create ::GameInputLayerProcessor {
+    superclass ::LayerProcessor
 }
 
+oo::define ::GameInputLayerProcessor {
+    method initFields_GameInputLayerProcessor {} {
+        return
+    }
+    
 
-# throws Exception
-sub processAt {
-    my ($self, $allBinaryLayerManager, $layerInterface, $index) = @_;
-        my $gameInputInterface = $layerInterface;
-        $gameInputInterface->processInput($allBinaryLayerManager);
-}
+    constructor {} {
+        next [::GameInputLayerManager new]
+        my initFields_GameInputLayerProcessor
+    }
+    
 
+    method processAt {allBinaryLayerManager layerInterface index} {
+        set gameInputInterface $layerInterface
+        $gameInputInterface processInput $allBinaryLayerManager
+    }
+    
 
-sub isProcessorLayer {
-    my ($self, $layerInterface) = @_;
-        if ($layerInterface->implmentsGameInputInterface()) {
-            return 1;
+    method isProcessorLayer {layerInterface} {
+        if {[$layerInterface implmentsGameInputInterface]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::layer::LayerProcessor ();
-use org::allbinary::game::input::GameInputLayerManager ();
+namespace eval ::GameInputLayerProcessor {
+}
 
-1;
 

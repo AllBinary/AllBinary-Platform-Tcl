@@ -11,154 +11,164 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.event
 
-package org::allbinary::game::input::event::DownKeyEventHandlerBase;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::handler::BasicEventHandler';
-
-our $TOTAL_LISTENERS = " Total PlayerGameInput Listeners: ";
-our $LISTENER_LABEL = " PlayerGameInput Listener: ";
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::DownKeyEventHandlerBase {
+    superclass ::BasicEventHandler
 }
 
+oo::define ::DownKeyEventHandlerBase {
+    method initFields_DownKeyEventHandlerBase {} {
+        my jset list {}
+        my jset list [::BasicArrayListD new]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_DownKeyEventHandlerBase
+    }
+    
 
-
-sub addListener {
-    my ($self, $playerGameInput) = @_;
-        if (!$self->{list}->contains($playerGameInput)) {
-            $self->{list}->add($playerGameInput);
+    method addListener {playerGameInput} {
+        if {[expr {![[my jget list] contains $playerGameInput]}]} {
+            [my jget list] add $playerGameInput
         }
-}
+    }
+    
 
+    method removeAllListeners {} {
+        [my jget list] clear
+        next
+    }
+    
 
-sub removeAllListeners {
-    my ($self) = @_;
-        $self->{list}->clear();
-        $self->SUPER::removeAllListeners();
-}
+    method removeListenerSingleThreaded {eventListenerInterface} {
+        [my jget list] remove $eventListenerInterface
+        next $eventListenerInterface
+    }
+    
 
+    method removeListener {eventListenerInterface} {
+        [my jget list] remove $eventListenerInterface
+        next $eventListenerInterface
+    }
+    
 
-sub removeListenerSingleThreaded {
-    my ($self, $eventListenerInterface) = @_;
-        $self->{list}->remove($eventListenerInterface);
-        $self->SUPER::removeListenerSingleThreaded($eventListenerInterface);
-}
-
-
-sub removeListener {
-    my ($self, $eventListenerInterface) = @_;
-        $self->{list}->remove($eventListenerInterface);
-        $self->SUPER::removeListener($eventListenerInterface);
-}
-
-
-# throws Exception
-sub fireEventI {
-    my ($self, $eventObject) = @_;
-        for (my $index = $self->{list}->size(); --$index >= 0; ) {
+    method fireEventI {eventObject} {
+        for {set index [[my jget list] size]} {[expr {[jpreincr index -1] >= 0}]} {} {
             try {
-                my $playerGameInput = $self->{list}->{objectArray}->[$index];
-                $playerGameInput->onDownKey($eventObject);
-            } catch ($e) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, 'org::allbinary::logic::util::event::EventStrings'->getInstance()->{FIRE_EVENT}, $e);
+                set playerGameInput [[[my jget list] jget objectArray] get $index]
+                $playerGameInput onDownKey $eventObject
+            } on error {e} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[::EventStrings::getInstance] jget FIRE_EVENT] $e
             }
         }
-        my $index = 0;
-        my $eventListenerInterface = undef;
-        while ($index < $self->{eventListenerInterfaceList}->size()) {
+        set index 0
+        set eventListenerInterface {}
+        while {[expr {$index < [[my jget eventListenerInterfaceList] size]}]} {
             try {
-                $eventListenerInterface = $self->{eventListenerInterfaceList}->get($index);
-                $self->processI($eventObject, $eventListenerInterface);
-            } catch ($e) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, 'org::allbinary::logic::util::event::EventStrings'->getInstance()->{FIRE_EVENT}, $e);
+                set eventListenerInterface [[my jget eventListenerInterfaceList] get $index]
+                my processI $eventObject $eventListenerInterface
+            } on error {e} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[::EventStrings::getInstance] jget FIRE_EVENT] $e
             }
-            $index++;
+            jpostincr index 1
         }
-}
+    }
+    
 
-
-# throws Exception
-sub fireEventForGameKeyEvent {
-    my ($self, $eventObject) = @_;
-        my $size = $self->{list}->size();
-        for (my $index = $size; --$index >= 0; ) {
+    method fireEventForGameKeyEvent {eventObject} {
+        set size [[my jget list] size]
+        for {set index $size} {[expr {[jpreincr index -1] >= 0}]} {} {
             try {
-                my $playerGameInput = $self->{list}->{objectArray}->[$index];
-                $playerGameInput->onDownKeyEvent($eventObject);
-            } catch ($e) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, 'org::allbinary::logic::util::event::EventStrings'->getInstance()->{FIRE_EVENT}, $e);
+                set playerGameInput [[[my jget list] jget objectArray] get $index]
+                $playerGameInput onDownKeyEvent $eventObject
+            } on error {e} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[::EventStrings::getInstance] jget FIRE_EVENT] $e
             }
         }
-        my $index = 0;
-        my $eventListenerInterface = undef;
-        while ($index < $self->{eventListenerInterfaceList}->size()) {
+        set index 0
+        set eventListenerInterface {}
+        while {[expr {$index < [[my jget eventListenerInterfaceList] size]}]} {
             try {
-                $eventListenerInterface = $self->{eventListenerInterfaceList}->get($index);
-                $self->processEvent($eventObject, $eventListenerInterface);
-            } catch ($e) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, 'org::allbinary::logic::util::event::EventStrings'->getInstance()->{FIRE_EVENT}, $e);
+                set eventListenerInterface [[my jget eventListenerInterfaceList] get $index]
+                my processEvent $eventObject $eventListenerInterface
+            } on error {e} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[::EventStrings::getInstance] jget FIRE_EVENT] $e
             }
-            $index++;
+            jpostincr index 1
         }
-}
+    }
+    
 
+    method processI {eventObject eventListenerInterface} {
+        set downKeyEventListenerInterface $eventListenerInterface
+        $downKeyEventListenerInterface onDownKey $eventObject
+    }
+    
 
-# throws Exception
-sub processI {
-    my ($self, $eventObject, $eventListenerInterface) = @_;
-        my $downKeyEventListenerInterface = $eventListenerInterface;
-        $downKeyEventListenerInterface->onDownKey($eventObject);
-}
+    method processEvent {eventObject eventListenerInterface} {
+        set downKeyEventListenerInterface $eventListenerInterface
+        $downKeyEventListenerInterface onDownKeyEvent $eventObject
+    }
+    
 
-
-# throws Exception
-sub processEvent {
-    my ($self, $eventObject, $eventListenerInterface) = @_;
-        my $downKeyEventListenerInterface = $eventListenerInterface;
-        $downKeyEventListenerInterface->onDownKeyEvent($eventObject);
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append($self->SUPER::toString());
-        $stringBuffer->append($org::allbinary::game::input::event::DownKeyEventHandlerBase::TOTAL_LISTENERS);
-        $stringBuffer->appendint($self->{list}->size());
-        my $eventListenerInterface = undef;
-        for (my $index = 0; $index < $self->{list}->size(); $index++) {
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append [next]
+        $stringBuffer append [::DownKeyEventHandlerBase::staticGet_TOTAL_LISTENERS]
+        $stringBuffer appendint [[my jget list] size]
+        set eventListenerInterface {}
+        for {set index 0} {[expr {$index < [[my jget list] size]}]} {jpostincr index 1} {
             try {
-                $eventListenerInterface = $self->{list}->get($index);
-                $stringBuffer->append($org::allbinary::game::input::event::DownKeyEventHandlerBase::LISTENER_LABEL);
-                $stringBuffer->append($eventListenerInterface->toString());
-            } catch ($e) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{TOSTRING}, $e);
+                set eventListenerInterface [[my jget list] get $index]
+                $stringBuffer append [::DownKeyEventHandlerBase::staticGet_LISTENER_LABEL]
+                $stringBuffer append [$eventListenerInterface toString]
+            } on error {e} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget TOSTRING] $e
             }
         }
-        return $stringBuffer->toString();
+        return [$stringBuffer toString]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::PlayerGameInput ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
+namespace eval ::DownKeyEventHandlerBase {
+    variable TOTAL_LISTENERSValue {}
+    variable TOTAL_LISTENERSSet 0
+    proc staticGet_TOTAL_LISTENERS {} {
+        variable TOTAL_LISTENERSValue
+        variable TOTAL_LISTENERSSet
+        if {!$TOTAL_LISTENERSSet} {
+            set TOTAL_LISTENERSSet 1
+            set TOTAL_LISTENERSValue " Total PlayerGameInput Listeners: "
+        }
+        return $TOTAL_LISTENERSValue
+    }
+    proc staticSet_TOTAL_LISTENERS {value} {
+        variable TOTAL_LISTENERSValue
+        variable TOTAL_LISTENERSSet
+        set TOTAL_LISTENERSSet 1
+        set TOTAL_LISTENERSValue $value
+    }
+    variable LISTENER_LABELValue {}
+    variable LISTENER_LABELSet 0
+    proc staticGet_LISTENER_LABEL {} {
+        variable LISTENER_LABELValue
+        variable LISTENER_LABELSet
+        if {!$LISTENER_LABELSet} {
+            set LISTENER_LABELSet 1
+            set LISTENER_LABELValue " PlayerGameInput Listener: "
+        }
+        return $LISTENER_LABELValue
+    }
+    proc staticSet_LISTENER_LABEL {value} {
+        variable LISTENER_LABELValue
+        variable LISTENER_LABELSet
+        set LISTENER_LABELSet 1
+        set LISTENER_LABELValue $value
+    }
+}
 
-1;
 

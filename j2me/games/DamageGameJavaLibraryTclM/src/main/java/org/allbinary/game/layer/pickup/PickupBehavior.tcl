@@ -11,158 +11,152 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
-package org::allbinary::game::layer::pickup::PickupBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::layer::pickup::PickupBehaviorInterface';
-
-tie our $NULL_PICKUP_BEHAVIOR, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{countedIndex} = undef;
-    $self->{ownerLayerInterface} = undef;
+oo::class create ::PickupBehavior {
+    superclass ::JObject
 }
 
+oo::define ::PickupBehavior {
+    method initFields_PickupBehavior {} {
+        my jset logUtil {}
+        my jset countedIndex 0
+        my jset ownerLayerInterface {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        
+        return
+    }
+    
+    
 
-sub getNullInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::layer::pickup::PickupBehavior::NULL_PICKUP_BEHAVIOR == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::layer::pickup::PickupBehavior::NULL_PICKUP_BEHAVIOR = 'org::allbinary::game::layer::pickup::PickupBehavior'->new('org::allbinary::game::layer::CollidableCompositeLayer'->getNullInstance(), 0);
-        }
-        return $org::allbinary::game::layer::pickup::PickupBehavior::NULL_PICKUP_BEHAVIOR;
-}
+    constructor {ownerLayerInterface countedIndex} {
+        next
+        my initFields_PickupBehavior
+        my jset ownerLayerInterface $ownerLayerInterface
+        my jset countedIndex $countedIndex
+    }
+    
 
-
-sub new {
-    my ($class, $ownerLayerInterface, $countedIndex) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{ownerLayerInterface} = $ownerLayerInterface;
-        $self->{countedIndex} = $countedIndex;
-    return $self;
-}
-
-
-sub doPickup {
-    my ($self, $pickupProcessorInterface) = @_;
+    method doPickup {pickupProcessorInterface} {
         try {
-            my $healthInterfaceCompositeInterface = $self->{ownerLayerInterface};
-            if ($healthInterfaceCompositeInterface->getHealthInterface()->isAlive()) {
-                $pickupProcessorInterface->process($self->{ownerLayerInterface});
+            set healthInterfaceCompositeInterface [my jget ownerLayerInterface]
+            if {[[$healthInterfaceCompositeInterface getHealthInterface] isAlive]} {
+                $pickupProcessorInterface process [my jget ownerLayerInterface]
             }
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, "doPickup", $e);
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] "doPickup" $e
         }
-}
+    }
+    
 
-
-sub doPickupLayer {
-    my ($self, $pickupLayerInterface) = @_;
+    method doPickupLayer {pickupLayerInterface} {
         try {
-            my $pickedUpLayerInterfaceFactoryInterface = $pickupLayerInterface->getPickedUpLayerInterfaceFactoryInterface();
-            my $pickedUpLayerType = $pickedUpLayerInterfaceFactoryInterface->getPickedUpLayerType();
-            my $pickedUpLayerTypeFactory = 'org::allbinary::game::layer::pickup::PickedUpLayerTypeFactory'->getInstance();
-            if ($pickedUpLayerType == $pickedUpLayerTypeFactory->{BEAM} || $pickedUpLayerType == $pickedUpLayerTypeFactory->{MINE} || $pickedUpLayerType == $pickedUpLayerTypeFactory->{PROJECTILE} || $pickedUpLayerType == $pickedUpLayerTypeFactory->{ENHANCEMENT}) {
-                $self->add($pickedUpLayerInterfaceFactoryInterface);
-            } elsif ($pickedUpLayerInterfaceFactoryInterface->getPickedUpLayerType() == $pickedUpLayerTypeFactory->{PART}) {
-                my $collidableDestroyableDamageableLayer = $self->{ownerLayerInterface};
-                $collidableDestroyableDamageableLayer->addPart($pickedUpLayerInterfaceFactoryInterface);
-            } elsif ($pickedUpLayerType == $pickedUpLayerTypeFactory->{NONE}) {
+            set pickedUpLayerInterfaceFactoryInterface [$pickupLayerInterface getPickedUpLayerInterfaceFactoryInterface]
+            set pickedUpLayerType [$pickedUpLayerInterfaceFactoryInterface getPickedUpLayerType]
+            set pickedUpLayerTypeFactory [::PickedUpLayerTypeFactory::getInstance]
+            if {[expr {[expr {[expr {[expr {$pickedUpLayerType eq [$pickedUpLayerTypeFactory jget BEAM]}] || [expr {$pickedUpLayerType eq [$pickedUpLayerTypeFactory jget MINE]}]}] || [expr {$pickedUpLayerType eq [$pickedUpLayerTypeFactory jget PROJECTILE]}]}] || [expr {$pickedUpLayerType eq [$pickedUpLayerTypeFactory jget ENHANCEMENT]}]}]} {
+                my add $pickedUpLayerInterfaceFactoryInterface
+            } elseif {[expr {[$pickedUpLayerInterfaceFactoryInterface getPickedUpLayerType] == [$pickedUpLayerTypeFactory jget PART]}]} {
+                set collidableDestroyableDamageableLayer [my jget ownerLayerInterface]
+                $collidableDestroyableDamageableLayer addPart $pickedUpLayerInterfaceFactoryInterface
+            } elseif {[expr {$pickedUpLayerType eq [$pickedUpLayerTypeFactory jget NONE]}]} {
             } else {
-                my $pickupProcessorInterface = $pickedUpLayerInterfaceFactoryInterface;
-                $self->doPickup($pickupProcessorInterface);
+                set pickupProcessorInterface $pickedUpLayerInterfaceFactoryInterface
+                my doPickup $pickupProcessorInterface
             }
-            $pickupLayerInterface->setPickedUp();
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            'org::allbinary::logic::communication::log::PreLogUtil'->putOE($commonStrings->{EXCEPTION}, $self, "doPickup", $e);
+            $pickupLayerInterface setPickedUp
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            ::PreLogUtil::putOE [$commonStrings jget EXCEPTION] [self] "doPickup" $e
         }
-}
+    }
+    
 
+    method add {countedPickedUpLayerInterfaceFactoryInterface} {
+        set partIndex [expr {[$countedPickedUpLayerInterfaceFactoryInterface getId] + [my jget countedIndex]}]
+        my addAt $countedPickedUpLayerInterfaceFactoryInterface $partIndex
+    }
+    
 
-sub add {
-    my ($self, $countedPickedUpLayerInterfaceFactoryInterface) = @_;
-        my $partIndex = $countedPickedUpLayerInterfaceFactoryInterface->getId() + $self->{countedIndex};
-        $self->addAt($countedPickedUpLayerInterfaceFactoryInterface, $partIndex);
-}
+    method addAt {countedPickedUpLayerInterfaceFactoryInterface partIndex} {
+        set collidableDestroyableDamageableLayer [my jget ownerLayerInterface]
+        set countedLayerInterfaceFactory [[$collidableDestroyableDamageableLayer getPartInterfaceArray] get $partIndex]
+        $countedLayerInterfaceFactory setTotal [expr {[$countedLayerInterfaceFactory getTotal] + [$countedPickedUpLayerInterfaceFactoryInterface getTotal]}]
+    }
+    
 
-
-sub addAt {
-    my ($self, $countedPickedUpLayerInterfaceFactoryInterface, $partIndex) = @_;
-        my $collidableDestroyableDamageableLayer = $self->{ownerLayerInterface};
-        my $countedLayerInterfaceFactory = $collidableDestroyableDamageableLayer->getPartInterfaceArray()->[$partIndex];
-        $countedLayerInterfaceFactory->setTotal($countedLayerInterfaceFactory->getTotal() + $countedPickedUpLayerInterfaceFactoryInterface->getTotal());
-}
-
-
-sub getFirstAvailableCountedLayerInterfaceFactory {
-    my ($self, $pickedUpLayerTypeArray) = @_;
-        my $collidableDestroyableDamageableLayer = $self->{ownerLayerInterface};
-        my $partInterfaceArray = $collidableDestroyableDamageableLayer->getPartInterfaceArray();
-        my $size = scalar(@{$partInterfaceArray});
-        my $nextCountedLayerInterfaceFactory = undef;
-        my $countedPickedUpLayerInterfaceFactory = undef;
-        for (my $index = $self->{countedIndex}; $index < $size; $index++) {
-            $nextCountedLayerInterfaceFactory = $collidableDestroyableDamageableLayer->getPartInterfaceArray()->[$index];
-            $countedPickedUpLayerInterfaceFactory = $nextCountedLayerInterfaceFactory->getCountedPickedUpLayerInterfaceFactory();
-            for (my $index2 = scalar(@{$pickedUpLayerTypeArray}); --$index2 >= 0; ) {
-                if ($countedPickedUpLayerInterfaceFactory->getPickedUpLayerType() == $pickedUpLayerTypeArray->[$index2]) {
-                    if ($nextCountedLayerInterfaceFactory->getTotal() > 0) {
-                        return $nextCountedLayerInterfaceFactory;
+    method getFirstAvailableCountedLayerInterfaceFactory {pickedUpLayerTypeArray} {
+        set collidableDestroyableDamageableLayer [my jget ownerLayerInterface]
+        set partInterfaceArray [$collidableDestroyableDamageableLayer getPartInterfaceArray]
+        set size [$partInterfaceArray length]
+        set nextCountedLayerInterfaceFactory {}
+        set countedPickedUpLayerInterfaceFactory {}
+        for {set index [my jget countedIndex]} {[expr {$index < $size}]} {jpostincr index 1} {
+            set nextCountedLayerInterfaceFactory [[$collidableDestroyableDamageableLayer getPartInterfaceArray] get $index]
+            set countedPickedUpLayerInterfaceFactory [$nextCountedLayerInterfaceFactory getCountedPickedUpLayerInterfaceFactory]
+            for {set index2 [$pickedUpLayerTypeArray length]} {[expr {[jpreincr index2 -1] >= 0}]} {} {
+                if {[expr {[$countedPickedUpLayerInterfaceFactory getPickedUpLayerType] eq [$pickedUpLayerTypeArray get $index2]}]} {
+                    if {[expr {[$nextCountedLayerInterfaceFactory getTotal] > 0}]} {
+                        return $nextCountedLayerInterfaceFactory
                     }
                 }
             }
         }
-        return $org::allbinary::game::part::CountedLayerInterfaceFactoryPart::NULL_COUNTED_LAYER_INTERFACE_FACTORY;
-}
+        return [::CountedLayerInterfaceFactoryPart::staticGet_NULL_COUNTED_LAYER_INTERFACE_FACTORY]
+    }
+    
 
-
-# throws Exception
-sub getCountedLayerInterfaceFactoryForSlot {
-    my ($self, $slotIndex) = @_;
-        my $currentSlot = 0;
-        my $collidableDestroyableDamageableLayer = $self->{ownerLayerInterface};
-        my $partInterfaceArray = $collidableDestroyableDamageableLayer->getPartInterfaceArray();
-        my $size = scalar(@{$partInterfaceArray});
-        my $nextCountedLayerInterfaceFactory = undef;
-        for (my $index = $self->{countedIndex}; $index < $size; $index++) {
-            $nextCountedLayerInterfaceFactory = $collidableDestroyableDamageableLayer->getPartInterfaceArray()->[$index];
-            if ($nextCountedLayerInterfaceFactory->getTotal() > 0) {
-                if ($currentSlot == $slotIndex) {
-                    return $nextCountedLayerInterfaceFactory;
+    method getCountedLayerInterfaceFactoryForSlot {slotIndex} {
+        set currentSlot 0
+        set collidableDestroyableDamageableLayer [my jget ownerLayerInterface]
+        set partInterfaceArray [$collidableDestroyableDamageableLayer getPartInterfaceArray]
+        set size [$partInterfaceArray length]
+        set nextCountedLayerInterfaceFactory {}
+        for {set index [my jget countedIndex]} {[expr {$index < $size}]} {jpostincr index 1} {
+            set nextCountedLayerInterfaceFactory [[$collidableDestroyableDamageableLayer getPartInterfaceArray] get $index]
+            if {[expr {[$nextCountedLayerInterfaceFactory getTotal] > 0}]} {
+                if {[expr {$currentSlot == $slotIndex}]} {
+                    return $nextCountedLayerInterfaceFactory
                 } else {
-                    $currentSlot++;
+                    jpostincr currentSlot 1
                 }
             }
         }
-        return $org::allbinary::game::part::CountedLayerInterfaceFactoryPart::NULL_COUNTED_LAYER_INTERFACE_FACTORY;
+        return [::CountedLayerInterfaceFactoryPart::staticGet_NULL_COUNTED_LAYER_INTERFACE_FACTORY]
+    }
+    
+
+    method getCountedIndex {} {
+        return [my jget countedIndex]
+    }
 }
 
-
-sub getCountedIndex {
-    my ($self) = @_;
-        return $self->{countedIndex};
+namespace eval ::PickupBehavior {
+    variable NULL_PICKUP_BEHAVIORValue {}
+    variable NULL_PICKUP_BEHAVIORSet 0
+    proc staticGet_NULL_PICKUP_BEHAVIOR {} {
+        variable NULL_PICKUP_BEHAVIORValue
+        variable NULL_PICKUP_BEHAVIORSet
+        if {!$NULL_PICKUP_BEHAVIORSet} {
+            set NULL_PICKUP_BEHAVIORSet 1
+            set NULL_PICKUP_BEHAVIORValue [[::NullUtil::getInstance] jget NULL_OBJECT]
+        }
+        return $NULL_PICKUP_BEHAVIORValue
+    }
+    proc staticSet_NULL_PICKUP_BEHAVIOR {value} {
+        variable NULL_PICKUP_BEHAVIORValue
+        variable NULL_PICKUP_BEHAVIORSet
+        set NULL_PICKUP_BEHAVIORSet 1
+        set NULL_PICKUP_BEHAVIORValue $value
+    }
+    proc getNullInstance {} {
+        if {[expr {[::PickupBehavior::staticGet_NULL_PICKUP_BEHAVIOR] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::PickupBehavior::staticSet_NULL_PICKUP_BEHAVIOR [::PickupBehavior new [::CollidableCompositeLayer::getNullInstance] 0]
+        }
+        return [::PickupBehavior::staticGet_NULL_PICKUP_BEHAVIOR]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::health::HealthInterfaceCompositeInterface ();
-use org::allbinary::game::layer::CollidableCompositeLayer ();
-use org::allbinary::game::layer::special::CollidableDestroyableDamageableLayer ();
-use org::allbinary::game::part::CountedLayerInterfaceFactoryPart ();
-use org::allbinary::game::part::PartInterface ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::layer::pickup::PickupBehaviorInterface ();
-use org::allbinary::game::layer::pickup::PickedUpLayerTypeFactory ();
-
-1;
 

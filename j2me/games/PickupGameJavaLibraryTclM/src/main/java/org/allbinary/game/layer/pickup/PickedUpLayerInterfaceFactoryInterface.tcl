@@ -11,35 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
-# Java interface
-package org::allbinary::game::layer::pickup::PickedUpLayerInterfaceFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getPickedUpLayerType {
-    my ($self) = @_;
-    die "abstract method getPickedUpLayerType";
+oo::class create ::PickedUpLayerInterfaceFactoryInterface {
+    superclass ::JObject
 }
 
+oo::define ::PickedUpLayerInterfaceFactoryInterface {
+    method initFields_PickedUpLayerInterfaceFactoryInterface {} {
+        return
+    }
+    
 
-sub getIconLayer {
-    my ($self) = @_;
-    die "abstract method getIconLayer";
+    method getPickedUpLayerType {} {
+        error [jexception AbstractMethodError getPickedUpLayerType]
+    }
+    
+
+    method getIconLayer {} {
+        error [jexception AbstractMethodError getIconLayer]
+    }
+    
+
+    method getAnimationInterface {} {
+        error [jexception AbstractMethodError getAnimationInterface]
+    }
 }
 
-
-sub getAnimationInterface {
-    my ($self) = @_;
-    die "abstract method getAnimationInterface";
+namespace eval ::PickedUpLayerInterfaceFactoryInterface {
 }
 
-use org::allbinary::animation::Animation ();
-use org::allbinary::layer::AllBinaryLayer ();
-
-1;
 

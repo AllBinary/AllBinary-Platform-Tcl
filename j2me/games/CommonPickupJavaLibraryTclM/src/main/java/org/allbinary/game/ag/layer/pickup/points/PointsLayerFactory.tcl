@@ -11,40 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.pickup.points
 
-package org::allbinary::game::ag::layer::pickup::points::PointsLayerFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::layer::AllBinaryLayerFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{points} = undef;
+oo::class create ::PointsLayerFactory {
+    superclass ::JObject
 }
 
+oo::define ::PointsLayerFactory {
+    method initFields_PointsLayerFactory {} {
+        my jset points 0
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $points) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{points} = $points;
-    return $self;
+    constructor {points} {
+        next
+        my initFields_PointsLayerFactory
+        my jset points $points
+    }
+    
+
+    method getInstance {} {
+        return [::PointsLayer new [my jget points]]
+    }
 }
 
-
-# throws Exception
-sub getInstance {
-    my ($self) = @_;
-        return 'org::allbinary::game::ag::layer::pickup::points::PointsLayer'->new($self->{points});
+namespace eval ::PointsLayerFactory {
 }
 
-use java::lang::Object ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerFactoryInterface ();
-use org::allbinary::game::ag::layer::pickup::points::PointsLayer ();
-
-1;
 

@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-# Java interface
-package org::allbinary::game::collision::CollidableBaseBehaviorFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub createBehavior {
-    my ($self) = @_;
-    die "abstract method createBehavior";
+oo::class create ::CollidableBaseBehaviorFactoryInterface {
+    superclass ::JObject
 }
 
+oo::define ::CollidableBaseBehaviorFactoryInterface {
+    method initFields_CollidableBaseBehaviorFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method createBehavior {} {
+        error [jexception AbstractMethodError createBehavior]
+    }
+}
+
+namespace eval ::CollidableBaseBehaviorFactoryInterface {
+}
+
 

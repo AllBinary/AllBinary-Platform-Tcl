@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.resource
 
-package org::allbinary::game::resource::ResourceInitialization;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::init::Init';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::ResourceInitialization {
+    superclass ::Init
 }
 
-use java::lang::Object ();
-use org::allbinary::init::Init ();
+oo::define ::ResourceInitialization {
+    method initFields_ResourceInitialization {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_ResourceInitialization
+    }
+}
+
+namespace eval ::ResourceInitialization {
+}
+
 

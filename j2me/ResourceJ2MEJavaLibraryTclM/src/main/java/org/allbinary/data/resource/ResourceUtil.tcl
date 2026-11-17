@@ -11,88 +11,76 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.data.resource
 
 #J2ME
-package org::allbinary::data::resource::ResourceUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::data::resource::ResourceUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::ResourceUtil {
+    superclass ::JObject
 }
 
+oo::define ::ResourceUtil {
+    method initFields_ResourceUtil {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::data::resource::ResourceUtil::instance;
-}
+    constructor {} {
+        next
+        my initFields_ResourceUtil
+    }
+    
 
+    method setLoadingPaths {path ext} {
+        [my jget logUtil] putF [[::CommonStrings::getInstance] jget NOT_IMPLEMENTED] [self] "setLoadingPaths"
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-sub setLoadingPaths {
-    my ($self, $path, $ext) = @_;
-        $self->{logUtil}->putF('org::allbinary::string::CommonStrings'->getInstance()->{NOT_IMPLEMENTED}, $self, "setLoadingPaths");
-}
-
-
-# throws Exception
-sub getResourceAsStream {
-    my ($self, $resource) = @_;
-        my $inputStream = ref($resource)->getResourceAsStream($resource);
-        if (!defined($inputStream)) {
-            $inputStream = $self->getResourceAsStreamAtStart($resource, 2);
-            if (!defined($inputStream)) {
-                $inputStream = $self->getResourceAsStreamAtStart($resource, 1);
-                if (!defined($inputStream)) {
-                    my $stringMaker = 'org::allbinary::logic::string::StringMaker'->new();
-                    my $index = rindex($resource, "/");
-                    my $resourcePath = substr($resource, $index + 1);
-                    $inputStream = ref($resource)->getResourceAsStream($resourcePath);
-                    if (!defined($inputStream)) {
-                        $resourcePath = substr($resource, $index);
-                        $inputStream = ref($resource)->getResourceAsStream($resourcePath);
-                        if (!defined($inputStream)) {
-                            my $RES = "res";
-                            $resourcePath = $stringMaker->append($RES)->append(substr($resource, $index))->toString();
-                            $inputStream = ref($resource)->getResourceAsStream($resourcePath);
-                            if (!defined($inputStream)) {
-                                $stringMaker->delete(0, $stringMaker->length());
-                                $resourcePath = $stringMaker->append("/")->append($RES)->append(substr($resource, $index))->toString();
-                                $inputStream = ref($resource)->getResourceAsStream($resourcePath);
-                                my $COLON = 'org::allbinary::string::CommonSeps'->getInstance()->{COLON};
-                                if (!defined($inputStream)) {
-                                    $stringMaker->delete(0, $stringMaker->length());
-                                    $resourcePath = $stringMaker->append($RES)->append($COLON)->append(substr($resource, $index))->toString();
-                                    $inputStream = ref($resource)->getResourceAsStream($resourcePath);
-                                    if (!defined($inputStream)) {
-                                        $stringMaker->delete(0, $stringMaker->length());
-                                        $resourcePath = $stringMaker->append($RES)->append($COLON)->append(substr($resource, $index + 1))->toString();
-                                        $inputStream = ref($resource)->getResourceAsStream($resourcePath);
-                                        if (!defined($inputStream)) {
-                                            my $RESOURCE_STRING = "resource";
-                                            $stringMaker->delete(0, $stringMaker->length());
-                                            $resourcePath = $stringMaker->append($RESOURCE_STRING)->append($COLON)->append(substr($resource, $index))->toString();
-                                            $inputStream = ref($resource)->getResourceAsStream($resourcePath);
-                                            if (!defined($inputStream)) {
-                                                $stringMaker->delete(0, $stringMaker->length());
-                                                $resourcePath = $stringMaker->append($RESOURCE_STRING)->append($COLON)->append(substr($resource, $index + 1))->toString();
-                                                $inputStream = ref($resource)->getResourceAsStream($resourcePath);
-                                                if (!defined($inputStream)) {
-                                                    $stringMaker->delete(0, $stringMaker->length());
-                                                    die ($stringMaker->append("Unable to obtain: ")->append($resource)->toString());
+    method getResourceAsStream {resource} {
+        set inputStream [[jclassname $resource] getResourceAsStream $resource]
+        if {[expr {$inputStream eq {}}]} {
+            set inputStream [my getResourceAsStreamAtStart $resource 2]
+            if {[expr {$inputStream eq {}}]} {
+                set inputStream [my getResourceAsStreamAtStart $resource 1]
+                if {[expr {$inputStream eq {}}]} {
+                    set stringMaker [::StringMaker new]
+                    set index [jlastindexof $resource [scan "/" %c]]
+                    set resourcePath [jsubstring $resource [jint [expr {$index + 1}]]]
+                    set inputStream [[jclassname $resource] getResourceAsStream $resourcePath]
+                    if {[expr {$inputStream eq {}}]} {
+                        set resourcePath [jsubstring $resource $index]
+                        set inputStream [[jclassname $resource] getResourceAsStream $resourcePath]
+                        if {[expr {$inputStream eq {}}]} {
+                            set RES "res"
+                            set resourcePath [[[$stringMaker append $RES] append [jsubstring $resource $index]] toString]
+                            set inputStream [[jclassname $resource] getResourceAsStream $resourcePath]
+                            if {[expr {$inputStream eq {}}]} {
+                                $stringMaker delete 0 [$stringMaker length]
+                                set resourcePath [[[[$stringMaker append "/"] append $RES] append [jsubstring $resource $index]] toString]
+                                set inputStream [[jclassname $resource] getResourceAsStream $resourcePath]
+                                set COLON [[::CommonSeps::getInstance] jget COLON]
+                                if {[expr {$inputStream eq {}}]} {
+                                    $stringMaker delete 0 [$stringMaker length]
+                                    set resourcePath [[[[$stringMaker append $RES] append $COLON] append [jsubstring $resource $index]] toString]
+                                    set inputStream [[jclassname $resource] getResourceAsStream $resourcePath]
+                                    if {[expr {$inputStream eq {}}]} {
+                                        $stringMaker delete 0 [$stringMaker length]
+                                        set resourcePath [[[[$stringMaker append $RES] append $COLON] append [jsubstring $resource [jint [expr {$index + 1}]]]] toString]
+                                        set inputStream [[jclassname $resource] getResourceAsStream $resourcePath]
+                                        if {[expr {$inputStream eq {}}]} {
+                                            set RESOURCE_STRING "resource"
+                                            $stringMaker delete 0 [$stringMaker length]
+                                            set resourcePath [[[[$stringMaker append $RESOURCE_STRING] append $COLON] append [jsubstring $resource $index]] toString]
+                                            set inputStream [[jclassname $resource] getResourceAsStream $resourcePath]
+                                            if {[expr {$inputStream eq {}}]} {
+                                                $stringMaker delete 0 [$stringMaker length]
+                                                set resourcePath [[[[$stringMaker append $RESOURCE_STRING] append $COLON] append [jsubstring $resource [jint [expr {$index + 1}]]]] toString]
+                                                set inputStream [[jclassname $resource] getResourceAsStream $resourcePath]
+                                                if {[expr {$inputStream eq {}}]} {
+                                                    $stringMaker delete 0 [$stringMaker length]
+                                                    error [jexception Exception [[[$stringMaker append "Unable to obtain: "] append $resource] toString]]
                                                 }
                                             }
                                         }
@@ -104,35 +92,47 @@ sub getResourceAsStream {
                 }
             }
         }
-        return $inputStream;
-}
+        return $inputStream
+    }
+    
 
-
-# throws Exception
-sub getResourceAsStreamAtStart {
-    my ($self, $resource, $startIndex) = @_;
-        my $stringMaker = 'org::allbinary::logic::string::StringMaker'->new();
-        my $index = index($resource, 'org::allbinary::string::CommonSeps'->getInstance()->{COLON});
-        my $resourcePath = substr($resource, $index + $startIndex);
-        my $inputStream = ref($resource)->getResourceAsStream($resourcePath);
-        if (defined($inputStream)) {
-            return $inputStream;
+    method getResourceAsStreamAtStart {resource startIndex} {
+        set stringMaker [::StringMaker new]
+        set index [string first [[::CommonSeps::getInstance] jget COLON] $resource]
+        set resourcePath [jsubstring $resource [jint [expr {$index + $startIndex}]]]
+        set inputStream [[jclassname $resource] getResourceAsStream $resourcePath]
+        if {[expr {$inputStream ne {}}]} {
+            return $inputStream
         }
-        return $inputStream;
+        return $inputStream
+    }
+    
+
+    method addResource {resource value} {
+    }
 }
 
-
-sub addResource {
-    my ($self, $resource, $value) = @_;
+namespace eval ::ResourceUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ResourceUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ResourceUtil::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::InputStream ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

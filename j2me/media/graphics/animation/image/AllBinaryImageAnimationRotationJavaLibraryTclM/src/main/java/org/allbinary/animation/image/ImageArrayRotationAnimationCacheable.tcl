@@ -11,41 +11,35 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::ImageArrayRotationAnimationCacheable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::image::AdjustedImageArrayRotationAnimation','org::allbinary::logic::util::cache::CacheableInterface';
-
-
-
-sub new {
-    my ($class, $anyType, $animationBehavior) = @_;
-    my $self = $class->SUPER::new(($anyType)->getImageArray(), ($anyType)->getAngleInfoP(), ($anyType)->getTotalAngle(), ($anyType)->getDx(), ($anyType)->getDy(), $animationBehavior);
-        # super(...) made $self above
-    return $self;
+oo::class create ::ImageArrayRotationAnimationCacheable {
+    superclass ::AdjustedImageArrayRotationAnimation
 }
 
+oo::define ::ImageArrayRotationAnimationCacheable {
+    method initFields_ImageArrayRotationAnimationCacheable {} {
+        return
+    }
+    
 
-sub getKey {
-    my ($self) = @_;
-        return 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT};
+    constructor {anyType animationBehavior} {
+        next [($anyType) getImageArray] [($anyType) getAngleInfoP] [($anyType) getTotalAngle] [($anyType) getDx] [($anyType) getDy] $animationBehavior
+        my initFields_ImageArrayRotationAnimationCacheable
+    }
+    
+
+    method getKey {} {
+        return [[::NullUtil::getInstance] jget NULL_OBJECT]
+    }
+    
+
+    method toString {} {
+        return [[::StringUtil::getInstance] jget EMPTY_STRING]
+    }
 }
 
-
-sub toString {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+namespace eval ::ImageArrayRotationAnimationCacheable {
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::util::cache::CacheableInterface ();
-use org::allbinary::animation::image::AdjustedImageArrayRotationAnimation ();
-
-1;
 

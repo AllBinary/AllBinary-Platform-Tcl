@@ -11,45 +11,39 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchButtonResourceOpenGLESAnimationInterfaceFactoryInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::motion::button::TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new("OpenGL TouchButton Animations");
-        # super(...) made $self above
-    return $self;
+oo::class create ::TouchButtonResourceOpenGLESAnimationInterfaceFactoryInterfaceFactory {
+    superclass ::TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory
 }
 
+oo::define ::TouchButtonResourceOpenGLESAnimationInterfaceFactoryInterfaceFactory {
+    method initFields_TouchButtonResourceOpenGLESAnimationInterfaceFactoryInterfaceFactory {} {
+        return
+    }
+    
 
-# throws Exception
-sub init {
-    my ($self, $level) = @_;
-        $self->SUPER::initImageCache('org::allbinary::image::opengles::OpenGLImageCacheFactory'->getInstance(), $level);
-}
+    constructor {} {
+        next "OpenGL TouchButton Animations"
+        my initFields_TouchButtonResourceOpenGLESAnimationInterfaceFactoryInterfaceFactory
+    }
+    
 
+    method init {level} {
+        next [::OpenGLImageCacheFactory::getInstance] $level
+    }
+    
 
-sub isFeature {
-    my ($self) = @_;
-        if ('org::allbinary::game::configuration::feature::Features'->getInstance()->isDefault('org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance()->{OPENGL})) {
-            return 1;
+    method isFeature {} {
+        if {[[::Features::getInstance] isDefault [[::OpenGLFeatureFactory::getInstance] jget OPENGL]]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::graphics::opengles::OpenGLFeatureFactory ();
-use org::allbinary::image::opengles::OpenGLImageCacheFactory ();
-use org::allbinary::input::motion::button::TouchButtonResourceAnimationInterfaceFactoryInterfaceFactory ();
+namespace eval ::TouchButtonResourceOpenGLESAnimationInterfaceFactoryInterfaceFactory {
+}
 
-1;
 

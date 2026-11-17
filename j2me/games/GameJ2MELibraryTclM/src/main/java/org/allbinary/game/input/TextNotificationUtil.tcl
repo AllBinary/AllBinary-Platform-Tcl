@@ -11,78 +11,75 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::TextNotificationUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::TextNotificationUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{TWO} = 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt(2);
-    $self->{FALSE} = 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{FALSE};
-    $self->{gameNotificationEventHandler} = 'org::allbinary::game::layer::hud::event::GameNotificationEventHandler'->getInstance();
+oo::class create ::TextNotificationUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::TextNotificationUtil {
+    method initFields_TextNotificationUtil {} {
+        my jset TWO {}
+        my jset FALSE {}
+        my jset gameNotificationEventHandler {}
+        my jset TWO [[::SmallIntegerSingletonFactory::getInstance] getAt 2]
+        my jset FALSE [[::BooleanFactory::getInstance] jget FALSE]
+        my jset gameNotificationEventHandler [::GameNotificationEventHandler::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_TextNotificationUtil
+    }
+    
+    
+
+    method fireError {message} {
+        [::PrimaryPlayerQueueFactory::getInstance] add [::ErrorSound::getInstance]
+        my fire $message
+    }
+    
+
+    method fireNew {message} {
+        [::PrimaryPlayerQueueFactory::getInstance] add [::SelectSound::getInstance]
+        my fire $message
+    }
+    
+
+    method fireSuccess {message} {
+        [::PrimaryPlayerQueueFactory::getInstance] add [::SelectSound::getInstance]
+        my fire $message
+    }
+    
+
+    method fire {message} {
+        set gameNotificationEvent [::GameNotificationEvent new [self] $message [my jget TWO] [[::BasicColorFactory::getInstance] jget RED] [my jget FALSE]]
+        [my jget gameNotificationEventHandler] fireEvent $gameNotificationEvent
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::TextNotificationUtil::instance;
+namespace eval ::TextNotificationUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::TextNotificationUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::TextNotificationUtil::staticGet_instance]
+    }
 }
 
-
-# throws Exception
-sub fireError {
-    my ($self, $message) = @_;
-        'org::allbinary::media::audio::PrimaryPlayerQueueFactory'->getInstance()->add('org::allbinary::media::audio::ErrorSound'->getInstance());
-        $self->fire($message);
-}
-
-
-# throws Exception
-sub fireNew {
-    my ($self, $message) = @_;
-        'org::allbinary::media::audio::PrimaryPlayerQueueFactory'->getInstance()->add('org::allbinary::media::audio::SelectSound'->getInstance());
-        $self->fire($message);
-}
-
-
-# throws Exception
-sub fireSuccess {
-    my ($self, $message) = @_;
-        'org::allbinary::media::audio::PrimaryPlayerQueueFactory'->getInstance()->add('org::allbinary::media::audio::SelectSound'->getInstance());
-        $self->fire($message);
-}
-
-
-# throws Exception
-sub fire {
-    my ($self, $message) = @_;
-        my $gameNotificationEvent = 'org::allbinary::game::layer::hud::event::GameNotificationEvent'->new($self, $message, $self->{TWO}, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{RED}, $self->{FALSE});
-        $self->{gameNotificationEventHandler}->fireEvent($gameNotificationEvent);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::layer::hud::event::GameNotificationEvent ();
-use org::allbinary::game::layer::hud::event::GameNotificationEventHandler ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::logic::java::bool::BooleanFactory ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::media::audio::ErrorSound ();
-use org::allbinary::media::audio::PrimaryPlayerQueueFactory ();
-use org::allbinary::media::audio::SelectSound ();
-
-1;
 

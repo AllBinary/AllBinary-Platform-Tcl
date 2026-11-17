@@ -11,38 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.canvas
 
-package org::allbinary::canvas::RunnableCanvasRefreshHelper;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::canvas::Processor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{runnableCanvas} = undef;
+oo::class create ::RunnableCanvasRefreshHelper {
+    superclass ::Processor
 }
 
+oo::define ::RunnableCanvasRefreshHelper {
+    method initFields_RunnableCanvasRefreshHelper {} {
+        my jset runnableCanvas {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $runnableCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{runnableCanvas} = $runnableCanvas;
-    return $self;
+    constructor {runnableCanvas} {
+        next
+        my initFields_RunnableCanvasRefreshHelper
+        my jset runnableCanvas $runnableCanvas
+    }
+    
+
+    method process {} {
+        [my jget runnableCanvas] repaint
+    }
 }
 
-
-sub process {
-    my ($self) = @_;
-        $self->{runnableCanvas}->repaint();
+namespace eval ::RunnableCanvasRefreshHelper {
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::displayable::MyCanvas ();
-use org::allbinary::canvas::Processor ();
-
-1;
 

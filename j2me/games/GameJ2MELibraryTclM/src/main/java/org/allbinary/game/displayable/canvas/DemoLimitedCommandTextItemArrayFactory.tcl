@@ -11,44 +11,52 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::DemoLimitedCommandTextItemArrayFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::displayable::canvas::DemoLimitedCommandTextItemArrayFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commandTextItemArrayFactory} = 'org::allbinary::graphics::form::item::CommandTextItemArrayFactory'->new('org::allbinary::graphics::form::item::LimitCommandsVisitor'->new());
+oo::class create ::DemoLimitedCommandTextItemArrayFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::DemoLimitedCommandTextItemArrayFactory {
+    method initFields_DemoLimitedCommandTextItemArrayFactory {} {
+        my jset commandTextItemArrayFactory {}
+        my jset commandTextItemArrayFactory [::CommandTextItemArrayFactory new [::LimitCommandsVisitor new]]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_DemoLimitedCommandTextItemArrayFactory
+    }
+    
+    
+
+    method getCommandTextItemArrayFactory {} {
+        return [my jget commandTextItemArrayFactory]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::displayable::canvas::DemoLimitedCommandTextItemArrayFactory::instance;
+namespace eval ::DemoLimitedCommandTextItemArrayFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::DemoLimitedCommandTextItemArrayFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::DemoLimitedCommandTextItemArrayFactory::staticGet_instance]
+    }
 }
 
-
-sub getCommandTextItemArrayFactory {
-    my ($self) = @_;
-        return $self->{commandTextItemArrayFactory};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::form::item::CommandTextItemArrayFactory ();
-use org::allbinary::graphics::form::item::LimitCommandsVisitor ();
-
-1;
 

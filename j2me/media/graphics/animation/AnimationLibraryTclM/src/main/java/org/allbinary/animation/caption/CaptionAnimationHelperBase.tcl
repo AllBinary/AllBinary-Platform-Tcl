@@ -11,48 +11,58 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.caption
 
-package org::allbinary::animation::caption::CaptionAnimationHelperBase;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::Animation';
-
-tie our $INSTANCE, 'java::lang::LazyStatic', sub { 'org::allbinary::animation::caption::CaptionAnimationHelperBase'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::CaptionAnimationHelperBase {
+    superclass ::Animation
 }
 
+oo::define ::CaptionAnimationHelperBase {
+    method initFields_CaptionAnimationHelperBase {} {
+        return
+    }
 
-sub isShowing {
-    my ($self) = @_;
-        return 0;
+    constructor {} {
+        next
+        my initFields_CaptionAnimationHelperBase
+    }
+    
+
+    method isShowing {} {
+        return false
+    }
+    
+
+    method tick {} {
+    }
+    
+
+    method update {message basicColor} {
+    }
+    
+
+    method paintXY {graphics x y} {
+    }
 }
 
-
-sub tick {
-    my ($self) = @_;
+namespace eval ::CaptionAnimationHelperBase {
+    variable INSTANCEValue {}
+    variable INSTANCESet 0
+    proc staticGet_INSTANCE {} {
+        variable INSTANCEValue
+        variable INSTANCESet
+        if {!$INSTANCESet} {
+            set INSTANCESet 1
+            set INSTANCEValue [::CaptionAnimationHelperBase new]
+        }
+        return $INSTANCEValue
+    }
+    proc staticSet_INSTANCE {value} {
+        variable INSTANCEValue
+        variable INSTANCESet
+        set INSTANCESet 1
+        set INSTANCEValue $value
+    }
 }
 
-
-sub update {
-    my ($self, $message, $basicColor) = @_;
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::graphics::color::BasicColor ();
-
-1;
 

@@ -11,132 +11,113 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-package org::allbinary::layer::AllBinaryLayerManager;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::LayerManager';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{layerManagerEventHandler} = 'org::allbinary::layer::event::LayerManagerEventHandler'->getInstance();
-    $self->{createLayerManagerEvent} = 'org::allbinary::layer::event::LayerManagerEvent'->new($self, $self->{layerManagerEventHandler}->{CREATE});
-    $self->{deleteLayerManagerEvent} = 'org::allbinary::layer::event::LayerManagerEvent'->new($self, $self->{layerManagerEventHandler}->{DELETE});
-    $self->{basicLayerProcessorArray} = [(undef) x (0)];
+oo::class create ::AllBinaryLayerManager {
+    superclass ::LayerManager
 }
 
+oo::define ::AllBinaryLayerManager {
+    method initFields_AllBinaryLayerManager {} {
+        my jset layerManagerEventHandler {}
+        my jset createLayerManagerEvent {}
+        my jset deleteLayerManagerEvent {}
+        my jset basicLayerProcessorArray {}
+        my jset layerManagerEventHandler [::LayerManagerEventHandler::getInstance]
+        my jset createLayerManagerEvent [::LayerManagerEvent new [self] [[my jget layerManagerEventHandler] jget CREATE]]
+        my jset deleteLayerManagerEvent [::LayerManagerEvent new [self] [[my jget layerManagerEventHandler] jget DELETE]]
+        my jset basicLayerProcessorArray [jarray 0 {}]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::layer::LayerManagerNoDebug'->getInstance());
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
-}
+    constructor {} {
+        next [::LayerManagerNoDebug::getInstance]
+        my initFields_AllBinaryLayerManager
+    }
+    
 
+    method getLayerProcessorArray {} {
+        return [my jget basicLayerProcessorArray]
+    }
+    
 
-sub getLayerProcessorArray {
-    my ($self) = @_;
-        return $self->{basicLayerProcessorArray};
-}
+    method setLayerProcessorArray {layerProcessorArray} {
+        my jset basicLayerProcessorArray $layerProcessorArray
+    }
+    
 
-
-sub setLayerProcessorArray {
-    my ($self, $layerProcessorArray) = @_;
-        $self->{basicLayerProcessorArray} = $layerProcessorArray;
-}
-
-
-sub log {
-    my ($self) = @_;
-        my $size = scalar(@{$self->{basicLayerProcessorArray}});
-        for (my $index = 0; $index < $size; $index++) {
-            my $layerProcessorInterface = $self->{basicLayerProcessorArray}->[$index];
+    method log {} {
+        set size [[my jget basicLayerProcessorArray] length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set layerProcessorInterface [[my jget basicLayerProcessorArray] get $index]
         }
-}
+    }
+    
 
-
-# throws Exception
-sub append {
-    my ($self, $layerInterface) = @_;
-        if (!$self->contains($layerInterface)) {
-            $self->appendProcessors($layerInterface);
-            $self->SUPER::append($layerInterface);
+    method append {layerInterface} {
+        if {[expr {![my contains $layerInterface]}]} {
+            my appendProcessors $layerInterface
+            next $layerInterface
         }
-}
+    }
+    
 
-
-# throws Exception
-sub appendAt {
-    my ($self, $layerInterface, $index) = @_;
-        if (!$self->contains($layerInterface)) {
-            $self->appendProcessors($layerInterface);
-            $self->SUPER::appendAt($layerInterface, $index);
+    method appendAt {layerInterface index} {
+        if {[expr {![my contains $layerInterface]}]} {
+            my appendProcessors $layerInterface
+            next $layerInterface $index
         }
-}
+    }
+    
 
-
-# throws Exception
-sub appendProcessors {
-    my ($self, $layerInterface) = @_;
-        $self->{createLayerManagerEvent}->setLayerInterface($layerInterface);
-        $self->{layerManagerEventHandler}->fireEvent($self->{createLayerManagerEvent});
-        my $layerProcessorInterface = undef;
-        for (my $index = scalar(@{$self->{basicLayerProcessorArray}}); --$index >= 0; ) {
-            $layerProcessorInterface = $self->{basicLayerProcessorArray}->[$index];
-            if ($layerProcessorInterface->isProcessorLayer($layerInterface)) {
-                $layerProcessorInterface->getLayerManager()->append($layerInterface);
+    method appendProcessors {layerInterface} {
+        [my jget createLayerManagerEvent] setLayerInterface $layerInterface
+        [my jget layerManagerEventHandler] fireEvent [my jget createLayerManagerEvent]
+        set layerProcessorInterface {}
+        for {set index [[my jget basicLayerProcessorArray] length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            set layerProcessorInterface [[my jget basicLayerProcessorArray] get $index]
+            if {[$layerProcessorInterface isProcessorLayer $layerInterface]} {
+                [$layerProcessorInterface getLayerManager] append $layerInterface
             }
         }
-}
+    }
+    
 
-
-# throws Exception
-sub remove {
-    my ($self, $layerInterface) = @_;
-        $self->{deleteLayerManagerEvent}->setLayerInterface($layerInterface);
-        $self->{layerManagerEventHandler}->fireDeleteEvent($self->{deleteLayerManagerEvent});
-        my $layerProcessorInterface = undef;
-        for (my $index = scalar(@{$self->{basicLayerProcessorArray}}); --$index >= 0; ) {
-            $layerProcessorInterface = $self->{basicLayerProcessorArray}->[$index];
-            $layerProcessorInterface->getLayerManager()->remove($layerInterface);
+    method remove {layerInterface} {
+        [my jget deleteLayerManagerEvent] setLayerInterface $layerInterface
+        [my jget layerManagerEventHandler] fireDeleteEvent [my jget deleteLayerManagerEvent]
+        set layerProcessorInterface {}
+        for {set index [[my jget basicLayerProcessorArray] length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            set layerProcessorInterface [[my jget basicLayerProcessorArray] get $index]
+            [$layerProcessorInterface getLayerManager] remove $layerInterface
         }
-        $self->SUPER::remove($layerInterface);
-}
+        next $layerInterface
+    }
+    
 
-
-# throws Exception
-sub process {
-    my ($self) = @_;
-        my $layerProcessorInterface = undef;
-        my $size = scalar(@{$self->{basicLayerProcessorArray}});
-        for (my $index = 0; $index < $size; $index++) {
-            $layerProcessorInterface = $self->{basicLayerProcessorArray}->[$index];
-            $layerProcessorInterface->process($self);
+    method process {} {
+        set layerProcessorInterface {}
+        set size [[my jget basicLayerProcessorArray] length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set layerProcessorInterface [[my jget basicLayerProcessorArray] get $index]
+            $layerProcessorInterface process [self]
         }
-}
+    }
+    
 
-
-# throws Exception
-sub cleanup {
-    my ($self) = @_;
-        my $layerProcessorInterface = undef;
-        my $size = scalar(@{$self->{basicLayerProcessorArray}});
-        for (my $index = 0; $index < $size; $index++) {
-            $layerProcessorInterface = $self->{basicLayerProcessorArray}->[$index];
-            $layerProcessorInterface->getLayerManager()->cleanup();
+    method cleanup {} {
+        set layerProcessorInterface {}
+        set size [[my jget basicLayerProcessorArray] length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set layerProcessorInterface [[my jget basicLayerProcessorArray] get $index]
+            [$layerProcessorInterface getLayerManager] cleanup
         }
-        $self->SUPER::cleanup();
+        next
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::layer::event::LayerManagerEvent ();
-use org::allbinary::layer::event::LayerManagerEventHandler ();
-use org::allbinary::layer::LayerManager ();
-use org::allbinary::layer::LayerManagerNoDebug ();
+namespace eval ::AllBinaryLayerManager {
+}
 
-1;
 

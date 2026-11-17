@@ -11,71 +11,59 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.tracking
 
-package org::allbinary::game::tracking::TrackingEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{layerInterface} = $org::allbinary::layer::AllBinaryLayer::NULL_ALLBINARY_LAYER;
+oo::class create ::TrackingEvent {
+    superclass ::AllBinaryEventObject
 }
 
+oo::define ::TrackingEvent {
+    method initFields_TrackingEvent {} {
+        my jset layerInterface {}
+        my jset layerInterface [::AllBinaryLayer::staticGet_NULL_ALLBINARY_LAYER]
+        return
+    }
+    
 
-sub new {
-    my ($class, $allBinaryLayerInterface) = @_;
-    my $self = $class->SUPER::new($allBinaryLayerInterface);
-    _init_fields($self);
-        # super(...) made $self above
-        if ($allBinaryLayerInterface != 'org::allbinary::game::tracking::TrackingEventHandler'->getInstance()) {
-            $self->setLayerInterface($allBinaryLayerInterface);
+    constructor {allBinaryLayerInterface} {
+        next $allBinaryLayerInterface
+        my initFields_TrackingEvent
+        if {[expr {$allBinaryLayerInterface ne [::TrackingEventHandler::getInstance]}]} {
+            my setLayerInterface $allBinaryLayerInterface
         }
-    return $self;
+    }
+    
+
+    method init {anyType} {
+        my setSource $anyType
+    }
+    
+
+    method getLayerInterface {} {
+        return [my jget layerInterface]
+    }
+    
+
+    method setLayerInterface {layerInterface} {
+        my jset layerInterface $layerInterface
+    }
+    
+
+    method setLayerInterfaceForCircularStaticPool {layerInterface} {
+        my jset layerInterface $layerInterface
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "TrackingEvent: \n"
+        $stringBuffer append "LayerInterface: "
+        $stringBuffer append [[my jget layerInterface] toString]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub init {
-    my ($self, $anyType) = @_;
-        $self->setSource($anyType);
+namespace eval ::TrackingEvent {
 }
 
-
-sub getLayerInterface {
-    my ($self) = @_;
-        return $self->{layerInterface};
-}
-
-
-sub setLayerInterface {
-    my ($self, $layerInterface) = @_;
-        $self->{layerInterface} = $layerInterface;
-}
-
-
-sub setLayerInterfaceForCircularStaticPool {
-    my ($self, $layerInterface) = @_;
-        $self->{layerInterface} = $layerInterface;
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("TrackingEvent: \n");
-        $stringBuffer->append("LayerInterface: ");
-        $stringBuffer->append($self->{layerInterface}->toString());
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::game::tracking::TrackingEventHandler ();
-
-1;
 

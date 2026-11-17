@@ -11,65 +11,70 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
-package org::allbinary::logic::system::security::licensing::PartnerIdentifierFileUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::system::security::licensing::PartnerIdentifierFileUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{FILE_NAME} = "partner.txt";
+oo::class create ::PartnerIdentifierFileUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::PartnerIdentifierFileUtil {
+    method initFields_PartnerIdentifierFileUtil {} {
+        my jset logUtil {}
+        my jset FILE_NAME {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset FILE_NAME "partner.txt"
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_PartnerIdentifierFileUtil
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::system::security::licensing::PartnerIdentifierFileUtil::instance;
-}
-
-
-sub get {
-    my ($self) = @_;
+    method get {} {
         try {
-            my $resourceUtil = 'org::allbinary::data::resource::ResourceUtil'->getInstance();
-            my $inputStream = $resourceUtil->getResourceAsStream($self->{FILE_NAME});
-            my $inputStreamReader = 'java::io::InputStreamReader'->new($inputStream);
-            my $chars = [("\0") x (30)];
-            my $size = $inputStreamReader->read($chars);
-            my $partnerString = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-            if ($size > 0) {
-                $partnerString = join("", @{$chars}[0 .. 0 + ($size) - 1]);
+            set resourceUtil [::ResourceUtil::getInstance]
+            set inputStream [$resourceUtil getResourceAsStream [my jget FILE_NAME]]
+            set inputStreamReader [::InputStreamReader new $inputStream]
+            set chars [jarray 30 0]
+            set size [$inputStreamReader read $chars]
+            set partnerString [[::StringUtil::getInstance] jget EMPTY_STRING]
+            if {[expr {$size > 0}]} {
+                set partnerString [jfromchars $chars 0 $size]
             }
-            $inputStreamReader->close();
-            return $partnerString;
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{GET}, $e);
-            return 'org::allbinary::logic::string::StringUtil'->getInstance()->{NULL_STRING};
+            $inputStreamReader close
+            return $partnerString
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget GET] $e
+            return [[::StringUtil::getInstance] jget NULL_STRING]
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::InputStream ();
-# use java::io::InputStreamReader ();
-use org::allbinary::data::resource::ResourceUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::PartnerIdentifierFileUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::PartnerIdentifierFileUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::PartnerIdentifierFileUtil::staticGet_instance]
+    }
+}
 
-1;
 

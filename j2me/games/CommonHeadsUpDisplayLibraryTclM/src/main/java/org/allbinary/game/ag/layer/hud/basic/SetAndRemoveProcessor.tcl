@@ -11,38 +11,33 @@
 # Created By: Travis Berthelot
 # 
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic
 
-package org::allbinary::game::ag::layer::hud::basic::SetAndRemoveProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::canvas::Processor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{updateMeasurementProcessor} = undef;
+oo::class create ::SetAndRemoveProcessor {
+    superclass ::Processor
 }
 
+oo::define ::SetAndRemoveProcessor {
+    method initFields_SetAndRemoveProcessor {} {
+        my jset updateMeasurementProcessor {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $updateMeasurementProcessor) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{updateMeasurementProcessor} = $updateMeasurementProcessor;
-    return $self;
+    constructor {updateMeasurementProcessor} {
+        next
+        my initFields_SetAndRemoveProcessor
+        my jset updateMeasurementProcessor $updateMeasurementProcessor
+    }
+    
+
+    method process {} {
+        [my jget updateMeasurementProcessor] setAndRemoveProcess
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self) = @_;
-        $self->{updateMeasurementProcessor}->setAndRemoveProcess();
+namespace eval ::SetAndRemoveProcessor {
 }
 
-use java::lang::Object ();
-use org::allbinary::canvas::Processor ();
-
-1;
 

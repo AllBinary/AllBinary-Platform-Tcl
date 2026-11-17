@@ -11,77 +11,67 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.hud.event
 
-package org::allbinary::game::layer::hud::event::GameNotificationEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{string} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{seconds} = undef;
-    $self->{basicColor} = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{BLACK};
-    $self->{removeable} = undef;
+oo::class create ::GameNotificationEvent {
+    superclass ::AllBinaryEventObject
 }
 
+oo::define ::GameNotificationEvent {
+    method initFields_GameNotificationEvent {} {
+        my jset string {}
+        my jset seconds {}
+        my jset basicColor {}
+        my jset removeable {}
+        my jset string [[::StringUtil::getInstance] jget EMPTY_STRING]
+        
+        my jset basicColor [[::BasicColorFactory::getInstance] jget BLACK]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $anyType, $string, $seconds, $basicColor, $permanent) = @_;
-    my $self = $class->SUPER::new($anyType);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->setString($string);
-        $self->{seconds} = $seconds;
-        $self->setBasicColorP($basicColor);
-        $self->{removeable} = $permanent;
-    return $self;
+    constructor {anyType string seconds basicColor permanent} {
+        next $anyType
+        my initFields_GameNotificationEvent
+        my setString $string
+        my jset seconds $seconds
+        my setBasicColorP $basicColor
+        my jset removeable $permanent
+    }
+    
+
+    method getString {} {
+        return [my jget string]
+    }
+    
+
+    method getSeconds {} {
+        return [my jget seconds]
+    }
+    
+
+    method getBasicColorP {} {
+        return [my jget basicColor]
+    }
+    
+
+    method getPermanent {} {
+        return [my jget removeable]
+    }
+    
+
+    method setString {string} {
+        my jset string $string
+    }
+    
+
+    method setBasicColorP {basicColor} {
+        my jset basicColor $basicColor
+    }
 }
 
-
-sub getString {
-    my ($self) = @_;
-        return $self->{string};
+namespace eval ::GameNotificationEvent {
 }
 
-
-sub getSeconds {
-    my ($self) = @_;
-        return $self->{seconds};
-}
-
-
-sub getBasicColorP {
-    my ($self) = @_;
-        return $self->{basicColor};
-}
-
-
-sub getPermanent {
-    my ($self) = @_;
-        return $self->{removeable};
-}
-
-
-sub setString {
-    my ($self, $string) = @_;
-        $self->{string} = $string;
-}
-
-
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
-        $self->{basicColor} = $basicColor;
-}
-
-use java::lang::Object ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-
-1;
 

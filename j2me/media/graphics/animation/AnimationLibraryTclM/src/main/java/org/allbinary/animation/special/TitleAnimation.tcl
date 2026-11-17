@@ -11,174 +11,159 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.special
 
-package org::allbinary::animation::special::TitleAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Time::HiRes ();
-use parent -norequire,'org::allbinary::animation::special::SpecialAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{systemWrapper} = 'org::allbinary::logic::ABSystemWrapper'->getInstance();
-    $self->{deltaX} = 0.0;
-    $self->{deltaY} = 0.0;
-    $self->{deltaZ} = 0.0;
-    $self->{basicColorArray} = undef;
-    $self->{dxArray} = undef;
-    $self->{dyArray} = undef;
-    $self->{widthP} = undef;
-    $self->{animationInterfaceArray} = undef;
-    $self->{sizeP} = undef;
-    $self->{y} = undef;
-    $self->{lastFrameStartTime} = undef;
-    $self->{displayInfoSingleton} = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-    $self->{CLEAR_COLOR} = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{CLEAR_COLOR};
+oo::class create ::TitleAnimation {
+    superclass ::SpecialAnimation
 }
 
+oo::define ::TitleAnimation {
+    method initFields_TitleAnimation {} {
+        my jset systemWrapper {}
+        my jset deltaX 0.0
+        my jset deltaY 0.0
+        my jset deltaZ 0.0
+        my jset basicColorArray {}
+        my jset dxArray {}
+        my jset dyArray {}
+        my jset widthP 0
+        my jset animationInterfaceArray {}
+        my jset sizeP 0
+        my jset y 0
+        my jset lastFrameStartTime 0
+        my jset displayInfoSingleton {}
+        my jset CLEAR_COLOR {}
+        my jset systemWrapper [::ABSystemWrapper::getInstance]
+        my jset deltaX 0.0
+        my jset deltaY 0.0
+        my jset deltaZ 0.0
+        
+        
+        
+        
+        
+        
+        
+        
+        my jset displayInfoSingleton [::DisplayInfoSingleton::getInstance]
+        my jset CLEAR_COLOR [[::BasicColorFactory::getInstance] jget CLEAR_COLOR]
+        return
+    }
+    
+    
 
-sub createAnimation {
-    my ($class, $animationInterfaceArray, $basicColorArray, $dxArray, $dyArray, $y, $width) = @_;
-        return 'org::allbinary::animation::special::TitleAnimation'->new($animationInterfaceArray, $basicColorArray, $dxArray, $dyArray, $y, $width, 'org::allbinary::animation::IndexedAnimationBehavior'->new(1, 250));
-}
+    constructor {animationInterfaceArray basicColorArray dxArray dyArray y width animationBehavior} {
+        next $animationBehavior
+        my initFields_TitleAnimation
+        my jset lastFrameStartTime [[my jget systemWrapper] currentTimeMillis]
+        my jset animationInterfaceArray $animationInterfaceArray
+        my jset sizeP [[my jget animationInterfaceArray] length]
+        my jset basicColorArray $basicColorArray
+        my jset dxArray $dxArray
+        my jset dyArray $dyArray
+        my jset y $y
+        my jset widthP $width
+        my reset
+    }
+    
 
-
-sub new {
-    my ($class, $animationInterfaceArray, $basicColorArray, $dxArray, $dyArray, $y, $width, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{lastFrameStartTime} = $self->{systemWrapper}->currentTimeMillis();
-        $self->{animationInterfaceArray} = $animationInterfaceArray;
-        $self->{sizeP} = scalar(@{$self->{animationInterfaceArray}});
-        $self->{basicColorArray} = $basicColorArray;
-        $self->{dxArray} = $dxArray;
-        $self->{dyArray} = $dyArray;
-        $self->{y} = $y;
-        $self->{widthP} = $width;
-        $self->reset();
-    return $self;
-}
-
-
-sub nextFrame {
-    my ($self) = @_;
-        my $currentTime = $self->{systemWrapper}->currentTimeMillis();
-        my $totalTimeElapsed = $currentTime - $self->{lastFrameStartTime};
-        my $indexedAnimationBehavior = $self->getAnimationBehavior();
-        if ($totalTimeElapsed > $indexedAnimationBehavior->{frameDelayTime}) {
-            $self->previousFrame();
-            $self->{lastFrameStartTime} = $currentTime;
+    method nextFrame {} {
+        set currentTime [[my jget systemWrapper] currentTimeMillis]
+        set totalTimeElapsed [jlong [expr {$currentTime - [my jget lastFrameStartTime]}]]
+        set indexedAnimationBehavior [my getAnimationBehavior]
+        if {[expr {$totalTimeElapsed > [$indexedAnimationBehavior jget frameDelayTime]}]} {
+            my previousFrame
+            my jset lastFrameStartTime $currentTime
         }
-        if ($self->{animationInterfaceArray}->[0]->getFrame() == 0) {
-            $indexedAnimationBehavior->{loopIndex}++;
+        if {[expr {[[[my jget animationInterfaceArray] get 0] getFrame] == 0}]} {
+            $indexedAnimationBehavior jpostinc loopIndex 1
         }
-}
+    }
+    
 
-
-sub isComplete {
-    my ($self) = @_;
-        my $indexedAnimationBehavior = $self->getAnimationBehavior();
-        if ($indexedAnimationBehavior->{loopTotal} == -1 || $indexedAnimationBehavior->{loopIndex} < $indexedAnimationBehavior->{loopTotal} || $self->getFrame() != 0) {
-            return 0;
+    method isComplete {} {
+        set indexedAnimationBehavior [my getAnimationBehavior]
+        if {[expr {[expr {[expr {[$indexedAnimationBehavior jget loopTotal] == [expr {-1}]}] || [expr {[$indexedAnimationBehavior jget loopIndex] < [$indexedAnimationBehavior jget loopTotal]}]}] || [expr {[my getFrame] != 0}]}]} {
+            return false
         } else {
-            return 1;
+            return true
         }
-}
+    }
+    
 
+    method setSequence {sequence} {
+    }
+    
 
-sub setSequence {
-    my ($self, $sequence) = @_;
-}
+    method getSequence {} {
+        return [::PrimitiveIntUtil::getArrayInstance]
+    }
+    
 
+    method getSize {} {
+        return [[[my jget animationInterfaceArray] get 0] getSize]
+    }
+    
 
-sub getSequence {
-    my ($self) = @_;
-        return 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance();
-}
+    method getFrame {} {
+        return [[[my jget animationInterfaceArray] get 0] getFrame]
+    }
+    
 
-
-sub getSize {
-    my ($self) = @_;
-        return $self->{animationInterfaceArray}->[0]->getSize();
-}
-
-
-sub getFrame {
-    my ($self) = @_;
-        return $self->{animationInterfaceArray}->[0]->getFrame();
-}
-
-
-sub setFrame {
-    my ($self, $frame) = @_;
-        for (my $index = 0; $index < $self->{sizeP}; $index++) {
-            $self->{animationInterfaceArray}->[$index]->setFrame($frame);
+    method setFrame {frame} {
+        for {set index 0} {[expr {$index < [my jget sizeP]}]} {jpostincr index 1} {
+            [[my jget animationInterfaceArray] get $index] setFrame $frame
         }
-}
+    }
+    
 
+    method setLastFrame {} {
+        my setFrame [jint [expr {[my getSize] - 1}]]
+    }
+    
 
-sub setLastFrame {
-    my ($self) = @_;
-        $self->setFrame($self->getSize() - 1);
-}
+    method reset {} {
+        my setLastFrame
+        set indexedAnimationBehavior ([my getAnimationBehavior])
+        $indexedAnimationBehavior reset
+    }
+    
 
-
-sub reset {
-    my ($self) = @_;
-        $self->setLastFrame();
-        my $indexedAnimationBehavior = ($self->getAnimationBehavior());
-        $indexedAnimationBehavior->reset();
-}
-
-
-sub previousFrame {
-    my ($self) = @_;
-        for (my $index = 0; $index < $self->{sizeP}; $index++) {
-            $self->{animationInterfaceArray}->[$index]->previousFrame();
+    method previousFrame {} {
+        for {set index 0} {[expr {$index < [my jget sizeP]}]} {jpostincr index 1} {
+            [[my jget animationInterfaceArray] get $index] previousFrame
         }
-}
+    }
+    
 
+    method paintFrameXY {graphics frame x y} {
+        my setFrame $frame
+        my paintXY $graphics $x $y
+    }
+    
 
-sub paintFrameXY {
-    my ($self, $graphics, $frame, $x, $y) = @_;
-        $self->setFrame($frame);
-        $self->paintXY($graphics, $x, $y);
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $ax, $ay) = @_;
-        my $x = 0;
-        if ($self->{widthP} != (-2147483648)) {
-            $x = (($self->{displayInfoSingleton}->getLastWidth() - $self->{widthP}) / 2);
+    method paintXY {graphics ax ay} {
+        set x 0
+        if {[expr {[my jget widthP] != [::Integer::staticGet_MIN_VALUE]}]} {
+            set x ([expr {([expr {[[my jget displayInfoSingleton] getLastWidth] - [my jget widthP]}]) / 2}])
         }
-        my $deltaX = 0;
-        my $deltaY = 0;
-        for (my $index = 0; $index < $self->{sizeP}; $index++) {
-            $deltaX = $self->{dxArray}->[$index] + $x;
-            $deltaY = $self->{dyArray}->[$index] + $self->{y};
-            if ($self->{basicColorArray}->[$index] != $self->{CLEAR_COLOR}) {
-                $self->{basicSetColorUtil}->setBasicColorP($graphics, $self->{basicColorArray}->[$index]);
+        set deltaX 0
+        set deltaY 0
+        for {set index 0} {[expr {$index < [my jget sizeP]}]} {jpostincr index 1} {
+            set deltaX [jint [expr {[[my jget dxArray] get $index] + $x}]]
+            set deltaY [jint [expr {[[my jget dyArray] get $index] + [my jget y]}]]
+            if {[expr {[[my jget basicColorArray] get $index] ne [my jget CLEAR_COLOR]}]} {
+                [my jget basicSetColorUtil] setBasicColorP $graphics [[my jget basicColorArray] get $index]
             }
-            $self->{animationInterfaceArray}->[$index]->paintXY($graphics, $deltaX, $deltaY);
+            [[my jget animationInterfaceArray] get $index] paintXY $graphics $deltaX $deltaY
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::animation::IndexedAnimationBehavior ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::logic::ABSystemWrapper ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::animation::special::SpecialAnimation ();
+namespace eval ::TitleAnimation {
+    proc createAnimation {animationInterfaceArray basicColorArray dxArray dyArray y width} {
+        return [::TitleAnimation new $animationInterfaceArray $basicColorArray $dxArray $dyArray $y $width [::IndexedAnimationBehavior new 1 250]]
+    }
+}
 
-1;
 

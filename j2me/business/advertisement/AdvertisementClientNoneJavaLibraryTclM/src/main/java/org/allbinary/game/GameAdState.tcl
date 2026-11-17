@@ -11,43 +11,35 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game
 
-package org::allbinary::game::GameAdState;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::business::advertisement::GameAdStateBase','org::allbinary::input::event::VirtualKeyboardEventListenerInterface';
-
-
-
-sub new {
-    my ($class, $adConfiguration) = @_;
-    my $self = $class->SUPER::new($adConfiguration);
-        # super(...) made $self above
-        'org::allbinary::input::event::VirtualKeyboardEventHandler'->getInstance()->addListenerInterface($self);
-    return $self;
+oo::class create ::GameAdState {
+    superclass ::GameAdStateBase
 }
 
+oo::define ::GameAdState {
+    method initFields_GameAdState {} {
+        return
+    }
+    
 
-# throws Exception
-sub onVirtualKeyboardEvent {
-    my ($self, $virtualKeyboardEvent) = @_;
+    constructor {adConfiguration} {
+        next $adConfiguration
+        my initFields_GameAdState
+        [::VirtualKeyboardEventHandler::getInstance] addListenerInterface [self]
+    }
+    
+
+    method onVirtualKeyboardEvent {virtualKeyboardEvent} {
+    }
+    
+
+    method onEvent {eventObject} {
+        next $eventObject
+    }
 }
 
-
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        $self->SUPER::onEvent($eventObject);
+namespace eval ::GameAdState {
 }
 
-use java::lang::Object ();
-use org::allbinary::business::advertisement::GameAdStateBase ();
-use org::allbinary::business::advertisement::AdConfiguration ();
-use org::allbinary::input::event::VirtualKeyboardEvent ();
-use org::allbinary::input::event::VirtualKeyboardEventHandler ();
-use org::allbinary::input::event::VirtualKeyboardEventListenerInterface ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-
-1;
 

@@ -11,25 +11,25 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
-package org::allbinary::graphics::opengles::shader::SimpleCompositeShaderUpdater;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::opengles::shader::CompositeShaderUpdater';
-
-
-
-sub new {
-    my ($class, $uniformBlockArray, $uniformArray, $attributeArray, $attributeHandleArray) = @_;
-    my $self = $class->SUPER::new($uniformBlockArray, $uniformArray, $attributeArray, $attributeHandleArray);
-        # super(...) made $self above
-    return $self;
+oo::class create ::SimpleCompositeShaderUpdater {
+    superclass ::CompositeShaderUpdater
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::opengles::shader::CompositeShaderUpdater ();
+oo::define ::SimpleCompositeShaderUpdater {
+    method initFields_SimpleCompositeShaderUpdater {} {
+        return
+    }
+    
 
-1;
+    constructor {uniformBlockArray uniformArray attributeArray attributeHandleArray} {
+        next $uniformBlockArray $uniformArray $attributeArray $attributeHandleArray
+        my initFields_SimpleCompositeShaderUpdater
+    }
+}
+
+namespace eval ::SimpleCompositeShaderUpdater {
+}
+
 

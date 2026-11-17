@@ -11,73 +11,65 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture
 
-package org::allbinary::input::motion::gesture::MotionGestureToMotionGestureActionAssociation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = undef;
-    $self->{motionGestureAction} = undef;
+oo::class create ::MotionGestureToMotionGestureActionAssociation {
+    superclass ::JObject
 }
 
+oo::define ::MotionGestureToMotionGestureActionAssociation {
+    method initFields_MotionGestureToMotionGestureActionAssociation {} {
+        my jset list {}
+        my jset motionGestureAction {}
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $list, $commandAction) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{list} = $list;
-        $self->{motionGestureAction} = $commandAction;
-    return $self;
-}
+    constructor {list commandAction} {
+        next
+        my initFields_MotionGestureToMotionGestureActionAssociation
+        my jset list $list
+        my jset motionGestureAction $commandAction
+    }
+    
 
+    method getMotionGesture {} {
+        return [my jget list]
+    }
+    
 
-sub getMotionGesture {
-    my ($self) = @_;
-        return $self->{list};
-}
+    method setMotionGestures {list} {
+        my jset list $list
+    }
+    
 
+    method getCommandAction {} {
+        return [my jget motionGestureAction]
+    }
+    
 
-sub setMotionGestures {
-    my ($self, $list) = @_;
-        $self->{list} = $list;
-}
+    method setMotionGestureAction {commandAction} {
+        my jset motionGestureAction $commandAction
+    }
+    
 
-
-sub getCommandAction {
-    my ($self) = @_;
-        return $self->{motionGestureAction};
-}
-
-
-sub setMotionGestureAction {
-    my ($self, $commandAction) = @_;
-        $self->{motionGestureAction} = $commandAction;
-}
-
-
-sub isMotionGestureArrayEquals {
-    my ($self, $aList) = @_;
-        my $size = $aList->size();
-        if ($self->{list}->size() != $size) {
-            return 0;
+    method isMotionGestureArrayEquals {aList} {
+        set size [$aList size]
+        if {[expr {[[my jget list] size] != $size}]} {
+            return false
         }
-        for (my $i = $size - 1; $i >= 0; $i--) {
-            if ($aList->{objectArray}->[$i] != $self->{list}->{objectArray}->[$i]) {
-                return 0;
+        for {set i [jint [expr {$size - 1}]]} {[expr {$i >= 0}]} {jpostincr i -1} {
+            if {[expr {[[$aList jget objectArray] get $i] != [[[my jget list] jget objectArray] get $i]}]} {
+                return false
             }
         }
-        return 1;
+        return true
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::CompleteMotionGestureInputEvent ();
-use org::allbinary::util::BasicArrayList ();
+namespace eval ::MotionGestureToMotionGestureActionAssociation {
+}
 
-1;
 

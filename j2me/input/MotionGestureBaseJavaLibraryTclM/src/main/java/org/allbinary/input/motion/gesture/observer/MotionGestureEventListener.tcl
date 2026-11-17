@@ -11,78 +11,69 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
-# Java interface
-package org::allbinary::input::motion::gesture::observer::MotionGestureEventListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::motion::gesture::observer::BaseMotionGestureEventListener';
-
-
-
-sub onPressedMotionGestureEvent {
-    my ($self, $ev) = @_;
-    die "abstract method onPressedMotionGestureEvent";
+oo::class create ::MotionGestureEventListener {
+    superclass ::JObject
 }
 
+oo::define ::MotionGestureEventListener {
+    method initFields_MotionGestureEventListener {} {
+        return
+    }
+    
 
-sub onUpMotionGestureEvent {
-    my ($self, $ev) = @_;
-    die "abstract method onUpMotionGestureEvent";
+    method onPressedMotionGestureEvent {ev} {
+        error [jexception AbstractMethodError onPressedMotionGestureEvent]
+    }
+    
+
+    method onUpMotionGestureEvent {ev} {
+        error [jexception AbstractMethodError onUpMotionGestureEvent]
+    }
+    
+
+    method onDownMotionGestureEvent {ev} {
+        error [jexception AbstractMethodError onDownMotionGestureEvent]
+    }
+    
+
+    method onLeftMotionGestureEvent {ev} {
+        error [jexception AbstractMethodError onLeftMotionGestureEvent]
+    }
+    
+
+    method onRightMotionGestureEvent {ev} {
+        error [jexception AbstractMethodError onRightMotionGestureEvent]
+    }
+    
+
+    method onDiagonalDownRightMotionGestureEvent {ev} {
+        error [jexception AbstractMethodError onDiagonalDownRightMotionGestureEvent]
+    }
+    
+
+    method onDiagonalDownLeftMotionGestureEvent {ev} {
+        error [jexception AbstractMethodError onDiagonalDownLeftMotionGestureEvent]
+    }
+    
+
+    method onDiagonalUpRightMotionGestureEvent {ev} {
+        error [jexception AbstractMethodError onDiagonalUpRightMotionGestureEvent]
+    }
+    
+
+    method onDiagonalUpLeftMotionGestureEvent {ev} {
+        error [jexception AbstractMethodError onDiagonalUpLeftMotionGestureEvent]
+    }
+    
+
+    method released {ev} {
+        error [jexception AbstractMethodError released]
+    }
 }
 
-
-sub onDownMotionGestureEvent {
-    my ($self, $ev) = @_;
-    die "abstract method onDownMotionGestureEvent";
+namespace eval ::MotionGestureEventListener {
 }
 
-
-sub onLeftMotionGestureEvent {
-    my ($self, $ev) = @_;
-    die "abstract method onLeftMotionGestureEvent";
-}
-
-
-sub onRightMotionGestureEvent {
-    my ($self, $ev) = @_;
-    die "abstract method onRightMotionGestureEvent";
-}
-
-
-sub onDiagonalDownRightMotionGestureEvent {
-    my ($self, $ev) = @_;
-    die "abstract method onDiagonalDownRightMotionGestureEvent";
-}
-
-
-sub onDiagonalDownLeftMotionGestureEvent {
-    my ($self, $ev) = @_;
-    die "abstract method onDiagonalDownLeftMotionGestureEvent";
-}
-
-
-sub onDiagonalUpRightMotionGestureEvent {
-    my ($self, $ev) = @_;
-    die "abstract method onDiagonalUpRightMotionGestureEvent";
-}
-
-
-sub onDiagonalUpLeftMotionGestureEvent {
-    my ($self, $ev) = @_;
-    die "abstract method onDiagonalUpLeftMotionGestureEvent";
-}
-
-
-# throws Exception
-sub released {
-    my ($self, $ev) = @_;
-    die "abstract method released";
-}
-
-use org::allbinary::input::motion::gesture::observer::BaseMotionGestureEventListener ();
-
-1;
 

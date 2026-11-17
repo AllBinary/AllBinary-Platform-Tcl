@@ -11,78 +11,82 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.event
 
-package org::allbinary::game::input::event::GameKeyEventFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{TOUCH_BUTTON_SOURCE_ID} = 2;
-    $self->{MOTION_GESTURE_SOURCE_ID} = 3;
-    $self->{MAX_SOURCES} = 4;
-    $self->{ARRAY} = [map { [(undef) x ('org::allbinary::game::input::InputFactory'->getInstance()->{MAX})] } 1 .. ($self->{MAX_SOURCES})];
+oo::class create ::GameKeyEventFactory {
+    superclass ::JObject
 }
 
+oo::define ::GameKeyEventFactory {
+    method initFields_GameKeyEventFactory {} {
+        my jset logUtil {}
+        my jset TOUCH_BUTTON_SOURCE_ID 0
+        my jset MOTION_GESTURE_SOURCE_ID 0
+        my jset MAX_SOURCES 0
+        my jset ARRAY {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset TOUCH_BUTTON_SOURCE_ID 2
+        my jset MOTION_GESTURE_SOURCE_ID 3
+        my jset MAX_SOURCES 4
+        my jset ARRAY [jarrayof [my jget MAX_SOURCES] {jarray [[::InputFactory::getInstance] jget MAX] {}}]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::input::event::GameKeyEventFactory::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::input::event::GameKeyEventFactory::instance = 'org::allbinary::game::input::event::GameKeyEventFactory'->new();
-        }
-        return $org::allbinary::game::input::event::GameKeyEventFactory::instance;
-}
+    constructor {} {
+        next
+        my initFields_GameKeyEventFactory
+    }
+    
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-sub init {
-    my ($self) = @_;
-        my $nullUtil = 'org::allbinary::logic::NullUtil'->getInstance();
-        my $size = 'org::allbinary::game::input::InputFactory'->getInstance()->{MAX};
-        for (my $index = $self->{MAX_SOURCES}; --$index >= 0; ) {
-            for (my $index2 = $size; --$index2 >= 0; ) {
-                $self->{ARRAY}->[$index]->[$index2] = 'org::allbinary::game::input::event::GameKeyEvent'->createEvent($nullUtil->{NULL_OBJECT}, $index, $index2);
+    method init {} {
+        set nullUtil [::NullUtil::getInstance]
+        set size [[::InputFactory::getInstance] jget MAX]
+        for {set index [my jget MAX_SOURCES]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            for {set index2 $size} {[expr {[jpreincr index2 -1] >= 0}]} {} {
+                [[my jget ARRAY] get $index] set $index2 [::GameKeyEvent::createEvent [$nullUtil jget NULL_OBJECT] $index $index2]
             }
         }
+    }
+    
+
+    method getInstanceForKey {anyType key} {
+        set gameKeyEvent [[[my jget ARRAY] get [$anyType getSourceId]] get $key]
+        return $gameKeyEvent
+    }
+    
+
+    method getInstanceForInput {anyType input} {
+        set gameKeyEvent [[[my jget ARRAY] get [$anyType getSourceId]] get [$input getId]]
+        return $gameKeyEvent
+    }
 }
 
-
-# throws Exception
-sub getInstanceForKey {
-    my ($self, $anyType, $key) = @_;
-        my $gameKeyEvent = $self->{ARRAY}->[$anyType->getSourceId()]->[$key];
-        return $gameKeyEvent;
+namespace eval ::GameKeyEventFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::GameKeyEventFactory::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::GameKeyEventFactory::staticSet_instance [::GameKeyEventFactory new]
+        }
+        return [::GameKeyEventFactory::staticGet_instance]
+    }
 }
 
-
-# throws Exception
-sub getInstanceForInput {
-    my ($self, $anyType, $input) = @_;
-        my $gameKeyEvent = $self->{ARRAY}->[$anyType->getSourceId()]->[$input->getId()];
-        return $gameKeyEvent;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::GameKeyEventSourceInterface ();
-use org::allbinary::game::input::Input ();
-use org::allbinary::game::input::InputFactory ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-
-1;
 

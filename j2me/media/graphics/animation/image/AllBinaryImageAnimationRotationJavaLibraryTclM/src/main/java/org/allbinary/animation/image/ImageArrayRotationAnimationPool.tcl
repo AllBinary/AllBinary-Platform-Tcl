@@ -11,48 +11,55 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::ImageArrayRotationAnimationPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::cache::BasicArrayListResetablePool';
-
-tie our $IMAGE_ROTATION_ANIMATION_POOL, 'java::lang::LazyStatic', sub { 'org::allbinary::animation::image::ImageArrayRotationAnimationPool'->new('org::allbinary::animation::image::ImageArrayRotationAnimationCacheableInterfaceFactory'->new()) };
-
-
-sub new {
-    my ($class, $cacheableInterfaceFactoryInterface) = @_;
-    my $self = $class->SUPER::new($cacheableInterfaceFactoryInterface);
-        # super(...) made $self above
-    return $self;
+oo::class create ::ImageArrayRotationAnimationPool {
+    superclass ::BasicArrayListResetablePool
 }
 
+oo::define ::ImageArrayRotationAnimationPool {
+    method initFields_ImageArrayRotationAnimationPool {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::animation::image::ImageArrayRotationAnimationPool::IMAGE_ROTATION_ANIMATION_POOL;
+    constructor {cacheableInterfaceFactoryInterface} {
+        next $cacheableInterfaceFactoryInterface
+        my initFields_ImageArrayRotationAnimationPool
+    }
+    
+    
+
+    method remove {key} {
+        set cacheableInterface [next $key]
+        set allBinaryImageRotationAnimationInfo $key
+        set imageArrayRotationAnimationCacheable ($cacheableInterface)
+        $imageArrayRotationAnimationCacheable setImageArray [$allBinaryImageRotationAnimationInfo getImageArray]
+        return $cacheableInterface
+    }
 }
 
-
-# throws Exception
-sub remove {
-    my ($self, $key) = @_;
-        my $cacheableInterface = $self->SUPER::remove($key);
-        my $allBinaryImageRotationAnimationInfo = $key;
-        my $imageArrayRotationAnimationCacheable = ($cacheableInterface);
-        $imageArrayRotationAnimationCacheable->setImageArray($allBinaryImageRotationAnimationInfo->getImageArray());
-        return $cacheableInterface;
+namespace eval ::ImageArrayRotationAnimationPool {
+    variable IMAGE_ROTATION_ANIMATION_POOLValue {}
+    variable IMAGE_ROTATION_ANIMATION_POOLSet 0
+    proc staticGet_IMAGE_ROTATION_ANIMATION_POOL {} {
+        variable IMAGE_ROTATION_ANIMATION_POOLValue
+        variable IMAGE_ROTATION_ANIMATION_POOLSet
+        if {!$IMAGE_ROTATION_ANIMATION_POOLSet} {
+            set IMAGE_ROTATION_ANIMATION_POOLSet 1
+            set IMAGE_ROTATION_ANIMATION_POOLValue [::ImageArrayRotationAnimationPool new [::ImageArrayRotationAnimationCacheableInterfaceFactory new]]
+        }
+        return $IMAGE_ROTATION_ANIMATION_POOLValue
+    }
+    proc staticSet_IMAGE_ROTATION_ANIMATION_POOL {value} {
+        variable IMAGE_ROTATION_ANIMATION_POOLValue
+        variable IMAGE_ROTATION_ANIMATION_POOLSet
+        set IMAGE_ROTATION_ANIMATION_POOLSet 1
+        set IMAGE_ROTATION_ANIMATION_POOLValue $value
+    }
+    proc getInstance {} {
+        return [::ImageArrayRotationAnimationPool::staticGet_IMAGE_ROTATION_ANIMATION_POOL]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::util::cache::BasicArrayListResetablePool ();
-use org::allbinary::logic::util::cache::CacheableInterface ();
-use org::allbinary::logic::util::cache::CacheableInterfaceFactoryInterface ();
-use org::allbinary::logic::util::cache::PoolInterface ();
-use org::allbinary::animation::image::ImageArrayRotationAnimationCacheableInterfaceFactory ();
-
-1;
 

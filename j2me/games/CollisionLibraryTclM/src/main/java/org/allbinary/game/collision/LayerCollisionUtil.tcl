@@ -11,56 +11,60 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-package org::allbinary::game::collision::LayerCollisionUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::collision::LayerCollisionUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{collisionProcessor} = undef;
+oo::class create ::LayerCollisionUtil {
+    superclass ::JObject
 }
 
+oo::define ::LayerCollisionUtil {
+    method initFields_LayerCollisionUtil {} {
+        my jset collisionProcessor {}
+        my jset collisionProcessor {}
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::collision::LayerCollisionUtil::instance;
-}
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        my $gameFeatureFactory = 'org::allbinary::game::configuration::feature::GameFeatureFactory'->getInstance();
-        if ('org::allbinary::graphics::opengles::OpenGLFeatureUtil'->getInstance()->isAnyThreed() && !$features->isFeature($gameFeatureFactory->{COLLISIONS_FORCED_TWO_DIMENSIONAL})) {
-            $self->{collisionProcessor} = 'org::allbinary::game::collision::CollisionThreedProcessor'->new();
+    constructor {} {
+        next
+        my initFields_LayerCollisionUtil
+        set features [::Features::getInstance]
+        set gameFeatureFactory [::GameFeatureFactory::getInstance]
+        if {[expr {[[::OpenGLFeatureUtil::getInstance] isAnyThreed] && [expr {![$features isFeature [$gameFeatureFactory jget COLLISIONS_FORCED_TWO_DIMENSIONAL]]}]}]} {
+            my jset collisionProcessor [::CollisionThreedProcessor new]
         } else {
-            $self->{collisionProcessor} = 'org::allbinary::game::collision::Collision2DProcessor'->new();
+            my jset collisionProcessor [::Collision2DProcessor new]
         }
-    return $self;
+    }
+    
+
+    method isCollision {myLayer myLayer2} {
+        return [[my jget collisionProcessor] isCollision $myLayer $myLayer2]
+    }
 }
 
-
-sub isCollision {
-    my ($self, $myLayer, $myLayer2) = @_;
-        return $self->{collisionProcessor}->isCollision($myLayer, $myLayer2);
+namespace eval ::LayerCollisionUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LayerCollisionUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LayerCollisionUtil::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::GameFeatureFactory ();
-use org::allbinary::graphics::opengles::OpenGLFeatureUtil ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::game::collision::Collision2DProcessor ();
-use org::allbinary::game::collision::CollisionThreedProcessor ();
-
-1;
 

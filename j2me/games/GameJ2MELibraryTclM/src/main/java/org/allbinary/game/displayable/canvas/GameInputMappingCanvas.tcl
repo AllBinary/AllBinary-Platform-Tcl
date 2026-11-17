@@ -11,260 +11,267 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::GameInputMappingCanvas;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::displayable::canvas::GameCommandCanvas','org::allbinary::game::input::mapping::InputMappingInterface';
-
-our $NAME = "GameInputMappingCanvas";
-tie our $DISPLAY, 'java::lang::LazyStatic', sub { 'javax::microedition::lcdui::Command'->new("Controls", 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $javax::microedition::lcdui::Command::SCREEN, 2) };
-tie our $DEFAULT, 'java::lang::LazyStatic', sub { 'javax::microedition::lcdui::Command'->new("Default", 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $javax::microedition::lcdui::Command::SCREEN, 2) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{paintable} = undef;
-    $self->{helpPaintable} = undef;
-    $self->{colorFillPaintable} = undef;
-    $self->{inputMapping} = undef;
-    $self->{NONE} = 'org::allbinary::game::input::GameKeyFactory'->getInstance()->{NONE};
-    $self->{abeClientInformation} = undef;
-    $self->{selectedGameKey} = $self->{NONE};
-    $self->{selectedInput} = $self->{NONE};
-    $self->{inputFactory} = 'org::allbinary::game::input::InputFactory'->getInstance();
+oo::class create ::GameInputMappingCanvas {
+    superclass ::GameCommandCanvas
 }
 
+oo::define ::GameInputMappingCanvas {
+    method initFields_GameInputMappingCanvas {} {
+        my jset paintable {}
+        my jset helpPaintable {}
+        my jset colorFillPaintable {}
+        my jset inputMapping {}
+        my jset NONE {}
+        my jset abeClientInformation {}
+        my jset selectedGameKey {}
+        my jset selectedInput {}
+        my jset inputFactory {}
+        
+        
+        
+        
+        my jset NONE [[::GameKeyFactory::getInstance] jget NONE]
+        
+        my jset selectedGameKey [my jget NONE]
+        my jset selectedInput [my jget NONE]
+        my jset inputFactory [::InputFactory::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $abeClientInformation, $commandListener, $allBinaryGameLayerManager, $helpPaintable) = @_;
-    my $self = $class->SUPER::new($commandListener, $org::allbinary::game::displayable::canvas::GameInputMappingCanvas::NAME, $allBinaryGameLayerManager->getBackgroundBasicColor(), $allBinaryGameLayerManager->getForegroundBasicColor());
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{CONSTRUCTOR});
-        if (!defined($helpPaintable)) {
-            die ("Help Paintable Exception");
+    constructor {abeClientInformation commandListener allBinaryGameLayerManager helpPaintable} {
+        next $commandListener [::GameInputMappingCanvas::staticGet_NAME] [$allBinaryGameLayerManager getBackgroundBasicColor] [$allBinaryGameLayerManager getForegroundBasicColor]
+        my initFields_GameInputMappingCanvas
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+        if {[expr {$helpPaintable eq {}}]} {
+            error [jexception Exception "Help Paintable Exception"]
         }
-        $self->{abeClientInformation} = $abeClientInformation;
-        $self->{helpPaintable} = $helpPaintable;
-        $self->{inputMapping} = 'org::allbinary::game::input::PlatformInputMappingFactory'->getInstance()->getPersistentInputMappingInstance();
-        $self->{paintable} = 'org::allbinary::graphics::paint::ProcessPaintable'->new();
-        $self->{colorFillPaintable} = 'org::allbinary::game::paint::ColorFillPaintableFactory'->getInstance()->getInstance($allBinaryGameLayerManager->getBackgroundBasicColor(), 0);
-    return $self;
-}
+        my jset abeClientInformation $abeClientInformation
+        my jset helpPaintable $helpPaintable
+        my jset inputMapping [[::PlatformInputMappingFactory::getInstance] getPersistentInputMappingInstance]
+        my jset paintable [::ProcessPaintable new]
+        my jset colorFillPaintable [[::ColorFillPaintableFactory::getInstance] getInstance [$allBinaryGameLayerManager getBackgroundBasicColor] false]
+    }
+    
 
+    method close {} {
+        next
+        [my jget paintable] process
+        my jset selectedGameKey [my jget NONE]
+        my jset selectedInput [my jget NONE]
+        my update
+    }
+    
 
-# throws Exception
-sub close {
-    my ($self) = @_;
-        $self->SUPER::close();
-        $self->{paintable}->process();
-        $self->{selectedGameKey} = $self->{NONE};
-        $self->{selectedInput} = $self->{NONE};
-        $self->update();
-}
+    method initCommands {cmdListener} {
+        my removeAllCommands
+        my addCommand [[::GameCommandsFactory::getInstance] jget CLOSE_AND_SHOW_GAME_CANVAS]
+        my addCommand [::GameInputMappingCanvas::staticGet_DEFAULT]
+        my addCommand [::GameInputMappingInstructionsCanvas::staticGet_DISPLAY]
+        my setCommandListener $cmdListener
+    }
+    
 
+    method keyPressed {keyCode} {
+        my keyPressedByDevice $keyCode 0
+    }
+    
 
-sub initCommands {
-    my ($self, $cmdListener) = @_;
-        $self->removeAllCommands();
-        $self->addCommand('org::allbinary::game::commands::GameCommandsFactory'->getInstance()->{CLOSE_AND_SHOW_GAME_CANVAS});
-        $self->addCommand($org::allbinary::game::displayable::canvas::GameInputMappingCanvas::DEFAULT);
-        $self->addCommand($org::allbinary::game::displayable::canvas::GameInputMappingInstructionsCanvas::DISPLAY);
-        $self->setCommandListener($cmdListener);
-}
+    method keyReleased {keyCode} {
+        my keyReleasedByDevice $keyCode 0
+    }
+    
 
+    method keyRepeated {keyCode} {
+        my keyRepeatedByDevice $keyCode 0
+    }
+    
 
-sub keyPressed {
-    my ($self, $keyCode) = @_;
-        $self->keyPressedByDevice($keyCode, 0);
-}
+    method keyPressedByDevice {keyCode deviceId} {
+        my addGameKey $keyCode false
+        next $keyCode 0
+    }
+    
 
-
-sub keyReleased {
-    my ($self, $keyCode) = @_;
-        $self->keyReleasedByDevice($keyCode, 0);
-}
-
-
-sub keyRepeated {
-    my ($self, $keyCode) = @_;
-        $self->keyRepeatedByDevice($keyCode, 0);
-}
-
-
-sub keyPressedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
-        $self->addGameKey($keyCode, 0);
-        $self->SUPER::keyPressedByDevice($keyCode, 0);
-}
-
-
-sub addGameKey {
-    my ($self, $keyCode, $repeated) = @_;
+    method addGameKey {keyCode repeated} {
         try {
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Raw Device Key Code: ")->append(sprintf("%x", $keyCode))->toString(), $self, $self->{gameInputStrings}->{ADD_KEY_EVENT});
-            my $gameKey = $self->{inputToGameKeyMapping}->getInstanceForCanvas($self, $keyCode);
-            my $input = $self->{inputFactory}->getInstanceById($keyCode);
-            $self->processInputMapping($gameKey, $input);
-        } catch ($e) {
-            $self->{logUtil}->put("Key Event Error", $self, $self->{gameInputStrings}->{ADD_KEY_EVENT}, $e);
+            [my jget logUtil] putF [[[[::StringMaker new] append "Raw Device Key Code: "] append [::Integer::toHexString $keyCode]] toString] [self] [[my jget gameInputStrings] jget ADD_KEY_EVENT]
+            set gameKey [[my jget inputToGameKeyMapping] getInstanceForCanvas [self] $keyCode]
+            set input [[my jget inputFactory] getInstanceById $keyCode]
+            my processInputMapping $gameKey $input
+        } on error {e} {
+            [my jget logUtil] put "Key Event Error" [self] [[my jget gameInputStrings] jget ADD_KEY_EVENT] $e
         }
-}
+    }
+    
 
-
-# throws Exception
-sub processInputMapping {
-    my ($self, $gameKey, $input) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("Start Passed GameKey: ");
-        $stringBuffer->append($self->{stringUtil}->toString($gameKey));
-        $stringBuffer->append(" Input: ");
-        $stringBuffer->append($self->{stringUtil}->toString($input));
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, $self->{commonStrings}->{PROCESS});
-        if ($self->{selectedGameKey} != $self->{NONE}) {
-            $self->gameActionCrud($gameKey, $input);
+    method processInputMapping {gameKey input} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "Start Passed GameKey: "
+        $stringBuffer append [[my jget stringUtil] toString1 $gameKey]
+        $stringBuffer append " Input: "
+        $stringBuffer append [[my jget stringUtil] toString1 $input]
+        [my jget logUtil] putF [$stringBuffer toString] [self] [[my jget commonStrings] jget PROCESS]
+        if {[expr {[my jget selectedGameKey] ne [my jget NONE]}]} {
+            my gameActionCrud $gameKey $input
         } else {
-            $self->setSelectedAction($gameKey);
+            my setSelectedAction $gameKey
         }
-}
+    }
+    
 
+    method setSelectedAction {gameKey} {
+        [my jget logUtil] putF [[[[::StringMaker new] append "Selected GameKey: "] append [[my jget stringUtil] toString1 $gameKey]] toString] [self] "setSelectedAction"
+        my jset selectedGameKey $gameKey
+        my jset selectedInput [my jget NONE]
+        [my jget helpPaintable] update [my jget selectedGameKey] [my jget selectedInput]
+        [my jget repaintBehavior] onChangeRepaint [self]
+    }
+    
 
-sub setSelectedAction {
-    my ($self, $gameKey) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Selected GameKey: ")->append($self->{stringUtil}->toString($gameKey))->toString(), $self, "setSelectedAction");
-        $self->{selectedGameKey} = $gameKey;
-        $self->{selectedInput} = $self->{NONE};
-        $self->{helpPaintable}->update($self->{selectedGameKey}, $self->{selectedInput});
-        $self->{repaintBehavior}->onChangeRepaint($self);
-}
-
-
-# throws Exception
-sub gameActionCrud {
-    my ($self, $gameKey, $input) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("Start GameKey: ");
-        $stringBuffer->append($self->{stringUtil}->toString($self->{selectedGameKey}));
-        $stringBuffer->append(" Input: ");
-        $stringBuffer->append($self->{stringUtil}->toString($self->{selectedInput}));
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, "gameActionCrud");
-        if ($self->{selectedInput} == $self->{NONE}) {
-            my $list = $self->{inputMapping}->getInputMapping()->getMappedInput($self->{selectedGameKey});
-            my $isInputAlreadyMappedToSelectedAction = $list->contains($input);
-            if ($isInputAlreadyMappedToSelectedAction) {
-                $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Already Mapped Input: ")->append($self->{stringUtil}->toString($input))->toString(), $self, "gameActionCrud");
-                $self->{selectedInput} = $input;
-                $self->{helpPaintable}->update($self->{selectedGameKey}, $self->{selectedInput});
-                $self->{repaintBehavior}->onChangeRepaint($self);
+    method gameActionCrud {gameKey input} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "Start GameKey: "
+        $stringBuffer append [[my jget stringUtil] toString1 [my jget selectedGameKey]]
+        $stringBuffer append " Input: "
+        $stringBuffer append [[my jget stringUtil] toString1 [my jget selectedInput]]
+        [my jget logUtil] putF [$stringBuffer toString] [self] "gameActionCrud"
+        if {[expr {[my jget selectedInput] eq [my jget NONE]}]} {
+            set list [[[my jget inputMapping] getInputMapping] getMappedInput [my jget selectedGameKey]]
+            set isInputAlreadyMappedToSelectedAction [$list contains $input]
+            if {$isInputAlreadyMappedToSelectedAction} {
+                [my jget logUtil] putF [[[[::StringMaker new] append "Already Mapped Input: "] append [[my jget stringUtil] toString1 $input]] toString] [self] "gameActionCrud"
+                my jset selectedInput $input
+                [my jget helpPaintable] update [my jget selectedGameKey] [my jget selectedInput]
+                [my jget repaintBehavior] onChangeRepaint [self]
             } else {
-                $self->addNewMapping($gameKey, $input);
+                my addNewMapping $gameKey $input
             }
-        } elsif ($self->{inputMapping}->isDelete($input)) {
-            $self->deleteCurrentMapping();
+        } elseif {[[my jget inputMapping] isDelete $input]} {
+            my deleteCurrentMapping
         } else {
-            $self->setSelectedAction($gameKey);
+            my setSelectedAction $gameKey
         }
-}
+    }
+    
 
-
-# throws Exception
-sub addNewMapping {
-    my ($self, $gameKey, $input) = @_;
-        my $METHOD_NAME = "addNewMapping";
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $METHOD_NAME);
-        my $isInputAlreadyMapped = $self->{inputMapping}->getInputMapping()->isMapped($input);
-        if (!$isInputAlreadyMapped && !$self->{inputMapping}->isSystemInput($input)) {
-            my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-            $stringBuffer->append("Add Key Mapping : GameKey: ");
-            $stringBuffer->append($self->{stringUtil}->toString($self->{selectedGameKey}));
-            $stringBuffer->append(" Input: ");
-            $stringBuffer->append($self->{stringUtil}->toString($self->{selectedInput}));
-            $self->{logUtil}->putF($stringBuffer->toString(), $self, $METHOD_NAME);
-            $self->{inputMapping}->getInputMapping()->add($self->{selectedGameKey}, $input);
-            $self->{selectedInput} = $input;
-            $self->update();
+    method addNewMapping {gameKey input} {
+        set METHOD_NAME "addNewMapping"
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] $METHOD_NAME
+        set isInputAlreadyMapped [[[my jget inputMapping] getInputMapping] isMapped $input]
+        if {[expr {[expr {!$isInputAlreadyMapped}] && [expr {![[my jget inputMapping] isSystemInput $input]}]}]} {
+            set stringBuffer [::StringMaker new]
+            $stringBuffer append "Add Key Mapping : GameKey: "
+            $stringBuffer append [[my jget stringUtil] toString1 [my jget selectedGameKey]]
+            $stringBuffer append " Input: "
+            $stringBuffer append [[my jget stringUtil] toString1 [my jget selectedInput]]
+            [my jget logUtil] putF [$stringBuffer toString] [self] $METHOD_NAME
+            [[my jget inputMapping] getInputMapping] add [my jget selectedGameKey] $input
+            my jset selectedInput $input
+            my update
         } else {
-            $self->{logUtil}->putF("Unable to add Mapping since one already exists or is MENU, HOME, or BACK key and setting selected action to what it is already mapped to", $self, $METHOD_NAME);
-            $self->setSelectedAction($gameKey);
+            [my jget logUtil] putF "Unable to add Mapping since one already exists or is MENU, HOME, or BACK key and setting selected action to what it is already mapped to" [self] $METHOD_NAME
+            my setSelectedAction $gameKey
         }
-}
+    }
+    
 
-
-# throws Exception
-sub deleteCurrentMapping {
-    my ($self) = @_;
-        my $METHOD_NAME = "deleteCurrentMapping";
-        my $list = $self->{inputMapping}->getInputMapping()->getMappedInput($self->{selectedGameKey});
-        if ($list->size() > 1) {
-            my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-            $stringBuffer->append("Start GameKey: ");
-            $stringBuffer->append("Remove Key Mapping: GameKey: ");
-            $stringBuffer->append($self->{stringUtil}->toString($self->{selectedGameKey}));
-            $stringBuffer->append(" Input: ");
-            $stringBuffer->append($self->{stringUtil}->toString($self->{selectedInput}));
-            $self->{logUtil}->putF($stringBuffer->toString(), $self, $METHOD_NAME);
-            $self->{inputMapping}->getInputMapping()->remove($self->{selectedGameKey}, $self->{selectedInput});
-            $self->{selectedInput} = $self->{NONE};
-            $self->update();
+    method deleteCurrentMapping {} {
+        set METHOD_NAME "deleteCurrentMapping"
+        set list [[[my jget inputMapping] getInputMapping] getMappedInput [my jget selectedGameKey]]
+        if {[expr {[$list size] > 1}]} {
+            set stringBuffer [::StringMaker new]
+            $stringBuffer append "Start GameKey: "
+            $stringBuffer append "Remove Key Mapping: GameKey: "
+            $stringBuffer append [[my jget stringUtil] toString1 [my jget selectedGameKey]]
+            $stringBuffer append " Input: "
+            $stringBuffer append [[my jget stringUtil] toString1 [my jget selectedInput]]
+            [my jget logUtil] putF [$stringBuffer toString] [self] $METHOD_NAME
+            [[my jget inputMapping] getInputMapping] remove [my jget selectedGameKey] [my jget selectedInput]
+            my jset selectedInput [my jget NONE]
+            my update
         } else {
-            $self->{logUtil}->putF("Can't Remove Last Key Mapping", $self, $METHOD_NAME);
+            [my jget logUtil] putF "Can't Remove Last Key Mapping" [self] $METHOD_NAME
         }
+    }
+    
+
+    method setDefault {} {
+        [my jget inputMapping] setDefault [my jget abeClientInformation]
+        [my jget helpPaintable] update [my jget NONE] [my jget NONE]
+        [my jget repaintBehavior] onChangeRepaint [self]
+    }
+    
+
+    method update {} {
+        [my jget inputMapping] update [my jget abeClientInformation]
+        [my jget helpPaintable] update [my jget selectedGameKey] [my jget selectedInput]
+        [my jget repaintBehavior] onChangeRepaint [self]
+    }
+    
+
+    method paint {graphics} {
+        [my jget colorFillPaintable] paint $graphics
+        [my jget helpPaintable] paint $graphics
+        [my jget paintable] paint $graphics
+        next $graphics
+    }
 }
 
-
-# throws Exception
-sub setDefault {
-    my ($self) = @_;
-        $self->{inputMapping}->setDefault($self->{abeClientInformation});
-        $self->{helpPaintable}->update($self->{NONE}, $self->{NONE});
-        $self->{repaintBehavior}->onChangeRepaint($self);
+namespace eval ::GameInputMappingCanvas {
+    variable NAMEValue {}
+    variable NAMESet 0
+    proc staticGet_NAME {} {
+        variable NAMEValue
+        variable NAMESet
+        if {!$NAMESet} {
+            set NAMESet 1
+            set NAMEValue "GameInputMappingCanvas"
+        }
+        return $NAMEValue
+    }
+    proc staticSet_NAME {value} {
+        variable NAMEValue
+        variable NAMESet
+        set NAMESet 1
+        set NAMEValue $value
+    }
+    variable DISPLAYValue {}
+    variable DISPLAYSet 0
+    proc staticGet_DISPLAY {} {
+        variable DISPLAYValue
+        variable DISPLAYSet
+        if {!$DISPLAYSet} {
+            set DISPLAYSet 1
+            set DISPLAYValue [::Command new "Controls" [[::StringUtil::getInstance] jget EMPTY_STRING] [::Command::staticGet_SCREEN] 2]
+        }
+        return $DISPLAYValue
+    }
+    proc staticSet_DISPLAY {value} {
+        variable DISPLAYValue
+        variable DISPLAYSet
+        set DISPLAYSet 1
+        set DISPLAYValue $value
+    }
+    variable DEFAULTValue {}
+    variable DEFAULTSet 0
+    proc staticGet_DEFAULT {} {
+        variable DEFAULTValue
+        variable DEFAULTSet
+        if {!$DEFAULTSet} {
+            set DEFAULTSet 1
+            set DEFAULTValue [::Command new "Default" [[::StringUtil::getInstance] jget EMPTY_STRING] [::Command::staticGet_SCREEN] 2]
+        }
+        return $DEFAULTValue
+    }
+    proc staticSet_DEFAULT {value} {
+        variable DEFAULTValue
+        variable DEFAULTSet
+        set DEFAULTSet 1
+        set DEFAULTValue $value
+    }
 }
 
-
-# throws Exception
-sub update {
-    my ($self) = @_;
-        $self->{inputMapping}->update($self->{abeClientInformation});
-        $self->{helpPaintable}->update($self->{selectedGameKey}, $self->{selectedInput});
-        $self->{repaintBehavior}->onChangeRepaint($self);
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{colorFillPaintable}->paint($graphics);
-        $self->{helpPaintable}->paint($graphics);
-        $self->{paintable}->paint($graphics);
-        $self->SUPER::paint($graphics);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::CommandListener ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::commands::GameCommandsFactory ();
-use org::allbinary::game::input::GameKey ();
-use org::allbinary::game::input::GameKeyFactory ();
-use org::allbinary::game::input::Input ();
-use org::allbinary::game::input::InputFactory ();
-use org::allbinary::game::input::PlatformInputMappingFactory ();
-use org::allbinary::game::input::mapping::InputMappingInterface ();
-use org::allbinary::game::input::mapping::PersistentInputMapping ();
-use org::allbinary::game::layer::AllBinaryGameLayerManager ();
-use org::allbinary::game::paint::ColorFillBasePaintable ();
-use org::allbinary::game::paint::ColorFillPaintableFactory ();
-use org::allbinary::game::paint::help::HelpPaintable ();
-use org::allbinary::game::paint::help::InputMappingHelpPaintable ();
-use org::allbinary::graphics::paint::ProcessPaintable ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::game::displayable::canvas::GameCommandCanvas ();
-use org::allbinary::game::displayable::canvas::GameInputMappingInstructionsCanvas ();
-
-1;
 

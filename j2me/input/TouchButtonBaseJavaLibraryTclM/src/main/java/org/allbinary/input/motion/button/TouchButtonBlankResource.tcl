@@ -11,33 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchButtonBlankResource;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::motion::button::TouchButtonResource';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::input::motion::button::TouchButtonBlankResource'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::motion::button::TouchButtonBlankResource::instance;
+oo::class create ::TouchButtonBlankResource {
+    superclass ::TouchButtonResource
 }
 
+oo::define ::TouchButtonBlankResource {
+    method initFields_TouchButtonBlankResource {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new("/touch_button_64_by_64.png", "/touch_button_hint_64_by_64.png");
-        # super(...) made $self above
-    return $self;
+    constructor {} {
+        next "/touch_button_64_by_64.png" "/touch_button_hint_64_by_64.png"
+        my initFields_TouchButtonBlankResource
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::input::motion::button::TouchButtonResource ();
+namespace eval ::TouchButtonBlankResource {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::TouchButtonBlankResource new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::TouchButtonBlankResource::staticGet_instance]
+    }
+}
 
-1;
 

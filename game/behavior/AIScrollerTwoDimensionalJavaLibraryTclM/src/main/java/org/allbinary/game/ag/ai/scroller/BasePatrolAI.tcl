@@ -11,94 +11,144 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.scroller
 
-package org::allbinary::game::ag::ai::scroller::BasePatrolAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ai::BasicAI';
-
-tie our $MAX_DISTANCE, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt(2) };
-tie our $DIRECTION_ARRAY, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt(3) };
-tie our $FIRING_DISTANCE, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt(4) };
-tie our $SPEED, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt(5) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{maxDistance} = undef;
-    $self->{currentDistance} = undef;
-    $self->{xTotalDistance} = 0;
-    $self->{lastKeyDirection} = $javax::microedition::lcdui::Canvas::RIGHT;
-    $self->{keyDirection} = $javax::microedition::lcdui::Canvas::RIGHT;
+oo::class create ::BasePatrolAI {
+    superclass ::BasicAI
 }
 
+oo::define ::BasePatrolAI {
+    method initFields_BasePatrolAI {} {
+        my jset maxDistance {}
+        my jset currentDistance 0
+        my jset xTotalDistance 0
+        my jset lastKeyDirection 0
+        my jset keyDirection 0
+        
+        
+        my jset xTotalDistance 0
+        my jset lastKeyDirection [::Canvas::staticGet_RIGHT]
+        my jset keyDirection [::Canvas::staticGet_RIGHT]
+        return
+    }
+    
 
-sub new {
-    my ($class, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{maxDistance} = $hashtable->get($org::allbinary::game::ag::ai::scroller::BasePatrolAI::MAX_DISTANCE);
-        $self->{currentDistance} = int($self->{maxDistance});
-    return $self;
-}
+    constructor {hashtable ownerLayerInterface gameInput} {
+        next $ownerLayerInterface $gameInput
+        my initFields_BasePatrolAI
+        my jset maxDistance [$hashtable get [::BasePatrolAI::staticGet_MAX_DISTANCE]]
+        my jset currentDistance [[my jget maxDistance] intValue]
+    }
+    
 
+    method update {} {
+        my updateTotalDistance
+        my changeDirectionIfReachedPacingAreaMax
+    }
+    
 
-sub update {
-    my ($self) = @_;
-        $self->updateTotalDistance();
-        $self->changeDirectionIfReachedPacingAreaMax();
-}
+    method updateTotalDistance {} {
+        set velocityInterfaceCompositeInterface [my getOwnerLayerInterface]
+        set velocityProperties [$velocityInterfaceCompositeInterface getVelocityProperties]
+        my jset xTotalDistance [jint [expr {[my jget xTotalDistance] + [[$velocityProperties getVelocityXBasicDecimalP] getScaled]}]]
+    }
+    
 
-
-sub updateTotalDistance {
-    my ($self) = @_;
-        my $velocityInterfaceCompositeInterface = $self->getOwnerLayerInterface();
-        my $velocityProperties = $velocityInterfaceCompositeInterface->getVelocityProperties();
-        $self->{xTotalDistance} += $velocityProperties->getVelocityXBasicDecimalP()->getScaled();
-}
-
-
-sub changeDirectionIfReachedPacingAreaMax {
-    my ($self) = @_;
-        my $mathUtil = 'org::allbinary::logic::math::MathUtil'->getInstance();
-        my $totalDistance = $mathUtil->abs($self->{xTotalDistance});
-        if ($totalDistance > $self->{currentDistance}) {
-            $self->nextDirection();
+    method changeDirectionIfReachedPacingAreaMax {} {
+        set mathUtil [::MathUtil::getInstance]
+        set totalDistance [$mathUtil abs [my jget xTotalDistance]]
+        if {[expr {$totalDistance > [my jget currentDistance]}]} {
+            my nextDirection
         }
-}
+    }
+    
 
-
-sub nextDirection {
-    my ($self) = @_;
-        if ($self->{lastKeyDirection} == $javax::microedition::lcdui::Canvas::LEFT) {
-            $self->{keyDirection} = $javax::microedition::lcdui::Canvas::RIGHT;
-            $self->{lastKeyDirection} = $self->{keyDirection};
-            $self->{xTotalDistance} = 0;
-        } elsif ($self->{lastKeyDirection} == $javax::microedition::lcdui::Canvas::RIGHT) {
-            $self->{keyDirection} = $javax::microedition::lcdui::Canvas::LEFT;
-            $self->{lastKeyDirection} = $self->{keyDirection};
-            $self->{xTotalDistance} = 0;
+    method nextDirection {} {
+        if {[expr {[my jget lastKeyDirection] == [::Canvas::staticGet_LEFT]}]} {
+            my jset keyDirection [::Canvas::staticGet_RIGHT]
+            my jset lastKeyDirection [my jget keyDirection]
+            my jset xTotalDistance 0
+        } elseif {[expr {[my jget lastKeyDirection] == [::Canvas::staticGet_RIGHT]}]} {
+            my jset keyDirection [::Canvas::staticGet_LEFT]
+            my jset lastKeyDirection [my jget keyDirection]
+            my jset xTotalDistance 0
         }
+    }
+    
+
+    method disable {} {
+    }
 }
 
-
-sub disable {
-    my ($self) = @_;
+namespace eval ::BasePatrolAI {
+    variable MAX_DISTANCEValue {}
+    variable MAX_DISTANCESet 0
+    proc staticGet_MAX_DISTANCE {} {
+        variable MAX_DISTANCEValue
+        variable MAX_DISTANCESet
+        if {!$MAX_DISTANCESet} {
+            set MAX_DISTANCESet 1
+            set MAX_DISTANCEValue [[::SmallIntegerSingletonFactory::getInstance] getAt 2]
+        }
+        return $MAX_DISTANCEValue
+    }
+    proc staticSet_MAX_DISTANCE {value} {
+        variable MAX_DISTANCEValue
+        variable MAX_DISTANCESet
+        set MAX_DISTANCESet 1
+        set MAX_DISTANCEValue $value
+    }
+    variable DIRECTION_ARRAYValue {}
+    variable DIRECTION_ARRAYSet 0
+    proc staticGet_DIRECTION_ARRAY {} {
+        variable DIRECTION_ARRAYValue
+        variable DIRECTION_ARRAYSet
+        if {!$DIRECTION_ARRAYSet} {
+            set DIRECTION_ARRAYSet 1
+            set DIRECTION_ARRAYValue [[::SmallIntegerSingletonFactory::getInstance] getAt 3]
+        }
+        return $DIRECTION_ARRAYValue
+    }
+    proc staticSet_DIRECTION_ARRAY {value} {
+        variable DIRECTION_ARRAYValue
+        variable DIRECTION_ARRAYSet
+        set DIRECTION_ARRAYSet 1
+        set DIRECTION_ARRAYValue $value
+    }
+    variable FIRING_DISTANCEValue {}
+    variable FIRING_DISTANCESet 0
+    proc staticGet_FIRING_DISTANCE {} {
+        variable FIRING_DISTANCEValue
+        variable FIRING_DISTANCESet
+        if {!$FIRING_DISTANCESet} {
+            set FIRING_DISTANCESet 1
+            set FIRING_DISTANCEValue [[::SmallIntegerSingletonFactory::getInstance] getAt 4]
+        }
+        return $FIRING_DISTANCEValue
+    }
+    proc staticSet_FIRING_DISTANCE {value} {
+        variable FIRING_DISTANCEValue
+        variable FIRING_DISTANCESet
+        set FIRING_DISTANCESet 1
+        set FIRING_DISTANCEValue $value
+    }
+    variable SPEEDValue {}
+    variable SPEEDSet 0
+    proc staticGet_SPEED {} {
+        variable SPEEDValue
+        variable SPEEDSet
+        if {!$SPEEDSet} {
+            set SPEEDSet 1
+            set SPEEDValue [[::SmallIntegerSingletonFactory::getInstance] getAt 5]
+        }
+        return $SPEEDValue
+    }
+    proc staticSet_SPEED {value} {
+        variable SPEEDValue
+        variable SPEEDSet
+        set SPEEDSet 1
+        set SPEEDValue $value
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::game::ai::BasicAI ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::game::physics::velocity::BasicVelocityProperties ();
-use org::allbinary::game::physics::velocity::VelocityInterfaceCompositeInterface ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::logic::math::MathUtil ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::util::ABHashtable ();
-
-1;
 

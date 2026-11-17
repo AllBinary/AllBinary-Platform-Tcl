@@ -11,51 +11,77 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::GameInputStrings;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::GameInputStrings'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{PROCESS_INPUT} = "processInput";
-    $self->{KEY_PRESSED} = "keyPressed";
-    $self->{KEY_RELEASED} = "keyReleased";
-    $self->{KEY_REPEATED} = "keyRepeated";
-    $self->{ON_PRESS_GAME_KEY} = "onPressGameKeyEvent";
-    $self->{ON_DOWN_GAME_KEY} = "onDownGameKeyEvent";
-    $self->{ON_UP_GAME_KEY} = "onUpGameKeyEvent";
-    $self->{NO_KEY} = "Key Code Not Mapped For Game: ";
-    $self->{ADD_KEY_EVENT} = "addGameKeyEvent";
-    $self->{REMOVE_KEY_EVENT} = "removeGameKeyEvent";
-    $self->{STRAFE_LEFT} = "strafeLeft";
-    $self->{STRAFE_RIGHT} = "strafeRight";
-    $self->{PROCESS_MOTION_INPUT} = "processMotionInput";
-    $self->{UDPATE_CURRENT_TOUCH_INPUT_FACTORY} = "updateCurrentTouchInputFactory";
-    $self->{ENABLE_PLAYER_GAME_INPUTS} = "Enabling PlayerGameInputs: ";
-    $self->{ENABLE_PLAYER_GAME_INPUT} = "Enabling PlayerGameInput: ";
+oo::class create ::GameInputStrings {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::GameInputStrings {
+    method initFields_GameInputStrings {} {
+        my jset PROCESS_INPUT {}
+        my jset KEY_PRESSED {}
+        my jset KEY_RELEASED {}
+        my jset KEY_REPEATED {}
+        my jset ON_PRESS_GAME_KEY {}
+        my jset ON_DOWN_GAME_KEY {}
+        my jset ON_UP_GAME_KEY {}
+        my jset NO_KEY {}
+        my jset ADD_KEY_EVENT {}
+        my jset REMOVE_KEY_EVENT {}
+        my jset STRAFE_LEFT {}
+        my jset STRAFE_RIGHT {}
+        my jset PROCESS_MOTION_INPUT {}
+        my jset UDPATE_CURRENT_TOUCH_INPUT_FACTORY {}
+        my jset ENABLE_PLAYER_GAME_INPUTS {}
+        my jset ENABLE_PLAYER_GAME_INPUT {}
+        my jset PROCESS_INPUT "processInput"
+        my jset KEY_PRESSED "keyPressed"
+        my jset KEY_RELEASED "keyReleased"
+        my jset KEY_REPEATED "keyRepeated"
+        my jset ON_PRESS_GAME_KEY "onPressGameKeyEvent"
+        my jset ON_DOWN_GAME_KEY "onDownGameKeyEvent"
+        my jset ON_UP_GAME_KEY "onUpGameKeyEvent"
+        my jset NO_KEY "Key Code Not Mapped For Game: "
+        my jset ADD_KEY_EVENT "addGameKeyEvent"
+        my jset REMOVE_KEY_EVENT "removeGameKeyEvent"
+        my jset STRAFE_LEFT "strafeLeft"
+        my jset STRAFE_RIGHT "strafeRight"
+        my jset PROCESS_MOTION_INPUT "processMotionInput"
+        my jset UDPATE_CURRENT_TOUCH_INPUT_FACTORY "updateCurrentTouchInputFactory"
+        my jset ENABLE_PLAYER_GAME_INPUTS "Enabling PlayerGameInputs: "
+        my jset ENABLE_PLAYER_GAME_INPUT "Enabling PlayerGameInput: "
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_GameInputStrings
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::GameInputStrings::instance;
+namespace eval ::GameInputStrings {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameInputStrings new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameInputStrings::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

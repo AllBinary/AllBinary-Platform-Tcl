@@ -11,54 +11,60 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
-package org::allbinary::image::opengles::OpenGLImageSpecificFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::image::opengles::OpenGLImageSpecificFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{imageFactory} = $org::allbinary::image::opengles::OpenGLImageFactory::NULL_OPENGL_IMAGE_FACTORY;
-    $self->{updating} = 0;
+oo::class create ::OpenGLImageSpecificFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::OpenGLImageSpecificFactory {
+    method initFields_OpenGLImageSpecificFactory {} {
+        my jset imageFactory {}
+        my jset updating false
+        my jset imageFactory [::OpenGLImageFactory::staticGet_NULL_OPENGL_IMAGE_FACTORY]
+        my jset updating false
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_OpenGLImageSpecificFactory
+    }
+    
+    
+
+    method setImageFactory {imageFactory} {
+        my jset imageFactory $imageFactory
+        ::PreLogUtil::put [[[[::StringMaker new] append "Selected Image Factory: "] append [[::StringUtil::getInstance] toString1 [my jget imageFactory]]] toString] [self] "setImageFactory"
+    }
+    
+
+    method getImageFactory {} {
+        return [my jget imageFactory]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::image::opengles::OpenGLImageSpecificFactory::instance;
+namespace eval ::OpenGLImageSpecificFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::OpenGLImageSpecificFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::OpenGLImageSpecificFactory::staticGet_instance]
+    }
 }
 
-
-sub setImageFactory {
-    my ($self, $imageFactory) = @_;
-        $self->{imageFactory} = $imageFactory;
-        'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append("Selected Image Factory: ")->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($self->{imageFactory}))->toString(), $self, "setImageFactory");
-}
-
-
-sub getImageFactory {
-    my ($self) = @_;
-        return $self->{imageFactory};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::image::opengles::OpenGLImageFactory ();
-
-1;
 

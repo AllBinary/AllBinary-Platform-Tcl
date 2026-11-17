@@ -11,75 +11,82 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.business.advertisement
 
-package org::allbinary::business::advertisement::BottomLimiter;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::business::advertisement::BottomLimiter'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{bottom} = 0;
-    $self->{deltaY} = 0;
-    $self->{lower} = 0;
-    $self->{higher} = 0;
+oo::class create ::BottomLimiter {
+    superclass ::JObject
 }
 
+oo::define ::BottomLimiter {
+    method initFields_BottomLimiter {} {
+        my jset bottom 0
+        my jset deltaY 0
+        my jset lower 0
+        my jset higher 0
+        my jset bottom 0
+        my jset deltaY 0
+        my jset lower 0
+        my jset higher 0
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::business::advertisement::BottomLimiter::instance;
-}
+    constructor {} {
+        next
+        my initFields_BottomLimiter
+    }
+    
 
+    method init {lower higher} {
+        my jset lower $lower
+        my jset higher $higher
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-sub init {
-    my ($self, $lower, $higher) = @_;
-        $self->{lower} = $lower;
-        $self->{higher} = $higher;
-}
-
-
-sub update {
-    my ($self) = @_;
-        my $displayInfo = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-        my $gameAdState = 'org::allbinary::business::advertisement::GameAdStateFactory'->getInstance()->getCurrentInstance();
-        if ($gameAdState->isShowingAt()) {
-            $self->{deltaY} = $self->{higher};
+    method update {} {
+        set displayInfo [::DisplayInfoSingleton::getInstance]
+        set gameAdState [[::GameAdStateFactory::getInstance] getCurrentInstance]
+        if {[$gameAdState isShowingAt]} {
+            my jset deltaY [my jget higher]
         } else {
-            $self->{deltaY} = $self->{lower};
+            my jset deltaY [my jget lower]
         }
-        $self->{bottom} = $displayInfo->getLastHeight() - $self->{deltaY};
+        my jset bottom [expr {[$displayInfo getLastHeight] - [my jget deltaY]}]
+    }
+    
+
+    method getDeltaY {} {
+        return [my jget deltaY]
+    }
+    
+
+    method getBottom {} {
+        return [my jget bottom]
+    }
 }
 
-
-sub getDeltaY {
-    my ($self) = @_;
-        return $self->{deltaY};
+namespace eval ::BottomLimiter {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::BottomLimiter new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::BottomLimiter::staticGet_instance]
+    }
 }
 
-
-sub getBottom {
-    my ($self) = @_;
-        return $self->{bottom};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::GameAdState ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::business::advertisement::GameAdStateFactory ();
-
-1;
 

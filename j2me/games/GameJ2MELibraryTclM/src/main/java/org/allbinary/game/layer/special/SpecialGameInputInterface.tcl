@@ -11,103 +11,79 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.special
 
-# Java interface
-package org::allbinary::game::layer::special::SpecialGameInputInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::PaintableInterface';
-
-
-
-# throws Exception
-sub up {
-    my ($self) = @_;
-    die "abstract method up";
+oo::class create ::SpecialGameInputInterface {
+    superclass ::JObject
 }
 
+oo::define ::SpecialGameInputInterface {
+    method initFields_SpecialGameInputInterface {} {
+        return
+    }
+    
 
-# throws Exception
-sub down {
-    my ($self) = @_;
-    die "abstract method down";
+    method up {} {
+        error [jexception AbstractMethodError up]
+    }
+    
+
+    method down {} {
+        error [jexception AbstractMethodError down]
+    }
+    
+
+    method right {} {
+        error [jexception AbstractMethodError right]
+    }
+    
+
+    method left {} {
+        error [jexception AbstractMethodError left]
+    }
+    
+
+    method strafeLeft {} {
+        error [jexception AbstractMethodError strafeLeft]
+    }
+    
+
+    method strafeRight {} {
+        error [jexception AbstractMethodError strafeRight]
+    }
+    
+
+    method fire {layerManager gameKeyEvent} {
+        error [jexception AbstractMethodError fire]
+    }
+    
+
+    method special1 {layerManager gameKeyEvent} {
+        error [jexception AbstractMethodError special1]
+    }
+    
+
+    method special2 {layerManager gameKeyEvent} {
+        error [jexception AbstractMethodError special2]
+    }
+    
+
+    method special3 {layerManager gameKeyEvent} {
+        error [jexception AbstractMethodError special3]
+    }
+    
+
+    method special4 {layerManager gameKeyEvent} {
+        error [jexception AbstractMethodError special4]
+    }
+    
+
+    method special5 {layerManager gameKeyEvent} {
+        error [jexception AbstractMethodError special5]
+    }
 }
 
-
-# throws Exception
-sub right {
-    my ($self) = @_;
-    die "abstract method right";
+namespace eval ::SpecialGameInputInterface {
 }
 
-
-# throws Exception
-sub left {
-    my ($self) = @_;
-    die "abstract method left";
-}
-
-
-# throws Exception
-sub strafeLeft {
-    my ($self) = @_;
-    die "abstract method strafeLeft";
-}
-
-
-# throws Exception
-sub strafeRight {
-    my ($self) = @_;
-    die "abstract method strafeRight";
-}
-
-
-# throws Exception
-sub fire {
-    my ($self, $layerManager, $gameKeyEvent) = @_;
-    die "abstract method fire";
-}
-
-
-# throws Exception
-sub special1 {
-    my ($self, $layerManager, $gameKeyEvent) = @_;
-    die "abstract method special1";
-}
-
-
-# throws Exception
-sub special2 {
-    my ($self, $layerManager, $gameKeyEvent) = @_;
-    die "abstract method special2";
-}
-
-
-# throws Exception
-sub special3 {
-    my ($self, $layerManager, $gameKeyEvent) = @_;
-    die "abstract method special3";
-}
-
-
-# throws Exception
-sub special4 {
-    my ($self, $layerManager, $gameKeyEvent) = @_;
-    die "abstract method special4";
-}
-
-
-# throws Exception
-sub special5 {
-    my ($self, $layerManager, $gameKeyEvent) = @_;
-    die "abstract method special5";
-}
-
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::graphics::paint::PaintableInterface ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-
-1;
 

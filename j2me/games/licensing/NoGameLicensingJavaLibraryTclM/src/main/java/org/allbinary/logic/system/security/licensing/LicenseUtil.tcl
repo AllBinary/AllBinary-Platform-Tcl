@@ -11,53 +11,63 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
-package org::allbinary::logic::system::security::licensing::LicenseUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::system::security::licensing::LicenseUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::LicenseUtil {
+    superclass ::JObject
 }
 
+oo::define ::LicenseUtil {
+    method initFields_LicenseUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::system::security::licensing::LicenseUtil::instance;
+    constructor {} {
+        next
+        my initFields_LicenseUtil
+    }
+    
+    
+
+    method init {} {
+    }
+    
+
+    method isRunning {} {
+        return false
+    }
+    
+
+    method setRunning {running} {
+    }
+    
+
+    method shouldWait {commandListener} {
+        return [my isRunning]
+    }
 }
 
-
-sub init {
-    my ($self) = @_;
+namespace eval ::LicenseUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LicenseUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LicenseUtil::staticGet_instance]
+    }
 }
 
-
-sub isRunning {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub setRunning {
-    my ($self, $running) = @_;
-}
-
-
-sub shouldWait {
-    my ($self, $commandListener) = @_;
-        return $self->isRunning();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::CommandListener ();
-
-1;
 

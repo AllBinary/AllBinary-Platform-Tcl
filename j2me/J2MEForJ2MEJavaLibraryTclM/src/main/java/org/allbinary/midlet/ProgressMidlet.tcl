@@ -11,63 +11,51 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.midlet
 
 #J2MEForJ2ME
-package org::allbinary::midlet::ProgressMidlet;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::midlet::AllBinaryMidlet';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{abeClientInformation} = undef;
+oo::class create ::ProgressMidlet {
+    superclass ::AllBinaryMidlet
 }
 
+oo::define ::ProgressMidlet {
+    method initFields_ProgressMidlet {} {
+        my jset abeClientInformation {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $clientInformationFactory) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->preInit();
-        $self->{abeClientInformation} = $clientInformationFactory->getInstance();
-    return $self;
-}
+    constructor {clientInformationFactory} {
+        next
+        my initFields_ProgressMidlet
+        my preInit
+        my jset abeClientInformation [$clientInformationFactory getInstance]
+    }
+    
 
+    method preInit {} {
+    }
+    
 
-sub preInit {
-    my ($self) = @_;
-}
-
-
-sub exitProgress {
-    my ($self, $isProgress) = @_;
-        my $processor = 'org::allbinary::midlet::MidletExitProcessorFactory'->getInstance()->getExitInstance($self);
+    method exitProgress {isProgress} {
+        set processor [[::MidletExitProcessorFactory::getInstance] getExitInstance [self]]
         try {
-            my $primaryThreadPool = 'org::allbinary::thread::PrimaryThreadPool'->getInstance();
-            my $runnable = 'org::allbinary::midlet::ExitRunnable'->new($self, $processor, $isProgress);
-            $primaryThreadPool->runTask($runnable);
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "exit", $e);
+            set primaryThreadPool [::PrimaryThreadPool::getInstance]
+            set runnable [::ExitRunnable new [self] $processor $isProgress]
+            $primaryThreadPool runTask $runnable
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "exit" $e
             try {
-                $processor->process();
-            } catch ($e2) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "exit", $e);
+                $processor process
+            } on error {e2} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "exit" $e
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::logic::system::security::licensing::ClientInformationFactory ();
-use org::allbinary::thread::PrimaryThreadPool ();
-use org::allbinary::thread::ThreadPool ();
-use org::allbinary::midlet::AllBinaryMidlet ();
-use org::allbinary::midlet::MidletExitProcessorFactory ();
-use org::allbinary::midlet::ExitRunnable ();
+namespace eval ::ProgressMidlet {
+}
 
-1;
 

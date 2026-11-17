@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.init
 
-# Java interface
-package org::allbinary::init::UpdateInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub update {
-    my ($self) = @_;
-    die "abstract method update";
+oo::class create ::UpdateInterface {
+    superclass ::JObject
 }
 
+oo::define ::UpdateInterface {
+    method initFields_UpdateInterface {} {
+        return
+    }
+    
 
-1;
+    method update {} {
+        error [jexception AbstractMethodError update]
+    }
+}
+
+namespace eval ::UpdateInterface {
+}
+
 

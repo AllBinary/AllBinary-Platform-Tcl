@@ -11,173 +11,150 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.physics.velocity
 
-package org::allbinary::game::physics::velocity::BasicVelocityProperties;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::physics::velocity::BasicVelocityInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{velocityXBasicDecimal} = undef;
-    $self->{velocityYBasicDecimal} = undef;
-    $self->{velocityZBasicDecimal} = undef;
-    $self->{axisMathVectorUtil} = 'org::allbinary::logic::math::vector::AxisMathVectorUtil'->getInstance();
-    $self->{directionUtil} = 'org::allbinary::direction::DirectionUtil'->getInstance();
+oo::class create ::BasicVelocityProperties {
+    superclass ::JObject
 }
 
+oo::define ::BasicVelocityProperties {
+    method initFields_BasicVelocityProperties {} {
+        my jset logUtil {}
+        my jset velocityXBasicDecimal {}
+        my jset velocityYBasicDecimal {}
+        my jset velocityZBasicDecimal {}
+        my jset axisMathVectorUtil {}
+        my jset directionUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        
+        
+        my jset axisMathVectorUtil [::AxisMathVectorUtil::getInstance]
+        my jset directionUtil [::DirectionUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{velocityXBasicDecimal} = 'org::allbinary::logic::math::BasicDecimal'->new(0);
-        $self->{velocityYBasicDecimal} = 'org::allbinary::logic::math::BasicDecimal'->new(0);
-        $self->{velocityZBasicDecimal} = 'org::allbinary::logic::math::BasicDecimal'->new(0);
-    return $self;
+    constructor {} {
+        next
+        my initFields_BasicVelocityProperties
+        my jset velocityXBasicDecimal [::BasicDecimal new 0]
+        my jset velocityYBasicDecimal [::BasicDecimal new 0]
+        my jset velocityZBasicDecimal [::BasicDecimal new 0]
+    }
+    
+
+    method zero {} {
+        [my jget velocityXBasicDecimal] setint 0
+        [my jget velocityYBasicDecimal] setint 0
+        [my jget velocityZBasicDecimal] setint 0
+    }
+    
+
+    method getVelocityXBasicDecimalP {} {
+        return [my jget velocityXBasicDecimal]
+    }
+    
+
+    method getVelocityYBasicDecimalP {} {
+        return [my jget velocityYBasicDecimal]
+    }
+    
+
+    method getVelocityZBasicDecimalP {} {
+        return [my jget velocityZBasicDecimal]
+    }
+    
+
+    method setVelocityWithBigDecimalAndDirection {magnitudeBasicDecimal direction otherDirection} {
+        set angle [[my jget directionUtil] getAngle $direction]
+        set otherAngle [[my jget directionUtil] getAngle $otherDirection]
+        my setVelocityWithBigDecimal $magnitudeBasicDecimal $angle $otherAngle
+    }
+    
+
+    method setVelocityWithDirection {magnitude direction otherDirection} {
+        set angle [[my jget directionUtil] getAngle $direction]
+        set otherAngle [[my jget directionUtil] getAngle $otherDirection]
+        my setVelocity $magnitude $angle $otherAngle
+    }
+    
+
+    method addVelocityWithBigDecimalAndDirection {magnitudeBasicDecimal direction otherDirection} {
+        set angle [[my jget directionUtil] getAngle $direction]
+        set otherAngle [[my jget directionUtil] getAngle $otherDirection]
+        my addVelocityWithBigDecimal $magnitudeBasicDecimal $angle $otherAngle
+    }
+    
+
+    method addVelocityWithDirection {magnitude direction otherDirection} {
+        set angle [[my jget directionUtil] getAngle $direction]
+        set otherAngle [[my jget directionUtil] getAngle $otherDirection]
+        my addVelocity $magnitude $angle $otherAngle
+    }
+    
+
+    method setVelocityWithBigDecimal {magnitudeBasicDecimal angle otherAngle} {
+        set magnitude [$magnitudeBasicDecimal getUnscaled]
+        my setVelocity $magnitude $angle $otherAngle
+    }
+    
+
+    method addVelocityWithBigDecimal {magnitudeBasicDecimal angle otherAngle} {
+        set magnitude [$magnitudeBasicDecimal getUnscaled]
+        my addVelocity $magnitude $angle $otherAngle
+    }
+    
+
+    method setVelocity {magnitude angle otherAngle} {
+        my setVelocityi $magnitude [jint [$angle getValue]] [jint [$otherAngle getValue]]
+    }
+    
+
+    method addVelocity {magnitude angle otherAngle} {
+        my addVelocityi $magnitude [jint [$angle getValue]] [jint [$otherAngle getValue]]
+    }
+    
+
+    method setVelocityi {magnitude angle otherAngle} {
+        set xVector ([expr {[[my jget axisMathVectorUtil] calculateX $magnitude $angle] / [[my jget velocityXBasicDecimal] getScaledFactorValue]}])
+        set yVector ([expr {[[my jget axisMathVectorUtil] calculateY $magnitude $angle] / [[my jget velocityYBasicDecimal] getScaledFactorValue]}])
+        set zVector ([expr {[[my jget axisMathVectorUtil] calculateZ $magnitude $otherAngle] / [[my jget velocityZBasicDecimal] getScaledFactorValue]}])
+        [my jget velocityXBasicDecimal] setlong $xVector
+        [my jget velocityYBasicDecimal] setlong $yVector
+        [my jget velocityZBasicDecimal] setlong $zVector
+    }
+    
+
+    method addVelocityi {magnitude angle otherAngle} {
+        set xVector ([expr {[[my jget axisMathVectorUtil] calculateX $magnitude $angle] / [[my jget velocityXBasicDecimal] getScaledFactorValue]}])
+        set yVector ([expr {[[my jget axisMathVectorUtil] calculateY $magnitude $angle] / [[my jget velocityYBasicDecimal] getScaledFactorValue]}])
+        set zVector ([expr {[[my jget axisMathVectorUtil] calculateZ $magnitude $otherAngle] / [[my jget velocityZBasicDecimal] getScaledFactorValue]}])
+        [my jget velocityXBasicDecimal] addlong $xVector
+        [my jget velocityYBasicDecimal] addlong $yVector
+        [my jget velocityZBasicDecimal] addlong $zVector
+    }
+    
+
+    method toString {} {
+        set commonSeps [::CommonSeps::getInstance]
+        set positionStrings [::PositionStrings::getInstance]
+        set stringBuffer [::StringMaker new]
+        set stringUtil [::StringUtil::getInstance]
+        $stringBuffer append "Velocity "
+        $stringBuffer append [$positionStrings jget X_LABEL]
+        $stringBuffer append [$stringUtil toString1 [my jget velocityXBasicDecimal]]
+        $stringBuffer append [$commonSeps jget SPACE]
+        $stringBuffer append [$positionStrings jget Y_LABEL]
+        $stringBuffer append [$stringUtil toString1 [my jget velocityYBasicDecimal]]
+        $stringBuffer append [$commonSeps jget SPACE]
+        $stringBuffer append [$positionStrings jget Z_LABEL]
+        $stringBuffer append [$stringUtil toString1 [my jget velocityZBasicDecimal]]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub zero {
-    my ($self) = @_;
-        $self->{velocityXBasicDecimal}->setint(0);
-        $self->{velocityYBasicDecimal}->setint(0);
-        $self->{velocityZBasicDecimal}->setint(0);
+namespace eval ::BasicVelocityProperties {
 }
 
-
-sub getVelocityXBasicDecimalP {
-    my ($self) = @_;
-        return $self->{velocityXBasicDecimal};
-}
-
-
-sub getVelocityYBasicDecimalP {
-    my ($self) = @_;
-        return $self->{velocityYBasicDecimal};
-}
-
-
-sub getVelocityZBasicDecimalP {
-    my ($self) = @_;
-        return $self->{velocityZBasicDecimal};
-}
-
-
-sub setVelocityWithBigDecimalAndDirection {
-    my ($self, $magnitudeBasicDecimal, $direction, $otherDirection) = @_;
-        my $angle = $self->{directionUtil}->getAngle($direction);
-        my $otherAngle = $self->{directionUtil}->getAngle($otherDirection);
-        $self->setVelocityWithBigDecimal($magnitudeBasicDecimal, $angle, $otherAngle);
-}
-
-
-sub setVelocityWithDirection {
-    my ($self, $magnitude, $direction, $otherDirection) = @_;
-        my $angle = $self->{directionUtil}->getAngle($direction);
-        my $otherAngle = $self->{directionUtil}->getAngle($otherDirection);
-        $self->setVelocity($magnitude, $angle, $otherAngle);
-}
-
-
-sub addVelocityWithBigDecimalAndDirection {
-    my ($self, $magnitudeBasicDecimal, $direction, $otherDirection) = @_;
-        my $angle = $self->{directionUtil}->getAngle($direction);
-        my $otherAngle = $self->{directionUtil}->getAngle($otherDirection);
-        $self->addVelocityWithBigDecimal($magnitudeBasicDecimal, $angle, $otherAngle);
-}
-
-
-sub addVelocityWithDirection {
-    my ($self, $magnitude, $direction, $otherDirection) = @_;
-        my $angle = $self->{directionUtil}->getAngle($direction);
-        my $otherAngle = $self->{directionUtil}->getAngle($otherDirection);
-        $self->addVelocity($magnitude, $angle, $otherAngle);
-}
-
-
-sub setVelocityWithBigDecimal {
-    my ($self, $magnitudeBasicDecimal, $angle, $otherAngle) = @_;
-        my $magnitude = $magnitudeBasicDecimal->getUnscaled();
-        $self->setVelocity($magnitude, $angle, $otherAngle);
-}
-
-
-sub addVelocityWithBigDecimal {
-    my ($self, $magnitudeBasicDecimal, $angle, $otherAngle) = @_;
-        my $magnitude = $magnitudeBasicDecimal->getUnscaled();
-        $self->addVelocity($magnitude, $angle, $otherAngle);
-}
-
-
-sub setVelocity {
-    my ($self, $magnitude, $angle, $otherAngle) = @_;
-        $self->setVelocityi($magnitude, int($angle->getValue()), int($otherAngle->getValue()));
-}
-
-
-sub addVelocity {
-    my ($self, $magnitude, $angle, $otherAngle) = @_;
-        $self->addVelocityi($magnitude, int($angle->getValue()), int($otherAngle->getValue()));
-}
-
-
-sub setVelocityi {
-    my ($self, $magnitude, $angle, $otherAngle) = @_;
-        my $xVector = ($self->{axisMathVectorUtil}->calculateX($magnitude, $angle) / $self->{velocityXBasicDecimal}->getScaledFactorValue());
-        my $yVector = ($self->{axisMathVectorUtil}->calculateY($magnitude, $angle) / $self->{velocityYBasicDecimal}->getScaledFactorValue());
-        my $zVector = ($self->{axisMathVectorUtil}->calculateZ($magnitude, $otherAngle) / $self->{velocityZBasicDecimal}->getScaledFactorValue());
-        $self->{velocityXBasicDecimal}->setlong($xVector);
-        $self->{velocityYBasicDecimal}->setlong($yVector);
-        $self->{velocityZBasicDecimal}->setlong($zVector);
-}
-
-
-sub addVelocityi {
-    my ($self, $magnitude, $angle, $otherAngle) = @_;
-        my $xVector = ($self->{axisMathVectorUtil}->calculateX($magnitude, $angle) / $self->{velocityXBasicDecimal}->getScaledFactorValue());
-        my $yVector = ($self->{axisMathVectorUtil}->calculateY($magnitude, $angle) / $self->{velocityYBasicDecimal}->getScaledFactorValue());
-        my $zVector = ($self->{axisMathVectorUtil}->calculateZ($magnitude, $otherAngle) / $self->{velocityZBasicDecimal}->getScaledFactorValue());
-        $self->{velocityXBasicDecimal}->addlong($xVector);
-        $self->{velocityYBasicDecimal}->addlong($yVector);
-        $self->{velocityZBasicDecimal}->addlong($zVector);
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $commonSeps = 'org::allbinary::string::CommonSeps'->getInstance();
-        my $positionStrings = 'org::allbinary::math::PositionStrings'->getInstance();
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $stringUtil = 'org::allbinary::logic::string::StringUtil'->getInstance();
-        $stringBuffer->append("Velocity ");
-        $stringBuffer->append($positionStrings->{X_LABEL});
-        $stringBuffer->append($stringUtil->toString($self->{velocityXBasicDecimal}));
-        $stringBuffer->append($commonSeps->{SPACE});
-        $stringBuffer->append($positionStrings->{Y_LABEL});
-        $stringBuffer->append($stringUtil->toString($self->{velocityYBasicDecimal}));
-        $stringBuffer->append($commonSeps->{SPACE});
-        $stringBuffer->append($positionStrings->{Z_LABEL});
-        $stringBuffer->append($stringUtil->toString($self->{velocityZBasicDecimal}));
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use org::allbinary::direction::Direction ();
-use org::allbinary::direction::DirectionUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::math::BasicDecimal ();
-use org::allbinary::logic::math::vector::AxisMathVectorUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::math::Angle ();
-use org::allbinary::math::PositionStrings ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::game::physics::velocity::BasicVelocityInterface ();
-
-1;
 

@@ -11,67 +11,70 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::BaseMenuBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::displayable::canvas::BaseMenuBehavior'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::BaseMenuBehavior {
+    superclass ::JObject
 }
 
+oo::define ::BaseMenuBehavior {
+    method initFields_BaseMenuBehavior {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::displayable::canvas::BaseMenuBehavior::instance;
+    constructor {} {
+        next
+        my initFields_BaseMenuBehavior
+    }
+    
+    
+
+    method onDisplayChangeEvent {allBinaryGameCanvas displayChangeEvent} {
+    }
+    
+
+    method initSpecialPaint {allBinaryGameCanvas} {
+        $allBinaryGameCanvas setNonBotPaintableP [::NullPaintable::getInstance]
+    }
+    
+
+    method initMenu {allBinaryGameCanvas} {
+    }
+    
+
+    method updateMenu {allBinaryGameCanvas} {
+    }
+    
+
+    method popupMenu {allBinaryGameCanvas} {
+    }
+    
+
+    method closeMenu {allBinaryGameCanvas} {
+    }
 }
 
-
-# throws Exception
-sub onDisplayChangeEvent {
-    my ($self, $allBinaryGameCanvas, $displayChangeEvent) = @_;
+namespace eval ::BaseMenuBehavior {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::BaseMenuBehavior new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::BaseMenuBehavior::staticGet_instance]
+    }
 }
 
-
-sub initSpecialPaint {
-    my ($self, $allBinaryGameCanvas) = @_;
-        $allBinaryGameCanvas->setNonBotPaintableP('org::allbinary::graphics::paint::NullPaintable'->getInstance());
-}
-
-
-# throws Exception
-sub initMenu {
-    my ($self, $allBinaryGameCanvas) = @_;
-}
-
-
-# throws Exception
-sub updateMenu {
-    my ($self, $allBinaryGameCanvas) = @_;
-}
-
-
-# throws Exception
-sub popupMenu {
-    my ($self, $allBinaryGameCanvas) = @_;
-}
-
-
-sub closeMenu {
-    my ($self, $allBinaryGameCanvas) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::displayable::event::DisplayChangeEvent ();
-use org::allbinary::graphics::paint::NullPaintable ();
-
-1;
 

@@ -11,46 +11,39 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-# Java interface
-package org::allbinary::game::collision::CollidableInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::NamedInterface';
-
-
-
-# throws Exception
-sub isCollidable {
-    my ($self, $ownerLayer) = @_;
-    die "abstract method isCollidable";
+oo::class create ::CollidableInterface {
+    superclass ::JObject
 }
 
+oo::define ::CollidableInterface {
+    method initFields_CollidableInterface {} {
+        return
+    }
+    
 
-# throws Exception
-sub isCollision {
-    my ($self, $ownerLayer, $collidableInterfaceCompositeInterface) = @_;
-    die "abstract method isCollision";
+    method isCollidable {ownerLayer} {
+        error [jexception AbstractMethodError isCollidable]
+    }
+    
+
+    method isCollision {ownerLayer collidableInterfaceCompositeInterface} {
+        error [jexception AbstractMethodError isCollision]
+    }
+    
+
+    method collide {ownerLayer collidableInterfaceCompositeInterface} {
+        error [jexception AbstractMethodError collide]
+    }
+    
+
+    method getCollisionTypeWith {layerInterface} {
+        error [jexception AbstractMethodError getCollisionTypeWith]
+    }
 }
 
-
-# throws Exception
-sub collide {
-    my ($self, $ownerLayer, $collidableInterfaceCompositeInterface) = @_;
-    die "abstract method collide";
+namespace eval ::CollidableInterface {
 }
 
-
-sub getCollisionTypeWith {
-    my ($self, $layerInterface) = @_;
-    die "abstract method getCollisionTypeWith";
-}
-
-use org::allbinary::game::layer::CollidableCompositeLayer ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::NamedInterface ();
-
-1;
 

@@ -11,140 +11,120 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.text
 
-package org::allbinary::animation::text::TextAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::IndexedAnimation','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{updateMyFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-    $self->{textArrayP} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{ONE_EMPTY_STRING_ARRAY};
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
-    $self->{fontHeight} = 0;
-    $self->{offsetY} = 0;
-    $self->{textChangeListener} = 'org::allbinary::animation::text::TextChangeListener'->getInstance();
+oo::class create ::TextAnimation {
+    superclass ::IndexedAnimation
 }
 
+oo::define ::TextAnimation {
+    method initFields_TextAnimation {} {
+        my jset updateMyFontProcessor {}
+        my jset myFontProcessor {}
+        my jset textArrayP {}
+        my jset anchor 0
+        my jset fontHeight 0
+        my jset offsetY 0
+        my jset textChangeListener {}
+        my jset updateMyFontProcessor [::UpdateMyFontProcessor new [self]]
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+        my jset textArrayP [[::StringUtil::getInstance] jget ONE_EMPTY_STRING_ARRAY]
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        my jset fontHeight 0
+        my jset offsetY 0
+        my jset textChangeListener [::TextChangeListener::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $text, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->setText($text);
-    return $self;
-}
+    constructor {text animationBehavior} {
+        next $animationBehavior
+        my initFields_TextAnimation
+        my setText $text
+    }
+    
 
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        my jset fontHeight [$font getHeight]
+        set adjustedFontHeight [jint [jd2i [expr {-([expr {[expr {double([my jget fontHeight])}] * 2.00}])}]]]
+        my jset offsetY [expr {[[::SWTJOGLProcessor::getInstance] isJOGL] ? $adjustedFontHeight : 0}]
+        [my jget textChangeListener] onMeasure
+        my jset textChangeListener [::TextChangeListener::getInstance]
+        my jset myFontProcessor [::MyFontProcessor::getInstance]
+    }
+    
 
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->{fontHeight} = $font->getHeight();
-        my $adjustedFontHeight = int(-($self->{fontHeight} * 2.00));
-        $self->{offsetY} = ('org::allbinary::graphics::threed::SWTJOGLProcessor'->getInstance()->isJOGL() ? $adjustedFontHeight : 0);
-        $self->{textChangeListener}->onMeasure();
-        $self->{textChangeListener} = 'org::allbinary::animation::text::TextChangeListener'->getInstance();
-        $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
-}
+    method nextFrame {} {
+    }
+    
 
+    method paintXY {graphics x y} {
+        [my jget myFontProcessor] process $graphics
+        my paintXYNoUpdate $graphics $x $y
+    }
+    
 
-# throws Exception
-sub nextFrame {
-    my ($self) = @_;
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        $self->paintXYNoUpdate($graphics, $x, $y);
-}
-
-
-sub paintXYNoUpdate {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->{basicSetColorUtil}->setBasicColorP3($graphics, $self->getBasicColorP(), $self->getColor());
-        my $size = scalar(@{$self->{textArrayP}});
-        for (my $index = 0; $index < $size; $index++) {
-            $graphics->drawString($self->{textArrayP}->[$index], $x, $y + $self->{offsetY} + ($index * $self->{fontHeight}), $self->{anchor});
+    method paintXYNoUpdate {graphics x y} {
+        [my jget basicSetColorUtil] setBasicColorP3 $graphics [my getBasicColorP] [my getColor]
+        set size [[my jget textArrayP] length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            $graphics drawString [[my jget textArrayP] get $index] $x [jint [expr {[jint [expr {$y + [my jget offsetY]}]] + ([jint [expr {$index * [my jget fontHeight]}]])}]] [my jget anchor]
         }
-}
+    }
+    
 
+    method setTextWithOnMeasure {text textChangeListener} {
+        my setText $text
+        my jset textChangeListener $textChangeListener
+    }
+    
 
-sub setTextWithOnMeasure {
-    my ($self, $text, $textChangeListener) = @_;
-        $self->setText($text);
-        $self->{textChangeListener} = $textChangeListener;
-}
-
-
-sub setText {
-    my ($self, $text) = @_;
-        my $list = 'org::allbinary::util::BasicArrayListD'->new();
-        if (length($text) > 0) {
-            my $index = 0;
-            my $startIndex = 0;
-            my $endIndex = 0;
-            while ($index >= 0) {
-                $startIndex = $index;
-                $index = index($text, "\n", $startIndex);
-                $endIndex = $index;
-                if ($index < 0) {
-                    $endIndex = length($text);
+    method setText {text} {
+        set list [::BasicArrayListD new]
+        if {[expr {[string length $text] > 0}]} {
+            set index 0
+            set startIndex 0
+            set endIndex 0
+            while {[expr {$index >= 0}]} {
+                set startIndex $index
+                set index [string first [scan "\n" %c] $text]
+                set endIndex $index
+                if {[expr {$index < 0}]} {
+                    set endIndex [string length $text]
                 }
-                $list->add(substr($text, $startIndex, ($endIndex) - ($startIndex)));
-                if ($index < 0) {
-                    last;
+                $list add [jsubstring $text $startIndex $endIndex]
+                if {[expr {$index < 0}]} {
+                    break
                 }
-                $index++;
+                jpostincr index 1
             }
         }
-        if ($list->size() > 0) {
-            my $textArray = [(undef) x ($list->size())];
-            my $size = $list->size();
-            for (my $index = 0; $index < $size; $index++) {
-                $textArray->[$index] = $list->get($index);
+        if {[expr {[$list size] > 0}]} {
+            set textArray [jarray [$list size] {}]
+            set size [$list size]
+            for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+                $textArray set $index [$list get $index]
             }
-            $self->{textArrayP} = $textArray;
+            my jset textArrayP $textArray
         } else {
-            $self->{textArrayP} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{ONE_EMPTY_STRING_ARRAY};
+            my jset textArrayP [[::StringUtil::getInstance] jget ONE_EMPTY_STRING_ARRAY]
         }
-        $self->{myFontProcessor} = $self->{updateMyFontProcessor};
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+    }
+    
+
+    method getTextArray {} {
+        return [my jget textArrayP]
+    }
+    
+
+    method getFontHeight {} {
+        return [my jget fontHeight]
+    }
 }
 
-
-sub getTextArray {
-    my ($self) = @_;
-        return $self->{textArrayP};
+namespace eval ::TextAnimation {
 }
 
-
-sub getFontHeight {
-    my ($self) = @_;
-        return $self->{fontHeight};
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::graphics::threed::SWTJOGLProcessor ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::animation::text::TextChangeListener ();
-
-1;
 

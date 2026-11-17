@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.thirdparty.store
 
-# Java interface
-package org::allbinary::thirdparty::store::LongArrayIdentifierInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getLongArrayIdentifier {
-    my ($self) = @_;
-    die "abstract method getLongArrayIdentifier";
+oo::class create ::LongArrayIdentifierInterface {
+    superclass ::JObject
 }
 
+oo::define ::LongArrayIdentifierInterface {
+    method initFields_LongArrayIdentifierInterface {} {
+        return
+    }
+    
 
-1;
+    method getLongArrayIdentifier {} {
+        error [jexception AbstractMethodError getLongArrayIdentifier]
+    }
+}
+
+namespace eval ::LongArrayIdentifierInterface {
+}
+
 

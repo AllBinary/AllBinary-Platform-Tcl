@@ -11,197 +11,180 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score.displayable
 
-package org::allbinary::game::score::displayable::HighScoresCanvas;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::displayable::canvas::GameCommandCanvas','org::allbinary::game::score::HighScoresResultsListener';
-
-our $NAME = "HighScoresCanvas";
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{paintable} = 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-    $self->{highScoreCommandsFactory} = 'org::allbinary::game::score::HighScoreCommandsFactory'->getInstance();
-    $self->{waitPaintable} = 'org::allbinary::graphics::paint::SimpleTextPaintable'->new($self->{commonStrings}->{PLEASE_WAIT_FOR_SERVER}, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE});
-    $self->{highScoresPaintable} = undef;
-    $self->{highScoresFactoryInterface} = undef;
-    $self->{colorFillPaintable} = undef;
-    $self->{highScoresHelper} = 'org::allbinary::game::score::HighScoresHelperBase'->new();
-    $self->{gameInfo} = undef;
-    $self->{highScoresCanvasInputProcessor} = undef;
-    $self->{currentCommand} = $self->{highScoreCommandsFactory}->{HIGH_SCORE_COMMANDS}->[0];
-    $self->{hasPainted} = 0;
+oo::class create ::HighScoresCanvas {
+    superclass ::GameCommandCanvas
 }
 
+oo::define ::HighScoresCanvas {
+    method initFields_HighScoresCanvas {} {
+        my jset paintable {}
+        my jset highScoreCommandsFactory {}
+        my jset waitPaintable {}
+        my jset highScoresPaintable {}
+        my jset highScoresFactoryInterface {}
+        my jset colorFillPaintable {}
+        my jset highScoresHelper {}
+        my jset gameInfo {}
+        my jset highScoresCanvasInputProcessor {}
+        my jset currentCommand {}
+        my jset hasPainted false
+        my jset paintable [::NullPaintable::getInstance]
+        my jset highScoreCommandsFactory [::HighScoreCommandsFactory::getInstance]
+        my jset waitPaintable [::SimpleTextPaintable new [[my jget commonStrings] jget PLEASE_WAIT_FOR_SERVER] [[::BasicColorFactory::getInstance] jget WHITE]]
+        
+        
+        
+        my jset highScoresHelper [::HighScoresHelperBase new]
+        
+        
+        my jset currentCommand [[[my jget highScoreCommandsFactory] jget HIGH_SCORE_COMMANDS] get 0]
+        my jset hasPainted false
+        return
+    }
+    
 
-sub new {
-    my ($class, $commandListener, $allBinaryGameLayerManager, $gameInfo, $paintable, $highScoresFactoryInterface, $highScoresCanvasInputProcessorFactoryInterface) = @_;
-    my $self = $class->SUPER::new($commandListener, $org::allbinary::game::score::displayable::HighScoresCanvas::NAME, $allBinaryGameLayerManager->getBackgroundBasicColor(), $allBinaryGameLayerManager->getForegroundBasicColor());
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{CONSTRUCTOR});
-        $self->{highScoresPaintable} = $paintable;
-        $self->{highScoresFactoryInterface} = $highScoresFactoryInterface;
-        $self->{highScoresCanvasInputProcessor} = $highScoresCanvasInputProcessorFactoryInterface->getInstance($self);
-        $self->{gameInfo} = $gameInfo;
-        $self->{waitPaintable}->setBasicColorP($allBinaryGameLayerManager->getForegroundBasicColor());
-        $self->getHighScoresPaintable()->setBasicColorP($allBinaryGameLayerManager->getForegroundBasicColor());
-        $self->{colorFillPaintable} = 'org::allbinary::game::paint::ColorFillPaintableFactory'->getInstance()->getInstance($allBinaryGameLayerManager->getBackgroundBasicColor(), 0);
-        if (scalar(@{$self->{highScoresHelper}->getHighScoresArray()}) == scalar(@{'org::allbinary::game::score::NoHighScoresFactory'->getInstance()->{NO_HIGH_SCORES}})) {
-            $self->setPaintable($self->{waitPaintable});
+    constructor {commandListener allBinaryGameLayerManager gameInfo paintable highScoresFactoryInterface highScoresCanvasInputProcessorFactoryInterface} {
+        next $commandListener [::HighScoresCanvas::staticGet_NAME] [$allBinaryGameLayerManager getBackgroundBasicColor] [$allBinaryGameLayerManager getForegroundBasicColor]
+        my initFields_HighScoresCanvas
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+        my jset highScoresPaintable $paintable
+        my jset highScoresFactoryInterface $highScoresFactoryInterface
+        my jset highScoresCanvasInputProcessor [$highScoresCanvasInputProcessorFactoryInterface getInstance [self]]
+        my jset gameInfo $gameInfo
+        [my jget waitPaintable] setBasicColorP [$allBinaryGameLayerManager getForegroundBasicColor]
+        [my getHighScoresPaintable] setBasicColorP [$allBinaryGameLayerManager getForegroundBasicColor]
+        my jset colorFillPaintable [[::ColorFillPaintableFactory::getInstance] getInstance [$allBinaryGameLayerManager getBackgroundBasicColor] false]
+        if {[expr {[[[my jget highScoresHelper] getHighScoresArray] length] == [[[::NoHighScoresFactory::getInstance] jget NO_HIGH_SCORES] length]}]} {
+            my setPaintable [my jget waitPaintable]
         } else {
-            $self->{logUtil}->putF("Show HighScores that are already loaded", $self, $self->{commonStrings}->{CONSTRUCTOR});
-            $self->updateCommand($self->{currentCommand});
-            $self->setPaintable($self->getHighScoresPaintable());
+            [my jget logUtil] putF "Show HighScores that are already loaded" [self] [[my jget commonStrings] jget CONSTRUCTOR]
+            my updateCommand [my jget currentCommand]
+            my setPaintable [my getHighScoresPaintable]
         }
-        'org::allbinary::thread::SecondaryThreadPool'->getInstance()->runTask('org::allbinary::game::score::displayable::HighScoreRunnable'->new($self));
-    return $self;
-}
+        [::SecondaryThreadPool::getInstance] runTask [::HighScoreRunnable new [self]]
+    }
+    
 
+    method initCommands {cmdListener} {
+        my removeAllCommands
+        my addCommand [[::GameCommandsFactory::getInstance] jget CLOSE_AND_SHOW_GAME_CANVAS]
+        my setCommandListener $cmdListener
+    }
+    
 
-sub initCommands {
-    my ($self, $cmdListener) = @_;
-        $self->removeAllCommands();
-        $self->addCommand('org::allbinary::game::commands::GameCommandsFactory'->getInstance()->{CLOSE_AND_SHOW_GAME_CANVAS});
-        $self->setCommandListener($cmdListener);
-}
+    method open {} {
+        next
+        [my jget highScoresCanvasInputProcessor] open
+    }
+    
 
+    method close {} {
+        next
+        [my jget highScoresCanvasInputProcessor] close
+    }
+    
 
-sub open {
-    my ($self) = @_;
-        $self->SUPER::open();
-        $self->{highScoresCanvasInputProcessor}->open();
-}
-
-
-# throws Exception
-sub close {
-    my ($self) = @_;
-        $self->SUPER::close();
-        $self->{highScoresCanvasInputProcessor}->close();
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{colorFillPaintable}->paint($graphics);
-        $self->{paintable}->paint($graphics);
-        if ($self->{waitPaintable} != $self->{paintable}) {
-            $self->{highScoresCanvasInputProcessor}->paint($graphics);
+    method paint {graphics} {
+        [my jget colorFillPaintable] paint $graphics
+        [my jget paintable] paint $graphics
+        if {[expr {[my jget waitPaintable] ne [my jget paintable]}]} {
+            [my jget highScoresCanvasInputProcessor] paint $graphics
         }
-        $self->SUPER::paint($graphics);
-        $self->{hasPainted} = 1;
-}
+        next $graphics
+        my jset hasPainted true
+    }
+    
 
-
-sub executeUpdate {
-    my ($self) = @_;
+    method executeUpdate {} {
         try {
-            $self->{highScoresFactoryInterface}->fetchHighScores($self->getGameInfo(), $self);
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{UPDATE}, $e);
+            [my jget highScoresFactoryInterface] fetchHighScores [my getGameInfo] [self]
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget UPDATE] $e
         }
-}
+    }
+    
 
+    method getHighScoresPaintable {} {
+        return [my jget highScoresPaintable]
+    }
+    
 
-sub getHighScoresPaintable {
-    my ($self) = @_;
-        return $self->{highScoresPaintable};
-}
-
-
-sub setHighScoresArray {
-    my ($self, $highScoresArray) = @_;
+    method setHighScoresArray {highScoresArray} {
         try {
-            if (defined($highScoresArray)) {
-                $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonStrings}->{START})->appendint(scalar(@{$highScoresArray}))->toString(), $self, "setHighScoresArray");
+            if {[expr {$highScoresArray ne {}}]} {
+                [my jget logUtil] putF [[[[::StringMaker new] append [[my jget commonStrings] jget START]] appendint [$highScoresArray length]] toString] [self] "setHighScoresArray"
             } else {
-                $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, "setHighScoresArray");
+                [my jget logUtil] putF [[my jget commonStrings] jget START] [self] "setHighScoresArray"
             }
-            $self->{highScoresHelper}->setHighScoresArray($highScoresArray);
-            $self->updateCommand($self->{currentCommand});
-            $self->setPaintable($self->getHighScoresPaintable());
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{UPDATE}, $e);
+            [my jget highScoresHelper] setHighScoresArray $highScoresArray
+            my updateCommand [my jget currentCommand]
+            my setPaintable [my getHighScoresPaintable]
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget UPDATE] $e
         }
-}
+    }
+    
 
-
-# throws Exception
-sub updateCommand {
-    my ($self, $command) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonStrings}->{START})->append($self->{stringUtil}->toString($command))->toString(), $self, $self->{commonStrings}->{UPDATE});
-        my $gameCommandsFactory = 'org::allbinary::game::commands::GameCommandsFactory'->getInstance();
-        if ($self->{highScoreCommandsFactory}->isHighScoreCommand($command)) {
-            my $index = $self->{highScoreCommandsFactory}->getIndex($command);
-            my $nextIndex = $index + 1;
-            my $highScoresArray = $self->{highScoresHelper}->getHighScoresArray();
-            if ($nextIndex >= scalar(@{$highScoresArray})) {
-                $nextIndex = 0;
+    method updateCommand {command} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[my jget commonStrings] jget START]] append [[my jget stringUtil] toString1 $command]] toString] [self] [[my jget commonStrings] jget UPDATE]
+        set gameCommandsFactory [::GameCommandsFactory::getInstance]
+        if {[[my jget highScoreCommandsFactory] isHighScoreCommand $command]} {
+            set index [[my jget highScoreCommandsFactory] getIndex $command]
+            set nextIndex [jint [expr {$index + 1}]]
+            set highScoresArray [[my jget highScoresHelper] getHighScoresArray]
+            if {[expr {$nextIndex >= [$highScoresArray length]}]} {
+                set nextIndex 0
             }
-            if (scalar(@{$highScoresArray}) > 0) {
-                $self->getHighScoresPaintable()->setHighScores($highScoresArray->[$index]);
+            if {[expr {[$highScoresArray length] > 0}]} {
+                [my getHighScoresPaintable] setHighScores [$highScoresArray get $index]
             } else {
-                $self->getHighScoresPaintable()->setHighScores('org::allbinary::game::score::NullHighScoresSingletonFactory'->getInstance());
+                [my getHighScoresPaintable] setHighScores [::NullHighScoresSingletonFactory::getInstance]
             }
-            if ($index != $nextIndex) {
-                $self->removeAllCommands();
-                $self->addCommand($gameCommandsFactory->{CLOSE_AND_SHOW_GAME_CANVAS});
-                $self->addCommand($self->{highScoreCommandsFactory}->{HIGH_SCORE_COMMANDS}->[$nextIndex]);
+            if {[expr {$index != $nextIndex}]} {
+                my removeAllCommands
+                my addCommand [$gameCommandsFactory jget CLOSE_AND_SHOW_GAME_CANVAS]
+                my addCommand [[[my jget highScoreCommandsFactory] jget HIGH_SCORE_COMMANDS] get $nextIndex]
             }
         }
-        $self->{currentCommand} = $command;
-        $self->close();
-        $self->SUPER::initMenu();
-        $self->open();
-        $self->{repaintBehavior}->onChangeRepaint($self);
+        my jset currentCommand $command
+        my close
+        next
+        my open
+        [my jget repaintBehavior] onChangeRepaint [self]
+    }
+    
+
+    method getGameInfo {} {
+        return [my jget gameInfo]
+    }
+    
+
+    method setPaintable {paintable} {
+        my jset paintable $paintable
+        [my jget repaintBehavior] onChangeRepaint [self]
+    }
 }
 
-
-sub getGameInfo {
-    my ($self) = @_;
-        return $self->{gameInfo};
+namespace eval ::HighScoresCanvas {
+    variable NAMEValue {}
+    variable NAMESet 0
+    proc staticGet_NAME {} {
+        variable NAMEValue
+        variable NAMESet
+        if {!$NAMESet} {
+            set NAMESet 1
+            set NAMEValue "HighScoresCanvas"
+        }
+        return $NAMEValue
+    }
+    proc staticSet_NAME {value} {
+        variable NAMEValue
+        variable NAMESet
+        set NAMESet 1
+        set NAMEValue $value
+    }
 }
 
-
-sub setPaintable {
-    my ($self, $paintable) = @_;
-        $self->{paintable} = $paintable;
-        $self->{repaintBehavior}->onChangeRepaint($self);
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::CommandListener ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::GameInfo ();
-use org::allbinary::game::commands::GameCommandsFactory ();
-use org::allbinary::game::displayable::canvas::GameCommandCanvas ();
-use org::allbinary::game::layer::AllBinaryGameLayerManager ();
-use org::allbinary::game::paint::ColorFillBasePaintable ();
-use org::allbinary::game::paint::ColorFillPaintableFactory ();
-use org::allbinary::game::score::HighScoreCommandsFactory ();
-use org::allbinary::game::score::HighScores ();
-use org::allbinary::game::score::HighScoresCanvasInputProcessor ();
-use org::allbinary::game::score::HighScoresCanvasInputProcessorFactoryInterface ();
-use org::allbinary::game::score::HighScoresFactoryInterface ();
-use org::allbinary::game::score::HighScoresHelperBase ();
-use org::allbinary::game::score::HighScoresPaintable ();
-use org::allbinary::game::score::HighScoresResultsListener ();
-use org::allbinary::game::score::NoHighScoresFactory ();
-use org::allbinary::game::score::NullHighScoresSingletonFactory ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::paint::NullPaintable ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::graphics::paint::SimpleTextPaintable ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::thread::SecondaryThreadPool ();
-use org::allbinary::game::score::displayable::HighScoreRunnable ();
-
-1;
 

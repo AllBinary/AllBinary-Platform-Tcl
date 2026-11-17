@@ -11,75 +11,61 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.destroy.event
 
-package org::allbinary::game::combat::destroy::event::DestroyedEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{allBinaryGameCanvas} = 'org::allbinary::game::displayable::canvas::NullGameCanvas'->getInstance();
-    $self->{allBinaryLayerInterface} = $org::allbinary::layer::AllBinaryLayer::NULL_ALLBINARY_LAYER;
+oo::class create ::DestroyedEvent {
+    superclass ::AllBinaryEventObject
 }
 
+oo::define ::DestroyedEvent {
+    method initFields_DestroyedEvent {} {
+        my jset allBinaryGameCanvas {}
+        my jset allBinaryLayerInterface {}
+        my jset allBinaryGameCanvas [::NullGameCanvas::getInstance]
+        my jset allBinaryLayerInterface [::AllBinaryLayer::staticGet_NULL_ALLBINARY_LAYER]
+        return
+    }
+    
 
-sub new {
-    my ($class, $combatGameCanvas) = @_;
-    my $self = $class->SUPER::new('org::allbinary::game::combat::destroy::event::DestroyedEventHandler'->getInstance());
-    _init_fields($self);
-        # super(...) made $self above
-        $self->setAllBinaryGameCanvas($combatGameCanvas);
-    return $self;
+    constructor {combatGameCanvas} {
+        next [::DestroyedEventHandler::getInstance]
+        my initFields_DestroyedEvent
+        my setAllBinaryGameCanvas $combatGameCanvas
+    }
+    
+
+    method getAllBinaryGameCanvas {} {
+        return [my jget allBinaryGameCanvas]
+    }
+    
+
+    method getLayerInterface {} {
+        return [my jget allBinaryLayerInterface]
+    }
+    
+
+    method setAllBinaryGameCanvas {allBinaryGameCanvas} {
+        my jset allBinaryGameCanvas $allBinaryGameCanvas
+    }
+    
+
+    method setLayerInterfaceForCircularStaticPool {allBinaryLayerInterface} {
+        my jset allBinaryLayerInterface $allBinaryLayerInterface
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "DestroyedEvent: \n"
+        $stringBuffer append "AllBinaryLayerInterface: "
+        $stringBuffer append [[my jget allBinaryLayerInterface] toString]
+        $stringBuffer append "\nAllBinaryGameCanvas: "
+        $stringBuffer append [[::StringUtil::getInstance] toString1 [my getAllBinaryGameCanvas]]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub getAllBinaryGameCanvas {
-    my ($self) = @_;
-        return $self->{allBinaryGameCanvas};
+namespace eval ::DestroyedEvent {
 }
 
-
-sub getLayerInterface {
-    my ($self) = @_;
-        return $self->{allBinaryLayerInterface};
-}
-
-
-sub setAllBinaryGameCanvas {
-    my ($self, $allBinaryGameCanvas) = @_;
-        $self->{allBinaryGameCanvas} = $allBinaryGameCanvas;
-}
-
-
-sub setLayerInterfaceForCircularStaticPool {
-    my ($self, $allBinaryLayerInterface) = @_;
-        $self->{allBinaryLayerInterface} = $allBinaryLayerInterface;
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("DestroyedEvent: \n");
-        $stringBuffer->append("AllBinaryLayerInterface: ");
-        $stringBuffer->append($self->{allBinaryLayerInterface}->toString());
-        $stringBuffer->append("\nAllBinaryGameCanvas: ");
-        $stringBuffer->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($self->getAllBinaryGameCanvas()));
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use org::allbinary::game::displayable::canvas::AllBinaryGameCanvas ();
-use org::allbinary::game::displayable::canvas::NullGameCanvas ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::game::combat::destroy::event::DestroyedEventHandler ();
-
-1;
 

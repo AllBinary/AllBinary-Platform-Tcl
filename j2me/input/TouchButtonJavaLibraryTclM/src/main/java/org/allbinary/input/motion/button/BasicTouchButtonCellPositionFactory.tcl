@@ -11,101 +11,116 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::BasicTouchButtonCellPositionFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{TOP_RIGHT} = undef;
-    $self->{TOP_LEFT} = undef;
-    $self->{SECOND_FROM_TOP_LEFT} = undef;
-    $self->{SECOND_FROM_TOP_RIGHT} = undef;
-    $self->{TOP_SECOND_FROM_LEFT} = undef;
-    $self->{TOP_SECOND_FROM_RIGHT} = undef;
-    $self->{BOTTOM_RIGHT} = undef;
-    $self->{BOTTOM_SECOND_FROM_RIGHT} = undef;
-    $self->{SECOND_FROM_BOTTOM_RIGHT} = undef;
-    $self->{THIRD_FROM_BOTTOM_RIGHT} = undef;
-    $self->{FOURTH_FROM_BOTTOM_RIGHT} = undef;
-    $self->{SECOND_FROM_BOTTOM_SECOND_FROM_RIGHT} = undef;
-    $self->{SECOND_FROM_BOTTOM_THIRD_FROM_RIGHT} = undef;
-    $self->{SECOND_FROM_BOTTOM_FOURTH_FROM_RIGHT} = undef;
-    $self->{BOTTOM_THIRD_FROM_RIGHT} = undef;
-    $self->{BOTTOM_FOURTH_FROM_RIGHT} = undef;
-    $self->{BOTTOM_SECOND_FROM_LEFT} = undef;
-    $self->{SECOND_FROM_BOTTOM_LEFT} = undef;
-    $self->{THIRD_FROM_BOTTOM_LEFT} = undef;
-    $self->{BOTTOM_LEFT} = undef;
-    $self->{SECOND_FROM_BOTTOM_SECOND_FROM_LEFT} = undef;
+oo::class create ::BasicTouchButtonCellPositionFactory {
+    superclass ::JObject
 }
 
+oo::define ::BasicTouchButtonCellPositionFactory {
+    method initFields_BasicTouchButtonCellPositionFactory {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset TOP_RIGHT {}
+        my jset TOP_LEFT {}
+        my jset SECOND_FROM_TOP_LEFT {}
+        my jset SECOND_FROM_TOP_RIGHT {}
+        my jset TOP_SECOND_FROM_LEFT {}
+        my jset TOP_SECOND_FROM_RIGHT {}
+        my jset BOTTOM_RIGHT {}
+        my jset BOTTOM_SECOND_FROM_RIGHT {}
+        my jset SECOND_FROM_BOTTOM_RIGHT {}
+        my jset THIRD_FROM_BOTTOM_RIGHT {}
+        my jset FOURTH_FROM_BOTTOM_RIGHT {}
+        my jset SECOND_FROM_BOTTOM_SECOND_FROM_RIGHT {}
+        my jset SECOND_FROM_BOTTOM_THIRD_FROM_RIGHT {}
+        my jset SECOND_FROM_BOTTOM_FOURTH_FROM_RIGHT {}
+        my jset BOTTOM_THIRD_FROM_RIGHT {}
+        my jset BOTTOM_FOURTH_FROM_RIGHT {}
+        my jset BOTTOM_SECOND_FROM_LEFT {}
+        my jset SECOND_FROM_BOTTOM_LEFT {}
+        my jset THIRD_FROM_BOTTOM_LEFT {}
+        my jset BOTTOM_LEFT {}
+        my jset SECOND_FROM_BOTTOM_SECOND_FROM_LEFT {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        
+        
+        my jset SECOND_FROM_TOP_LEFT {}
+        my jset SECOND_FROM_TOP_RIGHT {}
+        my jset TOP_SECOND_FROM_LEFT {}
+        my jset TOP_SECOND_FROM_RIGHT {}
+        
+        
+        
+        my jset THIRD_FROM_BOTTOM_RIGHT {}
+        my jset FOURTH_FROM_BOTTOM_RIGHT {}
+        
+        my jset SECOND_FROM_BOTTOM_THIRD_FROM_RIGHT {}
+        my jset SECOND_FROM_BOTTOM_FOURTH_FROM_RIGHT {}
+        my jset BOTTOM_THIRD_FROM_RIGHT {}
+        my jset BOTTOM_FOURTH_FROM_RIGHT {}
+        
+        
+        my jset THIRD_FROM_BOTTOM_LEFT {}
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{CONSTRUCTOR});
-        my $touchButtonLocationHelper = 'org::allbinary::input::motion::button::TouchButtonLocationHelper'->new();
-        my $cellPositionFactory = 'org::allbinary::graphics::CellPositionFactory'->getInstance();
-        $cellPositionFactory->init($touchButtonLocationHelper->getTotalColumns(), $touchButtonLocationHelper->getTotalRows());
-        $self->{TOP_LEFT} = $cellPositionFactory->getInstanceColRow(0, 0);
-        $self->{TOP_RIGHT} = $cellPositionFactory->getInstanceColRow($touchButtonLocationHelper->getTotalColumns() - 1, 0);
-        $self->{BOTTOM_LEFT} = $cellPositionFactory->getInstanceColRow(0, $touchButtonLocationHelper->getTotalRows() - 1);
-        $self->{BOTTOM_RIGHT} = $cellPositionFactory->getInstanceColRow($touchButtonLocationHelper->getTotalColumns() - 1, $touchButtonLocationHelper->getTotalRows() - 1);
-        $self->{BOTTOM_SECOND_FROM_RIGHT} = $cellPositionFactory->getInstanceColRow($touchButtonLocationHelper->getTotalColumns() - 2, $touchButtonLocationHelper->getTotalRows() - 1);
-        $self->{SECOND_FROM_BOTTOM_RIGHT} = $cellPositionFactory->getInstanceColRow($touchButtonLocationHelper->getTotalColumns() - 1, $touchButtonLocationHelper->getTotalRows() - 2);
-        $self->{SECOND_FROM_BOTTOM_SECOND_FROM_RIGHT} = $cellPositionFactory->getInstanceColRow($touchButtonLocationHelper->getTotalColumns() - 2, $touchButtonLocationHelper->getTotalRows() - 2);
-        $self->{BOTTOM_SECOND_FROM_LEFT} = $cellPositionFactory->getInstanceColRow(1, $touchButtonLocationHelper->getTotalRows() - 1);
-        $self->{SECOND_FROM_BOTTOM_LEFT} = $cellPositionFactory->getInstanceColRow(0, $touchButtonLocationHelper->getTotalRows() - 2);
-        $self->{SECOND_FROM_BOTTOM_SECOND_FROM_LEFT} = $cellPositionFactory->getInstanceColRow(1, $touchButtonLocationHelper->getTotalRows() - 2);
-        if ($touchButtonLocationHelper->getTotalRows() > 2) {
-            $self->{SECOND_FROM_TOP_LEFT} = $cellPositionFactory->getInstanceColRow(0, 1);
-            $self->{SECOND_FROM_TOP_RIGHT} = $cellPositionFactory->getInstanceColRow($touchButtonLocationHelper->getTotalColumns() - 1, 1);
+    constructor {} {
+        next
+        my initFields_BasicTouchButtonCellPositionFactory
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+        set touchButtonLocationHelper [::TouchButtonLocationHelper new]
+        set cellPositionFactory [::CellPositionFactory::getInstance]
+        $cellPositionFactory init [$touchButtonLocationHelper getTotalColumns] [$touchButtonLocationHelper getTotalRows]
+        my jset TOP_LEFT [$cellPositionFactory getInstanceColRow 0 0]
+        my jset TOP_RIGHT [$cellPositionFactory getInstanceColRow [expr {[$touchButtonLocationHelper getTotalColumns] - 1}] 0]
+        my jset BOTTOM_LEFT [$cellPositionFactory getInstanceColRow 0 [expr {[$touchButtonLocationHelper getTotalRows] - 1}]]
+        my jset BOTTOM_RIGHT [$cellPositionFactory getInstanceColRow [expr {[$touchButtonLocationHelper getTotalColumns] - 1}] [expr {[$touchButtonLocationHelper getTotalRows] - 1}]]
+        my jset BOTTOM_SECOND_FROM_RIGHT [$cellPositionFactory getInstanceColRow [expr {[$touchButtonLocationHelper getTotalColumns] - 2}] [expr {[$touchButtonLocationHelper getTotalRows] - 1}]]
+        my jset SECOND_FROM_BOTTOM_RIGHT [$cellPositionFactory getInstanceColRow [expr {[$touchButtonLocationHelper getTotalColumns] - 1}] [expr {[$touchButtonLocationHelper getTotalRows] - 2}]]
+        my jset SECOND_FROM_BOTTOM_SECOND_FROM_RIGHT [$cellPositionFactory getInstanceColRow [expr {[$touchButtonLocationHelper getTotalColumns] - 2}] [expr {[$touchButtonLocationHelper getTotalRows] - 2}]]
+        my jset BOTTOM_SECOND_FROM_LEFT [$cellPositionFactory getInstanceColRow 1 [expr {[$touchButtonLocationHelper getTotalRows] - 1}]]
+        my jset SECOND_FROM_BOTTOM_LEFT [$cellPositionFactory getInstanceColRow 0 [expr {[$touchButtonLocationHelper getTotalRows] - 2}]]
+        my jset SECOND_FROM_BOTTOM_SECOND_FROM_LEFT [$cellPositionFactory getInstanceColRow 1 [expr {[$touchButtonLocationHelper getTotalRows] - 2}]]
+        if {[expr {[$touchButtonLocationHelper getTotalRows] > 2}]} {
+            my jset SECOND_FROM_TOP_LEFT [$cellPositionFactory getInstanceColRow 0 1]
+            my jset SECOND_FROM_TOP_RIGHT [$cellPositionFactory getInstanceColRow [expr {[$touchButtonLocationHelper getTotalColumns] - 1}] 1]
         } else {
-            $self->{SECOND_FROM_TOP_LEFT} = $cellPositionFactory->{NONE};
-            $self->{SECOND_FROM_TOP_RIGHT} = $cellPositionFactory->{NONE};
+            my jset SECOND_FROM_TOP_LEFT [$cellPositionFactory jget NONE]
+            my jset SECOND_FROM_TOP_RIGHT [$cellPositionFactory jget NONE]
         }
-        if ($touchButtonLocationHelper->getTotalRows() >= 4) {
-            $self->{THIRD_FROM_BOTTOM_RIGHT} = $cellPositionFactory->getInstanceColRow($touchButtonLocationHelper->getTotalColumns() - 1, $touchButtonLocationHelper->getTotalRows() - 3);
-            $self->{FOURTH_FROM_BOTTOM_RIGHT} = $cellPositionFactory->getInstanceColRow($touchButtonLocationHelper->getTotalColumns() - 1, $touchButtonLocationHelper->getTotalRows() - 4);
-            $self->{THIRD_FROM_BOTTOM_LEFT} = $cellPositionFactory->getInstanceColRow(0, $touchButtonLocationHelper->getTotalRows() - 3);
+        if {[expr {[$touchButtonLocationHelper getTotalRows] >= 4}]} {
+            my jset THIRD_FROM_BOTTOM_RIGHT [$cellPositionFactory getInstanceColRow [expr {[$touchButtonLocationHelper getTotalColumns] - 1}] [expr {[$touchButtonLocationHelper getTotalRows] - 3}]]
+            my jset FOURTH_FROM_BOTTOM_RIGHT [$cellPositionFactory getInstanceColRow [expr {[$touchButtonLocationHelper getTotalColumns] - 1}] [expr {[$touchButtonLocationHelper getTotalRows] - 4}]]
+            my jset THIRD_FROM_BOTTOM_LEFT [$cellPositionFactory getInstanceColRow 0 [expr {[$touchButtonLocationHelper getTotalRows] - 3}]]
         } else {
-            $self->{THIRD_FROM_BOTTOM_RIGHT} = $cellPositionFactory->{NONE};
-            $self->{FOURTH_FROM_BOTTOM_RIGHT} = $cellPositionFactory->{NONE};
-            $self->{THIRD_FROM_BOTTOM_LEFT} = $cellPositionFactory->{NONE};
+            my jset THIRD_FROM_BOTTOM_RIGHT [$cellPositionFactory jget NONE]
+            my jset FOURTH_FROM_BOTTOM_RIGHT [$cellPositionFactory jget NONE]
+            my jset THIRD_FROM_BOTTOM_LEFT [$cellPositionFactory jget NONE]
         }
-        if ($touchButtonLocationHelper->getTotalColumns() >= 4) {
-            $self->{SECOND_FROM_BOTTOM_THIRD_FROM_RIGHT} = $cellPositionFactory->getInstanceColRow($touchButtonLocationHelper->getTotalColumns() - 3, $touchButtonLocationHelper->getTotalRows() - 2);
-            $self->{SECOND_FROM_BOTTOM_FOURTH_FROM_RIGHT} = $cellPositionFactory->getInstanceColRow($touchButtonLocationHelper->getTotalColumns() - 4, $touchButtonLocationHelper->getTotalRows() - 2);
-            $self->{BOTTOM_THIRD_FROM_RIGHT} = $cellPositionFactory->getInstanceColRow($touchButtonLocationHelper->getTotalColumns() - 3, $touchButtonLocationHelper->getTotalRows() - 1);
-            $self->{BOTTOM_FOURTH_FROM_RIGHT} = $cellPositionFactory->getInstanceColRow($touchButtonLocationHelper->getTotalColumns() - 4, $touchButtonLocationHelper->getTotalRows() - 1);
-            $self->{TOP_SECOND_FROM_LEFT} = $cellPositionFactory->getInstanceColRow(1, 0);
-            $self->{TOP_SECOND_FROM_RIGHT} = $cellPositionFactory->getInstanceColRow($touchButtonLocationHelper->getTotalColumns() - 2, 0);
+        if {[expr {[$touchButtonLocationHelper getTotalColumns] >= 4}]} {
+            my jset SECOND_FROM_BOTTOM_THIRD_FROM_RIGHT [$cellPositionFactory getInstanceColRow [expr {[$touchButtonLocationHelper getTotalColumns] - 3}] [expr {[$touchButtonLocationHelper getTotalRows] - 2}]]
+            my jset SECOND_FROM_BOTTOM_FOURTH_FROM_RIGHT [$cellPositionFactory getInstanceColRow [expr {[$touchButtonLocationHelper getTotalColumns] - 4}] [expr {[$touchButtonLocationHelper getTotalRows] - 2}]]
+            my jset BOTTOM_THIRD_FROM_RIGHT [$cellPositionFactory getInstanceColRow [expr {[$touchButtonLocationHelper getTotalColumns] - 3}] [expr {[$touchButtonLocationHelper getTotalRows] - 1}]]
+            my jset BOTTOM_FOURTH_FROM_RIGHT [$cellPositionFactory getInstanceColRow [expr {[$touchButtonLocationHelper getTotalColumns] - 4}] [expr {[$touchButtonLocationHelper getTotalRows] - 1}]]
+            my jset TOP_SECOND_FROM_LEFT [$cellPositionFactory getInstanceColRow 1 0]
+            my jset TOP_SECOND_FROM_RIGHT [$cellPositionFactory getInstanceColRow [expr {[$touchButtonLocationHelper getTotalColumns] - 2}] 0]
         } else {
-            $self->{SECOND_FROM_BOTTOM_THIRD_FROM_RIGHT} = $cellPositionFactory->{NONE};
-            $self->{SECOND_FROM_BOTTOM_FOURTH_FROM_RIGHT} = $cellPositionFactory->{NONE};
-            $self->{BOTTOM_THIRD_FROM_RIGHT} = $cellPositionFactory->{NONE};
-            $self->{BOTTOM_FOURTH_FROM_RIGHT} = $cellPositionFactory->{NONE};
-            $self->{TOP_SECOND_FROM_LEFT} = $cellPositionFactory->{NONE};
-            $self->{TOP_SECOND_FROM_RIGHT} = $cellPositionFactory->{NONE};
+            my jset SECOND_FROM_BOTTOM_THIRD_FROM_RIGHT [$cellPositionFactory jget NONE]
+            my jset SECOND_FROM_BOTTOM_FOURTH_FROM_RIGHT [$cellPositionFactory jget NONE]
+            my jset BOTTOM_THIRD_FROM_RIGHT [$cellPositionFactory jget NONE]
+            my jset BOTTOM_FOURTH_FROM_RIGHT [$cellPositionFactory jget NONE]
+            my jset TOP_SECOND_FROM_LEFT [$cellPositionFactory jget NONE]
+            my jset TOP_SECOND_FROM_RIGHT [$cellPositionFactory jget NONE]
         }
-    return $self;
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::CellPosition ();
-use org::allbinary::graphics::CellPositionFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::input::motion::button::TouchButtonLocationHelper ();
+namespace eval ::BasicTouchButtonCellPositionFactory {
+}
 
-1;
 

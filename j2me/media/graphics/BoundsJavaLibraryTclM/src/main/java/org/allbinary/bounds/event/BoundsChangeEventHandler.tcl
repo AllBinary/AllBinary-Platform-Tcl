@@ -11,42 +11,52 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.bounds.event
 
-package org::allbinary::bounds::event::BoundsChangeEventHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::handler::BasicEventHandler';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::bounds::event::BoundsChangeEventHandler'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::BoundsChangeEventHandler {
+    superclass ::BasicEventHandler
 }
 
+oo::define ::BoundsChangeEventHandler {
+    method initFields_BoundsChangeEventHandler {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::bounds::event::BoundsChangeEventHandler::SINGLETON;
+    constructor {} {
+        next
+        my initFields_BoundsChangeEventHandler
+    }
+    
+    
+
+    method process {eventObject eventListenerInterface} {
+        set boundsChangeEventListener $eventListenerInterface
+        $boundsChangeEventListener onBoundsChangeEvent $eventObject
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $eventObject, $eventListenerInterface) = @_;
-        my $boundsChangeEventListener = $eventListenerInterface;
-        $boundsChangeEventListener->onBoundsChangeEvent($eventObject);
+namespace eval ::BoundsChangeEventHandler {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::BoundsChangeEventHandler new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::BoundsChangeEventHandler::staticGet_SINGLETON]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
-
-1;
 

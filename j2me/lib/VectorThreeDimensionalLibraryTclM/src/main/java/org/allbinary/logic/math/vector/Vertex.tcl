@@ -11,51 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.math.vector
 
-package org::allbinary::logic::math::vector::Vertex;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{x} = 'org::allbinary::logic::math::BasicDecimal'->new(0);
-    $self->{y} = 'org::allbinary::logic::math::BasicDecimal'->new(0);
-    $self->{z} = 'org::allbinary::logic::math::BasicDecimal'->new(0);
+oo::class create ::Vertex {
+    superclass ::JObject
 }
 
+oo::define ::Vertex {
+    method initFields_Vertex {} {
+        my jset x {}
+        my jset y {}
+        my jset z {}
+        my jset x [::BasicDecimal new 0]
+        my jset y [::BasicDecimal new 0]
+        my jset z [::BasicDecimal new 0]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_Vertex
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        set positionStrings [::PositionStrings::getInstance]
+        $stringBuffer append [$positionStrings jget X_LABEL]
+        $stringBuffer append [[my jget x] toString]
+        $stringBuffer append [[::CommonSeps::getInstance] jget SPACE]
+        $stringBuffer append [$positionStrings jget Y_LABEL]
+        $stringBuffer append [[my jget y] toString]
+        $stringBuffer append [[::CommonSeps::getInstance] jget SPACE]
+        $stringBuffer append [$positionStrings jget Z_LABEL]
+        $stringBuffer append [[my jget z] toString]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $positionStrings = 'org::allbinary::math::PositionStrings'->getInstance();
-        $stringBuffer->append($positionStrings->{X_LABEL});
-        $stringBuffer->append($self->{x}->toString());
-        $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
-        $stringBuffer->append($positionStrings->{Y_LABEL});
-        $stringBuffer->append($self->{y}->toString());
-        $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
-        $stringBuffer->append($positionStrings->{Z_LABEL});
-        $stringBuffer->append($self->{z}->toString());
-        return $stringBuffer->toString();
+namespace eval ::Vertex {
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::math::BasicDecimal ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::math::PositionStrings ();
-use org::allbinary::string::CommonSeps ();
-
-1;
 

@@ -11,148 +11,139 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.part
 
-package org::allbinary::game::part::CountedLayerInterfaceFactoryPart;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'java::lang::Object','org::allbinary::game::part::PartInterface','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-tie our $NULL_COUNTED_LAYER_INTERFACE_FACTORY, 'java::lang::LazyStatic', sub { 'org::allbinary::game::part::CountedLayerInterfaceFactoryPart'->new(0, $org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactory::NULL_COUNTED_PICKUP_LAYER_FACTORY) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{updateMyFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-    $self->{animationInterface} = 'org::allbinary::animation::NullAnimationFactory'->getFactoryInstance()->getInstance(0);
-    $self->{total} = 0;
-    $self->{totalString} = 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_CHAR_ARRAY};
-    $self->{xOffset} = 0;
-    $self->{countedPickedUpLayerInterfaceFactory} = $org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactory::NULL_COUNTED_PICKUP_LAYER_FACTORY;
-    $self->{primitiveLongUtil} = undef;
+oo::class create ::CountedLayerInterfaceFactoryPart {
+    superclass ::JObject
 }
 
+oo::define ::CountedLayerInterfaceFactoryPart {
+    method initFields_CountedLayerInterfaceFactoryPart {} {
+        my jset updateMyFontProcessor {}
+        my jset myFontProcessor {}
+        my jset animationInterface {}
+        my jset total 0
+        my jset totalString {}
+        my jset xOffset 0
+        my jset countedPickedUpLayerInterfaceFactory {}
+        my jset primitiveLongUtil {}
+        my jset updateMyFontProcessor [::UpdateMyFontProcessor new [self]]
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+        my jset animationInterface [[::NullAnimationFactory::getFactoryInstance] getInstance 0]
+        my jset total 0
+        my jset totalString [[::NullUtil::getInstance] jget NULL_CHAR_ARRAY]
+        my jset xOffset 0
+        my jset countedPickedUpLayerInterfaceFactory [::CountedPickedUpLayerInterfaceFactory::staticGet_NULL_COUNTED_PICKUP_LAYER_FACTORY]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $total, $countedPickedUpLayerInterfaceFactory) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{primitiveLongUtil} = 'org::allbinary::logic::math::PrimitiveLongUtil'->createPowerOfTen(1000);
-        $self->init($total, $countedPickedUpLayerInterfaceFactory);
-    return $self;
-}
+    constructor {total countedPickedUpLayerInterfaceFactory} {
+        next
+        my initFields_CountedLayerInterfaceFactoryPart
+        my jset primitiveLongUtil [::PrimitiveLongUtil::createPowerOfTen 1000]
+        my init $total $countedPickedUpLayerInterfaceFactory
+    }
+    
 
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        my setXOffset [expr {[$font charsWidth [my jget totalString] 0 [[my jget primitiveLongUtil] getCurrentTotalDigits]] + ([expr {[$font getSize] >> 1}])}]
+        my jset myFontProcessor [::MyFontProcessor::getInstance]
+    }
+    
 
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->setXOffset($font->charsWidth($self->{totalString}, 0, $self->{primitiveLongUtil}->getCurrentTotalDigits()) + (POSIX::floor(($font->getSize()) / (2 ** (1)))));
-        $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
-}
+    method init {total countedPickedUpLayerInterfaceFactory} {
+        my setCountedPickedUpLayerInterfaceFactory $countedPickedUpLayerInterfaceFactory
+        my jset total $total
+    }
+    
 
-
-sub init {
-    my ($self, $total, $countedPickedUpLayerInterfaceFactory) = @_;
-        $self->setCountedPickedUpLayerInterfaceFactory($countedPickedUpLayerInterfaceFactory);
-        $self->{total} = $total;
-}
-
-
-# throws Exception
-sub getInstance {
-    my ($self, $hashtable, $x, $y, $z) = @_;
-        if ($self->{total} > 0) {
-            $self->setTotal($self->{total} - 1);
-            return $self->getCountedPickedUpLayerInterfaceFactory()->getNextInstance($hashtable, $x, $y, $z);
+    method getInstance {hashtable x y z} {
+        if {[expr {[my jget total] > 0}]} {
+            my setTotal [jint [expr {[my jget total] - 1}]]
+            return [[my getCountedPickedUpLayerInterfaceFactory] getNextInstance $hashtable $x $y $z]
         } else {
-            die ("No more left. Could use a listener to automatically remove");
+            error [jexception Exception "No more left. Could use a listener to automatically remove"]
         }
+    }
+    
+
+    method getTotal {} {
+        return [my jget total]
+    }
+    
+
+    method setTotal {total} {
+        my jset total $total
+        my jset totalString [[my jget primitiveLongUtil] getCharArray $total]
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+    }
+    
+
+    method paint {graphics} {
+        [my jget myFontProcessor] process $graphics
+    }
+    
+
+    method paintThreed {graphics} {
+    }
+    
+
+    method getAnimationInterface {} {
+        return [my jget animationInterface]
+    }
+    
+
+    method setAnimationInterface {animationInterface} {
+        my jset animationInterface $animationInterface
+    }
+    
+
+    method getXOffset {} {
+        return [my jget xOffset]
+    }
+    
+
+    method setXOffset {totalStringWidth} {
+        my jset xOffset $totalStringWidth
+    }
+    
+
+    method getTotalString {} {
+        return [my jget totalString]
+    }
+    
+
+    method getCountedPickedUpLayerInterfaceFactory {} {
+        return [my jget countedPickedUpLayerInterfaceFactory]
+    }
+    
+
+    method setCountedPickedUpLayerInterfaceFactory {countedPickedUpLayerInterfaceFactory} {
+        my jset countedPickedUpLayerInterfaceFactory $countedPickedUpLayerInterfaceFactory
+    }
 }
 
-
-sub getTotal {
-    my ($self) = @_;
-        return $self->{total};
+namespace eval ::CountedLayerInterfaceFactoryPart {
+    variable NULL_COUNTED_LAYER_INTERFACE_FACTORYValue {}
+    variable NULL_COUNTED_LAYER_INTERFACE_FACTORYSet 0
+    proc staticGet_NULL_COUNTED_LAYER_INTERFACE_FACTORY {} {
+        variable NULL_COUNTED_LAYER_INTERFACE_FACTORYValue
+        variable NULL_COUNTED_LAYER_INTERFACE_FACTORYSet
+        if {!$NULL_COUNTED_LAYER_INTERFACE_FACTORYSet} {
+            set NULL_COUNTED_LAYER_INTERFACE_FACTORYSet 1
+            set NULL_COUNTED_LAYER_INTERFACE_FACTORYValue [::CountedLayerInterfaceFactoryPart new 0 [::CountedPickedUpLayerInterfaceFactory::staticGet_NULL_COUNTED_PICKUP_LAYER_FACTORY]]
+        }
+        return $NULL_COUNTED_LAYER_INTERFACE_FACTORYValue
+    }
+    proc staticSet_NULL_COUNTED_LAYER_INTERFACE_FACTORY {value} {
+        variable NULL_COUNTED_LAYER_INTERFACE_FACTORYValue
+        variable NULL_COUNTED_LAYER_INTERFACE_FACTORYSet
+        set NULL_COUNTED_LAYER_INTERFACE_FACTORYSet 1
+        set NULL_COUNTED_LAYER_INTERFACE_FACTORYValue $value
+    }
 }
 
-
-sub setTotal {
-    my ($self, $total) = @_;
-        $self->{total} = $total;
-        $self->{totalString} = $self->{primitiveLongUtil}->getCharArray($total);
-        $self->{myFontProcessor} = $self->{updateMyFontProcessor};
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor}->process($graphics);
-}
-
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
-}
-
-
-sub getAnimationInterface {
-    my ($self) = @_;
-        return $self->{animationInterface};
-}
-
-
-sub setAnimationInterface {
-    my ($self, $animationInterface) = @_;
-        $self->{animationInterface} = $animationInterface;
-}
-
-
-sub getXOffset {
-    my ($self) = @_;
-        return $self->{xOffset};
-}
-
-
-sub setXOffset {
-    my ($self, $totalStringWidth) = @_;
-        $self->{xOffset} = $totalStringWidth;
-}
-
-
-sub getTotalString {
-    my ($self) = @_;
-        return $self->{totalString};
-}
-
-
-sub getCountedPickedUpLayerInterfaceFactory {
-    my ($self) = @_;
-        return $self->{countedPickedUpLayerInterfaceFactory};
-}
-
-
-sub setCountedPickedUpLayerInterfaceFactory {
-    my ($self, $countedPickedUpLayerInterfaceFactory) = @_;
-        $self->{countedPickedUpLayerInterfaceFactory} = $countedPickedUpLayerInterfaceFactory;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::NullAnimationFactory ();
-use org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactory ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::math::PrimitiveLongUtil ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::part::PartInterface ();
-
-1;
 

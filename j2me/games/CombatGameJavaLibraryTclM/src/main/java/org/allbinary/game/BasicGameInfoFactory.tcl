@@ -1,61 +1,71 @@
 # Generated Code Do Not Modify
+# package org.allbinary.game
 
-package org::allbinary::game::BasicGameInfoFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::BasicGameInfoFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{currentReleaseIndex} = 0;
-    $self->{currentDestroyIndex} = 0;
-    $self->{total} = 0;
+oo::class create ::BasicGameInfoFactory {
+    superclass ::JObject
 }
 
+oo::define ::BasicGameInfoFactory {
+    method initFields_BasicGameInfoFactory {} {
+        my jset currentReleaseIndex 0
+        my jset currentDestroyIndex 0
+        my jset total 0
+        my jset currentReleaseIndex 0
+        my jset currentDestroyIndex 0
+        my jset total 0
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::BasicGameInfoFactory::SINGLETON;
-}
+    constructor {} {
+        next
+        my initFields_BasicGameInfoFactory
+    }
+    
 
+    method init {total} {
+        my jset currentReleaseIndex 0
+        my jset currentDestroyIndex 0
+        my jset total $total
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-sub init {
-    my ($self, $total) = @_;
-        $self->{currentReleaseIndex} = 0;
-        $self->{currentDestroyIndex} = 0;
-        $self->{total} = $total;
-}
-
-
-sub isPeaked {
-    my ($self) = @_;
-        if ($self->{currentDestroyIndex} >= $self->{total}) {
-            return 1;
+    method isPeaked {} {
+        if {[expr {[my jget currentDestroyIndex] >= [my jget total]}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
+    
+
+    method howManyLeft {} {
+        return [jint [expr {[my jget total] - [my jget currentDestroyIndex]}]]
+    }
 }
 
-
-sub howManyLeft {
-    my ($self) = @_;
-        return $self->{total} - $self->{currentDestroyIndex};
+namespace eval ::BasicGameInfoFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::BasicGameInfoFactory new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::BasicGameInfoFactory::staticGet_SINGLETON]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

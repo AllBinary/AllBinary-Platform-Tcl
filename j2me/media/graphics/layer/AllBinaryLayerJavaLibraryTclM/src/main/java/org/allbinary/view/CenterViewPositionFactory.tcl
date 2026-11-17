@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.view
 
-package org::allbinary::view::CenterViewPositionFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::view::CenterStaticViewPositionFactory';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::CenterViewPositionFactory {
+    superclass ::CenterStaticViewPositionFactory
 }
 
-use java::lang::Object ();
-use org::allbinary::view::CenterStaticViewPositionFactory ();
+oo::define ::CenterViewPositionFactory {
+    method initFields_CenterViewPositionFactory {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_CenterViewPositionFactory
+    }
+}
+
+namespace eval ::CenterViewPositionFactory {
+}
+
 

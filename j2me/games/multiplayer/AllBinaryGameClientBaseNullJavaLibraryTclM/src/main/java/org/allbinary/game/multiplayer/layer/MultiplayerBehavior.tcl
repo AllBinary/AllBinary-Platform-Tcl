@@ -11,42 +11,55 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.multiplayer.layer
 
-package org::allbinary::game::multiplayer::layer::MultiplayerBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_MULTIPLAYER_BEHAVIOR, 'java::lang::LazyStatic', sub { 'org::allbinary::game::multiplayer::layer::MultiplayerBehavior'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}) };
-
-
-sub new {
-    my ($class, $username) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::MultiplayerBehavior {
+    superclass ::JObject
 }
 
+oo::define ::MultiplayerBehavior {
+    method initFields_MultiplayerBehavior {} {
+        return
+    }
+    
 
-sub startTick {
-    my ($self) = @_;
+    constructor {username} {
+        next
+        my initFields_MultiplayerBehavior
+    }
+    
+
+    method startTick {} {
+    }
+    
+
+    method endTick {} {
+    }
+    
+
+    method getApproximateElapsed {} {
+        return 0
+    }
 }
 
-
-sub endTick {
-    my ($self) = @_;
+namespace eval ::MultiplayerBehavior {
+    variable NULL_MULTIPLAYER_BEHAVIORValue {}
+    variable NULL_MULTIPLAYER_BEHAVIORSet 0
+    proc staticGet_NULL_MULTIPLAYER_BEHAVIOR {} {
+        variable NULL_MULTIPLAYER_BEHAVIORValue
+        variable NULL_MULTIPLAYER_BEHAVIORSet
+        if {!$NULL_MULTIPLAYER_BEHAVIORSet} {
+            set NULL_MULTIPLAYER_BEHAVIORSet 1
+            set NULL_MULTIPLAYER_BEHAVIORValue [::MultiplayerBehavior new [[::StringUtil::getInstance] jget EMPTY_STRING]]
+        }
+        return $NULL_MULTIPLAYER_BEHAVIORValue
+    }
+    proc staticSet_NULL_MULTIPLAYER_BEHAVIOR {value} {
+        variable NULL_MULTIPLAYER_BEHAVIORValue
+        variable NULL_MULTIPLAYER_BEHAVIORSet
+        set NULL_MULTIPLAYER_BEHAVIORSet 1
+        set NULL_MULTIPLAYER_BEHAVIORValue $value
+    }
 }
 
-
-sub getApproximateElapsed {
-    my ($self) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringUtil ();
-
-1;
 

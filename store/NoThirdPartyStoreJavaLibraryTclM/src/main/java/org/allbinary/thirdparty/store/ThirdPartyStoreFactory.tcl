@@ -11,32 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.thirdparty.store
 
-package org::allbinary::thirdparty::store::ThirdPartyStoreFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::thirdparty::store::NoThirdPartyStore'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::thirdparty::store::ThirdPartyStoreFactory::instance;
+oo::class create ::ThirdPartyStoreFactory {
+    superclass ::JObject
 }
 
+oo::define ::ThirdPartyStoreFactory {
+    method initFields_ThirdPartyStoreFactory {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+    constructor {} {
+        next
+        my initFields_ThirdPartyStoreFactory
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::thirdparty::store::NoThirdPartyStore ();
+namespace eval ::ThirdPartyStoreFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::NoThirdPartyStore new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ThirdPartyStoreFactory::staticGet_instance]
+    }
+}
 
-1;
 

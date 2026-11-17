@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.destroy.event
 
-# Java interface
-package org::allbinary::game::combat::destroy::event::DestroyedEventListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-# throws Exception
-sub onDestroyed {
-    my ($self, $destroyedEvent) = @_;
-    die "abstract method onDestroyed";
+oo::class create ::DestroyedEventListenerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::DestroyedEventListenerInterface {
+    method initFields_DestroyedEventListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onDestroyed {destroyedEvent} {
+        error [jexception AbstractMethodError onDestroyed]
+    }
+}
+
+namespace eval ::DestroyedEventListenerInterface {
+}
+
 

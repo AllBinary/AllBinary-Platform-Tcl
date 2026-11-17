@@ -11,139 +11,118 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.mapping
 
-package org::allbinary::game::input::mapping::InputMapping;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{hashtable} = 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable();
-    $self->{mappedList} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::InputMapping {
+    superclass ::JObject
 }
 
+oo::define ::InputMapping {
+    method initFields_InputMapping {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset hashtable {}
+        my jset mappedList {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset hashtable [[::StdUtil::getInstance] createHashtable]
+        my jset mappedList [::BasicArrayListD new]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_InputMapping
+    }
+    
 
+    method getTotalMapped {} {
+        return [[my jget hashtable] size]
+    }
+    
 
-sub getTotalMapped {
-    my ($self) = @_;
-        return $self->{hashtable}->size();
-}
+    method isDefaultNew {} {
+        return false
+    }
+    
 
+    method getDefault {} {
+        return [::InputToGameKeyMapping::getNullInstance]
+    }
+    
 
-sub isDefaultNew {
-    my ($self) = @_;
-        return 0;
-}
+    method removeAll {} {
+        [my jget hashtable] clear
+        [my jget mappedList] clear
+    }
+    
 
-
-sub getDefault {
-    my ($self) = @_;
-        return 'org::allbinary::game::input::mapping::InputToGameKeyMapping'->getNullInstance();
-}
-
-
-sub removeAll {
-    my ($self) = @_;
-        $self->{hashtable}->clear();
-        $self->{mappedList}->clear();
-}
-
-
-sub remove {
-    my ($self, $input, $mappedToInput) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $stringUtil = 'org::allbinary::logic::string::StringUtil'->getInstance();
-        $stringBuffer->append('org::allbinary::string::CommonLabels'->getInstance()->{START_LABEL});
-        $stringBuffer->append($stringUtil->toString($input));
-        $stringBuffer->append(" == ");
-        $stringBuffer->append($stringUtil->toString($mappedToInput));
-        $self->{logUtil}->putF($stringBuffer->toString(), $self, "InputMapping::remove");
-        my $list = $self->getMappedInput($input);
-        if ($list->contains($mappedToInput)) {
-            $list->remove($mappedToInput);
-            $self->{mappedList}->remove($mappedToInput);
-            $stringBuffer->delete(0, $stringBuffer->length());
-            $stringBuffer->append("Removed: ");
-            $stringBuffer->append($stringUtil->toString($input));
-            $stringBuffer->append(" == ");
-            $stringBuffer->append($stringUtil->toString($mappedToInput));
-            $self->{logUtil}->putF($stringBuffer->toString(), $self, "InputMapping::remove");
+    method remove {input mappedToInput} {
+        set stringBuffer [::StringMaker new]
+        set stringUtil [::StringUtil::getInstance]
+        $stringBuffer append [[::CommonLabels::getInstance] jget START_LABEL]
+        $stringBuffer append [$stringUtil toString1 $input]
+        $stringBuffer append " == "
+        $stringBuffer append [$stringUtil toString1 $mappedToInput]
+        [my jget logUtil] putF [$stringBuffer toString] [self] "InputMapping::remove"
+        set list [my getMappedInput $input]
+        if {[$list contains $mappedToInput]} {
+            $list remove $mappedToInput
+            [my jget mappedList] remove $mappedToInput
+            $stringBuffer delete 0 [$stringBuffer length]
+            $stringBuffer append "Removed: "
+            $stringBuffer append [$stringUtil toString1 $input]
+            $stringBuffer append " == "
+            $stringBuffer append [$stringUtil toString1 $mappedToInput]
+            [my jget logUtil] putF [$stringBuffer toString] [self] "InputMapping::remove"
         } else {
-            $stringBuffer->delete(0, $stringBuffer->length());
-            $stringBuffer->append("Not Deleted: ");
-            $stringBuffer->append($stringUtil->toString($input));
-            $stringBuffer->append(" == ");
-            $stringBuffer->append($stringUtil->toString($mappedToInput));
-            $self->{logUtil}->putF($stringBuffer->toString(), $self, "InputMapping::remove");
+            $stringBuffer delete 0 [$stringBuffer length]
+            $stringBuffer append "Not Deleted: "
+            $stringBuffer append [$stringUtil toString1 $input]
+            $stringBuffer append " == "
+            $stringBuffer append [$stringUtil toString1 $mappedToInput]
+            [my jget logUtil] putF [$stringBuffer toString] [self] "InputMapping::remove"
         }
-}
+    }
+    
 
+    method addMapping {inputToGameKeyMapping} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
 
-# throws Exception
-sub addMapping {
-    my ($self, $inputToGameKeyMapping) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
-
-
-sub add {
-    my ($self, $input, $mappedToInput) = @_;
-        my $list = $self->getMappedInput($input);
-        if (!$list->contains($mappedToInput)) {
-            $list->add($mappedToInput);
-            $self->{mappedList}->add($mappedToInput);
+    method add {input mappedToInput} {
+        set list [my getMappedInput $input]
+        if {[expr {![$list contains $mappedToInput]}]} {
+            $list add $mappedToInput
+            [my jget mappedList] add $mappedToInput
         }
-}
+    }
+    
 
+    method isMapped {input} {
+        return [[my jget mappedList] contains $input]
+    }
+    
 
-sub isMapped {
-    my ($self, $input) = @_;
-        return $self->{mappedList}->contains($input);
-}
-
-
-sub getMappedInput {
-    my ($self, $id) = @_;
-        my $mappingInputCanBeNullList = $self->{hashtable}->get($id);
-        if (!defined($mappingInputCanBeNullList)) {
-            my $list = 'org::allbinary::util::BasicArrayListD'->new();
-            $self->{hashtable}->put($id, $list);
-            return $list;
+    method getMappedInput {id} {
+        set mappingInputCanBeNullList [[my jget hashtable] get $id]
+        if {[expr {$mappingInputCanBeNullList eq {}}]} {
+            set list [::BasicArrayListD new]
+            [my jget hashtable] put $id $list
+            return $list
         }
-        return $mappingInputCanBeNullList;
+        return $mappingInputCanBeNullList
+    }
+    
+
+    method getHashtable {} {
+        return [my jget hashtable]
+    }
 }
 
-
-sub getHashtable {
-    my ($self) = @_;
-        return $self->{hashtable};
+namespace eval ::InputMapping {
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::Input ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::input::mapping::InputToGameKeyMapping ();
-
-1;
 

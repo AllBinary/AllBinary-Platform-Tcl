@@ -11,56 +11,48 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::DemoGameRunnable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::displayable::canvas::GameRunnable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{demoCanvas} = undef;
-    $self->{gameTickTimeDelayHelper} = 'org::allbinary::time::GameTickTimeDelayHelperFactory'->getInstance();
+oo::class create ::DemoGameRunnable {
+    superclass ::GameRunnable
 }
 
+oo::define ::DemoGameRunnable {
+    method initFields_DemoGameRunnable {} {
+        my jset logUtil {}
+        my jset demoCanvas {}
+        my jset gameTickTimeDelayHelper {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        my jset gameTickTimeDelayHelper [::GameTickTimeDelayHelperFactory::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $demoCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{demoCanvas} = $demoCanvas;
-    return $self;
-}
+    constructor {demoCanvas} {
+        next
+        my initFields_DemoGameRunnable
+        my jset demoCanvas $demoCanvas
+    }
+    
 
-
-sub run {
-    my ($self) = @_;
+    method run {} {
         try {
-            $self->{demoCanvas}->getLoopTimeHelperP()->setStartTime($self->{gameTickTimeDelayHelper}->setStartTime());
-            $self->{demoCanvas}->processGame();
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{RUN}, $e);
+            [[my jget demoCanvas] getLoopTimeHelperP] setStartTime [[my jget gameTickTimeDelayHelper] setStartTime]
+            [my jget demoCanvas] processGame
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget RUN] $e
         }
+    }
+    
+
+    method processLoopSleep {} {
+        [my jget demoCanvas] processLoopSleep
+    }
 }
 
-
-# throws Exception
-sub processLoopSleep {
-    my ($self) = @_;
-        $self->{demoCanvas}->processLoopSleep();
+namespace eval ::DemoGameRunnable {
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::time::GameTickTimeDelayHelper ();
-use org::allbinary::time::GameTickTimeDelayHelperFactory ();
-use org::allbinary::game::displayable::canvas::GameRunnable ();
-
-1;
 

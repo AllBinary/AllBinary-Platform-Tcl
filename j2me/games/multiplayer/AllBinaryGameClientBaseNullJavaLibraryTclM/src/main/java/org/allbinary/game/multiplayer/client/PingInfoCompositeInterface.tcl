@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.multiplayer.client
 
-# Java interface
-package org::allbinary::game::multiplayer::client::PingInfoCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub setPingInfo {
-    my ($self, $show) = @_;
-    die "abstract method setPingInfo";
+oo::class create ::PingInfoCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::PingInfoCompositeInterface {
+    method initFields_PingInfoCompositeInterface {} {
+        return
+    }
+    
 
-1;
+    method setPingInfo {show} {
+        error [jexception AbstractMethodError setPingInfo]
+    }
+}
+
+namespace eval ::PingInfoCompositeInterface {
+}
+
 

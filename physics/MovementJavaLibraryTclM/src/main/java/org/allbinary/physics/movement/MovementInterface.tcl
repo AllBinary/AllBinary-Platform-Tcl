@@ -11,36 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
-# Java interface
-package org::allbinary::physics::movement::MovementInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub init {
-    my ($self, $speedBasicDecimal, $angle, $otherAngle) = @_;
-    die "abstract method init";
+oo::class create ::MovementInterface {
+    superclass ::JObject
 }
 
+oo::define ::MovementInterface {
+    method initFields_MovementInterface {} {
+        return
+    }
+    
 
-# throws Exception
-sub process {
-    my ($self, $layer) = @_;
-    die "abstract method process";
+    method init {speedBasicDecimal angle otherAngle} {
+        error [jexception AbstractMethodError init]
+    }
+    
+
+    method process {layer} {
+        error [jexception AbstractMethodError process]
+    }
+    
+
+    method stop {} {
+        error [jexception AbstractMethodError stop]
+    }
 }
 
-
-sub stop {
-    my ($self) = @_;
-    die "abstract method stop";
+namespace eval ::MovementInterface {
 }
 
-use org::allbinary::game::layer::AllBinaryGameLayer ();
-use org::allbinary::logic::math::BasicDecimal ();
-
-1;
 

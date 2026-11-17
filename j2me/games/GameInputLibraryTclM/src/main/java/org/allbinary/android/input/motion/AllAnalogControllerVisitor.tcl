@@ -11,38 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.android.input.motion
 
-package org::allbinary::android::input::motion::AllAnalogControllerVisitor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::android::input::motion::AnalogControllerVisitor';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::AllAnalogControllerVisitor {
+    superclass ::AnalogControllerVisitor
 }
 
+oo::define ::AllAnalogControllerVisitor {
+    method initFields_AllAnalogControllerVisitor {} {
+        return
+    }
 
-sub process {
-    my ($self, $allbinaryLayerManager, $analogLocationInputProcessor) = @_;
-        my $analogLocationInputList = 'org::allbinary::game::input::analog::AnalogLocationInputFactory'->getInstance()->getList();
-        my $analogLocationInput = undef;
-        for (my $index = $analogLocationInputList->size() - 1; $index >= 0; $index--) {
-            $analogLocationInput = $analogLocationInputList->get($index);
-            $analogLocationInputProcessor->process($allbinaryLayerManager, $analogLocationInput);
+    constructor {} {
+        next
+        my initFields_AllAnalogControllerVisitor
+    }
+    
+
+    method process {allbinaryLayerManager analogLocationInputProcessor} {
+        set analogLocationInputList [[::AnalogLocationInputFactory::getInstance] getList]
+        set analogLocationInput {}
+        for {set index [jint [expr {[$analogLocationInputList size] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set analogLocationInput [$analogLocationInputList get $index]
+            $analogLocationInputProcessor process $allbinaryLayerManager $analogLocationInput
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::analog::AnalogLocationInput ();
-use org::allbinary::game::input::analog::AnalogLocationInputFactory ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::android::input::motion::AnalogControllerVisitor ();
+namespace eval ::AllAnalogControllerVisitor {
+}
 
-1;
 

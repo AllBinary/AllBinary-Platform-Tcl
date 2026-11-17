@@ -11,36 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-package org::allbinary::graphics::paint::InitUpdatePaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable','org::allbinary::graphics::paint::InitUpdatePaintableInterface';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::InitUpdatePaintable {
+    superclass ::Paintable
 }
 
+oo::define ::InitUpdatePaintable {
+    method initFields_InitUpdatePaintable {} {
+        return
+    }
+    
 
-# throws Exception
-sub init {
-    my ($self) = @_;
+    constructor {} {
+        next
+        my initFields_InitUpdatePaintable
+    }
+    
+
+    method init {} {
+    }
+    
+
+    method update {} {
+    }
 }
 
-
-sub update {
-    my ($self) = @_;
+namespace eval ::InitUpdatePaintable {
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::graphics::paint::InitUpdatePaintableInterface ();
-
-1;
 

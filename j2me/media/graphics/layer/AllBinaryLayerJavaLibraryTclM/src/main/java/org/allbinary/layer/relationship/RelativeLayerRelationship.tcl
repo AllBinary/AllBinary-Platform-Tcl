@@ -11,53 +11,43 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer.relationship
 
-package org::allbinary::layer::relationship::RelativeLayerRelationship;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::RelativeRelationship';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{layer} = $org::allbinary::layer::AllBinaryLayer::NULL_ALLBINARY_LAYER;
+oo::class create ::RelativeLayerRelationship {
+    superclass ::RelativeRelationship
 }
 
+oo::define ::RelativeLayerRelationship {
+    method initFields_RelativeLayerRelationship {} {
+        my jset layer {}
+        my jset layer [::AllBinaryLayer::staticGet_NULL_ALLBINARY_LAYER]
+        return
+    }
+    
 
-sub new {
-    my ($class, $layer, $point, $typesAllowedList) = @_;
-    my $self = $class->SUPER::new($point, $typesAllowedList);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{layer} = $layer;
-    return $self;
+    constructor {layer point typesAllowedList} {
+        next $point $typesAllowedList
+        my initFields_RelativeLayerRelationship
+        my jset layer $layer
+    }
+    
+
+    method getX {} {
+        return [expr {[[my jget layer] getXP] + [next]}]
+    }
+    
+
+    method getY {} {
+        return [expr {[[my jget layer] getYP] + [next]}]
+    }
+    
+
+    method getZ {} {
+        return [expr {[[my jget layer] getZP] + [next]}]
+    }
 }
 
-
-sub getX {
-    my ($self) = @_;
-        return $self->{layer}->getXP() + $self->SUPER::getX();
+namespace eval ::RelativeLayerRelationship {
 }
 
-
-sub getY {
-    my ($self) = @_;
-        return $self->{layer}->getYP() + $self->SUPER::getY();
-}
-
-
-sub getZ {
-    my ($self) = @_;
-        return $self->{layer}->getZP() + $self->SUPER::getZ();
-}
-
-use java::lang::Object ();
-use org::allbinary::graphics::GPoint ();
-use org::allbinary::graphics::RelativeRelationship ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::util::BasicArrayList ();
-
-1;
 

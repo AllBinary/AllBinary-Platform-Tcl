@@ -11,99 +11,69 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image.sprite
 
-package org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::animation::image::BaseImageAnimationFactory';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{animationFactorySpriteScaleUtil} = 'org::allbinary::image::sprite::AnimationFactorySpriteScaleUtil'->getInstance();
+oo::class create ::OneRowSpriteIndexedAnimationFactory {
+    superclass ::BaseImageAnimationFactory
 }
 
+oo::define ::OneRowSpriteIndexedAnimationFactory {
+    method initFields_OneRowSpriteIndexedAnimationFactory {} {
+        my jset animationFactorySpriteScaleUtil {}
+        my jset animationFactorySpriteScaleUtil [::AnimationFactorySpriteScaleUtil::getInstance]
+        return
+    }
+    
+    
+    
+    
+    
 
-# throws Exception
-sub createFactoryDX {
-    my ($class, $image, $dx, $animationBehaviorFactory) = @_;
-        my $oneRowSpriteIndexedAnimationFactory = 'org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory'->new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $image->getHeight(), $image->getHeight(), 0, 0, $animationBehaviorFactory);
-        $oneRowSpriteIndexedAnimationFactory->initW($dx);
-        return $oneRowSpriteIndexedAnimationFactory;
-}
+    constructor {image sequenceArray width height dx dy animationBehaviorFactory} {
+        next $image $sequenceArray $width $height $dx $dy $animationBehaviorFactory
+        my initFields_OneRowSpriteIndexedAnimationFactory
+    }
+    
 
+    method init {dx dy} {
+        [my jget animationFactoryInitializationVisitor] jset dx $dx
+        [my jget animationFactoryInitializationVisitor] jset dy $dy
+    }
+    
 
-# throws Exception
-sub createFactoryDXY {
-    my ($class, $image, $dx, $dy, $animationBehaviorFactory) = @_;
-        my $oneRowSpriteIndexedAnimationFactory = 'org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory'->new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $image->getHeight(), $image->getHeight(), 0, 0, $animationBehaviorFactory);
-        $oneRowSpriteIndexedAnimationFactory->init($dx, $dy);
-        return $oneRowSpriteIndexedAnimationFactory;
-}
+    method initW {dx} {
+        my init $dx 0
+        [my jget animationFactoryInitializationVisitor] jset dx [expr {[[my jget animationFactoryInitializationVisitor] jget dx] + [expr {-([expr {[[my jget animationFactoryInitializationVisitor] jget width] >> 2}])}]}]
+    }
+    
 
-
-# throws Exception
-sub createFactoryWH {
-    my ($class, $image, $width, $height, $animationBehaviorFactory) = @_;
-        return 'org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory'->new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $width, $height, 0, 0, $animationBehaviorFactory);
-}
-
-
-# throws Exception
-sub createFactory {
-    my ($class, $image, $animationBehaviorFactory) = @_;
-        return 'org::allbinary::animation::image::sprite::OneRowSpriteIndexedAnimationFactory'->new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $image->getHeight(), $image->getHeight(), 0, 0, $animationBehaviorFactory);
-}
-
-
-sub new {
-    my ($class, $image, $sequenceArray, $width, $height, $dx, $dy, $animationBehaviorFactory) = @_;
-    my $self = $class->SUPER::new($image, $sequenceArray, $width, $height, $dx, $dy, $animationBehaviorFactory);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
-}
-
-
-sub init {
-    my ($self, $dx, $dy) = @_;
-        $self->{animationFactoryInitializationVisitor}->{dx} = $dx;
-        $self->{animationFactoryInitializationVisitor}->{dy} = $dy;
-}
-
-
-sub initW {
-    my ($self, $dx) = @_;
-        $self->init($dx, 0);
-        $self->{animationFactoryInitializationVisitor}->{dx} += -(POSIX::floor(($self->{animationFactoryInitializationVisitor}->{width}) / (2 ** (2))));
-}
-
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        my $sprite = $self->{animationFactorySpriteScaleUtil}->createImage($self->getImage(), $self->{animationFactoryInitializationVisitor}->{width}, $self->{animationFactoryInitializationVisitor}->{height}, $self->{scaleProperties}->{scaleWidth}, $self->{scaleProperties}->{scaleHeight});
-        if ($self->{animationFactoryInitializationVisitor}->{dx} != 0 || $self->{animationFactoryInitializationVisitor}->{dy} != 0) {
-            return 'org::allbinary::animation::image::sprite::AdjustedSpriteIndexedAnimation'->new($sprite, $self->getImage(), 'org::allbinary::graphics::color::BasicColorUtil'->getInstance()->{ZERO_ARRAY}, $self->{animationFactoryInitializationVisitor}->{dx}, $self->{animationFactoryInitializationVisitor}->{dy}, $self->{animationBehaviorFactory}->getOrCreateInstance());
+    method getInstance {instanceId} {
+        set sprite [[my jget animationFactorySpriteScaleUtil] createImage [my getImage] [[my jget animationFactoryInitializationVisitor] jget width] [[my jget animationFactoryInitializationVisitor] jget height] [[my jget scaleProperties] jget scaleWidth] [[my jget scaleProperties] jget scaleHeight]]
+        if {[expr {[expr {[[my jget animationFactoryInitializationVisitor] jget dx] != 0}] || [expr {[[my jget animationFactoryInitializationVisitor] jget dy] != 0}]}]} {
+            return [::AdjustedSpriteIndexedAnimation new $sprite [my getImage] [[::BasicColorUtil::getInstance] jget ZERO_ARRAY] [[my jget animationFactoryInitializationVisitor] jget dx] [[my jget animationFactoryInitializationVisitor] jget dy] [[my jget animationBehaviorFactory] getOrCreateInstance]]
         } else {
-            return 'org::allbinary::animation::image::sprite::SpriteIndexedAnimation'->new($sprite, $self->getImage(), 'org::allbinary::graphics::color::BasicColorUtil'->getInstance()->{ZERO_ARRAY}, $self->{animationBehaviorFactory}->getOrCreateInstance());
+            return [::SpriteIndexedAnimation new $sprite [my getImage] [[::BasicColorUtil::getInstance] jget ZERO_ARRAY] [[my jget animationBehaviorFactory] getOrCreateInstance]]
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::game::Sprite ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::animation::image::BaseImageAnimationFactory ();
-use org::allbinary::graphics::color::BasicColorUtil ();
-use org::allbinary::image::sprite::AnimationFactorySpriteScaleUtil ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::animation::image::sprite::SpriteIndexedAnimation ();
-use org::allbinary::animation::image::sprite::AdjustedSpriteIndexedAnimation ();
+namespace eval ::OneRowSpriteIndexedAnimationFactory {
+    proc createFactoryDX {image dx animationBehaviorFactory} {
+        set oneRowSpriteIndexedAnimationFactory [::OneRowSpriteIndexedAnimationFactory new $image [::PrimitiveIntUtil::getArrayInstance] [$image getHeight] [$image getHeight] 0 0 $animationBehaviorFactory]
+        $oneRowSpriteIndexedAnimationFactory initW $dx
+        return $oneRowSpriteIndexedAnimationFactory
+    }
+    proc createFactoryDXY {image dx dy animationBehaviorFactory} {
+        set oneRowSpriteIndexedAnimationFactory [::OneRowSpriteIndexedAnimationFactory new $image [::PrimitiveIntUtil::getArrayInstance] [$image getHeight] [$image getHeight] 0 0 $animationBehaviorFactory]
+        $oneRowSpriteIndexedAnimationFactory init $dx $dy
+        return $oneRowSpriteIndexedAnimationFactory
+    }
+    proc createFactoryWH {image width height animationBehaviorFactory} {
+        return [::OneRowSpriteIndexedAnimationFactory new $image [::PrimitiveIntUtil::getArrayInstance] $width $height 0 0 $animationBehaviorFactory]
+    }
+    proc createFactory {image animationBehaviorFactory} {
+        return [::OneRowSpriteIndexedAnimationFactory new $image [::PrimitiveIntUtil::getArrayInstance] [$image getHeight] [$image getHeight] 0 0 $animationBehaviorFactory]
+    }
+}
 
-1;
 

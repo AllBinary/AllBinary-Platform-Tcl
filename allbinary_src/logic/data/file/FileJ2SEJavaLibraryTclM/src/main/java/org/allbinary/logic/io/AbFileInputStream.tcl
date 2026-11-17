@@ -11,43 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
-package org::allbinary::logic::io::AbFileInputStream;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class, $name) = @_;
-    my $self = $class->SUPER::new($name);
-        # super(...) made $self above
-    return $self;
+oo::class create ::AbFileInputStream {
+    superclass ::FileInputStream
 }
 
+oo::define ::AbFileInputStream {
+    method initFields_AbFileInputStream {} {
+        return
+    }
+    
 
-# throws FileNotFoundException
-sub createFromAbFile {
-    my ($class, $file) = @_;
-        return 'org::allbinary::logic::io::AbFileInputStream'->new('org::allbinary::logic::io::file::AbFileNativeUtil'->get($file)->getPath());
+    constructor {name} {
+        next $name
+        my initFields_AbFileInputStream
+    }
+    
+    
 }
 
-
-# throws FileNotFoundException
-sub createFromFile {
-    my ($class, $file) = @_;
-        return 'org::allbinary::logic::io::AbFileInputStream'->new($file->getPath());
+namespace eval ::AbFileInputStream {
+    proc createFromAbFile {file} {
+        return [::AbFileInputStream new [[::AbFileNativeUtil::get $file] getPath]]
+    }
+    proc createFromFile {file} {
+        return [::AbFileInputStream new [$file getPath]]
+    }
 }
 
-use java::lang::Object ();
-use java::io::File ();
-# use java::io::FileInputStream ();
-# use java::io::FileNotFoundException ();
-use org::allbinary::logic::io::file::AbFile ();
-use org::allbinary::logic::io::file::AbFileNativeUtil ();
-
-1;
 

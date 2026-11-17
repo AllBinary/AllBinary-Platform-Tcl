@@ -11,38 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::EndGamePaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gameCanvas} = undef;
+oo::class create ::EndGamePaintable {
+    superclass ::Paintable
 }
 
+oo::define ::EndGamePaintable {
+    method initFields_EndGamePaintable {} {
+        my jset gameCanvas {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{gameCanvas} = $gameCanvas;
-    return $self;
+    constructor {gameCanvas} {
+        next
+        my initFields_EndGamePaintable
+        my jset gameCanvas $gameCanvas
+    }
+    
+
+    method paint {graphics} {
+        [my jget gameCanvas] paintGameOver $graphics
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{gameCanvas}->paintGameOver($graphics);
+namespace eval ::EndGamePaintable {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::paint::Paintable ();
-
-1;
 

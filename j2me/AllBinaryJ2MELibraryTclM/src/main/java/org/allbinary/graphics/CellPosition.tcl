@@ -11,80 +11,69 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics
 
-package org::allbinary::graphics::CellPosition;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graph::V';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{id} = undef;
-    $self->{column} = undef;
-    $self->{row} = undef;
+oo::class create ::CellPosition {
+    superclass ::V
 }
 
+oo::define ::CellPosition {
+    method initFields_CellPosition {} {
+        my jset id 0
+        my jset column 0
+        my jset row 0
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $column, $row, $columns, $rows) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{column} = $column;
-        $self->{row} = $row;
-        $self->{id} = ($row * $columns) + $column;
-    return $self;
+    constructor {column row columns rows} {
+        next
+        my initFields_CellPosition
+        my jset column $column
+        my jset row $row
+        my jset id [jint [expr {([jint [expr {$row * $columns}]]) + $column}]]
+    }
+    
+
+    method getColumn {} {
+        return [my jget column]
+    }
+    
+
+    method getRow {} {
+        return [my jget row]
+    }
+    
+
+    method toString {} {
+        return [::CellPosition::toStringColRow [my getColumn] [my getRow]]
+    }
+    
+    
+    
+
+    method getId {} {
+        return [my jget id]
+    }
 }
 
-
-sub getColumn {
-    my ($self) = @_;
-        return $self->{column};
+namespace eval ::CellPosition {
+    proc toStringCellPosition {basicGeographicMapCellPosition} {
+        return [::CellPosition::toStringColRow [$basicGeographicMapCellPosition getColumn] [$basicGeographicMapCellPosition getRow]]
+    }
+    proc toStringColRow {i_column i_row} {
+        set stringBuffer [::StringMaker new]
+        set commonSeps [::CommonSeps::getInstance]
+        $stringBuffer append [$commonSeps jget PARENTHESIS_OPEN]
+        $stringBuffer appendint $i_column
+        $stringBuffer append [$commonSeps jget COMMA]
+        $stringBuffer appendint $i_row
+        $stringBuffer append [$commonSeps jget PARENTHESIS_CLOSE]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub getRow {
-    my ($self) = @_;
-        return $self->{row};
-}
-
-
-sub toString {
-    my ($self) = @_;
-        return 'org::allbinary::graphics::CellPosition'->toStringColRow($self->getColumn(), $self->getRow());
-}
-
-
-sub toStringCellPosition {
-    my ($class, $basicGeographicMapCellPosition) = @_;
-        return 'org::allbinary::graphics::CellPosition'->toStringColRow($basicGeographicMapCellPosition->getColumn(), $basicGeographicMapCellPosition->getRow());
-}
-
-
-sub toStringColRow {
-    my ($class, $i_column, $i_row) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $commonSeps = 'org::allbinary::string::CommonSeps'->getInstance();
-        $stringBuffer->append($commonSeps->{PARENTHESIS_OPEN});
-        $stringBuffer->appendint($i_column);
-        $stringBuffer->append($commonSeps->{COMMA});
-        $stringBuffer->appendint($i_row);
-        $stringBuffer->append($commonSeps->{PARENTHESIS_CLOSE});
-        return $stringBuffer->toString();
-}
-
-
-sub getId {
-    my ($self) = @_;
-        return $self->{id};
-}
-
-use java::lang::Object ();
-use org::allbinary::graph::V ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonSeps ();
-
-1;
 

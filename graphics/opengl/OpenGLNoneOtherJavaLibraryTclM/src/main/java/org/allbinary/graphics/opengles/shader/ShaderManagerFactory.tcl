@@ -11,37 +11,50 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
-package org::allbinary::graphics::opengles::shader::ShaderManagerFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::opengles::shader::ShaderManagerFactory'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ShaderManagerFactory {
+    superclass ::JObject
 }
 
+oo::define ::ShaderManagerFactory {
+    method initFields_ShaderManagerFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::opengles::shader::ShaderManagerFactory::instance;
+    constructor {} {
+        next
+        my initFields_ShaderManagerFactory
+    }
+    
+    
+
+    method create {} {
+        return [::ShaderManager::getInstance]
+    }
 }
 
-
-sub create {
-    my ($self) = @_;
-        return 'org::allbinary::graphics::opengles::shader::ShaderManager'->getInstance();
+namespace eval ::ShaderManagerFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ShaderManagerFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ShaderManagerFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::opengles::shader::ShaderManager ();
-
-1;
 

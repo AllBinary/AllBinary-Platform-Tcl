@@ -11,37 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.pickup.points
 
-package org::allbinary::game::ag::layer::pickup::points::PointsLayerCircularStaticPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::AllBinaryLayerCircularPool';
-
-
-
-sub new {
-    my ($class, $allbinaryLayerFactoryInterface, $total) = @_;
-    my $self = $class->SUPER::new();
-        $self->SUPER::initAllBinaryLayerCircularPool($allbinaryLayerFactoryInterface, $total);
-    return $self;
+oo::class create ::PointsLayerCircularStaticPool {
+    superclass ::AllBinaryLayerCircularPool
 }
 
+oo::define ::PointsLayerCircularStaticPool {
+    method initFields_PointsLayerCircularStaticPool {} {
+        return
+    }
+    
 
-# throws Exception
-sub visit {
-    my ($self, $sourceLayerInterface) = @_;
-        my $pointsLayer = $self->getNextInstance();
-        my $scoreableInterface = $sourceLayerInterface;
-        $pointsLayer->visit($scoreableInterface);
+    constructor {allbinaryLayerFactoryInterface total} {
+        next
+        my initFields_PointsLayerCircularStaticPool
+        next $allbinaryLayerFactoryInterface $total
+    }
+    
+
+    method visit {sourceLayerInterface} {
+        set pointsLayer [my getNextInstance]
+        set scoreableInterface $sourceLayerInterface
+        $pointsLayer visit $scoreableInterface
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::score::ScoreableInterface ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerCircularPool ();
-use org::allbinary::layer::AllBinaryLayerFactoryInterface ();
+namespace eval ::PointsLayerCircularStaticPool {
+}
 
-1;
 

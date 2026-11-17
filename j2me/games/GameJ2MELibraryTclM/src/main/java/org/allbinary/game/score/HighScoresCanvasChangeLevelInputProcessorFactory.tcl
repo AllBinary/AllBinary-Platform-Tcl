@@ -11,31 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::HighScoresCanvasChangeLevelInputProcessorFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::score::HighScoresCanvasInputProcessorFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::HighScoresCanvasChangeLevelInputProcessorFactory {
+    superclass ::JObject
 }
 
+oo::define ::HighScoresCanvasChangeLevelInputProcessorFactory {
+    method initFields_HighScoresCanvasChangeLevelInputProcessorFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($self, $highScoresCanvas) = @_;
-        return 'org::allbinary::game::score::HighScoresCanvasLevelChangeInputProcessor'->new($highScoresCanvas);
+    constructor {} {
+        next
+        my initFields_HighScoresCanvasChangeLevelInputProcessorFactory
+    }
+    
+
+    method getInstance {highScoresCanvas} {
+        return [::HighScoresCanvasLevelChangeInputProcessor new $highScoresCanvas]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::score::displayable::HighScoresCanvas ();
-use org::allbinary::game::score::HighScoresCanvasInputProcessorFactoryInterface ();
-use org::allbinary::game::score::HighScoresCanvasLevelChangeInputProcessor ();
+namespace eval ::HighScoresCanvasChangeLevelInputProcessorFactory {
+}
 
-1;
 

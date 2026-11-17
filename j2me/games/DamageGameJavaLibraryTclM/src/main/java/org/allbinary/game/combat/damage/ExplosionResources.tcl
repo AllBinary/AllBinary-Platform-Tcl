@@ -11,40 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.damage
 
-package org::allbinary::game::combat::damage::ExplosionResources;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::combat::damage::ExplosionResources'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{EXPLOSION_90_RESOURCE} = "/explosion_sprite_90_by_90.png";
-    $self->{EXPLOSION_60_RESOURCE} = "/explosion_sprite_60_by_60.png";
-    $self->{HALF_EXPLOSION_RESOURCE} = "/explosion_sprite_30_by_30.png";
-    $self->{THIRD_EXPLOSION_RESOURCE} = "/explosion_sprite_15_by_15.png";
+oo::class create ::ExplosionResources {
+    superclass ::JObject
 }
 
+oo::define ::ExplosionResources {
+    method initFields_ExplosionResources {} {
+        my jset EXPLOSION_90_RESOURCE {}
+        my jset EXPLOSION_60_RESOURCE {}
+        my jset HALF_EXPLOSION_RESOURCE {}
+        my jset THIRD_EXPLOSION_RESOURCE {}
+        my jset EXPLOSION_90_RESOURCE "/explosion_sprite_90_by_90.png"
+        my jset EXPLOSION_60_RESOURCE "/explosion_sprite_60_by_60.png"
+        my jset HALF_EXPLOSION_RESOURCE "/explosion_sprite_30_by_30.png"
+        my jset THIRD_EXPLOSION_RESOURCE "/explosion_sprite_15_by_15.png"
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::combat::damage::ExplosionResources::instance;
+    constructor {} {
+        next
+        my initFields_ExplosionResources
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+namespace eval ::ExplosionResources {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ExplosionResources new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ExplosionResources::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

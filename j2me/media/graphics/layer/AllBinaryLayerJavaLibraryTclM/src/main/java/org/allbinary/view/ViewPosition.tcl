@@ -11,80 +11,66 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.view
 
-package org::allbinary::view::ViewPosition;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::view::ViewPositionBase';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{allbinaryLayer} = $org::allbinary::layer::AllBinaryLayer::NULL_ALLBINARY_LAYER;
+oo::class create ::ViewPosition {
+    superclass ::ViewPositionBase
 }
 
+oo::define ::ViewPosition {
+    method initFields_ViewPosition {} {
+        my jset allbinaryLayer {}
+        my jset allbinaryLayer [::AllBinaryLayer::staticGet_NULL_ALLBINARY_LAYER]
+        return
+    }
+    
+    
 
-sub getInstanceD {
-    my ($class) = @_;
-        return 'org::allbinary::view::ViewPosition'->new(0, 0, 0);
+    constructor {x y z} {
+        next $x $y $z
+        my initFields_ViewPosition
+    }
+    
+
+    method getX {} {
+        return [[my jget allbinaryLayer] getXP]
+    }
+    
+
+    method getY {} {
+        return [[my jget allbinaryLayer] getYP]
+    }
+    
+
+    method getZ {} {
+        return [[my jget allbinaryLayer] getZP]
+    }
+    
+
+    method getX2 {} {
+        return [expr {[my getX] + [[my jget allbinaryLayer] getWidth]}]
+    }
+    
+
+    method getY2 {} {
+        return [expr {[my getY] + [[my jget allbinaryLayer] getHeight]}]
+    }
+    
+
+    method getZ2 {} {
+        return [jint ([expr {[my getZ] + [[my jget allbinaryLayer] getDepth]}])]
+    }
+    
+
+    method setAllbinaryLayer {allbinaryLayer} {
+        my jset allbinaryLayer $allbinaryLayer
+    }
 }
 
-
-sub new {
-    my ($class, $x, $y, $z) = @_;
-    my $self = $class->SUPER::new($x, $y, $z);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
+namespace eval ::ViewPosition {
+    proc getInstanceD {} {
+        return [::ViewPosition new 0 0 0]
+    }
 }
 
-
-sub getX {
-    my ($self) = @_;
-        return $self->{allbinaryLayer}->getXP();
-}
-
-
-sub getY {
-    my ($self) = @_;
-        return $self->{allbinaryLayer}->getYP();
-}
-
-
-sub getZ {
-    my ($self) = @_;
-        return $self->{allbinaryLayer}->getZP();
-}
-
-
-sub getX2 {
-    my ($self) = @_;
-        return $self->getX() + $self->{allbinaryLayer}->getWidth();
-}
-
-
-sub getY2 {
-    my ($self) = @_;
-        return $self->getY() + $self->{allbinaryLayer}->getHeight();
-}
-
-
-sub getZ2 {
-    my ($self) = @_;
-        return int(($self->getZ() + $self->{allbinaryLayer}->getDepth()));
-}
-
-
-sub setAllbinaryLayer {
-    my ($self, $allbinaryLayer) = @_;
-        $self->{allbinaryLayer} = $allbinaryLayer;
-}
-
-use java::lang::Object ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::view::ViewPositionBase ();
-
-1;
 

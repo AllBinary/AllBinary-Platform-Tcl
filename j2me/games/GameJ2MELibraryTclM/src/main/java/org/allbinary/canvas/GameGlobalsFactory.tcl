@@ -11,40 +11,51 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.canvas
 
-package org::allbinary::canvas::GameGlobalsFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::canvas::GameGlobalsFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{newCanvas} = 1;
-    $self->{newDisplaybleTime} = int((-2147483648));
-    $self->{point} = 'org::allbinary::graphics::PointFactory'->getInstance()->{ZERO_ZERO};
+oo::class create ::GameGlobalsFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::GameGlobalsFactory {
+    method initFields_GameGlobalsFactory {} {
+        my jset newCanvas false
+        my jset newDisplaybleTime 0
+        my jset point {}
+        my jset newCanvas true
+        my jset newDisplaybleTime [::Integer::staticGet_MIN_VALUE]
+        my jset point [[::PointFactory::getInstance] jget ZERO_ZERO]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_GameGlobalsFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::canvas::GameGlobalsFactory::instance;
+namespace eval ::GameGlobalsFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameGlobalsFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameGlobalsFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::GPoint ();
-use org::allbinary::graphics::PointFactory ();
-
-1;
 

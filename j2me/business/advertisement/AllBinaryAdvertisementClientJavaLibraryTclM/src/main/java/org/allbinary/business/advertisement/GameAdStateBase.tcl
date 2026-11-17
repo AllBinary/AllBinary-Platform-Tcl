@@ -11,157 +11,127 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.business.advertisement
 
-package org::allbinary::business::advertisement::GameAdStateBase;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{adConfigurationP} = undef;
-    $self->{advertisementsP} = 'org::allbinary::business::advertisement::Advertisements'->new();
-    $self->{okayToShowAdsP} = 0;
+oo::class create ::GameAdStateBase {
+    superclass ::JObject
 }
 
+oo::define ::GameAdStateBase {
+    method initFields_GameAdStateBase {} {
+        my jset adConfigurationP {}
+        my jset advertisementsP {}
+        my jset okayToShowAdsP false
+        
+        my jset advertisementsP [::Advertisements new]
+        my jset okayToShowAdsP false
+        return
+    }
+    
 
-sub new {
-    my ($class, $adConfiguration) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{adConfigurationP} = $adConfiguration;
-    return $self;
+    constructor {adConfiguration} {
+        next
+        my initFields_GameAdStateBase
+        my jset adConfigurationP $adConfiguration
+    }
+    
+
+    method initViewArray {viewArray} {
+    }
+    
+
+    method onStart {anyType} {
+        my init
+    }
+    
+
+    method init {} {
+    }
+    
+
+    method isShowingAtLocation {location} {
+        return false
+    }
+    
+
+    method isShowingAt {} {
+        return false
+    }
+    
+
+    method show {} {
+    }
+    
+
+    method hide {} {
+    }
+    
+
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
+
+    method processAdState {gameState gameType} {
+    }
+    
+
+    method processPageAdState {} {
+    }
+    
+
+    method playingAdState {} {
+    }
+    
+
+    method playingAdStateWH {width height} {
+    }
+    
+
+    method notPlayingAdState {} {
+    }
+    
+
+    method setGameIsReady {gameIsReady} {
+    }
+    
+
+    method isGameIsReady {} {
+        return false
+    }
+    
+
+    method getAdvertisements {} {
+        return [my jget advertisementsP]
+    }
+    
+
+    method getAdConfiguration {} {
+        return [my jget adConfigurationP]
+    }
+    
+
+    method isOkayToShowPageAd {} {
+        return false
+    }
+    
+
+    method setOkayToShowAds {okayToShowAds} {
+        my jset okayToShowAdsP $okayToShowAds
+    }
+    
+
+    method isOkayToShowAds {} {
+        return [my jget okayToShowAdsP]
+    }
+    
+
+    method isEnabled {} {
+        return false
+    }
 }
 
-
-sub initViewArray {
-    my ($self, $viewArray) = @_;
+namespace eval ::GameAdStateBase {
 }
 
-
-sub onStart {
-    my ($self, $anyType) = @_;
-        $self->init();
-}
-
-
-sub init {
-    my ($self) = @_;
-}
-
-
-sub isShowingAtLocation {
-    my ($self, $location) = @_;
-        return 0;
-}
-
-
-sub isShowingAt {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub show {
-    my ($self) = @_;
-}
-
-
-sub hide {
-    my ($self) = @_;
-}
-
-
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
-}
-
-
-sub processAdState {
-    my ($self, $gameState, $gameType) = @_;
-}
-
-
-sub processPageAdState {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub playingAdState {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub playingAdStateWH {
-    my ($self, $width, $height) = @_;
-}
-
-
-# throws Exception
-sub notPlayingAdState {
-    my ($self) = @_;
-}
-
-
-sub setGameIsReady {
-    my ($self, $gameIsReady) = @_;
-}
-
-
-sub isGameIsReady {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub getAdvertisements {
-    my ($self) = @_;
-        return $self->{advertisementsP};
-}
-
-
-sub getAdConfiguration {
-    my ($self) = @_;
-        return $self->{adConfigurationP};
-}
-
-
-sub isOkayToShowPageAd {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub setOkayToShowAds {
-    my ($self, $okayToShowAds) = @_;
-        $self->{okayToShowAdsP} = $okayToShowAds;
-}
-
-
-sub isOkayToShowAds {
-    my ($self) = @_;
-        return $self->{okayToShowAdsP};
-}
-
-
-sub isEnabled {
-    my ($self) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-use org::allbinary::game::GameType ();
-use org::allbinary::game::state::GameState ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::business::advertisement::Advertisements ();
-
-1;
 

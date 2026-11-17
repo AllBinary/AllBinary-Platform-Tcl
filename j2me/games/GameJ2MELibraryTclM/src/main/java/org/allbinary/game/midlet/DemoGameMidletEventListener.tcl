@@ -11,35 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-# Java interface
-package org::allbinary::game::midlet::DemoGameMidletEventListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-sub onDemoStart {
-    my ($self) = @_;
-    die "abstract method onDemoStart";
+oo::class create ::DemoGameMidletEventListener {
+    superclass ::JObject
 }
 
+oo::define ::DemoGameMidletEventListener {
+    method initFields_DemoGameMidletEventListener {} {
+        return
+    }
+    
 
-sub onGameStart {
-    my ($self) = @_;
-    die "abstract method onGameStart";
+    method onDemoStart {} {
+        error [jexception AbstractMethodError onDemoStart]
+    }
+    
+
+    method onGameStart {} {
+        error [jexception AbstractMethodError onGameStart]
+    }
+    
+
+    method onDemoGameMidletEvent {demoGameMidletEvent} {
+        error [jexception AbstractMethodError onDemoGameMidletEvent]
+    }
 }
 
-
-sub onDemoGameMidletEvent {
-    my ($self, $demoGameMidletEvent) = @_;
-    die "abstract method onDemoGameMidletEvent";
+namespace eval ::DemoGameMidletEventListener {
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
-
-1;
 

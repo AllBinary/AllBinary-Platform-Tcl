@@ -11,45 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::NoPlayerGameInput;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::PlayerGameInput';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::NoPlayerGameInput'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::NoPlayerGameInput::SINGLETON;
+oo::class create ::NoPlayerGameInput {
+    superclass ::PlayerGameInput
 }
 
+oo::define ::NoPlayerGameInput {
+    method initFields_NoPlayerGameInput {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::util::BasicArrayListD'->new(), 'org::allbinary::util::BasicArrayListD'->new(), -1);
-        # super(...) made $self above
-    return $self;
+    constructor {} {
+        next [::BasicArrayListD new] [::BasicArrayListD new] [expr {-1}]
+        my initFields_NoPlayerGameInput
+    }
+    
+
+    method onDownGameKeyEvent {gameKeyEvent} {
+    }
+    
+
+    method onUpGameKeyEvent {gameKeyEvent} {
+    }
 }
 
-
-sub onDownGameKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
+namespace eval ::NoPlayerGameInput {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::NoPlayerGameInput new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::NoPlayerGameInput::staticGet_SINGLETON]
+    }
 }
 
-
-sub onUpGameKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::game::input::PlayerGameInput ();
-
-1;
 

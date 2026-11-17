@@ -11,66 +11,65 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.special
 
-package org::allbinary::game::layer::special::AnalogInputBuilder;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::special::AnalogInputBuilder'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AnalogInputBuilder {
+    superclass ::JObject
 }
 
+oo::define ::AnalogInputBuilder {
+    method initFields_AnalogInputBuilder {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::layer::special::AnalogInputBuilder::instance;
+    constructor {} {
+        next
+        my initFields_AnalogInputBuilder
+    }
+    
+    
+
+    method disable {inputProcessorArray collidableDestroyableDamageableLayer} {
+        $inputProcessorArray set [::Canvas::staticGet_UP] [::SpecialUpGameInputProcessor new $collidableDestroyableDamageableLayer]
+        $inputProcessorArray set [::Canvas::staticGet_DOWN] [::SpecialDownGameInputProcessor new $collidableDestroyableDamageableLayer]
+        $inputProcessorArray set [::Canvas::staticGet_RIGHT] [::SpecialRightGameInputProcessor new $collidableDestroyableDamageableLayer]
+        $inputProcessorArray set [::Canvas::staticGet_LEFT] [::SpecialLeftGameInputProcessor new $collidableDestroyableDamageableLayer]
+        $inputProcessorArray set [::Canvas::staticGet_KEY_NUM0] [::Special1GameInputProcessor new $collidableDestroyableDamageableLayer]
+        $inputProcessorArray set [::Canvas::staticGet_KEY_NUM5] [::Special3GameInputProcessor new $collidableDestroyableDamageableLayer]
+    }
+    
+
+    method enable {inputProcessorArray collidableDestroyableDamageableLayer} {
+        $inputProcessorArray set [::Canvas::staticGet_UP] [::SpecialAnalogUpGameInputProcessor new $collidableDestroyableDamageableLayer]
+        $inputProcessorArray set [::Canvas::staticGet_DOWN] [::SpecialAnalogDownGameInputProcessor new $collidableDestroyableDamageableLayer]
+        $inputProcessorArray set [::Canvas::staticGet_RIGHT] [::SpecialAnalogRightGameInputProcessor new $collidableDestroyableDamageableLayer]
+        $inputProcessorArray set [::Canvas::staticGet_LEFT] [::SpecialAnalogLeftGameInputProcessor new $collidableDestroyableDamageableLayer]
+        $inputProcessorArray set [::Canvas::staticGet_KEY_NUM0] [::SpecialAnalogLeftTriggerGameInputProcessor new $collidableDestroyableDamageableLayer]
+        $inputProcessorArray set [::Canvas::staticGet_KEY_NUM5] [::SpecialAnalogRightTriggerGameInputProcessor new $collidableDestroyableDamageableLayer]
+    }
 }
 
-
-sub disable {
-    my ($self, $inputProcessorArray, $collidableDestroyableDamageableLayer) = @_;
-        $inputProcessorArray->[$javax::microedition::lcdui::Canvas::UP] = 'org::allbinary::game::layer::special::SpecialUpGameInputProcessor'->new($collidableDestroyableDamageableLayer);
-        $inputProcessorArray->[$javax::microedition::lcdui::Canvas::DOWN] = 'org::allbinary::game::layer::special::SpecialDownGameInputProcessor'->new($collidableDestroyableDamageableLayer);
-        $inputProcessorArray->[$javax::microedition::lcdui::Canvas::RIGHT] = 'org::allbinary::game::layer::special::SpecialRightGameInputProcessor'->new($collidableDestroyableDamageableLayer);
-        $inputProcessorArray->[$javax::microedition::lcdui::Canvas::LEFT] = 'org::allbinary::game::layer::special::SpecialLeftGameInputProcessor'->new($collidableDestroyableDamageableLayer);
-        $inputProcessorArray->[$javax::microedition::lcdui::Canvas::KEY_NUM0] = 'org::allbinary::game::layer::special::Special1GameInputProcessor'->new($collidableDestroyableDamageableLayer);
-        $inputProcessorArray->[$javax::microedition::lcdui::Canvas::KEY_NUM5] = 'org::allbinary::game::layer::special::Special3GameInputProcessor'->new($collidableDestroyableDamageableLayer);
+namespace eval ::AnalogInputBuilder {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AnalogInputBuilder new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AnalogInputBuilder::staticGet_instance]
+    }
 }
 
-
-sub enable {
-    my ($self, $inputProcessorArray, $collidableDestroyableDamageableLayer) = @_;
-        $inputProcessorArray->[$javax::microedition::lcdui::Canvas::UP] = 'org::allbinary::game::layer::special::SpecialAnalogUpGameInputProcessor'->new($collidableDestroyableDamageableLayer);
-        $inputProcessorArray->[$javax::microedition::lcdui::Canvas::DOWN] = 'org::allbinary::game::layer::special::SpecialAnalogDownGameInputProcessor'->new($collidableDestroyableDamageableLayer);
-        $inputProcessorArray->[$javax::microedition::lcdui::Canvas::RIGHT] = 'org::allbinary::game::layer::special::SpecialAnalogRightGameInputProcessor'->new($collidableDestroyableDamageableLayer);
-        $inputProcessorArray->[$javax::microedition::lcdui::Canvas::LEFT] = 'org::allbinary::game::layer::special::SpecialAnalogLeftGameInputProcessor'->new($collidableDestroyableDamageableLayer);
-        $inputProcessorArray->[$javax::microedition::lcdui::Canvas::KEY_NUM0] = 'org::allbinary::game::layer::special::SpecialAnalogLeftTriggerGameInputProcessor'->new($collidableDestroyableDamageableLayer);
-        $inputProcessorArray->[$javax::microedition::lcdui::Canvas::KEY_NUM5] = 'org::allbinary::game::layer::special::SpecialAnalogRightTriggerGameInputProcessor'->new($collidableDestroyableDamageableLayer);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::game::input::GameInputProcessor ();
-use org::allbinary::game::layer::special::SpecialUpGameInputProcessor ();
-use org::allbinary::game::layer::special::SpecialDownGameInputProcessor ();
-use org::allbinary::game::layer::special::SpecialRightGameInputProcessor ();
-use org::allbinary::game::layer::special::SpecialLeftGameInputProcessor ();
-use org::allbinary::game::layer::special::Special1GameInputProcessor ();
-use org::allbinary::game::layer::special::Special3GameInputProcessor ();
-use org::allbinary::game::layer::special::SpecialAnalogUpGameInputProcessor ();
-use org::allbinary::game::layer::special::SpecialAnalogDownGameInputProcessor ();
-use org::allbinary::game::layer::special::SpecialAnalogRightGameInputProcessor ();
-use org::allbinary::game::layer::special::SpecialAnalogLeftGameInputProcessor ();
-use org::allbinary::game::layer::special::SpecialAnalogLeftTriggerGameInputProcessor ();
-use org::allbinary::game::layer::special::SpecialAnalogRightTriggerGameInputProcessor ();
-
-1;
 

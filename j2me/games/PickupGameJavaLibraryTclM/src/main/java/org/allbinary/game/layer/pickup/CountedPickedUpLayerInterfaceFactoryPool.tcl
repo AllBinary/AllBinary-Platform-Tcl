@@ -11,52 +11,58 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
-package org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactoryPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactoryPool'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = undef;
+oo::class create ::CountedPickedUpLayerInterfaceFactoryPool {
+    superclass ::JObject
 }
 
+oo::define ::CountedPickedUpLayerInterfaceFactoryPool {
+    method initFields_CountedPickedUpLayerInterfaceFactoryPool {} {
+        my jset list {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
-    return $self;
+    constructor {} {
+        next
+        my initFields_CountedPickedUpLayerInterfaceFactoryPool
+        my jset list [::BasicArrayListD new]
+    }
+    
+
+    method getList {} {
+        return [my jget list]
+    }
+    
+    
 }
 
-
-sub getList {
-    my ($self) = @_;
-        return $self->{list};
+namespace eval ::CountedPickedUpLayerInterfaceFactoryPool {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::CountedPickedUpLayerInterfaceFactoryPool new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::CountedPickedUpLayerInterfaceFactoryPool::staticGet_SINGLETON]
+    }
+    proc init {} {
+        ::CountedPickedUpLayerInterfaceFactoryPool::staticSet_SINGLETON [::CountedPickedUpLayerInterfaceFactoryPool new]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactoryPool::SINGLETON;
-}
-
-
-sub init {
-    my ($class) = @_;
-        $org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactoryPool::SINGLETON = 'org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactoryPool'->new();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

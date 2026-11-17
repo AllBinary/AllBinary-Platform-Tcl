@@ -11,31 +11,46 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.persistance
 
-package org::allbinary::game::configuration::persistance::NullRecordComparator;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','javax::microedition::rms::RecordComparator';
-
-tie our $NULL_RECORD_COMPARATOR, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::persistance::NullRecordComparator'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullRecordComparator {
+    superclass ::JObject
 }
 
+oo::define ::NullRecordComparator {
+    method initFields_NullRecordComparator {} {
+        return
+    }
 
-sub compare {
-    my ($self, $rec1, $rec2) = @_;
-        return 0;
+    constructor {} {
+        next
+        my initFields_NullRecordComparator
+    }
+    
+
+    method compare {rec1 rec2} {
+        return 0
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::rms::RecordComparator ();
+namespace eval ::NullRecordComparator {
+    variable NULL_RECORD_COMPARATORValue {}
+    variable NULL_RECORD_COMPARATORSet 0
+    proc staticGet_NULL_RECORD_COMPARATOR {} {
+        variable NULL_RECORD_COMPARATORValue
+        variable NULL_RECORD_COMPARATORSet
+        if {!$NULL_RECORD_COMPARATORSet} {
+            set NULL_RECORD_COMPARATORSet 1
+            set NULL_RECORD_COMPARATORValue [::NullRecordComparator new]
+        }
+        return $NULL_RECORD_COMPARATORValue
+    }
+    proc staticSet_NULL_RECORD_COMPARATOR {value} {
+        variable NULL_RECORD_COMPARATORValue
+        variable NULL_RECORD_COMPARATORSet
+        set NULL_RECORD_COMPARATORSet 1
+        set NULL_RECORD_COMPARATORValue $value
+    }
+}
 
-1;
 

@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.event
 
-# Java interface
-package org::allbinary::game::input::event::RawKeyEventListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub onEventRaw {
-    my ($self, $keyCode, $deviceId, $repeated) = @_;
-    die "abstract method onEventRaw";
+oo::class create ::RawKeyEventListener {
+    superclass ::JObject
 }
 
+oo::define ::RawKeyEventListener {
+    method initFields_RawKeyEventListener {} {
+        return
+    }
+    
 
-1;
+    method onEventRaw {keyCode deviceId repeated} {
+        error [jexception AbstractMethodError onEventRaw]
+    }
+}
+
+namespace eval ::RawKeyEventListener {
+}
+
 

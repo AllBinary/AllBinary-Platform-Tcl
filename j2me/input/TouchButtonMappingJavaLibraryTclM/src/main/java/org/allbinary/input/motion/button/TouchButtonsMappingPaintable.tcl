@@ -11,85 +11,71 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchButtonsMappingPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{foregroundColor} = undef;
-    $self->{paintableTable} = [map { [(undef) x (0)] } 1 .. (0)];
-    $self->{touchButtonLocationHelper} = 'org::allbinary::input::motion::button::TouchButtonLocationHelper'->new();
+oo::class create ::TouchButtonsMappingPaintable {
+    superclass ::Paintable
 }
 
+oo::define ::TouchButtonsMappingPaintable {
+    method initFields_TouchButtonsMappingPaintable {} {
+        my jset logUtil {}
+        my jset foregroundColor 0
+        my jset paintableTable {}
+        my jset touchButtonLocationHelper {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        my jset paintableTable [jarrayof 0 {jarray 0 {}}]
+        my jset touchButtonLocationHelper [::TouchButtonLocationHelper new]
+        return
+    }
+    
 
-sub new {
-    my ($class, $basicColor) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{foregroundColor} = int($basicColor);
-        $self->init();
-    return $self;
-}
+    constructor {basicColor} {
+        next
+        my initFields_TouchButtonsMappingPaintable
+        my jset foregroundColor [$basicColor intValue]
+        my init
+    }
+    
 
-
-sub init {
-    my ($self) = @_;
+    method init {} {
         try {
-            $self->{paintableTable} = $self->createPaintableTable();
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, "updateRectangle", $e);
+            my jset paintableTable [my createPaintableTable]
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] "updateRectangle" $e
         }
-}
+    }
+    
 
-
-# throws Exception
-sub createPaintableTable {
-    my ($self) = @_;
-        my $totalColumns = $self->{touchButtonLocationHelper}->getTotalColumns();
-        my $totalRows = $self->{touchButtonLocationHelper}->getTotalRows();
-        my $paintableTable = [map { [(undef) x ($totalRows)] } 1 .. ($totalColumns)];
-        my $cellPositionFactory = 'org::allbinary::graphics::CellPositionFactory'->getInstance();
-        my $commonButtons = 'org::allbinary::input::motion::button::CommonButtons'->getInstance();
-        for (my $index = $totalColumns - 1; $index >= 0; $index--) {
-            for (my $rowIndex = $totalRows - 1; $rowIndex >= 0; $rowIndex--) {
-                $self->{paintableTable}->[$index]->[$rowIndex] = 'org::allbinary::input::motion::button::TouchButton'->createButton('org::allbinary::input::motion::button::BasicTouchInputFactory'->getInstance()->{NONE}, 'org::allbinary::input::motion::button::TouchButtonBlankResource'->getInstance(), $commonButtons->{NORMAL_BUTTON}, $cellPositionFactory->getInstanceColRow($index, $rowIndex), $self->{touchButtonLocationHelper}->getColumnsRemainderHalf(), $self->{touchButtonLocationHelper}->getRowsRemainderHalf());
+    method createPaintableTable {} {
+        set totalColumns [[my jget touchButtonLocationHelper] getTotalColumns]
+        set totalRows [[my jget touchButtonLocationHelper] getTotalRows]
+        set paintableTable [jarrayof $totalColumns {jarray $totalRows {}}]
+        set cellPositionFactory [::CellPositionFactory::getInstance]
+        set commonButtons [::CommonButtons::getInstance]
+        for {set index [jint [expr {$totalColumns - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            for {set rowIndex [jint [expr {$totalRows - 1}]]} {[expr {$rowIndex >= 0}]} {jpostincr rowIndex -1} {
+                [[my jget paintableTable] get $index] set $rowIndex [::TouchButton::createButton [[::BasicTouchInputFactory::getInstance] jget NONE] [::TouchButtonBlankResource::getInstance] [$commonButtons jget NORMAL_BUTTON] [$cellPositionFactory getInstanceColRow $index $rowIndex] [[my jget touchButtonLocationHelper] getColumnsRemainderHalf] [[my jget touchButtonLocationHelper] getRowsRemainderHalf]]
             }
         }
-        return $paintableTable;
-}
+        return $paintableTable
+    }
+    
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        my $totalColumns = $self->{touchButtonLocationHelper}->getTotalColumns();
-        my $totalRows = $self->{touchButtonLocationHelper}->getTotalRows();
-        for (my $index = $totalColumns - 1; $index >= 0; $index--) {
-            for (my $rowIndex = $totalRows - 1; $rowIndex >= 0; $rowIndex--) {
-                $self->{paintableTable}->[$index]->[$rowIndex]->paint($graphics);
+    method paint {graphics} {
+        set totalColumns [[my jget touchButtonLocationHelper] getTotalColumns]
+        set totalRows [[my jget touchButtonLocationHelper] getTotalRows]
+        for {set index [jint [expr {$totalColumns - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            for {set rowIndex [jint [expr {$totalRows - 1}]]} {[expr {$rowIndex >= 0}]} {jpostincr rowIndex -1} {
+                [[[my jget paintableTable] get $index] get $rowIndex] paint $graphics
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::CellPositionFactory ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::input::motion::button::TouchButtonLocationHelper ();
-use org::allbinary::input::motion::button::CommonButtons ();
-use org::allbinary::input::motion::button::TouchButton ();
-use org::allbinary::input::motion::button::BasicTouchInputFactory ();
-use org::allbinary::input::motion::button::TouchButtonBlankResource ();
+namespace eval ::TouchButtonsMappingPaintable {
+}
 
-1;
 

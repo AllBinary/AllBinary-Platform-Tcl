@@ -11,87 +11,79 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing
 
-# Java interface
-package org::allbinary::logic::system::security::licensing::ThirdPartyInApplicationPurchaseInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub isPurchased {
-    my ($self, $lockableFeature) = @_;
-    die "abstract method isPurchased";
+oo::class create ::ThirdPartyInApplicationPurchaseInterface {
+    superclass ::JObject
 }
 
+oo::define ::ThirdPartyInApplicationPurchaseInterface {
+    method initFields_ThirdPartyInApplicationPurchaseInterface {} {
+        return
+    }
+    
 
-sub onCreate {
-    my ($self, $anyType, $stateObject) = @_;
-    die "abstract method onCreate";
+    method isPurchased {lockableFeature} {
+        error [jexception AbstractMethodError isPurchased]
+    }
+    
+
+    method onCreate {anyType stateObject} {
+        error [jexception AbstractMethodError onCreate]
+    }
+    
+
+    method onDestroy {} {
+        error [jexception AbstractMethodError onDestroy]
+    }
+    
+
+    method onStart {} {
+        error [jexception AbstractMethodError onStart]
+    }
+    
+
+    method onActivityResult {requestCode resultCode dataObject} {
+        error [jexception AbstractMethodError onActivityResult]
+    }
+    
+
+    method onSaveInstanceState {anyType} {
+        error [jexception AbstractMethodError onSaveInstanceState]
+    }
+    
+
+    method onStop {} {
+        error [jexception AbstractMethodError onStop]
+    }
+    
+
+    method requestPurchase {lockableFeature} {
+        error [jexception AbstractMethodError requestPurchase]
+    }
+    
+
+    method requestReceipts {} {
+        error [jexception AbstractMethodError requestReceipts]
+    }
+    
+
+    method add {lockableFeature} {
+        error [jexception AbstractMethodError add]
+    }
+    
+
+    method getUserName {} {
+        error [jexception AbstractMethodError getUserName]
+    }
+    
+
+    method isEnabled {} {
+        error [jexception AbstractMethodError isEnabled]
+    }
 }
 
-
-sub onDestroy {
-    my ($self) = @_;
-    die "abstract method onDestroy";
+namespace eval ::ThirdPartyInApplicationPurchaseInterface {
 }
 
-
-sub onStart {
-    my ($self) = @_;
-    die "abstract method onStart";
-}
-
-
-sub onActivityResult {
-    my ($self, $requestCode, $resultCode, $dataObject) = @_;
-    die "abstract method onActivityResult";
-}
-
-
-sub onSaveInstanceState {
-    my ($self, $anyType) = @_;
-    die "abstract method onSaveInstanceState";
-}
-
-
-sub onStop {
-    my ($self) = @_;
-    die "abstract method onStop";
-}
-
-
-sub requestPurchase {
-    my ($self, $lockableFeature) = @_;
-    die "abstract method requestPurchase";
-}
-
-
-sub requestReceipts {
-    my ($self) = @_;
-    die "abstract method requestReceipts";
-}
-
-
-sub add {
-    my ($self, $lockableFeature) = @_;
-    die "abstract method add";
-}
-
-
-sub getUserName {
-    my ($self) = @_;
-    die "abstract method getUserName";
-}
-
-
-sub isEnabled {
-    my ($self) = @_;
-    die "abstract method isEnabled";
-}
-
-
-1;
 

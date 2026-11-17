@@ -11,29 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.android.input.motion
 
-package org::allbinary::android::input::motion::AnalogLocationInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AnalogLocationInputProcessor {
+    superclass ::JObject
 }
 
+oo::define ::AnalogLocationInputProcessor {
+    method initFields_AnalogLocationInputProcessor {} {
+        return
+    }
 
-sub process {
-    my ($self, $allbinaryLayerManager, $analogLocationInput) = @_;
+    constructor {} {
+        next
+        my initFields_AnalogLocationInputProcessor
+    }
+    
+
+    method process {allbinaryLayerManager analogLocationInput} {
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::analog::AnalogLocationInput ();
-use org::allbinary::layer::AllBinaryLayerManager ();
+namespace eval ::AnalogLocationInputProcessor {
+}
 
-1;
 

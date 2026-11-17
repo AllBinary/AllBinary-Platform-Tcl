@@ -11,48 +11,43 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::PCGameKey;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::Input';
+oo::class create ::PCGameKey {
+    superclass ::Input
+}
 
+oo::define ::PCGameKey {
+    method initFields_PCGameKey {} {
+        return
+    }
+    
 
-
-sub new {
-    my ($class, $keyCode, $name) = @_;
-    my $self = $class->SUPER::new($keyCode, $name);
-        # super(...) made $self above
-        my $id = $self->getId();
-        if ($id >= 0) {
-            'org::allbinary::game::input::InputFactory'->getInstance()->add($id, $self);
+    constructor {keyCode name} {
+        next $keyCode $name
+        my initFields_PCGameKey
+        set id [my getId]
+        if {[expr {$id >= 0}]} {
+            [::InputFactory::getInstance] add $id [self]
         }
-    return $self;
+    }
+    
+
+    method toString {} {
+        return [string cat "PCGameKey: " [next]]
+    }
+    
 }
 
-
-sub toString {
-    my ($self) = @_;
-        return "PCGameKey: " . $self->SUPER::toString();
-}
-
-
-sub getString {
-    my ($class, $keyCode) = @_;
-        my $input = 'org::allbinary::game::input::InputFactory'->getInstance()->getInstanceById($keyCode);
-        if (defined($input)) {
-            return $input->getName();
+namespace eval ::PCGameKey {
+    proc getString {keyCode} {
+        set input [[::InputFactory::getInstance] getInstanceById $keyCode]
+        if {[expr {$input ne {}}]} {
+            return [$input getName]
         } else {
-            return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+            return [[::StringUtil::getInstance] jget EMPTY_STRING]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::game::input::Input ();
-use org::allbinary::game::input::InputFactory ();
-
-1;
 

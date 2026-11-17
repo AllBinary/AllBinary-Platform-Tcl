@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.multiplayer.layer
 
-# Java interface
-package org::allbinary::game::multiplayer::layer::MultiPlayerGameLayerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getMultiplayerBehavior {
-    my ($self) = @_;
-    die "abstract method getMultiplayerBehavior";
+oo::class create ::MultiPlayerGameLayerInterface {
+    superclass ::JObject
 }
 
+oo::define ::MultiPlayerGameLayerInterface {
+    method initFields_MultiPlayerGameLayerInterface {} {
+        return
+    }
+    
 
-1;
+    method getMultiplayerBehavior {} {
+        error [jexception AbstractMethodError getMultiplayerBehavior]
+    }
+}
+
+namespace eval ::MultiPlayerGameLayerInterface {
+}
+
 

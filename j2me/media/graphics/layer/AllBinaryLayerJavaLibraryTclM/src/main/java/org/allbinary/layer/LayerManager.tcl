@@ -1,149 +1,129 @@
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-package org::allbinary::layer::LayerManager;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{systemWrapper} = 'org::allbinary::logic::ABSystemWrapper'->getInstance();
-    $self->{tsUtil} = 'org::allbinary::TsUtil'->getInstance();
-    $self->{layerManagerLogging} = undef;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{anyType} = 'org::allbinary::thread::SynchObject'->new();
+oo::class create ::LayerManager {
+    superclass ::JObject
 }
 
+oo::define ::LayerManager {
+    method initFields_LayerManager {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset systemWrapper {}
+        my jset tsUtil {}
+        my jset layerManagerLogging {}
+        my jset list {}
+        my jset anyType {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset systemWrapper [::ABSystemWrapper::getInstance]
+        my jset tsUtil [::TsUtil::getInstance]
+        
+        my jset list [::BasicArrayListD new]
+        my jset anyType [::SynchObject new]
+        return
+    }
+    
 
-sub new {
-    my ($class, $layerManagerLogging) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{CONSTRUCTOR});
-        $self->{layerManagerLogging} = $layerManagerLogging;
-    return $self;
-}
+    constructor {layerManagerLogging} {
+        next
+        my initFields_LayerManager
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+        my jset layerManagerLogging $layerManagerLogging
+    }
+    
 
+    method contains {layerInterface} {
+        return [[my jget list] contains $layerInterface]
+    }
+    
 
-sub contains {
-    my ($self, $layerInterface) = @_;
-        return $self->{list}->contains($layerInterface);
-}
-
-
-# throws Exception
-sub update {
-    my ($self, $layerInterface) = @_;
-        my $had = $self->{list}->remove($layerInterface);
-        if ($had) {
-            my $nextLayerInterface = undef;
-            my $size = $self->{list}->size();
-            for (my $index = 0; $index < $size; $index++) {
-                $nextLayerInterface = $self->{list}->get($index);
-                if ($layerInterface->getZP() > $nextLayerInterface->getZP()) {
-                    $self->{list}->addAt($index, $layerInterface);
-                    return;
+    method update {layerInterface} {
+        set had [[my jget list] remove $layerInterface]
+        if {$had} {
+            set nextLayerInterface {}
+            set size [[my jget list] size]
+            for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+                set nextLayerInterface [[my jget list] get $index]
+                if {[expr {[$layerInterface getZP] > [$nextLayerInterface getZP]}]} {
+                    [my jget list] addAt $index $layerInterface
+                    return
                 }
             }
-            $self->{list}->add($layerInterface);
+            [my jget list] add $layerInterface
         }
-}
+    }
+    
 
-
-# throws Exception
-sub insert {
-    my ($self, $layerInterface) = @_;
-        my $nextLayerInterface = undef;
-        my $size = $self->{list}->size();
-        for (my $index = 0; $index < $size; $index++) {
-            $nextLayerInterface = $self->{list}->get($index);
-            if ($layerInterface->getZP() > $nextLayerInterface->getZP()) {
-                $self->appendAt($layerInterface, $index);
-                return;
+    method insert {layerInterface} {
+        set nextLayerInterface {}
+        set size [[my jget list] size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set nextLayerInterface [[my jget list] get $index]
+            if {[expr {[$layerInterface getZP] > [$nextLayerInterface getZP]}]} {
+                my appendAt $layerInterface $index
+                return
             }
         }
-        $self->append($layerInterface);
-}
+        my append $layerInterface
+    }
+    
 
+    method append {layerInterface} {
+        [my jget layerManagerLogging] append $layerInterface
+        [my jget list] add $layerInterface
+    }
+    
 
-# throws Exception
-sub append {
-    my ($self, $layerInterface) = @_;
-        $self->{layerManagerLogging}->append($layerInterface);
-        $self->{list}->add($layerInterface);
-}
+    method appendAt {layerInterface index} {
+        [my jget layerManagerLogging] appendAt $layerInterface $index
+        [my jget list] addAt $index $layerInterface
+    }
+    
 
-
-# throws Exception
-sub appendAt {
-    my ($self, $layerInterface, $index) = @_;
-        $self->{layerManagerLogging}->appendAt($layerInterface, $index);
-        $self->{list}->addAt($index, $layerInterface);
-}
-
-
-# throws Exception
-sub remove {
-    my ($self, $layerInterface) = @_;
-        {; # synchronized ($self->{anyType})
-            $self->{layerManagerLogging}->remove($layerInterface);
-            my $result = $self->{list}->remove($layerInterface);
-            $self->{layerManagerLogging}->removeResult($self, $layerInterface, $result);
+    method remove {layerInterface} {
+        if {1} {
+            [my jget layerManagerLogging] remove $layerInterface
+            set result [[my jget list] remove $layerInterface]
+            [my jget layerManagerLogging] removeResult [self] $layerInterface $result
         }
-}
+    }
+    
 
+    method getLayerAt {index} {
+        return [[[my jget list] jget objectArray] get $index]
+    }
+    
 
-sub getLayerAt {
-    my ($self, $index) = @_;
-        return $self->{list}->{objectArray}->[$index];
-}
+    method getSize {} {
+        return [[my jget list] size]
+    }
+    
 
-
-sub getSize {
-    my ($self) = @_;
-        return $self->{list}->size();
-}
-
-
-# throws Exception
-sub cleanup {
-    my ($self) = @_;
-        {; # synchronized ($self->{anyType})
-            $self->{list}->clear();
-            $self->{layerManagerLogging}->clear();
-            $self->{tsUtil}->gc();
-            $self->{tsUtil}->gc();
+    method cleanup {} {
+        if {1} {
+            [my jget list] clear
+            [my jget layerManagerLogging] clear
+            [my jget tsUtil] gc
+            [my jget tsUtil] gc
         }
-}
+    }
+    
 
-
-sub paint {
-    my ($self, $g, $x, $y) = @_;
-        {; # synchronized ($self->{anyType})
-            my $comp = undef;
-            for (my $index = $self->{list}->size(); --$index >= 0; ) {
-                $comp = $self->{list}->{objectArray}->[$index];
-                if (defined($comp) && $comp->isVisible()) {
-                    $comp->paint($g);
+    method paint {g x y} {
+        if {1} {
+            set comp {}
+            for {set index [[my jget list] size]} {[expr {[jpreincr index -1] >= 0}]} {} {
+                set comp [[[my jget list] jget objectArray] get $index]
+                if {[expr {[expr {$comp ne {}}] && [$comp isVisible]}]} {
+                    $comp paint $g
                 }
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::TsUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::thread::SynchObject ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::logic::ABSystemWrapper ();
+namespace eval ::LayerManager {
+}
 
-1;
 

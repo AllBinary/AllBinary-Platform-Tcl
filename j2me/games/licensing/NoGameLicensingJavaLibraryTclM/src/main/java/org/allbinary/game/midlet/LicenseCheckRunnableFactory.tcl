@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-package org::allbinary::game::midlet::LicenseCheckRunnableFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::LicenseCheckRunnableFactory {
+    superclass ::JObject
 }
 
+oo::define ::LicenseCheckRunnableFactory {
+    method initFields_LicenseCheckRunnableFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($self, $specialDemoGameMidlet) = @_;
-        return 'org::allbinary::thread::NullABRunnable'->getInstance();
+    constructor {} {
+        next
+        my initFields_LicenseCheckRunnableFactory
+    }
+    
+
+    method getInstance {specialDemoGameMidlet} {
+        return [::NullABRunnable::getInstance]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::thread::ABRunnable ();
-use org::allbinary::thread::NullABRunnable ();
+namespace eval ::LicenseCheckRunnableFactory {
+}
 
-1;
 

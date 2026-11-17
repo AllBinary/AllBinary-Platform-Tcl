@@ -11,38 +11,47 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.platform.opengles
 
-package org::allbinary::platform::opengles::PlatformTextureBaseFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_PLATFORM_TEXTURE_BASE_FACTORY, 'java::lang::LazyStatic', sub { 'org::allbinary::platform::opengles::PlatformTextureBaseFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
+oo::class create ::PlatformTextureBaseFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::PlatformTextureBaseFactory {
+    method initFields_PlatformTextureBaseFactory {} {
+        my jset commonStrings {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_PlatformTextureBaseFactory
+    }
+    
+
+    method load {gl target level image border flip} {
+    }
 }
 
-
-sub load {
-    my ($self, $gl, $target, $level, $image, $border, $flip) = @_;
+namespace eval ::PlatformTextureBaseFactory {
+    variable NULL_PLATFORM_TEXTURE_BASE_FACTORYValue {}
+    variable NULL_PLATFORM_TEXTURE_BASE_FACTORYSet 0
+    proc staticGet_NULL_PLATFORM_TEXTURE_BASE_FACTORY {} {
+        variable NULL_PLATFORM_TEXTURE_BASE_FACTORYValue
+        variable NULL_PLATFORM_TEXTURE_BASE_FACTORYSet
+        if {!$NULL_PLATFORM_TEXTURE_BASE_FACTORYSet} {
+            set NULL_PLATFORM_TEXTURE_BASE_FACTORYSet 1
+            set NULL_PLATFORM_TEXTURE_BASE_FACTORYValue [::PlatformTextureBaseFactory new]
+        }
+        return $NULL_PLATFORM_TEXTURE_BASE_FACTORYValue
+    }
+    proc staticSet_NULL_PLATFORM_TEXTURE_BASE_FACTORY {value} {
+        variable NULL_PLATFORM_TEXTURE_BASE_FACTORYValue
+        variable NULL_PLATFORM_TEXTURE_BASE_FACTORYSet
+        set NULL_PLATFORM_TEXTURE_BASE_FACTORYSet 1
+        set NULL_PLATFORM_TEXTURE_BASE_FACTORYValue $value
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::khronos::opengles::GL10 ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

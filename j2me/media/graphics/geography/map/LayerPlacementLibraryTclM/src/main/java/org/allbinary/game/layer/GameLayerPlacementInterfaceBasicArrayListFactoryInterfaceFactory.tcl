@@ -11,27 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-# Java interface
-package org::allbinary::game::layer::GameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getInstance {
-    my ($self, $level) = @_;
-    die "abstract method getInstance";
+oo::class create ::GameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory {
+    superclass ::JObject
 }
 
+oo::define ::GameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory {
+    method initFields_GameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory {} {
+        return
+    }
+    
 
-sub size {
-    my ($self) = @_;
-    die "abstract method size";
+    method getInstance {level} {
+        error [jexception AbstractMethodError getInstance]
+    }
+    
+
+    method size {} {
+        error [jexception AbstractMethodError size]
+    }
 }
 
+namespace eval ::GameLayerPlacementInterfaceBasicArrayListFactoryInterfaceFactory {
+}
 
-1;
 

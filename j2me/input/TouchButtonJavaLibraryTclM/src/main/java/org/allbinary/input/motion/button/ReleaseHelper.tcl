@@ -11,46 +11,41 @@
 # Created By: Travis Berthelot
 # 
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::ReleaseHelper;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{touchButtonRecognizer} = undef;
+oo::class create ::ReleaseHelper {
+    superclass ::JObject
 }
 
+oo::define ::ReleaseHelper {
+    method initFields_ReleaseHelper {} {
+        my jset touchButtonRecognizer {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $touchButtonRecognizer) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{touchButtonRecognizer} = $touchButtonRecognizer;
-    return $self;
-}
+    constructor {touchButtonRecognizer} {
+        next
+        my initFields_ReleaseHelper
+        my jset touchButtonRecognizer $touchButtonRecognizer
+    }
+    
 
-
-# throws Exception
-sub release {
-    my ($self, $touchButtonInput, $deviceId) = @_;
-        my $nextTouchButtonInput = undef;
-        my $gameKeyEvent = undef;
-        for (my $index = $self->{touchButtonRecognizer}->{currentlyPressedTouchButtonSingleton}->size() - 1; $index >= 0; $index--) {
-            $nextTouchButtonInput = $self->{touchButtonRecognizer}->{currentlyPressedTouchButtonSingleton}->get($index);
-            $gameKeyEvent = $nextTouchButtonInput->getGameKeyEvent();
-            $self->{touchButtonRecognizer}->{upGameKeyEventHandler}->fireEvent($gameKeyEvent);
-            $self->{touchButtonRecognizer}->{upGameKeyEventHandler}->getInstanceForDevice($deviceId)->fireEvent($gameKeyEvent);
-            $self->{touchButtonRecognizer}->{currentlyPressedTouchButtonSingleton}->removeAt($index);
+    method release {touchButtonInput deviceId} {
+        set nextTouchButtonInput {}
+        set gameKeyEvent {}
+        for {set index [jint [expr {[[[my jget touchButtonRecognizer] jget currentlyPressedTouchButtonSingleton] size] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set nextTouchButtonInput [[[my jget touchButtonRecognizer] jget currentlyPressedTouchButtonSingleton] get $index]
+            set gameKeyEvent [$nextTouchButtonInput getGameKeyEvent]
+            [[my jget touchButtonRecognizer] jget upGameKeyEventHandler] fireEvent $gameKeyEvent
+            [[[my jget touchButtonRecognizer] jget upGameKeyEventHandler] getInstanceForDevice $deviceId] fireEvent $gameKeyEvent
+            [[my jget touchButtonRecognizer] jget currentlyPressedTouchButtonSingleton] removeAt $index
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::event::GameKeyEvent ();
+namespace eval ::ReleaseHelper {
+}
 
-1;
 

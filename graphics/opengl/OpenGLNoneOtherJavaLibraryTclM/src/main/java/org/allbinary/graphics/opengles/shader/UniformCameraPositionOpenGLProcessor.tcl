@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
-package org::allbinary::graphics::opengles::shader::UniformCameraPositionOpenGLProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::opengles::shader::OpenGLObject3dProcessor';
-
-
-
-sub new {
-    my ($class, $shaderComposite, $handleIndex) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::UniformCameraPositionOpenGLProcessor {
+    superclass ::OpenGLObject3dProcessor
 }
 
+oo::define ::UniformCameraPositionOpenGLProcessor {
+    method initFields_UniformCameraPositionOpenGLProcessor {} {
+        return
+    }
+    
 
-sub process {
-    my ($self, $gl, $anyType) = @_;
+    constructor {shaderComposite handleIndex} {
+        next
+        my initFields_UniformCameraPositionOpenGLProcessor
+    }
+    
+
+    method process {gl anyType} {
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::khronos::opengles::GL10 ();
-use org::allbinary::graphics::opengles::shader::OpenGLObject3dProcessor ();
+namespace eval ::UniformCameraPositionOpenGLProcessor {
+}
 
-1;
 

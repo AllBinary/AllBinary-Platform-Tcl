@@ -11,36 +11,47 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-package org::allbinary::media::audio::NoSound;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::media::audio::Sound';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::media::audio::NoSound'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::media::audio::NoSound::instance;
+oo::class create ::NoSound {
+    superclass ::Sound
 }
 
+oo::define ::NoSound {
+    method initFields_NoSound {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING});
-        # super(...) made $self above
-        $self->setPlayerP($org::allbinary::media::audio::NoPlayer::NO_PLAYER);
-    return $self;
+    constructor {} {
+        next [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my initFields_NoSound
+        my setPlayerP [::NoPlayer::staticGet_NO_PLAYER]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::media::audio::Sound ();
-use org::allbinary::media::audio::NoPlayer ();
+namespace eval ::NoSound {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::NoSound new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::NoSound::staticGet_instance]
+    }
+}
 
-1;
 

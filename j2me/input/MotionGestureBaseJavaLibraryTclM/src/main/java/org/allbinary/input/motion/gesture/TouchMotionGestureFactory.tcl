@@ -11,71 +11,92 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture
 
-package org::allbinary::input::motion::gesture::TouchMotionGestureFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{LEFT} = undef;
-    $self->{RIGHT} = undef;
-    $self->{UP} = undef;
-    $self->{DOWN} = undef;
-    $self->{PRESSED} = undef;
-    $self->{RELEASED} = undef;
-    $self->{DIAGONAL_DOWN_RIGHT} = undef;
-    $self->{DIAGONAL_DOWN_LEFT} = undef;
-    $self->{DIAGONAL_UP_RIGHT} = undef;
-    $self->{DIAGONAL_UP_LEFT} = undef;
-    $self->{SCROLL_UP} = undef;
-    $self->{SCROLL_DOWN} = undef;
-    $self->{NO_MOTION} = undef;
-    $self->{LAST_MOTION} = undef;
+oo::class create ::TouchMotionGestureFactory {
+    superclass ::JObject
 }
 
+oo::define ::TouchMotionGestureFactory {
+    method initFields_TouchMotionGestureFactory {} {
+        my jset LEFT {}
+        my jset RIGHT {}
+        my jset UP {}
+        my jset DOWN {}
+        my jset PRESSED {}
+        my jset RELEASED {}
+        my jset DIAGONAL_DOWN_RIGHT {}
+        my jset DIAGONAL_DOWN_LEFT {}
+        my jset DIAGONAL_UP_RIGHT {}
+        my jset DIAGONAL_UP_LEFT {}
+        my jset SCROLL_UP {}
+        my jset SCROLL_DOWN {}
+        my jset NO_MOTION {}
+        my jset LAST_MOTION {}
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::input::motion::gesture::TouchMotionGestureFactory::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::input::motion::gesture::TouchMotionGestureFactory::instance = 'org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->new();
+    constructor {} {
+        next
+        my initFields_TouchMotionGestureFactory
+        set MAX [[::InputFactory::getInstance] jget MAX]
+        my jset LEFT [::MotionGestureInput new [jint [expr {$MAX - 3}]] "Left Touch"]
+        my jset RIGHT [::MotionGestureInput new [jint [expr {$MAX - 4}]] "Right Touch"]
+        my jset UP [::MotionGestureInput new [jint [expr {$MAX - 5}]] "Up Touch"]
+        my jset DOWN [::MotionGestureInput new [jint [expr {$MAX - 6}]] "Down Touch"]
+        my jset PRESSED [::MotionGestureInput new [jint [expr {$MAX - 7}]] "Screen Press"]
+        my jset RELEASED [::MotionGestureInput new [jint [expr {$MAX - 8}]] "Released"]
+        my jset DIAGONAL_DOWN_RIGHT [::MotionGestureInput new [jint [expr {$MAX - 9}]] "Diagonal Dn R"]
+        my jset DIAGONAL_DOWN_LEFT [::MotionGestureInput new [jint [expr {$MAX - 10}]] "Diagonal Dn L"]
+        my jset DIAGONAL_UP_RIGHT [::MotionGestureInput new [jint [expr {$MAX - 11}]] "Diagonal Up R"]
+        my jset DIAGONAL_UP_LEFT [::MotionGestureInput new [jint [expr {$MAX - 12}]] "Diagonal Up L"]
+        my jset SCROLL_UP [::MotionGestureInput new [jint [expr {$MAX - 13}]] "Scroll Up"]
+        my jset SCROLL_DOWN [::MotionGestureInput new [jint [expr {$MAX - 14}]] "Scroll Down"]
+        my jset NO_MOTION [::MotionGestureInput new [jint [expr {$MAX - 2}]] "No Motion"]
+        my jset LAST_MOTION [::MotionGestureInput new [jint [expr {$MAX - 19}]] "Last Motion"]
+    }
+}
+
+namespace eval ::TouchMotionGestureFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::input::motion::gesture::TouchMotionGestureFactory::instance;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::TouchMotionGestureFactory::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::TouchMotionGestureFactory::staticSet_instance [::TouchMotionGestureFactory new]
+        }
+        return [::TouchMotionGestureFactory::staticGet_instance]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $MAX = 'org::allbinary::game::input::InputFactory'->getInstance()->{MAX};
-        $self->{LEFT} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 3, "Left Touch");
-        $self->{RIGHT} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 4, "Right Touch");
-        $self->{UP} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 5, "Up Touch");
-        $self->{DOWN} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 6, "Down Touch");
-        $self->{PRESSED} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 7, "Screen Press");
-        $self->{RELEASED} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 8, "Released");
-        $self->{DIAGONAL_DOWN_RIGHT} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 9, "Diagonal Dn R");
-        $self->{DIAGONAL_DOWN_LEFT} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 10, "Diagonal Dn L");
-        $self->{DIAGONAL_UP_RIGHT} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 11, "Diagonal Up R");
-        $self->{DIAGONAL_UP_LEFT} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 12, "Diagonal Up L");
-        $self->{SCROLL_UP} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 13, "Scroll Up");
-        $self->{SCROLL_DOWN} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 14, "Scroll Down");
-        $self->{NO_MOTION} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 2, "No Motion");
-        $self->{LAST_MOTION} = 'org::allbinary::input::motion::gesture::MotionGestureInput'->new($MAX - 19, "Last Motion");
-    return $self;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::InputFactory ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::input::motion::gesture::MotionGestureInput ();
-
-1;
 

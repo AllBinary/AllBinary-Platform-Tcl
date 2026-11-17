@@ -11,48 +11,60 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.math
 
-package org::allbinary::logic::math::J2SEMath;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::math::J2SEMath'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::J2SEMath {
+    superclass ::JObject
 }
 
+oo::define ::J2SEMath {
+    method initFields_J2SEMath {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::math::J2SEMath::instance;
+    constructor {} {
+        next
+        my initFields_J2SEMath
+    }
+    
+    
+
+    method round {value} {
+        return [jint [jd2i $value]]
+    }
+    
+
+    method abs {value} {
+        return [expr {([expr {$value < 0.0}]) ? [expr {-$value}] : $value}]
+    }
+    
+
+    method absdouble {value} {
+        return [expr {([expr {$value < 0.0}]) ? [expr {-$value}] : $value}]
+    }
 }
 
-
-sub round {
-    my ($self, $value) = @_;
-        return int($value);
+namespace eval ::J2SEMath {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::J2SEMath new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::J2SEMath::staticGet_instance]
+    }
 }
 
-
-sub abs {
-    my ($self, $value) = @_;
-        return (($value < 0.0) ? -$value : $value);
-}
-
-
-sub absdouble {
-    my ($self, $value) = @_;
-        return (($value < 0.0) ? -$value : $value);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

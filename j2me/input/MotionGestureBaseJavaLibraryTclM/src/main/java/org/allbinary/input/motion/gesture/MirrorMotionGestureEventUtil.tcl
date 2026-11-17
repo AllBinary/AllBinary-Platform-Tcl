@@ -11,69 +11,73 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture
 
-package org::allbinary::input::motion::gesture::MirrorMotionGestureEventUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::input::motion::gesture::MirrorMotionGestureEventUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{motionEventCircularPool} = undef;
+oo::class create ::MirrorMotionGestureEventUtil {
+    superclass ::JObject
 }
 
+oo::define ::MirrorMotionGestureEventUtil {
+    method initFields_MirrorMotionGestureEventUtil {} {
+        my jset motionEventCircularPool {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{motionEventCircularPool} = 'org::allbinary::input::motion::gesture::observer::MotionEventCircularPool'->createPool(2147483647);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_MirrorMotionGestureEventUtil
+        my jset motionEventCircularPool [::MotionEventCircularPool::createPool [::Integer::staticGet_MAX_VALUE]]
+    }
+    
 
+    method mirrorVerticle {motionGestureEvent halfWidth} {
+        set event [[my jget motionEventCircularPool] getInstance [$motionGestureEvent getMotionGesture]]
+        set previousNewX [my getNewX [[$motionGestureEvent getPreviousPoint] getX] $halfWidth]
+        set currentNewX [my getNewX [[$motionGestureEvent getCurrentPoint] getX] $halfWidth]
+        set pointFactory [::PointFactory::getInstance]
+        set mirroredPreviousPoint [$pointFactory createXY $previousNewX [[$motionGestureEvent getPreviousPoint] getY]]
+        set mirroredCurrentPoint [$pointFactory createXY $currentNewX [[$motionGestureEvent getCurrentPoint] getY]]
+        $event setPreviousPoint $mirroredPreviousPoint
+        $event setCurrentPoint $mirroredCurrentPoint
+        return $event
+    }
+    
 
-# throws Exception
-sub mirrorVerticle {
-    my ($self, $motionGestureEvent, $halfWidth) = @_;
-        my $event = $self->{motionEventCircularPool}->getInstance($motionGestureEvent->getMotionGesture());
-        my $previousNewX = $self->getNewX($motionGestureEvent->getPreviousPoint()->getX(), $halfWidth);
-        my $currentNewX = $self->getNewX($motionGestureEvent->getCurrentPoint()->getX(), $halfWidth);
-        my $pointFactory = 'org::allbinary::graphics::PointFactory'->getInstance();
-        my $mirroredPreviousPoint = $pointFactory->createXY($previousNewX, $motionGestureEvent->getPreviousPoint()->getY());
-        my $mirroredCurrentPoint = $pointFactory->createXY($currentNewX, $motionGestureEvent->getCurrentPoint()->getY());
-        $event->setPreviousPoint($mirroredPreviousPoint);
-        $event->setCurrentPoint($mirroredCurrentPoint);
-        return $event;
-}
-
-
-sub getNewX {
-    my ($self, $x, $halfWidth) = @_;
-        my $newX = 0;
-        if ($x > $halfWidth) {
-            $newX = $halfWidth - ($x - $halfWidth);
+    method getNewX {x halfWidth} {
+        set newX 0
+        if {[expr {$x > $halfWidth}]} {
+            set newX [jint [expr {$halfWidth - ([jint [expr {$x - $halfWidth}]])}]]
         } else {
-            $newX = $halfWidth + ($halfWidth - $x);
+            set newX [jint [expr {$halfWidth + ([jint [expr {$halfWidth - $x}]])}]]
         }
-        return $newX;
+        return $newX
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::motion::gesture::MirrorMotionGestureEventUtil::instance;
+namespace eval ::MirrorMotionGestureEventUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::MirrorMotionGestureEventUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::MirrorMotionGestureEventUtil::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::GPoint ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::input::motion::gesture::observer::MotionEventCircularPool ();
-use org::allbinary::input::motion::gesture::observer::MotionGestureEvent ();
-
-1;
 

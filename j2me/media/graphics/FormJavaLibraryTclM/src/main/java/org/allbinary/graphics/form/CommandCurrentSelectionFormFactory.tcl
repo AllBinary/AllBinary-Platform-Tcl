@@ -11,42 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::CommandCurrentSelectionFormFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::CommandCurrentSelectionFormFactory {
+    superclass ::JObject
 }
 
+oo::define ::CommandCurrentSelectionFormFactory {
+    method initFields_CommandCurrentSelectionFormFactory {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($class, $title, $items, $rectangle, $formType, $border, $moveForSmallScreen, $backgroundBasicColor, $foregroundBasicColor) = @_;
-        if ('org::allbinary::game::configuration::feature::Features'->getInstance()->isFeature('org::allbinary::game::configuration::feature::TouchFeatureFactory'->getInstance()->{TOUCH_ENABLED})) {
-            my $scrollSelectionForm = 'org::allbinary::graphics::form::CommandCurrentSelectionForm'->new($title, $items, $border, $moveForSmallScreen, $backgroundBasicColor, $foregroundBasicColor);
-            $scrollSelectionForm->init($rectangle, $formType);
-            return $scrollSelectionForm;
+    constructor {} {
+        next
+        my initFields_CommandCurrentSelectionFormFactory
+    }
+    
+}
+
+namespace eval ::CommandCurrentSelectionFormFactory {
+    proc getInstance {title items rectangle formType border moveForSmallScreen backgroundBasicColor foregroundBasicColor} {
+        if {[[::Features::getInstance] isFeature [[::TouchFeatureFactory::getInstance] jget TOUCH_ENABLED]]} {
+            set scrollSelectionForm [::CommandCurrentSelectionForm new $title $items $border $moveForSmallScreen $backgroundBasicColor $foregroundBasicColor]
+            $scrollSelectionForm init $rectangle $formType
+            return $scrollSelectionForm
         } else {
-            return 'org::allbinary::graphics::form::ScrollSelectionFormNoneFactory'->getInstance();
+            return [::ScrollSelectionFormNoneFactory::getInstance]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::TouchFeatureFactory ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
-use org::allbinary::graphics::form::ScrollSelectionFormNoneFactory ();
-use org::allbinary::graphics::form::CommandCurrentSelectionForm ();
-
-1;
 

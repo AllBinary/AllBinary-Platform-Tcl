@@ -11,56 +11,67 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::FormTypeFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::form::FormTypeFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{UNK} = "Unknown FormType";
-    $self->{NULL_FORM_TYPE} = 'org::allbinary::graphics::form::FormType'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{NULL_STRING});
-    $self->{TEMP_HORIZONTAL_FORM} = 'org::allbinary::graphics::form::FormType'->new("TempHorizontal");
-    $self->{HORIZONTAL_FORM} = 'org::allbinary::graphics::form::FormType'->new("Horizontal");
-    $self->{VERTICAL_CENTER_FORM} = 'org::allbinary::graphics::form::FormType'->new("Vertical");
+oo::class create ::FormTypeFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::FormTypeFactory {
+    method initFields_FormTypeFactory {} {
+        my jset UNK {}
+        my jset NULL_FORM_TYPE {}
+        my jset TEMP_HORIZONTAL_FORM {}
+        my jset HORIZONTAL_FORM {}
+        my jset VERTICAL_CENTER_FORM {}
+        my jset UNK "Unknown FormType"
+        my jset NULL_FORM_TYPE [::FormType new [[::StringUtil::getInstance] jget NULL_STRING]]
+        my jset TEMP_HORIZONTAL_FORM [::FormType new "TempHorizontal"]
+        my jset HORIZONTAL_FORM [::FormType new "Horizontal"]
+        my jset VERTICAL_CENTER_FORM [::FormType new "Vertical"]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_FormTypeFactory
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::form::FormTypeFactory::instance;
-}
-
-
-sub getFormType {
-    my ($self) = @_;
-        my $displayInfo = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-        my $formType = undef;
-        if ($displayInfo->isPortrait()) {
-            $formType = $self->{VERTICAL_CENTER_FORM};
+    method getFormType {} {
+        set displayInfo [::DisplayInfoSingleton::getInstance]
+        set formType {}
+        if {[$displayInfo isPortrait]} {
+            set formType [my jget VERTICAL_CENTER_FORM]
         } else {
-            $formType = $self->{HORIZONTAL_FORM};
+            set formType [my jget HORIZONTAL_FORM]
         }
-        return $formType;
+        return $formType
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::graphics::form::FormType ();
+namespace eval ::FormTypeFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::FormTypeFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::FormTypeFactory::staticGet_instance]
+    }
+}
 
-1;
 

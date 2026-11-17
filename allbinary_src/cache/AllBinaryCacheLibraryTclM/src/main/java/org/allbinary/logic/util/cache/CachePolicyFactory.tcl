@@ -11,43 +11,59 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-package org::allbinary::logic::util::cache::CachePolicyFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::util::cache::CachePolicyFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NAME} = "lru";
-    $self->{MAX_TIME_THOUSAND_MAX} = 'org::allbinary::logic::util::cache::CachePolicy'->new($self->{NAME}, 9223372036854775807, 1000);
-    $self->{THIRTY_MINUTES_TEN_THOUSAND_MAX} = 'org::allbinary::logic::util::cache::CachePolicy'->new($self->{NAME}, 1000 * 60 * 30, 10000);
-    $self->{THIRTY_MINUTES_FIFTY_THOUSAND_MAX} = 'org::allbinary::logic::util::cache::CachePolicy'->new($self->{NAME}, 1000 * 60 * 30, 100000);
-    $self->{ONE_MINUTE_FIVE_MAX} = 'org::allbinary::logic::util::cache::CachePolicy'->new($self->{NAME}, 1000 * 60 * 1, 5);
-    $self->{ONE_MINUTE_TEN_MAX} = 'org::allbinary::logic::util::cache::CachePolicy'->new($self->{NAME}, 1000 * 60 * 1, 10);
-    $self->{ONE_MINUTE_ONE_HUNDRED_MAX} = 'org::allbinary::logic::util::cache::CachePolicy'->new($self->{NAME}, 1000 * 60 * 1, 100);
+oo::class create ::CachePolicyFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::CachePolicyFactory {
+    method initFields_CachePolicyFactory {} {
+        my jset NAME {}
+        my jset MAX_TIME_THOUSAND_MAX {}
+        my jset THIRTY_MINUTES_TEN_THOUSAND_MAX {}
+        my jset THIRTY_MINUTES_FIFTY_THOUSAND_MAX {}
+        my jset ONE_MINUTE_FIVE_MAX {}
+        my jset ONE_MINUTE_TEN_MAX {}
+        my jset ONE_MINUTE_ONE_HUNDRED_MAX {}
+        my jset NAME "lru"
+        my jset MAX_TIME_THOUSAND_MAX [::CachePolicy new [my jget NAME] [::Long::staticGet_MAX_VALUE] 1000]
+        my jset THIRTY_MINUTES_TEN_THOUSAND_MAX [::CachePolicy new [my jget NAME] [jint [expr {[jint [expr {1000 * 60}]] * 30}]] 10000]
+        my jset THIRTY_MINUTES_FIFTY_THOUSAND_MAX [::CachePolicy new [my jget NAME] [jint [expr {[jint [expr {1000 * 60}]] * 30}]] 100000]
+        my jset ONE_MINUTE_FIVE_MAX [::CachePolicy new [my jget NAME] [jint [expr {[jint [expr {1000 * 60}]] * 1}]] 5]
+        my jset ONE_MINUTE_TEN_MAX [::CachePolicy new [my jget NAME] [jint [expr {[jint [expr {1000 * 60}]] * 1}]] 10]
+        my jset ONE_MINUTE_ONE_HUNDRED_MAX [::CachePolicy new [my jget NAME] [jint [expr {[jint [expr {1000 * 60}]] * 1}]] 100]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_CachePolicyFactory
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::util::cache::CachePolicyFactory::instance;
+namespace eval ::CachePolicyFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::CachePolicyFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::CachePolicyFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::util::cache::CachePolicy ();
-
-1;
 

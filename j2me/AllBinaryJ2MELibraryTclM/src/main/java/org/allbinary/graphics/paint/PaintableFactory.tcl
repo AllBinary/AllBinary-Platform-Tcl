@@ -11,29 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-package org::allbinary::graphics::paint::PaintableFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::PaintableFactory {
+    superclass ::JObject
 }
 
+oo::define ::PaintableFactory {
+    method initFields_PaintableFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($self) = @_;
-        return 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
+    constructor {} {
+        next
+        my initFields_PaintableFactory
+    }
+    
+
+    method getInstance {} {
+        return [::NullPaintable::getInstance]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::paint::NullPaintable ();
+namespace eval ::PaintableFactory {
+}
 
-1;
 

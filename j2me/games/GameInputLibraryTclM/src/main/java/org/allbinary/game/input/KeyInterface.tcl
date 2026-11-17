@@ -11,39 +11,39 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-# Java interface
-package org::allbinary::game::input::KeyInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub keyPressed {
-    my ($self, $keyCode) = @_;
-    die "abstract method keyPressed";
+oo::class create ::KeyInterface {
+    superclass ::JObject
 }
 
+oo::define ::KeyInterface {
+    method initFields_KeyInterface {} {
+        return
+    }
+    
 
-sub keyReleased {
-    my ($self, $keyCode) = @_;
-    die "abstract method keyReleased";
+    method keyPressed {keyCode} {
+        error [jexception AbstractMethodError keyPressed]
+    }
+    
+
+    method keyReleased {keyCode} {
+        error [jexception AbstractMethodError keyReleased]
+    }
+    
+
+    method keyPressedByDevice {keyCode deviceId} {
+        error [jexception AbstractMethodError keyPressedByDevice]
+    }
+    
+
+    method keyReleasedByDevice {keyCode deviceId} {
+        error [jexception AbstractMethodError keyReleasedByDevice]
+    }
 }
 
-
-sub keyPressedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
-    die "abstract method keyPressedByDevice";
+namespace eval ::KeyInterface {
 }
 
-
-sub keyReleasedByDevice {
-    my ($self, $keyCode, $deviceId) = @_;
-    die "abstract method keyReleasedByDevice";
-}
-
-
-1;
 

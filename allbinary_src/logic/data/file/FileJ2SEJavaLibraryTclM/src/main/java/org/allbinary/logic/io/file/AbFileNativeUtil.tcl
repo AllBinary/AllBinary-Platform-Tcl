@@ -11,29 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io.file
 
-package org::allbinary::logic::io::file::AbFileNativeUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AbFileNativeUtil {
+    superclass ::JObject
 }
 
+oo::define ::AbFileNativeUtil {
+    method initFields_AbFileNativeUtil {} {
+        return
+    }
 
-sub get {
-    my ($class, $file) = @_;
-        return $file->getFile();
+    constructor {} {
+        next
+        my initFields_AbFileNativeUtil
+    }
+    
 }
 
-use java::lang::Object ();
-use java::io::File ();
+namespace eval ::AbFileNativeUtil {
+    proc get {file} {
+        return [$file getFile]
+    }
+}
 
-1;
 

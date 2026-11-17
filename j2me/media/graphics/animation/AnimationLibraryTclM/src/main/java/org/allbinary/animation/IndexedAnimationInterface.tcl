@@ -11,35 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-# Java interface
-package org::allbinary::animation::IndexedAnimationInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::SequentialAnimationInterface';
-
-
-
-sub reset {
-    my ($self) = @_;
-    die "abstract method reset";
+oo::class create ::IndexedAnimationInterface {
+    superclass ::JObject
 }
 
+oo::define ::IndexedAnimationInterface {
+    method initFields_IndexedAnimationInterface {} {
+        return
+    }
+    
 
-sub setFrame {
-    my ($self, $index) = @_;
-    die "abstract method setFrame";
+    method reset {} {
+        error [jexception AbstractMethodError reset]
+    }
+    
+
+    method setFrame {index} {
+        error [jexception AbstractMethodError setFrame]
+    }
+    
+
+    method getFrame {} {
+        error [jexception AbstractMethodError getFrame]
+    }
 }
 
-
-sub getFrame {
-    my ($self) = @_;
-    die "abstract method getFrame";
+namespace eval ::IndexedAnimationInterface {
 }
 
-use org::allbinary::animation::SequentialAnimationInterface ();
-
-1;
 

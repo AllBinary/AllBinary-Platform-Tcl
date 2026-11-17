@@ -11,29 +11,29 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-package org::allbinary::game::collision::CollidableBaseBehaviorFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::collision::CollidableBaseBehaviorFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::CollidableBaseBehaviorFactory {
+    superclass ::JObject
 }
 
+oo::define ::CollidableBaseBehaviorFactory {
+    method initFields_CollidableBaseBehaviorFactory {} {
+        return
+    }
 
-sub createBehavior {
-    my ($self) = @_;
-        die ("RuntimeException");
+    constructor {} {
+        next
+        my initFields_CollidableBaseBehaviorFactory
+    }
+    
+
+    method createBehavior {} {
+        error [jexception RuntimeException {}]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::collision::CollidableBaseBehaviorFactoryInterface ();
+namespace eval ::CollidableBaseBehaviorFactory {
+}
 
-1;
 

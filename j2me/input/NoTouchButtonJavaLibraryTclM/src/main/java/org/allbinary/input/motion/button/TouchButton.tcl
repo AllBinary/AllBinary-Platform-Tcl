@@ -11,116 +11,105 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchButton;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{touchButtonInput} = undef;
-    $self->{animationInterface} = undef;
-    $self->{rawRectangle} = undef;
-    $self->{xBorder} = undef;
-    $self->{yBorder} = undef;
-    $self->{rectangle} = $org::allbinary::graphics::RectangleFactory::SINGLETON;
-    $self->{cellPosition} = undef;
-    $self->{animationX} = 0;
-    $self->{animationY} = 0;
+oo::class create ::TouchButton {
+    superclass ::Paintable
 }
 
+oo::define ::TouchButton {
+    method initFields_TouchButton {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset touchButtonInput {}
+        my jset animationInterface {}
+        my jset rawRectangle {}
+        my jset xBorder 0
+        my jset yBorder 0
+        my jset rectangle {}
+        my jset cellPosition {}
+        my jset animationX 0
+        my jset animationY 0
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        
+        
+        
+        
+        
+        my jset rectangle [::RectangleFactory::staticGet_SINGLETON]
+        
+        my jset animationX 0
+        my jset animationY 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $touchButtonInput, $animationInterface, $rawRectangle, $cellPosition, $xBorder, $yBorder) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{touchButtonInput} = $touchButtonInput;
-        $self->{animationInterface} = $animationInterface;
-        $self->{rawRectangle} = $rawRectangle;
-        $self->{cellPosition} = $cellPosition;
-        $self->{xBorder} = $xBorder;
-        $self->{yBorder} = $yBorder;
-        $self->updateRectangle();
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Created: ")->append($self->toString())->toString(), $self, $self->{commonStrings}->{CONSTRUCTOR});
-    return $self;
-}
+    constructor {touchButtonInput animationInterface rawRectangle cellPosition xBorder yBorder} {
+        next
+        my initFields_TouchButton
+        my jset touchButtonInput $touchButtonInput
+        my jset animationInterface $animationInterface
+        my jset rawRectangle $rawRectangle
+        my jset cellPosition $cellPosition
+        my jset xBorder $xBorder
+        my jset yBorder $yBorder
+        my updateRectangle
+        [my jget logUtil] putF [[[[::StringMaker new] append "Created: "] append [my toString]] toString] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+    }
+    
 
+    method paint {graphics} {
+        [my jget animationInterface] paintXY $graphics [my jget animationX] [my jget animationY]
+    }
+    
 
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{animationInterface}->paintXY($graphics, $self->{animationX}, $self->{animationY});
-}
-
-
-sub updateRectangle {
-    my ($self) = @_;
+    method updateRectangle {} {
         try {
-            my $x = $self->{rawRectangle}->getWidth() * $self->{cellPosition}->getColumn();
-            my $y = $self->{rawRectangle}->getHeight() * $self->{cellPosition}->getRow();
-            my $pointFactory = 'org::allbinary::graphics::PointFactory'->getInstance();
-            $self->{rectangle} = 'org::allbinary::graphics::Rectangle'->new($pointFactory->createXY($x + $self->{xBorder}, $y + $self->{yBorder}), $self->{rawRectangle}->getWidth(), $self->{rawRectangle}->getHeight());
-            my $point = $self->{rectangle}->getPoint();
-            $self->{animationX} = $point->getX();
-            $self->{animationY} = $point->getY();
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "updateRectangle", $e);
+            set x [expr {[[my jget rawRectangle] getWidth] * [[my jget cellPosition] getColumn]}]
+            set y [expr {[[my jget rawRectangle] getHeight] * [[my jget cellPosition] getRow]}]
+            set pointFactory [::PointFactory::getInstance]
+            my jset rectangle [::Rectangle new [$pointFactory createXY [jint [expr {$x + [my jget xBorder]}]] [jint [expr {$y + [my jget yBorder]}]]] [[my jget rawRectangle] getWidth] [[my jget rawRectangle] getHeight]]
+            set point [[my jget rectangle] getPoint]
+            my jset animationX [$point getX]
+            my jset animationY [$point getY]
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "updateRectangle" $e
         }
+    }
+    
+
+    method getCellPositionP {} {
+        return [my jget cellPosition]
+    }
+    
+
+    method getRectangleP {} {
+        return [my jget rectangle]
+    }
+    
+
+    method getTouchButtonInput {} {
+        return [my jget touchButtonInput]
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        set stringUtil [::StringUtil::getInstance]
+        $stringBuffer append "TouchButton: "
+        $stringBuffer append [$stringUtil toString1 [my jget rectangle]]
+        $stringBuffer append " CellPosition: "
+        $stringBuffer append [$stringUtil toString1 [my jget cellPosition]]
+        $stringBuffer append " xBorder: "
+        $stringBuffer appendint [my jget xBorder]
+        $stringBuffer append " yBorder: "
+        $stringBuffer appendint [my jget yBorder]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub getCellPositionP {
-    my ($self) = @_;
-        return $self->{cellPosition};
+namespace eval ::TouchButton {
 }
 
-
-sub getRectangleP {
-    my ($self) = @_;
-        return $self->{rectangle};
-}
-
-
-sub getTouchButtonInput {
-    my ($self) = @_;
-        return $self->{touchButtonInput};
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        my $stringUtil = 'org::allbinary::logic::string::StringUtil'->getInstance();
-        $stringBuffer->append("TouchButton: ");
-        $stringBuffer->append($stringUtil->toString($self->{rectangle}));
-        $stringBuffer->append(" CellPosition: ");
-        $stringBuffer->append($stringUtil->toString($self->{cellPosition}));
-        $stringBuffer->append(" xBorder: ");
-        $stringBuffer->appendint($self->{xBorder});
-        $stringBuffer->append(" yBorder: ");
-        $stringBuffer->appendint($self->{yBorder});
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationInterface ();
-use org::allbinary::graphics::CellPosition ();
-use org::allbinary::graphics::GPoint ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::RectangleFactory ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

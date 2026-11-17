@@ -11,64 +11,53 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::VectorRotationAnimationInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::AnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{currentPoints} = 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_INT_ARRAY_ARRAY_ARRAY};
-    $self->{basicColor} = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE};
-    $self->{animationBehaviorFactory} = undef;
+oo::class create ::VectorRotationAnimationInterfaceFactory {
+    superclass ::JObject
 }
 
+oo::define ::VectorRotationAnimationInterfaceFactory {
+    method initFields_VectorRotationAnimationInterfaceFactory {} {
+        my jset currentPoints {}
+        my jset basicColor {}
+        my jset animationBehaviorFactory {}
+        my jset currentPoints [[::NullUtil::getInstance] jget NULL_INT_ARRAY_ARRAY_ARRAY]
+        my jset basicColor [[::BasicColorFactory::getInstance] jget WHITE]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $currentPoints, $basicColor, $animationBehaviorFactory) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{currentPoints} = $currentPoints;
-        $self->setBasicColorP($basicColor);
-        $self->{animationBehaviorFactory} = $animationBehaviorFactory;
-    return $self;
+    constructor {currentPoints basicColor animationBehaviorFactory} {
+        next
+        my initFields_VectorRotationAnimationInterfaceFactory
+        my jset currentPoints $currentPoints
+        my setBasicColorP $basicColor
+        my jset animationBehaviorFactory $animationBehaviorFactory
+    }
+    
+
+    method getInstance {instanceId} {
+        return [::VectorRotationAnimation new [my jget currentPoints] [my getBasicColorP] [[my jget animationBehaviorFactory] getOrCreateInstance]]
+    }
+    
+
+    method setBasicColorP {basicColor} {
+        my jset basicColor $basicColor
+    }
+    
+
+    method getBasicColorP {} {
+        return [my jget basicColor]
+    }
+    
+
+    method setInitialScale {scaleProperties} {
+    }
 }
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        return 'org::allbinary::animation::VectorRotationAnimation'->new($self->{currentPoints}, $self->getBasicColorP(), $self->{animationBehaviorFactory}->getOrCreateInstance());
+namespace eval ::VectorRotationAnimationInterfaceFactory {
 }
 
-
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
-        $self->{basicColor} = $basicColor;
-}
-
-
-sub getBasicColorP {
-    my ($self) = @_;
-        return $self->{basicColor};
-}
-
-
-sub setInitialScale {
-    my ($self, $scaleProperties) = @_;
-}
-
-use java::lang::Object ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::media::ScaleProperties ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::VectorRotationAnimation ();
-
-1;
 

@@ -30,11 +30,64 @@ cp -R "$source_dir/." "$output_dir/src/"
 
 check="$object_dir/check.tcl"
 {
+    # allbinary_java.tcl first, then the java/... classes (each sources the class it extends)
     for runtime in "$runtime_dir"/*.tcl; do echo "source {$runtime}"; done
+    find "$runtime_dir" -mindepth 2 -type f -name '*.tcl' | sort | while IFS= read -r file; do echo "source {$file}"; done
+    # The dependency and project files: a class whose superclass is not sourced yet fails (TclOO deletes it) and is
+    # sourced again after the others until a pass sources nothing more
+    echo "set dependencyFiles {}"
+    echo "set projectFiles {}"
     if [ -d "$dependency_dir/src" ]; then
-        find "$dependency_dir/src" -type f -name '*.tcl' | sort | while IFS= read -r file; do echo "source {$file}"; done
+        find "$dependency_dir/src" -type f -name '*.tcl' | sort | while IFS= read -r file; do echo "lappend dependencyFiles {$file}"; done
     fi
-    find "$source_dir" -type f -name '*.tcl' | sort | while IFS= read -r file; do echo "source {$file}"; done
+    find "$source_dir" -type f -name '*.tcl' | sort | while IFS= read -r file; do echo "lappend projectFiles {$file}"; done
+    cat <<'TCL'
+# A class of this project replaces a dependency class with the same name like the Java class path
+proc classNames {file} {
+    set channel [open $file]
+    set text [read $channel]
+    close $channel
+    return [regexp -all -inline -line {^oo::class create ::(\S+)} $text]
+}
+set projectClasses {}
+foreach file $projectFiles {
+    foreach {match name} [classNames $file] { dict set projectClasses $name 1 }
+}
+set pending {}
+foreach file $dependencyFiles {
+    set replaced 0
+    foreach {match name} [classNames $file] {
+        if {[dict exists $projectClasses $name]} { set replaced 1 }
+    }
+    if {!$replaced} { lappend pending $file }
+}
+lappend pending {*}$projectFiles
+while {[llength $pending] > 0} {
+    set failed {}
+    set lastError ""
+    foreach file $pending {
+        if {[catch {uplevel #0 [list source $file]} message options]} {
+            lappend failed $file
+            set lastError [dict get $options -errorinfo]
+        }
+    }
+    if {[llength $failed] == [llength $pending]} {
+        # A dependency class whose superclass is in an optional dependency of that dependency (ThreadPool of a platform
+        # thread library) can not be sourced: only a project file that can not be sourced fails the build
+        set projectFailed 0
+        foreach file $failed {
+            if {[lsearch -exact $projectFiles $file] >= 0} { set projectFailed 1 }
+        }
+        if {!$projectFailed} {
+            puts "Tcl dependency files not sourced (optional dependencies): [llength $failed]"
+            break
+        }
+        puts stderr $lastError
+        exit 1
+    }
+    set pending $failed
+}
+TCL
     echo "puts {Tcl sourced: $artifact}"
 } > "$check"
 

@@ -11,145 +11,126 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.configuration
 
-package org::allbinary::input::motion::gesture::configuration::MotionGestureConfiguration;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{diagonalMotionGestureAllowed} = 1;
-    $self->{diagonalTolerance} = 7;
-    $self->{minimumMotionGesture} = 9;
-    $self->{button} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{color} = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{BLUE};
-    $self->{executingActions} = 1;
-    $self->{mouseButtonMask} = 0;
-    $self->{activeCommands} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::MotionGestureConfiguration {
+    superclass ::JObject
 }
 
+oo::define ::MotionGestureConfiguration {
+    method initFields_MotionGestureConfiguration {} {
+        my jset diagonalMotionGestureAllowed false
+        my jset diagonalTolerance 0
+        my jset minimumMotionGesture 0
+        my jset button {}
+        my jset color {}
+        my jset executingActions false
+        my jset mouseButtonMask 0
+        my jset activeCommands {}
+        my jset diagonalMotionGestureAllowed true
+        my jset diagonalTolerance 7
+        my jset minimumMotionGesture 9
+        my jset button [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset color [[::BasicColorFactory::getInstance] jget BLUE]
+        my jset executingActions true
+        my jset mouseButtonMask 0
+        my jset activeCommands [::BasicArrayListD new]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_MotionGestureConfiguration
+    }
+    
+
+    method addMotionGestureAction {list commandAction} {
+        [my jget activeCommands] add [::MotionGestureToMotionGestureActionAssociation new $list $commandAction]
+    }
+    
+
+    method clearMotionGestureAction {} {
+        [my jget activeCommands] clear
+    }
+    
+
+    method getAssociateCommandActionsList {} {
+        return [my jget activeCommands]
+    }
+    
+
+    method isDiagonalMotionGestureAllowed {} {
+        return [my jget diagonalMotionGestureAllowed]
+    }
+    
+
+    method isExecutingActionsAllowed {} {
+        return [my jget executingActions]
+    }
+    
+
+    method setExecutingActionsAllowed {executingActionAllowed} {
+        my jset executingActions $executingActionAllowed
+    }
+    
+
+    method setDiagonalMotionGestureAllowed {diagonalMotionGestureAllowed} {
+        my jset diagonalMotionGestureAllowed $diagonalMotionGestureAllowed
+    }
+    
+
+    method getDiagonalTolerance {} {
+        return [my jget diagonalTolerance]
+    }
+    
+
+    method setDiagonalTolerance {diagonalTolerance} {
+        my jset diagonalTolerance $diagonalTolerance
+    }
+    
+
+    method getMinimumMotionGesture {} {
+        return [my jget minimumMotionGesture]
+    }
+    
+
+    method setMinimumMotionGesture {minimumMotionGesture} {
+        my jset minimumMotionGesture $minimumMotionGesture
+    }
+    
+
+    method getButton {} {
+        return [my jget button]
+    }
+    
+
+    method setButton {button} {
+        my jset button $button
+    }
+    
+
+    method getColor {} {
+        return [my jget color]
+    }
+    
+
+    method setColor {color} {
+        my jset color $color
+    }
+    
+
+    method getMouseButtonMask {} {
+        return [my jget mouseButtonMask]
+    }
+    
+
+    method setMouseButtonMask {mouseButtonMask} {
+        my jset mouseButtonMask $mouseButtonMask
+    }
 }
 
-
-sub addMotionGestureAction {
-    my ($self, $list, $commandAction) = @_;
-        $self->{activeCommands}->add('org::allbinary::input::motion::gesture::MotionGestureToMotionGestureActionAssociation'->new($list, $commandAction));
+namespace eval ::MotionGestureConfiguration {
 }
 
-
-sub clearMotionGestureAction {
-    my ($self) = @_;
-        $self->{activeCommands}->clear();
-}
-
-
-sub getAssociateCommandActionsList {
-    my ($self) = @_;
-        return $self->{activeCommands};
-}
-
-
-sub isDiagonalMotionGestureAllowed {
-    my ($self) = @_;
-        return $self->{diagonalMotionGestureAllowed};
-}
-
-
-sub isExecutingActionsAllowed {
-    my ($self) = @_;
-        return $self->{executingActions};
-}
-
-
-sub setExecutingActionsAllowed {
-    my ($self, $executingActionAllowed) = @_;
-        $self->{executingActions} = $executingActionAllowed;
-}
-
-
-sub setDiagonalMotionGestureAllowed {
-    my ($self, $diagonalMotionGestureAllowed) = @_;
-        $self->{diagonalMotionGestureAllowed} = $diagonalMotionGestureAllowed;
-}
-
-
-sub getDiagonalTolerance {
-    my ($self) = @_;
-        return $self->{diagonalTolerance};
-}
-
-
-sub setDiagonalTolerance {
-    my ($self, $diagonalTolerance) = @_;
-        $self->{diagonalTolerance} = $diagonalTolerance;
-}
-
-
-sub getMinimumMotionGesture {
-    my ($self) = @_;
-        return $self->{minimumMotionGesture};
-}
-
-
-sub setMinimumMotionGesture {
-    my ($self, $minimumMotionGesture) = @_;
-        $self->{minimumMotionGesture} = $minimumMotionGesture;
-}
-
-
-sub getButton {
-    my ($self) = @_;
-        return $self->{button};
-}
-
-
-sub setButton {
-    my ($self, $button) = @_;
-        $self->{button} = $button;
-}
-
-
-sub getColor {
-    my ($self) = @_;
-        return $self->{color};
-}
-
-
-sub setColor {
-    my ($self, $color) = @_;
-        $self->{color} = $color;
-}
-
-
-sub getMouseButtonMask {
-    my ($self) = @_;
-        return $self->{mouseButtonMask};
-}
-
-
-sub setMouseButtonMask {
-    my ($self, $mouseButtonMask) = @_;
-        $self->{mouseButtonMask} = $mouseButtonMask;
-}
-
-use java::lang::Object ();
-use org::allbinary::game::input::CompleteMotionGestureInputEvent ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::input::motion::gesture::MotionGestureToMotionGestureActionAssociation ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

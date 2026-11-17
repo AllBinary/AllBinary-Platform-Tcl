@@ -11,44 +11,36 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::RightToLeftImageAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::image::BaseImageAnimationFactory';
-
-
-
-sub new {
-    my ($class, $image, $dx, $dy, $animationBehaviorFactory) = @_;
-    my $self = $class->SUPER::new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $image->getWidth(), $image->getHeight(), $dx, $dy, $animationBehaviorFactory);
-        # super(...) made $self above
-    return $self;
+oo::class create ::RightToLeftImageAnimationFactory {
+    superclass ::BaseImageAnimationFactory
 }
 
+oo::define ::RightToLeftImageAnimationFactory {
+    method initFields_RightToLeftImageAnimationFactory {} {
+        return
+    }
+    
 
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        my $scaledImage = $self->{animationFactoryImageScaleUtil}->createImage($self->getImage(), $self->{animationFactoryInitializationVisitor}->{width}, $self->{animationFactoryInitializationVisitor}->{height}, $self->{scaleProperties}->{scaleWidth}, $self->{scaleProperties}->{scaleHeight});
-        if ($self->{animationFactoryInitializationVisitor}->{dx} != 0 || $self->{animationFactoryInitializationVisitor}->{dy} != 0) {
-            $self->{animationFactoryImageScaleUtil}->processAdjust($self);
-            return 'org::allbinary::animation::image::AdjustedRightToLeftImageAnimation'->new($scaledImage, $self->{animationFactoryInitializationVisitor}->{dx}, $self->{animationFactoryInitializationVisitor}->{dy}, $self->{animationBehaviorFactory}->getOrCreateInstance());
+    constructor {image dx dy animationBehaviorFactory} {
+        next $image [::PrimitiveIntUtil::getArrayInstance] [$image getWidth] [$image getHeight] $dx $dy $animationBehaviorFactory
+        my initFields_RightToLeftImageAnimationFactory
+    }
+    
+
+    method getInstance {instanceId} {
+        set scaledImage [[my jget animationFactoryImageScaleUtil] createImage [my getImage] [[my jget animationFactoryInitializationVisitor] jget width] [[my jget animationFactoryInitializationVisitor] jget height] [[my jget scaleProperties] jget scaleWidth] [[my jget scaleProperties] jget scaleHeight]]
+        if {[expr {[expr {[[my jget animationFactoryInitializationVisitor] jget dx] != 0}] || [expr {[[my jget animationFactoryInitializationVisitor] jget dy] != 0}]}]} {
+            [my jget animationFactoryImageScaleUtil] processAdjust [self]
+            return [::AdjustedRightToLeftImageAnimation new $scaledImage [[my jget animationFactoryInitializationVisitor] jget dx] [[my jget animationFactoryInitializationVisitor] jget dy] [[my jget animationBehaviorFactory] getOrCreateInstance]]
         } else {
-            return 'org::allbinary::animation::image::RightToLeftImageAnimation'->new($scaledImage, $self->{animationBehaviorFactory}->getOrCreateInstance());
+            return [::RightToLeftImageAnimation new $scaledImage [[my jget animationBehaviorFactory] getOrCreateInstance]]
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::animation::image::BaseImageAnimationFactory ();
-use org::allbinary::animation::image::RightToLeftImageAnimation ();
-use org::allbinary::animation::image::AdjustedRightToLeftImageAnimation ();
+namespace eval ::RightToLeftImageAnimationFactory {
+}
 
-1;
 

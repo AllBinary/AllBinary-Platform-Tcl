@@ -11,46 +11,42 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::StartIntermissionProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::canvas::Processor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{gameCanvas} = undef;
-    $self->{WAIT} = 5000;
+oo::class create ::StartIntermissionProcessor {
+    superclass ::Processor
 }
 
+oo::define ::StartIntermissionProcessor {
+    method initFields_StartIntermissionProcessor {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset gameCanvas {}
+        my jset WAIT 0
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        
+        my jset WAIT 5000
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{gameCanvas} = $gameCanvas;
-    return $self;
-}
+    constructor {gameCanvas} {
+        next
+        my initFields_StartIntermissionProcessor
+        my jset gameCanvas $gameCanvas
+    }
+    
 
-
-# throws Exception
-sub process {
-    my ($self) = @_;
-        if ($self->{gameCanvas}->getStartIntermissionInterface()->getTimeDelayHelper()->isElapsedTNT($self->{WAIT})) {
-            $self->{logUtil}->putF("Intermission End", $self, $self->{commonStrings}->{PROCESS});
-            $self->{gameCanvas}->getStartIntermissionInterface()->setEnabled(0);
+    method process {} {
+        if {[[[[my jget gameCanvas] getStartIntermissionInterface] getTimeDelayHelper] isElapsedTNT [my jget WAIT]]} {
+            [my jget logUtil] putF "Intermission End" [self] [[my jget commonStrings] jget PROCESS]
+            [[my jget gameCanvas] getStartIntermissionInterface] setEnabled false
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::StartIntermissionProcessor {
+}
 
-1;
 

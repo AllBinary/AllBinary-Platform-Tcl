@@ -11,36 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.init
 
-package org::allbinary::init::Init;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::init::InitInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
+oo::class create ::Init {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::Init {
+    method initFields_Init {} {
+        my jset commonStrings {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_Init
+    }
+    
+
+    method init {} {
+    }
 }
 
-
-# throws Exception
-sub init {
-    my ($self) = @_;
+namespace eval ::Init {
 }
 
-use java::lang::Object ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::init::InitInterface ();
-
-1;
 

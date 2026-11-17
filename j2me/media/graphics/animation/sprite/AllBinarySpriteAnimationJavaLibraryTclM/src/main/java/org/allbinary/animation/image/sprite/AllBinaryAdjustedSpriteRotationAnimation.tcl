@@ -11,45 +11,37 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image.sprite
 
-package org::allbinary::animation::image::sprite::AllBinaryAdjustedSpriteRotationAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::image::sprite::AllBinarySpriteRotationAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{dx} = undef;
-    $self->{dy} = undef;
+oo::class create ::AllBinaryAdjustedSpriteRotationAnimation {
+    superclass ::AllBinarySpriteRotationAnimation
 }
 
+oo::define ::AllBinaryAdjustedSpriteRotationAnimation {
+    method initFields_AllBinaryAdjustedSpriteRotationAnimation {} {
+        my jset dx 0
+        my jset dy 0
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $sprite, $image, $dx, $dy, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($sprite, $image, $animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{dx} = $dx;
-        $self->{dy} = $dy;
-    return $self;
+    constructor {sprite image dx dy animationBehavior} {
+        next $sprite $image $animationBehavior
+        my initFields_AllBinaryAdjustedSpriteRotationAnimation
+        my jset dx $dx
+        my jset dy $dy
+    }
+    
+
+    method paintXY {g x y} {
+        [my jget sprite] setPosition [jint [expr {$x + [my jget dx]}]] [jint [expr {$y + [my jget dy]}]]
+        my paint $g
+    }
 }
 
-
-sub paintXY {
-    my ($self, $g, $x, $y) = @_;
-        $self->{sprite}->setPosition($x + $self->{dx}, $y + $self->{dy});
-        $self->paint($g);
+namespace eval ::AllBinaryAdjustedSpriteRotationAnimation {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::game::Sprite ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::animation::image::sprite::AllBinarySpriteRotationAnimation ();
-
-1;
 

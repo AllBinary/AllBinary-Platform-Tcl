@@ -11,141 +11,122 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.pipeline
 
-package org::allbinary::graphics::pipeline::BasicGraphicsPipeline;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{pointBasicArrayList} = undef;
-    $self->{noDecimalTrigTable} = 'org::allbinary::math::NoDecimalTrigTable'->getInstance();
+oo::class create ::BasicGraphicsPipeline {
+    superclass ::JObject
 }
 
+oo::define ::BasicGraphicsPipeline {
+    method initFields_BasicGraphicsPipeline {} {
+        my jset pointBasicArrayList {}
+        my jset noDecimalTrigTable {}
+        
+        my jset noDecimalTrigTable [::NoDecimalTrigTable::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $points) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{pointBasicArrayList} = $points;
-    return $self;
-}
+    constructor {points} {
+        next
+        my initFields_BasicGraphicsPipeline
+        my jset pointBasicArrayList $points
+    }
+    
 
+    method setInitMatrix {points} {
+        my jset pointBasicArrayList $points
+    }
+    
 
-sub setInitMatrix {
-    my ($self, $points) = @_;
-        $self->{pointBasicArrayList} = $points;
-}
+    method createMatrix {} {
+    }
+    
 
-
-sub createMatrix {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub translate {
-    my ($self, $x, $y) = @_;
-        my $newBasicArrayList = 'org::allbinary::util::BasicArrayListD'->new();
-        my $size = $self->{pointBasicArrayList}->size();
-        my $pointFactory = 'org::allbinary::graphics::PointFactory'->getInstance();
-        my $secondPoint = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $secondPoint = $self->{pointBasicArrayList}->{objectArray}->[$index];
-            if ($secondPoint->getX() != 1000) {
-                $newBasicArrayList->add($pointFactory->createXY($secondPoint->getX() + $x, $secondPoint->getY() + $y));
+    method translate {x y} {
+        set newBasicArrayList [::BasicArrayListD new]
+        set size [[my jget pointBasicArrayList] size]
+        set pointFactory [::PointFactory::getInstance]
+        set secondPoint {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set secondPoint [[[my jget pointBasicArrayList] jget objectArray] get $index]
+            if {[expr {[$secondPoint getX] != 1000}]} {
+                $newBasicArrayList add [$pointFactory createXY [expr {[$secondPoint getX] + $x}] [expr {[$secondPoint getY] + $y}]]
             } else {
-                $newBasicArrayList->add($secondPoint);
+                $newBasicArrayList add $secondPoint
             }
         }
-        $self->{pointBasicArrayList} = $newBasicArrayList;
-}
+        my jset pointBasicArrayList $newBasicArrayList
+    }
+    
 
+    method rotateToAngle {angle} {
+        my rotate [jint [$angle getValue]]
+    }
+    
 
-# throws Exception
-sub rotateToAngle {
-    my ($self, $angle) = @_;
-        $self->rotate(int($angle->getValue()));
-}
-
-
-# throws Exception
-sub rotate {
-    my ($self, $angle) = @_;
-        my $newBasicArrayList = 'org::allbinary::util::BasicArrayListD'->new();
-        my $secondPoint = undef;
-        my $y = 0;
-        my $secondX = 0;
-        my $secondY = 0;
-        my $point = undef;
-        my $pointFactory = 'org::allbinary::graphics::PointFactory'->getInstance();
-        my $size = $self->{pointBasicArrayList}->size();
-        my $sin = 0;
-        my $cos = 0;
-        for (my $index = 0; $index < $size; $index++) {
-            $secondPoint = $self->{pointBasicArrayList}->{objectArray}->[$index];
-            if ($secondPoint->getX() != 1000) {
-                $sin = $self->{noDecimalTrigTable}->sin($angle);
-                $cos = $self->{noDecimalTrigTable}->cos($angle);
-                $y = $secondPoint->getY() * $sin;
-                $secondX = ($secondPoint->getX() * $cos) - $y;
-                $secondY = ($secondPoint->getX() * $sin) + ($secondPoint->getY() * $cos);
-                $point = $pointFactory->createXY(int($secondX / 10000), int($secondY / 10000));
-                $newBasicArrayList->add($point);
+    method rotate {angle} {
+        set newBasicArrayList [::BasicArrayListD new]
+        set secondPoint {}
+        set y 0
+        set secondX 0
+        set secondY 0
+        set point {}
+        set pointFactory [::PointFactory::getInstance]
+        set size [[my jget pointBasicArrayList] size]
+        set sin 0
+        set cos 0
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set secondPoint [[[my jget pointBasicArrayList] jget objectArray] get $index]
+            if {[expr {[$secondPoint getX] != 1000}]} {
+                set sin [[my jget noDecimalTrigTable] sin $angle]
+                set cos [[my jget noDecimalTrigTable] cos $angle]
+                set y [expr {[$secondPoint getY] * $sin}]
+                set secondX [expr {([expr {[$secondPoint getX] * $cos}]) - $y}]
+                set secondY [expr {([expr {[$secondPoint getX] * $sin}]) + ([expr {[$secondPoint getY] * $cos}])}]
+                set point [$pointFactory createXY [jdiv [jint $secondX] 10000] [jdiv [jint $secondY] 10000]]
+                $newBasicArrayList add $point
             } else {
-                $newBasicArrayList->add($secondPoint);
+                $newBasicArrayList add $secondPoint
             }
         }
-        $self->{pointBasicArrayList} = $newBasicArrayList;
-}
+        my jset pointBasicArrayList $newBasicArrayList
+    }
+    
 
-
-# throws Exception
-sub mirror {
-    my ($self, $width) = @_;
-        my $pointFactory = 'org::allbinary::graphics::PointFactory'->getInstance();
-        my $halfWidth = (POSIX::floor(($width) / (2 ** (1))));
-        my $newBasicArrayList = 'org::allbinary::util::BasicArrayListD'->new();
-        my $secondPoint = undef;
-        my $newX = 0;
-        my $point = undef;
-        my $size = $self->{pointBasicArrayList}->size();
-        for (my $index = 0; $index < $size; $index++) {
-            $secondPoint = $self->{pointBasicArrayList}->{objectArray}->[$index];
-            if ($secondPoint->getX() != 1000) {
-                $newX = 0;
-                if ($secondPoint->getX() > $halfWidth) {
-                    $newX = $halfWidth - ($secondPoint->getX() - $halfWidth);
+    method mirror {width} {
+        set pointFactory [::PointFactory::getInstance]
+        set halfWidth ([expr {$width >> 1}])
+        set newBasicArrayList [::BasicArrayListD new]
+        set secondPoint {}
+        set newX 0
+        set point {}
+        set size [[my jget pointBasicArrayList] size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set secondPoint [[[my jget pointBasicArrayList] jget objectArray] get $index]
+            if {[expr {[$secondPoint getX] != 1000}]} {
+                set newX 0
+                if {[expr {[$secondPoint getX] > $halfWidth}]} {
+                    set newX [expr {$halfWidth - ([expr {[$secondPoint getX] - $halfWidth}])}]
                 } else {
-                    $newX = $halfWidth + ($halfWidth - $secondPoint->getX());
+                    set newX [expr {$halfWidth + ([expr {$halfWidth - [$secondPoint getX]}])}]
                 }
-                $point = $pointFactory->createXY($newX, $secondPoint->getY());
-                $newBasicArrayList->add($point);
+                set point [$pointFactory createXY $newX [$secondPoint getY]]
+                $newBasicArrayList add $point
             } else {
-                $newBasicArrayList->add($secondPoint);
+                $newBasicArrayList add $secondPoint
             }
         }
-        $self->{pointBasicArrayList} = $newBasicArrayList;
+        my jset pointBasicArrayList $newBasicArrayList
+    }
+    
+
+    method getMatrix {} {
+        return [my jget pointBasicArrayList]
+    }
 }
 
-
-sub getMatrix {
-    my ($self) = @_;
-        return $self->{pointBasicArrayList};
+namespace eval ::BasicGraphicsPipeline {
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::GPoint ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::math::Angle ();
-use org::allbinary::math::NoDecimalTrigTable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

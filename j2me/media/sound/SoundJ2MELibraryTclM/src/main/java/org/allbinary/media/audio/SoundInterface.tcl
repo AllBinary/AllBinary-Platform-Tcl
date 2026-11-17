@@ -11,35 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-# Java interface
-package org::allbinary::media::audio::SoundInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getResource {
-    my ($self) = @_;
-    die "abstract method getResource";
+oo::class create ::SoundInterface {
+    superclass ::JObject
 }
 
+oo::define ::SoundInterface {
+    method initFields_SoundInterface {} {
+        return
+    }
+    
 
-sub getPlayerP {
-    my ($self) = @_;
-    die "abstract method getPlayerP";
+    method getResource {} {
+        error [jexception AbstractMethodError getResource]
+    }
+    
+
+    method getPlayerP {} {
+        error [jexception AbstractMethodError getPlayerP]
+    }
+    
+
+    method init {} {
+        error [jexception AbstractMethodError init]
+    }
 }
 
-
-# throws Exception
-sub init {
-    my ($self) = @_;
-    die "abstract method init";
+namespace eval ::SoundInterface {
 }
 
-use javax::microedition::media::Player ();
-
-1;
 

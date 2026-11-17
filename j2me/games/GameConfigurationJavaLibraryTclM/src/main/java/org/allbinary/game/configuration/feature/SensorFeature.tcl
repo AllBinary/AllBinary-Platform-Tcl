@@ -11,25 +11,25 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
-package org::allbinary::game::configuration::feature::SensorFeature;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::configuration::feature::Feature';
-
-
-
-sub new {
-    my ($class, $name) = @_;
-    my $self = $class->SUPER::new($name);
-        # super(...) made $self above
-    return $self;
+oo::class create ::SensorFeature {
+    superclass ::Feature
 }
 
-use java::lang::Object ();
-use org::allbinary::game::configuration::feature::Feature ();
+oo::define ::SensorFeature {
+    method initFields_SensorFeature {} {
+        return
+    }
+    
 
-1;
+    constructor {name} {
+        next $name
+        my initFields_SensorFeature
+    }
+}
+
+namespace eval ::SensorFeature {
+}
+
 

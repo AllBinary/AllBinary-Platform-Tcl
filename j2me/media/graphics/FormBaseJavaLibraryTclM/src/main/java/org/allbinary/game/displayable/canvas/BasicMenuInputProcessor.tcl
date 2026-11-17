@@ -11,70 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::BasicMenuInputProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::PlayerGameInput','org::allbinary::input::motion::gesture::observer::BaseMotionGestureEventListener';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{motionGestureEventList} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{canvas} = $javax::microedition::lcdui::NullCanvas::NULL_CANVAS;
+oo::class create ::BasicMenuInputProcessor {
+    superclass ::PlayerGameInput
 }
 
+oo::define ::BasicMenuInputProcessor {
+    method initFields_BasicMenuInputProcessor {} {
+        my jset motionGestureEventList {}
+        my jset canvas {}
+        my jset motionGestureEventList [::BasicArrayListD new]
+        my jset canvas [::NullCanvas::staticGet_NULL_CANVAS]
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameKeyEventList, $playerInputId, $gameCanvas) = @_;
-    my $self = $class->SUPER::new($gameKeyEventList, 'org::allbinary::util::BasicArrayListD'->new(), $playerInputId);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{canvas} = $gameCanvas;
-    return $self;
+    constructor {gameKeyEventList playerInputId gameCanvas} {
+        next $gameKeyEventList [::BasicArrayListD new] $playerInputId
+        my initFields_BasicMenuInputProcessor
+        my jset canvas $gameCanvas
+    }
+    
+
+    method onMotionGestureEvent {motionGestureEvent} {
+        [my jget motionGestureEventList] add $motionGestureEvent
+    }
+    
+
+    method onScrolledMotionGestureEvent {motionGestureEvent} {
+    }
+    
+
+    method setCanvas {canvas} {
+        my jset canvas $canvas
+    }
+    
+
+    method getCanvas {} {
+        return [my jget canvas]
+    }
+    
+
+    method processInputList {} {
+        return [expr {-1}]
+    }
 }
 
-
-sub onMotionGestureEvent {
-    my ($self, $motionGestureEvent) = @_;
-        $self->{motionGestureEventList}->add($motionGestureEvent);
+namespace eval ::BasicMenuInputProcessor {
 }
 
-
-sub onScrolledMotionGestureEvent {
-    my ($self, $motionGestureEvent) = @_;
-}
-
-
-sub setCanvas {
-    my ($self, $canvas) = @_;
-        $self->{canvas} = $canvas;
-}
-
-
-sub getCanvas {
-    my ($self) = @_;
-        return $self->{canvas};
-}
-
-
-# throws Exception
-sub processInputList {
-    my ($self) = @_;
-        return -1;
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use javax::microedition::lcdui::NullCanvas ();
-use org::allbinary::game::input::PlayerGameInput ();
-use org::allbinary::graphics::displayable::MyCanvas ();
-use org::allbinary::input::motion::gesture::observer::BaseMotionGestureEventListener ();
-use org::allbinary::input::motion::gesture::observer::MotionGestureEvent ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

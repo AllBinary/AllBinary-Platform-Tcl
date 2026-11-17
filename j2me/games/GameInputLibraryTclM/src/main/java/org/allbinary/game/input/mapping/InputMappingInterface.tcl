@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.mapping
 
-# Java interface
-package org::allbinary::game::input::mapping::InputMappingInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub processInputMapping {
-    my ($self, $gameKey, $input) = @_;
-    die "abstract method processInputMapping";
+oo::class create ::InputMappingInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::game::input::GameKey ();
-use org::allbinary::game::input::Input ();
+oo::define ::InputMappingInterface {
+    method initFields_InputMappingInterface {} {
+        return
+    }
+    
 
-1;
+    method processInputMapping {gameKey input} {
+        error [jexception AbstractMethodError processInputMapping]
+    }
+}
+
+namespace eval ::InputMappingInterface {
+}
+
 

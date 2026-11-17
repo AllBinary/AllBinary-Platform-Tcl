@@ -11,25 +11,25 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.event
 
-package org::allbinary::graphics::displayable::event::DisplayChangeEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::AllBinaryEventObject';
-
-
-
-sub new {
-    my ($class, $anyType) = @_;
-    my $self = $class->SUPER::new($anyType);
-        # super(...) made $self above
-    return $self;
+oo::class create ::DisplayChangeEvent {
+    superclass ::AllBinaryEventObject
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
+oo::define ::DisplayChangeEvent {
+    method initFields_DisplayChangeEvent {} {
+        return
+    }
+    
 
-1;
+    constructor {anyType} {
+        next $anyType
+        my initFields_DisplayChangeEvent
+    }
+}
+
+namespace eval ::DisplayChangeEvent {
+}
+
 

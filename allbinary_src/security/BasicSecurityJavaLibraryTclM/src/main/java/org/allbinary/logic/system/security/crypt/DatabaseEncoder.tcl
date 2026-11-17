@@ -11,73 +11,62 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.crypt
 
-package org::allbinary::logic::system::security::crypt::DatabaseEncoder;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::DatabaseEncoder {
+    superclass ::JObject
 }
 
+oo::define ::DatabaseEncoder {
+    method initFields_DatabaseEncoder {} {
+        return
+    }
+    
 
-sub encode {
-    my ($class, $value) = @_;
+    constructor {} {
+        next
+        my initFields_DatabaseEncoder
+    }
+    
+    
+}
+
+namespace eval ::DatabaseEncoder {
+    proc encode {value} {
         try {
-            my $array = $value;
-            my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-            for (my $index = 0; $index < scalar(@{$array}); $index++) {
-                $stringBuffer->append($array->[$index]->toString());
-                if ($index < scalar(@{$array}) - 1) {
-                    $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
+            set array $value
+            set stringBuffer [::StringMaker new]
+            for {set index 0} {[expr {$index < [$array length]}]} {jpostincr index 1} {
+                $stringBuffer append [[$array get $index] toString]
+                if {[expr {$index < [jint [expr {[$array length] - 1}]]}]} {
+                    $stringBuffer append [[::CommonSeps::getInstance] jget SPACE]
                 }
             }
-            return $stringBuffer->toString();
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            'org::allbinary::logic::communication::log::PreLogUtil'->putOE($commonStrings->{EXCEPTION}, "DatabaseEncoder", "decode", $e);
-            return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+            return [$stringBuffer toString]
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            ::PreLogUtil::putOE [$commonStrings jget EXCEPTION] "DatabaseEncoder" "decode" $e
+            return [[::StringUtil::getInstance] jget EMPTY_STRING]
         }
-}
-
-
-sub decode {
-    my ($class, $value) = @_;
+    }
+    proc decode {value} {
         try {
-            my $tokenizer = 'org::allbinary::logic::string::tokens::Tokenizer'->new('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
-            my $vector = $tokenizer->getTokensFromString($value, 'org::allbinary::util::BasicArrayListD'->new());
-            my $size = $vector->size();
-            my $decode = [(0) x ($size)];
-            my $byteOfData = undef;
-            for (my $index = 0; $index < $size; $index++) {
-                $byteOfData = $vector->{objectArray}->[$index];
-                $decode->[$index] = 'Byte'->parseByte($byteOfData);
+            set tokenizer [::Tokenizer new [[::CommonSeps::getInstance] jget SPACE]]
+            set vector [$tokenizer getTokensFromString $value [::BasicArrayListD new]]
+            set size [$vector size]
+            set decode [jarray $size 0]
+            set byteOfData {}
+            for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+                set byteOfData [[$vector jget objectArray] get $index]
+                $decode set $index [::Byte::parseByte $byteOfData]
             }
-            return $decode;
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            'org::allbinary::logic::communication::log::PreLogUtil'->putSE($commonStrings->{EXCEPTION}, "DatabaseEncoder", "decode", $e);
-            return 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_BYTE_ARRAY};
+            return $decode
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            ::PreLogUtil::putSE [$commonStrings jget EXCEPTION] "DatabaseEncoder" "decode" $e
+            return [[::NullUtil::getInstance] jget NULL_BYTE_ARRAY]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::string::tokens::Tokenizer ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

@@ -11,167 +11,135 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image.sprite
 
-package org::allbinary::animation::image::sprite::SpriteIndexedAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::IndexedAnimation','org::allbinary::graphics::color::ColorCompositeInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{sprite} = undef;
-    $self->{image} = undef;
-    $self->{basicColorArray} = undef;
+oo::class create ::SpriteIndexedAnimation {
+    superclass ::IndexedAnimation
 }
 
+oo::define ::SpriteIndexedAnimation {
+    method initFields_SpriteIndexedAnimation {} {
+        my jset sprite {}
+        my jset image {}
+        my jset basicColorArray {}
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $sprite, $image, $basicColorArray, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{sprite} = $sprite;
-        $self->{image} = $image;
-        $self->{basicColorArray} = $basicColorArray;
-        if (scalar(@{$self->{basicColorArray}}) != 0 && $self->getSize() != scalar(@{$self->{basicColorArray}})) {
-            die ('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{TOTAL_LABEL})->appendint($self->getSize())->append("!=")->appendint(scalar(@{$self->{basicColorArray}}))->toString());
+    constructor {sprite image basicColorArray animationBehavior} {
+        next $animationBehavior
+        my initFields_SpriteIndexedAnimation
+        my jset sprite $sprite
+        my jset image $image
+        my jset basicColorArray $basicColorArray
+        if {[expr {[expr {[[my jget basicColorArray] length] != 0}] && [expr {[my getSize] != [[my jget basicColorArray] length]}]}]} {
+            error [jexception Exception [[[[[[::StringMaker new] append [[::CommonLabels::getInstance] jget TOTAL_LABEL]] appendint [my getSize]] append "!="] appendint [[my jget basicColorArray] length]] toString]]
         }
-    return $self;
-}
+    }
+    
 
+    method getAnimationSize {} {
+        return [my getSize]
+    }
+    
 
-# throws Exception
-sub getAnimationSize {
-    my ($self) = @_;
-        return $self->getSize();
-}
-
-
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
-        for (my $index = 0; $index < scalar(@{$self->{basicColorArray}}); $index++) {
-            if ($basicColor == $self->{basicColorArray}->[$index]) {
-                $self->setFrame($index);
-                last;
+    method setBasicColorP {basicColor} {
+        for {set index 0} {[expr {$index < [[my jget basicColorArray] length]}]} {jpostincr index 1} {
+            if {[expr {$basicColor eq [[my jget basicColorArray] get $index]}]} {
+                my setFrame $index
+                break
             }
         }
-}
+    }
+    
 
-
-sub getBasicColorP {
-    my ($self) = @_;
-        if (scalar(@{$self->{basicColorArray}}) < $self->getFrame()) {
-            return $self->{basicColorArray}->[$self->getFrame()];
+    method getBasicColorP {} {
+        if {[expr {[[my jget basicColorArray] length] < [my getFrame]}]} {
+            return [[my jget basicColorArray] get [my getFrame]]
         } else {
-            return 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE};
+            return [[::BasicColorFactory::getInstance] jget WHITE]
         }
-}
+    }
+    
 
+    method paintFrame {graphics frame x y} {
+        my setFrame $frame
+        [my jget sprite] setPosition $x $y
+        [my jget sprite] paint $graphics
+    }
+    
 
-sub paintFrame {
-    my ($self, $graphics, $frame, $x, $y) = @_;
-        $self->setFrame($frame);
-        $self->{sprite}->setPosition($x, $y);
-        $self->{sprite}->paint($graphics);
-}
+    method paintXY {graphics x y} {
+        [my jget sprite] setPosition $x $y
+        [my jget sprite] paint $graphics
+    }
+    
 
+    method paint {graphics} {
+        [my jget sprite] paint $graphics
+    }
+    
 
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->{sprite}->setPosition($x, $y);
-        $self->{sprite}->paint($graphics);
-}
+    method nextFrame {} {
+        [my jget sprite] nextFrame
+    }
+    
 
+    method previousFrame {} {
+        [my jget sprite] prevFrame
+    }
+    
 
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{sprite}->paint($graphics);
-}
+    method getSize {} {
+        return [[my jget sprite] getRawFrameCount]
+    }
+    
 
+    method setFrame {frame} {
+        [my jget sprite] setFrame $frame
+    }
+    
 
-sub nextFrame {
-    my ($self) = @_;
-        $self->{sprite}->nextFrame();
-}
+    method getFrame {} {
+        return [[my jget sprite] getFrame]
+    }
+    
 
-
-sub previousFrame {
-    my ($self) = @_;
-        $self->{sprite}->prevFrame();
-}
-
-
-sub getSize {
-    my ($self) = @_;
-        return $self->{sprite}->getRawFrameCount();
-}
-
-
-sub setFrame {
-    my ($self, $frame) = @_;
-        $self->{sprite}->setFrame($frame);
-}
-
-
-sub getFrame {
-    my ($self) = @_;
-        return $self->{sprite}->getFrame();
-}
-
-
-sub isLastFrame {
-    my ($self) = @_;
-        if ($self->{sprite}->getFrame() == $self->getSize() - 1) {
-            return 1;
+    method isLastFrame {} {
+        if {[expr {[[my jget sprite] getFrame] == [jint [expr {[my getSize] - 1}]]}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
+    
+
+    method getLastFrame {} {
+        return [my getSize]
+    }
+    
+
+    method setSequence {sequence} {
+    }
+    
+
+    method getSequence {} {
+        return [::PrimitiveIntUtil::getArrayInstance]
+    }
+    
+
+    method close {} {
+    }
+    
+
+    method finalize {} {
+    }
 }
 
-
-sub getLastFrame {
-    my ($self) = @_;
-        return $self->getSize();
+namespace eval ::SpriteIndexedAnimation {
 }
 
-
-sub setSequence {
-    my ($self, $sequence) = @_;
-}
-
-
-sub getSequence {
-    my ($self) = @_;
-        return 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance();
-}
-
-
-# throws Exception
-sub close {
-    my ($self) = @_;
-}
-
-
-# throws Throwable
-sub finalize {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::game::Sprite ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::color::ColorCompositeInterface ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonLabels ();
-
-1;
 

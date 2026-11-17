@@ -11,32 +11,46 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package javax.microedition.lcdui
 
 #PlatformNullImageJavaLibrary
-package javax::microedition::lcdui::PostLoadPlatformImage;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'javax::microedition::lcdui::PlatformImage';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'javax::microedition::lcdui::PostLoadPlatformImage'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::PostLoadPlatformImage {
+    superclass ::PlatformImage
 }
 
+oo::define ::PostLoadPlatformImage {
+    method initFields_PostLoadPlatformImage {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $javax::microedition::lcdui::PostLoadPlatformImage::instance;
+    constructor {} {
+        next
+        my initFields_PostLoadPlatformImage
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::PlatformImage ();
+namespace eval ::PostLoadPlatformImage {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::PostLoadPlatformImage new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::PostLoadPlatformImage::staticGet_instance]
+    }
+}
 
-1;
 

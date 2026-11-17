@@ -1,32 +1,30 @@
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::CompleteMotionGestureInputEventListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::input::CompleteMotionGestureInputEventListenerInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::CompleteMotionGestureInputEventListener {
+    superclass ::JObject
 }
 
+oo::define ::CompleteMotionGestureInputEventListener {
+    method initFields_CompleteMotionGestureInputEventListener {} {
+        return
+    }
 
-sub onEvent {
-    my ($self, $eventObject) = @_;
+    constructor {} {
+        next
+        my initFields_CompleteMotionGestureInputEventListener
+    }
+    
+
+    method onEvent {eventObject} {
+    }
+    
+
+    method onCompleteMotionGestureInputEvent {completeMotionGestureInputEvent} {
+    }
 }
 
-
-sub onCompleteMotionGestureInputEvent {
-    my ($self, $completeMotionGestureInputEvent) = @_;
+namespace eval ::CompleteMotionGestureInputEventListener {
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::game::input::CompleteMotionGestureInputEventListenerInterface ();
-
-1;
 

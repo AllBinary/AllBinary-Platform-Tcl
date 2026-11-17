@@ -11,56 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchButtonsPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{foregroundBasicColor} = undef;
-    $self->{foregroundColor} = undef;
-    $self->{basicSetColorUtil} = 'org::allbinary::graphics::color::BasicColorSetUtil'->getInstance();
-    $self->{touchButtonFactory} = 'org::allbinary::input::motion::button::TouchButtonFactory'->getInstance();
+oo::class create ::TouchButtonsPaintable {
+    superclass ::Paintable
 }
 
+oo::define ::TouchButtonsPaintable {
+    method initFields_TouchButtonsPaintable {} {
+        my jset foregroundBasicColor {}
+        my jset foregroundColor 0
+        my jset basicSetColorUtil {}
+        my jset touchButtonFactory {}
+        
+        
+        my jset basicSetColorUtil [::BasicColorSetUtil::getInstance]
+        my jset touchButtonFactory [::TouchButtonFactory::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $basicColor) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{foregroundBasicColor} = $basicColor;
-        $self->{foregroundColor} = int($basicColor);
-    return $self;
-}
+    constructor {basicColor} {
+        next
+        my initFields_TouchButtonsPaintable
+        my jset foregroundBasicColor $basicColor
+        my jset foregroundColor [$basicColor intValue]
+    }
+    
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        my $list = $self->{touchButtonFactory}->getList();
-        $self->{basicSetColorUtil}->setBasicColorP3($graphics, $self->{foregroundBasicColor}, $self->{foregroundColor});
-        my $touchButton = undef;
-        for (my $index = $list->size(); --$index >= 0; ) {
-            $touchButton = $list->{objectArray}->[$index];
-            $touchButton->paint($graphics);
+    method paint {graphics} {
+        set list [[my jget touchButtonFactory] getList]
+        [my jget basicSetColorUtil] setBasicColorP3 $graphics [my jget foregroundBasicColor] [my jget foregroundColor]
+        set touchButton {}
+        for {set index [$list size]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            set touchButton [[$list jget objectArray] get $index]
+            $touchButton paint $graphics
         }
-        for (my $index = $list->size(); --$index >= 0; ) {
-            $touchButton = $list->{objectArray}->[$index];
-            $touchButton->paintHint($graphics);
+        for {set index [$list size]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            set touchButton [[$list jget objectArray] get $index]
+            $touchButton paintHint $graphics
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorSetUtil ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::input::motion::button::TouchButtonFactory ();
+namespace eval ::TouchButtonsPaintable {
+}
 
-1;
 

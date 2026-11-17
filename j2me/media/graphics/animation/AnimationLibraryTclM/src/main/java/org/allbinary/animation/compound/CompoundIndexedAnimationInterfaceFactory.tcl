@@ -11,42 +11,35 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.compound
 
-package org::allbinary::animation::compound::CompoundIndexedAnimationInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::compound::CompoundAnimationInterfaceFactory';
-
-
-
-sub new {
-    my ($class, $basicAnimationInterfaceFactoryInterfaceArray, $animationBehaviorFactory) = @_;
-    my $self = $class->SUPER::new($basicAnimationInterfaceFactoryInterfaceArray, $animationBehaviorFactory);
-        # super(...) made $self above
-    return $self;
+oo::class create ::CompoundIndexedAnimationInterfaceFactory {
+    superclass ::CompoundAnimationInterfaceFactory
 }
 
+oo::define ::CompoundIndexedAnimationInterfaceFactory {
+    method initFields_CompoundIndexedAnimationInterfaceFactory {} {
+        return
+    }
+    
 
-sub createArray {
-    my ($self, $size) = @_;
-        return [(undef) x ($size)];
+    constructor {basicAnimationInterfaceFactoryInterfaceArray animationBehaviorFactory} {
+        next $basicAnimationInterfaceFactoryInterfaceArray $animationBehaviorFactory
+        my initFields_CompoundIndexedAnimationInterfaceFactory
+    }
+    
+
+    method createArray {size} {
+        return [jarray $size {}]
+    }
+    
+
+    method createAnimation {animationArray} {
+        return [::CompoundIndexedAnimation new $animationArray [[my jget animationBehaviorFactory] getOrCreateInstance]]
+    }
 }
 
-
-sub createAnimation {
-    my ($self, $animationArray) = @_;
-        return 'org::allbinary::animation::compound::CompoundIndexedAnimation'->new($animationArray, $self->{animationBehaviorFactory}->getOrCreateInstance());
+namespace eval ::CompoundIndexedAnimationInterfaceFactory {
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::animation::compound::CompoundAnimationInterfaceFactory ();
-use org::allbinary::animation::compound::CompoundIndexedAnimation ();
-
-1;
 

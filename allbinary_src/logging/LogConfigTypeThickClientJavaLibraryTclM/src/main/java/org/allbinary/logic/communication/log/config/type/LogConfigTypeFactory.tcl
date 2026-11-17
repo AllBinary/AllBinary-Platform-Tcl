@@ -11,49 +11,66 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.communication.log.config.type
 
-package org::allbinary::logic::communication::log::config::type::LogConfigTypeFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::communication::log::config::type::LogConfigTypeFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{NO_DESCRIPTION} = "No Description";
-    $self->{OS} = 'org::allbinary::logic::communication::log::config::type::LogConfigType'->new("Operating System", $self->{NO_DESCRIPTION});
-    $self->{FACTORYERROR} = 'org::allbinary::logic::communication::log::config::type::LogConfigType'->new("Factory Error", $self->{NO_DESCRIPTION});
-    $self->{FILE} = 'org::allbinary::logic::communication::log::config::type::LogConfigType'->new("File", $self->{NO_DESCRIPTION});
-    $self->{FILEERROR} = 'org::allbinary::logic::communication::log::config::type::LogConfigType'->new("File Error", $self->{NO_DESCRIPTION});
-    $self->{IDLOGGING} = 'org::allbinary::logic::communication::log::config::type::LogConfigType'->new("ID Logging", $self->{NO_DESCRIPTION});
-    $self->{REPLACE} = 'org::allbinary::logic::communication::log::config::type::LogConfigType'->new("Replace", $self->{NO_DESCRIPTION});
-    $self->{REPLACE_INFO} = 'org::allbinary::logic::communication::log::config::type::LogConfigType'->new("Replace Info", $self->{NO_DESCRIPTION});
-    $self->{REPLACEERROR} = 'org::allbinary::logic::communication::log::config::type::LogConfigType'->new("Replace Error", $self->{NO_DESCRIPTION});
+oo::class create ::LogConfigTypeFactory {
+    superclass ::JObject
 }
 
+oo::define ::LogConfigTypeFactory {
+    method initFields_LogConfigTypeFactory {} {
+        my jset NO_DESCRIPTION {}
+        my jset OS {}
+        my jset FACTORYERROR {}
+        my jset FILE {}
+        my jset FILEERROR {}
+        my jset IDLOGGING {}
+        my jset REPLACE {}
+        my jset REPLACE_INFO {}
+        my jset REPLACEERROR {}
+        my jset NO_DESCRIPTION "No Description"
+        my jset OS [::LogConfigType new "Operating System" [my jget NO_DESCRIPTION]]
+        my jset FACTORYERROR [::LogConfigType new "Factory Error" [my jget NO_DESCRIPTION]]
+        my jset FILE [::LogConfigType new "File" [my jget NO_DESCRIPTION]]
+        my jset FILEERROR [::LogConfigType new "File Error" [my jget NO_DESCRIPTION]]
+        my jset IDLOGGING [::LogConfigType new "ID Logging" [my jget NO_DESCRIPTION]]
+        my jset REPLACE [::LogConfigType new "Replace" [my jget NO_DESCRIPTION]]
+        my jset REPLACE_INFO [::LogConfigType new "Replace Info" [my jget NO_DESCRIPTION]]
+        my jset REPLACEERROR [::LogConfigType new "Replace Error" [my jget NO_DESCRIPTION]]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::communication::log::config::type::LogConfigTypeFactory::instance;
+    constructor {} {
+        next
+        my initFields_LogConfigTypeFactory
+        [::LogConfigTypes::staticGet_LOGGING] add [my jget OS]
+        [::LogConfigTypes::staticGet_LOGGING] add [my jget FACTORYERROR]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $org::allbinary::logic::communication::log::config::type::LogConfigTypes::LOGGING->add($self->{OS});
-        $org::allbinary::logic::communication::log::config::type::LogConfigTypes::LOGGING->add($self->{FACTORYERROR});
-    return $self;
+namespace eval ::LogConfigTypeFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LogConfigTypeFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LogConfigTypeFactory::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::config::type::LogConfigType ();
-use org::allbinary::logic::communication::log::config::type::LogConfigTypes ();
-
-1;
 

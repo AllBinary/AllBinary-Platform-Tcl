@@ -11,50 +11,41 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::SpinnerAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ai::BasicAI';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{isEven} = 0;
-    $self->{direction} = undef;
+oo::class create ::SpinnerAI {
+    superclass ::BasicAI
 }
 
+oo::define ::SpinnerAI {
+    method initFields_SpinnerAI {} {
+        my jset isEven false
+        my jset direction {}
+        my jset isEven false
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $direction, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{direction} = $direction;
-    return $self;
-}
+    constructor {direction ownerLayerInterface gameInput} {
+        next $ownerLayerInterface $gameInput
+        my initFields_SpinnerAI
+        my jset direction $direction
+    }
+    
 
-
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        if ($self->{isEven}) {
-            $self->SUPER::processKeyAI($self->{direction}->[0]);
-            $self->{isEven} = 0;
+    method processAI {allBinaryLayerManager} {
+        if {[my jget isEven]} {
+            next [[my jget direction] get 0]
+            my jset isEven false
         } else {
-            $self->SUPER::processKeyAI($javax::microedition::lcdui::Canvas::KEY_NUM1);
-            $self->{isEven} = 1;
+            next [::Canvas::staticGet_KEY_NUM1]
+            my jset isEven true
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::game::ai::BasicAI ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
+namespace eval ::SpinnerAI {
+}
 
-1;
 

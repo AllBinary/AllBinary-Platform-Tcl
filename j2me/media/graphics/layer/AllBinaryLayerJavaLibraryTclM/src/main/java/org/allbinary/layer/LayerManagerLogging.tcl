@@ -11,120 +11,143 @@
 # Created By: Travis Berthelot
 # 
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-package org::allbinary::layer::LayerManagerLogging;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::LayerManagerLoggingBase';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::layer::LayerManagerLogging'->new() };
-our $removeFailed = 0;
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{stringBuilder} = 'org::allbinary::logic::string::StringMaker'->new();
-    $self->{APPEND} = "append";
-    $self->{APPEND_} = " append: ";
-    $self->{_AT_} = " at: ";
-    $self->{ATTEMPT_REMOVE_} = " Remove Attempt: ";
-    $self->{REMOVE_} = " Remove: ";
-    $self->{REMOVE} = "remove";
-    $self->{DID_NOT_REMOVE} = " Did not remove: ";
-    $self->{CLEAR} = " Clear List";
+oo::class create ::LayerManagerLogging {
+    superclass ::LayerManagerLoggingBase
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+oo::define ::LayerManagerLogging {
+    method initFields_LayerManagerLogging {} {
+        my jset logUtil {}
+        my jset stringBuilder {}
+        my jset APPEND {}
+        my jset APPEND_ {}
+        my jset _AT_ {}
+        my jset ATTEMPT_REMOVE_ {}
+        my jset REMOVE_ {}
+        my jset REMOVE {}
+        my jset DID_NOT_REMOVE {}
+        my jset CLEAR {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset stringBuilder [::StringMaker new]
+        my jset APPEND "append"
+        my jset APPEND_ " append: "
+        my jset _AT_ " at: "
+        my jset ATTEMPT_REMOVE_ " Remove Attempt: "
+        my jset REMOVE_ " Remove: "
+        my jset REMOVE "remove"
+        my jset DID_NOT_REMOVE " Did not remove: "
+        my jset CLEAR " Clear List"
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_LayerManagerLogging
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::layer::LayerManagerLogging::instance;
-}
+    method append {layerInterface} {
+        [my jget stringBuilder] delete 0 [[my jget stringBuilder] length]
+        [my jget logUtil] putF [[[[[my jget stringBuilder] appendint [jint [[::TsUtil::getInstance] hashCode1 [self]]]] append [my jget APPEND_]] append [$layerInterface getName]] toString] [self] [my jget APPEND]
+    }
+    
 
+    method appendAt {layerInterface index} {
+        [my jget stringBuilder] delete 0 [[my jget stringBuilder] length]
+        [my jget logUtil] putF [[[[[[[my jget stringBuilder] appendint [jint [[::TsUtil::getInstance] hashCode1 [self]]]] append [my jget APPEND_]] append [$layerInterface getName]] append [my jget _AT_]] appendint $index] toString] [self] [my jget APPEND]
+    }
+    
 
-# throws Exception
-sub append {
-    my ($self, $layerInterface) = @_;
-        $self->{stringBuilder}->delete(0, $self->{stringBuilder}->length());
-        $self->{logUtil}->putF($self->{stringBuilder}->appendint(int('org::allbinary::TsUtil'->getInstance()->hashCode($self)))->append($self->{APPEND_})->append($layerInterface->getName())->toString(), $self, $self->{APPEND});
-}
-
-
-sub appendAt {
-    my ($self, $layerInterface, $index) = @_;
-        $self->{stringBuilder}->delete(0, $self->{stringBuilder}->length());
-        $self->{logUtil}->putF($self->{stringBuilder}->appendint(int('org::allbinary::TsUtil'->getInstance()->hashCode($self)))->append($self->{APPEND_})->append($layerInterface->getName())->append($self->{_AT_})->appendint($index)->toString(), $self, $self->{APPEND});
-}
-
-
-sub remove {
-    my ($self, $layerInterface) = @_;
-        if (!defined($layerInterface)) {
-            $self->{stringBuilder}->delete(0, $self->{stringBuilder}->length());
-            $self->{logUtil}->putF($self->{stringBuilder}->appendint(int('org::allbinary::TsUtil'->getInstance()->hashCode($self)))->append($self->{ATTEMPT_REMOVE_})->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($layerInterface))->toString(), $self, $self->{REMOVE});
+    method remove {layerInterface} {
+        if {[expr {$layerInterface eq {}}]} {
+            [my jget stringBuilder] delete 0 [[my jget stringBuilder] length]
+            [my jget logUtil] putF [[[[[my jget stringBuilder] appendint [jint [[::TsUtil::getInstance] hashCode1 [self]]]] append [my jget ATTEMPT_REMOVE_]] append [[::StringUtil::getInstance] toString1 $layerInterface]] toString] [self] [my jget REMOVE]
         } else {
-            $self->{stringBuilder}->delete(0, $self->{stringBuilder}->length());
-            $self->{logUtil}->putF($self->{stringBuilder}->appendint(int('org::allbinary::TsUtil'->getInstance()->hashCode($self)))->append($self->{ATTEMPT_REMOVE_})->append($layerInterface->getName())->toString(), $self, $self->{REMOVE});
+            [my jget stringBuilder] delete 0 [[my jget stringBuilder] length]
+            [my jget logUtil] putF [[[[[my jget stringBuilder] appendint [jint [[::TsUtil::getInstance] hashCode1 [self]]]] append [my jget ATTEMPT_REMOVE_]] append [$layerInterface getName]] toString] [self] [my jget REMOVE]
         }
-}
+    }
+    
 
-
-sub removeResult {
-    my ($self, $layerManager, $layerInterface, $result) = @_;
-        if (!defined($layerInterface)) {
-            $self->{stringBuilder}->delete(0, $self->{stringBuilder}->length());
-            $self->{logUtil}->putF($self->{stringBuilder}->appendint(int('org::allbinary::TsUtil'->getInstance()->hashCode($self)))->append($self->{REMOVE_})->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($layerInterface))->toString(), $self, $self->{REMOVE});
-        } elsif ($result) {
-            if ($org::allbinary::layer::LayerManagerLogging::removeFailed) {
-                $self->{stringBuilder}->delete(0, $self->{stringBuilder}->length());
-                $self->{logUtil}->putF($self->{stringBuilder}->appendint(int('org::allbinary::TsUtil'->getInstance()->hashCode($self)))->append($self->{REMOVE_})->append($layerInterface->getName())->toString(), $self, $self->{REMOVE});
+    method removeResult {layerManager layerInterface result} {
+        if {[expr {$layerInterface eq {}}]} {
+            [my jget stringBuilder] delete 0 [[my jget stringBuilder] length]
+            [my jget logUtil] putF [[[[[my jget stringBuilder] appendint [jint [[::TsUtil::getInstance] hashCode1 [self]]]] append [my jget REMOVE_]] append [[::StringUtil::getInstance] toString1 $layerInterface]] toString] [self] [my jget REMOVE]
+        } elseif {$result} {
+            if {[::LayerManagerLogging::staticGet_removeFailed]} {
+                [my jget stringBuilder] delete 0 [[my jget stringBuilder] length]
+                [my jget logUtil] putF [[[[[my jget stringBuilder] appendint [jint [[::TsUtil::getInstance] hashCode1 [self]]]] append [my jget REMOVE_]] append [$layerInterface getName]] toString] [self] [my jget REMOVE]
             }
         } else {
-            $self->{stringBuilder}->delete(0, $self->{stringBuilder}->length());
-            $self->{logUtil}->putF($self->{stringBuilder}->appendint(int('org::allbinary::TsUtil'->getInstance()->hashCode($self)))->append($self->{DID_NOT_REMOVE})->append($layerInterface->getName())->toString(), $self, $self->{REMOVE});
-            $org::allbinary::layer::LayerManagerLogging::removeFailed = 1;
+            [my jget stringBuilder] delete 0 [[my jget stringBuilder] length]
+            [my jget logUtil] putF [[[[[my jget stringBuilder] appendint [jint [[::TsUtil::getInstance] hashCode1 [self]]]] append [my jget DID_NOT_REMOVE]] append [$layerInterface getName]] toString] [self] [my jget REMOVE]
+            ::LayerManagerLogging::staticSet_removeFailed true
         }
-}
+    }
+    
 
-
-sub log {
-    my ($self, $layerManager) = @_;
-        $self->{stringBuilder}->delete(0, $self->{stringBuilder}->length());
-        my $size = $layerManager->getSize();
-        my $commonSeps = 'org::allbinary::string::CommonSeps'->getInstance();
-        $self->{stringBuilder}->append(sprintf("%x", 'org::allbinary::TsUtil'->getInstance()->hashCode($layerManager)))->append($commonSeps->{COLON_SEP});
-        $self->{stringBuilder}->appendint($size)->append($commonSeps->{COLON_SEP});
-        my $allBinaryLayer = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $allBinaryLayer = ($layerManager->getLayerAt($index));
-            $self->{stringBuilder}->append($allBinaryLayer->getName())->append($commonSeps->{COMMA});
+    method log {layerManager} {
+        [my jget stringBuilder] delete 0 [[my jget stringBuilder] length]
+        set size [$layerManager getSize]
+        set commonSeps [::CommonSeps::getInstance]
+        [[my jget stringBuilder] append [::Integer::toHexString [[::TsUtil::getInstance] hashCode1 $layerManager]]] append [$commonSeps jget COLON_SEP]
+        [[my jget stringBuilder] appendint $size] append [$commonSeps jget COLON_SEP]
+        set allBinaryLayer {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set allBinaryLayer ([$layerManager getLayerAt $index])
+            [[my jget stringBuilder] append [$allBinaryLayer getName]] append [$commonSeps jget COMMA]
         }
-        $self->{logUtil}->putF($self->{stringBuilder}->toString(), $self, $self->{REMOVE});
+        [my jget logUtil] putF [[my jget stringBuilder] toString] [self] [my jget REMOVE]
+    }
+    
+
+    method clear {} {
+        [my jget stringBuilder] delete 0 [[my jget stringBuilder] length]
+        [my jget logUtil] putF [[[[my jget stringBuilder] appendint [jint [[::TsUtil::getInstance] hashCode1 [self]]]] append [my jget CLEAR]] toString] [self] [my jget CLEAR]
+    }
 }
 
-
-sub clear {
-    my ($self) = @_;
-        $self->{stringBuilder}->delete(0, $self->{stringBuilder}->length());
-        $self->{logUtil}->putF($self->{stringBuilder}->appendint(int('org::allbinary::TsUtil'->getInstance()->hashCode($self)))->append($self->{CLEAR})->toString(), $self, $self->{CLEAR});
+namespace eval ::LayerManagerLogging {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LayerManagerLogging new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    variable removeFailedValue {}
+    variable removeFailedSet 0
+    proc staticGet_removeFailed {} {
+        variable removeFailedValue
+        variable removeFailedSet
+        if {!$removeFailedSet} {
+            set removeFailedSet 1
+            set removeFailedValue false
+        }
+        return $removeFailedValue
+    }
+    proc staticSet_removeFailed {value} {
+        variable removeFailedValue
+        variable removeFailedSet
+        set removeFailedSet 1
+        set removeFailedValue $value
+    }
+    proc getInstance {} {
+        return [::LayerManagerLogging::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::TsUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::layer::LayerManagerLoggingBase ();
-
-1;
 

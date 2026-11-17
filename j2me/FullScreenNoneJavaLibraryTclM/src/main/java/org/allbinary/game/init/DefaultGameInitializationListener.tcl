@@ -11,74 +11,60 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.init
 
-package org::allbinary::game::init::DefaultGameInitializationListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Time::HiRes ();
-use parent -norequire,'java::lang::Object','org::allbinary::game::configuration::event::GameInitializedListenerInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{swtJOGLProcessor} = 'org::allbinary::graphics::threed::SWTJOGLProcessor'->getInstance();
-    $self->{firstTime} = 1;
+oo::class create ::DefaultGameInitializationListener {
+    superclass ::JObject
 }
 
+oo::define ::DefaultGameInitializationListener {
+    method initFields_DefaultGameInitializationListener {} {
+        my jset logUtil {}
+        my jset swtJOGLProcessor {}
+        my jset firstTime false
+        my jset logUtil [::LogUtil::getInstance]
+        my jset swtJOGLProcessor [::SWTJOGLProcessor::getInstance]
+        my jset firstTime true
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $gameInitializedEventHandler = 'org::allbinary::game::configuration::event::GameInitializedEventHandler'->getInstance();
-        $gameInitializedEventHandler->removeAllListeners();
-        $gameInitializedEventHandler->addListenerInterface($self);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_DefaultGameInitializationListener
+        set gameInitializedEventHandler [::GameInitializedEventHandler::getInstance]
+        $gameInitializedEventHandler removeAllListeners
+        $gameInitializedEventHandler addListenerInterface [self]
+    }
+    
 
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
 
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
-}
-
-
-sub onGameInitialized {
-    my ($self, $gameInitializedEvent) = @_;
-        my $ON_GAME_INITIALIZED = "onGameInitialized";
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
+    method onGameInitialized {gameInitializedEvent} {
+        set ON_GAME_INITIALIZED "onGameInitialized"
+        set commonStrings [::CommonStrings::getInstance]
         try {
-            $self->{logUtil}->putF($commonStrings->{START}, $self, $ON_GAME_INITIALIZED);
-            while (!$self->{swtJOGLProcessor}->isHolderCreated()) {
-                $self->{logUtil}->putF($commonStrings->{UPDATE}, $self, $ON_GAME_INITIALIZED);
-                Time::HiRes::sleep((20) / 1000);
+            [my jget logUtil] putF [$commonStrings jget START] [self] $ON_GAME_INITIALIZED
+            while {[expr {![[my jget swtJOGLProcessor] isHolderCreated]}]} {
+                [my jget logUtil] putF [$commonStrings jget UPDATE] [self] $ON_GAME_INITIALIZED
+                ::Thread::sleep 20
             }
-            'org::allbinary::game::resource::FeatureResourceInitializationUtil'->getInstance()->init($gameInitializedEvent->getLevel());
-            if ($self->{firstTime}) {
-                $self->{firstTime} = 0;
+            [::FeatureResourceInitializationUtil::getInstance] init [$gameInitializedEvent getLevel]
+            if {[my jget firstTime]} {
+                my jset firstTime false
             } else {
-                $self->{swtJOGLProcessor}->onSurfaceChanged();
+                [my jget swtJOGLProcessor] onSurfaceChanged
             }
-        } catch ($e) {
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $ON_GAME_INITIALIZED, $e);
+        } on error {e} {
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] $ON_GAME_INITIALIZED $e
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::configuration::event::GameInitializedEvent ();
-use org::allbinary::game::configuration::event::GameInitializedEventHandler ();
-use org::allbinary::game::configuration::event::GameInitializedListenerInterface ();
-use org::allbinary::game::resource::FeatureResourceInitializationUtil ();
-use org::allbinary::graphics::threed::SWTJOGLProcessor ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::string::CommonStrings ();
-use java::lang::Thread ();
+namespace eval ::DefaultGameInitializationListener {
+}
 
-1;
 

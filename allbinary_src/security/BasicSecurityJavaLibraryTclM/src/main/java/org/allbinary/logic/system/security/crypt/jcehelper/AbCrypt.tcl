@@ -11,89 +11,72 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.crypt.jcehelper
 
-package org::allbinary::logic::system::security::crypt::jcehelper::AbCrypt;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::init::crypt::jcehelper::CryptInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{tsUtil} = 'org::allbinary::TsUtil'->getInstance();
-    $self->{secretComposite} = $org::allbinary::logic::system::security::crypt::jcehelper::BaseSecretComposite::NULL_SECRET_COMPOSITE;
-    $self->{algorithm} = undef;
+oo::class create ::AbCrypt {
+    superclass ::JObject
 }
 
+oo::define ::AbCrypt {
+    method initFields_AbCrypt {} {
+        my jset tsUtil {}
+        my jset secretComposite {}
+        my jset algorithm {}
+        my jset tsUtil [::TsUtil::getInstance]
+        my jset secretComposite [::BaseSecretComposite::staticGet_NULL_SECRET_COMPOSITE]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $algorithm) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{algorithm} = $algorithm;
-    return $self;
-}
+    constructor {algorithm} {
+        next
+        my initFields_AbCrypt
+        my jset algorithm $algorithm
+    }
+    
 
-
-sub init {
-    my ($self, $keyAsString) = @_;
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
+    method init {keyAsString} {
+        set commonStrings [::CommonStrings::getInstance]
         try {
             try {
-                'java::security::Security'->addProvider('org::bouncycastle::jce::provider::BouncyCastleProvider'->new());
-            } catch ($e) {
-                'org::allbinary::logic::communication::log::PreLogUtil'->putOE($commonStrings->{EXCEPTION}, $self, $commonStrings->{INIT}, $e);
+                ::Security::addProvider [::BouncyCastleProvider new]
+            } on error {e} {
+                ::PreLogUtil::putOE [$commonStrings jget EXCEPTION] [self] [$commonStrings jget INIT] $e
             }
-            my $key = $self->{tsUtil}->getByteArray($keyAsString);
-            my $keySpec = 'org::allbinary::logic::system::security::crypt::jcehelper::KeySpecFactory'->getInstance()->getInstance($self->{algorithm}, $key);
-            my $keyFactory = 'javax::crypto::SecretKeyFactory'->getInstance($self->{algorithm});
-            my $secretKey = $keyFactory->generateSecret($keySpec);
-            my $cipher = 'javax::crypto::Cipher'->getInstance($self->{algorithm});
-            $self->{secretComposite} = 'org::allbinary::logic::system::security::crypt::jcehelper::SecretComposite'->new($secretKey, $cipher, $key);
-        } catch ($e) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->putOE("init Failed", $self, $commonStrings->{INIT}, $e);
+            set key [[my jget tsUtil] getByteArray $keyAsString]
+            set keySpec [[::KeySpecFactory::getInstance] getInstance [my jget algorithm] $key]
+            set keyFactory [::SecretKeyFactory::getInstance [my jget algorithm]]
+            set secretKey [$keyFactory generateSecret $keySpec]
+            set cipher [::Cipher::getInstance [my jget algorithm]]
+            my jset secretComposite [::SecretComposite new $secretKey $cipher $key]
+        } on error {e} {
+            ::PreLogUtil::putOE "init Failed" [self] [$commonStrings jget INIT] $e
         }
-}
+    }
+    
 
-
-sub encrypt {
-    my ($self, $array) = @_;
+    method encrypt {array} {
         try {
-            return $self->{secretComposite}->encrypt($array);
-        } catch ($e) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->putOE("Encrypt Failed", $self, "encrypt", $e);
-            return 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_BYTE_ARRAY};
+            return [[my jget secretComposite] encrypt $array]
+        } on error {e} {
+            ::PreLogUtil::putOE "Encrypt Failed" [self] "encrypt" $e
+            return [[::NullUtil::getInstance] jget NULL_BYTE_ARRAY]
         }
-}
+    }
+    
 
-
-sub decrypt {
-    my ($self, $array) = @_;
+    method decrypt {array} {
         try {
-            return $self->{secretComposite}->decrypt($array);
-        } catch ($e) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->putOE("decrypt Failed", $self, "decrypt", $e);
-            return 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_BYTE_ARRAY};
+            return [[my jget secretComposite] decrypt $array]
+        } on error {e} {
+            ::PreLogUtil::putOE "decrypt Failed" [self] "decrypt" $e
+            return [[::NullUtil::getInstance] jget NULL_BYTE_ARRAY]
         }
+    }
 }
 
-use java::lang::Object ();
-# use java::security::Security ();
-# use java::security::spec::KeySpec ();
-# use javax::crypto::Cipher ();
-# use javax::crypto::SecretKey ();
-# use javax::crypto::SecretKeyFactory ();
-use org::allbinary::TsUtil ();
-use org::allbinary::init::crypt::jcehelper::CryptInterface ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::bouncycastle::jce::provider::BouncyCastleProvider ();
-use org::allbinary::logic::system::security::crypt::jcehelper::BaseSecretComposite ();
-use org::allbinary::logic::system::security::crypt::jcehelper::KeySpecFactory ();
-use org::allbinary::logic::system::security::crypt::jcehelper::SecretComposite ();
+namespace eval ::AbCrypt {
+}
 
-1;
 

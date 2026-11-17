@@ -11,64 +11,59 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-package org::allbinary::logic::util::cache::CachePolicy;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{name} = undef;
-    $self->{maxTime} = 0;
-    $self->{maxSize} = 0;
+oo::class create ::CachePolicy {
+    superclass ::JObject
 }
 
+oo::define ::CachePolicy {
+    method initFields_CachePolicy {} {
+        my jset name {}
+        my jset maxTime 0
+        my jset maxSize 0
+        
+        my jset maxTime 0
+        my jset maxSize 0
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $maxTime, $maxSize) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{name} = $name;
-        $self->setMaxTime($maxTime);
-        $self->setMaxSize($maxSize);
-    return $self;
+    constructor {name maxTime maxSize} {
+        next
+        my initFields_CachePolicy
+        my jset name $name
+        my setMaxTime $maxTime
+        my setMaxSize $maxSize
+    }
+    
+
+    method getMaxTime {} {
+        return [my jget maxTime]
+    }
+    
+
+    method setMaxTime {maxTime} {
+        my jset maxTime $maxTime
+    }
+    
+
+    method getMaxSize {} {
+        return [my jget maxSize]
+    }
+    
+
+    method setMaxSize {maxSize} {
+        my jset maxSize $maxSize
+    }
+    
+
+    method getName {} {
+        return [my jget name]
+    }
 }
 
-
-sub getMaxTime {
-    my ($self) = @_;
-        return $self->{maxTime};
+namespace eval ::CachePolicy {
 }
 
-
-sub setMaxTime {
-    my ($self, $maxTime) = @_;
-        $self->{maxTime} = $maxTime;
-}
-
-
-sub getMaxSize {
-    my ($self) = @_;
-        return $self->{maxSize};
-}
-
-
-sub setMaxSize {
-    my ($self, $maxSize) = @_;
-        $self->{maxSize} = $maxSize;
-}
-
-
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
-}
-
-use java::lang::Object ();
-
-1;
 

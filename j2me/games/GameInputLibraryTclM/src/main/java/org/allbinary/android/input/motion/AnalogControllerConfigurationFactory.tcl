@@ -11,57 +11,65 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.android.input.motion
 
-package org::allbinary::android::input::motion::AnalogControllerConfigurationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::android::input::motion::AnalogControllerConfigurationFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{SCALE_FACTOR} = 'org::allbinary::logic::math::ScaleFactorFactory'->getInstance()->{DEFAULT_SCALE_FACTOR};
-    $self->{SCALE_VALUE} = 'org::allbinary::logic::math::ScaleFactorFactory'->getInstance()->{DEFAULT_SCALE_VALUE};
-    $self->{available} = 0;
-    $self->{analogControllerConfigurationEvent} = 'org::allbinary::android::input::motion::event::AnalogControllerConfigurationEvent'->new($self);
+oo::class create ::AnalogControllerConfigurationFactory {
+    superclass ::JObject
 }
 
+oo::define ::AnalogControllerConfigurationFactory {
+    method initFields_AnalogControllerConfigurationFactory {} {
+        my jset SCALE_FACTOR 0
+        my jset SCALE_VALUE 0
+        my jset available false
+        my jset analogControllerConfigurationEvent {}
+        my jset SCALE_FACTOR [[::ScaleFactorFactory::getInstance] jget DEFAULT_SCALE_FACTOR]
+        my jset SCALE_VALUE [[::ScaleFactorFactory::getInstance] jget DEFAULT_SCALE_VALUE]
+        my jset available false
+        my jset analogControllerConfigurationEvent [::AnalogControllerConfigurationEvent new [self]]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::android::input::motion::AnalogControllerConfigurationFactory::instance;
+    constructor {} {
+        next
+        my initFields_AnalogControllerConfigurationFactory
+    }
+    
+
+    method isAvailable {} {
+        return [my jget available]
+    }
+    
+
+    method setAvailable {available} {
+        my jset available $available
+        [::AnalogControllerConfigurationEventHandler::getInstance] fireEvent [my jget analogControllerConfigurationEvent]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+namespace eval ::AnalogControllerConfigurationFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AnalogControllerConfigurationFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::AnalogControllerConfigurationFactory::staticGet_instance]
+    }
 }
 
-
-sub isAvailable {
-    my ($self) = @_;
-        return $self->{available};
-}
-
-
-# throws Exception
-sub setAvailable {
-    my ($self, $available) = @_;
-        $self->{available} = $available;
-        'org::allbinary::android::input::motion::event::AnalogControllerConfigurationEventHandler'->getInstance()->fireEvent($self->{analogControllerConfigurationEvent});
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::android::input::motion::event::AnalogControllerConfigurationEvent ();
-use org::allbinary::android::input::motion::event::AnalogControllerConfigurationEventHandler ();
-use org::allbinary::logic::math::ScaleFactorFactory ();
-
-1;
 

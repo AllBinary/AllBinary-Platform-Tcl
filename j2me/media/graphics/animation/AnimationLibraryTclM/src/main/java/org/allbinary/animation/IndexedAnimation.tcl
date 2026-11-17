@@ -11,120 +11,101 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::IndexedAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::Animation','org::allbinary::animation::IndexedAnimationInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{animationBehaviorP} = undef;
+oo::class create ::IndexedAnimation {
+    superclass ::Animation
 }
 
+oo::define ::IndexedAnimation {
+    method initFields_IndexedAnimation {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset animationBehaviorP {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $animationBehavior) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{animationBehaviorP} = $animationBehavior;
-    return $self;
-}
+    constructor {animationBehavior} {
+        next
+        my initFields_IndexedAnimation
+        my jset animationBehaviorP $animationBehavior
+    }
+    
 
+    method getAnimationBehavior {} {
+        return [my jget animationBehaviorP]
+    }
+    
 
-sub getAnimationBehavior {
-    my ($self) = @_;
-        return $self->{animationBehaviorP};
-}
+    method reset {} {
+        [my jget animationBehaviorP] reset
+        my setFrame 0
+    }
+    
 
+    method setFrame {index} {
+    }
+    
 
-sub reset {
-    my ($self) = @_;
-        $self->{animationBehaviorP}->reset();
-        $self->setFrame(0);
-}
+    method getFrame {} {
+        return 0
+    }
+    
 
+    method getAnimationSize {} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
 
-sub setFrame {
-    my ($self, $index) = @_;
-}
+    method getSize {} {
+        return 0
+    }
+    
 
+    method previousFrame {} {
+    }
+    
 
-sub getFrame {
-    my ($self) = @_;
-        return 0;
-}
-
-
-# throws Exception
-sub getAnimationSize {
-    my ($self) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
-
-
-sub getSize {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub previousFrame {
-    my ($self) = @_;
-}
-
-
-sub isLastFrame {
-    my ($self) = @_;
-        if ($self->getFrame() == $self->getSize() - 1) {
-            return 1;
+    method isLastFrame {} {
+        if {[expr {[my getFrame] == [jint [expr {[my getSize] - 1}]]}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
+    
+
+    method setSequence {sequence} {
+    }
+    
+
+    method getSequence {} {
+        return [::PrimitiveIntUtil::getArrayInstance]
+    }
+    
+
+    method setState {indexedAnimation} {
+        my setFrame [$indexedAnimation getFrame]
+        my setDx [$indexedAnimation getDx]
+        my setDy [$indexedAnimation getDy]
+    }
+    
+
+    method getWidth {} {
+        return 0
+    }
+    
+
+    method getHeight {} {
+        return 0
+    }
 }
 
-
-sub setSequence {
-    my ($self, $sequence) = @_;
+namespace eval ::IndexedAnimation {
 }
 
-
-sub getSequence {
-    my ($self) = @_;
-        return 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance();
-}
-
-
-sub setState {
-    my ($self, $indexedAnimation) = @_;
-        $self->setFrame($indexedAnimation->getFrame());
-        $self->setDx($indexedAnimation->getDx());
-        $self->setDy($indexedAnimation->getDy());
-}
-
-
-sub getWidth {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub getHeight {
-    my ($self) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::IndexedAnimationInterface ();
-
-1;
 

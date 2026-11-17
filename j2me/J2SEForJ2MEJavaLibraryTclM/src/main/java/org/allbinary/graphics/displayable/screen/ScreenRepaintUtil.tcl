@@ -11,28 +11,27 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.screen
 
-package org::allbinary::graphics::displayable::screen::ScreenRepaintUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ScreenRepaintUtil {
+    superclass ::JObject
 }
 
+oo::define ::ScreenRepaintUtil {
+    method initFields_ScreenRepaintUtil {} {
+        return
+    }
 
-sub repaint {
-    my ($class, $displayable) = @_;
+    constructor {} {
+        next
+        my initFields_ScreenRepaintUtil
+    }
+    
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Displayable ();
+namespace eval ::ScreenRepaintUtil {
+    proc repaint {displayable} {
+    }
+}
 
-1;
 

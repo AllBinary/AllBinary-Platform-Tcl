@@ -11,31 +11,45 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
-package org::allbinary::graphics::opengles::shader::NullOpenGLTextureProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::opengles::shader::OpenGLObject3dProcessor'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullOpenGLTextureProcessor {
+    superclass ::JObject
 }
 
+oo::define ::NullOpenGLTextureProcessor {
+    method initFields_NullOpenGLTextureProcessor {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::opengles::shader::NullOpenGLTextureProcessor::instance;
+    constructor {} {
+        next
+        my initFields_NullOpenGLTextureProcessor
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::opengles::shader::OpenGLObject3dProcessor ();
+namespace eval ::NullOpenGLTextureProcessor {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::OpenGLObject3dProcessor new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::NullOpenGLTextureProcessor::staticGet_instance]
+    }
+}
 
-1;
 

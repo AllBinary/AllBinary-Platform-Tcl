@@ -1,80 +1,61 @@
 # Generated Code Do Not Modify
+# package org.allbinary.device
 
-package org::allbinary::device::OpenGLESGraphics;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::image::opengles::OpenGLSurfaceChangedInterface','org::allbinary::device::GraphicsInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{gl} = $org::allbinary::device::NullGL10::NULL_GL10;
+oo::class create ::OpenGLESGraphics {
+    superclass ::JObject
 }
 
+oo::define ::OpenGLESGraphics {
+    method initFields_OpenGLESGraphics {} {
+        my jset commonStrings {}
+        my jset gl {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset gl [::NullGL10::staticGet_NULL_GL10]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_OpenGLESGraphics
+    }
+    
+
+    method updateGL {gl} {
+    }
+    
+
+    method set {gl} {
+    }
+    
+
+    method init {} {
+    }
+    
+
+    method update {} {
+    }
+    
+
+    method setOrthoginalMode {} {
+    }
+    
+
+    method setCameraMode {} {
+    }
+    
+
+    method getGlP {} {
+        return [my jget gl]
+    }
+    
+
+    method setFontDebug {font fontDebug} {
+        error [jexception RuntimeException {}]
+    }
 }
 
-
-sub updateGL {
-    my ($self, $gl) = @_;
+namespace eval ::OpenGLESGraphics {
 }
 
-
-sub set {
-    my ($self, $gl) = @_;
-}
-
-
-# throws Exception
-sub init {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub update {
-    my ($self) = @_;
-}
-
-
-sub setOrthoginalMode {
-    my ($self) = @_;
-}
-
-
-sub setCameraMode {
-    my ($self) = @_;
-}
-
-
-sub getGlP {
-    my ($self) = @_;
-        return $self->{gl};
-}
-
-
-sub setFontDebug {
-    my ($self, $font, $fontDebug) = @_;
-        die ("RuntimeException");
-}
-
-use java::lang::Object ();
-use javax::microedition::khronos::opengles::GL ();
-use javax::microedition::khronos::opengles::GL10 ();
-use javax::microedition::lcdui::Font ();
-use org::allbinary::graphics::font::FontDebugBase ();
-use org::allbinary::image::opengles::OpenGLSurfaceChangedInterface ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::device::GraphicsInterface ();
-use org::allbinary::device::NullGL10 ();
-
-1;
 

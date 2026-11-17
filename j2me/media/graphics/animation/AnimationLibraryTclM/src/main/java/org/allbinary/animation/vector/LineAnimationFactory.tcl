@@ -11,47 +11,37 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.vector
 
-package org::allbinary::animation::vector::LineAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::AnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{basicColor} = undef;
+oo::class create ::LineAnimationFactory {
+    superclass ::JObject
 }
 
+oo::define ::LineAnimationFactory {
+    method initFields_LineAnimationFactory {} {
+        my jset basicColor {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $basicColor) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{basicColor} = $basicColor;
-    return $self;
+    constructor {basicColor} {
+        next
+        my initFields_LineAnimationFactory
+        my jset basicColor $basicColor
+    }
+    
+
+    method getInstance {instanceId} {
+        return [::LineAnimation new [my jget basicColor]]
+    }
+    
+
+    method setInitialScale {scaleProperties} {
+    }
 }
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        return 'org::allbinary::animation::vector::LineAnimation'->new($self->{basicColor});
+namespace eval ::LineAnimationFactory {
 }
 
-
-sub setInitialScale {
-    my ($self, $scaleProperties) = @_;
-}
-
-use java::lang::Object ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::media::ScaleProperties ();
-use org::allbinary::animation::vector::LineAnimation ();
-
-1;
 

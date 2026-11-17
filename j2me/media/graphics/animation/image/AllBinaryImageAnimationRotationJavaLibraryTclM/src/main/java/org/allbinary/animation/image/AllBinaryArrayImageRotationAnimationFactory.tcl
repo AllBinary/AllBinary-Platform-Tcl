@@ -11,109 +11,82 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::AllBinaryArrayImageRotationAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::image::BaseImageAnimationFactory';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{imageArray} = $javax::microedition::lcdui::NullImage::NULL_IMAGE_ARRAY;
-    $self->{angleIncrement} = undef;
+oo::class create ::AllBinaryArrayImageRotationAnimationFactory {
+    superclass ::BaseImageAnimationFactory
 }
 
+oo::define ::AllBinaryArrayImageRotationAnimationFactory {
+    method initFields_AllBinaryArrayImageRotationAnimationFactory {} {
+        my jset imageArray {}
+        my jset angleIncrement 0
+        my jset imageArray [::NullImage::staticGet_NULL_IMAGE_ARRAY]
+        
+        return
+    }
+    
+    
+    
 
-# throws Exception
-sub createFactory {
-    my ($class, $image, $dx, $dy) = @_;
-        my $arrayImageRotationAnimationFactory = 'org::allbinary::animation::image::AllBinaryArrayImageRotationAnimationFactory'->new($image, $image->getWidth(), $image->getHeight(), 'org::allbinary::math::AngleFactory'->getInstance()->{TOTAL_ANGLE} / 'org::allbinary::game::configuration::GameConfigurationCentral'->getInstance()->getGameControlFidelity(), 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance());
-        $arrayImageRotationAnimationFactory->initDXY($dx, $dy);
-        return $arrayImageRotationAnimationFactory;
-}
+    constructor {image width height angleIncrement animationBehaviorFactory} {
+        next $image [::PrimitiveIntUtil::getArrayInstance] $width $height 0 0 $animationBehaviorFactory
+        my initFields_AllBinaryArrayImageRotationAnimationFactory
+        my jset angleIncrement $angleIncrement
+        my init
+    }
+    
 
+    method init {} {
+        my setImageArray [[::ImageToRotationImageArrayUtil::getInstance] generate [my getImage] [my getAngleIncrement] [jint [[::AngleFactory::getInstance] jget TOTAL_ANGLE]]]
+    }
+    
 
-# throws Exception
-sub createFactoryA {
-    my ($class, $image, $dx, $dy, $angleIncrement) = @_;
-        my $arrayImageRotationAnimationFactory = 'org::allbinary::animation::image::AllBinaryArrayImageRotationAnimationFactory'->new($image, $image->getWidth(), $image->getHeight(), $angleIncrement, 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance());
-        $arrayImageRotationAnimationFactory->initDXY($dx, $dy);
-        return $arrayImageRotationAnimationFactory;
-}
+    method initDXY {dx dy} {
+        [my jget animationFactoryInitializationVisitor] jset dx $dx
+        [my jget animationFactoryInitializationVisitor] jset dy $dy
+        [my jget animationFactoryInitializationVisitor] jset originalDx $dx
+        [my jget animationFactoryInitializationVisitor] jset originalDy $dy
+    }
+    
 
-
-sub new {
-    my ($class, $image, $width, $height, $angleIncrement, $animationBehaviorFactory) = @_;
-    my $self = $class->SUPER::new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $width, $height, 0, 0, $animationBehaviorFactory);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{angleIncrement} = $angleIncrement;
-        $self->init();
-    return $self;
-}
-
-
-# throws Exception
-sub init {
-    my ($self) = @_;
-        $self->setImageArray('org::allbinary::media::image::ImageToRotationImageArrayUtil'->getInstance()->generate($self->getImage(), $self->getAngleIncrement(), int('org::allbinary::math::AngleFactory'->getInstance()->{TOTAL_ANGLE})));
-}
-
-
-sub initDXY {
-    my ($self, $dx, $dy) = @_;
-        $self->{animationFactoryInitializationVisitor}->{dx} = $dx;
-        $self->{animationFactoryInitializationVisitor}->{dy} = $dy;
-        $self->{animationFactoryInitializationVisitor}->{originalDx} = $dx;
-        $self->{animationFactoryInitializationVisitor}->{originalDy} = $dy;
-}
-
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        my $scaledImageArray = [(undef) x (scalar(@{$self->{imageArray}}))];
-        my $size = scalar(@{$scaledImageArray});
-        my $image = $self->getImage();
-        for (my $index = 0; $index < $size; $index++) {
-            $scaledImageArray->[$index] = $self->{animationFactoryImageScaleUtil}->createImage($image, $image->getWidth(), $image->getHeight(), $self->{scaleProperties}->{scaleWidth}, $self->{scaleProperties}->{scaleHeight});
+    method getInstance {instanceId} {
+        set scaledImageArray [jarray [[my jget imageArray] length] {}]
+        set size [$scaledImageArray length]
+        set image [my getImage]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            $scaledImageArray set $index [[my jget animationFactoryImageScaleUtil] createImage $image [$image getWidth] [$image getHeight] [[my jget scaleProperties] jget scaleWidth] [[my jget scaleProperties] jget scaleHeight]]
         }
-        if ($self->{animationFactoryInitializationVisitor}->{dx} != 0 || $self->{animationFactoryInitializationVisitor}->{dy} != 0) {
-            $self->{animationFactoryImageScaleUtil}->processAdjust($self);
-            return 'org::allbinary::animation::image::AdjustedImageArrayRotationAnimation'->new($scaledImageArray, 'org::allbinary::math::AngleInfo'->getInstance(((int($self->getAngleIncrement()) + 32768) % 65536 - 32768)), int('org::allbinary::math::AngleFactory'->getInstance()->{TOTAL_ANGLE}), $self->{animationFactoryInitializationVisitor}->{dx}, $self->{animationFactoryInitializationVisitor}->{dy}, $self->{animationBehaviorFactory}->getOrCreateInstance());
+        if {[expr {[expr {[[my jget animationFactoryInitializationVisitor] jget dx] != 0}] || [expr {[[my jget animationFactoryInitializationVisitor] jget dy] != 0}]}]} {
+            [my jget animationFactoryImageScaleUtil] processAdjust [self]
+            return [::AdjustedImageArrayRotationAnimation new $scaledImageArray [::AngleInfo::getInstance [jshort [my getAngleIncrement]]] [jint [[::AngleFactory::getInstance] jget TOTAL_ANGLE]] [[my jget animationFactoryInitializationVisitor] jget dx] [[my jget animationFactoryInitializationVisitor] jget dy] [[my jget animationBehaviorFactory] getOrCreateInstance]]
         } else {
-            return 'org::allbinary::animation::image::ImageArrayRotationAnimation'->new($scaledImageArray, 'org::allbinary::math::AngleInfo'->getInstance(((int($self->getAngleIncrement()) + 32768) % 65536 - 32768)), int('org::allbinary::math::AngleFactory'->getInstance()->{TOTAL_ANGLE}), $self->{animationBehaviorFactory}->getOrCreateInstance());
+            return [::ImageArrayRotationAnimation new $scaledImageArray [::AngleInfo::getInstance [jshort [my getAngleIncrement]]] [jint [[::AngleFactory::getInstance] jget TOTAL_ANGLE]] [[my jget animationBehaviorFactory] getOrCreateInstance]]
         }
+    }
+    
+
+    method setImageArray {imageArray} {
+        my jset imageArray $imageArray
+    }
+    
+
+    method getAngleIncrement {} {
+        return [my jget angleIncrement]
+    }
 }
 
-
-sub setImageArray {
-    my ($self, $imageArray) = @_;
-        $self->{imageArray} = $imageArray;
+namespace eval ::AllBinaryArrayImageRotationAnimationFactory {
+    proc createFactory {image dx dy} {
+        set arrayImageRotationAnimationFactory [::AllBinaryArrayImageRotationAnimationFactory new $image [$image getWidth] [$image getHeight] [expr {[[::AngleFactory::getInstance] jget TOTAL_ANGLE] / [[::GameConfigurationCentral::getInstance] getGameControlFidelity]}] [::AnimationBehaviorFactory::getInstance]]
+        $arrayImageRotationAnimationFactory initDXY $dx $dy
+        return $arrayImageRotationAnimationFactory
+    }
+    proc createFactoryA {image dx dy angleIncrement} {
+        set arrayImageRotationAnimationFactory [::AllBinaryArrayImageRotationAnimationFactory new $image [$image getWidth] [$image getHeight] $angleIncrement [::AnimationBehaviorFactory::getInstance]]
+        $arrayImageRotationAnimationFactory initDXY $dx $dy
+        return $arrayImageRotationAnimationFactory
+    }
 }
 
-
-sub getAngleIncrement {
-    my ($self) = @_;
-        return $self->{angleIncrement};
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::NullImage ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::game::configuration::GameConfigurationCentral ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::math::AngleFactory ();
-use org::allbinary::math::AngleInfo ();
-use org::allbinary::media::image::ImageToRotationImageArrayUtil ();
-use org::allbinary::animation::image::BaseImageAnimationFactory ();
-use org::allbinary::animation::image::ImageArrayRotationAnimation ();
-use org::allbinary::animation::image::AdjustedImageArrayRotationAnimation ();
-
-1;
 

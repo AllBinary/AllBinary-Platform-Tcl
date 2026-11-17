@@ -11,35 +11,47 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::GameKey;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::Input';
-
-tie our $NULL_GAME_KEY, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::GameKey'->new(-1, 'org::allbinary::logic::string::StringUtil'->getInstance()->{NULL_STRING}) };
-
-
-sub new {
-    my ($class, $key, $name) = @_;
-    my $self = $class->SUPER::new($key, $name);
-        # super(...) made $self above
-    return $self;
+oo::class create ::GameKey {
+    superclass ::Input
 }
 
+oo::define ::GameKey {
+    method initFields_GameKey {} {
+        return
+    }
+    
 
-sub toString {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringMaker'->new()->append("GameKey ")->append($self->SUPER::toString())->toString();
+    constructor {key name} {
+        next $key $name
+        my initFields_GameKey
+    }
+    
+
+    method toString {} {
+        return [[[[::StringMaker new] append "GameKey "] append [next]] toString]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::game::input::Input ();
+namespace eval ::GameKey {
+    variable NULL_GAME_KEYValue {}
+    variable NULL_GAME_KEYSet 0
+    proc staticGet_NULL_GAME_KEY {} {
+        variable NULL_GAME_KEYValue
+        variable NULL_GAME_KEYSet
+        if {!$NULL_GAME_KEYSet} {
+            set NULL_GAME_KEYSet 1
+            set NULL_GAME_KEYValue [::GameKey new [expr {-1}] [[::StringUtil::getInstance] jget NULL_STRING]]
+        }
+        return $NULL_GAME_KEYValue
+    }
+    proc staticSet_NULL_GAME_KEY {value} {
+        variable NULL_GAME_KEYValue
+        variable NULL_GAME_KEYSet
+        set NULL_GAME_KEYSet 1
+        set NULL_GAME_KEYValue $value
+    }
+}
 
-1;
 

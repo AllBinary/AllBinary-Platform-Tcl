@@ -11,55 +11,81 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable
 
-package org::allbinary::graphics::displayable::CanvasStrings;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::displayable::CanvasStrings'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{CONSTRUCTOR} = "MyCanvas::MyCanvas";
-    $self->{PAUSE} = "MyCanvas::pause";
-    $self->{UN_PAUSE} = "MyCanvas::unPause";
-    $self->{SET_FULL_SCREEN_MODE} = "setFullScreenMode";
-    $self->{SIZE_CHANGED} = "sizeChanged";
-    $self->{SCALED_IMAGES} = "scaledImages";
-    $self->{PAINT} = "paint";
-    $self->{ON_DISPLAY_CHANGE_EVENT} = "onDisplayChangeEvent";
-    $self->{UPDATE_MEASUREMENT} = "updateMeasurement";
-    $self->{FD_WIDTH} = " font/display width: ";
-    $self->{FD_HEIGHT} = " font/display height: ";
-    $self->{EMPTY_CHILD_NAME_LIST} = 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance();
-    $self->{ABOUT} = "About";
-    $self->{OPTIONS} = "Options";
-    $self->{FONT_ATLAS} = "/font.png";
-    $self->{OBJ_MODEL} = "_obj";
-    $self->{MD2_MODEL} = "_md2";
-    $self->{_PNG} = ".png";
+oo::class create ::CanvasStrings {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::CanvasStrings {
+    method initFields_CanvasStrings {} {
+        my jset CONSTRUCTOR {}
+        my jset PAUSE {}
+        my jset UN_PAUSE {}
+        my jset SET_FULL_SCREEN_MODE {}
+        my jset SIZE_CHANGED {}
+        my jset SCALED_IMAGES {}
+        my jset PAINT {}
+        my jset ON_DISPLAY_CHANGE_EVENT {}
+        my jset UPDATE_MEASUREMENT {}
+        my jset FD_WIDTH {}
+        my jset FD_HEIGHT {}
+        my jset EMPTY_CHILD_NAME_LIST {}
+        my jset ABOUT {}
+        my jset OPTIONS {}
+        my jset FONT_ATLAS {}
+        my jset OBJ_MODEL {}
+        my jset MD2_MODEL {}
+        my jset _PNG {}
+        my jset CONSTRUCTOR "MyCanvas::MyCanvas"
+        my jset PAUSE "MyCanvas::pause"
+        my jset UN_PAUSE "MyCanvas::unPause"
+        my jset SET_FULL_SCREEN_MODE "setFullScreenMode"
+        my jset SIZE_CHANGED "sizeChanged"
+        my jset SCALED_IMAGES "scaledImages"
+        my jset PAINT "paint"
+        my jset ON_DISPLAY_CHANGE_EVENT "onDisplayChangeEvent"
+        my jset UPDATE_MEASUREMENT "updateMeasurement"
+        my jset FD_WIDTH " font/display width: "
+        my jset FD_HEIGHT " font/display height: "
+        my jset EMPTY_CHILD_NAME_LIST [[::BasicArrayListUtil::getInstance] getImmutableInstance]
+        my jset ABOUT "About"
+        my jset OPTIONS "Options"
+        my jset FONT_ATLAS "/font.png"
+        my jset OBJ_MODEL "_obj"
+        my jset MD2_MODEL "_md2"
+        my jset _PNG ".png"
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_CanvasStrings
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::displayable::CanvasStrings::instance;
+namespace eval ::CanvasStrings {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::CanvasStrings new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::CanvasStrings::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListUtil ();
-
-1;
 

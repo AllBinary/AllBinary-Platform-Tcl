@@ -11,39 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.mapping
 
-package org::allbinary::game::input::mapping::MotionInputMappingEventListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::input::mapping::event::InputMappingEventListenerInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::MotionInputMappingEventListener {
+    superclass ::JObject
 }
 
+oo::define ::MotionInputMappingEventListener {
+    method initFields_MotionInputMappingEventListener {} {
+        return
+    }
 
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
+    constructor {} {
+        next
+        my initFields_MotionInputMappingEventListener
+    }
+    
+
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
+
+    method onInputMappingEvent {inputMappingEvent} {
+    }
 }
 
-
-# throws Exception
-sub onInputMappingEvent {
-    my ($self, $inputMappingEvent) = @_;
+namespace eval ::MotionInputMappingEventListener {
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::mapping::event::InputMappingEvent ();
-use org::allbinary::game::input::mapping::event::InputMappingEventListenerInterface ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventStrings ();
-
-1;
 

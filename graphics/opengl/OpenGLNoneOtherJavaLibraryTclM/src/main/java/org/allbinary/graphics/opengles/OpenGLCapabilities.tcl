@@ -11,84 +11,99 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles
 
-package org::allbinary::graphics::opengles::OpenGLCapabilities;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::opengles::OpenGLCapabilities'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{CUSTOM_GL_SURFACE_VIEW} = 1;
-    $self->{VERSION_1_0} = "1.0";
-    $self->{VERSION_1_1} = "1.1";
-    $self->{VERSION_2_0} = "2.0";
-    $self->{VERSION_3_0} = "3.0";
-    $self->{VERSION_3_1} = "3.1";
-    $self->{VERSION_3_2} = "3.2";
-    $self->{VERSION_HIGHER_THAN_EXISTS} = "999.999";
-    $self->{glVersion} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{shaderVersion} = 0;
-    $self->{glInstanceVersion} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{maxTextureSize} = 64;
+oo::class create ::OpenGLCapabilities {
+    superclass ::JObject
 }
 
+oo::define ::OpenGLCapabilities {
+    method initFields_OpenGLCapabilities {} {
+        my jset CUSTOM_GL_SURFACE_VIEW false
+        my jset VERSION_1_0 {}
+        my jset VERSION_1_1 {}
+        my jset VERSION_2_0 {}
+        my jset VERSION_3_0 {}
+        my jset VERSION_3_1 {}
+        my jset VERSION_3_2 {}
+        my jset VERSION_HIGHER_THAN_EXISTS {}
+        my jset glVersion {}
+        my jset shaderVersion 0
+        my jset glInstanceVersion {}
+        my jset maxTextureSize 0
+        my jset CUSTOM_GL_SURFACE_VIEW true
+        my jset VERSION_1_0 "1.0"
+        my jset VERSION_1_1 "1.1"
+        my jset VERSION_2_0 "2.0"
+        my jset VERSION_3_0 "3.0"
+        my jset VERSION_3_1 "3.1"
+        my jset VERSION_3_2 "3.2"
+        my jset VERSION_HIGHER_THAN_EXISTS "999.999"
+        my jset glVersion [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset shaderVersion 0
+        my jset glInstanceVersion [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset maxTextureSize 64
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::opengles::OpenGLCapabilities::instance;
+    constructor {} {
+        next
+        my initFields_OpenGLCapabilities
+    }
+    
+
+    method isInitialized {} {
+        return true
+    }
+    
+
+    method initCapabilities {gl} {
+    }
+    
+
+    method isGlExtensionDrawTexture {} {
+        return false
+    }
+    
+
+    method getGlVersion {} {
+        return [my jget glVersion]
+    }
+    
+
+    method isVertexBufferObjectSupport {} {
+        return false
+    }
+    
+
+    method isTextureSizeValid {widthAndHeight} {
+        return true
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+namespace eval ::OpenGLCapabilities {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::OpenGLCapabilities new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::OpenGLCapabilities::staticGet_instance]
+    }
 }
 
-
-sub isInitialized {
-    my ($self) = @_;
-        return 1;
-}
-
-
-sub initCapabilities {
-    my ($self, $gl) = @_;
-}
-
-
-sub isGlExtensionDrawTexture {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub getGlVersion {
-    my ($self) = @_;
-        return $self->{glVersion};
-}
-
-
-sub isVertexBufferObjectSupport {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub isTextureSizeValid {
-    my ($self, $widthAndHeight) = @_;
-        return 1;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringUtil ();
-
-1;
 

@@ -11,28 +11,28 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary
 
-package org::allbinary::AvianUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AvianUtil {
+    superclass ::JObject
 }
 
+oo::define ::AvianUtil {
+    method initFields_AvianUtil {} {
+        return
+    }
 
-sub isAvian {
-    my ($class) = @_;
-        return 0;
+    constructor {} {
+        next
+        my initFields_AvianUtil
+    }
+    
 }
 
-use java::lang::Object ();
+namespace eval ::AvianUtil {
+    proc isAvian {} {
+        return false
+    }
+}
 
-1;
 

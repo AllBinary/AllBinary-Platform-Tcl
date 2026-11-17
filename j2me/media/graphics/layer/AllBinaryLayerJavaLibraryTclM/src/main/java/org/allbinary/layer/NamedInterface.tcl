@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-# Java interface
-package org::allbinary::layer::NamedInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getName {
-    my ($self) = @_;
-    die "abstract method getName";
+oo::class create ::NamedInterface {
+    superclass ::JObject
 }
 
+oo::define ::NamedInterface {
+    method initFields_NamedInterface {} {
+        return
+    }
+    
 
-1;
+    method getName {} {
+        error [jexception AbstractMethodError getName]
+    }
+}
+
+namespace eval ::NamedInterface {
+}
+
 

@@ -11,109 +11,87 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image.sprite
 
-package org::allbinary::animation::image::sprite::HackRotationSpriteIndexedAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::RotationAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{sprite} = undef;
-    $self->{image} = undef;
+oo::class create ::HackRotationSpriteIndexedAnimation {
+    superclass ::RotationAnimation
 }
 
+oo::define ::HackRotationSpriteIndexedAnimation {
+    method initFields_HackRotationSpriteIndexedAnimation {} {
+        my jset sprite {}
+        my jset image {}
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $sprite, $image, $angleInfo, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($angleInfo, 'org::allbinary::util::CircularIndexUtil'->createInstance(360 / $angleInfo->getAngleIncrementInfo()->getAngleIncrement()), $animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{sprite} = $sprite;
-        $self->{image} = $image;
-    return $self;
+    constructor {sprite image angleInfo animationBehavior} {
+        next $angleInfo [::CircularIndexUtil::createInstance [expr {360 / [[$angleInfo getAngleIncrementInfo] getAngleIncrement]}]] $animationBehavior
+        my initFields_HackRotationSpriteIndexedAnimation
+        my jset sprite $sprite
+        my jset image $image
+    }
+    
+
+    method getAnimationSize {} {
+        return [my getSize]
+    }
+    
+
+    method paintFrame {g frame x y} {
+        my setFrame $frame
+        my paintXY $g $x $y
+    }
+    
+
+    method paintXY {g x y} {
+        [my jget sprite] setPosition $x $y
+        my paint $g
+    }
+    
+
+    method paint {g} {
+        [my jget sprite] paint $g
+    }
+    
+
+    method nextRotation {} {
+        [my jget sprite] nextFrame
+    }
+    
+
+    method previousRotation {} {
+        [my jget sprite] prevFrame
+    }
+    
+
+    method getSize {} {
+        return [[my jget sprite] getRawFrameCount]
+    }
+    
+
+    method setFrame {frame} {
+        [my jget sprite] setFrame $frame
+    }
+    
+
+    method getFrame {} {
+        return [[my jget sprite] getFrame]
+    }
+    
+
+    method setSequence {sequence} {
+    }
+    
+
+    method getSequence {} {
+        return [::PrimitiveIntUtil::getArrayInstance]
+    }
 }
 
-
-# throws Exception
-sub getAnimationSize {
-    my ($self) = @_;
-        return $self->getSize();
+namespace eval ::HackRotationSpriteIndexedAnimation {
 }
 
-
-sub paintFrame {
-    my ($self, $g, $frame, $x, $y) = @_;
-        $self->setFrame($frame);
-        $self->paintXY($g, $x, $y);
-}
-
-
-sub paintXY {
-    my ($self, $g, $x, $y) = @_;
-        $self->{sprite}->setPosition($x, $y);
-        $self->paint($g);
-}
-
-
-sub paint {
-    my ($self, $g) = @_;
-        $self->{sprite}->paint($g);
-}
-
-
-sub nextRotation {
-    my ($self) = @_;
-        $self->{sprite}->nextFrame();
-}
-
-
-sub previousRotation {
-    my ($self) = @_;
-        $self->{sprite}->prevFrame();
-}
-
-
-sub getSize {
-    my ($self) = @_;
-        return $self->{sprite}->getRawFrameCount();
-}
-
-
-sub setFrame {
-    my ($self, $frame) = @_;
-        $self->{sprite}->setFrame($frame);
-}
-
-
-sub getFrame {
-    my ($self) = @_;
-        return $self->{sprite}->getFrame();
-}
-
-
-sub setSequence {
-    my ($self, $sequence) = @_;
-}
-
-
-sub getSequence {
-    my ($self) = @_;
-        return 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance();
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::game::Sprite ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::animation::RotationAnimation ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::math::AngleInfo ();
-use org::allbinary::util::CircularIndexUtil ();
-
-1;
 

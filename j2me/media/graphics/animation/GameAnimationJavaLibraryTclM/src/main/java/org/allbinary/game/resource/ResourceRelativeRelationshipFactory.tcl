@@ -11,91 +11,74 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.resource
 
-package org::allbinary::game::resource::ResourceRelativeRelationshipFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::resource::ResourceRelativeRelationshipFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{basicArrayListUtil} = 'org::allbinary::util::BasicArrayListUtil'->getInstance();
-    $self->{hashtable} = 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable();
-    $self->{initialized} = 0;
+oo::class create ::ResourceRelativeRelationshipFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::ResourceRelativeRelationshipFactory {
+    method initFields_ResourceRelativeRelationshipFactory {} {
+        my jset basicArrayListUtil {}
+        my jset hashtable {}
+        my jset initialized false
+        my jset basicArrayListUtil [::BasicArrayListUtil::getInstance]
+        my jset hashtable [[::StdUtil::getInstance] createHashtable]
+        my jset initialized false
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_ResourceRelativeRelationshipFactory
+    }
+    
 
-# throws Exception
-sub init {
-    my ($self, $level) = @_;
-        $self->setInitialized(1);
-}
+    method init {level} {
+        my setInitialized true
+    }
+    
 
-
-# throws Exception
-sub getResourceRelativeRelationshipList {
-    my ($self, $resource) = @_;
-        my $listCanBeNull = $self->{hashtable}->get($resource);
-        if (!defined($listCanBeNull)) {
-            return $self->{basicArrayListUtil}->getImmutableInstance();
+    method getResourceRelativeRelationshipList {resource} {
+        set listCanBeNull [[my jget hashtable] get $resource]
+        if {[expr {$listCanBeNull eq {}}]} {
+            return [[my jget basicArrayListUtil] getImmutableInstance]
         }
-        return $listCanBeNull;
-}
+        return $listCanBeNull
+    }
+    
 
-
-# throws Exception
-sub addResourceRelativeRelationship {
-    my ($self, $resource, $hardPoint) = @_;
-        my $list = $self->getResourceRelativeRelationshipList($resource);
-        if ($list == $self->{basicArrayListUtil}->getImmutableInstance()) {
-            $list = 'org::allbinary::util::BasicArrayListD'->new();
+    method addResourceRelativeRelationship {resource hardPoint} {
+        set list [my getResourceRelativeRelationshipList $resource]
+        if {[expr {$list eq [[my jget basicArrayListUtil] getImmutableInstance]}]} {
+            set list [::BasicArrayListD new]
         }
-        $list->add($hardPoint);
-        $self->{hashtable}->put($resource, $list);
+        $list add $hardPoint
+        [my jget hashtable] put $resource $list
+    }
+    
+
+    method isLoadingLevel {level} {
+        return false
+    }
+    
+
+    method isFeature {} {
+        return false
+    }
+    
+
+    method setInitialized {initialized} {
+        my jset initialized $initialized
+    }
+    
+
+    method isInitialized {} {
+        return [my jget initialized]
+    }
 }
 
-
-sub isLoadingLevel {
-    my ($self, $level) = @_;
-        return 0;
+namespace eval ::ResourceRelativeRelationshipFactory {
 }
 
-
-sub isFeature {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub setInitialized {
-    my ($self, $initialized) = @_;
-        $self->{initialized} = $initialized;
-}
-
-
-sub isInitialized {
-    my ($self) = @_;
-        return $self->{initialized};
-}
-
-use java::lang::Object ();
-use org::allbinary::graphics::RelativeRelationship ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::util::BasicArrayListUtil ();
-use org::allbinary::game::resource::ResourceRelativeRelationshipFactoryInterface ();
-
-1;
 

@@ -11,62 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision
 
-package org::allbinary::game::collision::OptimizedAllBinaryCollisionLayerProcessorForCollidableLayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::LayerProcessor';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::game::collision::OptimizedAllBinaryCollisionLayerManager'->new());
-        # super(...) made $self above
-    return $self;
+oo::class create ::OptimizedAllBinaryCollisionLayerProcessorForCollidableLayer {
+    superclass ::LayerProcessor
 }
 
+oo::define ::OptimizedAllBinaryCollisionLayerProcessorForCollidableLayer {
+    method initFields_OptimizedAllBinaryCollisionLayerProcessorForCollidableLayer {} {
+        return
+    }
+    
 
-# throws Exception
-sub processAt {
-    my ($self, $allBinaryLayerManager, $layerInterface, $startIndex) = @_;
-        my $collidableInterfaceCompositeInterface = $layerInterface;
-        my $collidableBase = $collidableInterfaceCompositeInterface->getCollidableInferface();
-        if ($collidableBase->isCollidable($collidableInterfaceCompositeInterface)) {
-            my $layerManager = $self->getLayerManager();
-            my $size = $layerManager->getSize();
-            my $collidableInterfaceCompositeInterface2 = undef;
-            my $collidableBase2 = undef;
-            for (my $index = $startIndex + 1; $index < $size; $index++) {
-                $collidableInterfaceCompositeInterface2 = $layerManager->getLayerAt($index);
-                $collidableBase2 = $collidableInterfaceCompositeInterface2->getCollidableInferface();
-                if ($collidableBase2->isCollidable($collidableInterfaceCompositeInterface) && $collidableBase->isCollision($collidableInterfaceCompositeInterface, $collidableInterfaceCompositeInterface2)) {
-                    $collidableBase->collide($collidableInterfaceCompositeInterface, $collidableInterfaceCompositeInterface2);
-                    $collidableBase2->collide($collidableInterfaceCompositeInterface2, $collidableInterfaceCompositeInterface);
+    constructor {} {
+        next [::OptimizedAllBinaryCollisionLayerManager new]
+        my initFields_OptimizedAllBinaryCollisionLayerProcessorForCollidableLayer
+    }
+    
+
+    method processAt {allBinaryLayerManager layerInterface startIndex} {
+        set collidableInterfaceCompositeInterface $layerInterface
+        set collidableBase [$collidableInterfaceCompositeInterface getCollidableInferface]
+        if {[$collidableBase isCollidable $collidableInterfaceCompositeInterface]} {
+            set layerManager [my getLayerManager]
+            set size [$layerManager getSize]
+            set collidableInterfaceCompositeInterface2 {}
+            set collidableBase2 {}
+            for {set index [jint [expr {$startIndex + 1}]]} {[expr {$index < $size}]} {jpostincr index 1} {
+                set collidableInterfaceCompositeInterface2 [$layerManager getLayerAt $index]
+                set collidableBase2 [$collidableInterfaceCompositeInterface2 getCollidableInferface]
+                if {[expr {[$collidableBase2 isCollidable $collidableInterfaceCompositeInterface] && [$collidableBase isCollision $collidableInterfaceCompositeInterface $collidableInterfaceCompositeInterface2]}]} {
+                    $collidableBase collide $collidableInterfaceCompositeInterface $collidableInterfaceCompositeInterface2
+                    $collidableBase2 collide $collidableInterfaceCompositeInterface2 $collidableInterfaceCompositeInterface
                 }
             }
         }
-}
+    }
+    
 
-
-sub isProcessorLayer {
-    my ($self, $layerInterface) = @_;
-        if ($layerInterface->implmentsCollidableInterface()) {
-            return 1;
+    method isProcessorLayer {layerInterface} {
+        if {[$layerInterface implmentsCollidableInterface]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::layer::CollidableCompositeLayer ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::layer::LayerManager ();
-use org::allbinary::layer::LayerProcessor ();
-use org::allbinary::game::collision::OptimizedAllBinaryCollisionLayerManager ();
+namespace eval ::OptimizedAllBinaryCollisionLayerProcessorForCollidableLayer {
+}
 
-1;
 

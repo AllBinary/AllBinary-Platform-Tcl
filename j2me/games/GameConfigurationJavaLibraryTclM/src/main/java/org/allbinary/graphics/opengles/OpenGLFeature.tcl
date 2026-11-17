@@ -11,25 +11,25 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles
 
-package org::allbinary::graphics::opengles::OpenGLFeature;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::configuration::feature::Feature';
-
-
-
-sub new {
-    my ($class, $name) = @_;
-    my $self = $class->SUPER::new($name);
-        # super(...) made $self above
-    return $self;
+oo::class create ::OpenGLFeature {
+    superclass ::Feature
 }
 
-use java::lang::Object ();
-use org::allbinary::game::configuration::feature::Feature ();
+oo::define ::OpenGLFeature {
+    method initFields_OpenGLFeature {} {
+        return
+    }
+    
 
-1;
+    constructor {name} {
+        next $name
+        my initFields_OpenGLFeature
+    }
+}
+
+namespace eval ::OpenGLFeature {
+}
+
 

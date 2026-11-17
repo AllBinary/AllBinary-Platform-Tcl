@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.system
 
 #ActualPlatform
-package org::allbinary::system::Memory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::Memory {
+    superclass ::JObject
 }
 
+oo::define ::Memory {
+    method initFields_Memory {} {
+        return
+    }
 
-sub getInfo {
-    my ($class) = @_;
-        return 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+    constructor {} {
+        next
+        my initFields_Memory
+    }
+    
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::string::StringUtil ();
+namespace eval ::Memory {
+    proc getInfo {} {
+        return [[::StringUtil::getInstance] jget EMPTY_STRING]
+    }
+}
 
-1;
 

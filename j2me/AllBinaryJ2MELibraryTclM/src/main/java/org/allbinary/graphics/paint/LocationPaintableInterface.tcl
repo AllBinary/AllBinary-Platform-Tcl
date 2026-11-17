@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-# Java interface
-package org::allbinary::graphics::paint::LocationPaintableInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-    die "abstract method paintXY";
+oo::class create ::LocationPaintableInterface {
+    superclass ::JObject
 }
 
-use javax::microedition::lcdui::Graphics ();
+oo::define ::LocationPaintableInterface {
+    method initFields_LocationPaintableInterface {} {
+        return
+    }
+    
 
-1;
+    method paintXY {graphics x y} {
+        error [jexception AbstractMethodError paintXY]
+    }
+}
+
+namespace eval ::LocationPaintableInterface {
+}
+
 

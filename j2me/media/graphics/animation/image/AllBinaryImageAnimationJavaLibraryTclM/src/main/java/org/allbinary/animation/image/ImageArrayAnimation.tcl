@@ -11,116 +11,95 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::ImageArrayAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::IndexedAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{imageArray} = $javax::microedition::lcdui::NullImage::NULL_IMAGE_ARRAY;
-    $self->{totalFrames} = 0;
-    $self->{circularIndexUtil} = $org::allbinary::util::CircularIndexUtil::NULL_CIRCULAR_INDEX_UTIL;
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
+oo::class create ::ImageArrayAnimation {
+    superclass ::IndexedAnimation
 }
 
+oo::define ::ImageArrayAnimation {
+    method initFields_ImageArrayAnimation {} {
+        my jset imageArray {}
+        my jset totalFrames 0
+        my jset circularIndexUtil {}
+        my jset anchor 0
+        my jset imageArray [::NullImage::staticGet_NULL_IMAGE_ARRAY]
+        my jset totalFrames 0
+        my jset circularIndexUtil [::CircularIndexUtil::staticGet_NULL_CIRCULAR_INDEX_UTIL]
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        return
+    }
+    
 
-sub new {
-    my ($class, $imageArray, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->setImageArray($imageArray);
-    return $self;
+    constructor {imageArray animationBehavior} {
+        next $animationBehavior
+        my initFields_ImageArrayAnimation
+        my setImageArray $imageArray
+    }
+    
+
+    method getAnimationSize {} {
+        return [my getSize]
+    }
+    
+
+    method nextFrame {} {
+        [my jget circularIndexUtil] next
+    }
+    
+
+    method previousFrame {} {
+        [my jget circularIndexUtil] previous
+    }
+    
+
+    method setFrame {index} {
+        [my jget circularIndexUtil] setIndex $index
+    }
+    
+
+    method getFrame {} {
+        return [[my jget circularIndexUtil] getIndex]
+    }
+    
+
+    method getSize {} {
+        return [my jget totalFrames]
+    }
+    
+
+    method setSequence {sequence} {
+    }
+    
+
+    method getSequence {} {
+        return [::PrimitiveIntUtil::getArrayInstance]
+    }
+    
+
+    method getImage {index} {
+        return [[my jget imageArray] get $index]
+    }
+    
+
+    method getImageArray {} {
+        return [my jget imageArray]
+    }
+    
+
+    method setImageArray {imageArray} {
+        my jset imageArray $imageArray
+        my jset totalFrames [$imageArray length]
+        my jset circularIndexUtil [::CircularIndexUtil::createInstance [my jget totalFrames]]
+    }
+    
+
+    method paintXY {graphics x y} {
+        $graphics drawImage [[my jget imageArray] get [[my jget circularIndexUtil] getIndex]] $x $y [my jget anchor]
+    }
 }
 
-
-# throws Exception
-sub getAnimationSize {
-    my ($self) = @_;
-        return $self->getSize();
+namespace eval ::ImageArrayAnimation {
 }
 
-
-sub nextFrame {
-    my ($self) = @_;
-        $self->{circularIndexUtil}->next();
-}
-
-
-sub previousFrame {
-    my ($self) = @_;
-        $self->{circularIndexUtil}->previous();
-}
-
-
-sub setFrame {
-    my ($self, $index) = @_;
-        $self->{circularIndexUtil}->setIndex($index);
-}
-
-
-sub getFrame {
-    my ($self) = @_;
-        return $self->{circularIndexUtil}->getIndex();
-}
-
-
-sub getSize {
-    my ($self) = @_;
-        return $self->{totalFrames};
-}
-
-
-sub setSequence {
-    my ($self, $sequence) = @_;
-}
-
-
-sub getSequence {
-    my ($self) = @_;
-        return 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance();
-}
-
-
-sub getImage {
-    my ($self, $index) = @_;
-        return $self->{imageArray}->[$index];
-}
-
-
-sub getImageArray {
-    my ($self) = @_;
-        return $self->{imageArray};
-}
-
-
-sub setImageArray {
-    my ($self, $imageArray) = @_;
-        $self->{imageArray} = $imageArray;
-        $self->{totalFrames} = scalar(@{$imageArray});
-        $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstance($self->{totalFrames});
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $graphics->drawImage($self->{imageArray}->[$self->{circularIndexUtil}->getIndex()], $x, $y, $self->{anchor});
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::NullImage ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::util::CircularIndexUtil ();
-
-1;
 

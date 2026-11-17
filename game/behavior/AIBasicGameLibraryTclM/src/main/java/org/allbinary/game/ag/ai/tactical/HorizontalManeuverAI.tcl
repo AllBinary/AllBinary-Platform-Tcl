@@ -11,97 +11,84 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.tactical
 
-package org::allbinary::game::ag::ai::tactical::HorizontalManeuverAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ai::BasicAI';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{currentRelativeAngle} = 0;
-    $self->{currentSpeed} = undef;
+oo::class create ::HorizontalManeuverAI {
+    superclass ::BasicAI
 }
 
+oo::define ::HorizontalManeuverAI {
+    method initFields_HorizontalManeuverAI {} {
+        my jset currentRelativeAngle 0
+        my jset currentSpeed 0
+        my jset currentRelativeAngle 0
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{currentSpeed} = 5;
-    return $self;
-}
+    constructor {ownerLayerInterface gameInput} {
+        next $ownerLayerInterface $gameInput
+        my initFields_HorizontalManeuverAI
+        my jset currentSpeed 5
+    }
+    
 
-
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        my $ownerLayerInterface = $self->getOwnerLayerInterface();
-        my $x = $ownerLayerInterface->getXP();
-        if ($ownerLayerInterface->getXP() - $self->{currentSpeed} <= 0) {
-            $self->reverse();
-            $self->drop();
+    method processAI {allBinaryLayerManager} {
+        set ownerLayerInterface [my getOwnerLayerInterface]
+        set x [$ownerLayerInterface getXP]
+        if {[expr {[expr {[$ownerLayerInterface getXP] - [my jget currentSpeed]}] <= 0}]} {
+            my reverse
+            my drop
         }
-        if ($ownerLayerInterface->getX2() + $self->{currentSpeed} > 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance()->getLastWidth()) {
-            $self->reverse();
-            $self->accelerate();
-            $self->drop();
+        if {[expr {[expr {[$ownerLayerInterface getX2] + [my jget currentSpeed]}] > [[::DisplayInfoSingleton::getInstance] getLastWidth]}]} {
+            my reverse
+            my accelerate
+            my drop
         }
-        if ($self->{currentRelativeAngle} == 0) {
-            $x += $self->{currentSpeed};
-        } elsif ($self->{currentRelativeAngle} == 180) {
-            $x -= $self->{currentSpeed};
+        if {[expr {[my jget currentRelativeAngle] == 0}]} {
+            set x [jint [expr {$x + [my jget currentSpeed]}]]
+        } elseif {[expr {[my jget currentRelativeAngle] == 180}]} {
+            set x [jint [expr {$x - [my jget currentSpeed]}]]
         }
-        $ownerLayerInterface->setPosition($x, $ownerLayerInterface->getYP(), $ownerLayerInterface->getZP());
-        if ($self->{currentRelativeAngle} == 0) {
-            $self->SUPER::processKeyAI($javax::microedition::lcdui::Canvas::KEY_NUM0);
-        } elsif ($self->{currentRelativeAngle} == 180) {
-            $self->SUPER::processKeyAI($javax::microedition::lcdui::Canvas::KEY_POUND);
+        $ownerLayerInterface setPosition $x [$ownerLayerInterface getYP] [$ownerLayerInterface getZP]
+        if {[expr {[my jget currentRelativeAngle] == 0}]} {
+            next [::Canvas::staticGet_KEY_NUM0]
+        } elseif {[expr {[my jget currentRelativeAngle] == 180}]} {
+            next [::Canvas::staticGet_KEY_POUND]
         }
-}
+    }
+    
 
-
-sub reverse {
-    my ($self) = @_;
-        if ($self->{currentRelativeAngle} == 180) {
-            $self->{currentRelativeAngle} = 0;
-        } elsif ($self->{currentRelativeAngle} == 0) {
-            $self->{currentRelativeAngle} = 180;
+    method reverse {} {
+        if {[expr {[my jget currentRelativeAngle] == 180}]} {
+            my jset currentRelativeAngle 0
+        } elseif {[expr {[my jget currentRelativeAngle] == 0}]} {
+            my jset currentRelativeAngle 180
         }
-}
+    }
+    
 
-
-sub accelerate {
-    my ($self) = @_;
-        if ($self->{currentSpeed} < 20) {
-            $self->{currentSpeed}++;
+    method accelerate {} {
+        if {[expr {[my jget currentSpeed] < 20}]} {
+            my jpostinc currentSpeed 1
         }
-}
+    }
+    
 
-
-sub drop {
-    my ($self) = @_;
-        my $ownerLayerInterface = $self->getOwnerLayerInterface();
-        my $y = $ownerLayerInterface->getYP();
-        if ($ownerLayerInterface->getY2() + $ownerLayerInterface->getHeight() > 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance()->getLastHeight()) {
-            $y = 0;
+    method drop {} {
+        set ownerLayerInterface [my getOwnerLayerInterface]
+        set y [$ownerLayerInterface getYP]
+        if {[expr {[expr {[$ownerLayerInterface getY2] + [$ownerLayerInterface getHeight]}] > [[::DisplayInfoSingleton::getInstance] getLastHeight]}]} {
+            set y 0
         } else {
-            $y += $ownerLayerInterface->getHeight() + 1;
+            set y [jint [expr {$y + [expr {[$ownerLayerInterface getHeight] + 1}]}]]
         }
-        $ownerLayerInterface->setPosition($ownerLayerInterface->getXP(), $y, $ownerLayerInterface->getZP());
+        $ownerLayerInterface setPosition [$ownerLayerInterface getXP] $y [$ownerLayerInterface getZP]
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::game::ai::BasicAI ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
+namespace eval ::HorizontalManeuverAI {
+}
 
-1;
 

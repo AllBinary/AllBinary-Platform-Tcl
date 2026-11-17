@@ -11,145 +11,171 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.event
 
-package org::allbinary::game::input::event::RawKeyEventHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::event::RawKeyEventHandler'->new() };
-our $TOTAL_LISTENERS = "Total Listeners: ";
-our $LISTENER_LABEL = " Listener: ";
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{eventListenerInterfaceList} = undef;
+oo::class create ::RawKeyEventHandler {
+    superclass ::JObject
 }
 
+oo::define ::RawKeyEventHandler {
+    method initFields_RawKeyEventHandler {} {
+        my jset logUtil {}
+        my jset eventListenerInterfaceList {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::event::RawKeyEventHandler::instance;
-}
+    constructor {} {
+        next
+        my initFields_RawKeyEventHandler
+        my jset eventListenerInterfaceList [::BasicArrayListD new]
+    }
+    
 
+    method removeAllListeners {} {
+        my jset eventListenerInterfaceList [::BasicArrayListD new]
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{eventListenerInterfaceList} = 'org::allbinary::util::BasicArrayListD'->new();
-    return $self;
-}
-
-
-sub removeAllListeners {
-    my ($self) = @_;
-        $self->{eventListenerInterfaceList} = 'org::allbinary::util::BasicArrayListD'->new();
-}
-
-
-sub addListeners {
-    my ($self, $vector) = @_;
-        my $eventListenerInterface = undef;
-        my $size = $vector->size();
-        for (my $index = 0; $index < $size; $index++) {
-            $eventListenerInterface = $vector->get($index);
-            $self->addListener($eventListenerInterface);
+    method addListeners {vector} {
+        set eventListenerInterface {}
+        set size [$vector size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set eventListenerInterface [$vector get $index]
+            my addListener $eventListenerInterface
         }
-}
+    }
+    
 
-
-sub addListenerSingleThreaded {
-    my ($self, $eventListenerInterface) = @_;
-        if (!$self->{eventListenerInterfaceList}->contains($eventListenerInterface)) {
-            $self->{eventListenerInterfaceList}->add($eventListenerInterface);
+    method addListenerSingleThreaded {eventListenerInterface} {
+        if {[expr {![[my jget eventListenerInterfaceList] contains $eventListenerInterface]}]} {
+            [my jget eventListenerInterfaceList] add $eventListenerInterface
         }
-}
+    }
+    
 
-
-sub addListener {
-    my ($self, $eventListenerInterface) = @_;
-        if (!$self->{eventListenerInterfaceList}->contains($eventListenerInterface)) {
-            $self->{eventListenerInterfaceList}->add($eventListenerInterface);
+    method addListener {eventListenerInterface} {
+        if {[expr {![[my jget eventListenerInterfaceList] contains $eventListenerInterface]}]} {
+            [my jget eventListenerInterfaceList] add $eventListenerInterface
         }
-}
+    }
+    
 
+    method removeListenerSingleThreaded {eventListenerInterface} {
+        [my jget eventListenerInterfaceList] remove $eventListenerInterface
+    }
+    
 
-sub removeListenerSingleThreaded {
-    my ($self, $eventListenerInterface) = @_;
-        $self->{eventListenerInterfaceList}->remove($eventListenerInterface);
-}
+    method removeListener {eventListenerInterface} {
+        [my jget eventListenerInterfaceList] remove $eventListenerInterface
+    }
+    
 
-
-sub removeListener {
-    my ($self, $eventListenerInterface) = @_;
-        $self->{eventListenerInterfaceList}->remove($eventListenerInterface);
-}
-
-
-# throws Exception
-sub fireEvent {
-    my ($self, $keyCode, $deviceId, $repeated) = @_;
-        my $eventListenerInterface = undef;
-        my $index = 0;
-        while ($index < $self->{eventListenerInterfaceList}->size()) {
+    method fireEvent {keyCode deviceId repeated} {
+        set eventListenerInterface {}
+        set index 0
+        while {[expr {$index < [[my jget eventListenerInterfaceList] size]}]} {
             try {
-                $eventListenerInterface = $self->{eventListenerInterfaceList}->get($index);
-                $self->process($keyCode, $deviceId, $repeated, $eventListenerInterface);
-            } catch ($e) {
-                my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-                $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, 'org::allbinary::logic::util::event::EventStrings'->getInstance()->{FIRE_EVENT}, $e);
+                set eventListenerInterface [[my jget eventListenerInterfaceList] get $index]
+                my process $keyCode $deviceId $repeated $eventListenerInterface
+            } on error {e} {
+                set commonStrings [::CommonStrings::getInstance]
+                [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [[::EventStrings::getInstance] jget FIRE_EVENT] $e
             }
-            $index++;
+            jpostincr index 1
         }
-}
+    }
+    
 
+    method process {keyCode deviceId repeated eventListenerInterface} {
+        $eventListenerInterface onEventRaw $keyCode $deviceId $repeated
+    }
+    
 
-# throws Exception
-sub process {
-    my ($self, $keyCode, $deviceId, $repeated, $eventListenerInterface) = @_;
-        $eventListenerInterface->onEventRaw($keyCode, $deviceId, $repeated);
-}
+    method getEventListenerInterfaceListP {} {
+        return [my jget eventListenerInterfaceList]
+    }
+    
 
-
-sub getEventListenerInterfaceListP {
-    my ($self) = @_;
-        return $self->{eventListenerInterfaceList};
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append($org::allbinary::game::input::event::RawKeyEventHandler::TOTAL_LISTENERS);
-        $stringBuffer->appendint($self->{eventListenerInterfaceList}->size());
-        my $eventListenerInterface = undef;
-        my $index = 0;
-        while ($index < $self->{eventListenerInterfaceList}->size()) {
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append [::RawKeyEventHandler::staticGet_TOTAL_LISTENERS]
+        $stringBuffer appendint [[my jget eventListenerInterfaceList] size]
+        set eventListenerInterface {}
+        set index 0
+        while {[expr {$index < [[my jget eventListenerInterfaceList] size]}]} {
             try {
-                $eventListenerInterface = $self->{eventListenerInterfaceList}->get($index);
-                $stringBuffer->append($org::allbinary::game::input::event::RawKeyEventHandler::LISTENER_LABEL);
-                $stringBuffer->append($eventListenerInterface->toString());
-            } catch ($e) {
-                my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-                $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{TOSTRING}, $e);
+                set eventListenerInterface [[my jget eventListenerInterfaceList] get $index]
+                $stringBuffer append [::RawKeyEventHandler::staticGet_LISTENER_LABEL]
+                $stringBuffer append [$eventListenerInterface toString]
+            } on error {e} {
+                set commonStrings [::CommonStrings::getInstance]
+                [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget TOSTRING] $e
             }
-            $index++;
+            jpostincr index 1
         }
-        return $stringBuffer->toString();
+        return [$stringBuffer toString]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
+namespace eval ::RawKeyEventHandler {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::RawKeyEventHandler new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    variable TOTAL_LISTENERSValue {}
+    variable TOTAL_LISTENERSSet 0
+    proc staticGet_TOTAL_LISTENERS {} {
+        variable TOTAL_LISTENERSValue
+        variable TOTAL_LISTENERSSet
+        if {!$TOTAL_LISTENERSSet} {
+            set TOTAL_LISTENERSSet 1
+            set TOTAL_LISTENERSValue "Total Listeners: "
+        }
+        return $TOTAL_LISTENERSValue
+    }
+    proc staticSet_TOTAL_LISTENERS {value} {
+        variable TOTAL_LISTENERSValue
+        variable TOTAL_LISTENERSSet
+        set TOTAL_LISTENERSSet 1
+        set TOTAL_LISTENERSValue $value
+    }
+    variable LISTENER_LABELValue {}
+    variable LISTENER_LABELSet 0
+    proc staticGet_LISTENER_LABEL {} {
+        variable LISTENER_LABELValue
+        variable LISTENER_LABELSet
+        if {!$LISTENER_LABELSet} {
+            set LISTENER_LABELSet 1
+            set LISTENER_LABELValue " Listener: "
+        }
+        return $LISTENER_LABELValue
+    }
+    proc staticSet_LISTENER_LABEL {value} {
+        variable LISTENER_LABELValue
+        variable LISTENER_LABELSet
+        set LISTENER_LABELSet 1
+        set LISTENER_LABELValue $value
+    }
+    proc getInstance {} {
+        return [::RawKeyEventHandler::staticGet_instance]
+    }
+}
 
-1;
 

@@ -11,84 +11,114 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
 #OpenGLESNullImageJavaLibrary
-package org::allbinary::image::opengles::OpenGLESImage;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'javax::microedition::lcdui::Image','org::allbinary::image::opengles::OpenGLSurfaceChangedInterface';
-
-tie our $NULL_OPENGL_IMAGE, 'java::lang::LazyStatic', sub { 'org::allbinary::image::opengles::OpenGLESImage'->new($javax::microedition::lcdui::NullImage::NULL_IMAGE, $org::allbinary::platform::graphics::PlatformBitmapBaseFactory::NULL_PLATFORM_BITMAP_BASE_FACTORY, $org::allbinary::platform::opengles::PlatformTextureBaseFactory::NULL_PLATFORM_TEXTURE_BASE_FACTORY) };
-tie our $texture2dList, 'java::lang::LazyStatic', sub { 'org::allbinary::util::BasicArrayListD'->new() };
-our $TYPE = 4;
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{textureFactory} = undef;
-    $self->{openGLBitmap} = undef;
-    $self->{openGLESImageProperties} = 'org::allbinary::image::opengles::OpenGLESImageProperties'->new();
-    $self->{imageProcessor} = 'org::allbinary::image::opengles::OpenGLESImageProcessor'->getInstance();
-    $self->{openGLESImageTranslate} = 'org::allbinary::image::opengles::OpenGLESImageTranslate'->getInstance();
+oo::class create ::OpenGLESImage {
+    superclass ::Image
 }
 
+oo::define ::OpenGLESImage {
+    method initFields_OpenGLESImage {} {
+        my jset commonStrings {}
+        my jset textureFactory {}
+        my jset openGLBitmap {}
+        my jset openGLESImageProperties {}
+        my jset imageProcessor {}
+        my jset openGLESImageTranslate {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        
+        
+        my jset openGLESImageProperties [::OpenGLESImageProperties new]
+        my jset imageProcessor [::OpenGLESImageProcessor::getInstance]
+        my jset openGLESImageTranslate [::OpenGLESImageTranslate::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $image, $bitmapFactory, $textureFactory) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{openGLBitmap} = $bitmapFactory->createBitmap($image);
-        $self->{textureFactory} = $textureFactory;
-    return $self;
+    constructor {image bitmapFactory textureFactory} {
+        next
+        my initFields_OpenGLESImage
+        my jset openGLBitmap [$bitmapFactory createBitmap $image]
+        my jset textureFactory $textureFactory
+    }
+    
+
+    method set {gl} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
+
+    method initTexture {gl} {
+        return false
+    }
+    
+
+    method drawRegion {gl viewHeight x_src y_src width height x y z} {
+    }
+    
+
+    method draw {gl x y z} {
+    }
+    
+
+    method getType {} {
+        return [::OpenGLESImage::staticGet_TYPE]
+    }
 }
 
-
-# throws Exception
-sub set {
-    my ($self, $gl) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
+namespace eval ::OpenGLESImage {
+    variable NULL_OPENGL_IMAGEValue {}
+    variable NULL_OPENGL_IMAGESet 0
+    proc staticGet_NULL_OPENGL_IMAGE {} {
+        variable NULL_OPENGL_IMAGEValue
+        variable NULL_OPENGL_IMAGESet
+        if {!$NULL_OPENGL_IMAGESet} {
+            set NULL_OPENGL_IMAGESet 1
+            set NULL_OPENGL_IMAGEValue [::OpenGLESImage new [::NullImage::staticGet_NULL_IMAGE] [::PlatformBitmapBaseFactory::staticGet_NULL_PLATFORM_BITMAP_BASE_FACTORY] [::PlatformTextureBaseFactory::staticGet_NULL_PLATFORM_TEXTURE_BASE_FACTORY]]
+        }
+        return $NULL_OPENGL_IMAGEValue
+    }
+    proc staticSet_NULL_OPENGL_IMAGE {value} {
+        variable NULL_OPENGL_IMAGEValue
+        variable NULL_OPENGL_IMAGESet
+        set NULL_OPENGL_IMAGESet 1
+        set NULL_OPENGL_IMAGEValue $value
+    }
+    variable texture2dListValue {}
+    variable texture2dListSet 0
+    proc staticGet_texture2dList {} {
+        variable texture2dListValue
+        variable texture2dListSet
+        if {!$texture2dListSet} {
+            set texture2dListSet 1
+            set texture2dListValue [::BasicArrayListD new]
+        }
+        return $texture2dListValue
+    }
+    proc staticSet_texture2dList {value} {
+        variable texture2dListValue
+        variable texture2dListSet
+        set texture2dListSet 1
+        set texture2dListValue $value
+    }
+    variable TYPEValue {}
+    variable TYPESet 0
+    proc staticGet_TYPE {} {
+        variable TYPEValue
+        variable TYPESet
+        if {!$TYPESet} {
+            set TYPESet 1
+            set TYPEValue 4
+        }
+        return $TYPEValue
+    }
+    proc staticSet_TYPE {value} {
+        variable TYPEValue
+        variable TYPESet
+        set TYPESet 1
+        set TYPEValue $value
+    }
 }
 
-
-sub initTexture {
-    my ($self, $gl) = @_;
-        return 0;
-}
-
-
-sub drawRegion {
-    my ($self, $gl, $viewHeight, $x_src, $y_src, $width, $height, $x, $y, $z) = @_;
-}
-
-
-sub draw {
-    my ($self, $gl, $x, $y, $z) = @_;
-}
-
-
-sub getType {
-    my ($self) = @_;
-        return $org::allbinary::image::opengles::OpenGLESImage::TYPE;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::khronos::opengles::GL ();
-use javax::microedition::khronos::opengles::GL10 ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::NullImage ();
-use org::allbinary::platform::graphics::PlatformBitmapBase ();
-use org::allbinary::platform::graphics::PlatformBitmapBaseFactory ();
-use org::allbinary::platform::opengles::PlatformTextureBaseFactory ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::image::opengles::OpenGLSurfaceChangedInterface ();
-use org::allbinary::image::opengles::OpenGLESImageProperties ();
-use org::allbinary::image::opengles::OpenGLESImageProcessor ();
-use org::allbinary::image::opengles::OpenGLESImageTranslate ();
-
-1;
 

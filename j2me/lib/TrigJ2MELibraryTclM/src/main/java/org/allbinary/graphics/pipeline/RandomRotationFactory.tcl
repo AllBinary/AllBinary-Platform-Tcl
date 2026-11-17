@@ -11,57 +11,62 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.pipeline
 
-package org::allbinary::graphics::pipeline::RandomRotationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::pipeline::RandomRotationFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{myRandomFactory} = 'org::allbinary::game::rand::MyRandomFactory'->getInstance();
-    $self->{angleFactory} = 'org::allbinary::math::AngleFactory'->getInstance();
+oo::class create ::RandomRotationFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::RandomRotationFactory {
+    method initFields_RandomRotationFactory {} {
+        my jset myRandomFactory {}
+        my jset angleFactory {}
+        my jset myRandomFactory [::MyRandomFactory::getInstance]
+        my jset angleFactory [::AngleFactory::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_RandomRotationFactory
+    }
+    
+    
+
+    method getInstanceList {vector howMuch} {
+        set graphicsPipe [::BasicGraphicsPipeline new $vector]
+        $graphicsPipe createMatrix
+        $graphicsPipe rotateToAngle [[my jget angleFactory] getAt [my getNextRandomAngle $howMuch]]
+        return [$graphicsPipe getMatrix]
+    }
+    
+
+    method getNextRandomAngle {howMuch} {
+        return [[my jget myRandomFactory] getNextInt [jint [expr {$howMuch * 10}]]]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::pipeline::RandomRotationFactory::instance;
+namespace eval ::RandomRotationFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::RandomRotationFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::RandomRotationFactory::staticGet_instance]
+    }
 }
 
-
-# throws Exception
-sub getInstanceList {
-    my ($self, $vector, $howMuch) = @_;
-        my $graphicsPipe = 'org::allbinary::graphics::pipeline::BasicGraphicsPipeline'->new($vector);
-        $graphicsPipe->createMatrix();
-        $graphicsPipe->rotateToAngle($self->{angleFactory}->getAt($self->getNextRandomAngle($howMuch)));
-        return $graphicsPipe->getMatrix();
-}
-
-
-sub getNextRandomAngle {
-    my ($self, $howMuch) = @_;
-        return $self->{myRandomFactory}->getNextInt($howMuch * 10);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::rand::MyRandomFactory ();
-use org::allbinary::math::AngleFactory ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::graphics::pipeline::BasicGraphicsPipeline ();
-
-1;
 

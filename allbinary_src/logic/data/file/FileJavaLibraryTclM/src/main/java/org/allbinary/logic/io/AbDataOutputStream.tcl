@@ -11,26 +11,25 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
-package org::allbinary::logic::io::AbDataOutputStream;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class, $out) = @_;
-    my $self = $class->SUPER::new($out);
-        # super(...) made $self above
-    return $self;
+oo::class create ::AbDataOutputStream {
+    superclass ::DataOutputStream
 }
 
-use java::lang::Object ();
-# use java::io::DataOutputStream ();
-# use java::io::OutputStream ();
+oo::define ::AbDataOutputStream {
+    method initFields_AbDataOutputStream {} {
+        return
+    }
+    
 
-1;
+    constructor {out} {
+        next $out
+        my initFields_AbDataOutputStream
+    }
+}
+
+namespace eval ::AbDataOutputStream {
+}
+
 

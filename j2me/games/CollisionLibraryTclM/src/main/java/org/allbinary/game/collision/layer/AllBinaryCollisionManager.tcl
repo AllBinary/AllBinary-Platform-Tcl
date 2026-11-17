@@ -11,60 +11,67 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision.layer
 
-package org::allbinary::game::collision::layer::AllBinaryCollisionManager;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $allBinaryCollisionManager, 'java::lang::LazyStatic', sub { 'org::allbinary::game::collision::layer::AllBinaryCollisionManager'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AllBinaryCollisionManager {
+    superclass ::JObject
 }
 
+oo::define ::AllBinaryCollisionManager {
+    method initFields_AllBinaryCollisionManager {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::collision::layer::AllBinaryCollisionManager::allBinaryCollisionManager;
-}
+    constructor {} {
+        next
+        my initFields_AllBinaryCollisionManager
+    }
+    
+    
 
-
-# throws Exception
-sub process {
-    my ($self, $layerManager, $collidableInterfaceCompositeInterface, $startIndex) = @_;
-        my $size = $layerManager->getSize();
-        for (my $index = $startIndex + 1; $index < $size; $index++) {
-            my $collidableInterfaceCompositeInterface2 = $layerManager->getLayerAt($index);
-            $self->collide($layerManager, $collidableInterfaceCompositeInterface, $collidableInterfaceCompositeInterface2);
+    method process {layerManager collidableInterfaceCompositeInterface startIndex} {
+        set size [$layerManager getSize]
+        for {set index [jint [expr {$startIndex + 1}]]} {[expr {$index < $size}]} {jpostincr index 1} {
+            set collidableInterfaceCompositeInterface2 [$layerManager getLayerAt $index]
+            my collide $layerManager $collidableInterfaceCompositeInterface $collidableInterfaceCompositeInterface2
         }
-}
+    }
+    
 
-
-# throws Exception
-sub collide {
-    my ($self, $layerManager, $collidableInterfaceCompositeInterface, $collidableInterfaceCompositeInterface2) = @_;
-        my $collidableBase2 = $collidableInterfaceCompositeInterface2->getCollidableInferface();
-        my $collidableBase = $collidableInterfaceCompositeInterface->getCollidableInferface();
-        if ($collidableBase2->isCollidable($collidableInterfaceCompositeInterface)) {
-            if ($collidableBase->isCollisionInterface($collidableInterfaceCompositeInterface, $collidableInterfaceCompositeInterface2)) {
-                $collidableBase->collideInterface($collidableInterfaceCompositeInterface, $collidableInterfaceCompositeInterface2);
-                $collidableBase2->collideInterface($collidableInterfaceCompositeInterface, $collidableInterfaceCompositeInterface);
+    method collide {layerManager collidableInterfaceCompositeInterface collidableInterfaceCompositeInterface2} {
+        set collidableBase2 [$collidableInterfaceCompositeInterface2 getCollidableInferface]
+        set collidableBase [$collidableInterfaceCompositeInterface getCollidableInferface]
+        if {[$collidableBase2 isCollidable $collidableInterfaceCompositeInterface]} {
+            if {[$collidableBase isCollisionInterface $collidableInterfaceCompositeInterface $collidableInterfaceCompositeInterface2]} {
+                $collidableBase collideInterface $collidableInterfaceCompositeInterface $collidableInterfaceCompositeInterface2
+                $collidableBase2 collideInterface $collidableInterfaceCompositeInterface $collidableInterfaceCompositeInterface
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::collision::CollidableBaseBehavior ();
-use org::allbinary::game::collision::CollidableInterfaceCompositeInterface ();
-use org::allbinary::game::layer::CollidableCompositeLayer ();
-use org::allbinary::layer::LayerManager ();
+namespace eval ::AllBinaryCollisionManager {
+    variable allBinaryCollisionManagerValue {}
+    variable allBinaryCollisionManagerSet 0
+    proc staticGet_allBinaryCollisionManager {} {
+        variable allBinaryCollisionManagerValue
+        variable allBinaryCollisionManagerSet
+        if {!$allBinaryCollisionManagerSet} {
+            set allBinaryCollisionManagerSet 1
+            set allBinaryCollisionManagerValue [::AllBinaryCollisionManager new]
+        }
+        return $allBinaryCollisionManagerValue
+    }
+    proc staticSet_allBinaryCollisionManager {value} {
+        variable allBinaryCollisionManagerValue
+        variable allBinaryCollisionManagerSet
+        set allBinaryCollisionManagerSet 1
+        set allBinaryCollisionManagerValue $value
+    }
+    proc getInstance {} {
+        return [::AllBinaryCollisionManager::staticGet_allBinaryCollisionManager]
+    }
+}
 
-1;
 

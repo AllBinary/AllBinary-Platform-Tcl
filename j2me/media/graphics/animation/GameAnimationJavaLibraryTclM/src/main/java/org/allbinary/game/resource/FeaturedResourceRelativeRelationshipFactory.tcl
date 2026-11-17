@@ -11,78 +11,76 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.resource
 
-package org::allbinary::game::resource::FeaturedResourceRelativeRelationshipFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::resource::FeaturedResourceFactory';
-
-tie our $INSTANCE, 'java::lang::LazyStatic', sub { 'org::allbinary::game::resource::FeaturedResourceRelativeRelationshipFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{basicArrayListUtil} = 'org::allbinary::util::BasicArrayListUtil'->getInstance();
+oo::class create ::FeaturedResourceRelativeRelationshipFactory {
+    superclass ::FeaturedResourceFactory
 }
 
+oo::define ::FeaturedResourceRelativeRelationshipFactory {
+    method initFields_FeaturedResourceRelativeRelationshipFactory {} {
+        my jset basicArrayListUtil {}
+        my jset basicArrayListUtil [::BasicArrayListUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_FeaturedResourceRelativeRelationshipFactory
+    }
+    
+    
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::resource::FeaturedResourceRelativeRelationshipFactory::INSTANCE;
-}
-
-
-# throws Exception
-sub getRelativeRelationshipList {
-    my ($self, $resource, $layer) = @_;
-        my $featureReleaseList = $self->getList();
-        my $size = $self->getList()->size();
-        for (my $index = 0; $index < $size; $index++) {
-            my $featureInterface = $featureReleaseList->{objectArray}->[$index];
-            if ($featureInterface->isFeature()) {
-                my $list = $featureInterface->getResourceRelativeRelationshipList($resource);
-                if ($list != $self->{basicArrayListUtil}->getImmutableInstance()) {
-                    return $self->duplicate($list, $layer);
+    method getRelativeRelationshipList {resource layer} {
+        set featureReleaseList [my getList]
+        set size [[my getList] size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set featureInterface [[$featureReleaseList jget objectArray] get $index]
+            if {[$featureInterface isFeature]} {
+                set list [$featureInterface getResourceRelativeRelationshipList $resource]
+                if {[expr {$list ne [[my jget basicArrayListUtil] getImmutableInstance]}]} {
+                    return [my duplicate $list $layer]
                 }
             }
         }
-        die ('org::allbinary::logic::string::StringMaker'->new()->append("Not available for current feature selection or Resource: ")->append($resource)->toString());
-}
+        error [jexception Exception [[[[::StringMaker new] append "Not available for current feature selection or Resource: "] append $resource] toString]]
+    }
+    
 
-
-# throws Exception
-sub duplicate {
-    my ($self, $list, $layer) = @_;
-        my $pointFactory = 'org::allbinary::graphics::PointFactory'->getInstance();
-        my $newList = 'org::allbinary::util::BasicArrayListD'->new();
-        my $size = $list->size();
-        for (my $index = 0; $index < $size; $index++) {
-            my $relativeRelationship = $list->{objectArray}->[$index];
-            $newList->add('org::allbinary::layer::relationship::RelativeLayerRelationship'->new($layer, $pointFactory->createXY($relativeRelationship->getX(), $relativeRelationship->getY()), 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance()));
+    method duplicate {list layer} {
+        set pointFactory [::PointFactory::getInstance]
+        set newList [::BasicArrayListD new]
+        set size [$list size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set relativeRelationship [[$list jget objectArray] get $index]
+            $newList add [::RelativeLayerRelationship new $layer [$pointFactory createXY [$relativeRelationship getX] [$relativeRelationship getY]] [[::BasicArrayListUtil::getInstance] getImmutableInstance]]
         }
-        return $newList;
+        return $newList
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::graphics::RelativeRelationship ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::relationship::RelativeLayerRelationship ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::util::BasicArrayListUtil ();
-use org::allbinary::game::resource::FeaturedResourceFactory ();
+namespace eval ::FeaturedResourceRelativeRelationshipFactory {
+    variable INSTANCEValue {}
+    variable INSTANCESet 0
+    proc staticGet_INSTANCE {} {
+        variable INSTANCEValue
+        variable INSTANCESet
+        if {!$INSTANCESet} {
+            set INSTANCESet 1
+            set INSTANCEValue [::FeaturedResourceRelativeRelationshipFactory new]
+        }
+        return $INSTANCEValue
+    }
+    proc staticSet_INSTANCE {value} {
+        variable INSTANCEValue
+        variable INSTANCESet
+        set INSTANCESet 1
+        set INSTANCEValue $value
+    }
+    proc getInstance {} {
+        return [::FeaturedResourceRelativeRelationshipFactory::staticGet_INSTANCE]
+    }
+}
 
-1;
 

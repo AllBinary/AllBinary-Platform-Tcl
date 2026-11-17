@@ -11,122 +11,103 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::HighScoresPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::graphics::paint::Paintable','org::allbinary::graphics::color::ColorChangeListener','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{displayInfoSingleton} = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-    $self->{myFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{basicColor} = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE};
-    $self->{highScores} = 'org::allbinary::game::score::NullHighScoresSingletonFactory'->getInstance();
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
-    $self->{charHeight} = 0;
+oo::class create ::HighScoresPaintable {
+    superclass ::Paintable
 }
 
+oo::define ::HighScoresPaintable {
+    method initFields_HighScoresPaintable {} {
+        my jset displayInfoSingleton {}
+        my jset myFontProcessor {}
+        my jset basicColor {}
+        my jset highScores {}
+        my jset anchor 0
+        my jset charHeight 0
+        my jset displayInfoSingleton [::DisplayInfoSingleton::getInstance]
+        my jset myFontProcessor [::UpdateMyFontProcessor new [self]]
+        my jset basicColor [[::BasicColorFactory::getInstance] jget WHITE]
+        my jset highScores [::NullHighScoresSingletonFactory::getInstance]
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        my jset charHeight 0
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_HighScoresPaintable
+    }
+    
 
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        my jset charHeight [$font getHeight]
+        my jset myFontProcessor [::MyFontProcessor::getInstance]
+    }
+    
 
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->{charHeight} = $font->getHeight();
-        $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
-}
+    method onEvent {eventObject} {
+        set colorChangeEvent $eventObject
+        my jset basicColor [$colorChangeEvent getBasicColorP]
+    }
+    
 
-
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        my $colorChangeEvent = $eventObject;
-        $self->{basicColor} = $colorChangeEvent->getBasicColorP();
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        my $width = $self->{displayInfoSingleton}->getLastWidth();
-        my $height = $self->{displayInfoSingleton}->getLastHeight();
-        $graphics->setColor(int($self->getBasicColorP()));
-        my $heading = $self->{highScores}->getHeading();
-        my $topScoresWidth = (POSIX::floor(($graphics->getFont()->stringWidth($heading)) / (2 ** (1))));
-        my $charHeight = $self->{charHeight};
-        $graphics->drawString($heading, (POSIX::floor(($width) / (2 ** (1)))) - $topScoresWidth, $charHeight, $self->{anchor});
-        $graphics->drawString($self->{highScores}->getColumnOneHeading(), 10, $charHeight * 3, $self->{anchor});
-        my $columnTwoHeading = $self->{highScores}->getColumnTwoHeading();
-        my $columnTwoHeadingWidth = $graphics->getFont()->stringWidth($columnTwoHeading);
-        $graphics->drawString($columnTwoHeading, $width - 10 - $columnTwoHeadingWidth, $charHeight * 3, $self->{anchor});
-        my $index = 4;
-        my $largestSecondColumnWidth = $columnTwoHeadingWidth;
-        my $list = $self->{highScores}->getList();
-        my $size = $list->size();
-        my $vectorIndex = 0;
-        my $highScore = undef;
-        while ($vectorIndex < $size && $charHeight * $index < $height - ($charHeight * 2)) {
-            $highScore = $list->{objectArray}->[$vectorIndex];
-            my $nextScoreWidth = $graphics->getFont()->stringWidth($highScore->getScoreString());
-            if ($nextScoreWidth > $largestSecondColumnWidth) {
-                $largestSecondColumnWidth = $nextScoreWidth;
+    method paint {graphics} {
+        [my jget myFontProcessor] process $graphics
+        set width [[my jget displayInfoSingleton] getLastWidth]
+        set height [[my jget displayInfoSingleton] getLastHeight]
+        $graphics setColor [[my getBasicColorP] intValue]
+        set heading [[my jget highScores] getHeading]
+        set topScoresWidth ([expr {[[$graphics getFont] stringWidth $heading] >> 1}])
+        set charHeight [my jget charHeight]
+        $graphics drawString $heading [jint [expr {([expr {$width >> 1}]) - $topScoresWidth}]] $charHeight [my jget anchor]
+        $graphics drawString [[my jget highScores] getColumnOneHeading] 10 [jint [expr {$charHeight * 3}]] [my jget anchor]
+        set columnTwoHeading [[my jget highScores] getColumnTwoHeading]
+        set columnTwoHeadingWidth [[$graphics getFont] stringWidth $columnTwoHeading]
+        $graphics drawString $columnTwoHeading [jint [expr {[jint [expr {$width - 10}]] - $columnTwoHeadingWidth}]] [jint [expr {$charHeight * 3}]] [my jget anchor]
+        set index 4
+        set largestSecondColumnWidth $columnTwoHeadingWidth
+        set list [[my jget highScores] getList]
+        set size [$list size]
+        set vectorIndex 0
+        set highScore {}
+        while {[expr {[expr {$vectorIndex < $size}] && [expr {[jint [expr {$charHeight * $index}]] < [jint [expr {$height - ([jint [expr {$charHeight * 2}]])}]]}]}]} {
+            set highScore [[$list jget objectArray] get $vectorIndex]
+            set nextScoreWidth [[$graphics getFont] stringWidth [$highScore getScoreString]]
+            if {[expr {$nextScoreWidth > $largestSecondColumnWidth}]} {
+                set largestSecondColumnWidth $nextScoreWidth
             }
-            $vectorIndex++;
+            jpostincr vectorIndex 1
         }
-        $vectorIndex = 0;
-        while ($vectorIndex < $size && $charHeight * $index < $height - ($charHeight * 2)) {
-            $highScore = $list->{objectArray}->[$vectorIndex];
-            $graphics->drawString($highScore->getName(), 10, $charHeight * $index, $self->{anchor});
-            $graphics->drawString($highScore->getScoreString(), $width - 10 - $largestSecondColumnWidth, $charHeight * $index, $self->{anchor});
-            $index++;
-            $vectorIndex++;
+        set vectorIndex 0
+        while {[expr {[expr {$vectorIndex < $size}] && [expr {[jint [expr {$charHeight * $index}]] < [jint [expr {$height - ([jint [expr {$charHeight * 2}]])}]]}]}]} {
+            set highScore [[$list jget objectArray] get $vectorIndex]
+            $graphics drawString [$highScore getName] 10 [jint [expr {$charHeight * $index}]] [my jget anchor]
+            $graphics drawString [$highScore getScoreString] [jint [expr {[jint [expr {$width - 10}]] - $largestSecondColumnWidth}]] [jint [expr {$charHeight * $index}]] [my jget anchor]
+            jpostincr index 1
+            jpostincr vectorIndex 1
         }
+    }
+    
+
+    method setBasicColorP {basicColor} {
+        my jset basicColor $basicColor
+    }
+    
+
+    method getBasicColorP {} {
+        return [my jget basicColor]
+    }
+    
+
+    method setHighScores {highScores} {
+        my jset highScores $highScores
+    }
 }
 
-
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
-        $self->{basicColor} = $basicColor;
+namespace eval ::HighScoresPaintable {
 }
 
-
-sub getBasicColorP {
-    my ($self) = @_;
-        return $self->{basicColor};
-}
-
-
-sub setHighScores {
-    my ($self, $highScores) = @_;
-        $self->{highScores} = $highScores;
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::color::ColorChangeEvent ();
-use org::allbinary::graphics::color::ColorChangeListener ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::game::score::NullHighScoresSingletonFactory ();
-
-1;
 

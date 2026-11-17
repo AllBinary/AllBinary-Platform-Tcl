@@ -11,42 +11,39 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.event.handler
 
-# Java interface
-package org::allbinary::logic::util::event::handler::BasicEventHandlerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub addListenerInterface {
-    my ($self, $eventListenerInterface) = @_;
-    die "abstract method addListenerInterface";
+oo::class create ::BasicEventHandlerInterface {
+    superclass ::JObject
 }
 
+oo::define ::BasicEventHandlerInterface {
+    method initFields_BasicEventHandlerInterface {} {
+        return
+    }
+    
 
-# throws Exception
-sub fireEvent {
-    my ($self, $eventObject) = @_;
-    die "abstract method fireEvent";
+    method addListenerInterface {eventListenerInterface} {
+        error [jexception AbstractMethodError addListenerInterface]
+    }
+    
+
+    method fireEvent {eventObject} {
+        error [jexception AbstractMethodError fireEvent]
+    }
+    
+
+    method removeAllListeners {} {
+        error [jexception AbstractMethodError removeAllListeners]
+    }
+    
+
+    method removeListener {eventListenerInterface} {
+        error [jexception AbstractMethodError removeListener]
+    }
 }
 
-
-sub removeAllListeners {
-    my ($self) = @_;
-    die "abstract method removeAllListeners";
+namespace eval ::BasicEventHandlerInterface {
 }
 
-
-sub removeListener {
-    my ($self, $eventListenerInterface) = @_;
-    die "abstract method removeListener";
-}
-
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventListenerInterface ();
-
-1;
 

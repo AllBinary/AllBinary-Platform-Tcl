@@ -11,50 +11,59 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.accelerometer
 
-package org::allbinary::input::accelerometer::AccelerometerSensorFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $allBinaryAccelerometerSensor = undef;
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AccelerometerSensorFactory {
+    superclass ::JObject
 }
 
+oo::define ::AccelerometerSensorFactory {
+    method initFields_AccelerometerSensorFactory {} {
+        return
+    }
 
-# throws Exception
-sub init {
-    my ($class) = @_;
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        my $sensorFeatureFactory = 'org::allbinary::game::configuration::feature::SensorFeatureFactory'->getInstance();
-        if ($features->isFeature($sensorFeatureFactory->{ORIENTATION_SENSORS})) {
-            die ("No Orientation Sensors");
-        } elsif ($features->isFeature($sensorFeatureFactory->{SIMULATED_ORIENTATION_SENSORS})) {
-            die ("No Simulation Sensors");
-        } elsif ($features->isFeature($sensorFeatureFactory->{NO_ORIENTATION})) {
-            $org::allbinary::input::accelerometer::AccelerometerSensorFactory::allBinaryAccelerometerSensor = 'org::allbinary::input::accelerometer::NoAccelerometerSensor'->new();
-        } else {
-            die ("Not Such SensorFeature");
+    constructor {} {
+        next
+        my initFields_AccelerometerSensorFactory
+    }
+    
+    
+}
+
+namespace eval ::AccelerometerSensorFactory {
+    variable allBinaryAccelerometerSensorValue {}
+    variable allBinaryAccelerometerSensorSet 0
+    proc staticGet_allBinaryAccelerometerSensor {} {
+        variable allBinaryAccelerometerSensorValue
+        variable allBinaryAccelerometerSensorSet
+        if {!$allBinaryAccelerometerSensorSet} {
+            set allBinaryAccelerometerSensorSet 1
+            set allBinaryAccelerometerSensorValue {}
         }
+        return $allBinaryAccelerometerSensorValue
+    }
+    proc staticSet_allBinaryAccelerometerSensor {value} {
+        variable allBinaryAccelerometerSensorValue
+        variable allBinaryAccelerometerSensorSet
+        set allBinaryAccelerometerSensorSet 1
+        set allBinaryAccelerometerSensorValue $value
+    }
+    proc init {} {
+        set features [::Features::getInstance]
+        set sensorFeatureFactory [::SensorFeatureFactory::getInstance]
+        if {[$features isFeature [$sensorFeatureFactory jget ORIENTATION_SENSORS]]} {
+            error [jexception Exception "No Orientation Sensors"]
+        } elseif {[$features isFeature [$sensorFeatureFactory jget SIMULATED_ORIENTATION_SENSORS]]} {
+            error [jexception Exception "No Simulation Sensors"]
+        } elseif {[$features isFeature [$sensorFeatureFactory jget NO_ORIENTATION]]} {
+            ::AccelerometerSensorFactory::staticSet_allBinaryAccelerometerSensor [::NoAccelerometerSensor new]
+        } else {
+            error [jexception Exception "Not Such SensorFeature"]
+        }
+    }
+    proc getInstance {} {
+        return [::AccelerometerSensorFactory::staticGet_allBinaryAccelerometerSensor]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::accelerometer::AccelerometerSensorFactory::allBinaryAccelerometerSensor;
-}
-
-use java::lang::Object ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::SensorFeatureFactory ();
-use org::allbinary::input::gyro::AllBinaryOrientationSensor ();
-use org::allbinary::input::accelerometer::NoAccelerometerSensor ();
-
-1;
 

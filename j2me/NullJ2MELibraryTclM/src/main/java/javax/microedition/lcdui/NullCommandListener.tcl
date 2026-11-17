@@ -1,28 +1,43 @@
 # Generated Code Do Not Modify
+# package javax.microedition.lcdui
 
-package javax::microedition::lcdui::NullCommandListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','javax::microedition::lcdui::CommandListener';
-
-tie our $NULL_COMMAND_LISTENER, 'java::lang::LazyStatic', sub { 'javax::microedition::lcdui::NullCommandListener'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullCommandListener {
+    superclass ::JObject
 }
 
+oo::define ::NullCommandListener {
+    method initFields_NullCommandListener {} {
+        return
+    }
 
-sub commandAction {
-    my ($self, $c, $d) = @_;
+    constructor {} {
+        next
+        my initFields_NullCommandListener
+    }
+    
+
+    method commandAction {c d} {
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::CommandListener ();
+namespace eval ::NullCommandListener {
+    variable NULL_COMMAND_LISTENERValue {}
+    variable NULL_COMMAND_LISTENERSet 0
+    proc staticGet_NULL_COMMAND_LISTENER {} {
+        variable NULL_COMMAND_LISTENERValue
+        variable NULL_COMMAND_LISTENERSet
+        if {!$NULL_COMMAND_LISTENERSet} {
+            set NULL_COMMAND_LISTENERSet 1
+            set NULL_COMMAND_LISTENERValue [::NullCommandListener new]
+        }
+        return $NULL_COMMAND_LISTENERValue
+    }
+    proc staticSet_NULL_COMMAND_LISTENER {value} {
+        variable NULL_COMMAND_LISTENERValue
+        variable NULL_COMMAND_LISTENERSet
+        set NULL_COMMAND_LISTENERSet 1
+        set NULL_COMMAND_LISTENERValue $value
+    }
+}
 
-1;
 

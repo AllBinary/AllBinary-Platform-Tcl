@@ -11,78 +11,77 @@
 # Created By: Travis Berthelot 
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.emulator.device
 
-package org::allbinary::emulator::device::TrueTypeFontUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::emulator::device::TrueTypeFontUtilBase';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::emulator::device::TrueTypeFontUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{fontImage} = $org::allbinary::image::opengles::OpenGLESImage::NULL_OPENGL_IMAGE;
+oo::class create ::TrueTypeFontUtil {
+    superclass ::TrueTypeFontUtilBase
 }
 
+oo::define ::TrueTypeFontUtil {
+    method initFields_TrueTypeFontUtil {} {
+        my jset fontImage {}
+        my jset fontImage [::OpenGLESImage::staticGet_NULL_OPENGL_IMAGE]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::emulator::device::TrueTypeFontUtil::instance;
+    constructor {} {
+        next 1
+        my initFields_TrueTypeFontUtil
+    }
+    
+
+    method getAsTextureSize {textureSize} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method getCellSize {cellSize} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method getFontBitmap {filename fontSize cellSize basicColor} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method saveFontAtlasAsFile {} {
+    }
+    
+
+    method getFontBitmapGL {gl filename cellSize basicColor} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method getFontWidths {filename fontSize} {
+        error [jexception RuntimeException {}]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new(1);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
+namespace eval ::TrueTypeFontUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::TrueTypeFontUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::TrueTypeFontUtil::staticGet_instance]
+    }
 }
 
-
-sub getAsTextureSize {
-    my ($self, $textureSize) = @_;
-        die ("RuntimeException");
-}
-
-
-sub getCellSize {
-    my ($self, $cellSize) = @_;
-        die ("RuntimeException");
-}
-
-
-sub getFontBitmap {
-    my ($self, $filename, $fontSize, $cellSize, $basicColor) = @_;
-        die ("RuntimeException");
-}
-
-
-sub saveFontAtlasAsFile {
-    my ($self) = @_;
-}
-
-
-sub getFontBitmapGL {
-    my ($self, $gl, $filename, $cellSize, $basicColor) = @_;
-        die ("RuntimeException");
-}
-
-
-sub getFontWidths {
-    my ($self, $filename, $fontSize) = @_;
-        die ("RuntimeException");
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::khronos::opengles::GL10 ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::image::opengles::OpenGLESImage ();
-use org::allbinary::emulator::device::TrueTypeFontUtilBase ();
-
-1;
 

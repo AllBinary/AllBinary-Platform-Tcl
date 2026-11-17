@@ -11,74 +11,81 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::InputProbability;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $INPUT_PROBABILITY, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt(0) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{likelyhoodIntegerArray} = undef;
-    $self->{repeatLikelyhoodIntegerArray} = undef;
-    $self->{max} = undef;
-    $self->{timeDelayHelper} = undef;
+oo::class create ::InputProbability {
+    superclass ::JObject
 }
 
+oo::define ::InputProbability {
+    method initFields_InputProbability {} {
+        my jset likelyhoodIntegerArray {}
+        my jset repeatLikelyhoodIntegerArray {}
+        my jset max 0
+        my jset timeDelayHelper {}
+        
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $likelyhoodIntegerArray, $repeatLikelyhoodIntegerArray, $max, $timeDelayHelper) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{likelyhoodIntegerArray} = $likelyhoodIntegerArray;
-        $self->{repeatLikelyhoodIntegerArray} = $repeatLikelyhoodIntegerArray;
-        $self->{max} = $max;
-        $self->{timeDelayHelper} = $timeDelayHelper;
-    return $self;
+    constructor {likelyhoodIntegerArray repeatLikelyhoodIntegerArray max timeDelayHelper} {
+        next
+        my initFields_InputProbability
+        my jset likelyhoodIntegerArray $likelyhoodIntegerArray
+        my jset repeatLikelyhoodIntegerArray $repeatLikelyhoodIntegerArray
+        my jset max $max
+        my jset timeDelayHelper $timeDelayHelper
+    }
+    
+
+    method getLikelyhoodIntegerArray {} {
+        return [my jget likelyhoodIntegerArray]
+    }
+    
+
+    method getRepeatLikelyhoodIntegerArray {} {
+        return [my jget repeatLikelyhoodIntegerArray]
+    }
+    
+
+    method getMax {} {
+        return [my jget max]
+    }
+    
+
+    method getTimeDelayHelper {} {
+        return [my jget timeDelayHelper]
+    }
+    
+
+    method toHashtable {} {
+        set hashtable [[::StdUtil::getInstance] createHashtable]
+        $hashtable put [::InputProbability::staticGet_INPUT_PROBABILITY] [self]
+        return $hashtable
+    }
 }
 
-
-sub getLikelyhoodIntegerArray {
-    my ($self) = @_;
-        return $self->{likelyhoodIntegerArray};
+namespace eval ::InputProbability {
+    variable INPUT_PROBABILITYValue {}
+    variable INPUT_PROBABILITYSet 0
+    proc staticGet_INPUT_PROBABILITY {} {
+        variable INPUT_PROBABILITYValue
+        variable INPUT_PROBABILITYSet
+        if {!$INPUT_PROBABILITYSet} {
+            set INPUT_PROBABILITYSet 1
+            set INPUT_PROBABILITYValue [[::SmallIntegerSingletonFactory::getInstance] getAt 0]
+        }
+        return $INPUT_PROBABILITYValue
+    }
+    proc staticSet_INPUT_PROBABILITY {value} {
+        variable INPUT_PROBABILITYValue
+        variable INPUT_PROBABILITYSet
+        set INPUT_PROBABILITYSet 1
+        set INPUT_PROBABILITYValue $value
+    }
 }
 
-
-sub getRepeatLikelyhoodIntegerArray {
-    my ($self) = @_;
-        return $self->{repeatLikelyhoodIntegerArray};
-}
-
-
-sub getMax {
-    my ($self) = @_;
-        return $self->{max};
-}
-
-
-sub getTimeDelayHelper {
-    my ($self) = @_;
-        return $self->{timeDelayHelper};
-}
-
-
-sub toHashtable {
-    my ($self) = @_;
-        my $hashtable = 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable();
-        $hashtable->put($org::allbinary::game::ag::ai::InputProbability::INPUT_PROBABILITY, $self);
-        return $hashtable;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::time::TimeDelayHelper ();
-use org::allbinary::util::ABHashtable ();
-
-1;
 

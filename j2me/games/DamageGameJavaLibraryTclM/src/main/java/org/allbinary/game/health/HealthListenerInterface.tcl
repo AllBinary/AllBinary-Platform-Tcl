@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.health
 
-# Java interface
-package org::allbinary::game::health::HealthListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub onHealthChange {
-    my ($self) = @_;
-    die "abstract method onHealthChange";
+oo::class create ::HealthListenerInterface {
+    superclass ::JObject
 }
 
+oo::define ::HealthListenerInterface {
+    method initFields_HealthListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onHealthChange {} {
+        error [jexception AbstractMethodError onHealthChange]
+    }
+}
+
+namespace eval ::HealthListenerInterface {
+}
+
 

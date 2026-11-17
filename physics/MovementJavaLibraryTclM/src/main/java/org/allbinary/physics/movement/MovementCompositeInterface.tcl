@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
-# Java interface
-package org::allbinary::physics::movement::MovementCompositeInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getMovement {
-    my ($self) = @_;
-    die "abstract method getMovement";
+oo::class create ::MovementCompositeInterface {
+    superclass ::JObject
 }
 
+oo::define ::MovementCompositeInterface {
+    method initFields_MovementCompositeInterface {} {
+        return
+    }
+    
 
-1;
+    method getMovement {} {
+        error [jexception AbstractMethodError getMovement]
+    }
+}
+
+namespace eval ::MovementCompositeInterface {
+}
+
 

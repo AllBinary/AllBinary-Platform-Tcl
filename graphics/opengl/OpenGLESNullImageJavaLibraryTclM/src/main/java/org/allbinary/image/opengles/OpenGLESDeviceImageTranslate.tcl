@@ -11,45 +11,42 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
-package org::allbinary::image::opengles::OpenGLESDeviceImageTranslate;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::image::opengles::OpenGLESImageTranslate';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{translateX} = 0.0;
-    $self->{translateY} = 0.0;
-    $self->{translateX2} = 0.0;
-    $self->{translateY2} = 0.0;
+oo::class create ::OpenGLESDeviceImageTranslate {
+    superclass ::OpenGLESImageTranslate
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
+oo::define ::OpenGLESDeviceImageTranslate {
+    method initFields_OpenGLESDeviceImageTranslate {} {
+        my jset translateX 0.0
+        my jset translateY 0.0
+        my jset translateX2 0.0
+        my jset translateY2 0.0
+        my jset translateX 0.0
+        my jset translateY 0.0
+        my jset translateX2 0.0
+        my jset translateY2 0.0
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_OpenGLESDeviceImageTranslate
+    }
+    
+
+    method translate {gl openGLESImage x y} {
+        [$openGLESImage jget imageProcessor] translate $gl [expr {[my jget translateX] + ([expr {[[$openGLESImage jget openGLESImageProperties] jget scaleX] * $x}])}] [expr {[my jget translateY] + ([expr {[[$openGLESImage jget openGLESImageProperties] jget scaleY] * $y}])}]
+    }
+    
+
+    method translate2 {gl openGLESImage} {
+        [$openGLESImage jget imageProcessor] translate $gl [my jget translateX2] [my jget translateY2]
+    }
 }
 
-
-sub translate {
-    my ($self, $gl, $openGLESImage, $x, $y) = @_;
-        $openGLESImage->{imageProcessor}->translate($gl, $self->{translateX} + ($openGLESImage->{openGLESImageProperties}->{scaleX} * $x), $self->{translateY} + ($openGLESImage->{openGLESImageProperties}->{scaleY} * $y));
+namespace eval ::OpenGLESDeviceImageTranslate {
 }
 
-
-sub translate2 {
-    my ($self, $gl, $openGLESImage) = @_;
-        $openGLESImage->{imageProcessor}->translate($gl, $self->{translateX2}, $self->{translateY2});
-}
-
-use java::lang::Object ();
-use javax::microedition::khronos::opengles::GL10 ();
-use org::allbinary::image::opengles::OpenGLESImageTranslate ();
-
-1;
 

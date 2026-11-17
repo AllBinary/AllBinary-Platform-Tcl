@@ -11,123 +11,136 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::BasicTouchInputFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{SPECIAL_BUTTON_SEVEN_TESTING_ONLY} = undef;
-    $self->{SPECIAL_BUTTON_EIGHT_TESTING_ONLY} = undef;
-    $self->{SPECIAL_BUTTON_SIX} = undef;
-    $self->{SPECIAL_BUTTON_FIVE} = undef;
-    $self->{SPECIAL_BUTTON_FOUR} = undef;
-    $self->{SPECIAL_BUTTON_THREE} = undef;
-    $self->{SPECIAL_BUTTON_TWO} = undef;
-    $self->{SPECIAL_BUTTON_ONE} = undef;
-    $self->{UP} = undef;
-    $self->{LEFT} = undef;
-    $self->{RIGHT} = undef;
-    $self->{DOWN} = undef;
-    $self->{NONE} = undef;
-    $self->{initialized} = 0;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::BasicTouchInputFactory {
+    superclass ::JObject
 }
 
+oo::define ::BasicTouchInputFactory {
+    method initFields_BasicTouchInputFactory {} {
+        my jset logUtil {}
+        my jset SPECIAL_BUTTON_SEVEN_TESTING_ONLY {}
+        my jset SPECIAL_BUTTON_EIGHT_TESTING_ONLY {}
+        my jset SPECIAL_BUTTON_SIX {}
+        my jset SPECIAL_BUTTON_FIVE {}
+        my jset SPECIAL_BUTTON_FOUR {}
+        my jset SPECIAL_BUTTON_THREE {}
+        my jset SPECIAL_BUTTON_TWO {}
+        my jset SPECIAL_BUTTON_ONE {}
+        my jset UP {}
+        my jset LEFT {}
+        my jset RIGHT {}
+        my jset DOWN {}
+        my jset NONE {}
+        my jset initialized false
+        my jset list {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        my jset initialized false
+        my jset list [::BasicArrayListD new]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::input::motion::button::BasicTouchInputFactory::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::input::motion::button::BasicTouchInputFactory::instance = 'org::allbinary::input::motion::button::BasicTouchInputFactory'->new();
+    constructor {} {
+        next
+        my initFields_BasicTouchInputFactory
+        set MAX [[::InputFactory::getInstance] jget MAX]
+        my jset SPECIAL_BUTTON_SEVEN_TESTING_ONLY [::TouchButtonInput new [jint [expr {$MAX - 41}]] "Button 7 - Testing Only May Cross Over Key Values"]
+        my jset SPECIAL_BUTTON_EIGHT_TESTING_ONLY [::TouchButtonInput new [jint [expr {$MAX - 42}]] "Button 8 - Testing Only May Cross Over Key Values"]
+        my jset SPECIAL_BUTTON_SIX [::TouchButtonInput new [jint [expr {$MAX - 30}]] "Button 6"]
+        my jset SPECIAL_BUTTON_FIVE [::TouchButtonInput new [jint [expr {$MAX - 31}]] "Button 5"]
+        my jset SPECIAL_BUTTON_FOUR [::TouchButtonInput new [jint [expr {$MAX - 32}]] "Button 4"]
+        my jset SPECIAL_BUTTON_THREE [::TouchButtonInput new [jint [expr {$MAX - 33}]] "Button 3"]
+        my jset SPECIAL_BUTTON_TWO [::TouchButtonInput new [jint [expr {$MAX - 34}]] "Button 2"]
+        my jset SPECIAL_BUTTON_ONE [::TouchButtonInput new [jint [expr {$MAX - 35}]] "Button 1"]
+        my jset UP [::TouchButtonInput new [jint [expr {$MAX - 36}]] "Up Button"]
+        my jset LEFT [::TouchButtonInput new [jint [expr {$MAX - 37}]] "Left Button"]
+        my jset RIGHT [::TouchButtonInput new [jint [expr {$MAX - 38}]] "Right Button"]
+        my jset DOWN [::TouchButtonInput new [jint [expr {$MAX - 39}]] "Down Button"]
+        my jset NONE [::TouchButtonInput new [jint [expr {$MAX - 40}]] "No Button"]
+    }
+    
+
+    method init {inputToGameKeyMapping} {
+        if {[expr {![my jget initialized]}]} {
+            my jset initialized true
+            [my jget list] add [my jget UP]
+            [my jget list] add [my jget LEFT]
+            [my jget list] add [my jget RIGHT]
+            [my jget list] add [my jget DOWN]
+            [my jget list] add [my jget SPECIAL_BUTTON_TWO]
+            [my jget list] add [my jget SPECIAL_BUTTON_FOUR]
+            [my jget list] add [my jget SPECIAL_BUTTON_THREE]
+            [my jget list] add [my jget SPECIAL_BUTTON_ONE]
+            [my jget list] add [my jget SPECIAL_BUTTON_FIVE]
+            [my jget list] add [my jget SPECIAL_BUTTON_SIX]
+            [my jget list] add [my jget SPECIAL_BUTTON_SIX]
+            [my jget list] add [my jget SPECIAL_BUTTON_SEVEN_TESTING_ONLY]
+            [my jget list] add [my jget SPECIAL_BUTTON_EIGHT_TESTING_ONLY]
+            my updateAllFromList [my jget list] $inputToGameKeyMapping
         }
-        return $org::allbinary::input::motion::button::BasicTouchInputFactory::instance;
-}
+    }
+    
 
+    method updateAll {inputToGameKeyMapping} {
+        my updateAllFromList [my jget list] $inputToGameKeyMapping
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $MAX = 'org::allbinary::game::input::InputFactory'->getInstance()->{MAX};
-        $self->{SPECIAL_BUTTON_SEVEN_TESTING_ONLY} = 'org::allbinary::input::motion::button::TouchButtonInput'->new($MAX - 41, "Button 7 - Testing Only May Cross Over Key Values");
-        $self->{SPECIAL_BUTTON_EIGHT_TESTING_ONLY} = 'org::allbinary::input::motion::button::TouchButtonInput'->new($MAX - 42, "Button 8 - Testing Only May Cross Over Key Values");
-        $self->{SPECIAL_BUTTON_SIX} = 'org::allbinary::input::motion::button::TouchButtonInput'->new($MAX - 30, "Button 6");
-        $self->{SPECIAL_BUTTON_FIVE} = 'org::allbinary::input::motion::button::TouchButtonInput'->new($MAX - 31, "Button 5");
-        $self->{SPECIAL_BUTTON_FOUR} = 'org::allbinary::input::motion::button::TouchButtonInput'->new($MAX - 32, "Button 4");
-        $self->{SPECIAL_BUTTON_THREE} = 'org::allbinary::input::motion::button::TouchButtonInput'->new($MAX - 33, "Button 3");
-        $self->{SPECIAL_BUTTON_TWO} = 'org::allbinary::input::motion::button::TouchButtonInput'->new($MAX - 34, "Button 2");
-        $self->{SPECIAL_BUTTON_ONE} = 'org::allbinary::input::motion::button::TouchButtonInput'->new($MAX - 35, "Button 1");
-        $self->{UP} = 'org::allbinary::input::motion::button::TouchButtonInput'->new($MAX - 36, "Up Button");
-        $self->{LEFT} = 'org::allbinary::input::motion::button::TouchButtonInput'->new($MAX - 37, "Left Button");
-        $self->{RIGHT} = 'org::allbinary::input::motion::button::TouchButtonInput'->new($MAX - 38, "Right Button");
-        $self->{DOWN} = 'org::allbinary::input::motion::button::TouchButtonInput'->new($MAX - 39, "Down Button");
-        $self->{NONE} = 'org::allbinary::input::motion::button::TouchButtonInput'->new($MAX - 40, "No Button");
-    return $self;
-}
-
-
-sub init {
-    my ($self, $inputToGameKeyMapping) = @_;
-        if (!$self->{initialized}) {
-            $self->{initialized} = 1;
-            $self->{list}->add($self->{UP});
-            $self->{list}->add($self->{LEFT});
-            $self->{list}->add($self->{RIGHT});
-            $self->{list}->add($self->{DOWN});
-            $self->{list}->add($self->{SPECIAL_BUTTON_TWO});
-            $self->{list}->add($self->{SPECIAL_BUTTON_FOUR});
-            $self->{list}->add($self->{SPECIAL_BUTTON_THREE});
-            $self->{list}->add($self->{SPECIAL_BUTTON_ONE});
-            $self->{list}->add($self->{SPECIAL_BUTTON_FIVE});
-            $self->{list}->add($self->{SPECIAL_BUTTON_SIX});
-            $self->{list}->add($self->{SPECIAL_BUTTON_SIX});
-            $self->{list}->add($self->{SPECIAL_BUTTON_SEVEN_TESTING_ONLY});
-            $self->{list}->add($self->{SPECIAL_BUTTON_EIGHT_TESTING_ONLY});
-            $self->updateAllFromList($self->{list}, $inputToGameKeyMapping);
+    method updateAllFromList {list inputToGameKeyMapping} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[::CommonLabels::getInstance] jget START_LABEL]] appendint [$list size]] toString] [self] "updateAll"
+        set touchButtonInput {}
+        for {set index [jint [expr {[$list size] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set touchButtonInput [[$list jget objectArray] get $index]
+            $touchButtonInput update $inputToGameKeyMapping
         }
+    }
+    
+
+    method getList {} {
+        return [my jget list]
+    }
 }
 
-
-sub updateAll {
-    my ($self, $inputToGameKeyMapping) = @_;
-        $self->updateAllFromList($self->{list}, $inputToGameKeyMapping);
-}
-
-
-sub updateAllFromList {
-    my ($self, $list, $inputToGameKeyMapping) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{START_LABEL})->appendint($list->size())->toString(), $self, "updateAll");
-        my $touchButtonInput = undef;
-        for (my $index = $list->size() - 1; $index >= 0; $index--) {
-            $touchButtonInput = $list->{objectArray}->[$index];
-            $touchButtonInput->update($inputToGameKeyMapping);
+namespace eval ::BasicTouchInputFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::BasicTouchInputFactory::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::BasicTouchInputFactory::staticSet_instance [::BasicTouchInputFactory new]
+        }
+        return [::BasicTouchInputFactory::staticGet_instance]
+    }
 }
 
-
-sub getList {
-    my ($self) = @_;
-        return $self->{list};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::InputFactory ();
-use org::allbinary::game::input::mapping::InputToGameKeyMapping ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::input::motion::button::TouchButtonInput ();
-
-1;
 

@@ -11,47 +11,55 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.resources
 
-package org::allbinary::resources::KeyValueFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::resources::KeyValueFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{MAP} = 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable();
+oo::class create ::KeyValueFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::KeyValueFactory {
+    method initFields_KeyValueFactory {} {
+        my jset MAP {}
+        my jset MAP [[::StdUtil::getInstance] createHashtable]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_KeyValueFactory
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::resources::KeyValueFactory::instance;
-}
-
-
-sub get {
-    my ($self, $key) = @_;
-        if (!$self->{MAP}->containsKey($key)) {
-            return $key;
+    method get {key} {
+        if {[expr {![[my jget MAP] containsKey $key]}]} {
+            return $key
         }
-        return $self->{MAP}->get($key);
+        return [[my jget MAP] get $key]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::util::ABHashtable ();
+namespace eval ::KeyValueFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::KeyValueFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::KeyValueFactory::staticGet_instance]
+    }
+}
 
-1;
 

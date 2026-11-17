@@ -11,25 +11,41 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.transition.shake
 
-package org::allbinary::animation::transition::shake::NoShakeAnimationListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::transition::shake::ShakeAnimationListener';
-
-tie our $NO_SHAKE_ANIMATION_LISTENER, 'java::lang::LazyStatic', sub { 'org::allbinary::animation::transition::shake::NoShakeAnimationListener'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::NoShakeAnimationListener {
+    superclass ::ShakeAnimationListener
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::animation::transition::shake::ShakeAnimationListener ();
+oo::define ::NoShakeAnimationListener {
+    method initFields_NoShakeAnimationListener {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_NoShakeAnimationListener
+    }
+}
+
+namespace eval ::NoShakeAnimationListener {
+    variable NO_SHAKE_ANIMATION_LISTENERValue {}
+    variable NO_SHAKE_ANIMATION_LISTENERSet 0
+    proc staticGet_NO_SHAKE_ANIMATION_LISTENER {} {
+        variable NO_SHAKE_ANIMATION_LISTENERValue
+        variable NO_SHAKE_ANIMATION_LISTENERSet
+        if {!$NO_SHAKE_ANIMATION_LISTENERSet} {
+            set NO_SHAKE_ANIMATION_LISTENERSet 1
+            set NO_SHAKE_ANIMATION_LISTENERValue [::NoShakeAnimationListener new]
+        }
+        return $NO_SHAKE_ANIMATION_LISTENERValue
+    }
+    proc staticSet_NO_SHAKE_ANIMATION_LISTENER {value} {
+        variable NO_SHAKE_ANIMATION_LISTENERValue
+        variable NO_SHAKE_ANIMATION_LISTENERSet
+        set NO_SHAKE_ANIMATION_LISTENERSet 1
+        set NO_SHAKE_ANIMATION_LISTENERValue $value
+    }
+}
+
 

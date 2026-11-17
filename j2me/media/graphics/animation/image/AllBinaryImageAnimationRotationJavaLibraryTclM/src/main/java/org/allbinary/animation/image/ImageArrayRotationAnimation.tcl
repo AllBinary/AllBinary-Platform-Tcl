@@ -11,61 +11,48 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::ImageArrayRotationAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::image::ImageArrayBaseRotationAnimation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{expectedTotalFrames} = 0;
+oo::class create ::ImageArrayRotationAnimation {
+    superclass ::ImageArrayBaseRotationAnimation
 }
 
+oo::define ::ImageArrayRotationAnimation {
+    method initFields_ImageArrayRotationAnimation {} {
+        my jset expectedTotalFrames 0
+        my jset expectedTotalFrames 0
+        return
+    }
+    
+    
 
-# throws Exception
-sub createAnimation {
-    my ($class, $anyType, $animationBehavior) = @_;
-        my $imageRotationAnimationInfo = $anyType;
-        return 'org::allbinary::animation::image::ImageArrayRotationAnimation'->new($imageRotationAnimationInfo->getImageArray(), $imageRotationAnimationInfo->getAngleInfoP(), $imageRotationAnimationInfo->getTotalAngle(), $animationBehavior);
-}
+    constructor {imageArray angleInfo totalAngle animationBehavior} {
+        next $imageArray $angleInfo $animationBehavior
+        my initFields_ImageArrayRotationAnimation
+        my initImageArray $imageArray $angleInfo $totalAngle
+    }
+    
 
-
-sub new {
-    my ($class, $imageArray, $angleInfo, $totalAngle, $animationBehavior) = @_;
-    my $self = $class->SUPER::new($imageArray, $angleInfo, $animationBehavior);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->initImageArray($imageArray, $angleInfo, $totalAngle);
-    return $self;
-}
-
-
-# throws Exception
-sub initImageArray {
-    my ($self, $imageArray, $angleInfo, $totalAngle) = @_;
-        $self->{expectedTotalFrames} = $totalAngle / $self->{angleInfo}->getAngleIncrementInfo()->getAngleIncrement();
-        $self->{angleInfo}->adjustAngle(0);
-        if ($self->{expectedTotalFrames} != $self->getSize()) {
-            die ("Wrong Number of Frames");
+    method initImageArray {imageArray angleInfo totalAngle} {
+        my jset expectedTotalFrames [expr {$totalAngle / [[[my jget angleInfo] getAngleIncrementInfo] getAngleIncrement]}]
+        [my jget angleInfo] adjustAngle 0
+        if {[expr {[my jget expectedTotalFrames] != [my getSize]}]} {
+            error [jexception Exception "Wrong Number of Frames"]
         }
+    }
+    
+
+    method setImageArray {imageArray} {
+        next $imageArray
+        [my jget angleInfo] adjustAngle 0
+    }
 }
 
-
-sub setImageArray {
-    my ($self, $imageArray) = @_;
-        $self->SUPER::setImageArray($imageArray);
-        $self->{angleInfo}->adjustAngle(0);
+namespace eval ::ImageArrayRotationAnimation {
+    proc createAnimation {anyType animationBehavior} {
+        set imageRotationAnimationInfo $anyType
+        return [::ImageArrayRotationAnimation new [$imageRotationAnimationInfo getImageArray] [$imageRotationAnimationInfo getAngleInfoP] [$imageRotationAnimationInfo getTotalAngle] $animationBehavior]
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::math::AngleInfo ();
-use org::allbinary::animation::image::ImageArrayBaseRotationAnimation ();
-
-1;
 

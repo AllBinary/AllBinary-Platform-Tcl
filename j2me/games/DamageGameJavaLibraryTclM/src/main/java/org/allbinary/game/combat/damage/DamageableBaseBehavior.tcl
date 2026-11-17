@@ -11,50 +11,59 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.damage
 
-package org::allbinary::game::combat::damage::DamageableBaseBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::combat::damage::DamageableInterface';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::combat::damage::DamageableBaseBehavior'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::DamageableBaseBehavior {
+    superclass ::JObject
 }
 
+oo::define ::DamageableBaseBehavior {
+    method initFields_DamageableBaseBehavior {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::combat::damage::DamageableBaseBehavior::instance;
+    constructor {} {
+        next
+        my initFields_DamageableBaseBehavior
+    }
+    
+    
+
+    method getName {} {
+        return [jclassname [self]]
+    }
+    
+
+    method damage {damage damageType} {
+    }
+    
+
+    method getDamage {damageType} {
+        return 6000
+    }
 }
 
-
-sub getName {
-    my ($self) = @_;
-        return ref($self);
+namespace eval ::DamageableBaseBehavior {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::DamageableBaseBehavior new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::DamageableBaseBehavior::staticGet_instance]
+    }
 }
 
-
-# throws Exception
-sub damage {
-    my ($self, $damage, $damageType) = @_;
-}
-
-
-# throws Exception
-sub getDamage {
-    my ($self, $damageType) = @_;
-        return 6000;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::combat::damage::DamageableInterface ();
-
-1;
 

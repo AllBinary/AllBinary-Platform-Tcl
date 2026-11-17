@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.part
 
-# Java interface
-package org::allbinary::game::part::PartFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub getInstance {
-    my ($self, $sourceLayerInterface, $relativeRelationship) = @_;
-    die "abstract method getInstance";
+oo::class create ::PartFactoryInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::graphics::RelativeRelationship ();
-use org::allbinary::layer::AllBinaryLayer ();
+oo::define ::PartFactoryInterface {
+    method initFields_PartFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getInstance {sourceLayerInterface relativeRelationship} {
+        error [jexception AbstractMethodError getInstance]
+    }
+}
+
+namespace eval ::PartFactoryInterface {
+}
+
 

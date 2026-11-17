@@ -11,31 +11,46 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.persistance
 
-package org::allbinary::game::configuration::persistance::NullRecordFilter;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','javax::microedition::rms::RecordFilter';
-
-tie our $NULL_RECORD_FILTER, 'java::lang::LazyStatic', sub { 'org::allbinary::game::configuration::persistance::NullRecordFilter'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::NullRecordFilter {
+    superclass ::JObject
 }
 
+oo::define ::NullRecordFilter {
+    method initFields_NullRecordFilter {} {
+        return
+    }
 
-sub matches {
-    my ($self, $candidate) = @_;
-        return 1;
+    constructor {} {
+        next
+        my initFields_NullRecordFilter
+    }
+    
+
+    method matches {candidate} {
+        return true
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::rms::RecordFilter ();
+namespace eval ::NullRecordFilter {
+    variable NULL_RECORD_FILTERValue {}
+    variable NULL_RECORD_FILTERSet 0
+    proc staticGet_NULL_RECORD_FILTER {} {
+        variable NULL_RECORD_FILTERValue
+        variable NULL_RECORD_FILTERSet
+        if {!$NULL_RECORD_FILTERSet} {
+            set NULL_RECORD_FILTERSet 1
+            set NULL_RECORD_FILTERValue [::NullRecordFilter new]
+        }
+        return $NULL_RECORD_FILTERValue
+    }
+    proc staticSet_NULL_RECORD_FILTER {value} {
+        variable NULL_RECORD_FILTERValue
+        variable NULL_RECORD_FILTERSet
+        set NULL_RECORD_FILTERSet 1
+        set NULL_RECORD_FILTERValue $value
+    }
+}
 
-1;
 

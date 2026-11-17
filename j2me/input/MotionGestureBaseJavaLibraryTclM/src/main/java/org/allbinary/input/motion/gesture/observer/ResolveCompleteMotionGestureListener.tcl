@@ -11,59 +11,45 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
-package org::allbinary::input::motion::gesture::observer::ResolveCompleteMotionGestureListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::input::motion::gesture::observer::CompleteMotionGestureListenerInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::ResolveCompleteMotionGestureListener {
+    superclass ::JObject
 }
 
+oo::define ::ResolveCompleteMotionGestureListener {
+    method initFields_ResolveCompleteMotionGestureListener {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-        $self->{logUtil}->putF("MotionGesture to CompleteMotionGesture Reciever", $self, $commonStrings->{CONSTRUCTOR});
-        'org::allbinary::game::input::CompleteMotionGestureInputEventHandler'->getInstance()->addListener('org::allbinary::game::input::motion::action::GameKeyFromMotionGestureEventListener'->new());
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_ResolveCompleteMotionGestureListener
+        set commonStrings [::CommonStrings::getInstance]
+        [my jget logUtil] putF "MotionGesture to CompleteMotionGesture Reciever" [self] [$commonStrings jget CONSTRUCTOR]
+        [::CompleteMotionGestureInputEventHandler::getInstance] addListener [::GameKeyFromMotionGestureEventListener new]
+    }
+    
 
-
-# throws Exception
-sub onMotionGestureCompleted {
-    my ($self, $list) = @_;
-        my $configuration = 'org::allbinary::input::motion::gesture::configuration::MotionGestureConfigurationFactory'->getInstance();
-        my $commandActionsList = $configuration->getAssociateCommandActionsList();
-        my $size = $commandActionsList->size();
-        for (my $index = $size - 1; $index >= 0; $index--) {
-            my $association = $commandActionsList->{objectArray}->[$index];
-            if ($association->isMotionGestureArrayEquals($list) == 1) {
-                my $completeMotionGestureInputEvent = $association->getCommandAction();
-                'org::allbinary::game::input::CompleteMotionGestureInputEventHandler'->getInstance()->fireEvent($completeMotionGestureInputEvent);
-                last;
+    method onMotionGestureCompleted {list} {
+        set configuration [::MotionGestureConfigurationFactory::getInstance]
+        set commandActionsList [$configuration getAssociateCommandActionsList]
+        set size [$commandActionsList size]
+        for {set index [jint [expr {$size - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set association [[$commandActionsList jget objectArray] get $index]
+            if {[expr {[$association isMotionGestureArrayEquals $list] == true}]} {
+                set completeMotionGestureInputEvent [$association getCommandAction]
+                [::CompleteMotionGestureInputEventHandler::getInstance] fireEvent $completeMotionGestureInputEvent
+                break
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::CompleteMotionGestureInputEventHandler ();
-use org::allbinary::game::input::motion::action::GameKeyCompleteMotionGestureInputEvent ();
-use org::allbinary::game::input::motion::action::GameKeyFromMotionGestureEventListener ();
-use org::allbinary::input::motion::gesture::MotionGestureToMotionGestureActionAssociation ();
-use org::allbinary::input::motion::gesture::configuration::MotionGestureConfiguration ();
-use org::allbinary::input::motion::gesture::configuration::MotionGestureConfigurationFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::input::motion::gesture::observer::CompleteMotionGestureListenerInterface ();
+namespace eval ::ResolveCompleteMotionGestureListener {
+}
 
-1;
 

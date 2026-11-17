@@ -11,69 +11,73 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.system.security.licensing.registration
 
-package org::allbinary::logic::system::security::licensing::registration::RegistrationConfiguration;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::system::security::licensing::registration::RegistrationConfiguration'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{registrationCode} = "No Registration Code";
-    $self->{NAME} = "registrationid";
+oo::class create ::RegistrationConfiguration {
+    superclass ::JObject
 }
 
+oo::define ::RegistrationConfiguration {
+    method initFields_RegistrationConfiguration {} {
+        my jset registrationCode {}
+        my jset NAME {}
+        my jset registrationCode "No Registration Code"
+        my jset NAME "registrationid"
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_RegistrationConfiguration
+    }
+    
+    
+
+    method read {} {
+    }
+    
+
+    method write {} {
+    }
+    
+
+    method toString {} {
+        return [[[[::StringMaker new] append "Registration Code: "] append [my getRegistrationCode]] toString]
+    }
+    
+
+    method setRegistrationCode {registrationCode} {
+        my jset registrationCode $registrationCode
+    }
+    
+
+    method getRegistrationCode {} {
+        return [my jget registrationCode]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::system::security::licensing::registration::RegistrationConfiguration::SINGLETON;
+namespace eval ::RegistrationConfiguration {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::RegistrationConfiguration new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::RegistrationConfiguration::staticGet_SINGLETON]
+    }
 }
 
-
-# throws Exception
-sub read {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub write {
-    my ($self) = @_;
-}
-
-
-sub toString {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringMaker'->new()->append("Registration Code: ")->append($self->getRegistrationCode())->toString();
-}
-
-
-sub setRegistrationCode {
-    my ($self, $registrationCode) = @_;
-        $self->{registrationCode} = $registrationCode;
-}
-
-
-sub getRegistrationCode {
-    my ($self) = @_;
-        return $self->{registrationCode};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringMaker ();
-
-1;
 

@@ -11,284 +11,264 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-package org::allbinary::layer::AllBinaryLayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::layer::Layer','org::allbinary::layer::LayerInterface';
-
-tie our $NULL_ALLBINARY_LAYER, 'java::lang::LazyStatic', sub { 'org::allbinary::layer::AllBinaryLayer'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $org::allbinary::graphics::RectangleFactory::SINGLETON, $org::allbinary::view::ViewPositionBase::NULL_VIEW_POSITION) };
-our $TYPE = "Type: ";
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{viewPositionEvent} = 'org::allbinary::view::event::ViewPositionEvent'->new($self);
-    $self->{halfWidth} = 0;
-    $self->{halfHeight} = 0;
-    $self->{name} = undef;
-    $self->{viewPosition} = $org::allbinary::view::ViewPositionBase::NULL_VIEW_POSITION;
+oo::class create ::AllBinaryLayer {
+    superclass ::Layer
 }
 
+oo::define ::AllBinaryLayer {
+    method initFields_AllBinaryLayer {} {
+        my jset viewPositionEvent {}
+        my jset halfWidth 0
+        my jset halfHeight 0
+        my jset name {}
+        my jset viewPosition {}
+        my jset viewPositionEvent [::ViewPositionEvent new [self]]
+        my jset halfWidth 0
+        my jset halfHeight 0
+        
+        my jset viewPosition [::ViewPositionBase::staticGet_NULL_VIEW_POSITION]
+        return
+    }
+    
 
-sub new {
-    my ($class, $name, $rectangle, $viewPosition) = @_;
-    my $self = $class->SUPER::new($rectangle->getWidth(), $rectangle->getHeight());
-    _init_fields($self);
-        # super(...) made $self above
-        my $localName = undef;
-        $localName = 'org::allbinary::logic::string::StringMaker'->new()->append($name)->append('org::allbinary::string::CommonSeps'->getInstance()->{COLON})->append(sprintf("%x", 'org::allbinary::TsUtil'->getInstance()->hashCode($self)))->toString();
-        $self->{name} = $localName;
-        my $point = $rectangle->getPoint();
-        $self->setPosition($point->getX(), $point->getY(), $point->getZ());
-        $self->setHalfWidth((POSIX::floor(($self->getWidth()) / (2 ** (1)))));
-        $self->setHalfHeight((POSIX::floor(($self->getHeight()) / (2 ** (1)))));
-        $self->{viewPosition} = $viewPosition;
-        $self->{viewPosition}->setAllbinaryLayer($self);
-    return $self;
+    constructor {name rectangle viewPosition} {
+        next [$rectangle getWidth] [$rectangle getHeight]
+        my initFields_AllBinaryLayer
+        set localName {}
+        set localName [[[[[::StringMaker new] append $name] append [[::CommonSeps::getInstance] jget COLON]] append [::Integer::toHexString [[::TsUtil::getInstance] hashCode1 [self]]]] toString]
+        my jset name $localName
+        set point [$rectangle getPoint]
+        my setPosition [$point getX] [$point getY] [$point getZ]
+        my setHalfWidth ([expr {[my getWidth] >> 1}])
+        my setHalfHeight ([expr {[my getHeight] >> 1}])
+        my jset viewPosition $viewPosition
+        [my jget viewPosition] setAllbinaryLayer [self]
+    }
+    
+
+    method setPosition {x y z} {
+        next $x $y $z
+    }
+    
+
+    method moveDXYZ {dx dy dz} {
+        next $dx $dy $dz
+    }
+    
+
+    method getXP {} {
+        return [next]
+    }
+    
+
+    method getYP {} {
+        return [next]
+    }
+    
+
+    method getZP {} {
+        return [next]
+    }
+    
+
+    method getWidth {} {
+        return [next]
+    }
+    
+
+    method getHeight {} {
+        return [next]
+    }
+    
+
+    method setVisible {visible} {
+        next $visible
+    }
+    
+
+    method isVisible {} {
+        return [next]
+    }
+    
+
+    method paint {graphics} {
+        next $graphics
+    }
+    
+
+    method onChangeEvent {layerManagerEvent} {
+    }
+    
+
+    method paintThreed {graphics} {
+    }
+    
+
+    method getX2 {} {
+        return [jint [expr {[my getXP] + [my getWidth]}]]
+    }
+    
+
+    method getY2 {} {
+        return [jint [expr {[my getYP] + [my getHeight]}]]
+    }
+    
+
+    method getZ2 {} {
+        return [jint ([expr {[my getZP] + [my getDepth]}])]
+    }
+    
+
+    method getName {} {
+        return [my jget name]
+    }
+    
+
+    method setHalfWidth {halfWidth} {
+        my jset halfWidth $halfWidth
+    }
+    
+
+    method getHalfWidth {} {
+        return [my jget halfWidth]
+    }
+    
+
+    method setHalfHeight {halfHeight} {
+        my jset halfHeight $halfHeight
+    }
+    
+
+    method getHalfHeight {} {
+        return [my jget halfHeight]
+    }
+    
+
+    method getHalfDepth {} {
+        return [jdiv [jint [my getDepth]] 2]
+    }
+    
+
+    method getViewPosition {} {
+        return [my jget viewPosition]
+    }
+    
+
+    method setViewPosition {viewPosition} {
+        my jset viewPosition $viewPosition
+    }
+    
+
+    method getGroupInterface {} {
+        return [[::BasicGroupFactory::getInstance] jget NONE_ARRAY]
+    }
+    
+
+    method implmentsTickableInterface {} {
+        return false
+    }
+    
+
+    method implmentsGameInputInterface {} {
+        return false
+    }
+    
+
+    method implmentsArtificialIntelligenceCompositeInterface {} {
+        return false
+    }
+    
+
+    method implmentsCollidableInterface {} {
+        return false
+    }
+    
+
+    method implementsThreedInterface {} {
+        return [[::OpenGLFeatureUtil::getInstance] isAnyThreed]
+    }
+    
+
+    method getType {} {
+        return [expr {-1}]
+    }
+    
+
+    method getMultiPlayerType {} {
+        return [expr {-1}]
+    }
+    
+
+    method toStringAppend {stringBuffer} {
+        set commonSeps [::CommonSeps::getInstance]
+        set positionStrings [::PositionStrings::getInstance]
+        set commonLabels [::CommonLabels::getInstance]
+        $stringBuffer append [my getName]
+        $stringBuffer append [$commonSeps jget COLON]
+        $stringBuffer append [::AllBinaryLayer::staticGet_TYPE]
+        $stringBuffer appendint [my getType]
+        $stringBuffer append [$commonSeps jget SPACE]
+        $stringBuffer append [$positionStrings jget X_LABEL]
+        $stringBuffer appendint [my getXP]
+        $stringBuffer append [$commonSeps jget SPACE]
+        $stringBuffer append [$positionStrings jget Y_LABEL]
+        $stringBuffer appendint [my getYP]
+        $stringBuffer append [$commonSeps jget SPACE]
+        $stringBuffer append [$positionStrings jget Z_LABEL]
+        $stringBuffer appendint [my getZP]
+        $stringBuffer append [$commonSeps jget SPACE]
+        $stringBuffer append [$commonLabels jget WIDTH_LABEL]
+        $stringBuffer appendint [my getWidth]
+        $stringBuffer append [$commonSeps jget SPACE]
+        $stringBuffer append [$commonLabels jget HEIGHT_LABEL]
+        $stringBuffer appendint [my getHeight]
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        my toStringAppend $stringBuffer
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub setPosition {
-    my ($self, $x, $y, $z) = @_;
-        $self->SUPER::setPosition($x, $y, $z);
+namespace eval ::AllBinaryLayer {
+    variable NULL_ALLBINARY_LAYERValue {}
+    variable NULL_ALLBINARY_LAYERSet 0
+    proc staticGet_NULL_ALLBINARY_LAYER {} {
+        variable NULL_ALLBINARY_LAYERValue
+        variable NULL_ALLBINARY_LAYERSet
+        if {!$NULL_ALLBINARY_LAYERSet} {
+            set NULL_ALLBINARY_LAYERSet 1
+            set NULL_ALLBINARY_LAYERValue [::AllBinaryLayer new [[::StringUtil::getInstance] jget EMPTY_STRING] [::RectangleFactory::staticGet_SINGLETON] [::ViewPositionBase::staticGet_NULL_VIEW_POSITION]]
+        }
+        return $NULL_ALLBINARY_LAYERValue
+    }
+    proc staticSet_NULL_ALLBINARY_LAYER {value} {
+        variable NULL_ALLBINARY_LAYERValue
+        variable NULL_ALLBINARY_LAYERSet
+        set NULL_ALLBINARY_LAYERSet 1
+        set NULL_ALLBINARY_LAYERValue $value
+    }
+    variable TYPEValue {}
+    variable TYPESet 0
+    proc staticGet_TYPE {} {
+        variable TYPEValue
+        variable TYPESet
+        if {!$TYPESet} {
+            set TYPESet 1
+            set TYPEValue "Type: "
+        }
+        return $TYPEValue
+    }
+    proc staticSet_TYPE {value} {
+        variable TYPEValue
+        variable TYPESet
+        set TYPESet 1
+        set TYPEValue $value
+    }
 }
 
-
-sub moveDXYZ {
-    my ($self, $dx, $dy, $dz) = @_;
-        $self->SUPER::moveDXYZ($dx, $dy, $dz);
-}
-
-
-sub getXP {
-    my ($self) = @_;
-        return $self->SUPER::getXP();
-}
-
-
-sub getYP {
-    my ($self) = @_;
-        return $self->SUPER::getYP();
-}
-
-
-sub getZP {
-    my ($self) = @_;
-        return $self->SUPER::getZP();
-}
-
-
-sub getWidth {
-    my ($self) = @_;
-        return $self->SUPER::getWidth();
-}
-
-
-sub getHeight {
-    my ($self) = @_;
-        return $self->SUPER::getHeight();
-}
-
-
-sub setVisible {
-    my ($self, $visible) = @_;
-        $self->SUPER::setVisible($visible);
-}
-
-
-sub isVisible {
-    my ($self) = @_;
-        return $self->SUPER::isVisible();
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->SUPER::paint($graphics);
-}
-
-
-# throws Exception
-sub onChangeEvent {
-    my ($self, $layerManagerEvent) = @_;
-}
-
-
-sub paintThreed {
-    my ($self, $graphics) = @_;
-}
-
-
-sub getX2 {
-    my ($self) = @_;
-        return $self->getXP() + $self->getWidth();
-}
-
-
-sub getY2 {
-    my ($self) = @_;
-        return $self->getYP() + $self->getHeight();
-}
-
-
-sub getZ2 {
-    my ($self) = @_;
-        return int(($self->getZP() + $self->getDepth()));
-}
-
-
-sub getName {
-    my ($self) = @_;
-        return $self->{name};
-}
-
-
-sub setHalfWidth {
-    my ($self, $halfWidth) = @_;
-        $self->{halfWidth} = $halfWidth;
-}
-
-
-sub getHalfWidth {
-    my ($self) = @_;
-        return $self->{halfWidth};
-}
-
-
-sub setHalfHeight {
-    my ($self, $halfHeight) = @_;
-        $self->{halfHeight} = $halfHeight;
-}
-
-
-sub getHalfHeight {
-    my ($self) = @_;
-        return $self->{halfHeight};
-}
-
-
-sub getHalfDepth {
-    my ($self) = @_;
-        return int(int($self->getDepth()) / 2);
-}
-
-
-sub getViewPosition {
-    my ($self) = @_;
-        return $self->{viewPosition};
-}
-
-
-sub setViewPosition {
-    my ($self, $viewPosition) = @_;
-        $self->{viewPosition} = $viewPosition;
-}
-
-
-sub getGroupInterface {
-    my ($self) = @_;
-        return 'org::allbinary::game::identification::BasicGroupFactory'->getInstance()->{NONE_ARRAY};
-}
-
-
-sub implmentsTickableInterface {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub implmentsGameInputInterface {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub implmentsArtificialIntelligenceCompositeInterface {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub implmentsCollidableInterface {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub implementsThreedInterface {
-    my ($self) = @_;
-        return 'org::allbinary::graphics::opengles::OpenGLFeatureUtil'->getInstance()->isAnyThreed();
-}
-
-
-sub getType {
-    my ($self) = @_;
-        return -1;
-}
-
-
-sub getMultiPlayerType {
-    my ($self) = @_;
-        return -1;
-}
-
-
-sub toStringAppend {
-    my ($self, $stringBuffer) = @_;
-        my $commonSeps = 'org::allbinary::string::CommonSeps'->getInstance();
-        my $positionStrings = 'org::allbinary::math::PositionStrings'->getInstance();
-        my $commonLabels = 'org::allbinary::string::CommonLabels'->getInstance();
-        $stringBuffer->append($self->getName());
-        $stringBuffer->append($commonSeps->{COLON});
-        $stringBuffer->append($org::allbinary::layer::AllBinaryLayer::TYPE);
-        $stringBuffer->appendint($self->getType());
-        $stringBuffer->append($commonSeps->{SPACE});
-        $stringBuffer->append($positionStrings->{X_LABEL});
-        $stringBuffer->appendint($self->getXP());
-        $stringBuffer->append($commonSeps->{SPACE});
-        $stringBuffer->append($positionStrings->{Y_LABEL});
-        $stringBuffer->appendint($self->getYP());
-        $stringBuffer->append($commonSeps->{SPACE});
-        $stringBuffer->append($positionStrings->{Z_LABEL});
-        $stringBuffer->appendint($self->getZP());
-        $stringBuffer->append($commonSeps->{SPACE});
-        $stringBuffer->append($commonLabels->{WIDTH_LABEL});
-        $stringBuffer->appendint($self->getWidth());
-        $stringBuffer->append($commonSeps->{SPACE});
-        $stringBuffer->append($commonLabels->{HEIGHT_LABEL});
-        $stringBuffer->appendint($self->getHeight());
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $self->toStringAppend($stringBuffer);
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::game::identification::BasicGroupFactory ();
-use org::allbinary::game::identification::Group ();
-use org::allbinary::graphics::GPoint ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::RectangleFactory ();
-use org::allbinary::graphics::opengles::OpenGLFeatureUtil ();
-use org::allbinary::TsUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::math::PositionStrings ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::view::ViewPositionBase ();
-use org::allbinary::view::event::ViewPositionEvent ();
-use org::allbinary::layer::Layer ();
-use org::allbinary::layer::LayerInterface ();
-
-1;
 

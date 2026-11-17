@@ -11,89 +11,89 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
-package org::allbinary::logic::io::StreamUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::io::StreamUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::StreamUtil {
+    superclass ::JObject
 }
 
+oo::define ::StreamUtil {
+    method initFields_StreamUtil {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::io::StreamUtil::instance;
-}
+    constructor {} {
+        next
+        my initFields_StreamUtil
+    }
+    
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-# throws Exception
-sub get {
-    my ($self, $inputStream, $outputStream, $buffer) = @_;
-        my $len = 0;
-        while (1) {
-            $len = $inputStream->read($buffer, 0, scalar(@{$buffer}));
-            if ($len != -1) {
+    method get {inputStream outputStream buffer} {
+        set len 0
+        while {true} {
+            set len [$inputStream read $buffer 0 [$buffer length]]
+            if {[expr {$len != [expr {-1}]}]} {
             } else {
-                last;
+                break
             }
-            $outputStream->write($buffer, 0, $len);
+            $outputStream write $buffer 0 $len
         }
-        return $outputStream;
-}
+        return $outputStream
+    }
+    
 
-
-# throws Exception
-sub getByteArray {
-    my ($self, $inputStream, $outputStream2, $byteArray) = @_;
-        my $outputStream = $outputStream2;
+    method getByteArray {inputStream outputStream2 byteArray} {
+        set outputStream $outputStream2
         try {
-            $self->get($inputStream, $outputStream, $byteArray);
-            return $outputStream->toByteArray();
-        } catch ($e) {
-            die $e;
+            my get $inputStream $outputStream $byteArray
+            return [$outputStream toByteArray]
+        } on error {e} {
+            error $e
         } finally {
-            $self->close($outputStream);
+            my close $outputStream
         }
-}
+    }
+    
 
-
-sub close {
-    my ($self, $closeable) = @_;
+    method close {closeable} {
         try {
-            if (defined($closeable)) {
-                $closeable->close();
+            if {[expr {$closeable ne {}}]} {
+                $closeable close
             }
-            return 1;
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{CLOSE}, $e);
-            return 0;
+            return true
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget CLOSE] $e
+            return false
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::ByteArrayOutputStream ();
-# use java::io::Closeable ();
-# use java::io::InputStream ();
-# use java::io::OutputStream ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::StreamUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::StreamUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::StreamUtil::staticGet_instance]
+    }
+}
 
-1;
 

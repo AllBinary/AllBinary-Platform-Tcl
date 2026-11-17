@@ -11,61 +11,69 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::BufferedGameCanvasPaintHelper;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::ProcessPaintable';
-
-our $MAX_IMAGES = 4;
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gameCanvas} = $javax::microedition::lcdui::NullCanvas::NULL_CANVAS;
-    $self->{offScreenImage} = [(undef) x ($org::allbinary::game::displayable::canvas::BufferedGameCanvasPaintHelper::MAX_IMAGES)];
-    $self->{previousImage} = $javax::microedition::lcdui::NullImage::NULL_IMAGE;
-    $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstance($org::allbinary::game::displayable::canvas::BufferedGameCanvasPaintHelper::MAX_IMAGES);
-    $self->{drawCircularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstanceAt($org::allbinary::game::displayable::canvas::BufferedGameCanvasPaintHelper::MAX_IMAGES - 1, $org::allbinary::game::displayable::canvas::BufferedGameCanvasPaintHelper::MAX_IMAGES);
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
+oo::class create ::BufferedGameCanvasPaintHelper {
+    superclass ::ProcessPaintable
 }
 
+oo::define ::BufferedGameCanvasPaintHelper {
+    method initFields_BufferedGameCanvasPaintHelper {} {
+        my jset gameCanvas {}
+        my jset offScreenImage {}
+        my jset previousImage {}
+        my jset circularIndexUtil {}
+        my jset drawCircularIndexUtil {}
+        my jset anchor 0
+        my jset gameCanvas [::NullCanvas::staticGet_NULL_CANVAS]
+        my jset offScreenImage [jarray [::BufferedGameCanvasPaintHelper::staticGet_MAX_IMAGES] {}]
+        my jset previousImage [::NullImage::staticGet_NULL_IMAGE]
+        my jset circularIndexUtil [::CircularIndexUtil::createInstance [::BufferedGameCanvasPaintHelper::staticGet_MAX_IMAGES]]
+        my jset drawCircularIndexUtil [::CircularIndexUtil::createInstanceAt [jint [expr {[::BufferedGameCanvasPaintHelper::staticGet_MAX_IMAGES] - 1}]] [::BufferedGameCanvasPaintHelper::staticGet_MAX_IMAGES]]
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        die ("No Longer Used");
-    return $self;
+    constructor {gameCanvas} {
+        next
+        my initFields_BufferedGameCanvasPaintHelper
+        error [jexception Exception "No Longer Used"]
+    }
+    
+
+    method process {} {
+        set myCanvas ([my jget gameCanvas])
+        $myCanvas draw [[[my jget offScreenImage] get [[my jget circularIndexUtil] getIndex]] getGraphics]
+        [my jget circularIndexUtil] next
+        [my jget drawCircularIndexUtil] next
+    }
+    
+
+    method paint {graphics} {
+        my jset previousImage [[my jget offScreenImage] get [[my jget drawCircularIndexUtil] getIndex]]
+        $graphics drawImage [my jget previousImage] 0 0 [my jget anchor]
+    }
 }
 
-
-sub process {
-    my ($self) = @_;
-        my $myCanvas = ($self->{gameCanvas});
-        $myCanvas->draw($self->{offScreenImage}->[$self->{circularIndexUtil}->getIndex()]->getGraphics());
-        $self->{circularIndexUtil}->next();
-        $self->{drawCircularIndexUtil}->next();
+namespace eval ::BufferedGameCanvasPaintHelper {
+    variable MAX_IMAGESValue {}
+    variable MAX_IMAGESSet 0
+    proc staticGet_MAX_IMAGES {} {
+        variable MAX_IMAGESValue
+        variable MAX_IMAGESSet
+        if {!$MAX_IMAGESSet} {
+            set MAX_IMAGESSet 1
+            set MAX_IMAGESValue 4
+        }
+        return $MAX_IMAGESValue
+    }
+    proc staticSet_MAX_IMAGES {value} {
+        variable MAX_IMAGESValue
+        variable MAX_IMAGESSet
+        set MAX_IMAGESSet 1
+        set MAX_IMAGESValue $value
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{previousImage} = $self->{offScreenImage}->[$self->{drawCircularIndexUtil}->getIndex()];
-        $graphics->drawImage($self->{previousImage}, 0, 0, $self->{anchor});
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Canvas ();
-use javax::microedition::lcdui::Graphics ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::NullCanvas ();
-use javax::microedition::lcdui::NullImage ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::graphics::displayable::MyCanvas ();
-use org::allbinary::graphics::paint::ProcessPaintable ();
-use org::allbinary::util::CircularIndexUtil ();
-
-1;
 

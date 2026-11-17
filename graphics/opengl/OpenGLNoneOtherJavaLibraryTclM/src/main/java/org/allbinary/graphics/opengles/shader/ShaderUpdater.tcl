@@ -11,46 +11,53 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
-package org::allbinary::graphics::opengles::shader::ShaderUpdater;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::opengles::shader::ShaderUpdater'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{rendererStrings} = 'org::allbinary::graphics::opengles::renderer::RendererStrings'->getInstance();
+oo::class create ::ShaderUpdater {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::ShaderUpdater {
+    method initFields_ShaderUpdater {} {
+        my jset commonStrings {}
+        my jset rendererStrings {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset rendererStrings [::RendererStrings::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_ShaderUpdater
+    }
+    
+    
+
+    method onSurfaceCreated {gl eglConfig} {
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::opengles::shader::ShaderUpdater::instance;
+namespace eval ::ShaderUpdater {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ShaderUpdater new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ShaderUpdater::staticGet_instance]
+    }
 }
 
-
-sub onSurfaceCreated {
-    my ($self, $gl, $eglConfig) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::khronos::egl::EGLConfig ();
-use javax::microedition::khronos::opengles::GL10 ();
-use org::allbinary::graphics::opengles::renderer::RendererStrings ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

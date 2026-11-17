@@ -11,32 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::AnimationEventHandler;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::handler::BasicEventHandler';
-
-tie our $eventHandler, 'java::lang::LazyStatic', sub { 'org::allbinary::animation::AnimationEventHandler'->new() };
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::AnimationEventHandler {
+    superclass ::BasicEventHandler
 }
 
+oo::define ::AnimationEventHandler {
+    method initFields_AnimationEventHandler {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::animation::AnimationEventHandler::eventHandler;
+    constructor {} {
+        next
+        my initFields_AnimationEventHandler
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::util::event::handler::BasicEventHandler ();
+namespace eval ::AnimationEventHandler {
+    variable eventHandlerValue {}
+    variable eventHandlerSet 0
+    proc staticGet_eventHandler {} {
+        variable eventHandlerValue
+        variable eventHandlerSet
+        if {!$eventHandlerSet} {
+            set eventHandlerSet 1
+            set eventHandlerValue [::AnimationEventHandler new]
+        }
+        return $eventHandlerValue
+    }
+    proc staticSet_eventHandler {value} {
+        variable eventHandlerValue
+        variable eventHandlerSet
+        set eventHandlerSet 1
+        set eventHandlerValue $value
+    }
+    proc getInstance {} {
+        return [::AnimationEventHandler::staticGet_eventHandler]
+    }
+}
 
-1;
 

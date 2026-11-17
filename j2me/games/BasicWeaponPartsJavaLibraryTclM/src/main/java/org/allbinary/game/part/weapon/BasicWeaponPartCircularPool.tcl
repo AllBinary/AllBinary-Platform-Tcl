@@ -11,50 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.part.weapon
 
-package org::allbinary::game::part::weapon::BasicWeaponPartCircularPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_BASIC_WEAPON_PART_CIRCULAR_POOL, 'java::lang::LazyStatic', sub { 'org::allbinary::game::part::weapon::BasicWeaponPartCircularPool'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{basicWeaponPart} = $org::allbinary::game::part::weapon::BasicWeaponPart::NULL_BASIC_WEAPON_PART;
+oo::class create ::BasicWeaponPartCircularPool {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::BasicWeaponPartCircularPool {
+    method initFields_BasicWeaponPartCircularPool {} {
+        my jset basicWeaponPart {}
+        my jset basicWeaponPart [::BasicWeaponPart::staticGet_NULL_BASIC_WEAPON_PART]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_BasicWeaponPartCircularPool
+    }
+    
+
+    method init {basicWeaponPartFactoryInterface} {
+        my jset basicWeaponPart [$basicWeaponPartFactoryInterface getInstance]
+    }
+    
+
+    method getInstance {sourceLayerInterface weaponProperties scoreableInterface relativeRelationship} {
+        [my jget basicWeaponPart] init $sourceLayerInterface $weaponProperties $scoreableInterface $relativeRelationship
+        return [my jget basicWeaponPart]
+    }
 }
 
-
-# throws Exception
-sub init {
-    my ($self, $basicWeaponPartFactoryInterface) = @_;
-        $self->{basicWeaponPart} = $basicWeaponPartFactoryInterface->getInstance();
+namespace eval ::BasicWeaponPartCircularPool {
+    variable NULL_BASIC_WEAPON_PART_CIRCULAR_POOLValue {}
+    variable NULL_BASIC_WEAPON_PART_CIRCULAR_POOLSet 0
+    proc staticGet_NULL_BASIC_WEAPON_PART_CIRCULAR_POOL {} {
+        variable NULL_BASIC_WEAPON_PART_CIRCULAR_POOLValue
+        variable NULL_BASIC_WEAPON_PART_CIRCULAR_POOLSet
+        if {!$NULL_BASIC_WEAPON_PART_CIRCULAR_POOLSet} {
+            set NULL_BASIC_WEAPON_PART_CIRCULAR_POOLSet 1
+            set NULL_BASIC_WEAPON_PART_CIRCULAR_POOLValue [::BasicWeaponPartCircularPool new]
+        }
+        return $NULL_BASIC_WEAPON_PART_CIRCULAR_POOLValue
+    }
+    proc staticSet_NULL_BASIC_WEAPON_PART_CIRCULAR_POOL {value} {
+        variable NULL_BASIC_WEAPON_PART_CIRCULAR_POOLValue
+        variable NULL_BASIC_WEAPON_PART_CIRCULAR_POOLSet
+        set NULL_BASIC_WEAPON_PART_CIRCULAR_POOLSet 1
+        set NULL_BASIC_WEAPON_PART_CIRCULAR_POOLValue $value
+    }
 }
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $sourceLayerInterface, $weaponProperties, $scoreableInterface, $relativeRelationship) = @_;
-        $self->{basicWeaponPart}->init($sourceLayerInterface, $weaponProperties, $scoreableInterface, $relativeRelationship);
-        return $self->{basicWeaponPart};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::combat::weapon::WeaponProperties ();
-use org::allbinary::game::score::ScoreableInterface ();
-use org::allbinary::graphics::RelativeRelationship ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::game::part::weapon::BasicWeaponPart ();
-
-1;
 

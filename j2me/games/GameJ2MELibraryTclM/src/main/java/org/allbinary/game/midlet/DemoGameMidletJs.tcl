@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-# Java interface
-package org::allbinary::game::midlet::DemoGameMidletJs;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub createDemoGameCanvasRunnableInterface {
-    my ($self) = @_;
-    die "abstract method createDemoGameCanvasRunnableInterface";
+oo::class create ::DemoGameMidletJs {
+    superclass ::JObject
 }
 
-use org::allbinary::game::displayable::canvas::GameCanvasRunnableInterface ();
+oo::define ::DemoGameMidletJs {
+    method initFields_DemoGameMidletJs {} {
+        return
+    }
+    
 
-1;
+    method createDemoGameCanvasRunnableInterface {} {
+        error [jexception AbstractMethodError createDemoGameCanvasRunnableInterface]
+    }
+}
+
+namespace eval ::DemoGameMidletJs {
+}
+
 

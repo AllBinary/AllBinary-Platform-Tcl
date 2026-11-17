@@ -11,39 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::ScrollSelectionFormVericalDx;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::ItemIndexDx';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{scrollSelectionForm} = undef;
+oo::class create ::ScrollSelectionFormVericalDx {
+    superclass ::ItemIndexDx
 }
 
+oo::define ::ScrollSelectionFormVericalDx {
+    method initFields_ScrollSelectionFormVericalDx {} {
+        my jset scrollSelectionForm {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $scrollSelectionForm) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{scrollSelectionForm} = $scrollSelectionForm;
-    return $self;
+    constructor {scrollSelectionForm} {
+        next
+        my initFields_ScrollSelectionFormVericalDx
+        my jset scrollSelectionForm $scrollSelectionForm
+    }
+    
+
+    method getDx {index item dx dy} {
+        return [[my jget scrollSelectionForm] getSelectedIndexForPointVerticalDx $index $item $dx $dy]
+    }
 }
 
-
-# throws Exception
-sub getDx {
-    my ($self, $index, $item, $dx, $dy) = @_;
-        return $self->{scrollSelectionForm}->getSelectedIndexForPointVerticalDx($index, $item, $dx, $dy);
+namespace eval ::ScrollSelectionFormVericalDx {
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
-use org::allbinary::graphics::form::ItemIndexDx ();
-
-1;
 

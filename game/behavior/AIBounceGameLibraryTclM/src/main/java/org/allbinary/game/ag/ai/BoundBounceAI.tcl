@@ -11,56 +11,44 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::BoundBounceAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ai::BasicAI';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{currentRelativeAngle} = 0;
-    $self->{layerBounds} = undef;
-    $self->{boundsVisitorInterface} = undef;
+oo::class create ::BoundBounceAI {
+    superclass ::BasicAI
 }
 
+oo::define ::BoundBounceAI {
+    method initFields_BoundBounceAI {} {
+        my jset currentRelativeAngle 0
+        my jset layerBounds {}
+        my jset boundsVisitorInterface {}
+        my jset currentRelativeAngle 0
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $ownerLayerInterface, $gameInput, $layerBounds, $boundsVisitorInterface) = @_;
-    my $self = $class->SUPER::new($ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{layerBounds} = $layerBounds;
-        $self->{boundsVisitorInterface} = $boundsVisitorInterface;
-    return $self;
+    constructor {ownerLayerInterface gameInput layerBounds boundsVisitorInterface} {
+        next $ownerLayerInterface $gameInput
+        my initFields_BoundBounceAI
+        my jset layerBounds $layerBounds
+        my jset boundsVisitorInterface $boundsVisitorInterface
+    }
+    
+
+    method paint {graphics} {
+        set rectange [[my jget layerBounds] getRectangleP]
+        $graphics drawRect [[$rectange getPoint] getX] [[$rectange getPoint] getY] [$rectange getWidth] [$rectange getHeight]
+    }
+    
+
+    method processAI {allBinaryLayerManager} {
+        [my jget layerBounds] visit [my jget boundsVisitorInterface]
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        my $rectange = $self->{layerBounds}->getRectangleP();
-        $graphics->drawRect($rectange->getPoint()->getX(), $rectange->getPoint()->getY(), $rectange->getWidth(), $rectange->getHeight());
+namespace eval ::BoundBounceAI {
 }
 
-
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        $self->{layerBounds}->visit($self->{boundsVisitorInterface});
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::bounds::BoundsVisitorInterface ();
-use org::allbinary::bounds::LayerBounds ();
-use org::allbinary::game::ai::BasicAI ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-
-1;
 

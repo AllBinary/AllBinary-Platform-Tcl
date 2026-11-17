@@ -11,42 +11,53 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.canvas
 
-package org::allbinary::canvas::Processor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::canvas::Processor'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::Processor {
+    superclass ::JObject
 }
 
+oo::define ::Processor {
+    method initFields_Processor {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::canvas::Processor::SINGLETON;
+    constructor {} {
+        next
+        my initFields_Processor
+    }
+    
+    
+
+    method process {} {
+    }
+    
+
+    method processt {timeDelta} {
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self) = @_;
+namespace eval ::Processor {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::Processor new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::Processor::staticGet_SINGLETON]
+    }
 }
 
-
-# throws Exception
-sub processt {
-    my ($self, $timeDelta) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

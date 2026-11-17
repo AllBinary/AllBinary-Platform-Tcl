@@ -11,37 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
-package org::allbinary::input::motion::gesture::observer::MotionGestureReceiveInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::MotionGestureReceiveInterfaceFactory {
+    superclass ::JObject
 }
 
+oo::define ::MotionGestureReceiveInterfaceFactory {
+    method initFields_MotionGestureReceiveInterfaceFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        my $configuration = 'org::allbinary::input::motion::gesture::configuration::MotionGestureConfigurationFactory'->getInstance();
-        if (!$configuration->isExecutingActionsAllowed()) {
-            return 'org::allbinary::input::motion::gesture::observer::NullCompleteMotionGestureReceiver'->new();
+    constructor {} {
+        next
+        my initFields_MotionGestureReceiveInterfaceFactory
+    }
+    
+}
+
+namespace eval ::MotionGestureReceiveInterfaceFactory {
+    proc getInstance {} {
+        set configuration [::MotionGestureConfigurationFactory::getInstance]
+        if {[expr {![$configuration isExecutingActionsAllowed]}]} {
+            return [::NullCompleteMotionGestureReceiver new]
         } else {
-            return 'org::allbinary::input::motion::gesture::observer::ResolveCompleteMotionGestureListener'->new();
+            return [::ResolveCompleteMotionGestureListener new]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::input::motion::gesture::configuration::MotionGestureConfiguration ();
-use org::allbinary::input::motion::gesture::configuration::MotionGestureConfigurationFactory ();
-use org::allbinary::input::motion::gesture::observer::ResolveCompleteMotionGestureListener ();
-use org::allbinary::input::motion::gesture::observer::NullCompleteMotionGestureReceiver ();
-
-1;
 

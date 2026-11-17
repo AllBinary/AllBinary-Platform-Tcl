@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.resource
 
-# Java interface
-package org::allbinary::animation::resource::ResourceAnimationInterfaceFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub getBasicAnimationInterfaceFactoryInstance {
-    my ($self, $resource) = @_;
-    die "abstract method getBasicAnimationInterfaceFactoryInstance";
+oo::class create ::ResourceAnimationInterfaceFactoryInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::animation::BasicAnimationInterfaceFactoryInterface ();
+oo::define ::ResourceAnimationInterfaceFactoryInterface {
+    method initFields_ResourceAnimationInterfaceFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getBasicAnimationInterfaceFactoryInstance {resource} {
+        error [jexception AbstractMethodError getBasicAnimationInterfaceFactoryInstance]
+    }
+}
+
+namespace eval ::ResourceAnimationInterfaceFactoryInterface {
+}
+
 

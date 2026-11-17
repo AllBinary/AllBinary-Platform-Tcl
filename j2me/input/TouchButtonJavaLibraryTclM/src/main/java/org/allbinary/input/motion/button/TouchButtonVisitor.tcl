@@ -11,28 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchButtonVisitor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::TouchButtonVisitor {
+    superclass ::JObject
 }
 
+oo::define ::TouchButtonVisitor {
+    method initFields_TouchButtonVisitor {} {
+        return
+    }
 
-# throws Exception
-sub process {
-    my ($self, $touchButtonInput, $string) = @_;
+    constructor {} {
+        next
+        my initFields_TouchButtonVisitor
+    }
+    
+
+    method process {touchButtonInput string} {
+    }
 }
 
-use java::lang::Object ();
+namespace eval ::TouchButtonVisitor {
+}
 
-1;
 

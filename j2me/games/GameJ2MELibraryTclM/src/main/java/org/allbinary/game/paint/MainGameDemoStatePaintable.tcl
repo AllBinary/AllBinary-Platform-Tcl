@@ -11,53 +11,47 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.paint
 
-package org::allbinary::game::paint::MainGameDemoStatePaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{ownershipPaintableInterface} = undef;
-    $self->{menuPaintableInterface} = undef;
+oo::class create ::MainGameDemoStatePaintable {
+    superclass ::Paintable
 }
 
+oo::define ::MainGameDemoStatePaintable {
+    method initFields_MainGameDemoStatePaintable {} {
+        my jset ownershipPaintableInterface {}
+        my jset menuPaintableInterface {}
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $ownershipPaintableInterface, $menuPaintableInterface) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{ownershipPaintableInterface} = $ownershipPaintableInterface;
-        $self->{menuPaintableInterface} = $menuPaintableInterface;
-    return $self;
+    constructor {ownershipPaintableInterface menuPaintableInterface} {
+        next
+        my initFields_MainGameDemoStatePaintable
+        my jset ownershipPaintableInterface $ownershipPaintableInterface
+        my jset menuPaintableInterface $menuPaintableInterface
+    }
+    
+
+    method paint {graphics} {
+        [my jget menuPaintableInterface] paint $graphics
+        [my jget ownershipPaintableInterface] paint $graphics
+    }
+    
+
+    method getOwnershipPaintableInterface {} {
+        return [my jget ownershipPaintableInterface]
+    }
+    
+
+    method getMenuPaintableInterface {} {
+        return [my jget menuPaintableInterface]
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{menuPaintableInterface}->paint($graphics);
-        $self->{ownershipPaintableInterface}->paint($graphics);
+namespace eval ::MainGameDemoStatePaintable {
 }
 
-
-sub getOwnershipPaintableInterface {
-    my ($self) = @_;
-        return $self->{ownershipPaintableInterface};
-}
-
-
-sub getMenuPaintableInterface {
-    my ($self) = @_;
-        return $self->{menuPaintableInterface};
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::paint::Paintable ();
-
-1;
 

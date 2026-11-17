@@ -3,32 +3,31 @@
 # To change this template file, choose Tools | Templates 
 # and open the template in the editor.  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchButtonResource;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{RESOURCE} = undef;
-    $self->{HINT} = undef;
+oo::class create ::TouchButtonResource {
+    superclass ::JObject
 }
 
+oo::define ::TouchButtonResource {
+    method initFields_TouchButtonResource {} {
+        my jset RESOURCE {}
+        my jset HINT {}
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $resource, $hint) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{RESOURCE} = $resource;
-        $self->{HINT} = $hint;
-    return $self;
+    constructor {resource hint} {
+        next
+        my initFields_TouchButtonResource
+        my jset RESOURCE $resource
+        my jset HINT $hint
+    }
 }
 
-use java::lang::Object ();
+namespace eval ::TouchButtonResource {
+}
 
-1;
 

@@ -11,33 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.thirdparty.store
 
-package org::allbinary::thirdparty::store::NoThirdPartyStore;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::thirdparty::store::ThirdPartyStore';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING});
-        # super(...) made $self above
-    return $self;
+oo::class create ::NoThirdPartyStore {
+    superclass ::ThirdPartyStore
 }
 
+oo::define ::NoThirdPartyStore {
+    method initFields_NoThirdPartyStore {} {
+        return
+    }
+    
 
-sub authorize {
-    my ($self, $clientInformationInterface) = @_;
-        $self->setAuthorized(1);
+    constructor {} {
+        next [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my initFields_NoThirdPartyStore
+    }
+    
+
+    method authorize {clientInformationInterface} {
+        my setAuthorized true
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::thirdparty::store::ThirdPartyStore ();
+namespace eval ::NoThirdPartyStore {
+}
 
-1;
 

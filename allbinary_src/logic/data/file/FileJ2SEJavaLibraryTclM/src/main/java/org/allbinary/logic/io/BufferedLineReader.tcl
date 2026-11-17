@@ -11,65 +11,52 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
-package org::allbinary::logic::io::BufferedLineReader;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{tmpIn} = undef;
+oo::class create ::BufferedLineReader {
+    superclass ::JObject
 }
 
+oo::define ::BufferedLineReader {
+    method initFields_BufferedLineReader {} {
+        my jset tmpIn {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $file) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{tmpIn} = 'java::io::BufferedReader'->new('java::io::FileReader'->new('org::allbinary::logic::io::file::AbFileNativeUtil'->get($file)));
-    return $self;
+    constructor {file} {
+        next
+        my initFields_BufferedLineReader
+        my jset tmpIn [::BufferedReader new [::FileReader new [::AbFileNativeUtil::get $file]]]
+    }
+    
+
+    method readUpToLines {readAheadIndex} {
+    }
+    
+
+    method readLine {} {
+        return [[my jget tmpIn] readLine]
+    }
+    
+
+    method ready {} {
+        return [[my jget tmpIn] ready]
+    }
+    
+
+    method getSize {} {
+        return 0
+    }
+    
+
+    method getCurrent {} {
+        return 0
+    }
 }
 
-
-sub readUpToLines {
-    my ($self, $readAheadIndex) = @_;
+namespace eval ::BufferedLineReader {
 }
 
-
-# throws Exception
-sub readLine {
-    my ($self) = @_;
-        return $self->{tmpIn}->readLine();
-}
-
-
-# throws Exception
-sub ready {
-    my ($self) = @_;
-        return $self->{tmpIn}->ready();
-}
-
-
-sub getSize {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub getCurrent {
-    my ($self) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-# use java::io::BufferedReader ();
-# use java::io::FileReader ();
-use org::allbinary::logic::io::file::AbFile ();
-use org::allbinary::logic::io::file::AbFileNativeUtil ();
-
-1;
 

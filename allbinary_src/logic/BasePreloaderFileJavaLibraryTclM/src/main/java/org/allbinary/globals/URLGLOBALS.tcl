@@ -11,56 +11,61 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.globals
 
-package org::allbinary::globals::URLGLOBALS;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $urlGlobalsInterface, 'java::lang::LazyStatic', sub { $org::allbinary::globals::AppUrlGlobals::NULL_APP_URL_GLOBALS };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::URLGLOBALS {
+    superclass ::JObject
 }
 
+oo::define ::URLGLOBALS {
+    method initFields_URLGLOBALS {} {
+        return
+    }
 
-sub init {
-    my ($class, $urlGlobalsInterface) = @_;
-        $org::allbinary::globals::URLGLOBALS::urlGlobalsInterface = $urlGlobalsInterface;
+    constructor {} {
+        next
+        my initFields_URLGLOBALS
+    }
+    
+    
+    
+    
+    
 }
 
-
-sub isTestingMode {
-    my ($class) = @_;
-        return $org::allbinary::globals::URLGLOBALS::urlGlobalsInterface->isTestingMode();
+namespace eval ::URLGLOBALS {
+    variable urlGlobalsInterfaceValue {}
+    variable urlGlobalsInterfaceSet 0
+    proc staticGet_urlGlobalsInterface {} {
+        variable urlGlobalsInterfaceValue
+        variable urlGlobalsInterfaceSet
+        if {!$urlGlobalsInterfaceSet} {
+            set urlGlobalsInterfaceSet 1
+            set urlGlobalsInterfaceValue [::AppUrlGlobals::staticGet_NULL_APP_URL_GLOBALS]
+        }
+        return $urlGlobalsInterfaceValue
+    }
+    proc staticSet_urlGlobalsInterface {value} {
+        variable urlGlobalsInterfaceValue
+        variable urlGlobalsInterfaceSet
+        set urlGlobalsInterfaceSet 1
+        set urlGlobalsInterfaceValue $value
+    }
+    proc init {urlGlobalsInterface} {
+        ::URLGLOBALS::staticSet_urlGlobalsInterface $urlGlobalsInterface
+    }
+    proc isTestingMode {} {
+        return [[::URLGLOBALS::staticGet_urlGlobalsInterface] isTestingMode]
+    }
+    proc getWebappPath {} {
+        return [[::URLGLOBALS::staticGet_urlGlobalsInterface] getWebappPath]
+    }
+    proc getTestHtmlPath {} {
+        return [[::URLGLOBALS::staticGet_urlGlobalsInterface] getTestHtmlPath]
+    }
+    proc getMainPath {} {
+        return [[::URLGLOBALS::staticGet_urlGlobalsInterface] getMainPath]
+    }
 }
 
-
-sub getWebappPath {
-    my ($class) = @_;
-        return $org::allbinary::globals::URLGLOBALS::urlGlobalsInterface->getWebappPath();
-}
-
-
-sub getTestHtmlPath {
-    my ($class) = @_;
-        return $org::allbinary::globals::URLGLOBALS::urlGlobalsInterface->getTestHtmlPath();
-}
-
-
-# throws Exception
-sub getMainPath {
-    my ($class) = @_;
-        return $org::allbinary::globals::URLGLOBALS::urlGlobalsInterface->getMainPath();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::globals::AppUrlGlobals ();
-
-1;
 

@@ -11,40 +11,51 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::HighScoreCommands;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::score::HighScoreCommands'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{DISPLAY} = 'javax::microedition::lcdui::Command'->new("Scores", 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $javax::microedition::lcdui::Command::SCREEN, 1);
-    $self->{PERSONAL} = 'javax::microedition::lcdui::Command'->new("Personal", 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $javax::microedition::lcdui::Command::SCREEN, 1);
-    $self->{WORLD} = 'javax::microedition::lcdui::Command'->new("World", 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, $javax::microedition::lcdui::Command::SCREEN, 1);
+oo::class create ::HighScoreCommands {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::HighScoreCommands {
+    method initFields_HighScoreCommands {} {
+        my jset DISPLAY {}
+        my jset PERSONAL {}
+        my jset WORLD {}
+        my jset DISPLAY [::Command new "Scores" [[::StringUtil::getInstance] jget EMPTY_STRING] [::Command::staticGet_SCREEN] 1]
+        my jset PERSONAL [::Command new "Personal" [[::StringUtil::getInstance] jget EMPTY_STRING] [::Command::staticGet_SCREEN] 1]
+        my jset WORLD [::Command new "World" [[::StringUtil::getInstance] jget EMPTY_STRING] [::Command::staticGet_SCREEN] 1]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_HighScoreCommands
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::score::HighScoreCommands::instance;
+namespace eval ::HighScoreCommands {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::HighScoreCommands new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::HighScoreCommands::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Command ();
-use org::allbinary::logic::string::StringUtil ();
-
-1;
 

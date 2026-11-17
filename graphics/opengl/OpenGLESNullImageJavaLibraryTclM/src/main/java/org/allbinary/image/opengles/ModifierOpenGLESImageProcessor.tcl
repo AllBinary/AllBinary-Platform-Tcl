@@ -11,31 +11,45 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.image.opengles
 
-package org::allbinary::image::opengles::ModifierOpenGLESImageProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::image::opengles::OpenGLESImageProcessor';
-
-tie our $instanceC, 'java::lang::LazyStatic', sub { 'org::allbinary::image::opengles::ModifierOpenGLESImageProcessor'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::ModifierOpenGLESImageProcessor {
+    superclass ::OpenGLESImageProcessor
 }
 
+oo::define ::ModifierOpenGLESImageProcessor {
+    method initFields_ModifierOpenGLESImageProcessor {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::image::opengles::ModifierOpenGLESImageProcessor::instanceC;
+    constructor {} {
+        next
+        my initFields_ModifierOpenGLESImageProcessor
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::image::opengles::OpenGLESImageProcessor ();
+namespace eval ::ModifierOpenGLESImageProcessor {
+    variable instanceCValue {}
+    variable instanceCSet 0
+    proc staticGet_instanceC {} {
+        variable instanceCValue
+        variable instanceCSet
+        if {!$instanceCSet} {
+            set instanceCSet 1
+            set instanceCValue [::ModifierOpenGLESImageProcessor new]
+        }
+        return $instanceCValue
+    }
+    proc staticSet_instanceC {value} {
+        variable instanceCValue
+        variable instanceCSet
+        set instanceCSet 1
+        set instanceCValue $value
+    }
+    proc getInstance {} {
+        return [::ModifierOpenGLESImageProcessor::staticGet_instanceC]
+    }
+}
 
-1;
 

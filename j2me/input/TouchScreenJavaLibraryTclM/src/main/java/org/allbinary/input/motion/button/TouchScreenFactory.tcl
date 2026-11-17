@@ -11,116 +11,117 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchScreenFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::input::motion::button::TouchScreenFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{touch} = 0;
-    $self->{multiTouch} = 0;
-    $self->{multiTouchDistinct} = 0;
-    $self->{touchScreenType} = 'org::allbinary::input::motion::button::TouchScreenTypesFactory'->getInstance()->{NOTOUCH};
+oo::class create ::TouchScreenFactory {
+    superclass ::JObject
 }
 
+oo::define ::TouchScreenFactory {
+    method initFields_TouchScreenFactory {} {
+        my jset logUtil {}
+        my jset touch false
+        my jset multiTouch false
+        my jset multiTouchDistinct false
+        my jset touchScreenType {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset touch false
+        my jset multiTouch false
+        my jset multiTouchDistinct false
+        my jset touchScreenType [[::TouchScreenTypesFactory::getInstance] jget NOTOUCH]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
+    constructor {} {
+        next
+        my initFields_TouchScreenFactory
         try {
-            $self->setTouch(1);
-            $self->setMultiTouch(0);
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $org::allbinary::input::motion::button::TouchScreenFactory::SINGLETON, $commonStrings->{GET_INSTANCE}, $e);
+            my setTouch true
+            my setMultiTouch false
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [::TouchScreenFactory::staticGet_SINGLETON] [$commonStrings jget GET_INSTANCE] $e
         }
-    return $self;
+    }
+    
+    
+
+    method setMultiTouch {multiTouch} {
+        my jset multiTouch $multiTouch
+    }
+    
+
+    method isMultiTouch {} {
+        return [my jget multiTouch]
+    }
+    
+
+    method setTouch {touch} {
+        my jset touch $touch
+    }
+    
+
+    method isTouch {} {
+        return [my jget touch]
+    }
+    
+
+    method setMultiTouchDistinct {multiTouchDistinct} {
+        my jset multiTouchDistinct $multiTouchDistinct
+    }
+    
+
+    method isMultiTouchDistinct {} {
+        return [my jget multiTouchDistinct]
+    }
+    
+
+    method setTouchScreenType {touchScreenType} {
+        my jset touchScreenType $touchScreenType
+    }
+    
+
+    method getTouchScreenType {} {
+        return [my jget touchScreenType]
+    }
+    
+
+    method toString {} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append "TouchScreen: "
+        $stringBuffer appendboolean [my isTouch]
+        $stringBuffer append " MultiTouch: "
+        $stringBuffer appendboolean [my isMultiTouch]
+        $stringBuffer append " Distinct MultiTouch: "
+        $stringBuffer appendboolean [my isMultiTouchDistinct]
+        $stringBuffer append " TouchScreenType: "
+        $stringBuffer append [[::StringUtil::getInstance] toString1 [my getTouchScreenType]]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::motion::button::TouchScreenFactory::SINGLETON;
+namespace eval ::TouchScreenFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::TouchScreenFactory new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::TouchScreenFactory::staticGet_SINGLETON]
+    }
 }
 
-
-sub setMultiTouch {
-    my ($self, $multiTouch) = @_;
-        $self->{multiTouch} = $multiTouch;
-}
-
-
-sub isMultiTouch {
-    my ($self) = @_;
-        return $self->{multiTouch};
-}
-
-
-sub setTouch {
-    my ($self, $touch) = @_;
-        $self->{touch} = $touch;
-}
-
-
-sub isTouch {
-    my ($self) = @_;
-        return $self->{touch};
-}
-
-
-sub setMultiTouchDistinct {
-    my ($self, $multiTouchDistinct) = @_;
-        $self->{multiTouchDistinct} = $multiTouchDistinct;
-}
-
-
-sub isMultiTouchDistinct {
-    my ($self) = @_;
-        return $self->{multiTouchDistinct};
-}
-
-
-sub setTouchScreenType {
-    my ($self, $touchScreenType) = @_;
-        $self->{touchScreenType} = $touchScreenType;
-}
-
-
-sub getTouchScreenType {
-    my ($self) = @_;
-        return $self->{touchScreenType};
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append("TouchScreen: ");
-        $stringBuffer->appendboolean($self->isTouch());
-        $stringBuffer->append(" MultiTouch: ");
-        $stringBuffer->appendboolean($self->isMultiTouch());
-        $stringBuffer->append(" Distinct MultiTouch: ");
-        $stringBuffer->appendboolean($self->isMultiTouchDistinct());
-        $stringBuffer->append(" TouchScreenType: ");
-        $stringBuffer->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($self->getTouchScreenType()));
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::input::motion::button::TouchScreenTypesFactory ();
-
-1;
 

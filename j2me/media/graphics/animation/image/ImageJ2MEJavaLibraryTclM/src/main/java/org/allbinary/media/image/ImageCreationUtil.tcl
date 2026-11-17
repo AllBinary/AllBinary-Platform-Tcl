@@ -11,49 +11,58 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.image
 
-package org::allbinary::media::image::ImageCreationUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::media::image::ImageCreationUtil'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::media::image::ImageCreationUtil::instance;
+oo::class create ::ImageCreationUtil {
+    superclass ::JObject
 }
 
+oo::define ::ImageCreationUtil {
+    method initFields_ImageCreationUtil {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+    constructor {} {
+        next
+        my initFields_ImageCreationUtil
+    }
+    
+
+    method createImageWH {width height} {
+        set image [[::GameFeatureImageCacheFactory::getInstance] get [jclassname [self]] $width $height]
+        return $image
+    }
+    
+
+    method createImage {width height maxScaleX maxScaleY} {
+        set image [[::GameFeatureImageCacheFactory::getInstance] get [jclassname [self]] [jint [expr {[jint [jd2i ([expr {[expr {double($width)}] * $maxScaleX}])]] + 1}]] [jint [expr {[jint [jd2i ([expr {[expr {double($height)}] * $maxScaleY}])]] + 1}]]]
+        return $image
+    }
 }
 
-
-# throws Exception
-sub createImageWH {
-    my ($self, $width, $height) = @_;
-        my $image = 'org::allbinary::image::GameFeatureImageCacheFactory'->getInstance()->get(ref($self), $width, $height);
-        return $image;
+namespace eval ::ImageCreationUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ImageCreationUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ImageCreationUtil::staticGet_instance]
+    }
 }
 
-
-# throws Exception
-sub createImage {
-    my ($self, $width, $height, $maxScaleX, $maxScaleY) = @_;
-        my $image = 'org::allbinary::image::GameFeatureImageCacheFactory'->getInstance()->get(ref($self), int(($width * $maxScaleX)) + 1, int(($height * $maxScaleY)) + 1);
-        return $image;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::image::GameFeatureImageCacheFactory ();
-
-1;
 

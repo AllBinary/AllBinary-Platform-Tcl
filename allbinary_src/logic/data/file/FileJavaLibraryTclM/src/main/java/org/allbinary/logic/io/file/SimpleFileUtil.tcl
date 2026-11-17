@@ -11,133 +11,125 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io.file
 
-package org::allbinary::logic::io::file::SimpleFileUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::io::file::SimpleFileUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{NULL_WRITER} = 'org::allbinary::logic::io::file::SimpleFileUtil'->nullWriter();
-    $self->{NULL_READER} = 'org::allbinary::logic::io::file::SimpleFileUtil'->nullReader();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{nullUtil} = 'org::allbinary::logic::NullUtil'->getInstance();
-    $self->{streamUtil} = 'org::allbinary::logic::io::StreamUtil'->getInstance();
+oo::class create ::SimpleFileUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::SimpleFileUtil {
+    method initFields_SimpleFileUtil {} {
+        my jset logUtil {}
+        my jset NULL_WRITER {}
+        my jset NULL_READER {}
+        my jset commonStrings {}
+        my jset nullUtil {}
+        my jset streamUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset NULL_WRITER [::SimpleFileUtil::nullWriter]
+        my jset NULL_READER [::SimpleFileUtil::nullReader]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset nullUtil [::NullUtil::getInstance]
+        my jset streamUtil [::StreamUtil::getInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_SimpleFileUtil
+    }
+    
+    
+    
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::logic::io::file::SimpleFileUtil::instance;
-}
+    method loadFileAsList {inputStream max byteArray1} {
+        return [my loadFileAsListReturnLine $inputStream $max $byteArray1 0]
+    }
+    
 
-
-sub nullOutputStream {
-    my ($class) = @_;
-        return $org::allbinary::logic::io::NullOutputStream::NULL_OUTPUT_STREAM;
-}
-
-
-sub nullWriter {
-    my ($class) = @_;
-        return $org::allbinary::logic::io::NullWriter::NULL_WRITER;
-}
-
-
-sub nullReader {
-    my ($class) = @_;
-        return $org::allbinary::logic::io::NullReader::NULL_READER;
-}
-
-
-sub loadFileAsList {
-    my ($self, $inputStream, $max, $byteArray1) = @_;
-        return $self->loadFileAsListReturnLine($inputStream, $max, $byteArray1, 0);
-}
-
-
-sub loadFileAsListReturnLine {
-    my ($self, $inputStream, $max, $byteArray1, $includeReturnLine) = @_;
-        my $stringList = 'org::allbinary::util::BasicArrayListD'->new();
-        if (!defined($inputStream)) {
-            return $stringList;
+    method loadFileAsListReturnLine {inputStream max byteArray1 includeReturnLine} {
+        set stringList [::BasicArrayListD new]
+        if {[expr {$inputStream eq {}}]} {
+            return $stringList
         }
-        my $byteArray = $self->{nullUtil}->{NULL_BYTE_ARRAY};
+        set byteArray [[my jget nullUtil] jget NULL_BYTE_ARRAY]
         try {
-            my $outputStream2 = 'java::io::ByteArrayOutputStream'->new($max);
-            $byteArray = $self->{streamUtil}->getByteArray($inputStream, $outputStream2, $byteArray1);
-            $self->{streamUtil}->close($inputStream);
-        } catch ($e) {
-            $self->{streamUtil}->close($inputStream);
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{ADD}, $e);
+            set outputStream2 [::ByteArrayOutputStream new $max]
+            set byteArray [[my jget streamUtil] getByteArray $inputStream $outputStream2 $byteArray1]
+            [my jget streamUtil] close $inputStream
+        } on error {e} {
+            [my jget streamUtil] close $inputStream
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget ADD] $e
         }
-        if (!defined($byteArray)) {
-            return $stringList;
+        if {[expr {$byteArray eq {}}]} {
+            return $stringList
         }
-        my $size = scalar(@{$byteArray});
-        my $index = 0;
-        my $startIndex = 0;
-        my $returnLine = 0;
-        while ($index < $size) {
-            $startIndex = $index;
-            while ($index < $size - 1 && $byteArray->[$index] != ord("\n")) {
-                $index++;
+        set size [$byteArray length]
+        set index 0
+        set startIndex 0
+        set returnLine 0
+        while {[expr {$index < $size}]} {
+            set startIndex $index
+            while {[expr {[expr {$index < [jint [expr {$size - 1}]]}] && [expr {[$byteArray get $index] != [jbyte [scan "\n" %c]]}]}]} {
+                jpostincr index 1
             }
-            if ($includeReturnLine == 0) {
-                if ($index > 0 && $byteArray->[$index - 1] == ord("\r")) {
-                    $returnLine = 1;
+            if {[expr {$includeReturnLine == 0}]} {
+                if {[expr {[expr {$index > 0}] && [expr {[$byteArray get [jint [expr {$index - 1}]]] == [jbyte [scan "\r" %c]]}]}]} {
+                    set returnLine 1
                 } else {
-                    $returnLine = 0;
+                    set returnLine 0
                 }
             }
-            my $s = pack("C*", @{$byteArray}[$startIndex .. $startIndex + (($index + $includeReturnLine - $returnLine - $startIndex)) - 1]);
-            $stringList->add($s);
-            $index++;
+            set s [jfromchars $byteArray $startIndex ([jint [expr {[jint [expr {[jint [expr {$index + $includeReturnLine}]] - $returnLine}]] - $startIndex}]])]
+            $stringList add $s
+            jpostincr index 1
         }
-        return $stringList;
+        return $stringList
+    }
+    
+
+    method createStringFromArrayOfStrings {stringArray} {
+        set stringMaker [::StringMaker new]
+        set size [$stringArray length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            $stringMaker append [$stringArray get $index]
+        }
+        return [$stringMaker toString]
+    }
 }
 
-
-sub createStringFromArrayOfStrings {
-    my ($self, $stringArray) = @_;
-        my $stringMaker = 'org::allbinary::logic::string::StringMaker'->new();
-        my $size = scalar(@{$stringArray});
-        for (my $index = 0; $index < $size; $index++) {
-            $stringMaker->append($stringArray->[$index]);
+namespace eval ::SimpleFileUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::SimpleFileUtil new]
         }
-        return $stringMaker->toString();
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::SimpleFileUtil::staticGet_instance]
+    }
+    proc nullOutputStream {} {
+        return [::NullOutputStream::staticGet_NULL_OUTPUT_STREAM]
+    }
+    proc nullWriter {} {
+        return [::NullWriter::staticGet_NULL_WRITER]
+    }
+    proc nullReader {} {
+        return [::NullReader::staticGet_NULL_READER]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::ByteArrayOutputStream ();
-# use java::io::InputStream ();
-# use java::io::OutputStream ();
-# use java::io::Reader ();
-# use java::io::Writer ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::io::NullOutputStream ();
-use org::allbinary::logic::io::NullReader ();
-use org::allbinary::logic::io::NullWriter ();
-use org::allbinary::logic::io::StreamUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

@@ -11,28 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.android.input.motion
 
-package org::allbinary::android::input::motion::AnalogControllerVisitor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AnalogControllerVisitor {
+    superclass ::JObject
 }
 
+oo::define ::AnalogControllerVisitor {
+    method initFields_AnalogControllerVisitor {} {
+        return
+    }
 
-sub process {
-    my ($self, $allbinaryLayerManager, $analogLocationInputProcessor) = @_;
+    constructor {} {
+        next
+        my initFields_AnalogControllerVisitor
+    }
+    
+
+    method process {allbinaryLayerManager analogLocationInputProcessor} {
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::layer::AllBinaryLayerManager ();
+namespace eval ::AnalogControllerVisitor {
+}
 
-1;
 

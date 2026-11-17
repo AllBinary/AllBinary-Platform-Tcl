@@ -11,48 +11,38 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.sequence
 
-package org::allbinary::game::ag::ai::sequence::NumberLayersSequenceAI;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::ag::ai::sequence::SequenceAI';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{numberOfLayersLeft} = undef;
+oo::class create ::NumberLayersSequenceAI {
+    superclass ::SequenceAI
 }
 
+oo::define ::NumberLayersSequenceAI {
+    method initFields_NumberLayersSequenceAI {} {
+        my jset numberOfLayersLeft 0
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $numberOfEnemiesLeft, $artificialIntelligenceInterface, $ownerLayerInterface, $gameInput) = @_;
-    my $self = $class->SUPER::new($artificialIntelligenceInterface, $ownerLayerInterface, $gameInput);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{numberOfLayersLeft} = $numberOfEnemiesLeft;
-    return $self;
-}
+    constructor {numberOfEnemiesLeft artificialIntelligenceInterface ownerLayerInterface gameInput} {
+        next $artificialIntelligenceInterface $ownerLayerInterface $gameInput
+        my initFields_NumberLayersSequenceAI
+        my jset numberOfLayersLeft $numberOfEnemiesLeft
+    }
+    
 
-
-# throws Exception
-sub processAI {
-    my ($self, $allBinaryLayerManager) = @_;
-        if ($self->getIndex() == 0) {
-            if ($allBinaryLayerManager->getSize() < $self->{numberOfLayersLeft}) {
-                $self->setIndex(1);
+    method processAI {allBinaryLayerManager} {
+        if {[expr {[my getIndex] == 0}]} {
+            if {[expr {[$allBinaryLayerManager getSize] < [my jget numberOfLayersLeft]}]} {
+                my setIndex 1
             }
         }
-        $self->SUPER::processAI($allBinaryLayerManager);
+        next $allBinaryLayerManager
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::game::ag::ai::sequence::SequenceAI ();
+namespace eval ::NumberLayersSequenceAI {
+}
 
-1;
 

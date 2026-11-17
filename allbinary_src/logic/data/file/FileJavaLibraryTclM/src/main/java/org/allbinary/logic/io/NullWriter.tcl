@@ -11,65 +11,65 @@
 # Created By: Travis Berthelot 
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
-package org::allbinary::logic::io::NullWriter;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $NULL_WRITER, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::io::NullWriter'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::NullWriter {
+    superclass ::Writer
 }
 
+oo::define ::NullWriter {
+    method initFields_NullWriter {} {
+        return
+    }
 
-# throws IOException
-sub write {
-    my ($self, $c) = @_;
+    constructor {} {
+        next
+        my initFields_NullWriter
+    }
+    
+
+    method write {c} {
+    }
+    
+
+    method write {cbuf off len} {
+    }
+    
+
+    method write {str} {
+    }
+    
+
+    method write {str off len} {
+    }
+    
+
+    method flush {} {
+    }
+    
+
+    method close {} {
+    }
 }
 
-
-# throws IOException
-# Java overloaded method: Perl keeps the last definition
-sub write {
-    my ($self, $cbuf, $off, $len) = @_;
+namespace eval ::NullWriter {
+    variable NULL_WRITERValue {}
+    variable NULL_WRITERSet 0
+    proc staticGet_NULL_WRITER {} {
+        variable NULL_WRITERValue
+        variable NULL_WRITERSet
+        if {!$NULL_WRITERSet} {
+            set NULL_WRITERSet 1
+            set NULL_WRITERValue [::NullWriter new]
+        }
+        return $NULL_WRITERValue
+    }
+    proc staticSet_NULL_WRITER {value} {
+        variable NULL_WRITERValue
+        variable NULL_WRITERSet
+        set NULL_WRITERSet 1
+        set NULL_WRITERValue $value
+    }
 }
 
-
-# throws IOException
-# Java overloaded method: Perl keeps the last definition
-sub write {
-    my ($self, $str) = @_;
-}
-
-
-# throws IOException
-# Java overloaded method: Perl keeps the last definition
-sub write {
-    my ($self, $str, $off, $len) = @_;
-}
-
-
-# throws IOException
-sub flush {
-    my ($self) = @_;
-}
-
-
-# throws IOException
-sub close {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::IOException ();
-# use java::io::Writer ();
-
-1;
 

@@ -11,54 +11,42 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::ImageAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::image::BaseImageAnimationFactory';
-
-
-
-# throws Exception
-sub createFactory {
-    my ($class, $image) = @_;
-        return 'org::allbinary::animation::image::ImageAnimationFactory'->new($image, $image->getWidth(), $image->getHeight(), 0, 0, 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance());
+oo::class create ::ImageAnimationFactory {
+    superclass ::BaseImageAnimationFactory
 }
 
+oo::define ::ImageAnimationFactory {
+    method initFields_ImageAnimationFactory {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class, $image, $width, $height, $dx, $dy, $animationBehaviorFactory) = @_;
-    my $self = $class->SUPER::new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $width, $height, $dx, $dy, $animationBehaviorFactory);
-        # super(...) made $self above
-    return $self;
-}
+    constructor {image width height dx dy animationBehaviorFactory} {
+        next $image [::PrimitiveIntUtil::getArrayInstance] $width $height $dx $dy $animationBehaviorFactory
+        my initFields_ImageAnimationFactory
+    }
+    
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        my $scaledImage = $self->{animationFactoryImageScaleUtil}->createImage($self->getImage(), $self->{animationFactoryInitializationVisitor}->{width}, $self->{animationFactoryInitializationVisitor}->{height}, $self->{scaleProperties}->{scaleWidth}, $self->{scaleProperties}->{scaleHeight});
-        my $openGLUtil = 'org::allbinary::graphics::opengles::OpenGLUtil'->getInstance();
-        $scaledImage = $openGLUtil->addImage($scaledImage);
-        if ($self->{animationFactoryInitializationVisitor}->{dx} != 0 || $self->{animationFactoryInitializationVisitor}->{dy} != 0) {
-            $self->{animationFactoryImageScaleUtil}->processAdjust($self);
-            return 'org::allbinary::animation::image::AdjustedImageAnimation'->new($scaledImage, $self->{animationFactoryInitializationVisitor}->{dx}, $self->{animationFactoryInitializationVisitor}->{dy}, $self->{animationBehaviorFactory}->getOrCreateInstance());
+    method getInstance {instanceId} {
+        set scaledImage [[my jget animationFactoryImageScaleUtil] createImage [my getImage] [[my jget animationFactoryInitializationVisitor] jget width] [[my jget animationFactoryInitializationVisitor] jget height] [[my jget scaleProperties] jget scaleWidth] [[my jget scaleProperties] jget scaleHeight]]
+        set openGLUtil [::OpenGLUtil::getInstance]
+        set scaledImage [$openGLUtil addImage $scaledImage]
+        if {[expr {[expr {[[my jget animationFactoryInitializationVisitor] jget dx] != 0}] || [expr {[[my jget animationFactoryInitializationVisitor] jget dy] != 0}]}]} {
+            [my jget animationFactoryImageScaleUtil] processAdjust [self]
+            return [::AdjustedImageAnimation new $scaledImage [[my jget animationFactoryInitializationVisitor] jget dx] [[my jget animationFactoryInitializationVisitor] jget dy] [[my jget animationBehaviorFactory] getOrCreateInstance]]
         } else {
-            return 'org::allbinary::animation::image::ImageAnimation'->new($scaledImage, $self->{animationBehaviorFactory}->getOrCreateInstance());
+            return [::ImageAnimation new $scaledImage [[my jget animationBehaviorFactory] getOrCreateInstance]]
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::graphics::opengles::OpenGLUtil ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::animation::image::BaseImageAnimationFactory ();
-use org::allbinary::animation::image::ImageAnimation ();
-use org::allbinary::animation::image::AdjustedImageAnimation ();
+namespace eval ::ImageAnimationFactory {
+    proc createFactory {image} {
+        return [::ImageAnimationFactory new $image [$image getWidth] [$image getHeight] 0 0 [::AnimationBehaviorFactory::getInstance]]
+    }
+}
 
-1;
 

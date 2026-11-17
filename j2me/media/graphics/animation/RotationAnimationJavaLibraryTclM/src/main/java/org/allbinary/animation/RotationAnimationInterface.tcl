@@ -11,37 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-# Java interface
-package org::allbinary::animation::RotationAnimationInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::IndexedAnimationInterface','org::allbinary::direction::DirectionalInterface';
-
-
-
-sub getAngleInfoP {
-    my ($self) = @_;
-    die "abstract method getAngleInfoP";
+oo::class create ::RotationAnimationInterface {
+    superclass ::JObject
 }
 
+oo::define ::RotationAnimationInterface {
+    method initFields_RotationAnimationInterface {} {
+        return
+    }
+    
 
-sub nextRotation {
-    my ($self) = @_;
-    die "abstract method nextRotation";
+    method getAngleInfoP {} {
+        error [jexception AbstractMethodError getAngleInfoP]
+    }
+    
+
+    method nextRotation {} {
+        error [jexception AbstractMethodError nextRotation]
+    }
+    
+
+    method previousRotation {} {
+        error [jexception AbstractMethodError previousRotation]
+    }
 }
 
-
-sub previousRotation {
-    my ($self) = @_;
-    die "abstract method previousRotation";
+namespace eval ::RotationAnimationInterface {
 }
 
-use org::allbinary::direction::DirectionalInterface ();
-use org::allbinary::math::AngleInfo ();
-use org::allbinary::animation::IndexedAnimationInterface ();
-
-1;
 

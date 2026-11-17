@@ -11,66 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-package org::allbinary::logic::util::cache::AbstractArrayListPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::logic::util::cache::PoolInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{buffers} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{cacheableInterfaceFactoryInterface} = undef;
+oo::class create ::AbstractArrayListPool {
+    superclass ::JObject
 }
 
+oo::define ::AbstractArrayListPool {
+    method initFields_AbstractArrayListPool {} {
+        my jset commonStrings {}
+        my jset buffers {}
+        my jset cacheableInterfaceFactoryInterface {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset buffers [::BasicArrayListD new]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $cacheableInterfaceFactoryInterface) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{cacheableInterfaceFactoryInterface} = $cacheableInterfaceFactoryInterface;
-    return $self;
-}
+    constructor {cacheableInterfaceFactoryInterface} {
+        next
+        my initFields_AbstractArrayListPool
+        my jset cacheableInterfaceFactoryInterface $cacheableInterfaceFactoryInterface
+    }
+    
 
+    method clear {} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
 
-# throws Exception
-sub clear {
-    my ($self) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
+    method remove {key} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
 
+    method add {cacheableInterface} {
+        [my jget buffers] add $cacheableInterface
+    }
+    
 
-# throws Exception
-sub remove {
-    my ($self, $key) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
-
-
-# throws Exception
-sub add {
-    my ($self, $cacheableInterface) = @_;
-        $self->{buffers}->add($cacheableInterface);
-}
-
-
-# throws Exception
-sub addArray {
-    my ($self, $cacheableInterfaces) = @_;
-        for (my $index = 0; $index < scalar(@{$cacheableInterfaces}); $index++) {
-            $self->{buffers}->add($cacheableInterfaces->[$index]);
+    method addArray {cacheableInterfaces} {
+        for {set index 0} {[expr {$index < [$cacheableInterfaces length]}]} {jpostincr index 1} {
+            [my jget buffers] add [$cacheableInterfaces get $index]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::logic::util::cache::PoolInterface ();
+namespace eval ::AbstractArrayListPool {
+}
 
-1;
 

@@ -11,37 +11,36 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.business.advertisement
 
-package org::allbinary::business::advertisement::AdvertisementProcessorInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AdvertisementProcessorInterface {
+    superclass ::JObject
 }
 
+oo::define ::AdvertisementProcessorInterface {
+    method initFields_AdvertisementProcessorInterface {} {
+        return
+    }
 
-sub process {
-    my ($self) = @_;
+    constructor {} {
+        next
+        my initFields_AdvertisementProcessorInterface
+    }
+    
+
+    method process {} {
+    }
+    
+
+    method start {} {
+    }
+    
+
+    method stop {} {
+    }
 }
 
-
-sub start {
-    my ($self) = @_;
+namespace eval ::AdvertisementProcessorInterface {
 }
 
-
-sub stop {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-
-1;
 

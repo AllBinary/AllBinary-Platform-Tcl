@@ -11,38 +11,33 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.font
 
-package org::allbinary::graphics::font::UpdateMyFontProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::font::MyFontProcessor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{updateMeasurementProcessor} = undef;
+oo::class create ::UpdateMyFontProcessor {
+    superclass ::MyFontProcessor
 }
 
+oo::define ::UpdateMyFontProcessor {
+    method initFields_UpdateMyFontProcessor {} {
+        my jset updateMeasurementProcessor {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $keyValueDrawCharArray) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{updateMeasurementProcessor} = $keyValueDrawCharArray;
-    return $self;
+    constructor {keyValueDrawCharArray} {
+        next
+        my initFields_UpdateMyFontProcessor
+        my jset updateMeasurementProcessor $keyValueDrawCharArray
+    }
+    
+
+    method process {graphics} {
+        [my jget updateMeasurementProcessor] updateMeasurement $graphics
+    }
 }
 
-
-sub process {
-    my ($self, $graphics) = @_;
-        $self->{updateMeasurementProcessor}->updateMeasurement($graphics);
+namespace eval ::UpdateMyFontProcessor {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-
-1;
 

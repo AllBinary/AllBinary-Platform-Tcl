@@ -11,64 +11,65 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable
 
-package org::allbinary::game::displayable::RepaintBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::displayable::RepaintBehavior'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{NAME} = "RepaintBehavior";
+oo::class create ::RepaintBehavior {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::RepaintBehavior {
+    method initFields_RepaintBehavior {} {
+        my jset logUtil {}
+        my jset NAME {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset NAME "RepaintBehavior"
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_RepaintBehavior
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::displayable::RepaintBehavior::instance;
-}
+    method repaint {canvas} {
+    }
+    
 
-
-sub repaint {
-    my ($self, $canvas) = @_;
-}
-
-
-sub onChangeRepaint {
-    my ($self, $canvas) = @_;
-        my $features = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-        my $openGLFeatureFactory = 'org::allbinary::graphics::opengles::OpenGLFeatureFactory'->getInstance();
-        if ($features->isFeature($openGLFeatureFactory->{OPENGL})) {
-            'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance()->process();
+    method onChangeRepaint {canvas} {
+        set features [::Features::getInstance]
+        set openGLFeatureFactory [::OpenGLFeatureFactory::getInstance]
+        if {[$features isFeature [$openGLFeatureFactory jget OPENGL]]} {
+            [::DisplayInfoSingleton::getInstance] process
         } else {
-            my $thread = 'java::lang::Thread'->new('org::allbinary::game::displayable::RepaintRunnable'->new($canvas), $self->{NAME});
-            $thread->start();
+            set thread [::Thread new [::RepaintRunnable new $canvas] [my jget NAME]]
+            $thread start
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Canvas ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::graphics::opengles::OpenGLFeatureFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::thread::NullRunnable ();
-use java::lang::Thread ();
-use org::allbinary::game::displayable::RepaintRunnable ();
+namespace eval ::RepaintBehavior {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::RepaintBehavior new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::RepaintBehavior::staticGet_instance]
+    }
+}
 
-1;
 

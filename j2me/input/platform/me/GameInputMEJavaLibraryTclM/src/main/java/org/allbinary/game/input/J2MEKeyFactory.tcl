@@ -11,118 +11,118 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::J2MEKeyFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::J2MEKeyFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gameKeyFactory} = 'org::allbinary::game::input::GameKeyFactory'->getInstance();
+oo::class create ::J2MEKeyFactory {
+    superclass ::JObject
 }
 
+oo::define ::J2MEKeyFactory {
+    method initFields_J2MEKeyFactory {} {
+        my jset gameKeyFactory {}
+        my jset gameKeyFactory [::GameKeyFactory::getInstance]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::J2MEKeyFactory::instance;
-}
+    constructor {} {
+        next
+        my initFields_J2MEKeyFactory
+    }
+    
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
-
-
-sub init {
-    my ($self) = @_;
-        my $gameKeyArray = [$self->{gameKeyFactory}->{DOWN}, $self->{gameKeyFactory}->{FIRE}, $self->{gameKeyFactory}->{GAME_A}, $self->{gameKeyFactory}->{GAME_B}, $self->{gameKeyFactory}->{GAME_C}, $self->{gameKeyFactory}->{GAME_D}, $self->{gameKeyFactory}->{KEY_NUM0}, $self->{gameKeyFactory}->{KEY_NUM1}, $self->{gameKeyFactory}->{KEY_NUM2}, $self->{gameKeyFactory}->{KEY_NUM3}, $self->{gameKeyFactory}->{KEY_NUM4}, $self->{gameKeyFactory}->{KEY_NUM5}, $self->{gameKeyFactory}->{KEY_NUM6}, $self->{gameKeyFactory}->{KEY_NUM7}, $self->{gameKeyFactory}->{KEY_NUM8}, $self->{gameKeyFactory}->{KEY_NUM9}, $self->{gameKeyFactory}->{KEY_POUND}, $self->{gameKeyFactory}->{KEY_STAR}, $self->{gameKeyFactory}->{LEFT}, $self->{gameKeyFactory}->{LEVEL_DOWN}, $self->{gameKeyFactory}->{LEVEL_UP}, $self->{gameKeyFactory}->{NONE}, $self->{gameKeyFactory}->{RIGHT}, $self->{gameKeyFactory}->{UP}];
-        my $inputFactory = 'org::allbinary::game::input::InputFactory'->getInstance();
-        for (my $index = scalar(@{$gameKeyArray}); --$index >= 0; ) {
-            $inputFactory->add($gameKeyArray->[$index]->getId(), $gameKeyArray->[$index]);
+    method init {} {
+        set gameKeyArray [jarrayfrom [list [[my jget gameKeyFactory] jget DOWN] [[my jget gameKeyFactory] jget FIRE] [[my jget gameKeyFactory] jget GAME_A] [[my jget gameKeyFactory] jget GAME_B] [[my jget gameKeyFactory] jget GAME_C] [[my jget gameKeyFactory] jget GAME_D] [[my jget gameKeyFactory] jget KEY_NUM0] [[my jget gameKeyFactory] jget KEY_NUM1] [[my jget gameKeyFactory] jget KEY_NUM2] [[my jget gameKeyFactory] jget KEY_NUM3] [[my jget gameKeyFactory] jget KEY_NUM4] [[my jget gameKeyFactory] jget KEY_NUM5] [[my jget gameKeyFactory] jget KEY_NUM6] [[my jget gameKeyFactory] jget KEY_NUM7] [[my jget gameKeyFactory] jget KEY_NUM8] [[my jget gameKeyFactory] jget KEY_NUM9] [[my jget gameKeyFactory] jget KEY_POUND] [[my jget gameKeyFactory] jget KEY_STAR] [[my jget gameKeyFactory] jget LEFT] [[my jget gameKeyFactory] jget LEVEL_DOWN] [[my jget gameKeyFactory] jget LEVEL_UP] [[my jget gameKeyFactory] jget NONE] [[my jget gameKeyFactory] jget RIGHT] [[my jget gameKeyFactory] jget UP]]]
+        set inputFactory [::InputFactory::getInstance]
+        for {set index [$gameKeyArray length]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            $inputFactory add [[$gameKeyArray get $index] getId] [$gameKeyArray get $index]
         }
-}
+    }
+    
 
-
-sub isSubmission {
-    my ($self, $input) = @_;
-        if ($input == $self->{gameKeyFactory}->{FIRE}) {
-            return 1;
+    method isSubmission {input} {
+        if {[expr {$input eq [[my jget gameKeyFactory] jget FIRE]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isDelete {
-    my ($self, $input) = @_;
-        if ($input == $self->{gameKeyFactory}->{GAME_D}) {
-            return 1;
+    method isDelete {input} {
+        if {[expr {$input eq [[my jget gameKeyFactory] jget GAME_D]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
+    method isBackSpace {input} {
+        return false
+    }
+    
 
-sub isBackSpace {
-    my ($self, $input) = @_;
-        return 0;
-}
-
-
-sub isUp {
-    my ($self, $input) = @_;
-        if ($input == $self->{gameKeyFactory}->{UP}) {
-            return 1;
+    method isUp {input} {
+        if {[expr {$input eq [[my jget gameKeyFactory] jget UP]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isDown {
-    my ($self, $input) = @_;
-        if ($input == $self->{gameKeyFactory}->{DOWN}) {
-            return 1;
+    method isDown {input} {
+        if {[expr {$input eq [[my jget gameKeyFactory] jget DOWN]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isLeft {
-    my ($self, $input) = @_;
-        if ($input == $self->{gameKeyFactory}->{LEFT}) {
-            return 1;
+    method isLeft {input} {
+        if {[expr {$input eq [[my jget gameKeyFactory] jget LEFT]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isRight {
-    my ($self, $input) = @_;
-        if ($input == $self->{gameKeyFactory}->{RIGHT}) {
-            return 1;
+    method isRight {input} {
+        if {[expr {$input eq [[my jget gameKeyFactory] jget RIGHT]}]} {
+            return true
         }
-        return 0;
-}
+        return false
+    }
+    
 
-
-sub isEnter {
-    my ($self, $input) = @_;
-        if ($input == $self->{gameKeyFactory}->{FIRE}) {
-            return 1;
+    method isEnter {input} {
+        if {[expr {$input eq [[my jget gameKeyFactory] jget FIRE]}]} {
+            return true
         }
-        return 0;
+        return false
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::GameKeyFactory ();
-use org::allbinary::game::input::InputFactory ();
+namespace eval ::J2MEKeyFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::J2MEKeyFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::J2MEKeyFactory::staticGet_instance]
+    }
+}
 
-1;
 

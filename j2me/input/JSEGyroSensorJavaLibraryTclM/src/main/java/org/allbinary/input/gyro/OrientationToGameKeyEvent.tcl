@@ -11,63 +11,52 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.gyro
 
-package org::allbinary::input::gyro::OrientationToGameKeyEvent;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{allBinaryGyroSensor} = undef;
-    $self->{MIN} = 15;
+oo::class create ::OrientationToGameKeyEvent {
+    superclass ::JObject
 }
 
+oo::define ::OrientationToGameKeyEvent {
+    method initFields_OrientationToGameKeyEvent {} {
+        my jset allBinaryGyroSensor {}
+        my jset MIN 0
+        my jset allBinaryGyroSensor {}
+        my jset MIN 15
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        if ('org::allbinary::game::configuration::feature::Features'->getInstance()->isFeature('org::allbinary::game::configuration::feature::SensorFeatureFactory'->getInstance()->{NO_ORIENTATION})) {
-            $self->{allBinaryGyroSensor} = 'org::allbinary::input::gyro::NoGyroSensor'->new();
+    constructor {} {
+        next
+        my initFields_OrientationToGameKeyEvent
+        if {[[::Features::getInstance] isFeature [[::SensorFeatureFactory::getInstance] jget NO_ORIENTATION]]} {
+            my jset allBinaryGyroSensor [::NoGyroSensor new]
         } else {
-            die ("Not Such Feature");
+            error [jexception Exception "Not Such Feature"]
         }
-    return $self;
+    }
+    
+
+    method setAllBinaryGyroSensor {allBinaryGyroSensor} {
+        my jset allBinaryGyroSensor $allBinaryGyroSensor
+    }
+    
+
+    method getAllBinaryGyroSensor {} {
+        return [my jget allBinaryGyroSensor]
+    }
+    
+
+    method process {} {
+    }
+    
+
+    method updateGameKeyEvents {orientation yaw pitch roll} {
+    }
 }
 
-
-sub setAllBinaryGyroSensor {
-    my ($self, $allBinaryGyroSensor) = @_;
-        $self->{allBinaryGyroSensor} = $allBinaryGyroSensor;
+namespace eval ::OrientationToGameKeyEvent {
 }
 
-
-sub getAllBinaryGyroSensor {
-    my ($self) = @_;
-        return $self->{allBinaryGyroSensor};
-}
-
-
-# throws Exception
-sub process {
-    my ($self) = @_;
-}
-
-
-# throws Exception
-sub updateGameKeyEvents {
-    my ($self, $orientation, $yaw, $pitch, $roll) = @_;
-}
-
-use java::lang::Object ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::SensorFeatureFactory ();
-use org::allbinary::logic::math::Orientation ();
-use org::allbinary::input::gyro::NoGyroSensor ();
-
-1;
 

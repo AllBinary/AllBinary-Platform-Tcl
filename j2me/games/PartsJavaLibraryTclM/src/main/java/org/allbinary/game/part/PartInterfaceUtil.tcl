@@ -11,29 +11,45 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.part
 
-package org::allbinary::game::part::PartInterfaceUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $SINGLETON = [(undef) x (0)];
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::PartInterfaceUtil {
+    superclass ::JObject
 }
 
+oo::define ::PartInterfaceUtil {
+    method initFields_PartInterfaceUtil {} {
+        return
+    }
 
-sub getZeroArray {
-    my ($class) = @_;
-        return $org::allbinary::game::part::PartInterfaceUtil::SINGLETON;
+    constructor {} {
+        next
+        my initFields_PartInterfaceUtil
+    }
+    
 }
 
-use java::lang::Object ();
+namespace eval ::PartInterfaceUtil {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [jarray 0 {}]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getZeroArray {} {
+        return [::PartInterfaceUtil::staticGet_SINGLETON]
+    }
+}
 
-1;
 

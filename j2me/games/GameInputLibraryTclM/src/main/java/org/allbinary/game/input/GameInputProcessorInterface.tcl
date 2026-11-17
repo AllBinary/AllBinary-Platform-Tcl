@@ -11,23 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-# Java interface
-package org::allbinary::game::input::GameInputProcessorInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub onInput {
-    my ($self, $list) = @_;
-    die "abstract method onInput";
+oo::class create ::GameInputProcessorInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::util::BasicArrayList ();
+oo::define ::GameInputProcessorInterface {
+    method initFields_GameInputProcessorInterface {} {
+        return
+    }
+    
 
-1;
+    method onInput {list} {
+        error [jexception AbstractMethodError onInput]
+    }
+}
+
+namespace eval ::GameInputProcessorInterface {
+}
+
 

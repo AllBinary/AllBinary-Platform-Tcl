@@ -11,28 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::ItemPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ItemPaintable {
+    superclass ::JObject
 }
 
+oo::define ::ItemPaintable {
+    method initFields_ItemPaintable {} {
+        return
+    }
 
-sub paint {
-    my ($self, $graphics, $currentIndex, $x, $y) = @_;
+    constructor {} {
+        next
+        my initFields_ItemPaintable
+    }
+    
+
+    method paint {graphics currentIndex x y} {
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
+namespace eval ::ItemPaintable {
+}
 
-1;
 

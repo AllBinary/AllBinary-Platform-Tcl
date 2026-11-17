@@ -11,57 +11,41 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image.sprite
 
-package org::allbinary::animation::image::sprite::ColorCompositeSpriteIndexedAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::image::BaseImageAnimationFactory','org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{animationFactorySpriteScaleUtil} = 'org::allbinary::image::sprite::AnimationFactorySpriteScaleUtil'->getInstance();
-    $self->{basicColorArray} = undef;
+oo::class create ::ColorCompositeSpriteIndexedAnimationFactory {
+    superclass ::BaseImageAnimationFactory
 }
 
+oo::define ::ColorCompositeSpriteIndexedAnimationFactory {
+    method initFields_ColorCompositeSpriteIndexedAnimationFactory {} {
+        my jset animationFactorySpriteScaleUtil {}
+        my jset basicColorArray {}
+        my jset animationFactorySpriteScaleUtil [::AnimationFactorySpriteScaleUtil::getInstance]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $image, $basicColorArray, $width, $height, $animationBehaviorFactory) = @_;
-    my $self = $class->SUPER::new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $width, $height, 0, 0, $animationBehaviorFactory);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{basicColorArray} = $basicColorArray;
-    return $self;
+    constructor {image basicColorArray width height animationBehaviorFactory} {
+        next $image [::PrimitiveIntUtil::getArrayInstance] $width $height 0 0 $animationBehaviorFactory
+        my initFields_ColorCompositeSpriteIndexedAnimationFactory
+        my jset basicColorArray $basicColorArray
+    }
+    
+
+    method getInstance {instanceId} {
+        set sprite [[my jget animationFactorySpriteScaleUtil] createImage [my getImage] [[my jget animationFactoryInitializationVisitor] jget width] [[my jget animationFactoryInitializationVisitor] jget height] [[my jget scaleProperties] jget scaleWidth] [[my jget scaleProperties] jget scaleHeight]]
+        return [::SpriteIndexedAnimation new $sprite [my getImage] [my jget basicColorArray] [[my jget animationBehaviorFactory] getOrCreateInstance]]
+    }
+    
+
+    method getInstanceAnimation {animationInterface} {
+        return [my getInstance 0]
+    }
 }
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        my $sprite = $self->{animationFactorySpriteScaleUtil}->createImage($self->getImage(), $self->{animationFactoryInitializationVisitor}->{width}, $self->{animationFactoryInitializationVisitor}->{height}, $self->{scaleProperties}->{scaleWidth}, $self->{scaleProperties}->{scaleHeight});
-        return 'org::allbinary::animation::image::sprite::SpriteIndexedAnimation'->new($sprite, $self->getImage(), $self->{basicColorArray}, $self->{animationBehaviorFactory}->getOrCreateInstance());
+namespace eval ::ColorCompositeSpriteIndexedAnimationFactory {
 }
 
-
-# throws Exception
-sub getInstanceAnimation {
-    my ($self, $animationInterface) = @_;
-        return $self->getInstance(0);
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::game::Sprite ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::image::BaseImageAnimationFactory ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::image::sprite::AnimationFactorySpriteScaleUtil ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::animation::image::sprite::SpriteIndexedAnimation ();
-
-1;
 

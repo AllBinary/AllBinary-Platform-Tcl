@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.part.weapon
 
-# Java interface
-package org::allbinary::game::part::weapon::BasicWeaponPartFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub getInstance {
-    my ($self) = @_;
-    die "abstract method getInstance";
+oo::class create ::BasicWeaponPartFactoryInterface {
+    superclass ::JObject
 }
 
+oo::define ::BasicWeaponPartFactoryInterface {
+    method initFields_BasicWeaponPartFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getInstance {} {
+        error [jexception AbstractMethodError getInstance]
+    }
+}
+
+namespace eval ::BasicWeaponPartFactoryInterface {
+}
+
 

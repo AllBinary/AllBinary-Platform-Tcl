@@ -11,51 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io.file
 
-package org::allbinary::logic::io::file::FileWrapperUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::FileWrapperUtil {
+    superclass ::JObject
 }
 
+oo::define ::FileWrapperUtil {
+    method initFields_FileWrapperUtil {} {
+        return
+    }
 
-sub wrapFiles {
-    my ($class, $files) = @_;
+    constructor {} {
+        next
+        my initFields_FileWrapperUtil
+    }
+    
+    
+}
+
+namespace eval ::FileWrapperUtil {
+    proc wrapFiles {files} {
         try {
-            my $abFileArray = [(undef) x (scalar(@{$files}))];
-            for (my $index = scalar(@{$files}) - 1; $index >= 0; $index--) {
-                $abFileArray->[$index] = 'org::allbinary::logic::io::file::AbFile'->new($files->[$index]);
+            set abFileArray [jarray [$files length] {}]
+            for {set index [jint [expr {[$files length] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+                $abFileArray set $index [::AbFile new [$files get $index]]
             }
-            return $abFileArray;
-        } catch ($e) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->putSE("Exception Wrapping Files", "FileWrapperUtil", "wrapFiles", $e);
-            return [(undef) x (0)];
+            return $abFileArray
+        } on error {e} {
+            ::PreLogUtil::putSE "Exception Wrapping Files" "FileWrapperUtil" "wrapFiles" $e
+            return [jarray 0 {}]
         }
-}
-
-
-sub wrapFile {
-    my ($class, $file) = @_;
+    }
+    proc wrapFile {file} {
         try {
-            return 'org::allbinary::logic::io::file::AbFile'->new($file);
-        } catch ($e) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->putSE("Exception Wrapping File", "FileWrapperUtil", "wrapFile", $e);
-            return $org::allbinary::logic::io::file::AbFile::NULL_FILE;
+            return [::AbFile new $file]
+        } on error {e} {
+            ::PreLogUtil::putSE "Exception Wrapping File" "FileWrapperUtil" "wrapFile" $e
+            return [::AbFile::staticGet_NULL_FILE]
         }
+    }
 }
 
-use java::lang::Object ();
-use java::io::File ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::io::file::AbFile ();
-
-1;
 

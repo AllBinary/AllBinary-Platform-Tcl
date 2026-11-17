@@ -11,65 +11,71 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.init.crypt.jcehelper
 
-package org::allbinary::init::crypt::jcehelper::BasicCryptUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::init::crypt::jcehelper::BasicCryptUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{tsUtil} = 'org::allbinary::TsUtil'->getInstance();
-    $self->{XML_START} = "<?xml";
+oo::class create ::BasicCryptUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::BasicCryptUtil {
+    method initFields_BasicCryptUtil {} {
+        my jset logUtil {}
+        my jset tsUtil {}
+        my jset XML_START {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset tsUtil [::TsUtil::getInstance]
+        my jset XML_START "<?xml"
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_BasicCryptUtil
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::init::crypt::jcehelper::BasicCryptUtil::instance;
-}
-
-
-# throws Exception
-sub getDecryptedInputStream {
-    my ($self, $inputStream, $cryptInterface) = @_;
-        my $buffer = 'java::io::ByteArrayOutputStream'->new();
-        my $ch = 0;
-        while (1) {
-            $ch = $inputStream->read();
-            if ($ch == -1) {
-                last;
+    method getDecryptedInputStream {inputStream cryptInterface} {
+        set buffer [::ByteArrayOutputStream new]
+        set ch 0
+        while {true} {
+            set ch [$inputStream read]
+            if {[expr {$ch == [expr {-1}]}]} {
+                break
             }
-            $buffer->write($ch);
+            $buffer write $ch
         }
-        my $decrypted = $cryptInterface->decrypt($buffer->toByteArray());
-        my $decryptedString = pack("C*", @{$decrypted});
-        my $index = index($decryptedString, $self->{XML_START});
-        if ($index > 0) {
-            $decryptedString = substr($decryptedString, $index);
+        set decrypted [$cryptInterface decrypt [$buffer toByteArray]]
+        set decryptedString $decrypted
+        set index [string first [my jget XML_START] $decryptedString]
+        if {[expr {$index > 0}]} {
+            set decryptedString [jsubstring $decryptedString $index]
         }
-        return 'java::io::ByteArrayInputStream'->new($self->{tsUtil}->getByteArray($decryptedString));
+        return [::ByteArrayInputStream new [[my jget tsUtil] getByteArray $decryptedString]]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-# use java::io::ByteArrayInputStream ();
-# use java::io::ByteArrayOutputStream ();
-# use java::io::InputStream ();
-use org::allbinary::TsUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
+namespace eval ::BasicCryptUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::BasicCryptUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::BasicCryptUtil::staticGet_instance]
+    }
+}
 
-1;
 

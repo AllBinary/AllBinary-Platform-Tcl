@@ -11,30 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.resource
 
-# Java interface
-package org::allbinary::game::resource::RectangleResourceFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub getRectangle {
-    my ($self, $resource) = @_;
-    die "abstract method getRectangle";
+oo::class create ::RectangleResourceFactoryInterface {
+    superclass ::JObject
 }
 
+oo::define ::RectangleResourceFactoryInterface {
+    method initFields_RectangleResourceFactoryInterface {} {
+        return
+    }
+    
 
-# throws Exception
-sub getRectangleArrayOfArrays {
-    my ($self, $resource) = @_;
-    die "abstract method getRectangleArrayOfArrays";
+    method getRectangle {resource} {
+        error [jexception AbstractMethodError getRectangle]
+    }
+    
+
+    method getRectangleArrayOfArrays {resource} {
+        error [jexception AbstractMethodError getRectangleArrayOfArrays]
+    }
 }
 
-use org::allbinary::graphics::Rectangle ();
+namespace eval ::RectangleResourceFactoryInterface {
+}
 
-1;
 

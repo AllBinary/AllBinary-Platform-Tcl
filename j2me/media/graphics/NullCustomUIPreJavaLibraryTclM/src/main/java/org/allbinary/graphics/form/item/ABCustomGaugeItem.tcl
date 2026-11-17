@@ -1,28 +1,40 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
-package org::allbinary::graphics::form::item::ABCustomGaugeItem;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::item::ABCustomItem';
-
-tie our $NULL_GAUGE_ITEM, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::form::item::ABCustomGaugeItem'->new('org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING}, 1, 0, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{BLACK}, 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE}) };
-
-
-sub new {
-    my ($class, $label, $maxValue, $initialValue, $backgroundBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($label, $backgroundBasicColor, $foregroundBasicColor);
-        # super(...) made $self above
-    return $self;
+oo::class create ::ABCustomGaugeItem {
+    superclass ::ABCustomItem
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
+oo::define ::ABCustomGaugeItem {
+    method initFields_ABCustomGaugeItem {} {
+        return
+    }
+    
 
-1;
+    constructor {label maxValue initialValue backgroundBasicColor foregroundBasicColor} {
+        next $label $backgroundBasicColor $foregroundBasicColor
+        my initFields_ABCustomGaugeItem
+    }
+}
+
+namespace eval ::ABCustomGaugeItem {
+    variable NULL_GAUGE_ITEMValue {}
+    variable NULL_GAUGE_ITEMSet 0
+    proc staticGet_NULL_GAUGE_ITEM {} {
+        variable NULL_GAUGE_ITEMValue
+        variable NULL_GAUGE_ITEMSet
+        if {!$NULL_GAUGE_ITEMSet} {
+            set NULL_GAUGE_ITEMSet 1
+            set NULL_GAUGE_ITEMValue [::ABCustomGaugeItem new [[::StringUtil::getInstance] jget EMPTY_STRING] 1 0 [[::BasicColorFactory::getInstance] jget BLACK] [[::BasicColorFactory::getInstance] jget WHITE]]
+        }
+        return $NULL_GAUGE_ITEMValue
+    }
+    proc staticSet_NULL_GAUGE_ITEM {value} {
+        variable NULL_GAUGE_ITEMValue
+        variable NULL_GAUGE_ITEMSet
+        set NULL_GAUGE_ITEMSet 1
+        set NULL_GAUGE_ITEMValue $value
+    }
+}
+
 

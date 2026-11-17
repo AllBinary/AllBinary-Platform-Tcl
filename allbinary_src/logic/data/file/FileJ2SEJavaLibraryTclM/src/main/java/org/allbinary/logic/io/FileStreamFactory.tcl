@@ -11,70 +11,74 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.io
 
-package org::allbinary::logic::io::FileStreamFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
+oo::class create ::FileStreamFactory {
+    superclass ::JObject
+}
 
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
+oo::define ::FileStreamFactory {
+    method initFields_FileStreamFactory {} {
+        return
+    }
+    
+    
 
+    constructor {} {
+        next
+        my initFields_FileStreamFactory
+    }
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::logic::io::FileStreamFactory::SINGLETON == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::logic::io::FileStreamFactory::SINGLETON = 'org::allbinary::logic::io::FileStreamFactory'->new();
+    method getFileInputStreamInstance {path fileName} {
+        set FILEABPATH [::AbPath new $path $fileName]
+        set file [::AbFile::createAbFileFromAbPath $FILEABPATH]
+        return [::AbFileInputStream::createFromAbFile $file]
+    }
+    
+
+    method getFileOutputStreamInstance {path fileName} {
+        set FILEABPATH [::AbPath new $path $fileName]
+        set file [::AbFile::createAbFileFromAbPath $FILEABPATH]
+        if {[$file exists]} {
+            $file delete
+            $file createNewFile
         }
-        return $org::allbinary::logic::io::FileStreamFactory::SINGLETON;
+        return [::AbFileOutputStream::createFromAbFile $file]
+    }
+    
+
+    method delete {path fileName} {
+        set FILEABPATH [::AbPath new $path $fileName]
+        set file [::AbFile::createAbFileFromAbPath $FILEABPATH]
+        $file delete
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
-}
-
-
-# throws Exception
-sub getFileInputStreamInstance {
-    my ($self, $path, $fileName) = @_;
-        my $FILEABPATH = 'org::allbinary::logic::io::path::AbPath'->new($path, $fileName);
-        my $file = 'org::allbinary::logic::io::file::AbFile'->createAbFileFromAbPath($FILEABPATH);
-        return 'org::allbinary::logic::io::AbFileInputStream'->createFromAbFile($file);
-}
-
-
-# throws Exception
-sub getFileOutputStreamInstance {
-    my ($self, $path, $fileName) = @_;
-        my $FILEABPATH = 'org::allbinary::logic::io::path::AbPath'->new($path, $fileName);
-        my $file = 'org::allbinary::logic::io::file::AbFile'->createAbFileFromAbPath($FILEABPATH);
-        if ($file->exists()) {
-            $file->delete();
-            $file->createNewFile();
+namespace eval ::FileStreamFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return 'org::allbinary::logic::io::AbFileOutputStream'->createFromAbFile($file);
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::FileStreamFactory::staticGet_SINGLETON] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::FileStreamFactory::staticSet_SINGLETON [::FileStreamFactory new]
+        }
+        return [::FileStreamFactory::staticGet_SINGLETON]
+    }
 }
 
-
-# throws Exception
-sub delete {
-    my ($self, $path, $fileName) = @_;
-        my $FILEABPATH = 'org::allbinary::logic::io::path::AbPath'->new($path, $fileName);
-        my $file = 'org::allbinary::logic::io::file::AbFile'->createAbFileFromAbPath($FILEABPATH);
-        $file->delete();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::io::file::AbFile ();
-use org::allbinary::logic::io::path::AbPath ();
-use org::allbinary::logic::io::AbFileInputStream ();
-use org::allbinary::logic::io::AbFileOutputStream ();
-
-1;
 

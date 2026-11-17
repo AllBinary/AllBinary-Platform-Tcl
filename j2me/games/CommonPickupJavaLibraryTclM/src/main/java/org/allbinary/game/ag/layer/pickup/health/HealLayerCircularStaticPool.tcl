@@ -11,39 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.pickup.health
 
-package org::allbinary::game::ag::layer::pickup::health::HealLayerCircularStaticPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::AllBinaryLayerCircularPool';
-
-
-
-sub new {
-    my ($class, $allbinaryLayerFactoryInterface, $total) = @_;
-    my $self = $class->SUPER::new();
-        $self->SUPER::initAllBinaryLayerCircularPool($allbinaryLayerFactoryInterface, $total);
-    return $self;
+oo::class create ::HealLayerCircularStaticPool {
+    superclass ::AllBinaryLayerCircularPool
 }
 
+oo::define ::HealLayerCircularStaticPool {
+    method initFields_HealLayerCircularStaticPool {} {
+        return
+    }
+    
 
-# throws Exception
-sub visit {
-    my ($self, $sourceLayerInterface) = @_;
-        my $healLayer = $self->getNextInstance();
-        my $healthInterfaceCompositeInterface = $sourceLayerInterface;
-        my $healthInterface = $healthInterfaceCompositeInterface->getHealthInterface();
-        $healLayer->visit($healthInterface);
+    constructor {allbinaryLayerFactoryInterface total} {
+        next
+        my initFields_HealLayerCircularStaticPool
+        next $allbinaryLayerFactoryInterface $total
+    }
+    
+
+    method visit {sourceLayerInterface} {
+        set healLayer [my getNextInstance]
+        set healthInterfaceCompositeInterface $sourceLayerInterface
+        set healthInterface [$healthInterfaceCompositeInterface getHealthInterface]
+        $healLayer visit $healthInterface
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::health::HealthInterface ();
-use org::allbinary::game::health::HealthInterfaceCompositeInterface ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerCircularPool ();
-use org::allbinary::layer::AllBinaryLayerFactoryInterface ();
+namespace eval ::HealLayerCircularStaticPool {
+}
 
-1;
 

@@ -11,142 +11,135 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.business.init
 
-package org::allbinary::business::init::LicenseInitInfoUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::business::init::LicenseInitInfoUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{stringUtil} = 'org::allbinary::logic::string::StringUtil'->getInstance();
-    $self->{INITFILENAME} = "licenseinitdata.dat";
-    $self->{ABOUT} = "about";
-    $self->{PRIVACY_POLICY} = "privacy_policy";
-    $self->{filePath} = $self->{stringUtil}->{EMPTY_STRING};
+oo::class create ::LicenseInitInfoUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::LicenseInitInfoUtil {
+    method initFields_LicenseInitInfoUtil {} {
+        my jset logUtil {}
+        my jset stringUtil {}
+        my jset INITFILENAME {}
+        my jset ABOUT {}
+        my jset PRIVACY_POLICY {}
+        my jset filePath {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset stringUtil [::StringUtil::getInstance]
+        my jset INITFILENAME "licenseinitdata.dat"
+        my jset ABOUT "about"
+        my jset PRIVACY_POLICY "privacy_policy"
+        my jset filePath [[my jget stringUtil] jget EMPTY_STRING]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_LicenseInitInfoUtil
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::business::init::LicenseInitInfoUtil::instance;
-}
+    method setFilePath {filePath} {
+        my jset filePath $filePath
+    }
+    
 
-
-sub setFilePath {
-    my ($self, $filePath) = @_;
-        $self->{filePath} = $filePath;
-}
-
-
-# throws Exception
-sub write {
-    my ($self, $initData) = @_;
-        if ($self->{filePath} eq $self->{stringUtil}->{EMPTY_STRING}) {
-            $self->{filePath} = 'org::allbinary::globals::URLGLOBALS'->getMainPath() + 'org::allbinary::globals::PATH_GLOBALS'->getInstance()->{INIT_PATH};
+    method write {initData} {
+        if {[expr {[my jget filePath] eq [[my jget stringUtil] jget EMPTY_STRING]}]} {
+            my jset filePath [expr {[::URLGLOBALS::getMainPath] + [[::PATH_GLOBALS::getInstance] jget INIT_PATH]}]
         }
         try {
-            my $tsUtil = 'org::allbinary::TsUtil'->getInstance();
-            my $dataOutputStream = 'org::allbinary::logic::io::DataOutputStreamFactory'->getInstance()->getInstance($self->{filePath}, $self->{INITFILENAME});
-            my $licenseIdCrypted = $tsUtil->getByteArray('org::allbinary::logic::system::security::crypt::WeakCrypt'->new(1)->encrypt($initData->getLicenseId()));
-            $dataOutputStream->writeUTF('org::allbinary::logic::system::security::crypt::DatabaseEncoder'->encode($licenseIdCrypted));
-            my $numberOfLicenseServers = $initData->getNumberOfServers();
-            $dataOutputStream->writeInt($numberOfLicenseServers);
-            my $licenseServerCrypted = undef;
-            for (my $index = 0; $index < $numberOfLicenseServers; $index++) {
-                $licenseServerCrypted = $tsUtil->getByteArray('org::allbinary::logic::system::security::crypt::WeakCrypt'->new(3)->encrypt($initData->getServer($index)));
-                $dataOutputStream->writeUTF('org::allbinary::logic::system::security::crypt::DatabaseEncoder'->encode($licenseServerCrypted));
+            set tsUtil [::TsUtil::getInstance]
+            set dataOutputStream [[::DataOutputStreamFactory::getInstance] getInstance [my jget filePath] [my jget INITFILENAME]]
+            set licenseIdCrypted [$tsUtil getByteArray [[::WeakCrypt new 1] encrypt [$initData getLicenseId]]]
+            $dataOutputStream writeUTF [::DatabaseEncoder::encode $licenseIdCrypted]
+            set numberOfLicenseServers [$initData getNumberOfServers]
+            $dataOutputStream writeInt $numberOfLicenseServers
+            set licenseServerCrypted {}
+            for {set index 0} {[expr {$index < $numberOfLicenseServers}]} {jpostincr index 1} {
+                set licenseServerCrypted [$tsUtil getByteArray [[::WeakCrypt new 3] encrypt [$initData getServer $index]]]
+                $dataOutputStream writeUTF [::DatabaseEncoder::encode $licenseServerCrypted]
             }
-        } catch ($e) {
-            $self->{logUtil}->put("Command Failed: " . $self->{INITFILENAME}, $self, "write", $e);
-            'org::allbinary::logic::io::FileStreamFactory'->getInstance()->delete($self->{filePath}, $self->{INITFILENAME});
-            die $e;
+        } on error {e} {
+            [my jget logUtil] put [string cat "Command Failed: " [my jget INITFILENAME]] [self] "write" $e
+            [::FileStreamFactory::getInstance] delete [my jget filePath] [my jget INITFILENAME]
+            error $e
         }
-}
+    }
+    
 
+    method read {} {
+        return [my readAgain 0]
+    }
+    
 
-# throws Exception
-sub read {
-    my ($self) = @_;
-        return $self->readAgain(0);
-}
-
-
-# throws Exception
-sub readAgain {
-    my ($self, $initializeCounter) = @_;
-        my $METHOD_NAME = "readAgain";
-        if ($self->{filePath} eq $self->{stringUtil}->{EMPTY_STRING}) {
-            $self->{filePath} = 'org::allbinary::globals::URLGLOBALS'->getMainPath() + 'org::allbinary::globals::PATH_GLOBALS'->getInstance()->{INIT_PATH};
+    method readAgain {initializeCounter} {
+        set METHOD_NAME "readAgain"
+        if {[expr {[my jget filePath] eq [[my jget stringUtil] jget EMPTY_STRING]}]} {
+            my jset filePath [expr {[::URLGLOBALS::getMainPath] + [[::PATH_GLOBALS::getInstance] jget INIT_PATH]}]
         }
         try {
-            $self->{logUtil}->putF("LicenseInitInfo File: " . $self->{INITFILENAME}, $self, $METHOD_NAME);
-            my $fileStreamFactory = 'org::allbinary::logic::io::FileStreamFactory'->getInstance();
-            my $iFile = $fileStreamFactory->getFileInputStreamInstance($self->{filePath}, $self->{INITFILENAME});
-            if (defined($iFile)) {
-                my $iData = 'org::allbinary::logic::io::AbDataInputStream'->new($iFile);
-                my $initInfo = 'org::allbinary::business::init::LicenseInitInfo'->new();
-                my $decodedByteArray = 'org::allbinary::logic::system::security::crypt::DatabaseEncoder'->decode($iData->readUTF());
-                my $licenseIdDecoded = pack("C*", @{$decodedByteArray});
-                $initInfo->setLicenseId('org::allbinary::logic::system::security::crypt::WeakCrypt'->new(1)->decrypt($licenseIdDecoded));
-                my $numberOfLicenseServers = $iData->readInt();
-                my $NEXT_FILE = 'org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{NEXT})->append(" License Server From File: ")->toString();
-                my $licenseServerDecoded = undef;
-                for (my $index = 0; $index < $numberOfLicenseServers; $index++) {
-                    $decodedByteArray = 'org::allbinary::logic::system::security::crypt::DatabaseEncoder'->decode($iData->readUTF());
-                    $licenseServerDecoded = pack("C*", @{$decodedByteArray});
-                    $initInfo->setServer('org::allbinary::logic::system::security::crypt::WeakCrypt'->new(3)->decrypt($licenseServerDecoded), $index);
-                    $self->{logUtil}->putF($NEXT_FILE . $initInfo->getServer($index), $self, $METHOD_NAME);
+            [my jget logUtil] putF [string cat "LicenseInitInfo File: " [my jget INITFILENAME]] [self] $METHOD_NAME
+            set fileStreamFactory [::FileStreamFactory::getInstance]
+            set iFile [$fileStreamFactory getFileInputStreamInstance [my jget filePath] [my jget INITFILENAME]]
+            if {[expr {$iFile ne {}}]} {
+                set iData [::AbDataInputStream new $iFile]
+                set initInfo [::LicenseInitInfo new]
+                set decodedByteArray [::DatabaseEncoder::decode [$iData readUTF]]
+                set licenseIdDecoded $decodedByteArray
+                $initInfo setLicenseId [[::WeakCrypt new 1] decrypt $licenseIdDecoded]
+                set numberOfLicenseServers [$iData readInt]
+                set NEXT_FILE [[[[::StringMaker new] append [[::CommonLabels::getInstance] jget NEXT]] append " License Server From File: "] toString]
+                set licenseServerDecoded {}
+                for {set index 0} {[expr {$index < $numberOfLicenseServers}]} {jpostincr index 1} {
+                    set decodedByteArray [::DatabaseEncoder::decode [$iData readUTF]]
+                    set licenseServerDecoded $decodedByteArray
+                    $initInfo setServer [[::WeakCrypt new 3] decrypt $licenseServerDecoded] $index
+                    [my jget logUtil] putF [string cat $NEXT_FILE [jstr [$initInfo getServer $index]]] [self] $METHOD_NAME
                 }
-                return $initInfo;
+                return $initInfo
             } else {
-                die ("Could Not Load License InitInfo: " . $self->{INITFILENAME});
+                error [jexception Exception [string cat "Could Not Load License InitInfo: " [my jget INITFILENAME]]]
             }
-        } catch ($e) {
+        } on error {e} {
             try {
-                $self->{logUtil}->put("Command Failed: " . $self->{INITFILENAME}, $self, $METHOD_NAME, $e);
-            } catch ($e2) {
-                $self->{logUtil}->put("LicenseInitInfo Read Retry: " . $self->{INITFILENAME}, $self, "readAgain()", $e2);
+                [my jget logUtil] put [string cat "Command Failed: " [my jget INITFILENAME]] [self] $METHOD_NAME $e
+            } on error {e2} {
+                [my jget logUtil] put [string cat "LicenseInitInfo Read Retry: " [my jget INITFILENAME]] [self] "readAgain()" $e2
             }
-            die ("LicenseInitInfo Read Error: " . $self->{INITFILENAME});
+            error [jexception Exception [string cat "LicenseInitInfo Read Error: " [my jget INITFILENAME]]]
         }
+    }
+    
+
+    method getFilePath {} {
+        return [my jget filePath]
+    }
 }
 
-
-sub getFilePath {
-    my ($self) = @_;
-        return $self->{filePath};
+namespace eval ::LicenseInitInfoUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::LicenseInitInfoUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::LicenseInitInfoUtil::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::TsUtil ();
-use org::allbinary::globals::PATH_GLOBALS ();
-use org::allbinary::globals::URLGLOBALS ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::io::AbDataInputStream ();
-use org::allbinary::logic::io::AbDataOutputStream ();
-use org::allbinary::logic::io::AbFileInputStream ();
-use org::allbinary::logic::io::DataOutputStreamFactory ();
-use org::allbinary::logic::io::FileStreamFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::system::security::crypt::DatabaseEncoder ();
-use org::allbinary::logic::system::security::crypt::WeakCrypt ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::business::init::LicenseInitInfo ();
-
-1;
 

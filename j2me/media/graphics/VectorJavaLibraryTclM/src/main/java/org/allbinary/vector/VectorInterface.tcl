@@ -11,27 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.vector
 
-# Java interface
-package org::allbinary::vector::VectorInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getPoints {
-    my ($self, $frame) = @_;
-    die "abstract method getPoints";
+oo::class create ::VectorInterface {
+    superclass ::JObject
 }
 
+oo::define ::VectorInterface {
+    method initFields_VectorInterface {} {
+        return
+    }
+    
 
-sub setPoints {
-    my ($self, $currentPoints) = @_;
-    die "abstract method setPoints";
+    method getPoints {frame} {
+        error [jexception AbstractMethodError getPoints]
+    }
+    
+
+    method setPoints {currentPoints} {
+        error [jexception AbstractMethodError setPoints]
+    }
 }
 
+namespace eval ::VectorInterface {
+}
 
-1;
 

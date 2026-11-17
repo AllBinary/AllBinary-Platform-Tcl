@@ -11,80 +11,86 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::GameKeyMappingFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{intKeyToGameKey} = [(undef) x ('org::allbinary::game::input::InputFactory'->getInstance()->{MAX})];
+oo::class create ::GameKeyMappingFactory {
+    superclass ::JObject
 }
 
+oo::define ::GameKeyMappingFactory {
+    method initFields_GameKeyMappingFactory {} {
+        my jset intKeyToGameKey {}
+        my jset intKeyToGameKey [jarray [[::InputFactory::getInstance] jget MAX] {}]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::input::GameKeyMappingFactory::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::input::GameKeyMappingFactory::instance = 'org::allbinary::game::input::GameKeyMappingFactory'->new();
+    constructor {} {
+        next
+        my initFields_GameKeyMappingFactory
+        set gameKeyFactory [::GameKeyFactory::getInstance]
+        my setGameKey [$gameKeyFactory jget NONE]
+        my setGameKey [$gameKeyFactory jget UP]
+        my setGameKey [$gameKeyFactory jget DOWN]
+        my setGameKey [$gameKeyFactory jget LEFT]
+        my setGameKey [$gameKeyFactory jget RIGHT]
+        my setGameKey [$gameKeyFactory jget KEY_POUND]
+        my setGameKey [$gameKeyFactory jget KEY_STAR]
+        my setGameKey [$gameKeyFactory jget KEY_NUM0]
+        my setGameKey [$gameKeyFactory jget KEY_NUM1]
+        my setGameKey [$gameKeyFactory jget KEY_NUM2]
+        my setGameKey [$gameKeyFactory jget KEY_NUM3]
+        my setGameKey [$gameKeyFactory jget KEY_NUM4]
+        my setGameKey [$gameKeyFactory jget KEY_NUM5]
+        my setGameKey [$gameKeyFactory jget KEY_NUM6]
+        my setGameKey [$gameKeyFactory jget KEY_NUM7]
+        my setGameKey [$gameKeyFactory jget KEY_NUM8]
+        my setGameKey [$gameKeyFactory jget KEY_NUM9]
+        my setGameKey [$gameKeyFactory jget GAME_A]
+        my setGameKey [$gameKeyFactory jget GAME_B]
+        my setGameKey [$gameKeyFactory jget GAME_C]
+        my setGameKey [$gameKeyFactory jget GAME_D]
+        my setGameKey [$gameKeyFactory jget FIRE]
+        my setGameKey [$gameKeyFactory jget LEVEL_DOWN]
+        my setGameKey [$gameKeyFactory jget LEVEL_UP]
+    }
+    
+
+    method getGameKey {key} {
+        return [[my jget intKeyToGameKey] get $key]
+    }
+    
+
+    method setGameKey {gameKey} {
+        [my jget intKeyToGameKey] set [$gameKey getId] $gameKey
+    }
+}
+
+namespace eval ::GameKeyMappingFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::game::input::GameKeyMappingFactory::instance;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::GameKeyMappingFactory::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::GameKeyMappingFactory::staticSet_instance [::GameKeyMappingFactory new]
+        }
+        return [::GameKeyMappingFactory::staticGet_instance]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $gameKeyFactory = 'org::allbinary::game::input::GameKeyFactory'->getInstance();
-        $self->setGameKey($gameKeyFactory->{NONE});
-        $self->setGameKey($gameKeyFactory->{UP});
-        $self->setGameKey($gameKeyFactory->{DOWN});
-        $self->setGameKey($gameKeyFactory->{LEFT});
-        $self->setGameKey($gameKeyFactory->{RIGHT});
-        $self->setGameKey($gameKeyFactory->{KEY_POUND});
-        $self->setGameKey($gameKeyFactory->{KEY_STAR});
-        $self->setGameKey($gameKeyFactory->{KEY_NUM0});
-        $self->setGameKey($gameKeyFactory->{KEY_NUM1});
-        $self->setGameKey($gameKeyFactory->{KEY_NUM2});
-        $self->setGameKey($gameKeyFactory->{KEY_NUM3});
-        $self->setGameKey($gameKeyFactory->{KEY_NUM4});
-        $self->setGameKey($gameKeyFactory->{KEY_NUM5});
-        $self->setGameKey($gameKeyFactory->{KEY_NUM6});
-        $self->setGameKey($gameKeyFactory->{KEY_NUM7});
-        $self->setGameKey($gameKeyFactory->{KEY_NUM8});
-        $self->setGameKey($gameKeyFactory->{KEY_NUM9});
-        $self->setGameKey($gameKeyFactory->{GAME_A});
-        $self->setGameKey($gameKeyFactory->{GAME_B});
-        $self->setGameKey($gameKeyFactory->{GAME_C});
-        $self->setGameKey($gameKeyFactory->{GAME_D});
-        $self->setGameKey($gameKeyFactory->{FIRE});
-        $self->setGameKey($gameKeyFactory->{LEVEL_DOWN});
-        $self->setGameKey($gameKeyFactory->{LEVEL_UP});
-    return $self;
-}
-
-
-sub getGameKey {
-    my ($self, $key) = @_;
-        return $self->{intKeyToGameKey}->[$key];
-}
-
-
-sub setGameKey {
-    my ($self, $gameKey) = @_;
-        $self->{intKeyToGameKey}->[$gameKey->getId()] = $gameKey;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::game::input::InputFactory ();
-use org::allbinary::game::input::GameKeyFactory ();
-
-1;
 

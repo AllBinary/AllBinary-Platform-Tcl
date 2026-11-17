@@ -11,58 +11,63 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.motion.action
 
-package org::allbinary::game::input::motion::action::GameKeyCompleteMotionGestureInputEventFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::input::motion::action::GameKeyCompleteMotionGestureInputEventFactory'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{eventList} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::GameKeyCompleteMotionGestureInputEventFactory {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::GameKeyCompleteMotionGestureInputEventFactory {
+    method initFields_GameKeyCompleteMotionGestureInputEventFactory {} {
+        my jset logUtil {}
+        my jset eventList {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset eventList [::BasicArrayListD new]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_GameKeyCompleteMotionGestureInputEventFactory
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::input::motion::action::GameKeyCompleteMotionGestureInputEventFactory::SINGLETON;
-}
+    method add {gameKeyCompleteMotionGestureInputEvent} {
+        [my jget eventList] add $gameKeyCompleteMotionGestureInputEvent
+    }
+    
 
-
-sub add {
-    my ($self, $gameKeyCompleteMotionGestureInputEvent) = @_;
-        $self->{eventList}->add($gameKeyCompleteMotionGestureInputEvent);
-}
-
-
-sub updateAll {
-    my ($self) = @_;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{START_LABEL})->appendint($self->{eventList}->size())->toString(), $self, "updateAll");
-        for (my $index = $self->{eventList}->size() - 1; $index >= 0; $index--) {
-            my $gameKeyCompleteMotionGestureInputEvent = $self->{eventList}->{objectArray}->[$index];
-            $gameKeyCompleteMotionGestureInputEvent->update();
+    method updateAll {} {
+        [my jget logUtil] putF [[[[::StringMaker new] append [[::CommonLabels::getInstance] jget START_LABEL]] appendint [[my jget eventList] size]] toString] [self] "updateAll"
+        for {set index [jint [expr {[[my jget eventList] size] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set gameKeyCompleteMotionGestureInputEvent [[[my jget eventList] jget objectArray] get $index]
+            $gameKeyCompleteMotionGestureInputEvent update
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
+namespace eval ::GameKeyCompleteMotionGestureInputEventFactory {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::GameKeyCompleteMotionGestureInputEventFactory new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::GameKeyCompleteMotionGestureInputEventFactory::staticGet_SINGLETON]
+    }
+}
 
-1;
 

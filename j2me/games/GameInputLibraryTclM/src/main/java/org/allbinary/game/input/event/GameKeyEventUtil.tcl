@@ -11,30 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input.event
 
-package org::allbinary::game::input::event::GameKeyEventUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::GameKeyEventUtil {
+    superclass ::JObject
 }
 
+oo::define ::GameKeyEventUtil {
+    method initFields_GameKeyEventUtil {} {
+        return
+    }
+    
 
-sub getKey {
-    my ($class, $anyType) = @_;
-        my $gameKeyEvent = $anyType;
-        return $gameKeyEvent->getKey();
+    constructor {} {
+        next
+        my initFields_GameKeyEventUtil
+    }
+    
 }
 
-use java::lang::Object ();
+namespace eval ::GameKeyEventUtil {
+    proc getKey {anyType} {
+        set gameKeyEvent $anyType
+        return [$gameKeyEvent getKey]
+    }
+}
 
-1;
 

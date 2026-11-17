@@ -11,34 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration.feature
 
-# Java interface
-package org::allbinary::game::configuration::feature::GameFeatureControlledInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub init {
-    my ($self, $level) = @_;
-    die "abstract method init";
+oo::class create ::GameFeatureControlledInterface {
+    superclass ::JObject
 }
 
+oo::define ::GameFeatureControlledInterface {
+    method initFields_GameFeatureControlledInterface {} {
+        return
+    }
+    
 
-sub isFeature {
-    my ($self) = @_;
-    die "abstract method isFeature";
+    method init {level} {
+        error [jexception AbstractMethodError init]
+    }
+    
+
+    method isFeature {} {
+        error [jexception AbstractMethodError isFeature]
+    }
+    
+
+    method isLoadingLevel {level} {
+        error [jexception AbstractMethodError isLoadingLevel]
+    }
 }
 
-
-sub isLoadingLevel {
-    my ($self, $level) = @_;
-    die "abstract method isLoadingLevel";
+namespace eval ::GameFeatureControlledInterface {
 }
 
-
-1;
 

@@ -11,25 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.tick
 
-# Java interface
-package org::allbinary::game::tick::TickableInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::NamedInterface';
-
-
-
-# throws Exception
-sub processTick {
-    my ($self, $allBinaryLayerManager) = @_;
-    die "abstract method processTick";
+oo::class create ::TickableInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::layer::NamedInterface ();
+oo::define ::TickableInterface {
+    method initFields_TickableInterface {} {
+        return
+    }
+    
 
-1;
+    method processTick {allBinaryLayerManager} {
+        error [jexception AbstractMethodError processTick]
+    }
+}
+
+namespace eval ::TickableInterface {
+}
+
 

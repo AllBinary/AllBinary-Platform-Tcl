@@ -11,115 +11,103 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::GameInput;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{gameKeyEventList} = undef;
-    $self->{removalGameKeyEventList} = undef;
-    $self->{isRemoveDuplicateKeyPresses} = undef;
+oo::class create ::GameInput {
+    superclass ::JObject
 }
 
+oo::define ::GameInput {
+    method initFields_GameInput {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset gameKeyEventList {}
+        my jset removalGameKeyEventList {}
+        my jset isRemoveDuplicateKeyPresses false
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameKeyEventList, $removalGameKeyEventList) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{gameKeyEventList} = $gameKeyEventList;
-        $self->{removalGameKeyEventList} = $removalGameKeyEventList;
-        $self->{isRemoveDuplicateKeyPresses} = 'org::allbinary::game::configuration::feature::Features'->getInstance()->isFeature('org::allbinary::game::configuration::feature::InputFeatureFactory'->getInstance()->{REMOVE_DUPLICATE_KEY_PRESSES});
-    return $self;
-}
+    constructor {gameKeyEventList removalGameKeyEventList} {
+        next
+        my initFields_GameInput
+        my jset gameKeyEventList $gameKeyEventList
+        my jset removalGameKeyEventList $removalGameKeyEventList
+        my jset isRemoveDuplicateKeyPresses [[::Features::getInstance] isFeature [[::InputFeatureFactory::getInstance] jget REMOVE_DUPLICATE_KEY_PRESSES]]
+    }
+    
 
-
-sub add {
-    my ($self, $gameKeyEvent) = @_;
-        if ($self->{isRemoveDuplicateKeyPresses} && $self->{gameKeyEventList}->contains($gameKeyEvent)) {
-            return;
+    method add {gameKeyEvent} {
+        if {[expr {[my jget isRemoveDuplicateKeyPresses] && [[my jget gameKeyEventList] contains $gameKeyEvent]}]} {
+            return
         }
-        if (defined($gameKeyEvent)) {
-            $self->{gameKeyEventList}->add($gameKeyEvent);
+        if {[expr {$gameKeyEvent ne {}}]} {
+            [my jget gameKeyEventList] add $gameKeyEvent
         } else {
-            $self->{logUtil}->putF("Danger Passed Null GameKeyEvent", $self, $self->{commonStrings}->{ADD});
+            [my jget logUtil] putF "Danger Passed Null GameKeyEvent" [self] [[my jget commonStrings] jget ADD]
         }
-}
+    }
+    
 
+    method addForRemoval {gameKeyEvent} {
+        [my jget removalGameKeyEventList] add $gameKeyEvent
+    }
+    
 
-sub addForRemoval {
-    my ($self, $gameKeyEvent) = @_;
-        $self->{removalGameKeyEventList}->add($gameKeyEvent);
-}
+    method isForRemoval {gameKeyEvent} {
+        return [[my jget removalGameKeyEventList] contains $gameKeyEvent]
+    }
+    
 
+    method clear {} {
+        [my jget gameKeyEventList] clear
+    }
+    
 
-sub isForRemoval {
-    my ($self, $gameKeyEvent) = @_;
-        return $self->{removalGameKeyEventList}->contains($gameKeyEvent);
-}
-
-
-sub clear {
-    my ($self) = @_;
-        $self->{gameKeyEventList}->clear();
-}
-
-
-sub removeNonAIInputGameKeyEvents {
-    my ($self) = @_;
-        my $list = $self->{gameKeyEventList};
-        my $gameKeyEvent = undef;
-        for (my $index = $list->size(); --$index >= 0; ) {
-            $gameKeyEvent = $list->{objectArray}->[$index];
-            if ($gameKeyEvent->getSourceId() != 1) {
-                $list->removeAt($index);
+    method removeNonAIInputGameKeyEvents {} {
+        set list [my jget gameKeyEventList]
+        set gameKeyEvent {}
+        for {set index [$list size]} {[expr {[jpreincr index -1] >= 0}]} {} {
+            set gameKeyEvent [[$list jget objectArray] get $index]
+            if {[expr {[$gameKeyEvent getSourceId] != 1}]} {
+                $list removeAt $index
             }
         }
-}
+    }
+    
 
-
-sub update {
-    my ($self) = @_;
-        my $removeList = $self->{removalGameKeyEventList};
-        my $list = $self->{gameKeyEventList};
-        my $size = $removeList->size();
-        for (my $index = 0; $index < $size; $index++) {
-            my $anyType = $removeList->{objectArray}->[$index];
-            for (my $index2 = $list->size(); --$index2 >= 0; ) {
-                if ($list->{objectArray}->[$index2] == $anyType) {
-                    $list->removeAt($index2);
+    method update {} {
+        set removeList [my jget removalGameKeyEventList]
+        set list [my jget gameKeyEventList]
+        set size [$removeList size]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set anyType [[$removeList jget objectArray] get $index]
+            for {set index2 [$list size]} {[expr {[jpreincr index2 -1] >= 0}]} {} {
+                if {[expr {[[$list jget objectArray] get $index2] eq $anyType}]} {
+                    $list removeAt $index2
                 }
             }
         }
-        $removeList->clear();
+        $removeList clear
+    }
+    
+
+    method getRemovalGameKeyEventList {} {
+        return [my jget removalGameKeyEventList]
+    }
+    
+
+    method getGameKeyEventList {} {
+        return [my jget gameKeyEventList]
+    }
 }
 
-
-sub getRemovalGameKeyEventList {
-    my ($self) = @_;
-        return $self->{removalGameKeyEventList};
+namespace eval ::GameInput {
 }
 
-
-sub getGameKeyEventList {
-    my ($self) = @_;
-        return $self->{gameKeyEventList};
-}
-
-use java::lang::Object ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::InputFeatureFactory ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-
-1;
 

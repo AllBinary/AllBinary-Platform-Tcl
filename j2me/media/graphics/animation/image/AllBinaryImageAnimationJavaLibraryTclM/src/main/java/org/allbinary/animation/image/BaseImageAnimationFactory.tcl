@@ -11,117 +11,97 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::BaseImageAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::AnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{animationFactoryImageScaleUtil} = 'org::allbinary::image::AnimationFactoryImageScaleUtil'->getInstance();
-    $self->{image} = undef;
-    $self->{animationBehaviorFactory} = undef;
-    $self->{sequenceArray} = undef;
-    $self->{animationFactoryInitializationVisitor} = undef;
-    $self->{scaleProperties} = $org::allbinary::media::ScaleProperties::instance;
+oo::class create ::BaseImageAnimationFactory {
+    superclass ::JObject
 }
 
+oo::define ::BaseImageAnimationFactory {
+    method initFields_BaseImageAnimationFactory {} {
+        my jset animationFactoryImageScaleUtil {}
+        my jset image {}
+        my jset animationBehaviorFactory {}
+        my jset sequenceArray {}
+        my jset animationFactoryInitializationVisitor {}
+        my jset scaleProperties {}
+        my jset animationFactoryImageScaleUtil [::AnimationFactoryImageScaleUtil::getInstance]
+        
+        
+        
+        
+        my jset scaleProperties [::ScaleProperties::staticGet_instance]
+        return
+    }
+    
+    
 
-# throws Exception
-sub createFactoryBase {
-    my ($class, $image, $sequenceArray, $width, $height, $animationBehaviorFactory) = @_;
-        return 'org::allbinary::animation::image::BaseImageAnimationFactory'->new($image, $sequenceArray, $width, $height, 0, 0, $animationBehaviorFactory);
-}
+    constructor {image sequenceArray width height dx dy animationBehaviorFactory} {
+        next
+        my initFields_BaseImageAnimationFactory
+        my jset animationFactoryInitializationVisitor [::AnimationFactoryInitializationVisitor new]
+        my jset image $image
+        [my jget animationFactoryInitializationVisitor] jset width $width
+        [my jget animationFactoryInitializationVisitor] jset height $height
+        my jset animationBehaviorFactory $animationBehaviorFactory
+        my jset sequenceArray $sequenceArray
+        [my jget animationFactoryInitializationVisitor] jset dx $dx
+        [my jget animationFactoryInitializationVisitor] jset dy $dy
+    }
+    
 
+    method getInstance {instanceId} {
+        return [[::NullAnimationFactory::getFactoryInstance] getInstance $instanceId]
+    }
+    
 
-sub new {
-    my ($class, $image, $sequenceArray, $width, $height, $dx, $dy, $animationBehaviorFactory) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{animationFactoryInitializationVisitor} = 'org::allbinary::animation::image::AnimationFactoryInitializationVisitor'->new();
-        $self->{image} = $image;
-        $self->{animationFactoryInitializationVisitor}->{width} = $width;
-        $self->{animationFactoryInitializationVisitor}->{height} = $height;
-        $self->{animationBehaviorFactory} = $animationBehaviorFactory;
-        $self->{sequenceArray} = $sequenceArray;
-        $self->{animationFactoryInitializationVisitor}->{dx} = $dx;
-        $self->{animationFactoryInitializationVisitor}->{dy} = $dy;
-    return $self;
-}
+    method getImage {} {
+        return [my jget image]
+    }
+    
 
+    method getSequenceArray {} {
+        return [my jget sequenceArray]
+    }
+    
 
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        return 'org::allbinary::animation::NullAnimationFactory'->getFactoryInstance()->getInstance($instanceId);
-}
-
-
-sub getImage {
-    my ($self) = @_;
-        return $self->{image};
-}
-
-
-sub getSequenceArray {
-    my ($self) = @_;
-        return $self->{sequenceArray};
-}
-
-
-sub setInitialScale {
-    my ($self, $scaleProperties) = @_;
-        $self->{scaleProperties} = $scaleProperties;
-        if ($self->{scaleProperties}->{shouldScale}) {
-            $self->{scaleProperties}->{scaleWidth} = int(($self->{animationFactoryInitializationVisitor}->{width} * $self->{scaleProperties}->{scaleX}));
-            $self->{scaleProperties}->{scaleHeight} = int(($self->{animationFactoryInitializationVisitor}->{height} * $self->{scaleProperties}->{scaleY}));
+    method setInitialScale {scaleProperties} {
+        my jset scaleProperties $scaleProperties
+        if {[[my jget scaleProperties] jget shouldScale]} {
+            [my jget scaleProperties] jset scaleWidth [jint ([expr {[[my jget animationFactoryInitializationVisitor] jget width] * [[my jget scaleProperties] jget scaleX]}])]
+            [my jget scaleProperties] jset scaleHeight [jint ([expr {[[my jget animationFactoryInitializationVisitor] jget height] * [[my jget scaleProperties] jget scaleY]}])]
         } else {
         }
+    }
+    
+
+    method getAnimationFactoryInitializationVisitorP {} {
+        return [my jget animationFactoryInitializationVisitor]
+    }
+    
+
+    method getScalePropertiesP {} {
+        return [my jget scaleProperties]
+    }
+    
+
+    method toString {} {
+        set commonSeps [::CommonSeps::getInstance]
+        set commonLabels [::CommonLabels::getInstance]
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append [next]
+        $stringBuffer append [$commonLabels jget HEIGHT_LABEL]
+        $stringBuffer appendint [jint [[my jget image] getHeight]]
+        $stringBuffer append [$commonSeps jget SPACE]
+        $stringBuffer append [[my jget animationFactoryInitializationVisitor] toString]
+        return [$stringBuffer toString]
+    }
 }
 
-
-sub getAnimationFactoryInitializationVisitorP {
-    my ($self) = @_;
-        return $self->{animationFactoryInitializationVisitor};
+namespace eval ::BaseImageAnimationFactory {
+    proc createFactoryBase {image sequenceArray width height animationBehaviorFactory} {
+        return [::BaseImageAnimationFactory new $image $sequenceArray $width $height 0 0 $animationBehaviorFactory]
+    }
 }
 
-
-sub getScalePropertiesP {
-    my ($self) = @_;
-        return $self->{scaleProperties};
-}
-
-
-sub toString {
-    my ($self) = @_;
-        my $commonSeps = 'org::allbinary::string::CommonSeps'->getInstance();
-        my $commonLabels = 'org::allbinary::string::CommonLabels'->getInstance();
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append($self->SUPER::toString());
-        $stringBuffer->append($commonLabels->{HEIGHT_LABEL});
-        $stringBuffer->appendint(int($self->{image}->getHeight()));
-        $stringBuffer->append($commonSeps->{SPACE});
-        $stringBuffer->append($self->{animationFactoryInitializationVisitor}->toString());
-        return $stringBuffer->toString();
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::NullAnimationFactory ();
-use org::allbinary::image::AnimationFactoryImageScaleUtil ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::media::ScaleProperties ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::animation::image::AnimationFactoryInitializationVisitor ();
-
-1;
 

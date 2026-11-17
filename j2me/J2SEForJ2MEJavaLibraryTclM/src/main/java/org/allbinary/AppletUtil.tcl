@@ -11,37 +11,51 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary
 
 #import org.allbinary.logic.communication.log.PreLogUtil;
-package org::allbinary::AppletUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $applet = 0;
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AppletUtil {
+    superclass ::JObject
 }
 
+oo::define ::AppletUtil {
+    method initFields_AppletUtil {} {
+        return
+    }
+    
 
-sub setApplet {
-    my ($class) = @_;
-        $org::allbinary::AppletUtil::applet = 1;
+    constructor {} {
+        next
+        my initFields_AppletUtil
+    }
+    
+    
 }
 
-
-sub isAppletLoader {
-    my ($class, $anyType) = @_;
-        return $org::allbinary::AppletUtil::applet;
+namespace eval ::AppletUtil {
+    variable appletValue {}
+    variable appletSet 0
+    proc staticGet_applet {} {
+        variable appletValue
+        variable appletSet
+        if {!$appletSet} {
+            set appletSet 1
+            set appletValue false
+        }
+        return $appletValue
+    }
+    proc staticSet_applet {value} {
+        variable appletValue
+        variable appletSet
+        set appletSet 1
+        set appletValue $value
+    }
+    proc setApplet {} {
+        ::AppletUtil::staticSet_applet true
+    }
+    proc isAppletLoader {anyType} {
+        return [::AppletUtil::staticGet_applet]
+    }
 }
 
-use java::lang::Object ();
-
-1;
 

@@ -11,151 +11,126 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::Animation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::AnimationInterface','org::allbinary::image::opengles::OpenGLSurfaceChangedInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{basicSetColorUtil} = 'org::allbinary::graphics::color::BasicColorSetUtil'->getInstance();
-    $self->{basicColor} = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{WHITE};
-    $self->{colorP} = 0;
-    $self->{changeBasicColorP} = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{NULL_COLOR};
-    $self->{changeColorP} = 0;
-    $self->{alphaP} = 0;
+oo::class create ::Animation {
+    superclass ::JObject
 }
 
+oo::define ::Animation {
+    method initFields_Animation {} {
+        my jset basicSetColorUtil {}
+        my jset basicColor {}
+        my jset colorP 0
+        my jset changeBasicColorP {}
+        my jset changeColorP 0
+        my jset alphaP 0
+        my jset basicSetColorUtil [::BasicColorSetUtil::getInstance]
+        my jset basicColor [[::BasicColorFactory::getInstance] jget WHITE]
+        my jset colorP 0
+        my jset changeBasicColorP [[::BasicColorFactory::getInstance] jget NULL_COLOR]
+        my jset changeColorP 0
+        my jset alphaP 0
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_Animation
+    }
+    
+
+    method setAlpha {alpha} {
+        my jset alphaP $alpha
+    }
+    
+
+    method nextFrame {} {
+    }
+    
+
+    method paintXY {graphics x y} {
+        [my jget basicSetColorUtil] setBasicColorP3 $graphics [my getBasicColorP] [my getColor]
+    }
+    
+
+    method paintThreedXYZ {graphics x y z} {
+    }
+    
+
+    method isThreed {} {
+        return false
+    }
+    
+
+    method getBasicColorP {} {
+        return [my jget basicColor]
+    }
+    
+
+    method setBasicColorP {basicColor} {
+        my jset basicColor $basicColor
+        my jset colorP [[my jget basicColor] intValue]
+    }
+    
+
+    method setBackgroundBasicColorP {basicColor} {
+    }
+    
+
+    method getChangeBasicColor {} {
+        return [my jget changeBasicColorP]
+    }
+    
+
+    method changeBasicColor {basicColor} {
+        my jset changeBasicColorP $basicColor
+        my jset changeColorP [[my jget changeBasicColorP] intValue]
+    }
+    
+
+    method getChangeColor {} {
+        return [my jget changeColorP]
+    }
+    
+
+    method getColor {} {
+        return [my jget colorP]
+    }
+    
+
+    method setScale {scaleX scaleY} {
+    }
+    
+
+    method setMaxScale {maxScaleX maxScaleY} {
+    }
+    
+
+    method set {gl} {
+    }
+    
+
+    method setDx {dx} {
+    }
+    
+
+    method getDx {} {
+        return 0
+    }
+    
+
+    method setDy {dy} {
+    }
+    
+
+    method getDy {} {
+        return 0
+    }
 }
 
-
-sub setAlpha {
-    my ($self, $alpha) = @_;
-        $self->{alphaP} = $alpha;
+namespace eval ::Animation {
 }
 
-
-# throws Exception
-sub nextFrame {
-    my ($self) = @_;
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->{basicSetColorUtil}->setBasicColorP3($graphics, $self->getBasicColorP(), $self->getColor());
-}
-
-
-sub paintThreedXYZ {
-    my ($self, $graphics, $x, $y, $z) = @_;
-}
-
-
-sub isThreed {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub getBasicColorP {
-    my ($self) = @_;
-        return $self->{basicColor};
-}
-
-
-sub setBasicColorP {
-    my ($self, $basicColor) = @_;
-        $self->{basicColor} = $basicColor;
-        $self->{colorP} = int($self->{basicColor});
-}
-
-
-sub setBackgroundBasicColorP {
-    my ($self, $basicColor) = @_;
-}
-
-
-sub getChangeBasicColor {
-    my ($self) = @_;
-        return $self->{changeBasicColorP};
-}
-
-
-sub changeBasicColor {
-    my ($self, $basicColor) = @_;
-        $self->{changeBasicColorP} = $basicColor;
-        $self->{changeColorP} = int($self->{changeBasicColorP});
-}
-
-
-sub getChangeColor {
-    my ($self) = @_;
-        return $self->{changeColorP};
-}
-
-
-sub getColor {
-    my ($self) = @_;
-        return $self->{colorP};
-}
-
-
-sub setScale {
-    my ($self, $scaleX, $scaleY) = @_;
-}
-
-
-sub setMaxScale {
-    my ($self, $maxScaleX, $maxScaleY) = @_;
-}
-
-
-# throws Exception
-sub set {
-    my ($self, $gl) = @_;
-}
-
-
-sub setDx {
-    my ($self, $dx) = @_;
-}
-
-
-sub getDx {
-    my ($self) = @_;
-        return 0;
-}
-
-
-sub setDy {
-    my ($self, $dy) = @_;
-}
-
-
-sub getDy {
-    my ($self) = @_;
-        return 0;
-}
-
-use java::lang::Object ();
-use javax::microedition::khronos::opengles::GL ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::color::BasicColorSetUtil ();
-use org::allbinary::image::opengles::OpenGLSurfaceChangedInterface ();
-use org::allbinary::animation::AnimationInterface ();
-
-1;
 

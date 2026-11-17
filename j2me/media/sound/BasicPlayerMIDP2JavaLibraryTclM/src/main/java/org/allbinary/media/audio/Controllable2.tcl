@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-# Java interface
-package org::allbinary::media::audio::Controllable2;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub setVolume {
-    my ($self, $leftVolume, $rightVolume) = @_;
-    die "abstract method setVolume";
+oo::class create ::Controllable2 {
+    superclass ::JObject
 }
 
+oo::define ::Controllable2 {
+    method initFields_Controllable2 {} {
+        return
+    }
+    
 
-1;
+    method setVolume {leftVolume rightVolume} {
+        error [jexception AbstractMethodError setVolume]
+    }
+}
+
+namespace eval ::Controllable2 {
+}
+
 

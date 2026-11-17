@@ -11,51 +11,42 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.collision.layer
 
-package org::allbinary::game::collision::layer::CollidableInterfaceLayerProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::LayerProcessor';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::game::collision::layer::CollidableInterfaceLayerManager'->new());
-        # super(...) made $self above
-    return $self;
+oo::class create ::CollidableInterfaceLayerProcessor {
+    superclass ::LayerProcessor
 }
 
+oo::define ::CollidableInterfaceLayerProcessor {
+    method initFields_CollidableInterfaceLayerProcessor {} {
+        return
+    }
+    
 
-# throws Exception
-sub processAt {
-    my ($self, $allBinaryLayerManager, $layerInterface, $index) = @_;
-        my $collidableInterfaceCompositeInterface = $layerInterface;
-        if ($collidableInterfaceCompositeInterface->getCollidableInferface()->isCollidable($collidableInterfaceCompositeInterface)) {
-            'org::allbinary::game::collision::layer::AllBinaryCollisionManager'->getInstance()->process($self->getLayerManager(), $collidableInterfaceCompositeInterface, $index);
+    constructor {} {
+        next [::CollidableInterfaceLayerManager new]
+        my initFields_CollidableInterfaceLayerProcessor
+    }
+    
+
+    method processAt {allBinaryLayerManager layerInterface index} {
+        set collidableInterfaceCompositeInterface $layerInterface
+        if {[[$collidableInterfaceCompositeInterface getCollidableInferface] isCollidable $collidableInterfaceCompositeInterface]} {
+            [::AllBinaryCollisionManager::getInstance] process [my getLayerManager] $collidableInterfaceCompositeInterface $index
         }
-}
+    }
+    
 
-
-sub isProcessorLayer {
-    my ($self, $layerInterface) = @_;
-        if ($layerInterface->implmentsCollidableInterface()) {
-            return 1;
+    method isProcessorLayer {layerInterface} {
+        if {[$layerInterface implmentsCollidableInterface]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::collision::CollidableInterfaceCompositeInterface ();
-use org::allbinary::game::layer::CollidableCompositeLayer ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::layer::LayerProcessor ();
-use org::allbinary::game::collision::layer::CollidableInterfaceLayerManager ();
-use org::allbinary::game::collision::layer::AllBinaryCollisionManager ();
+namespace eval ::CollidableInterfaceLayerProcessor {
+}
 
-1;
 

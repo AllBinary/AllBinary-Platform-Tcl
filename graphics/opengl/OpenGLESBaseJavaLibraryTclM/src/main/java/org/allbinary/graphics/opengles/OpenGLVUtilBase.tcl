@@ -11,38 +11,36 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles
 
-package org::allbinary::graphics::opengles::OpenGLVUtilBase;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::OpenGLVUtilBase {
+    superclass ::JObject
 }
 
+oo::define ::OpenGLVUtilBase {
+    method initFields_OpenGLVUtilBase {} {
+        return
+    }
 
-sub glTexEnvix {
-    my ($self, $gl, $target, $pname, $param) = @_;
+    constructor {} {
+        next
+        my initFields_OpenGLVUtilBase
+    }
+    
+
+    method glTexEnvix {gl target pname param} {
+    }
+    
+
+    method glTexParameterix {gl target pname param} {
+    }
+    
+
+    method glGenerateMipmap {gl textureId target generateMipMap} {
+    }
 }
 
-
-sub glTexParameterix {
-    my ($self, $gl, $target, $pname, $param) = @_;
+namespace eval ::OpenGLVUtilBase {
 }
 
-
-sub glGenerateMipmap {
-    my ($self, $gl, $textureId, $target, $generateMipMap) = @_;
-}
-
-use java::lang::Object ();
-use javax::microedition::khronos::opengles::GL10 ();
-
-1;
 

@@ -11,28 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable.command
 
-# Java interface
-package org::allbinary::graphics::displayable::command::MyCommandInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub addCommand {
-    my ($self, $command) = @_;
-    die "abstract method addCommand";
+oo::class create ::MyCommandInterface {
+    superclass ::JObject
 }
 
+oo::define ::MyCommandInterface {
+    method initFields_MyCommandInterface {} {
+        return
+    }
+    
 
-sub removeAllCommands {
-    my ($self) = @_;
-    die "abstract method removeAllCommands";
+    method addCommand {command} {
+        error [jexception AbstractMethodError addCommand]
+    }
+    
+
+    method removeAllCommands {} {
+        error [jexception AbstractMethodError removeAllCommands]
+    }
 }
 
-use javax::microedition::lcdui::Command ();
+namespace eval ::MyCommandInterface {
+}
 
-1;
 

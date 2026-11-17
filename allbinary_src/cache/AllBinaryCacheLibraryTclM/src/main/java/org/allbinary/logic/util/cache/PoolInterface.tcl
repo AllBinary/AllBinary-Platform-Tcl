@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.logic.util.cache
 
-# Java interface
-package org::allbinary::logic::util::cache::PoolInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::cache::CacheInterface';
-
-
-
-# throws Exception
-sub remove {
-    my ($self, $key) = @_;
-    die "abstract method remove";
+oo::class create ::PoolInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::cache::CacheInterface ();
+oo::define ::PoolInterface {
+    method initFields_PoolInterface {} {
+        return
+    }
+    
 
-1;
+    method remove {key} {
+        error [jexception AbstractMethodError remove]
+    }
+}
+
+namespace eval ::PoolInterface {
+}
+
 

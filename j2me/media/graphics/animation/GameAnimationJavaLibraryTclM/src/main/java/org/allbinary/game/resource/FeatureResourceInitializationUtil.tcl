@@ -11,51 +11,56 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.resource
 
-package org::allbinary::game::resource::FeatureResourceInitializationUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::resource::FeatureResourceInitializationUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::FeatureResourceInitializationUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::FeatureResourceInitializationUtil {
+    method initFields_FeatureResourceInitializationUtil {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_FeatureResourceInitializationUtil
+    }
+    
+    
+
+    method init {level} {
+        set commonStrings [::CommonStrings::getInstance]
+        [my jget logUtil] putF [$commonStrings jget START] [self] [$commonStrings jget INIT]
+        set featuredResourceFactory [::FeaturedAnimationInterfaceFactoryInterfaceFactory::getInstance]
+        $featuredResourceFactory init $level
+        [::FeaturedResourceRelativeRelationshipFactory::getInstance] init $level
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::resource::FeatureResourceInitializationUtil::instance;
+namespace eval ::FeatureResourceInitializationUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::FeatureResourceInitializationUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::FeatureResourceInitializationUtil::staticGet_instance]
+    }
 }
 
-
-# throws Exception
-sub init {
-    my ($self, $level) = @_;
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-        $self->{logUtil}->putF($commonStrings->{START}, $self, $commonStrings->{INIT});
-        my $featuredResourceFactory = 'org::allbinary::animation::FeaturedAnimationInterfaceFactoryInterfaceFactory'->getInstance();
-        $featuredResourceFactory->init($level);
-        'org::allbinary::game::resource::FeaturedResourceRelativeRelationshipFactory'->getInstance()->init($level);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::animation::FeaturedAnimationInterfaceFactoryInterfaceFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::resource::FeaturedResourceRelativeRelationshipFactory ();
-
-1;
 

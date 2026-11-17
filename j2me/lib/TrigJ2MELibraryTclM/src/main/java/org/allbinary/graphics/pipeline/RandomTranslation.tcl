@@ -11,38 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.pipeline
 
-package org::allbinary::graphics::pipeline::RandomTranslation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::RandomTranslation {
+    superclass ::JObject
 }
 
+oo::define ::RandomTranslation {
+    method initFields_RandomTranslation {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($class, $vector, $howMuch) = @_;
-        my $myRandomFactory = 'org::allbinary::game::rand::MyRandomFactory'->getInstance();
-        my $x = -$myRandomFactory->getNextInt($howMuch);
-        my $y = $myRandomFactory->getNextInt($howMuch);
-        my $graphicsPipe = 'org::allbinary::graphics::pipeline::BasicGraphicsPipeline'->new($vector);
-        $graphicsPipe->createMatrix();
-        $graphicsPipe->translate($x, $y);
-        return $graphicsPipe->getMatrix();
+    constructor {} {
+        next
+        my initFields_RandomTranslation
+    }
+    
 }
 
-use java::lang::Object ();
-use org::allbinary::game::rand::MyRandomFactory ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::graphics::pipeline::BasicGraphicsPipeline ();
+namespace eval ::RandomTranslation {
+    proc getInstance {vector howMuch} {
+        set myRandomFactory [::MyRandomFactory::getInstance]
+        set x [expr {-[$myRandomFactory getNextInt $howMuch]}]
+        set y [$myRandomFactory getNextInt $howMuch]
+        set graphicsPipe [::BasicGraphicsPipeline new $vector]
+        $graphicsPipe createMatrix
+        $graphicsPipe translate $x $y
+        return [$graphicsPipe getMatrix]
+    }
+}
 
-1;
 

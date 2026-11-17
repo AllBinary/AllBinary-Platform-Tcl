@@ -11,23 +11,25 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-package org::allbinary::game::midlet::LicenseLoadingType;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class, $name) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::LicenseLoadingType {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
+oo::define ::LicenseLoadingType {
+    method initFields_LicenseLoadingType {} {
+        return
+    }
+    
 
-1;
+    constructor {name} {
+        next
+        my initFields_LicenseLoadingType
+    }
+}
+
+namespace eval ::LicenseLoadingType {
+}
+
 

@@ -11,142 +11,143 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::CurrentlyPressedTouchButtonSingletonDebug;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::motion::button::CurrentlyPressedTouchButtonSingleton';
-
-tie our $instanceC, 'java::lang::LazyStatic', sub { 'org::allbinary::input::motion::button::CurrentlyPressedTouchButtonSingletonDebug'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{string} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{listString} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{appendText} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{PRESSED_AND_FIRED} = "pressed & fired";
-    $self->{PRESSED_AND_NOT_FIRED} = "pressed in button but not fired";
-    $self->{ASSOCIATED_RELEASED_AND_FIRED} = "assoc. rel & fired";
-    $self->{RELEASED_AND_FIRED} = "rel & fired 1";
-    $self->{RELEASED_AND_FIRED_2} = "rel & fired 2";
-    $self->{RELEASED_AND_NOT_FIRED} = "rel & not fired";
+oo::class create ::CurrentlyPressedTouchButtonSingletonDebug {
+    superclass ::CurrentlyPressedTouchButtonSingleton
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
+oo::define ::CurrentlyPressedTouchButtonSingletonDebug {
+    method initFields_CurrentlyPressedTouchButtonSingletonDebug {} {
+        my jset string {}
+        my jset listString {}
+        my jset appendText {}
+        my jset PRESSED_AND_FIRED {}
+        my jset PRESSED_AND_NOT_FIRED {}
+        my jset ASSOCIATED_RELEASED_AND_FIRED {}
+        my jset RELEASED_AND_FIRED {}
+        my jset RELEASED_AND_FIRED_2 {}
+        my jset RELEASED_AND_NOT_FIRED {}
+        my jset string [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset listString [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset appendText [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset PRESSED_AND_FIRED "pressed & fired"
+        my jset PRESSED_AND_NOT_FIRED "pressed in button but not fired"
+        my jset ASSOCIATED_RELEASED_AND_FIRED "assoc. rel & fired"
+        my jset RELEASED_AND_FIRED "rel & fired 1"
+        my jset RELEASED_AND_FIRED_2 "rel & fired 2"
+        my jset RELEASED_AND_NOT_FIRED "rel & not fired"
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_CurrentlyPressedTouchButtonSingletonDebug
+    }
+    
+    
+
+    method appendTouchButtonInput {append touchButtonInput} {
+        set stringBuffer [::StringMaker new]
+        $stringBuffer append [$touchButtonInput toString]
+        $stringBuffer append [[::CommonSeps::getInstance] jget SPACE]
+        $stringBuffer append $append
+        my jset appendText [$stringBuffer toString]
+        my jset string [[[[::StringMaker new] append [my jget listString]] append [my jget appendText]] toString]
+    }
+    
+
+    method append {append} {
+        my jset appendText [[[[::StringMaker new] append [my jget appendText]] append $append] toString]
+        my jset string [[[[::StringMaker new] append [my jget listString]] append [my jget appendText]] toString]
+    }
+    
+
+    method clearLog {x y} {
+        my jset appendText [[[[::StringMaker new] append [::GPoint::toStringStatic $x $y 0]] append [[::CommonSeps::getInstance] jget SPACE]] toString]
+        my jset string [[[[::StringMaker new] append [my jget listString]] append [my jget appendText]] toString]
+    }
+    
+
+    method releaseAndNotFired {} {
+        my append [my jget RELEASED_AND_NOT_FIRED]
+    }
+    
+
+    method releaseAndFired {touchButtonInput} {
+        my appendTouchButtonInput [my jget RELEASED_AND_FIRED] $touchButtonInput
+    }
+    
+
+    method releaseAndFired2 {touchButtonInput} {
+        my appendTouchButtonInput [my jget RELEASED_AND_FIRED_2] $touchButtonInput
+    }
+    
+
+    method releaseAndFiredAssociated {touchButtonInput} {
+        my appendTouchButtonInput [my jget ASSOCIATED_RELEASED_AND_FIRED] $touchButtonInput
+    }
+    
+
+    method pressedAndFired {touchButtonInput} {
+        my appendTouchButtonInput [my jget PRESSED_AND_FIRED] $touchButtonInput
+    }
+    
+
+    method pressedAndNotFired {touchButtonInput} {
+        my appendTouchButtonInput [my jget PRESSED_AND_NOT_FIRED] $touchButtonInput
+    }
+    
+
+    method removeAt {index} {
+        set touchButtonInput [next $index]
+        my jset listString [[my jget list] toString]
+        my jset string [[[[::StringMaker new] append [my jget listString]] append [my jget appendText]] toString]
+        return $touchButtonInput
+    }
+    
+
+    method remove {touchButtonInput} {
+        set isRemoved [next $touchButtonInput]
+        my jset listString [[my jget list] toString]
+        my jset string [[[[::StringMaker new] append [my jget listString]] append [my jget appendText]] toString]
+        return $isRemoved
+    }
+    
+
+    method add {touchButtonInput} {
+        next $touchButtonInput
+        my jset listString [[my jget list] toString]
+        my jset string [[[[::StringMaker new] append [my jget listString]] append [my jget appendText]] toString]
+    }
+    
+
+    method toString {} {
+        return [my jget string]
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::motion::button::CurrentlyPressedTouchButtonSingletonDebug::instanceC;
+namespace eval ::CurrentlyPressedTouchButtonSingletonDebug {
+    variable instanceCValue {}
+    variable instanceCSet 0
+    proc staticGet_instanceC {} {
+        variable instanceCValue
+        variable instanceCSet
+        if {!$instanceCSet} {
+            set instanceCSet 1
+            set instanceCValue [::CurrentlyPressedTouchButtonSingletonDebug new]
+        }
+        return $instanceCValue
+    }
+    proc staticSet_instanceC {value} {
+        variable instanceCValue
+        variable instanceCSet
+        set instanceCSet 1
+        set instanceCValue $value
+    }
+    proc getInstance {} {
+        return [::CurrentlyPressedTouchButtonSingletonDebug::staticGet_instanceC]
+    }
 }
 
-
-sub appendTouchButtonInput {
-    my ($self, $append, $touchButtonInput) = @_;
-        my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-        $stringBuffer->append($touchButtonInput->toString());
-        $stringBuffer->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE});
-        $stringBuffer->append($append);
-        $self->{appendText} = $stringBuffer->toString();
-        $self->{string} = 'org::allbinary::logic::string::StringMaker'->new()->append($self->{listString})->append($self->{appendText})->toString();
-}
-
-
-sub append {
-    my ($self, $append) = @_;
-        $self->{appendText} = 'org::allbinary::logic::string::StringMaker'->new()->append($self->{appendText})->append($append)->toString();
-        $self->{string} = 'org::allbinary::logic::string::StringMaker'->new()->append($self->{listString})->append($self->{appendText})->toString();
-}
-
-
-sub clearLog {
-    my ($self, $x, $y) = @_;
-        $self->{appendText} = 'org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::graphics::GPoint'->toStringStatic($x, $y, 0))->append('org::allbinary::string::CommonSeps'->getInstance()->{SPACE})->toString();
-        $self->{string} = 'org::allbinary::logic::string::StringMaker'->new()->append($self->{listString})->append($self->{appendText})->toString();
-}
-
-
-sub releaseAndNotFired {
-    my ($self) = @_;
-        $self->append($self->{RELEASED_AND_NOT_FIRED});
-}
-
-
-sub releaseAndFired {
-    my ($self, $touchButtonInput) = @_;
-        $self->appendTouchButtonInput($self->{RELEASED_AND_FIRED}, $touchButtonInput);
-}
-
-
-sub releaseAndFired2 {
-    my ($self, $touchButtonInput) = @_;
-        $self->appendTouchButtonInput($self->{RELEASED_AND_FIRED_2}, $touchButtonInput);
-}
-
-
-sub releaseAndFiredAssociated {
-    my ($self, $touchButtonInput) = @_;
-        $self->appendTouchButtonInput($self->{ASSOCIATED_RELEASED_AND_FIRED}, $touchButtonInput);
-}
-
-
-sub pressedAndFired {
-    my ($self, $touchButtonInput) = @_;
-        $self->appendTouchButtonInput($self->{PRESSED_AND_FIRED}, $touchButtonInput);
-}
-
-
-sub pressedAndNotFired {
-    my ($self, $touchButtonInput) = @_;
-        $self->appendTouchButtonInput($self->{PRESSED_AND_NOT_FIRED}, $touchButtonInput);
-}
-
-
-sub removeAt {
-    my ($self, $index) = @_;
-        my $touchButtonInput = $self->SUPER::removeAt($index);
-        $self->{listString} = $self->{list}->toString();
-        $self->{string} = 'org::allbinary::logic::string::StringMaker'->new()->append($self->{listString})->append($self->{appendText})->toString();
-        return $touchButtonInput;
-}
-
-
-sub remove {
-    my ($self, $touchButtonInput) = @_;
-        my $isRemoved = $self->SUPER::remove($touchButtonInput);
-        $self->{listString} = $self->{list}->toString();
-        $self->{string} = 'org::allbinary::logic::string::StringMaker'->new()->append($self->{listString})->append($self->{appendText})->toString();
-        return $isRemoved;
-}
-
-
-sub add {
-    my ($self, $touchButtonInput) = @_;
-        $self->SUPER::add($touchButtonInput);
-        $self->{listString} = $self->{list}->toString();
-        $self->{string} = 'org::allbinary::logic::string::StringMaker'->new()->append($self->{listString})->append($self->{appendText})->toString();
-}
-
-
-sub toString {
-    my ($self) = @_;
-        return $self->{string};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::GPoint ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonSeps ();
-use org::allbinary::input::motion::button::CurrentlyPressedTouchButtonSingleton ();
-
-1;
 

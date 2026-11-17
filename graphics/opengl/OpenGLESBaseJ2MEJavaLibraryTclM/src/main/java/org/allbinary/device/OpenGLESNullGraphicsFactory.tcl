@@ -1,29 +1,43 @@
 # Generated Code Do Not Modify
+# package org.allbinary.device
 
-package org::allbinary::device::OpenGLESNullGraphicsFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::device::OpenGLESGraphics'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::OpenGLESNullGraphicsFactory {
+    superclass ::JObject
 }
 
+oo::define ::OpenGLESNullGraphicsFactory {
+    method initFields_OpenGLESNullGraphicsFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::device::OpenGLESNullGraphicsFactory::instance;
+    constructor {} {
+        next
+        my initFields_OpenGLESNullGraphicsFactory
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::device::OpenGLESGraphics ();
+namespace eval ::OpenGLESNullGraphicsFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::OpenGLESGraphics new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::OpenGLESNullGraphicsFactory::staticGet_instance]
+    }
+}
 
-1;
 

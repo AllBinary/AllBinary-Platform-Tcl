@@ -11,712 +11,596 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-package org::allbinary::game::midlet::GameMidlet;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Scalar::Util ();
-use parent -norequire,'org::allbinary::midlet::ProgressMidlet','javax::microedition::lcdui::CommandListener';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{enumerationUtil} = 'org::allbinary::util::EnumerationUtil'->getInstance();
-    $self->{basicColorFactory} = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance();
-    $self->{features} = 'org::allbinary::game::configuration::feature::Features'->getInstance();
-    $self->{midletStrings} = 'org::allbinary::midlet::MidletStrings'->getInstance();
-    $self->{myCommandsFactory} = 'org::allbinary::graphics::displayable::command::MyCommandsFactory'->getInstance();
-    $self->{gameStrings} = 'org::allbinary::game::GameStrings'->getInstance();
-    $self->{gameAdStateFactory} = 'org::allbinary::business::advertisement::GameAdStateFactory'->getInstance();
-    $self->{gameStateFactory} = 'org::allbinary::game::state::GameStateFactory'->getInstance();
-    $self->{tsUtil} = 'org::allbinary::TsUtil'->getInstance();
-    $self->{DISPLAYABLE} = " Displayable: ";
-    $self->{COMMAND_NAME} = "command Name/Label: ";
-    $self->{NO_COMMAND} = "No Command";
-    $self->{NO_DISPLAYABLE} = "No Displayable";
-    $self->{COMMAND_ACTION} = 'org::allbinary::logic::string::StringMaker'->new()->append("GameMidlet::")->append($self->{midletStrings}->{COMMAND_ACTION})->toString();
-    $self->{PAUSE_APP_BACKGROUND} = "pauseAppBackground";
-    $self->{UN_PAUSE_APP_BACKGROUND} = "unPauseAppBackground";
-    $self->{aboutCommandProcessor} = 'org::allbinary::graphics::displayable::screen::AboutCommandProcessor'->getInstance();
-    $self->{webCommandProcessor} = 'org::allbinary::graphics::displayable::screen::WebCommandProcessor'->getInstance();
-    $self->{gameMidletStateFactory} = 'org::allbinary::game::midlet::GameMidletStateFactory'->getInstance();
-    $self->{gameStartTimeHelper} = 'org::allbinary::time::TimeDelayHelper'->new(240);
-    $self->{fullScreenUtil} = 'org::allbinary::canvas::FullScreenUtil'->getInstance();
-    $self->{debugInterface} = undef;
-    $self->{allbinaryGameCanvasRunnableInterface} = $org::allbinary::game::displayable::canvas::NullGameCanvasRunnable::NULL_GAME_CANVAS_RUNNABLE;
-    $self->{thread} = $org::allbinary::thread::NullThread::NULL_THREAD;
-    $self->{loadGameForm} = undef;
-    $self->{isFullScreen} = 0;
-    $self->{resized} = 0;
-    $self->{startedBefore} = 0;
+oo::class create ::GameMidlet {
+    superclass ::ProgressMidlet
 }
 
+oo::define ::GameMidlet {
+    method initFields_GameMidlet {} {
+        my jset enumerationUtil {}
+        my jset basicColorFactory {}
+        my jset features {}
+        my jset midletStrings {}
+        my jset myCommandsFactory {}
+        my jset gameStrings {}
+        my jset gameAdStateFactory {}
+        my jset gameStateFactory {}
+        my jset tsUtil {}
+        my jset DISPLAYABLE {}
+        my jset COMMAND_NAME {}
+        my jset NO_COMMAND {}
+        my jset NO_DISPLAYABLE {}
+        my jset COMMAND_ACTION {}
+        my jset PAUSE_APP_BACKGROUND {}
+        my jset UN_PAUSE_APP_BACKGROUND {}
+        my jset aboutCommandProcessor {}
+        my jset webCommandProcessor {}
+        my jset gameMidletStateFactory {}
+        my jset gameStartTimeHelper {}
+        my jset fullScreenUtil {}
+        my jset debugInterface {}
+        my jset allbinaryGameCanvasRunnableInterface {}
+        my jset thread {}
+        my jset loadGameForm {}
+        my jset isFullScreen false
+        my jset resized false
+        my jset startedBefore false
+        my jset enumerationUtil [::EnumerationUtil::getInstance]
+        my jset basicColorFactory [::BasicColorFactory::getInstance]
+        my jset features [::Features::getInstance]
+        my jset midletStrings [::MidletStrings::getInstance]
+        my jset myCommandsFactory [::MyCommandsFactory::getInstance]
+        my jset gameStrings [::GameStrings::getInstance]
+        my jset gameAdStateFactory [::GameAdStateFactory::getInstance]
+        my jset gameStateFactory [::GameStateFactory::getInstance]
+        my jset tsUtil [::TsUtil::getInstance]
+        my jset DISPLAYABLE " Displayable: "
+        my jset COMMAND_NAME "command Name/Label: "
+        my jset NO_COMMAND "No Command"
+        my jset NO_DISPLAYABLE "No Displayable"
+        my jset COMMAND_ACTION [[[[::StringMaker new] append "GameMidlet::"] append [[my jget midletStrings] jget COMMAND_ACTION]] toString]
+        my jset PAUSE_APP_BACKGROUND "pauseAppBackground"
+        my jset UN_PAUSE_APP_BACKGROUND "unPauseAppBackground"
+        my jset aboutCommandProcessor [::AboutCommandProcessor::getInstance]
+        my jset webCommandProcessor [::WebCommandProcessor::getInstance]
+        my jset gameMidletStateFactory [::GameMidletStateFactory::getInstance]
+        my jset gameStartTimeHelper [::TimeDelayHelper new 240]
+        my jset fullScreenUtil [::FullScreenUtil::getInstance]
+        
+        my jset allbinaryGameCanvasRunnableInterface [::NullGameCanvasRunnable::staticGet_NULL_GAME_CANVAS_RUNNABLE]
+        my jset thread [::NullThread::staticGet_NULL_THREAD]
+        
+        my jset isFullScreen false
+        my jset resized false
+        my jset startedBefore false
+        return
+    }
+    
 
-sub new {
-    my ($class, $clientInformationFactory) = @_;
-    my $self = $class->SUPER::new($clientInformationFactory);
-    _init_fields($self);
-        # super(...) made $self above
-        'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->initWithRange(0x291, 6);
-        $self->{loadGameForm} = 'org::allbinary::graphics::displayable::screen::CommandForm'->getNullCommandForm();
-        my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-        $progressCanvas->init($self);
-        'org::allbinary::game::configuration::event::GameFeatureEventHandler'->getInstance()->addListenerInterface('org::allbinary::game::configuration::event::ChangedGameFeatureListener'->getInstance());
-        'org::allbinary::game::configuration::persistance::GamePersistanceSingleton'->getInstance()->clear();
-        $self->{debugInterface} = 'org::allbinary::debug::DebugFactory'->getInstance();
-        $self->init();
-    return $self;
-}
+    constructor {clientInformationFactory} {
+        next $clientInformationFactory
+        my initFields_GameMidlet
+        [::SmallIntegerSingletonFactory::getInstance] initWithRange 0x291 6
+        my jset loadGameForm [::CommandForm::getNullCommandForm]
+        set progressCanvas [::ProgressCanvasFactory::getInstance]
+        $progressCanvas init [self]
+        [::GameFeatureEventHandler::getInstance] addListenerInterface [::ChangedGameFeatureListener::getInstance]
+        [::GamePersistanceSingleton::getInstance] clear
+        my jset debugInterface [::DebugFactory::getInstance]
+        my init
+    }
+    
 
+    method init {} {
+    }
+    
 
-sub init {
-    my ($self) = @_;
-}
+    method setDemo {} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
 
+    method createGame {} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
 
-# throws Exception
-sub setDemo {
-    my ($self) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
+    method mediaShutdown {} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
 
+    method stopAll {} {
+    }
+    
 
-# throws Exception
-sub createGame {
-    my ($self) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
+    method pauseApp {} {
+        my pauseAppBackground true
+        set gameAdState [[my jget gameAdStateFactory] getCurrentInstance]
+        [$gameAdState getAdvertisements] stopAll
+    }
+    
 
-
-# throws Exception
-sub mediaShutdown {
-    my ($self) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
-
-
-sub stopAll {
-    my ($self) = @_;
-}
-
-
-sub pauseApp {
-    my ($self) = @_;
-        $self->pauseAppBackground(1);
-        my $gameAdState = $self->{gameAdStateFactory}->getCurrentInstance();
-        $gameAdState->getAdvertisements()->stopAll();
-}
-
-
-sub pauseAppBackground {
-    my ($self, $background) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{PAUSE_APP_BACKGROUND});
-        if ($self->{allbinaryGameCanvasRunnableInterface} != $org::allbinary::game::displayable::canvas::NullGameCanvasRunnable::NULL_GAME_CANVAS_RUNNABLE) {
-            $self->{allbinaryGameCanvasRunnableInterface}->pause();
+    method pauseAppBackground {background} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [my jget PAUSE_APP_BACKGROUND]
+        if {[expr {[my jget allbinaryGameCanvasRunnableInterface] ne [::NullGameCanvasRunnable::staticGet_NULL_GAME_CANVAS_RUNNABLE]}]} {
+            [my jget allbinaryGameCanvasRunnableInterface] pause
         } else {
-            $self->{logUtil}->putF("<<<<<< Null", $self, $self->{PAUSE_APP_BACKGROUND});
+            [my jget logUtil] putF "<<<<<< Null" [self] [my jget PAUSE_APP_BACKGROUND]
         }
-        'org::allbinary::input::AllBinarySensorManager'->getInstance()->shutdown();
-}
+        [::AllBinarySensorManager::getInstance] shutdown
+    }
+    
 
+    method unPauseApp {} {
+        my unPauseAppBackground true
+        set gameAdState [[my jget gameAdStateFactory] getCurrentInstance]
+        [$gameAdState getAdvertisements] startAll
+    }
+    
 
-sub unPauseApp {
-    my ($self) = @_;
-        $self->unPauseAppBackground(1);
-        my $gameAdState = $self->{gameAdStateFactory}->getCurrentInstance();
-        $gameAdState->getAdvertisements()->startAll();
-}
-
-
-sub unPauseAppBackground {
-    my ($self, $background) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{UN_PAUSE_APP_BACKGROUND});
-        'org::allbinary::input::AllBinarySensorManager'->getInstance()->init();
-        my $gameCanvasRunnableInterface = $self->{allbinaryGameCanvasRunnableInterface};
-        if ($gameCanvasRunnableInterface != $org::allbinary::game::displayable::canvas::NullGameCanvasRunnable::NULL_GAME_CANVAS_RUNNABLE) {
-            $gameCanvasRunnableInterface->unPause();
+    method unPauseAppBackground {background} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [my jget UN_PAUSE_APP_BACKGROUND]
+        [::AllBinarySensorManager::getInstance] init
+        set gameCanvasRunnableInterface [my jget allbinaryGameCanvasRunnableInterface]
+        if {[expr {$gameCanvasRunnableInterface ne [::NullGameCanvasRunnable::staticGet_NULL_GAME_CANVAS_RUNNABLE]}]} {
+            $gameCanvasRunnableInterface unPause
         } else {
-            $self->{logUtil}->putF("<<<<<< Null", $self, $self->{UN_PAUSE_APP_BACKGROUND});
+            [my jget logUtil] putF "<<<<<< Null" [self] [my jget UN_PAUSE_APP_BACKGROUND]
         }
-}
+    }
+    
 
-
-sub destroyAppInRunnable {
-    my ($self, $unconditional, $isProgress) = @_;
-        my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-        if ($isProgress) {
-            $progressCanvas->start();
-            $self->commandAction($self->{myCommandsFactory}->{SET_DISPLAYABLE}, $progressCanvas);
+    method destroyAppInRunnable {unconditional isProgress} {
+        set progressCanvas [::ProgressCanvasFactory::getInstance]
+        if {$isProgress} {
+            $progressCanvas start
+            my commandAction [[my jget myCommandsFactory] jget SET_DISPLAYABLE] $progressCanvas
         }
-        $self->destroyApp($unconditional);
-        if ($isProgress) {
-            $progressCanvas->end();
+        my destroyApp $unconditional
+        if {$isProgress} {
+            $progressCanvas end
         }
-}
+    }
+    
 
-
-sub destroyApp {
-    my ($self, $unconditional) = @_;
-        my $METHOD_NAME = "GameMidlet::destroyApp";
+    method destroyApp {unconditional} {
+        set METHOD_NAME "GameMidlet::destroyApp"
         try {
-            'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::canvas::GameStatisticsFactory'->getInstance()->toString(), $self, $METHOD_NAME);
-            my $gameAdState = $self->{gameAdStateFactory}->getCurrentInstance();
-            $gameAdState->getAdvertisements()->stopAll();
-            if (!$self->isDestroyed()) {
-                $self->stopGameCanvasRunnableInterface();
-                $self->setGameCanvasRunnableInterface($org::allbinary::game::displayable::canvas::NullGameCanvasRunnable::NULL_GAME_CANVAS_RUNNABLE);
-                $self->mediaShutdown();
+            ::PreLogUtil::put [[::GameStatisticsFactory::getInstance] toString] [self] $METHOD_NAME
+            set gameAdState [[my jget gameAdStateFactory] getCurrentInstance]
+            [$gameAdState getAdvertisements] stopAll
+            if {[expr {![my isDestroyed]}]} {
+                my stopGameCanvasRunnableInterface
+                my setGameCanvasRunnableInterface [::NullGameCanvasRunnable::staticGet_NULL_GAME_CANVAS_RUNNABLE]
+                my mediaShutdown
             } else {
-                $self->{logUtil}->putF("Midlet Managment Error: Midlet Should Only Be Destroyed Once", $self, $METHOD_NAME);
+                [my jget logUtil] putF "Midlet Managment Error: Midlet Should Only Be Destroyed Once" [self] $METHOD_NAME
             }
-            $self->SUPER::destroyApp(1);
-            'org::allbinary::logic::communication::log::PreLogUtil'->put($self->{commonStrings}->{END}, $self, $METHOD_NAME);
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $METHOD_NAME, $e);
+            next true
+            ::PreLogUtil::put [[my jget commonStrings] jget END] [self] $METHOD_NAME
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] $METHOD_NAME $e
         }
-        $self->{logUtil}->putF($self->{commonStrings}->{END}, $self, $METHOD_NAME);
-}
+        [my jget logUtil] putF [[my jget commonStrings] jget END] [self] $METHOD_NAME
+    }
+    
 
-
-# throws MIDletStateChangeException
-sub startApp {
-    my ($self) = @_;
+    method startApp {} {
         try {
-            my $gameAdState = $self->{gameAdStateFactory}->getCurrentInstance();
-            $gameAdState->getAdvertisements()->startAll();
-            my $START_APP = "startApp";
-            $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $START_APP);
-            my $gameCanvasRunnableInterface = $self->{allbinaryGameCanvasRunnableInterface};
-            if ($gameCanvasRunnableInterface == $org::allbinary::game::displayable::canvas::NullGameCanvasRunnable::NULL_GAME_CANVAS_RUNNABLE) {
-                $self->{gameMidletStateFactory}->setCurrentGameState($self->{gameStateFactory}->{NO_GAME_STATE});
-                $self->setDemo();
+            set gameAdState [[my jget gameAdStateFactory] getCurrentInstance]
+            [$gameAdState getAdvertisements] startAll
+            set START_APP "startApp"
+            [my jget logUtil] putF [[my jget commonStrings] jget START] [self] $START_APP
+            set gameCanvasRunnableInterface [my jget allbinaryGameCanvasRunnableInterface]
+            if {[expr {$gameCanvasRunnableInterface eq [::NullGameCanvasRunnable::staticGet_NULL_GAME_CANVAS_RUNNABLE]}]} {
+                [my jget gameMidletStateFactory] setCurrentGameState [[my jget gameStateFactory] jget NO_GAME_STATE]
+                my setDemo
             } else {
-                $self->{logUtil}->putF("GameCanvasRunnableInterface is available", $self, $START_APP);
-                if ($gameCanvasRunnableInterface == $self->getCurrentDisplayable()) {
-                    $self->unPauseAppBackground(0);
+                [my jget logUtil] putF "GameCanvasRunnableInterface is available" [self] $START_APP
+                if {[expr {$gameCanvasRunnableInterface eq [my getCurrentDisplayable]}]} {
+                    my unPauseAppBackground false
                 } else {
-                    $self->{logUtil}->putF("GameCanvasRunnableInterface is not current displayable", $self, $START_APP);
+                    [my jget logUtil] putF "GameCanvasRunnableInterface is not current displayable" [self] $START_APP
                 }
             }
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "startApp", $e);
-            $self->destroyApp(0);
-            $self->notifyDestroyed();
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "startApp" $e
+            my destroyApp false
+            my notifyDestroyed
         }
-}
+    }
+    
 
-
-sub commandAction {
-    my ($self, $command, $displayable) = @_;
+    method commandAction {command displayable} {
         try {
-            my $displayableAsString = $self->{NO_DISPLAYABLE};
-            if (defined($displayable)) {
-                $displayableAsString = $displayable->toString();
+            set displayableAsString [my jget NO_DISPLAYABLE]
+            if {[expr {$displayable ne {}}]} {
+                set displayableAsString [$displayable toString]
             }
-            my $label = $self->{NO_COMMAND};
-            if (defined($command)) {
-                $label = $command->getLabel();
+            set label [my jget NO_COMMAND]
+            if {[expr {$command ne {}}]} {
+                set label [$command getLabel]
             }
-            'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append($self->{COMMAND_NAME})->append($label)->append($self->{DISPLAYABLE})->append($displayableAsString)->toString(), $self, $self->{COMMAND_ACTION});
-            my $gameCommandsFactory = 'org::allbinary::game::commands::GameCommandsFactory'->getInstance();
-            my $allbinaryGameCanvasRunnableInterface = $self->{allbinaryGameCanvasRunnableInterface};
-            my $gameCanvasRunnableInterface = $allbinaryGameCanvasRunnableInterface;
-            if ($command == $gameCommandsFactory->{SHOW_GAME_CANVAS}) {
-                if ($self->getDisplay()->getCurrent() != $gameCanvasRunnableInterface && $allbinaryGameCanvasRunnableInterface->getType() != $org::allbinary::game::displayable::canvas::NullGameCanvasRunnable::NULL_GAME_CANVAS_RUNNABLE->getType()) {
-                    $self->setDisplay($gameCanvasRunnableInterface);
+            ::PreLogUtil::put [[[[[[::StringMaker new] append [my jget COMMAND_NAME]] append $label] append [my jget DISPLAYABLE]] append $displayableAsString] toString] [self] [my jget COMMAND_ACTION]
+            set gameCommandsFactory [::GameCommandsFactory::getInstance]
+            set allbinaryGameCanvasRunnableInterface [my jget allbinaryGameCanvasRunnableInterface]
+            set gameCanvasRunnableInterface $allbinaryGameCanvasRunnableInterface
+            if {[expr {$command eq [$gameCommandsFactory jget SHOW_GAME_CANVAS]}]} {
+                if {[expr {[expr {[[my getDisplay] getCurrent] ne $gameCanvasRunnableInterface}] && [expr {[$allbinaryGameCanvasRunnableInterface getType] != [[::NullGameCanvasRunnable::staticGet_NULL_GAME_CANVAS_RUNNABLE] getType]}]}]} {
+                    my setDisplay $gameCanvasRunnableInterface
                 }
-                $self->unPauseAppBackground(0);
-            } elsif ($command == $gameCommandsFactory->{CLOSE_AND_SHOW_GAME_CANVAS}) {
-                my $menuListener = $displayable;
-                $menuListener->close();
-                $self->setDisplay($gameCanvasRunnableInterface);
-                $self->unPauseAppBackground(0);
-            } elsif ($command == $gameCommandsFactory->{EXIT_COMMAND}) {
-                if ('org::allbinary::game::midlet::GameMidletEventHandler'->getInstance()->getEventListenerInterfaceListP()->size() == 0) {
-                    $self->exitProgress(1);
+                my unPauseAppBackground false
+            } elseif {[expr {$command eq [$gameCommandsFactory jget CLOSE_AND_SHOW_GAME_CANVAS]}]} {
+                set menuListener $displayable
+                $menuListener close
+                my setDisplay $gameCanvasRunnableInterface
+                my unPauseAppBackground false
+            } elseif {[expr {$command eq [$gameCommandsFactory jget EXIT_COMMAND]}]} {
+                if {[expr {[[[::GameMidletEventHandler::getInstance] getEventListenerInterfaceListP] size] == 0}]} {
+                    my exitProgress true
                 }
-                'org::allbinary::game::midlet::GameMidletEventHandler'->getInstance()->fireEvent('org::allbinary::game::midlet::DemoGameMidletEvent'->new($self, 'org::allbinary::game::midlet::DemoGameMidletStateFactory'->getInstance()->{NONE}));
-            } elsif ($command == $gameCommandsFactory->{EXIT_WITHOUT_PROGRESS_COMMAND}) {
-                $self->exitProgress(0);
-            } elsif ($command == $gameCommandsFactory->{START_COMMAND} || $command == $gameCommandsFactory->{RESTART_COMMAND} || $command == $gameCommandsFactory->{CONTINUE_COMMAND}) {
-                if ($self->{gameMidletStateFactory}->getCurrentGameState() != $self->{gameStateFactory}->{PLAYING_GAME_STATE} || $command == $gameCommandsFactory->{RESTART_COMMAND}) {
-                    if ($self->{gameStartTimeHelper}->isTimeTNT()) {
-                        if ($command == $gameCommandsFactory->{START_COMMAND} && $self->isDemoLoading()) {
-                            $self->{logUtil}->putF("Trying to Start Game Before Loading Complete", $self, $self->{midletStrings}->{COMMAND_ACTION});
+                [::GameMidletEventHandler::getInstance] fireEvent [::DemoGameMidletEvent new [self] [[::DemoGameMidletStateFactory::getInstance] jget NONE]]
+            } elseif {[expr {$command eq [$gameCommandsFactory jget EXIT_WITHOUT_PROGRESS_COMMAND]}]} {
+                my exitProgress false
+            } elseif {[expr {[expr {[expr {$command eq [$gameCommandsFactory jget START_COMMAND]}] || [expr {$command eq [$gameCommandsFactory jget RESTART_COMMAND]}]}] || [expr {$command eq [$gameCommandsFactory jget CONTINUE_COMMAND]}]}]} {
+                if {[expr {[expr {[[my jget gameMidletStateFactory] getCurrentGameState] != [[my jget gameStateFactory] jget PLAYING_GAME_STATE]}] || [expr {$command eq [$gameCommandsFactory jget RESTART_COMMAND]}]}]} {
+                    if {[[my jget gameStartTimeHelper] isTimeTNT]} {
+                        if {[expr {[expr {$command eq [$gameCommandsFactory jget START_COMMAND]}] && [my isDemoLoading]}]} {
+                            [my jget logUtil] putF "Trying to Start Game Before Loading Complete" [self] [[my jget midletStrings] jget COMMAND_ACTION]
                         } else {
-                            $self->{startedBefore} = 1;
-                            $self->createGame();
-                            $self->{gameMidletStateFactory}->setCurrentGameState($self->{gameStateFactory}->{PLAYING_GAME_STATE});
+                            my jset startedBefore true
+                            my createGame
+                            [my jget gameMidletStateFactory] setCurrentGameState [[my jget gameStateFactory] jget PLAYING_GAME_STATE]
                         }
                     } else {
-                        $self->{logUtil}->putF("Starting Game Too Often", $self, $self->{midletStrings}->{COMMAND_ACTION});
+                        [my jget logUtil] putF "Starting Game Too Often" [self] [[my jget midletStrings] jget COMMAND_ACTION]
                     }
                 } else {
-                    $self->{logUtil}->putF("Already in playing state", $self, $self->{COMMAND_ACTION});
+                    [my jget logUtil] putF "Already in playing state" [self] [my jget COMMAND_ACTION]
                 }
-            } elsif ($command == $gameCommandsFactory->{BUY_COMMAND}) {
-                my $inApplicationPurchaseFactory = 'org::allbinary::logic::system::security::licensing::InApplicationPurchaseFactory'->getInstance();
-                my $list = 'org::allbinary::logic::system::security::licensing::LockableFeatureFactory'->getInstance()->getList();
-                my $lockableFeature = $list->get(0);
-                if ($list->size() > 0 && !$inApplicationPurchaseFactory->isPurchased($lockableFeature)) {
-                    $inApplicationPurchaseFactory->purchase($lockableFeature);
+            } elseif {[expr {$command eq [$gameCommandsFactory jget BUY_COMMAND]}]} {
+                set inApplicationPurchaseFactory [::InApplicationPurchaseFactory::getInstance]
+                set list [[::LockableFeatureFactory::getInstance] getList]
+                set lockableFeature [$list get 0]
+                if {[expr {[expr {[$list size] > 0}] && [expr {![$inApplicationPurchaseFactory isPurchased $lockableFeature]}]}]} {
+                    $inApplicationPurchaseFactory purchase $lockableFeature
                 } else {
-                    'org::allbinary::game::input::TextNotificationUtil'->getInstance()->fireSuccess("Already Purchased");
+                    [::TextNotificationUtil::getInstance] fireSuccess "Already Purchased"
                 }
-            } elsif ($command == $gameCommandsFactory->{QUIT_COMMAND}) {
-                if ($self->{gameStartTimeHelper}->isTimeTNT()) {
-                    if ((Scalar::Util::blessed($displayable) && $displayable->isa('org::allbinary::game::score::displayable::HighScoreTextBox'))) {
-                        my $menuListener = $displayable;
-                        $menuListener->close();
+            } elseif {[expr {$command eq [$gameCommandsFactory jget QUIT_COMMAND]}]} {
+                if {[[my jget gameStartTimeHelper] isTimeTNT]} {
+                    if {[jinstanceof $displayable ::HighScoreTextBox]} {
+                        set menuListener $displayable
+                        $menuListener close
                     }
-                    $self->stopGameCanvasRunnableInterface();
-                    $self->{gameMidletStateFactory}->setCurrentGameState($self->{gameStateFactory}->{NO_GAME_STATE});
-                    $self->setDemo();
+                    my stopGameCanvasRunnableInterface
+                    [my jget gameMidletStateFactory] setCurrentGameState [[my jget gameStateFactory] jget NO_GAME_STATE]
+                    my setDemo
                 }
-            } elsif ($command == $self->{myCommandsFactory}->{RESUME_COMMAND}) {
-                $self->unPauseAppBackground(0);
-            } elsif ($command == $self->{myCommandsFactory}->{PAUSE_COMMAND}) {
-                $self->pauseAppBackground(0);
-            } elsif ($command == $self->{myCommandsFactory}->{SET_DISPLAYABLE}) {
-                $self->pauseAppBackground(0);
-                $self->setDisplay($displayable);
-            } elsif ($command == $gameCommandsFactory->{SET_MENU_DISPLAYABLE}) {
-                $self->pauseAppBackground(0);
-                my $menuListener = $displayable;
-                $menuListener->open();
-                $self->setDisplay($displayable);
-            } elsif ($command == $gameCommandsFactory->{START_TRACE}) {
-                $self->{debugInterface}->start();
-                my $gameCanvas = $allbinaryGameCanvasRunnableInterface;
-                $gameCanvas->addCommand($gameCommandsFactory->{STOP_TRACE});
-                $gameCanvas->removeCommand($gameCommandsFactory->{START_TRACE});
-            } elsif ($command == $gameCommandsFactory->{STOP_TRACE}) {
-                $self->pauseAppBackground(0);
-                $self->{debugInterface}->stop();
-                $self->unPauseAppBackground(0);
-                my $gameCanvas = $allbinaryGameCanvasRunnableInterface;
-                $gameCanvas->addCommand($gameCommandsFactory->{START_TRACE});
-                $gameCanvas->removeCommand($gameCommandsFactory->{STOP_TRACE});
-            } elsif ($command == $gameCommandsFactory->{DEFAULT_OPTIONS}) {
-                my $tempDisplayable = $displayable;
-                if ((Scalar::Util::blessed($tempDisplayable) && $tempDisplayable->isa('org::allbinary::game::configuration::GameOptionsForm'))) {
-                    'org::allbinary::game::configuration::feature::GameFeatureFormUtil'->getInstance()->setDefault($tempDisplayable);
+            } elseif {[expr {$command eq [[my jget myCommandsFactory] jget RESUME_COMMAND]}]} {
+                my unPauseAppBackground false
+            } elseif {[expr {$command eq [[my jget myCommandsFactory] jget PAUSE_COMMAND]}]} {
+                my pauseAppBackground false
+            } elseif {[expr {$command eq [[my jget myCommandsFactory] jget SET_DISPLAYABLE]}]} {
+                my pauseAppBackground false
+                my setDisplay $displayable
+            } elseif {[expr {$command eq [$gameCommandsFactory jget SET_MENU_DISPLAYABLE]}]} {
+                my pauseAppBackground false
+                set menuListener $displayable
+                $menuListener open
+                my setDisplay $displayable
+            } elseif {[expr {$command eq [$gameCommandsFactory jget START_TRACE]}]} {
+                [my jget debugInterface] start
+                set gameCanvas $allbinaryGameCanvasRunnableInterface
+                $gameCanvas addCommand [$gameCommandsFactory jget STOP_TRACE]
+                $gameCanvas removeCommand [$gameCommandsFactory jget START_TRACE]
+            } elseif {[expr {$command eq [$gameCommandsFactory jget STOP_TRACE]}]} {
+                my pauseAppBackground false
+                [my jget debugInterface] stop
+                my unPauseAppBackground false
+                set gameCanvas $allbinaryGameCanvasRunnableInterface
+                $gameCanvas addCommand [$gameCommandsFactory jget START_TRACE]
+                $gameCanvas removeCommand [$gameCommandsFactory jget STOP_TRACE]
+            } elseif {[expr {$command eq [$gameCommandsFactory jget DEFAULT_OPTIONS]}]} {
+                set tempDisplayable $displayable
+                if {[jinstanceof $tempDisplayable ::GameOptionsForm]} {
+                    [::GameFeatureFormUtil::getInstance] setDefault $tempDisplayable
                 }
-            } elsif ($command == $org::allbinary::game::displayable::canvas::GameInputMappingInstructionsCanvas::DISPLAY) {
-                my $tempDisplayable = $displayable;
-                if ((Scalar::Util::blessed($tempDisplayable) && $tempDisplayable->isa('org::allbinary::game::displayable::canvas::GameInputMappingCanvas'))) {
-                    my $gameInputMappingCanvas = $tempDisplayable;
-                    $gameInputMappingCanvas->update();
+            } elseif {[expr {$command eq [::GameInputMappingInstructionsCanvas::staticGet_DISPLAY]}]} {
+                set tempDisplayable $displayable
+                if {[jinstanceof $tempDisplayable ::GameInputMappingCanvas]} {
+                    set gameInputMappingCanvas $tempDisplayable
+                    $gameInputMappingCanvas update
                 }
-                $self->commandAction($gameCommandsFactory->{SET_MENU_DISPLAYABLE}, $self->getInputMappingInstructionsCanvas());
-            } elsif ('org::allbinary::game::score::HighScoreCommandsFactory'->getInstance()->isHighScoreCommand($command)) {
-                my $tempDisplayable = $displayable;
-                if ((Scalar::Util::blessed($tempDisplayable) && $tempDisplayable->isa('org::allbinary::game::score::displayable::HighScoresCanvas'))) {
-                    my $highScoresCanvas = $tempDisplayable;
-                    $highScoresCanvas->updateCommand($command);
+                my commandAction [$gameCommandsFactory jget SET_MENU_DISPLAYABLE] [my getInputMappingInstructionsCanvas]
+            } elseif {[[::HighScoreCommandsFactory::getInstance] isHighScoreCommand $command]} {
+                set tempDisplayable $displayable
+                if {[jinstanceof $tempDisplayable ::HighScoresCanvas]} {
+                    set highScoresCanvas $tempDisplayable
+                    $highScoresCanvas updateCommand $command
                 }
-            } elsif ($command == 'org::allbinary::game::score::HighScoreCommands'->getInstance()->{DISPLAY}) {
-                $self->commandAction($gameCommandsFactory->{SET_MENU_DISPLAYABLE}, $self->createHighScoresCanvas());
-            } elsif ($command == $org::allbinary::game::displayable::canvas::GameInputMappingInstructionsCanvas::CLOSE) {
-                my $menuListener = $displayable;
-                $menuListener->close();
-                $self->commandAction($org::allbinary::game::displayable::canvas::GameInputMappingCanvas::DISPLAY, $javax::microedition::lcdui::NullCanvas::NULL_CANVAS);
-            } elsif ($command == $org::allbinary::game::displayable::canvas::GameInputMappingCanvas::DISPLAY) {
-                if ('org::allbinary::J2MEUtil'->isHTML()) {
-                    $self->pauseAppBackground(0);
+            } elseif {[expr {$command eq [[::HighScoreCommands::getInstance] jget DISPLAY]}]} {
+                my commandAction [$gameCommandsFactory jget SET_MENU_DISPLAYABLE] [my createHighScoresCanvas]
+            } elseif {[expr {$command eq [::GameInputMappingInstructionsCanvas::staticGet_CLOSE]}]} {
+                set menuListener $displayable
+                $menuListener close
+                my commandAction [::GameInputMappingCanvas::staticGet_DISPLAY] [::NullCanvas::staticGet_NULL_CANVAS]
+            } elseif {[expr {$command eq [::GameInputMappingCanvas::staticGet_DISPLAY]}]} {
+                if {[::J2MEUtil::isHTML]} {
+                    my pauseAppBackground false
                 }
-                $self->commandAction($gameCommandsFactory->{SET_MENU_DISPLAYABLE}, $self->getInputMappingCanvas());
-            } elsif ($command == $org::allbinary::game::displayable::canvas::GameInputMappingCanvas::DEFAULT) {
-                my $tempDisplayable = $displayable;
-                if ((Scalar::Util::blessed($tempDisplayable) && $tempDisplayable->isa('org::allbinary::game::displayable::canvas::GameInputMappingCanvas'))) {
-                    my $gameInputMappingCanvas = $tempDisplayable;
-                    $gameInputMappingCanvas->setDefault();
+                my commandAction [$gameCommandsFactory jget SET_MENU_DISPLAYABLE] [my getInputMappingCanvas]
+            } elseif {[expr {$command eq [::GameInputMappingCanvas::staticGet_DEFAULT]}]} {
+                set tempDisplayable $displayable
+                if {[jinstanceof $tempDisplayable ::GameInputMappingCanvas]} {
+                    set gameInputMappingCanvas $tempDisplayable
+                    $gameInputMappingCanvas setDefault
                 }
-            } elsif ($command == $org::allbinary::game::configuration::InGameOptionsForm::DISPLAY) {
-                $self->pauseAppBackground(0);
-                my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-                $progressCanvas->addNormalPortion(50, "In Game Options");
-                my $layerManager = $self->createGameLayerManager();
-                my $inGameOptionsFormFactory = 'org::allbinary::game::configuration::InGameOptionsFormFactory'->getInstance();
-                $inGameOptionsFormFactory->init($self, 'org::allbinary::game::configuration::InGameFeatures'->new(), "Options In Game", $layerManager->getBackgroundBasicColor(), $layerManager->getForegroundBasicColor());
-                my $inGameOptionsForm = $inGameOptionsFormFactory->get();
-                $inGameOptionsForm->setItemStateListener($allbinaryGameCanvasRunnableInterface);
-                $self->commandAction($gameCommandsFactory->{SET_MENU_DISPLAYABLE}, $inGameOptionsForm);
-            } elsif ($command == $org::allbinary::game::configuration::InGameOptionsForm::DEFAULT) {
-                my $inGameOptionsForm = 'org::allbinary::game::configuration::InGameOptionsFormFactory'->getInstance()->get();
-                'org::allbinary::game::configuration::feature::GameFeatureFormUtil'->getInstance()->setDefault($inGameOptionsForm);
-            } elsif ($command == $gameCommandsFactory->{DISPLAY_OPTIONS}) {
-                'org::allbinary::media::audio::AllBinaryMediaManager'->setMuted(1);
-                $self->stopAll();
-                my $mainFeatureFactory = 'org::allbinary::game::configuration::feature::MainFeatureFactory'->getInstance();
-                $self->{isFullScreen} = $self->{features}->isFeature($mainFeatureFactory->{FULL_SCREEN});
-                'org::allbinary::graphics::ResizableListenerHandler'->getInstance()->fireEvent(1);
-                $self->setResized(0);
-                $self->commandAction($gameCommandsFactory->{SET_MENU_DISPLAYABLE}, $self->getGameOptionsForm());
-            } elsif ($command == $gameCommandsFactory->{CLOSE_OPTIONS}) {
-                'org::allbinary::graphics::ResizableListenerHandler'->getInstance()->fireEvent(0);
-                $self->commandAction($gameCommandsFactory->{CLOSE_AND_SHOW_GAME_CANVAS}, $displayable);
-                my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-                $stringBuffer->append("Close isFullScreen/change: ");
-                $stringBuffer->appendboolean($self->{isFullScreen});
-                $stringBuffer->appendboolean($self->{fullScreenUtil}->isScreenChange($self->{isFullScreen}));
-                $stringBuffer->append(" isResized: ");
-                $stringBuffer->appendboolean($self->isResized());
-                'org::allbinary::logic::communication::log::PreLogUtil'->put($stringBuffer->toString(), $self, $self->{COMMAND_ACTION});
-                if ($self->isResized() || $self->{fullScreenUtil}->isScreenChange($self->{isFullScreen})) {
-                    $self->updateFullScreen();
+            } elseif {[expr {$command eq [::InGameOptionsForm::staticGet_DISPLAY]}]} {
+                my pauseAppBackground false
+                set progressCanvas [::ProgressCanvasFactory::getInstance]
+                $progressCanvas addNormalPortion 50 "In Game Options"
+                set layerManager [my createGameLayerManager]
+                set inGameOptionsFormFactory [::InGameOptionsFormFactory::getInstance]
+                $inGameOptionsFormFactory init [self] [::InGameFeatures new] "Options In Game" [$layerManager getBackgroundBasicColor] [$layerManager getForegroundBasicColor]
+                set inGameOptionsForm [$inGameOptionsFormFactory get]
+                $inGameOptionsForm setItemStateListener $allbinaryGameCanvasRunnableInterface
+                my commandAction [$gameCommandsFactory jget SET_MENU_DISPLAYABLE] $inGameOptionsForm
+            } elseif {[expr {$command eq [::InGameOptionsForm::staticGet_DEFAULT]}]} {
+                set inGameOptionsForm [[::InGameOptionsFormFactory::getInstance] get]
+                [::GameFeatureFormUtil::getInstance] setDefault $inGameOptionsForm
+            } elseif {[expr {$command eq [$gameCommandsFactory jget DISPLAY_OPTIONS]}]} {
+                ::AllBinaryMediaManager::setMuted true
+                my stopAll
+                set mainFeatureFactory [::MainFeatureFactory::getInstance]
+                my jset isFullScreen [[my jget features] isFeature [$mainFeatureFactory jget FULL_SCREEN]]
+                [::ResizableListenerHandler::getInstance] fireEvent true
+                my setResized false
+                my commandAction [$gameCommandsFactory jget SET_MENU_DISPLAYABLE] [my getGameOptionsForm]
+            } elseif {[expr {$command eq [$gameCommandsFactory jget CLOSE_OPTIONS]}]} {
+                [::ResizableListenerHandler::getInstance] fireEvent false
+                my commandAction [$gameCommandsFactory jget CLOSE_AND_SHOW_GAME_CANVAS] $displayable
+                set stringBuffer [::StringMaker new]
+                $stringBuffer append "Close isFullScreen/change: "
+                $stringBuffer appendboolean [my jget isFullScreen]
+                $stringBuffer appendboolean [[my jget fullScreenUtil] isScreenChange [my jget isFullScreen]]
+                $stringBuffer append " isResized: "
+                $stringBuffer appendboolean [my isResized]
+                ::PreLogUtil::put [$stringBuffer toString] [self] [my jget COMMAND_ACTION]
+                if {[expr {[my isResized] || [[my jget fullScreenUtil] isScreenChange [my jget isFullScreen]]}]} {
+                    my updateFullScreen
                 }
-                'org::allbinary::media::audio::AllBinaryMediaManager'->setMuted(0);
-            } elsif ($command == $gameCommandsFactory->{DISPLAY_LOAD_FORM}) {
-                $self->pauseAppBackground(0);
-                my $keyValuePersistance = 'org::allbinary::game::configuration::persistance::GamePersistanceSingleton'->getInstance();
-                $keyValuePersistance->clear();
-                $keyValuePersistance->loadAll($self->{abeClientInformation});
-                if ($self->getLoadGameForm() == 'org::allbinary::graphics::displayable::screen::CommandForm'->getNullCommandForm()) {
-                    my $layerManager = $self->createGameLayerManager();
-                    $self->setLoadGameForm('org::allbinary::game::configuration::LoadGameForm'->new($self, "Load Game", $layerManager->getBackgroundBasicColor(), $layerManager->getForegroundBasicColor()));
+                ::AllBinaryMediaManager::setMuted false
+            } elseif {[expr {$command eq [$gameCommandsFactory jget DISPLAY_LOAD_FORM]}]} {
+                my pauseAppBackground false
+                set keyValuePersistance [::GamePersistanceSingleton::getInstance]
+                $keyValuePersistance clear
+                $keyValuePersistance loadAll [my jget abeClientInformation]
+                if {[expr {[my getLoadGameForm] eq [::CommandForm::getNullCommandForm]}]} {
+                    set layerManager [my createGameLayerManager]
+                    my setLoadGameForm [::LoadGameForm new [self] "Load Game" [$layerManager getBackgroundBasicColor] [$layerManager getForegroundBasicColor]]
                 } else {
-                    $self->getLoadGameForm()->update();
+                    [my getLoadGameForm] update
                 }
-                $self->commandAction($gameCommandsFactory->{SET_MENU_DISPLAYABLE}, $self->getLoadGameForm());
-            } elsif ($command == $gameCommandsFactory->{LOAD_FILE}) {
-                my $loadGameForm = $self->getLoadGameForm();
-                my $index = $loadGameForm->getSelectedId();
-                if ($index != -1) {
-                    my $keyValuePersistance = 'org::allbinary::game::configuration::persistance::GamePersistanceSingleton'->getInstance();
-                    $self->setStartStateHashtable($keyValuePersistance->get($index));
-                    my $menuListener = $self->getLoadGameForm();
-                    $menuListener->close();
-                    'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::input::motion::gesture::observer::BasicMotionGesturesHandler'->getInstance()->toString(), $self, $self->{COMMAND_ACTION});
-                    $self->commandAction($gameCommandsFactory->{START_COMMAND}, $javax::microedition::lcdui::NullCanvas::NULL_CANVAS);
-                    'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::input::motion::gesture::observer::BasicMotionGesturesHandler'->getInstance()->toString(), $self, $self->{COMMAND_ACTION});
+                my commandAction [$gameCommandsFactory jget SET_MENU_DISPLAYABLE] [my getLoadGameForm]
+            } elseif {[expr {$command eq [$gameCommandsFactory jget LOAD_FILE]}]} {
+                set loadGameForm [my getLoadGameForm]
+                set index [$loadGameForm getSelectedId]
+                if {[expr {$index != [expr {-1}]}]} {
+                    set keyValuePersistance [::GamePersistanceSingleton::getInstance]
+                    my setStartStateHashtable [$keyValuePersistance get $index]
+                    set menuListener [my getLoadGameForm]
+                    $menuListener close
+                    ::PreLogUtil::put [[::BasicMotionGesturesHandler::getInstance] toString] [self] [my jget COMMAND_ACTION]
+                    my commandAction [$gameCommandsFactory jget START_COMMAND] [::NullCanvas::staticGet_NULL_CANVAS]
+                    ::PreLogUtil::put [[::BasicMotionGesturesHandler::getInstance] toString] [self] [my jget COMMAND_ACTION]
                 }
-            } elsif ($command == $gameCommandsFactory->{DELETE_FILE}) {
-                my $loadGameForm = $self->getLoadGameForm();
-                my $index = $loadGameForm->getSelectedText();
-                if ($index != -1) {
-                    my $keyValuePersistance = 'org::allbinary::game::configuration::persistance::GamePersistanceSingleton'->getInstance();
-                    $keyValuePersistance->delete($self->{abeClientInformation}, $index);
-                    $keyValuePersistance->clear();
-                    $keyValuePersistance->loadAllSize($self->{abeClientInformation}, 1);
-                    $self->getLoadGameForm()->update();
+            } elseif {[expr {$command eq [$gameCommandsFactory jget DELETE_FILE]}]} {
+                set loadGameForm [my getLoadGameForm]
+                set index [$loadGameForm getSelectedText]
+                if {[expr {$index != [expr {-1}]}]} {
+                    set keyValuePersistance [::GamePersistanceSingleton::getInstance]
+                    $keyValuePersistance delete [my jget abeClientInformation] $index
+                    $keyValuePersistance clear
+                    $keyValuePersistance loadAllSize [my jget abeClientInformation] 1
+                    [my getLoadGameForm] update
                 }
-            } elsif ($command == $gameCommandsFactory->{SAVE}) {
-                my $keyValuePersistance = 'org::allbinary::game::configuration::persistance::GamePersistanceSingleton'->getInstance();
-                $self->pauseAppBackground(0);
-                $keyValuePersistance->save($self->{abeClientInformation}, $self->getCurrentStateHashtable());
-                $self->unPauseAppBackground(0);
-            } elsif ($command == $org::allbinary::game::score::displayable::HighScoreUtil::SUBMIT_TEXTBOX_COMMAND) {
-                $self->{logUtil}->putF("Submitted Score", $self, $self->{COMMAND_ACTION});
-                if ((Scalar::Util::blessed($displayable) && $displayable->isa('org::allbinary::game::score::displayable::HighScoreTextBox'))) {
-                    my $highScoreTextBox = $displayable;
-                    $highScoreTextBox->{submitted} = 1;
+            } elseif {[expr {$command eq [$gameCommandsFactory jget SAVE]}]} {
+                set keyValuePersistance [::GamePersistanceSingleton::getInstance]
+                my pauseAppBackground false
+                $keyValuePersistance save [my jget abeClientInformation] [my getCurrentStateHashtable]
+                my unPauseAppBackground false
+            } elseif {[expr {$command eq [::HighScoreUtil::staticGet_SUBMIT_TEXTBOX_COMMAND]}]} {
+                [my jget logUtil] putF "Submitted Score" [self] [my jget COMMAND_ACTION]
+                if {[jinstanceof $displayable ::HighScoreTextBox]} {
+                    set highScoreTextBox $displayable
+                    $highScoreTextBox jset submitted true
                 }
-                $allbinaryGameCanvasRunnableInterface->setHighScoreSubmitted(1);
-                $self->commandAction($gameCommandsFactory->{CLOSE_AND_SHOW_GAME_CANVAS}, $displayable);
-            } elsif ($command == $gameCommandsFactory->{DISPLAY_ABOUT}) {
-                $self->{aboutCommandProcessor}->process($self, $gameCommandsFactory->{SET_MENU_DISPLAYABLE}, $self->getAboutCanvas());
-            } elsif ($command == $gameCommandsFactory->{OPEN_WEB_URL}) {
-                $self->{webCommandProcessor}->process($self, $gameCommandsFactory->{OPEN_WEB_URL}, $javax::microedition::lcdui::NullCanvas::NULL_CANVAS);
-            } elsif ($command == $gameCommandsFactory->{TOGGLE_KEYBOARD}) {
-                my $virtualKeyboardEventHandler = 'org::allbinary::input::event::VirtualKeyboardEventHandler'->getInstance();
-                $virtualKeyboardEventHandler->fireEvent($virtualKeyboardEventHandler->{SHOW_EVENT});
-            } elsif ($self->{tsUtil}->compareTo($command->getLabel(), $gameCommandsFactory->{TOGGLE_FULLSCREEN}->getLabel()) == 0) {
-                my $mainFeatureFactory = 'org::allbinary::game::configuration::feature::MainFeatureFactory'->getInstance();
-                my $isFullScreen = $self->{features}->isFeature($mainFeatureFactory->{FULL_SCREEN});
-                if ($isFullScreen) {
-                    $self->{features}->removeDefault($mainFeatureFactory->{FULL_SCREEN});
+                $allbinaryGameCanvasRunnableInterface setHighScoreSubmitted true
+                my commandAction [$gameCommandsFactory jget CLOSE_AND_SHOW_GAME_CANVAS] $displayable
+            } elseif {[expr {$command eq [$gameCommandsFactory jget DISPLAY_ABOUT]}]} {
+                [my jget aboutCommandProcessor] process [self] [$gameCommandsFactory jget SET_MENU_DISPLAYABLE] [my getAboutCanvas]
+            } elseif {[expr {$command eq [$gameCommandsFactory jget OPEN_WEB_URL]}]} {
+                [my jget webCommandProcessor] process [self] [$gameCommandsFactory jget OPEN_WEB_URL] [::NullCanvas::staticGet_NULL_CANVAS]
+            } elseif {[expr {$command eq [$gameCommandsFactory jget TOGGLE_KEYBOARD]}]} {
+                set virtualKeyboardEventHandler [::VirtualKeyboardEventHandler::getInstance]
+                $virtualKeyboardEventHandler fireEvent [$virtualKeyboardEventHandler jget SHOW_EVENT]
+            } elseif {[expr {[[my jget tsUtil] compareTo [$command getLabel] [[$gameCommandsFactory jget TOGGLE_FULLSCREEN] getLabel]] == 0}]} {
+                set mainFeatureFactory [::MainFeatureFactory::getInstance]
+                set isFullScreen [[my jget features] isFeature [$mainFeatureFactory jget FULL_SCREEN]]
+                if {$isFullScreen} {
+                    [my jget features] removeDefault [$mainFeatureFactory jget FULL_SCREEN]
                 } else {
-                    $self->{features}->addDefault($mainFeatureFactory->{FULL_SCREEN});
+                    [my jget features] addDefault [$mainFeatureFactory jget FULL_SCREEN]
                 }
-                $self->updateFullScreen();
+                my updateFullScreen
             }
-        } catch ($e) {
-            $self->{logUtil}->put('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonStrings}->{EXCEPTION_LABEL})->append($command->getLabel())->toString(), $self, $self->{midletStrings}->{COMMAND_ACTION}, $e);
-            if ($command != 'org::allbinary::game::commands::GameCommandsFactory'->getInstance()->{EXIT_COMMAND}) {
-                $self->exitProgress(0);
+        } on error {e} {
+            [my jget logUtil] put [[[[::StringMaker new] append [[my jget commonStrings] jget EXCEPTION_LABEL]] append [$command getLabel]] toString] [self] [[my jget midletStrings] jget COMMAND_ACTION] $e
+            if {[expr {$command ne [[::GameCommandsFactory::getInstance] jget EXIT_COMMAND]}]} {
+                my exitProgress false
             }
         }
-}
+    }
+    
 
-
-sub updateFullScreen {
-    my ($self) = @_;
-        my $mainFeatureFactory = 'org::allbinary::game::configuration::feature::MainFeatureFactory'->getInstance();
-        my $isFullScreen = $self->{features}->isFeature($mainFeatureFactory->{FULL_SCREEN});
-        my $displayable = $self->getDisplay()->getCurrent();
-        if ((Scalar::Util::blessed($displayable) && $displayable->isa('javax::microedition::lcdui::Canvas'))) {
-            my $canvas = $displayable;
-            $canvas->setFullScreenMode($isFullScreen);
+    method updateFullScreen {} {
+        set mainFeatureFactory [::MainFeatureFactory::getInstance]
+        set isFullScreen [[my jget features] isFeature [$mainFeatureFactory jget FULL_SCREEN]]
+        set displayable [[my getDisplay] getCurrent]
+        if {[jinstanceof $displayable ::Canvas]} {
+            set canvas $displayable
+            $canvas setFullScreenMode $isFullScreen
         }
-}
+    }
+    
 
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
 
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
-}
+    method getInputMappingInstructionsCanvas {} {
+        return [::GameInputMappingInstructionsCanvas new [self] [my createGameLayerManager]]
+    }
+    
 
+    method getInputMappingCanvas {} {
+        return [::GameInputMappingCanvas new [my jget abeClientInformation] [self] [my createGameLayerManager] [my getHelpPaintable]]
+    }
+    
 
-# throws Exception
-sub getInputMappingInstructionsCanvas {
-    my ($self) = @_;
-        return 'org::allbinary::game::displayable::canvas::GameInputMappingInstructionsCanvas'->new($self, $self->createGameLayerManager());
-}
+    method getAboutCanvas {} {
+        return [::BasicPaintablesCanvas new [self] [[::CanvasStrings::getInstance] jget ABOUT] [my createGameLayerManager] [[::AboutPaintableFactory::getInstance] jget paintableArray]]
+    }
+    
 
+    method getHelpPaintable {} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
 
-# throws Exception
-sub getInputMappingCanvas {
-    my ($self) = @_;
-        return 'org::allbinary::game::displayable::canvas::GameInputMappingCanvas'->new($self->{abeClientInformation}, $self, $self->createGameLayerManager(), $self->getHelpPaintable());
-}
+    method createHighScoresCanvas {} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
 
+    method startGameCanvasRunnableInterface {} {
+        set threadFactoryUtil [::ThreadFactoryUtil::getInstance]
+        my jset thread [$threadFactoryUtil getInstanceGameCanvasRunnable [my jget allbinaryGameCanvasRunnableInterface]]
+        [my jget logUtil] putF [[[[::StringMaker new] append "Thread Priority: "] appendint [jint [[my jget thread] getPriority]]] toString] [self] "startGameCanvasRunnableInterface"
+        [my jget allbinaryGameCanvasRunnableInterface] setThread [my jget thread]
+        $threadFactoryUtil start [my jget thread]
+    }
+    
 
-# throws Exception
-sub getAboutCanvas {
-    my ($self) = @_;
-        return 'org::allbinary::game::displayable::canvas::BasicPaintablesCanvas'->new($self, 'org::allbinary::graphics::displayable::CanvasStrings'->getInstance()->{ABOUT}, $self->createGameLayerManager(), 'org::allbinary::graphics::displayable::screen::AboutPaintableFactory'->getInstance()->{paintableArray});
-}
-
-
-# throws Exception
-sub getHelpPaintable {
-    my ($self) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
-
-
-# throws Exception
-sub createHighScoresCanvas {
-    my ($self) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
-
-
-# throws Exception
-sub startGameCanvasRunnableInterface {
-    my ($self) = @_;
-        my $threadFactoryUtil = 'org::allbinary::thread::ThreadFactoryUtil'->getInstance();
-        $self->{thread} = $threadFactoryUtil->getInstanceGameCanvasRunnable($self->{allbinaryGameCanvasRunnableInterface});
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Thread Priority: ")->appendint(int($self->{thread}->getPriority()))->toString(), $self, "startGameCanvasRunnableInterface");
-        $self->{allbinaryGameCanvasRunnableInterface}->setThread($self->{thread});
-        $threadFactoryUtil->start($self->{thread});
-}
-
-
-# throws Exception
-sub stopGameCanvasRunnableInterface {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{gameStrings}->{STOP_GAME_CANVAS_RUNNABLE_INTERFACE});
-        'org::allbinary::game::layer::hud::event::GameNotificationEventHandler'->getInstance()->removeAllListeners();
-        'org::allbinary::graphics::color::ColorChangeEventHandler'->getInstance()->removeAllListeners();
-        'org::allbinary::game::displayable::canvas::GameEventHandlerUtil'->removeAllListeners();
-        my $gameCanvasRunnableInterface = $self->{allbinaryGameCanvasRunnableInterface};
-        if ($gameCanvasRunnableInterface != $org::allbinary::game::displayable::canvas::NullGameCanvasRunnable::NULL_GAME_CANVAS_RUNNABLE) {
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("Set Running False: ")->append($gameCanvasRunnableInterface->toString())->toString(), $self, $self->{gameStrings}->{STOP_GAME_CANVAS_RUNNABLE_INTERFACE});
-            $gameCanvasRunnableInterface->setRunning(0);
+    method stopGameCanvasRunnableInterface {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget gameStrings] jget STOP_GAME_CANVAS_RUNNABLE_INTERFACE]
+        [::GameNotificationEventHandler::getInstance] removeAllListeners
+        [::ColorChangeEventHandler::getInstance] removeAllListeners
+        ::GameEventHandlerUtil::removeAllListeners
+        set gameCanvasRunnableInterface [my jget allbinaryGameCanvasRunnableInterface]
+        if {[expr {$gameCanvasRunnableInterface ne [::NullGameCanvasRunnable::staticGet_NULL_GAME_CANVAS_RUNNABLE]}]} {
+            [my jget logUtil] putF [[[[::StringMaker new] append "Set Running False: "] append [$gameCanvasRunnableInterface toString]] toString] [self] [[my jget gameStrings] jget STOP_GAME_CANVAS_RUNNABLE_INTERFACE]
+            $gameCanvasRunnableInterface setRunning false
         } else {
-            $self->{logUtil}->putF("StopGame - Could Not Stop", $self, $self->{gameStrings}->{STOP_GAME_CANVAS_RUNNABLE_INTERFACE});
+            [my jget logUtil] putF "StopGame - Could Not Stop" [self] [[my jget gameStrings] jget STOP_GAME_CANVAS_RUNNABLE_INTERFACE]
         }
-        'org::allbinary::thread::ThreadUtil'->getInstance()->join($self->{thread});
-        my $progressCanvas = 'org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory'->getInstance();
-        if ($self->{features}->isFeature('org::allbinary::game::configuration::feature::MainFeatureFactory'->getInstance()->{LOAD_ALL})) {
-            $progressCanvas->addNormalPortion(50, "Stopped Game Runnable");
+        [::ThreadUtil::getInstance] join [my jget thread]
+        set progressCanvas [::ProgressCanvasFactory::getInstance]
+        if {[[my jget features] isFeature [[::MainFeatureFactory::getInstance] jget LOAD_ALL]]} {
+            $progressCanvas addNormalPortion 50 "Stopped Game Runnable"
         } else {
-            $progressCanvas->addNormalPortion(50, "Stopped Main Runnable");
+            $progressCanvas addNormalPortion 50 "Stopped Main Runnable"
         }
-        $self->{logUtil}->putF($self->{commonStrings}->{END}, $self, $self->{gameStrings}->{STOP_GAME_CANVAS_RUNNABLE_INTERFACE});
-}
+        [my jget logUtil] putF [[my jget commonStrings] jget END] [self] [[my jget gameStrings] jget STOP_GAME_CANVAS_RUNNABLE_INTERFACE]
+    }
+    
 
+    method getGameCanvasRunnableInterface {} {
+        return [my jget allbinaryGameCanvasRunnableInterface]
+    }
+    
 
-sub getGameCanvasRunnableInterface {
-    my ($self) = @_;
-        return $self->{allbinaryGameCanvasRunnableInterface};
-}
+    method setGameCanvasRunnableInterface {gameCanvasRunnableInterface} {
+        my jset allbinaryGameCanvasRunnableInterface $gameCanvasRunnableInterface
+    }
+    
 
+    method createGameLayerManager {} {
+        set gameInfo [::GameInfo new [[::GameTypeFactory::getInstance] jget SINGLE_PLAYER] [::GameMode::staticGet_SERVER] [[::PlayerTypesFactory::getInstance] jget PLAYER_TYPE_ONE] 1 1]
+        return [::AllBinaryGameLayerManager new [[my jget basicColorFactory] jget BLACK] [[my jget basicColorFactory] jget WHITE] $gameInfo]
+    }
+    
 
-sub setGameCanvasRunnableInterface {
-    my ($self, $gameCanvasRunnableInterface) = @_;
-        $self->{allbinaryGameCanvasRunnableInterface} = $gameCanvasRunnableInterface;
-}
+    method getGameOptionsForm {} {
+        set layerManager [my createGameLayerManager]
+        return [[::GameOptionsFormFactory::getInstance] init [self] "Game Options" [$layerManager getBackgroundBasicColor] [$layerManager getForegroundBasicColor]]
+    }
+    
 
+    method save {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget SAVE]
+        set hashtable [my getCurrentStateHashtable]
+        [::GamePersistanceSingleton::getInstance] save [my jget abeClientInformation] $hashtable
+    }
+    
 
-sub createGameLayerManager {
-    my ($self) = @_;
-        my $gameInfo = 'org::allbinary::game::GameInfo'->new('org::allbinary::game::GameTypeFactory'->getInstance()->{SINGLE_PLAYER}, $org::allbinary::game::GameMode::SERVER, 'org::allbinary::game::PlayerTypesFactory'->getInstance()->{PLAYER_TYPE_ONE}, 1, 1);
-        return 'org::allbinary::game::layer::AllBinaryGameLayerManager'->new($self->{basicColorFactory}->{BLACK}, $self->{basicColorFactory}->{WHITE}, $gameInfo);
-}
-
-
-sub getGameOptionsForm {
-    my ($self) = @_;
-        my $layerManager = $self->createGameLayerManager();
-        return 'org::allbinary::game::configuration::GameOptionsFormFactory'->getInstance()->init($self, "Game Options", $layerManager->getBackgroundBasicColor(), $layerManager->getForegroundBasicColor());
-}
-
-
-# throws Exception
-sub save {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{SAVE});
-        my $hashtable = $self->getCurrentStateHashtable();
-        'org::allbinary::game::configuration::persistance::GamePersistanceSingleton'->getInstance()->save($self->{abeClientInformation}, $hashtable);
-}
-
-
-# throws Exception
-sub getCurrentStateHashtable {
-    my ($self) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, "getCurrentStateHashtable");
-        my $hashtable = 'org::allbinary::logic::StdUtil'->getInstance()->createHashtable();
-        if ($self->{allbinaryGameCanvasRunnableInterface} != $org::allbinary::game::displayable::canvas::NullGameCanvasRunnable::NULL_GAME_CANVAS_RUNNABLE) {
-            my $currentHashtable = $self->{allbinaryGameCanvasRunnableInterface}->getCurrentStateHashtable();
-            my $enumeration = $currentHashtable->keys();
-            my $key = undef;
-            while ($self->{enumerationUtil}->hasMoreElements($enumeration)) {
-                $key = $self->{enumerationUtil}->nextElement($enumeration);
-                $hashtable->put($key, $currentHashtable->get($key));
+    method getCurrentStateHashtable {} {
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] "getCurrentStateHashtable"
+        set hashtable [[::StdUtil::getInstance] createHashtable]
+        if {[expr {[my jget allbinaryGameCanvasRunnableInterface] ne [::NullGameCanvasRunnable::staticGet_NULL_GAME_CANVAS_RUNNABLE]}]} {
+            set currentHashtable [[my jget allbinaryGameCanvasRunnableInterface] getCurrentStateHashtable]
+            set enumeration [$currentHashtable keys]
+            set key {}
+            while {[[my jget enumerationUtil] hasMoreElements $enumeration]} {
+                set key [[my jget enumerationUtil] nextElement $enumeration]
+                $hashtable put $key [$currentHashtable get $key]
             }
         }
-        return $hashtable;
-}
+        return $hashtable
+    }
+    
 
+    method setLoadGameForm {loadGameForm} {
+        my jset loadGameForm $loadGameForm
+    }
+    
 
-sub setLoadGameForm {
-    my ($self, $loadGameForm) = @_;
-        $self->{loadGameForm} = $loadGameForm;
-}
+    method getLoadGameForm {} {
+        return [my jget loadGameForm]
+    }
+    
 
+    method setResized {resized} {
+        my jset resized $resized
+    }
+    
 
-sub getLoadGameForm {
-    my ($self) = @_;
-        return $self->{loadGameForm};
-}
+    method isResized {} {
+        return [my jget resized]
+    }
+    
 
-
-sub setResized {
-    my ($self, $resized) = @_;
-        $self->{resized} = $resized;
-}
-
-
-sub isResized {
-    my ($self) = @_;
-        return $self->{resized};
-}
-
-
-sub isDemoLoading {
-    my ($self) = @_;
-        if ($self->{startedBefore}) {
-            return 0;
+    method isDemoLoading {} {
+        if {[my jget startedBefore]} {
+            return false
         }
-        my $displayable = $self->getDisplay()->getCurrent();
-        if ((Scalar::Util::blessed($displayable) && $displayable->isa('org::allbinary::game::displayable::canvas::DemoCanvas'))) {
-            my $demoCanvas = $displayable;
-            if ($demoCanvas->isDemoLoading()) {
-                return 1;
+        set displayable [[my getDisplay] getCurrent]
+        if {[jinstanceof $displayable ::DemoCanvas]} {
+            set demoCanvas $displayable
+            if {[$demoCanvas isDemoLoading]} {
+                return true
             }
         }
-        return 0;
+        return false
+    }
 }
 
-use java::lang::Object ();
-use java::util::Enumeration ();
-use javax::microedition::lcdui::Canvas ();
-use javax::microedition::lcdui::Command ();
-use javax::microedition::lcdui::CommandListener ();
-use javax::microedition::lcdui::Displayable ();
-use javax::microedition::lcdui::NullCanvas ();
-use javax::microedition::midlet::MIDletStateChangeException ();
-use org::allbinary::J2MEUtil ();
-use org::allbinary::TsUtil ();
-use org::allbinary::business::advertisement::GameAdStateFactory ();
-use org::allbinary::canvas::FullScreenUtil ();
-use org::allbinary::canvas::GameStatisticsFactory ();
-use org::allbinary::debug::DebugFactory ();
-use org::allbinary::debug::DebugInterface ();
-use org::allbinary::game::GameAdState ();
-use org::allbinary::game::GameInfo ();
-use org::allbinary::game::GameMode ();
-use org::allbinary::game::GameStrings ();
-use org::allbinary::game::GameTypeFactory ();
-use org::allbinary::game::PlayerTypesFactory ();
-use org::allbinary::game::commands::GameCommandsFactory ();
-use org::allbinary::game::configuration::GameOptionsForm ();
-use org::allbinary::game::configuration::GameOptionsFormFactory ();
-use org::allbinary::game::configuration::InGameFeatures ();
-use org::allbinary::game::configuration::InGameOptionsForm ();
-use org::allbinary::game::configuration::InGameOptionsFormFactory ();
-use org::allbinary::game::configuration::LoadGameForm ();
-use org::allbinary::game::configuration::event::ChangedGameFeatureListener ();
-use org::allbinary::game::configuration::event::GameFeatureEventHandler ();
-use org::allbinary::game::configuration::feature::Features ();
-use org::allbinary::game::configuration::feature::GameFeatureFormUtil ();
-use org::allbinary::game::configuration::feature::MainFeatureFactory ();
-use org::allbinary::game::configuration::persistance::GamePersistanceSingleton ();
-use org::allbinary::game::configuration::persistance::KeyValuePersistance ();
-use org::allbinary::game::displayable::canvas::AllBinaryGameCanvas ();
-use org::allbinary::game::displayable::canvas::BasicPaintablesCanvas ();
-use org::allbinary::game::displayable::canvas::DemoCanvas ();
-use org::allbinary::game::displayable::canvas::GameCanvasRunnableInterface ();
-use org::allbinary::game::displayable::canvas::GameEventHandlerUtil ();
-use org::allbinary::game::displayable::canvas::GameInputMappingCanvas ();
-use org::allbinary::game::displayable::canvas::GameInputMappingInstructionsCanvas ();
-use org::allbinary::game::displayable::canvas::MenuListener ();
-use org::allbinary::game::displayable::canvas::NullGameCanvasRunnable ();
-use org::allbinary::game::input::TextNotificationUtil ();
-use org::allbinary::game::layer::AllBinaryGameLayerManager ();
-use org::allbinary::game::layer::hud::event::GameNotificationEventHandler ();
-use org::allbinary::game::paint::help::HelpPaintable ();
-use org::allbinary::game::score::HighScoreCommands ();
-use org::allbinary::game::score::HighScoreCommandsFactory ();
-use org::allbinary::game::score::displayable::HighScoreTextBox ();
-use org::allbinary::game::score::displayable::HighScoreUtil ();
-use org::allbinary::game::score::displayable::HighScoresCanvas ();
-use org::allbinary::game::state::GameStateFactory ();
-use org::allbinary::graphics::ResizableListenerHandler ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvas ();
-use org::allbinary::graphics::canvas::transition::progress::ProgressCanvasFactory ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::color::ColorChangeEventHandler ();
-use org::allbinary::graphics::displayable::CanvasStrings ();
-use org::allbinary::graphics::displayable::MyCanvas ();
-use org::allbinary::graphics::displayable::command::MyCommandsFactory ();
-use org::allbinary::graphics::displayable::screen::AboutCommandProcessor ();
-use org::allbinary::graphics::displayable::screen::AboutPaintableFactory ();
-use org::allbinary::graphics::displayable::screen::CommandForm ();
-use org::allbinary::graphics::displayable::screen::WebCommandProcessor ();
-use org::allbinary::input::AllBinarySensorManager ();
-use org::allbinary::input::event::VirtualKeyboardEventHandler ();
-use org::allbinary::input::motion::gesture::observer::BasicMotionGesturesHandler ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::system::security::licensing::ClientInformationFactory ();
-use org::allbinary::logic::system::security::licensing::InApplicationPurchaseFactory ();
-use org::allbinary::logic::system::security::licensing::LockableFeature ();
-use org::allbinary::logic::system::security::licensing::LockableFeatureFactory ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::media::audio::AllBinaryMediaManager ();
-use org::allbinary::midlet::MidletStrings ();
-use org::allbinary::midlet::ProgressMidlet ();
-use org::allbinary::thread::NullThread ();
-use org::allbinary::thread::ThreadFactoryUtil ();
-use org::allbinary::thread::ThreadUtil ();
-use org::allbinary::time::TimeDelayHelper ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::EnumerationUtil ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::midlet::GameMidletStateFactory ();
-use org::allbinary::game::midlet::GameMidletEventHandler ();
-use org::allbinary::game::midlet::DemoGameMidletEvent ();
-use org::allbinary::game::midlet::DemoGameMidletStateFactory ();
+namespace eval ::GameMidlet {
+}
 
-1;
 

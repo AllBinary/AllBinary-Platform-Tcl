@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.event
 
-# Java interface
-package org::allbinary::input::event::VirtualKeyboardEventListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-# throws Exception
-sub onVirtualKeyboardEvent {
-    my ($self, $virtualKeyboardEvent) = @_;
-    die "abstract method onVirtualKeyboardEvent";
+oo::class create ::VirtualKeyboardEventListenerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::VirtualKeyboardEventListenerInterface {
+    method initFields_VirtualKeyboardEventListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onVirtualKeyboardEvent {virtualKeyboardEvent} {
+        error [jexception AbstractMethodError onVirtualKeyboardEvent]
+    }
+}
+
+namespace eval ::VirtualKeyboardEventListenerInterface {
+}
+
 

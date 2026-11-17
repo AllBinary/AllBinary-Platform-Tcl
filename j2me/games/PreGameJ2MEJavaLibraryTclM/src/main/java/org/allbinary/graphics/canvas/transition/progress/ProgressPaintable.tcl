@@ -11,38 +11,33 @@
 # Created By: Travis Berthelot
 # 
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.canvas.transition.progress
 
-package org::allbinary::graphics::canvas::transition::progress::ProgressPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{progressCanvas} = undef;
+oo::class create ::ProgressPaintable {
+    superclass ::Paintable
 }
 
+oo::define ::ProgressPaintable {
+    method initFields_ProgressPaintable {} {
+        my jset progressCanvas {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $progressCanvas) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{progressCanvas} = $progressCanvas;
-    return $self;
+    constructor {progressCanvas} {
+        next
+        my initFields_ProgressPaintable
+        my jset progressCanvas $progressCanvas
+    }
+    
+
+    method paint {graphics} {
+        [my jget progressCanvas] paint2 $graphics
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{progressCanvas}->paint2($graphics);
+namespace eval ::ProgressPaintable {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::paint::Paintable ();
-
-1;
 

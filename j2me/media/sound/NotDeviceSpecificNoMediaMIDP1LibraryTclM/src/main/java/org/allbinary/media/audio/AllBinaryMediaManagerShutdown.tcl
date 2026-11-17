@@ -11,37 +11,48 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-package org::allbinary::media::audio::AllBinaryMediaManagerShutdown;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::media::audio::AllBinaryMediaManagerShutdown'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::AllBinaryMediaManagerShutdown {
+    superclass ::JObject
 }
 
+oo::define ::AllBinaryMediaManagerShutdown {
+    method initFields_AllBinaryMediaManagerShutdown {} {
+        return
+    }
 
-# throws Exception
-sub shutdown {
-    my ($class, $soundsFactoryInterface) = @_;
-        my $logUtil = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-        $logUtil->putF($commonStrings->{START}, $instance, "shutdown");
-        'org::allbinary::media::audio::AllBinaryMediaManager'->shutdown($soundsFactoryInterface);
+    constructor {} {
+        next
+        my initFields_AllBinaryMediaManagerShutdown
+    }
+    
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::media::audio::AllBinaryMediaManager ();
+namespace eval ::AllBinaryMediaManagerShutdown {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::AllBinaryMediaManagerShutdown new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc shutdown {soundsFactoryInterface} {
+        set logUtil [::LogUtil::getInstance]
+        set commonStrings [::CommonStrings::getInstance]
+        $logUtil putF [$commonStrings jget START] [::AllBinaryMediaManagerShutdown::staticGet_instance] "shutdown"
+        ::AllBinaryMediaManager::shutdown $soundsFactoryInterface
+    }
+}
 
-1;
 

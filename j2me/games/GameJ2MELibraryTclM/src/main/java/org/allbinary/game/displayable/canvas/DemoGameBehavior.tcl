@@ -11,107 +11,94 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::DemoGameBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::displayable::canvas::DemoGameBehavior'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::DemoGameBehavior {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::DemoGameBehavior {
+    method initFields_DemoGameBehavior {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_DemoGameBehavior
+    }
+    
+    
+
+    method init {} {
+    }
+    
+
+    method pause {allBinaryGameCanvas} {
+    }
+    
+
+    method unPause {allBinaryGameCanvas} {
+    }
+    
+
+    method updateTouch {allBinaryGameCanvas} {
+    }
+    
+
+    method updateScreenButtonPaintable {allBinaryGameCanvas} {
+        $allBinaryGameCanvas setTouchPaintableP [::NullPaintable::getInstance]
+    }
+    
+
+    method setGameState {allBinaryGameCanvas} {
+    }
+    
+
+    method removeAllGameKeyInputListeners {allBinaryGameCanvas} {
+    }
+    
+
+    method updateEndGameProcessor {allBinaryGameCanvas} {
+    }
+    
+
+    method buildGame {allBinaryGameCanvas} {
+    }
+    
+
+    method run {allBinaryGameCanvas} {
+        set commonStrings [::CommonStrings::getInstance]
+        [my jget logUtil] putF [[[::GameTypeFactory::getInstance] jget BOT] toString] [self] [$commonStrings jget RUN]
+    }
+    
+
+    method setHighScore {abeClientInformation allBinaryGameCanvas name score autoSubmit isLast} {
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::displayable::canvas::DemoGameBehavior::instance;
+namespace eval ::DemoGameBehavior {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::DemoGameBehavior new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::DemoGameBehavior::staticGet_instance]
+    }
 }
 
-
-# throws Exception
-sub init {
-    my ($self) = @_;
-}
-
-
-sub pause {
-    my ($self, $allBinaryGameCanvas) = @_;
-}
-
-
-sub unPause {
-    my ($self, $allBinaryGameCanvas) = @_;
-}
-
-
-# throws Exception
-sub updateTouch {
-    my ($self, $allBinaryGameCanvas) = @_;
-}
-
-
-# throws Exception
-sub updateScreenButtonPaintable {
-    my ($self, $allBinaryGameCanvas) = @_;
-        $allBinaryGameCanvas->setTouchPaintableP('org::allbinary::graphics::paint::NullPaintable'->getInstance());
-}
-
-
-# throws Exception
-sub setGameState {
-    my ($self, $allBinaryGameCanvas) = @_;
-}
-
-
-sub removeAllGameKeyInputListeners {
-    my ($self, $allBinaryGameCanvas) = @_;
-}
-
-
-# throws Exception
-sub updateEndGameProcessor {
-    my ($self, $allBinaryGameCanvas) = @_;
-}
-
-
-# throws Exception
-sub buildGame {
-    my ($self, $allBinaryGameCanvas) = @_;
-}
-
-
-# throws Exception
-sub run {
-    my ($self, $allBinaryGameCanvas) = @_;
-        my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-        $self->{logUtil}->putF('org::allbinary::game::GameTypeFactory'->getInstance()->{BOT}->toString(), $self, $commonStrings->{RUN});
-}
-
-
-# throws Exception
-sub setHighScore {
-    my ($self, $abeClientInformation, $allBinaryGameCanvas, $name, $score, $autoSubmit, $isLast) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::GameTypeFactory ();
-use org::allbinary::graphics::paint::NullPaintable ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
-use org::allbinary::string::CommonStrings ();
-
-1;
 

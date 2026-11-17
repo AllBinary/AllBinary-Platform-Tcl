@@ -11,46 +11,37 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.gyro
 
-package org::allbinary::input::gyro::SingleSensorGameUpdateProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::gyro::SensorGameUpdateProcessor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{accelerometerSensorUpdateProcessor} = 'org::allbinary::input::gyro::AccelerometerSensorUpdateProcessor'->new();
-    $self->{gyroSensorUpdateProcessor} = 'org::allbinary::input::gyro::GyroSensorUpdateProcessor'->new();
+oo::class create ::SingleSensorGameUpdateProcessor {
+    superclass ::SensorGameUpdateProcessor
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
+oo::define ::SingleSensorGameUpdateProcessor {
+    method initFields_SingleSensorGameUpdateProcessor {} {
+        my jset accelerometerSensorUpdateProcessor {}
+        my jset gyroSensorUpdateProcessor {}
+        my jset accelerometerSensorUpdateProcessor [::AccelerometerSensorUpdateProcessor new]
+        my jset gyroSensorUpdateProcessor [::GyroSensorUpdateProcessor new]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_SingleSensorGameUpdateProcessor
+    }
+    
+
+    method process {anyType} {
+        my setNoSensors
+    }
+    
+
+    method sendNotifications {anyType} {
+    }
 }
 
-
-# throws Exception
-sub process {
-    my ($self, $anyType) = @_;
-        $self->setNoSensors();
+namespace eval ::SingleSensorGameUpdateProcessor {
 }
 
-
-# throws Exception
-sub sendNotifications {
-    my ($self, $anyType) = @_;
-}
-
-use java::lang::Object ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::input::gyro::SensorGameUpdateProcessor ();
-use org::allbinary::input::gyro::AccelerometerSensorUpdateProcessor ();
-use org::allbinary::input::gyro::GyroSensorUpdateProcessor ();
-
-1;
 

@@ -11,23 +11,25 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.midlet
 
-package org::allbinary::game::midlet::DemoGameMidletState;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::DemoGameMidletState {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
+oo::define ::DemoGameMidletState {
+    method initFields_DemoGameMidletState {} {
+        return
+    }
+    
 
-1;
+    constructor {} {
+        next
+        my initFields_DemoGameMidletState
+    }
+}
+
+namespace eval ::DemoGameMidletState {
+}
+
 

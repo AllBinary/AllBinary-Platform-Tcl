@@ -11,93 +11,85 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image.sprite
 
-package org::allbinary::animation::image::sprite::ImageCaptionIndexedAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::AnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{animationFactoryImageScaleUtil} = 'org::allbinary::image::AnimationFactoryImageScaleUtil'->getInstance();
-    $self->{animationFactorySpriteScaleUtil} = 'org::allbinary::image::sprite::AnimationFactorySpriteScaleUtil'->getInstance();
-    $self->{captionImage} = undef;
-    $self->{spriteMovieImage} = undef;
-    $self->{frameWidth} = undef;
-    $self->{frameHeight} = undef;
-    $self->{captionDx} = undef;
-    $self->{captionDy} = undef;
-    $self->{dx} = undef;
-    $self->{dy} = undef;
-    $self->{time} = undef;
-    $self->{soundInterface} = undef;
-    $self->{scaleProperties} = $org::allbinary::media::ScaleProperties::instance;
-    $self->{animationBehaviorFactory} = undef;
+oo::class create ::ImageCaptionIndexedAnimationFactory {
+    superclass ::JObject
 }
 
+oo::define ::ImageCaptionIndexedAnimationFactory {
+    method initFields_ImageCaptionIndexedAnimationFactory {} {
+        my jset animationFactoryImageScaleUtil {}
+        my jset animationFactorySpriteScaleUtil {}
+        my jset captionImage {}
+        my jset spriteMovieImage {}
+        my jset frameWidth 0
+        my jset frameHeight 0
+        my jset captionDx 0
+        my jset captionDy 0
+        my jset dx 0
+        my jset dy 0
+        my jset time 0
+        my jset soundInterface {}
+        my jset scaleProperties {}
+        my jset animationBehaviorFactory {}
+        my jset animationFactoryImageScaleUtil [::AnimationFactoryImageScaleUtil::getInstance]
+        my jset animationFactorySpriteScaleUtil [::AnimationFactorySpriteScaleUtil::getInstance]
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        my jset scaleProperties [::ScaleProperties::staticGet_instance]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $captionImage, $spriteMovieImage, $soundInterface, $frameWidth, $frameHeight, $captionDx, $captionDy, $dx, $dy, $time, $animationBehaviorFactory) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        if ($animationBehaviorFactory == 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance()) {
-            'org::allbinary::logic::communication::log::ForcedLogUtil'->log("Using default AnimationBehaviorFactory with IndexedAnimationFactory", $self);
+    constructor {captionImage spriteMovieImage soundInterface frameWidth frameHeight captionDx captionDy dx dy time animationBehaviorFactory} {
+        next
+        my initFields_ImageCaptionIndexedAnimationFactory
+        if {[expr {$animationBehaviorFactory eq [::AnimationBehaviorFactory::getInstance]}]} {
+            ::ForcedLogUtil::log "Using default AnimationBehaviorFactory with IndexedAnimationFactory" [self]
         }
-        $self->{captionImage} = $captionImage;
-        $self->{spriteMovieImage} = $spriteMovieImage;
-        $self->{frameWidth} = $frameWidth;
-        $self->{frameHeight} = $frameHeight;
-        $self->{captionDx} = $captionDx;
-        $self->{captionDy} = $captionDy;
-        $self->{dx} = $dx;
-        $self->{dy} = $dy;
-        $self->{time} = $time;
-        $self->{soundInterface} = $soundInterface;
-        $self->{animationBehaviorFactory} = $animationBehaviorFactory;
-    return $self;
-}
+        my jset captionImage $captionImage
+        my jset spriteMovieImage $spriteMovieImage
+        my jset frameWidth $frameWidth
+        my jset frameHeight $frameHeight
+        my jset captionDx $captionDx
+        my jset captionDy $captionDy
+        my jset dx $dx
+        my jset dy $dy
+        my jset time $time
+        my jset soundInterface $soundInterface
+        my jset animationBehaviorFactory $animationBehaviorFactory
+    }
+    
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        my $scaledImage = $self->{animationFactoryImageScaleUtil}->createImage($self->{captionImage}, $self->{captionImage}->getWidth(), $self->{captionImage}->getHeight(), $self->{scaleProperties}->{scaleWidth}, $self->{scaleProperties}->{scaleHeight});
-        my $animationInterface = 'org::allbinary::animation::image::ImageAnimation'->new($scaledImage, $self->{animationBehaviorFactory}->getOrCreateInstance());
-        my $sprite = $self->{animationFactorySpriteScaleUtil}->createImage($self->{spriteMovieImage}, $self->{frameWidth}, $self->{frameHeight}, $self->{scaleProperties}->{scaleWidth}, $self->{scaleProperties}->{scaleHeight});
-        my $movieIndexedAnimationInterface = 'org::allbinary::animation::image::sprite::SpriteIndexedAnimation'->new($sprite, $self->{spriteMovieImage}, 'org::allbinary::graphics::color::BasicColorUtil'->getInstance()->{ZERO_ARRAY}, $self->{animationBehaviorFactory}->getOrCreateInstance());
-        my $player = $self->{soundInterface}->getPlayerP();
-        if (!defined($player)) {
-            die ("Sound Was not Initialized");
+    method getInstance {instanceId} {
+        set scaledImage [[my jget animationFactoryImageScaleUtil] createImage [my jget captionImage] [[my jget captionImage] getWidth] [[my jget captionImage] getHeight] [[my jget scaleProperties] jget scaleWidth] [[my jget scaleProperties] jget scaleHeight]]
+        set animationInterface [::ImageAnimation new $scaledImage [[my jget animationBehaviorFactory] getOrCreateInstance]]
+        set sprite [[my jget animationFactorySpriteScaleUtil] createImage [my jget spriteMovieImage] [my jget frameWidth] [my jget frameHeight] [[my jget scaleProperties] jget scaleWidth] [[my jget scaleProperties] jget scaleHeight]]
+        set movieIndexedAnimationInterface [::SpriteIndexedAnimation new $sprite [my jget spriteMovieImage] [[::BasicColorUtil::getInstance] jget ZERO_ARRAY] [[my jget animationBehaviorFactory] getOrCreateInstance]]
+        set player [[my jget soundInterface] getPlayerP]
+        if {[expr {$player eq {}}]} {
+            error [jexception Exception "Sound Was not Initialized"]
         }
-        return 'org::allbinary::animation::caption::CaptionIndexedAnimation'->new($animationInterface, $movieIndexedAnimationInterface, $player, $self->{captionDx}, $self->{captionDy}, $self->{dx}, $self->{dy}, $self->{time}, $self->{animationBehaviorFactory}->getOrCreateInstance());
+        return [::CaptionIndexedAnimation new $animationInterface $movieIndexedAnimationInterface $player [my jget captionDx] [my jget captionDy] [my jget dx] [my jget dy] [my jget time] [[my jget animationBehaviorFactory] getOrCreateInstance]]
+    }
+    
+
+    method setInitialScale {scaleProperties} {
+        my jset scaleProperties $scaleProperties
+    }
 }
 
-
-sub setInitialScale {
-    my ($self, $scaleProperties) = @_;
-        $self->{scaleProperties} = $scaleProperties;
+namespace eval ::ImageCaptionIndexedAnimationFactory {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::game::Sprite ();
-use javax::microedition::media::Player ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::animation::caption::CaptionIndexedAnimation ();
-use org::allbinary::animation::image::ImageAnimation ();
-use org::allbinary::graphics::color::BasicColorUtil ();
-use org::allbinary::image::AnimationFactoryImageScaleUtil ();
-use org::allbinary::image::sprite::AnimationFactorySpriteScaleUtil ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::media::ScaleProperties ();
-use org::allbinary::media::audio::Sound ();
-use org::allbinary::animation::image::sprite::SpriteIndexedAnimation ();
-
-1;
 

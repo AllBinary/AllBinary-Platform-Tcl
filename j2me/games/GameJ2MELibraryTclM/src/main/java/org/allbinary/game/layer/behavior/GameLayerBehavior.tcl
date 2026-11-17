@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.behavior
 
-package org::allbinary::game::layer::behavior::GameLayerBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::GameLayerBehavior {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
+oo::define ::GameLayerBehavior {
+    method initFields_GameLayerBehavior {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_GameLayerBehavior
+    }
+}
+
+namespace eval ::GameLayerBehavior {
+}
+
 

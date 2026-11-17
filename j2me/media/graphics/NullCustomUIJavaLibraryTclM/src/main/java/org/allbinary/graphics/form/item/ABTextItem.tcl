@@ -1,67 +1,56 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
-package org::allbinary::graphics::form::item::ABTextItem;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::item::CustomCustomItem','org::allbinary::graphics::form::item::ABCustomItemInterface';
-
-
-
-sub new {
-    my ($class, $label, $layout, $altText, $backgroundBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($label, $backgroundBasicColor, $foregroundBasicColor);
-        # super(...) made $self above
-    return $self;
+oo::class create ::ABTextItem {
+    superclass ::CustomCustomItem
 }
 
+oo::define ::ABTextItem {
+    method initFields_ABTextItem {} {
+        return
+    }
+    
 
-sub keyPressed {
-    my ($self, $keyCode) = @_;
+    constructor {label layout altText backgroundBasicColor foregroundBasicColor} {
+        next $label $backgroundBasicColor $foregroundBasicColor
+        my initFields_ABTextItem
+    }
+    
+
+    method keyPressed {keyCode} {
+    }
+    
+
+    method paintUnselected {graphics x y} {
+    }
+    
+
+    method getLabelStringComponent {} {
+        return [::ABStringComponent::staticGet_NULL_STRING_COMPONENT]
+    }
+    
+
+    method getMinimumWidth {} {
+        return [next]
+    }
+    
+
+    method getMinimumHeight {} {
+        return [next]
+    }
+    
+
+    method getLabel {} {
+        return [next]
+    }
+    
+
+    method paintXY {graphics x y} {
+        next $graphics $x $y
+    }
 }
 
-
-sub paintUnselected {
-    my ($self, $graphics, $x, $y) = @_;
+namespace eval ::ABTextItem {
 }
 
-
-sub getLabelStringComponent {
-    my ($self) = @_;
-        return $org::allbinary::graphics::form::item::ABStringComponent::NULL_STRING_COMPONENT;
-}
-
-
-sub getMinimumWidth {
-    my ($self) = @_;
-        return $self->SUPER::getMinimumWidth();
-}
-
-
-sub getMinimumHeight {
-    my ($self) = @_;
-        return $self->SUPER::getMinimumHeight();
-}
-
-
-sub getLabel {
-    my ($self) = @_;
-        return $self->SUPER::getLabel();
-}
-
-
-sub paintXY {
-    my ($self, $graphics, $x, $y) = @_;
-        $self->SUPER::paintXY($graphics, $x, $y);
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::form::item::CustomCustomItem ();
-use org::allbinary::graphics::form::item::ABCustomItemInterface ();
-use org::allbinary::graphics::form::item::ABStringComponent ();
-
-1;
 

@@ -11,57 +11,66 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.shader
 
-package org::allbinary::graphics::opengles::shader::ShaderManager;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::opengles::shader::ShaderManager'->new(-1, -1) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{LOAD_SHADER} = "loadShader";
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{GL_VERTEX_SHADER} = undef;
-    $self->{GL_FRAGMENT_SHADER} = undef;
+oo::class create ::ShaderManager {
+    superclass ::JObject
 }
 
+oo::define ::ShaderManager {
+    method initFields_ShaderManager {} {
+        my jset LOAD_SHADER {}
+        my jset commonStrings {}
+        my jset GL_VERTEX_SHADER 0
+        my jset GL_FRAGMENT_SHADER 0
+        my jset LOAD_SHADER "loadShader"
+        my jset commonStrings [::CommonStrings::getInstance]
+        
+        
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::opengles::shader::ShaderManager::instance;
+    constructor {GL_VERTEX_SHADER GL_FRAGMENT_SHADER} {
+        next
+        my initFields_ShaderManager
+        my jset GL_VERTEX_SHADER $GL_VERTEX_SHADER
+        my jset GL_FRAGMENT_SHADER $GL_FRAGMENT_SHADER
+    }
+    
+
+    method load {gl resource shaderAsStringArray shaderType} {
+        return [expr {-1}]
+    }
+    
+
+    method loadShader {gl resource stringList shaderType} {
+        return [expr {-1}]
+    }
 }
 
-
-sub new {
-    my ($class, $GL_VERTEX_SHADER, $GL_FRAGMENT_SHADER) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{GL_VERTEX_SHADER} = $GL_VERTEX_SHADER;
-        $self->{GL_FRAGMENT_SHADER} = $GL_FRAGMENT_SHADER;
-    return $self;
+namespace eval ::ShaderManager {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ShaderManager new [expr {-1}] [expr {-1}]]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ShaderManager::staticGet_instance]
+    }
 }
 
-
-sub load {
-    my ($self, $gl, $resource, $shaderAsStringArray, $shaderType) = @_;
-        return -1;
-}
-
-
-sub loadShader {
-    my ($self, $gl, $resource, $stringList, $shaderType) = @_;
-        return -1;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::khronos::opengles::GL10 ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-
-1;
 

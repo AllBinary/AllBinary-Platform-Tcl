@@ -11,15 +11,19 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
-# Java interface
-package org::allbinary::game::layer::pickup::PickupableInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
+oo::class create ::PickupableInterface {
+    superclass ::JObject
+}
 
+oo::define ::PickupableInterface {
+    method initFields_PickupableInterface {} {
+        return
+    }
+}
 
+namespace eval ::PickupableInterface {
+}
 
-1;
 

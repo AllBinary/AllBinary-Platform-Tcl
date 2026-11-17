@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-# Java interface
-package org::allbinary::game::score::HighScoresResultsListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub setHighScoresArray {
-    my ($self, $highScoresArrayP) = @_;
-    die "abstract method setHighScoresArray";
+oo::class create ::HighScoresResultsListener {
+    superclass ::JObject
 }
 
+oo::define ::HighScoresResultsListener {
+    method initFields_HighScoresResultsListener {} {
+        return
+    }
+    
 
-1;
+    method setHighScoresArray {highScoresArrayP} {
+        error [jexception AbstractMethodError setHighScoresArray]
+    }
+}
+
+namespace eval ::HighScoresResultsListener {
+}
+
 

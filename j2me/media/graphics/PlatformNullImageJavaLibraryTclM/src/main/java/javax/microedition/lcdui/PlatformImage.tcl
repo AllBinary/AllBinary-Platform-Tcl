@@ -11,87 +11,76 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package javax.microedition.lcdui
 
 #PlatformNullImageJavaLibrary
-package javax::microedition::lcdui::PlatformImage;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::PlatformImage {
+    superclass ::JObject
 }
 
+oo::define ::PlatformImage {
+    method initFields_PlatformImage {} {
+        return
+    }
 
-sub getImage {
-    my ($self, $graphicsSurface2) = @_;
-        return $javax::microedition::lcdui::NullImage::NULL_IMAGE;
+    constructor {} {
+        next
+        my initFields_PlatformImage
+    }
+    
+
+    method getImage {graphicsSurface2} {
+        return [::NullImage::staticGet_NULL_IMAGE]
+    }
+    
+
+    method getSurfaceWidth {graphicsSurface2 width} {
+        return $width
+    }
+    
+
+    method getSurfaceHeight {graphicsSurface2 height} {
+        return $height
+    }
+    
+
+    method getWidth {image width} {
+        return $width
+    }
+    
+
+    method getHeight {image height} {
+        return $height
+    }
+    
+
+    method getGraphics {graphicsSurface width height image} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method drawImage {image x y anchor g2 g} {
+    }
+    
+
+    method drawRegion {image x_src y_src width height transform x_dst y_dst anchor g} {
+    }
+    
+
+    method getRGB {argb offset scanlength x y width height image} {
+    }
+    
+
+    method setRGB {argb offset scanlength x y width height image} {
+    }
+    
+
+    method getData {image} {
+        return [[::NullUtil::getInstance] jget NULL_INT_ARRAY]
+    }
 }
 
-
-sub getSurfaceWidth {
-    my ($self, $graphicsSurface2, $width) = @_;
-        return $width;
+namespace eval ::PlatformImage {
 }
 
-
-sub getSurfaceHeight {
-    my ($self, $graphicsSurface2, $height) = @_;
-        return $height;
-}
-
-
-sub getWidth {
-    my ($self, $image, $width) = @_;
-        return $width;
-}
-
-
-sub getHeight {
-    my ($self, $image, $height) = @_;
-        return $height;
-}
-
-
-sub getGraphics {
-    my ($self, $graphicsSurface, $width, $height, $image) = @_;
-        die ("RuntimeException");
-}
-
-
-sub drawImage {
-    my ($self, $image, $x, $y, $anchor, $g2, $g) = @_;
-}
-
-
-sub drawRegion {
-    my ($self, $image, $x_src, $y_src, $width, $height, $transform, $x_dst, $y_dst, $anchor, $g) = @_;
-}
-
-
-sub getRGB {
-    my ($self, $argb, $offset, $scanlength, $x, $y, $width, $height, $image) = @_;
-}
-
-
-sub setRGB {
-    my ($self, $argb, $offset, $scanlength, $x, $y, $width, $height, $image) = @_;
-}
-
-
-sub getData {
-    my ($self, $image) = @_;
-        return 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_INT_ARRAY};
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::NullUtil ();
-use javax::microedition::lcdui::NullImage ();
-
-1;
 

@@ -11,42 +11,38 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-package org::allbinary::game::layer::LayerPlacementType;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{type} = undef;
+oo::class create ::LayerPlacementType {
+    superclass ::JObject
 }
 
+oo::define ::LayerPlacementType {
+    method initFields_LayerPlacementType {} {
+        my jset type 0
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $type) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{type} = $type;
-    return $self;
+    constructor {type} {
+        next
+        my initFields_LayerPlacementType
+        my jset type $type
+    }
+    
+
+    method getType {} {
+        return [my jget type]
+    }
+    
+
+    method setType {type} {
+        my jset type $type
+    }
 }
 
-
-sub getType {
-    my ($self) = @_;
-        return $self->{type};
+namespace eval ::LayerPlacementType {
 }
 
-
-sub setType {
-    my ($self, $type) = @_;
-        $self->{type} = $type;
-}
-
-use java::lang::Object ();
-
-1;
 

@@ -11,23 +11,41 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.midlet
 
-package org::allbinary::midlet::MidletIcon;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $RESOURCE = "icon";
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::MidletIcon {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
+oo::define ::MidletIcon {
+    method initFields_MidletIcon {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_MidletIcon
+    }
+}
+
+namespace eval ::MidletIcon {
+    variable RESOURCEValue {}
+    variable RESOURCESet 0
+    proc staticGet_RESOURCE {} {
+        variable RESOURCEValue
+        variable RESOURCESet
+        if {!$RESOURCESet} {
+            set RESOURCESet 1
+            set RESOURCEValue "icon"
+        }
+        return $RESOURCEValue
+    }
+    proc staticSet_RESOURCE {value} {
+        variable RESOURCEValue
+        variable RESOURCESet
+        set RESOURCESet 1
+        set RESOURCEValue $value
+    }
+}
+
 

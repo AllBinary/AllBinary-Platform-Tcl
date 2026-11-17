@@ -11,81 +11,85 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.resources
 
-package org::allbinary::game::layer::resources::BasicGameResources;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $stringBuffer, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::string::StringMaker'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{RESOURCE} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{RESOURCE_DESTROY} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
+oo::class create ::BasicGameResources {
+    superclass ::JObject
 }
 
+oo::define ::BasicGameResources {
+    method initFields_BasicGameResources {} {
+        my jset logUtil {}
+        my jset RESOURCE {}
+        my jset RESOURCE_DESTROY {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset RESOURCE [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset RESOURCE_DESTROY [[::StringUtil::getInstance] jget EMPTY_STRING]
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+    constructor {} {
+        next
+        my initFields_BasicGameResources
+    }
+    
 
-
-sub init {
-    my ($self, $ROOT, $SIZE) = @_;
+    method init {ROOT SIZE} {
         try {
-            my $scale = int('org::allbinary::game::configuration::GameConfigurationCentral'->getInstance()->{SCALE}->getValue());
-            if ($scale > 1 && $scale - 1 < scalar(@{$SIZE})) {
-                $self->append($ROOT, $SIZE->[$scale - 1]);
+            set scale [[[[::GameConfigurationCentral::getInstance] jget SCALE] getValue] intValue]
+            if {[expr {[expr {$scale > 1}] && [expr {[jint [expr {$scale - 1}]] < [$SIZE length]}]}]} {
+                my append $ROOT [$SIZE get [jint [expr {$scale - 1}]]]
             } else {
-                die ('org::allbinary::logic::string::StringMaker'->new()->append("Invalid Value: ")->appendint($scale)->toString());
+                error [jexception Exception [[[[::StringMaker new] append "Invalid Value: "] appendint $scale] toString]]
             }
-        } catch ($e) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->put($commonStrings->{EXCEPTION}, $self, $commonStrings->{INIT}, $e);
+        } on error {e} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] put [$commonStrings jget EXCEPTION] [self] [$commonStrings jget INIT] $e
         }
+    }
+    
+
+    method append {ROOT sizeString} {
+        set DESTROY "_destroy"
+        set string [my getString]
+        [::BasicGameResources::staticGet_stringBuffer] delete 0 [[::BasicGameResources::staticGet_stringBuffer] length]
+        [::BasicGameResources::staticGet_stringBuffer] append $ROOT
+        [::BasicGameResources::staticGet_stringBuffer] append $string
+        [::BasicGameResources::staticGet_stringBuffer] append $sizeString
+        my jset RESOURCE [[::BasicGameResources::staticGet_stringBuffer] toString]
+        [::BasicGameResources::staticGet_stringBuffer] delete 0 [[::BasicGameResources::staticGet_stringBuffer] length]
+        [::BasicGameResources::staticGet_stringBuffer] append $ROOT
+        [::BasicGameResources::staticGet_stringBuffer] append $DESTROY
+        [::BasicGameResources::staticGet_stringBuffer] append $string
+        [::BasicGameResources::staticGet_stringBuffer] append $sizeString
+        my jset RESOURCE_DESTROY [[::BasicGameResources::staticGet_stringBuffer] toString]
+    }
+    
+
+    method getString {} {
+        return [[::GameGraphicsResourceUtil::getInstance] getName]
+    }
 }
 
-
-# throws Exception
-sub append {
-    my ($self, $ROOT, $sizeString) = @_;
-        my $DESTROY = "_destroy";
-        my $string = $self->getString();
-        $org::allbinary::game::layer::resources::BasicGameResources::stringBuffer->delete(0, $org::allbinary::game::layer::resources::BasicGameResources::stringBuffer->length());
-        $org::allbinary::game::layer::resources::BasicGameResources::stringBuffer->append($ROOT);
-        $org::allbinary::game::layer::resources::BasicGameResources::stringBuffer->append($string);
-        $org::allbinary::game::layer::resources::BasicGameResources::stringBuffer->append($sizeString);
-        $self->{RESOURCE} = $org::allbinary::game::layer::resources::BasicGameResources::stringBuffer->toString();
-        $org::allbinary::game::layer::resources::BasicGameResources::stringBuffer->delete(0, $org::allbinary::game::layer::resources::BasicGameResources::stringBuffer->length());
-        $org::allbinary::game::layer::resources::BasicGameResources::stringBuffer->append($ROOT);
-        $org::allbinary::game::layer::resources::BasicGameResources::stringBuffer->append($DESTROY);
-        $org::allbinary::game::layer::resources::BasicGameResources::stringBuffer->append($string);
-        $org::allbinary::game::layer::resources::BasicGameResources::stringBuffer->append($sizeString);
-        $self->{RESOURCE_DESTROY} = $org::allbinary::game::layer::resources::BasicGameResources::stringBuffer->toString();
+namespace eval ::BasicGameResources {
+    variable stringBufferValue {}
+    variable stringBufferSet 0
+    proc staticGet_stringBuffer {} {
+        variable stringBufferValue
+        variable stringBufferSet
+        if {!$stringBufferSet} {
+            set stringBufferSet 1
+            set stringBufferValue [::StringMaker new]
+        }
+        return $stringBufferValue
+    }
+    proc staticSet_stringBuffer {value} {
+        variable stringBufferValue
+        variable stringBufferSet
+        set stringBufferSet 1
+        set stringBufferValue $value
+    }
 }
 
-
-# throws Exception
-sub getString {
-    my ($self) = @_;
-        return 'org::allbinary::game::layer::resources::GameGraphicsResourceUtil'->getInstance()->getName();
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::configuration::GameConfigurationCentral ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::layer::resources::GameGraphicsResourceUtil ();
-
-1;
 

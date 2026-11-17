@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.init
 
-# Java interface
-package org::allbinary::game::init::GameInitializationInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub init {
-    my ($self, $abeClientInformation, $commandListener, $level) = @_;
-    die "abstract method init";
+oo::class create ::GameInitializationInterface {
+    superclass ::JObject
 }
 
-use javax::microedition::lcdui::CommandListener ();
-use org::allbinary::logic::system::security::licensing::AbeClientInformationInterface ();
+oo::define ::GameInitializationInterface {
+    method initFields_GameInitializationInterface {} {
+        return
+    }
+    
 
-1;
+    method init {abeClientInformation commandListener level} {
+        error [jexception AbstractMethodError init]
+    }
+}
+
+namespace eval ::GameInitializationInterface {
+}
+
 

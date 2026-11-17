@@ -11,148 +11,127 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
-package org::allbinary::input::motion::gesture::observer::ReleaseControlledMotionGestureListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::input::motion::gesture::observer::MotionGestureEventListener';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{currentMotionGesture} = 'org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance()->{NO_MOTION};
-    $self->{isMouseGestureOccurring} = 0;
-    $self->{motionGestureCollection} = 'org::allbinary::util::BasicArrayListD'->new();
-    $self->{signed} = undef;
+oo::class create ::ReleaseControlledMotionGestureListener {
+    superclass ::JObject
 }
 
+oo::define ::ReleaseControlledMotionGestureListener {
+    method initFields_ReleaseControlledMotionGestureListener {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset currentMotionGesture {}
+        my jset isMouseGestureOccurring false
+        my jset motionGestureCollection {}
+        my jset signed {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset currentMotionGesture [[::TouchMotionGestureFactory::getInstance] jget NO_MOTION]
+        my jset isMouseGestureOccurring false
+        my jset motionGestureCollection [::BasicArrayListD new]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $signed) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{CONSTRUCTOR});
-        $self->{signed} = $signed;
-    return $self;
-}
+    constructor {signed} {
+        next
+        my initFields_ReleaseControlledMotionGestureListener
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+        my jset signed $signed
+    }
+    
 
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[my jget commonStrings] jget NOT_IMPLEMENTED] [self]
+    }
+    
 
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log($self->{commonStrings}->{NOT_IMPLEMENTED}, $self);
-}
+    method onUpMotionGestureEvent {ev} {
+        my onMotionGestureEvent $ev
+    }
+    
 
+    method onDownMotionGestureEvent {ev} {
+        my onMotionGestureEvent $ev
+    }
+    
 
-sub onUpMotionGestureEvent {
-    my ($self, $ev) = @_;
-        $self->onMotionGestureEvent($ev);
-}
+    method onLeftMotionGestureEvent {ev} {
+        my onMotionGestureEvent $ev
+    }
+    
 
+    method onRightMotionGestureEvent {ev} {
+        my onMotionGestureEvent $ev
+    }
+    
 
-sub onDownMotionGestureEvent {
-    my ($self, $ev) = @_;
-        $self->onMotionGestureEvent($ev);
-}
+    method onDiagonalDownRightMotionGestureEvent {ev} {
+        my onMotionGestureEvent $ev
+    }
+    
 
+    method onDiagonalDownLeftMotionGestureEvent {ev} {
+        my onMotionGestureEvent $ev
+    }
+    
 
-sub onLeftMotionGestureEvent {
-    my ($self, $ev) = @_;
-        $self->onMotionGestureEvent($ev);
-}
+    method onDiagonalUpRightMotionGestureEvent {ev} {
+        my onMotionGestureEvent $ev
+    }
+    
 
+    method onDiagonalUpLeftMotionGestureEvent {ev} {
+        my onMotionGestureEvent $ev
+    }
+    
 
-sub onRightMotionGestureEvent {
-    my ($self, $ev) = @_;
-        $self->onMotionGestureEvent($ev);
-}
+    method onPressedMotionGestureEvent {ev} {
+        my jset isMouseGestureOccurring true
+        my jset currentMotionGesture [[::TouchMotionGestureFactory::getInstance] jget NO_MOTION]
+        my onMotionGestureEvent $ev
+    }
+    
 
+    method onScrolledMotionGestureEvent {motionGestureEvent} {
+    }
+    
 
-sub onDiagonalDownRightMotionGestureEvent {
-    my ($self, $ev) = @_;
-        $self->onMotionGestureEvent($ev);
-}
-
-
-sub onDiagonalDownLeftMotionGestureEvent {
-    my ($self, $ev) = @_;
-        $self->onMotionGestureEvent($ev);
-}
-
-
-sub onDiagonalUpRightMotionGestureEvent {
-    my ($self, $ev) = @_;
-        $self->onMotionGestureEvent($ev);
-}
-
-
-sub onDiagonalUpLeftMotionGestureEvent {
-    my ($self, $ev) = @_;
-        $self->onMotionGestureEvent($ev);
-}
-
-
-sub onPressedMotionGestureEvent {
-    my ($self, $ev) = @_;
-        $self->{isMouseGestureOccurring} = 1;
-        $self->{currentMotionGesture} = 'org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance()->{NO_MOTION};
-        $self->onMotionGestureEvent($ev);
-}
-
-
-sub onScrolledMotionGestureEvent {
-    my ($self, $motionGestureEvent) = @_;
-}
-
-
-sub released {
-    my ($self, $ev) = @_;
+    method released {ev} {
         try {
-            if ($self->{isMouseGestureOccurring} == 0) {
-                return;
+            if {[expr {[my jget isMouseGestureOccurring] == false}]} {
+                return
             }
-            $self->{isMouseGestureOccurring} = 0;
-            $self->{signed}->onMotionGestureCompleted($self->{motionGestureCollection});
-            $self->{motionGestureCollection}->clear();
-        } catch ($e) {
-            $self->{logUtil}->put('org::allbinary::logic::string::StringMaker'->new()->append($self->{commonStrings}->{EXCEPTION_LABEL})->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($ev->getMotionGesture()))->toString(), $self, "release", $e);
+            my jset isMouseGestureOccurring false
+            [my jget signed] onMotionGestureCompleted [my jget motionGestureCollection]
+            [my jget motionGestureCollection] clear
+        } on error {e} {
+            [my jget logUtil] put [[[[::StringMaker new] append [[my jget commonStrings] jget EXCEPTION_LABEL]] append [[::StringUtil::getInstance] toString1 [$ev getMotionGesture]]] toString] [self] "release" $e
         }
-}
+    }
+    
 
-
-sub onMotionGestureEvent {
-    my ($self, $ev) = @_;
-        if ($self->{isMouseGestureOccurring} == 0) {
-            return;
+    method onMotionGestureEvent {ev} {
+        if {[expr {[my jget isMouseGestureOccurring] == false}]} {
+            return
         }
-        my $motionGestureInput = $ev->getMotionGesture();
-        if ($motionGestureInput == 'org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance()->{PRESSED}) {
-            $self->onPressedMotionGestureEvent($ev);
-        } elsif ($motionGestureInput == 'org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance()->{RELEASED}) {
-            $self->released($ev);
+        set motionGestureInput [$ev getMotionGesture]
+        if {[expr {$motionGestureInput eq [[::TouchMotionGestureFactory::getInstance] jget PRESSED]}]} {
+            my onPressedMotionGestureEvent $ev
+        } elseif {[expr {$motionGestureInput eq [[::TouchMotionGestureFactory::getInstance] jget RELEASED]}]} {
+            my released $ev
         } else {
-            if ($self->{currentMotionGesture} != $motionGestureInput) {
-                $self->{currentMotionGesture} = $motionGestureInput;
-                $self->{motionGestureCollection}->add($ev->getMotionGesture());
+            if {[expr {[my jget currentMotionGesture] ne $motionGestureInput}]} {
+                my jset currentMotionGesture $motionGestureInput
+                [my jget motionGestureCollection] add [$ev getMotionGesture]
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::input::motion::gesture::MotionGestureInput ();
-use org::allbinary::input::motion::gesture::TouchMotionGestureFactory ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::input::motion::gesture::observer::MotionGestureEventListener ();
+namespace eval ::ReleaseControlledMotionGestureListener {
+}
 
-1;
 

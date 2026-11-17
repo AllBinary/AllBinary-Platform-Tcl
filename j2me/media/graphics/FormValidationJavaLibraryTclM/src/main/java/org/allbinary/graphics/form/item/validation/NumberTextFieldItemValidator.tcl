@@ -11,113 +11,103 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item.validation
 
-package org::allbinary::graphics::form::item::validation::NumberTextFieldItemValidator;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::control::validate::ValidatorBase';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{textFieldItem} = undef;
-    $self->{min} = undef;
-    $self->{max} = undef;
-    $self->{maxChars} = undef;
+oo::class create ::NumberTextFieldItemValidator {
+    superclass ::ValidatorBase
 }
 
+oo::define ::NumberTextFieldItemValidator {
+    method initFields_NumberTextFieldItemValidator {} {
+        my jset textFieldItem {}
+        my jset min 0
+        my jset max 0
+        my jset maxChars 0
+        
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $textFieldItem, $maxChars, $min, $max) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{textFieldItem} = $textFieldItem;
-        $self->{min} = $min;
-        $self->{max} = $max;
-        $self->{maxChars} = $maxChars;
-    return $self;
-}
+    constructor {textFieldItem maxChars min max} {
+        next
+        my initFields_NumberTextFieldItemValidator
+        my jset textFieldItem $textFieldItem
+        my jset min $min
+        my jset max $max
+        my jset maxChars $maxChars
+    }
+    
 
+    method isNumberValid {value} {
+        return [[::BooleanFactory::getInstance] jget TRUE]
+    }
+    
 
-sub isNumberValid {
-    my ($self, $value) = @_;
-        return 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{TRUE};
-}
+    method toNumberVector {value} {
+        return [::BasicArrayListD new]
+    }
+    
 
-
-sub toNumberVector {
-    my ($self, $value) = @_;
-        return 'org::allbinary::util::BasicArrayListD'->new();
-}
-
-
-sub isValid {
-    my ($self) = @_;
-        my $result = 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{TRUE};
-        my $string = $self->{textFieldItem}->getString();
-        my $textLength = length($string);
-        if ($textLength > 0 && $textLength < $self->{maxChars}) {
+    method isValid {} {
+        set result [[::BooleanFactory::getInstance] jget TRUE]
+        set string [[my jget textFieldItem] getString]
+        set textLength [string length $string]
+        if {[expr {[expr {$textLength > 0}] && [expr {$textLength < [my jget maxChars]}]}]} {
             try {
-                int($self->{textFieldItem}->getString());
-            } catch ($e) {
-                $result = 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{FALSE};
+                string trim [[my jget textFieldItem] getString]
+            } on error {e} {
+                set result [[::BooleanFactory::getInstance] jget FALSE]
             }
         } else {
-            if ($textLength < 1) {
-                $result = 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{FALSE};
-            } elsif ($textLength > $self->{maxChars}) {
-                $result = 'org::allbinary::logic::java::bool::BooleanFactory'->getInstance()->{FALSE};
+            if {[expr {$textLength < 1}]} {
+                set result [[::BooleanFactory::getInstance] jget FALSE]
+            } elseif {[expr {$textLength > [my jget maxChars]}]} {
+                set result [[::BooleanFactory::getInstance] jget FALSE]
             }
         }
-        return $result;
-}
+        return $result
+    }
+    
 
-
-sub toList {
-    my ($self) = @_;
-        my $list = 'org::allbinary::util::BasicArrayListD'->new();
-        my $string = $self->{textFieldItem}->getString();
-        my $textLength = length($string);
-        my $label = $self->{textFieldItem}->getLabel();
-        my $name = substr($label, 0, (length($label) - 2) - (0));
-        my $smallIntegerSingletonFactory = 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance();
-        my $stringMaker = 'org::allbinary::logic::string::StringMaker'->new();
-        if ($textLength > 0 && $textLength < $self->{maxChars}) {
+    method toList {} {
+        set list [::BasicArrayListD new]
+        set string [[my jget textFieldItem] getString]
+        set textLength [string length $string]
+        set label [[my jget textFieldItem] getLabel]
+        set name [jsubstring $label 0 [jint [expr {[string length $label] - 2}]]]
+        set smallIntegerSingletonFactory [::SmallIntegerSingletonFactory::getInstance]
+        set stringMaker [::StringMaker new]
+        if {[expr {[expr {$textLength > 0}] && [expr {$textLength < [my jget maxChars]}]}]} {
             try {
-                my $number = $smallIntegerSingletonFactory->createInstance(int($self->{textFieldItem}->getString()));
-                if (int($number) > $self->{min}) {
-                    $stringMaker->delete(0, $stringMaker->length());
-                    $list->add($stringMaker->append($name)->append(" is to small")->toString());
-                } elsif (int($number) > $self->{max}) {
-                    $stringMaker->delete(0, $stringMaker->length());
-                    $list->add($stringMaker->append($name)->append(" is to large")->toString());
+                set number [$smallIntegerSingletonFactory createInstance [string trim [[my jget textFieldItem] getString]]]
+                if {[expr {[$number intValue] > [my jget min]}]} {
+                    $stringMaker delete 0 [$stringMaker length]
+                    $list add [[[$stringMaker append $name] append " is to small"] toString]
+                } elseif {[expr {[$number intValue] > [my jget max]}]} {
+                    $stringMaker delete 0 [$stringMaker length]
+                    $list add [[[$stringMaker append $name] append " is to large"] toString]
                 }
-            } catch ($e) {
-                $stringMaker->delete(0, $stringMaker->length());
-                $list->add($stringMaker->append($name)->append(" is not a number")->toString());
+            } on error {e} {
+                $stringMaker delete 0 [$stringMaker length]
+                $list add [[[$stringMaker append $name] append " is not a number"] toString]
             }
         } else {
-            if ($textLength < 1) {
-                $stringMaker->delete(0, $stringMaker->length());
-                $list->add($stringMaker->append($name)->append(" is to short")->toString());
-            } elsif ($textLength > $self->{maxChars}) {
-                $stringMaker->delete(0, $stringMaker->length());
-                $list->add($stringMaker->append($name)->append(" is to long")->toString());
+            if {[expr {$textLength < 1}]} {
+                $stringMaker delete 0 [$stringMaker length]
+                $list add [[[$stringMaker append $name] append " is to short"] toString]
+            } elseif {[expr {$textLength > [my jget maxChars]}]} {
+                $stringMaker delete 0 [$stringMaker length]
+                $list add [[[$stringMaker append $name] append " is to long"] toString]
             }
         }
-        return $list;
+        return $list
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::form::item::ABTextFieldItem ();
-use org::allbinary::logic::control::validate::ValidatorBase ();
-use org::allbinary::logic::java::bool::BooleanFactory ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
+namespace eval ::NumberTextFieldItemValidator {
+}
 
-1;
 

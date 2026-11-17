@@ -11,272 +11,242 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.canvas
 
-package org::allbinary::canvas::RunnableCanvas;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Time::HiRes ();
-use parent -norequire,'org::allbinary::graphics::displayable::MyCanvas','org::allbinary::thread::RunnableInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{nullUtil} = 'org::allbinary::logic::NullUtil'->getInstance();
-    $self->{stdUtil} = 'org::allbinary::logic::StdUtil'->getInstance();
-    $self->{systemWrapper} = 'org::allbinary::logic::ABSystemWrapper'->getInstance();
-    $self->{tsUtil} = 'org::allbinary::TsUtil'->getInstance();
-    $self->{thread} = $org::allbinary::thread::NullThread::NULL_THREAD;
-    $self->{currentThread} = $org::allbinary::thread::NullThread::NULL_THREAD;
-    $self->{running} = 0;
-    $self->{loopTimeHelper} = 'org::allbinary::time::TimeDelayHelper'->new('org::allbinary::game::displayable::canvas::NullWaitGameRunnable'->getInstance()->{WAIT});
-    $self->{runnableCanvasRefreshHelper} = 'org::allbinary::canvas::Processor'->getInstance();
-    $self->{commonLabels} = 'org::allbinary::string::CommonLabels'->getInstance();
-    $self->{threadObjectUtil} = 'org::allbinary::thread::ThreadObjectUtil'->getInstance();
-    $self->{SET_RUNNING} = "setRunning";
-    $self->{IS_RUNNING} = "isRunning";
-    $self->{THREAD} = "Thread: ";
-    $self->{NOT_EQUAL} = " != ";
-    $self->{PAUSE_SLEEP} = "pause sleep";
-    $self->{START_PAUSE} = "start pause - game thread sleep at: ";
-    $self->{END_PAUSE} = "end pause - game thread sleep at: ";
-    $self->{PROCESS_LOOP_SLEEP} = "processLoopSleep";
-    $self->{pauseWait} = 0;
-    $self->{notified} = 0;
+oo::class create ::RunnableCanvas {
+    superclass ::MyCanvas
 }
 
+oo::define ::RunnableCanvas {
+    method initFields_RunnableCanvas {} {
+        my jset nullUtil {}
+        my jset stdUtil {}
+        my jset systemWrapper {}
+        my jset tsUtil {}
+        my jset thread {}
+        my jset currentThread {}
+        my jset running false
+        my jset loopTimeHelper {}
+        my jset runnableCanvasRefreshHelper {}
+        my jset commonLabels {}
+        my jset threadObjectUtil {}
+        my jset SET_RUNNING {}
+        my jset IS_RUNNING {}
+        my jset THREAD {}
+        my jset NOT_EQUAL {}
+        my jset PAUSE_SLEEP {}
+        my jset START_PAUSE {}
+        my jset END_PAUSE {}
+        my jset PROCESS_LOOP_SLEEP {}
+        my jset pauseWait 0
+        my jset notified false
+        my jset nullUtil [::NullUtil::getInstance]
+        my jset stdUtil [::StdUtil::getInstance]
+        my jset systemWrapper [::ABSystemWrapper::getInstance]
+        my jset tsUtil [::TsUtil::getInstance]
+        my jset thread [::NullThread::staticGet_NULL_THREAD]
+        my jset currentThread [::NullThread::staticGet_NULL_THREAD]
+        my jset running false
+        my jset loopTimeHelper [::TimeDelayHelper new [[::NullWaitGameRunnable::getInstance] jget WAIT]]
+        my jset runnableCanvasRefreshHelper [::Processor::getInstance]
+        my jset commonLabels [::CommonLabels::getInstance]
+        my jset threadObjectUtil [::ThreadObjectUtil::getInstance]
+        my jset SET_RUNNING "setRunning"
+        my jset IS_RUNNING "isRunning"
+        my jset THREAD "Thread: "
+        my jset NOT_EQUAL " != "
+        my jset PAUSE_SLEEP "pause sleep"
+        my jset START_PAUSE "start pause - game thread sleep at: "
+        my jset END_PAUSE "end pause - game thread sleep at: "
+        my jset PROCESS_LOOP_SLEEP "processLoopSleep"
+        my jset pauseWait 0
+        my jset notified false
+        return
+    }
+    
 
-sub new {
-    my ($class, $commandListener, $childNameList, $hasParam) = @_;
-    my $self = $class->SUPER::new('org::allbinary::string::CommonStrings'->getInstance()->{UNKNOWN}, $childNameList);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("RunnableCanvas delay: ")->appendint(int($self->{loopTimeHelper}->{delay}))->toString(), $self, $self->{commonStrings}->{CONSTRUCTOR});
-        $self->{runnableCanvasRefreshHelper} = 'org::allbinary::canvas::RunnableCanvasRefreshHelper'->new($self);
-        if (defined($commandListener)) {
-            $self->initCommands($commandListener);
-        } elsif ($hasParam) {
-            $self->{logUtil}->putF("commandListener was null", $self, "initCommands");
+    constructor {commandListener childNameList hasParam} {
+        next [[::CommonStrings::getInstance] jget UNKNOWN] $childNameList
+        my initFields_RunnableCanvas
+        [my jget logUtil] putF [[[[::StringMaker new] append "RunnableCanvas delay: "] appendint [jint [[my jget loopTimeHelper] jget delay]]] toString] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+        my jset runnableCanvasRefreshHelper [::RunnableCanvasRefreshHelper new [self]]
+        if {[expr {$commandListener ne {}}]} {
+            my initCommands $commandListener
+        } elseif {$hasParam} {
+            [my jget logUtil] putF "commandListener was null" [self] "initCommands"
         }
-    return $self;
-}
+    }
+    
 
+    method initCommands {cmdListener} {
+        [my jget logUtil] putF [[my jget commonStrings] jget NOT_IMPLEMENTED] [self] "initCommands"
+    }
+    
 
-sub initCommands {
-    my ($self, $cmdListener) = @_;
-        $self->{logUtil}->putF($self->{commonStrings}->{NOT_IMPLEMENTED}, $self, "initCommands");
-}
-
-
-sub isMainCanvas {
-    my ($self) = @_;
-        if (defined($self->getCustomCommandListener())) {
-            return 1;
+    method isMainCanvas {} {
+        if {[expr {[my getCustomCommandListener] ne {}}]} {
+            return true
         } else {
-            return 0;
+            return false
         }
-}
+    }
+    
 
+    method setThread {thread} {
+        my jset thread $thread
+    }
+    
 
-sub setThread {
-    my ($self, $thread) = @_;
-        $self->{thread} = $thread;
-}
-
-
-sub setRunning {
-    my ($self, $running) = @_;
-        $self->{running} = $running;
-        if (!$self->{running}) {
-            $self->{thread} = $org::allbinary::thread::NullThread::NULL_THREAD;
-            {; # synchronized ($self)
-                $self->{threadObjectUtil}->notifyObject($self);
+    method setRunning {running} {
+        my jset running $running
+        if {[expr {![my jget running]}]} {
+            my jset thread [::NullThread::staticGet_NULL_THREAD]
+            if {1} {
+                [my jget threadObjectUtil] notifyObject [self]
             }
         }
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($self->{IS_RUNNING})->appendboolean($self->{running})->toString(), $self, $self->{SET_RUNNING});
-}
+        [my jget logUtil] putF [[[[::StringMaker new] append [my jget IS_RUNNING]] appendboolean [my jget running]] toString] [self] [my jget SET_RUNNING]
+    }
+    
 
-
-sub isRunning {
-    my ($self) = @_;
-        if ($self->{thread} == $self->{currentThread}) {
-            return $self->{running};
+    method isRunning {} {
+        if {[expr {[my jget thread] eq [my jget currentThread]}]} {
+            return [my jget running]
         } else {
-            my $stringBuffer = 'org::allbinary::logic::string::StringMaker'->new();
-            $stringBuffer->append($self->{THREAD});
-            if (defined($self->{thread})) {
-                $stringBuffer->append($self->{thread}->toString());
+            set stringBuffer [::StringMaker new]
+            $stringBuffer append [my jget THREAD]
+            if {[expr {[my jget thread] ne {}}]} {
+                $stringBuffer append [[my jget thread] toString]
             }
-            $stringBuffer->append($self->{NOT_EQUAL});
-            if (defined($self->{currentThread})) {
-                $stringBuffer->append('org::allbinary::logic::string::StringUtil'->getInstance()->toString($self->{currentThread}));
+            $stringBuffer append [my jget NOT_EQUAL]
+            if {[expr {[my jget currentThread] ne {}}]} {
+                $stringBuffer append [[::StringUtil::getInstance] toString1 [my jget currentThread]]
             }
-            $self->{logUtil}->putF($stringBuffer->toString(), $self, $self->{IS_RUNNING});
-            return 0;
+            [my jget logUtil] putF [$stringBuffer toString] [self] [my jget IS_RUNNING]
+            return false
         }
-}
+    }
+    
 
+    method getLoopTimeHelperP {} {
+        return [my jget loopTimeHelper]
+    }
+    
 
-sub getLoopTimeHelperP {
-    my ($self) = @_;
-        return $self->{loopTimeHelper};
-}
+    method setWait {wait} {
+        [my jget loopTimeHelper] jset delay $wait
+        my jset pauseWait [jlong [expr {$wait * 3}]]
+        [my jget logUtil] putF [[[[::StringMaker new] append "setWait - delay: "] appendint [jint [[my jget loopTimeHelper] jget delay]]] toString] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+    }
+    
 
+    method getWait {} {
+        return [[my jget loopTimeHelper] jget delay]
+    }
+    
 
-sub setWait {
-    my ($self, $wait) = @_;
-        $self->{loopTimeHelper}->{delay} = $wait;
-        $self->{pauseWait} = $wait * 3;
-        $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append("setWait - delay: ")->appendint(int($self->{loopTimeHelper}->{delay}))->toString(), $self, $self->{commonStrings}->{CONSTRUCTOR});
-}
+    method setCurrentThread {} {
+        my jset currentThread [::Thread::currentThread]
+    }
+    
 
+    method setCurrentThreadFake {} {
+        my jset currentThread [my jget thread]
+    }
+    
 
-sub getWait {
-    my ($self) = @_;
-        return $self->{loopTimeHelper}->{delay};
-}
-
-
-sub setCurrentThread {
-    my ($self) = @_;
-        $self->{currentThread} = 'java::lang::Thread'->currentThread();
-}
-
-
-sub setCurrentThreadFake {
-    my ($self) = @_;
-        $self->{currentThread} = $self->{thread};
-}
-
-
-sub showNotify {
-    my ($self) = @_;
+    method showNotify {} {
         try {
-            $self->stopWaiting();
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, "showNotify", $e);
+            my stopWaiting
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] "showNotify" $e
         }
-}
+    }
+    
 
-
-# throws Exception
-sub stopWaiting {
-    my ($self) = @_;
-        $self->{notified} = 1;
-        {; # synchronized ($self)
-            $self->{threadObjectUtil}->notifyObject($self);
+    method stopWaiting {} {
+        my jset notified true
+        if {1} {
+            [my jget threadObjectUtil] notifyObject [self]
         }
-        $self->repaint();
-}
+        my repaint
+    }
+    
 
-
-# throws Exception
-sub waitOnNotify {
-    my ($self, $wait) = @_;
-        if (!$self->{notified}) {
-            if ($wait > 0) {
-                $self->{threadObjectUtil}->waitObjectFor($self, $wait);
+    method waitOnNotify {wait} {
+        if {[expr {![my jget notified]}]} {
+            if {[expr {$wait > 0}]} {
+                [my jget threadObjectUtil] waitObjectFor [self] $wait
             } else {
-                $self->{threadObjectUtil}->waitObject($self);
+                [my jget threadObjectUtil] waitObject [self]
             }
         }
-}
+    }
+    
 
+    method processSleep {} {
+        ::Thread::sleep [my jget pauseWait]
+    }
+    
 
-# throws Exception
-sub processSleep {
-    my ($self) = @_;
-        Time::HiRes::sleep(($self->{pauseWait}) / 1000);
-}
+    method isPausable {} {
+        return false
+    }
+    
 
+    method processGameSleep {sleep} {
+        ::Thread::sleep $sleep
+    }
+    
 
-sub isPausable {
-    my ($self) = @_;
-        return 0;
-}
-
-
-# throws Exception
-sub processGameSleep {
-    my ($self, $sleep) = @_;
-        Time::HiRes::sleep(($sleep) / 1000);
-}
-
-
-# throws Exception
-sub processLoopSleep {
-    my ($self) = @_;
-        $self->{runnableCanvasRefreshHelper}->process();
-        if ($self->isPaused()) {
-            my $stringMaker = 'org::allbinary::logic::string::StringMaker'->new();
-            if ($self->isRunning() && !$self->isSingleThread()) {
-                $stringMaker->delete(0, $stringMaker->length());
-                my $currentTimeMillis = $self->{systemWrapper}->currentTimeMillis();
-                $self->{logUtil}->putF($stringMaker->append($self->{START_PAUSE})->appendlong($currentTimeMillis)->append($self->{PAUSE_SLEEP})->appendlong($self->{pauseWait})->toString(), $self, $self->{PROCESS_LOOP_SLEEP});
-                while ($self->isPaused() && $self->isRunning() && !$self->isSingleThread()) {
-                    $self->processSleep();
-                    if (!$self->isPausable()) {
-                        $stringMaker->delete(0, $stringMaker->length());
-                        $self->{logUtil}->putF($stringMaker->append($self->{END_PAUSE})->appendlong($currentTimeMillis)->toString(), $self, $self->{PROCESS_LOOP_SLEEP});
-                        return;
+    method processLoopSleep {} {
+        [my jget runnableCanvasRefreshHelper] process
+        if {[my isPaused]} {
+            set stringMaker [::StringMaker new]
+            if {[expr {[my isRunning] && [expr {![my isSingleThread]}]}]} {
+                $stringMaker delete 0 [$stringMaker length]
+                set currentTimeMillis [[my jget systemWrapper] currentTimeMillis]
+                [my jget logUtil] putF [[[[[$stringMaker append [my jget START_PAUSE]] appendlong $currentTimeMillis] append [my jget PAUSE_SLEEP]] appendlong [my jget pauseWait]] toString] [self] [my jget PROCESS_LOOP_SLEEP]
+                while {[expr {[expr {[my isPaused] && [my isRunning]}] && [expr {![my isSingleThread]}]}]} {
+                    my processSleep
+                    if {[expr {![my isPausable]}]} {
+                        $stringMaker delete 0 [$stringMaker length]
+                        [my jget logUtil] putF [[[$stringMaker append [my jget END_PAUSE]] appendlong $currentTimeMillis] toString] [self] [my jget PROCESS_LOOP_SLEEP]
+                        return
                     }
                 }
             }
         }
-        my $elapsedTime = $self->{loopTimeHelper}->getElapsedTNT();
-        my $wait = int($self->{loopTimeHelper}->{delay});
-        if ($elapsedTime > $wait) {
-            $elapsedTime = $wait;
+        set elapsedTime [[my jget loopTimeHelper] getElapsedTNT]
+        set wait [[my jget loopTimeHelper] jget delay]
+        if {[expr {$elapsedTime > $wait}]} {
+            set elapsedTime $wait
         } else {
-            $self->processGameSleep($wait - $elapsedTime);
+            my processGameSleep [jlong [expr {$wait - $elapsedTime}]]
         }
+    }
+    
+
+    method isSingleThread {} {
+        return false
+    }
+    
+
+    method run {} {
+        my setCurrentThread
+    }
+    
+
+    method end2 {} {
+    }
+    
+
+    method getType {} {
+        return [expr {-1}]
+    }
 }
 
-
-sub isSingleThread {
-    my ($self) = @_;
-        return 0;
+namespace eval ::RunnableCanvas {
 }
 
-
-sub run {
-    my ($self) = @_;
-        $self->setCurrentThread();
-}
-
-
-# throws Exception
-sub end2 {
-    my ($self) = @_;
-}
-
-
-sub getType {
-    my ($self) = @_;
-        return -1;
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::CommandListener ();
-use org::allbinary::TsUtil ();
-use org::allbinary::game::displayable::canvas::NullWaitGameRunnable ();
-use org::allbinary::graphics::displayable::MyCanvas ();
-use org::allbinary::logic::ABSystemWrapper ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::StdUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::thread::NullThread ();
-use org::allbinary::thread::RunnableInterface ();
-use org::allbinary::thread::ThreadObjectUtil ();
-use org::allbinary::time::TimeDelayHelper ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::canvas::RunnableCanvasRefreshHelper ();
-use java::lang::Thread ();
-
-1;
 

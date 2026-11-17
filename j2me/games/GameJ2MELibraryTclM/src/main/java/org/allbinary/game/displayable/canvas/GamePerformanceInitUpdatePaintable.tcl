@@ -11,81 +11,71 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::GamePerformanceInitUpdatePaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::InitUpdatePaintable','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{halfHeight} = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance()->getLastHalfHeight();
-    $self->{yArray} = [$self->{halfHeight} + 30, $self->{halfHeight} + 30, $self->{halfHeight} + 30 + 15, $self->{halfHeight} + 30 + 15, $self->{halfHeight} + 30 + 30, $self->{halfHeight} + 30 + 30, $self->{halfHeight} + 30 + 45, $self->{halfHeight} + 30 + 45];
-    $self->{myFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{baseRefreshHelperCharArray} = [map { [("\0") x (0)] } 1 .. (0)];
-    $self->{defaultStringWidth} = 0;
-    $self->{RED} = int('org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{RED});
+oo::class create ::GamePerformanceInitUpdatePaintable {
+    superclass ::InitUpdatePaintable
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+oo::define ::GamePerformanceInitUpdatePaintable {
+    method initFields_GamePerformanceInitUpdatePaintable {} {
+        my jset halfHeight 0
+        my jset yArray {}
+        my jset myFontProcessor {}
+        my jset baseRefreshHelperCharArray {}
+        my jset defaultStringWidth 0
+        my jset RED 0
+        my jset halfHeight [[::DisplayInfoSingleton::getInstance] getLastHalfHeight]
+        my jset yArray [jarrayfrom [list [jint [expr {[my jget halfHeight] + 30}]] [jint [expr {[my jget halfHeight] + 30}]] [jint [expr {[jint [expr {[my jget halfHeight] + 30}]] + 15}]] [jint [expr {[jint [expr {[my jget halfHeight] + 30}]] + 15}]] [jint [expr {[jint [expr {[my jget halfHeight] + 30}]] + 30}]] [jint [expr {[jint [expr {[my jget halfHeight] + 30}]] + 30}]] [jint [expr {[jint [expr {[my jget halfHeight] + 30}]] + 45}]] [jint [expr {[jint [expr {[my jget halfHeight] + 30}]] + 45}]]]]
+        my jset myFontProcessor [::UpdateMyFontProcessor new [self]]
+        my jset baseRefreshHelperCharArray [jarrayof 0 {jarray 0 0}]
+        my jset defaultStringWidth 0
+        my jset RED [[[::BasicColorFactory::getInstance] jget RED] intValue]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_GamePerformanceInitUpdatePaintable
+    }
+    
 
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->{defaultStringWidth} = 'org::allbinary::graphics::font::MyFontProcessor'->defaultStringWidth($font, 2);
-        $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
-}
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        my jset defaultStringWidth [::MyFontProcessor::defaultStringWidth $font 2]
+        my jset myFontProcessor [::MyFontProcessor::getInstance]
+    }
+    
 
+    method init {} {
+    }
+    
 
-sub init {
-    my ($self) = @_;
-}
+    method update {} {
+        my jset baseRefreshHelperCharArray [[::GameStatisticsFactory::getInstance] to2DCharArray]
+    }
+    
 
-
-sub update {
-    my ($self) = @_;
-        $self->{baseRefreshHelperCharArray} = 'org::allbinary::canvas::GameStatisticsFactory'->getInstance()->to2DCharArray();
-}
-
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        $graphics->setColor($self->{RED});
-        my $charArray = undef;
-        my $charArray2 = undef;
-        my $size2 = 0;
-        my $size3 = 0;
-        my $size = scalar(@{$self->{baseRefreshHelperCharArray}}) - 2;
-        for (my $index = $size; $index >= 0; $index -= 2) {
-            $charArray = $self->{baseRefreshHelperCharArray}->[$index];
-            $charArray2 = $self->{baseRefreshHelperCharArray}->[$index + 1];
-            $size2 = scalar(@{$charArray});
-            $size3 = scalar(@{$charArray2});
-            $graphics->drawChars($charArray, 0, $size2, 0, $self->{yArray}->[$index], 0);
-            $graphics->drawChars($charArray2, 0, $size3, $size2 * $self->{defaultStringWidth}, $self->{yArray}->[$index + 1], 0);
+    method paint {graphics} {
+        [my jget myFontProcessor] process $graphics
+        $graphics setColor [my jget RED]
+        set charArray {}
+        set charArray2 {}
+        set size2 0
+        set size3 0
+        set size [jint [expr {[[my jget baseRefreshHelperCharArray] length] - 2}]]
+        for {set index $size} {[expr {$index >= 0}]} {set index [jint [expr {$index - 2}]]} {
+            set charArray [[my jget baseRefreshHelperCharArray] get $index]
+            set charArray2 [[my jget baseRefreshHelperCharArray] get [jint [expr {$index + 1}]]]
+            set size2 [$charArray length]
+            set size3 [$charArray2 length]
+            $graphics drawChars $charArray 0 $size2 0 [[my jget yArray] get $index] 0
+            $graphics drawChars $charArray2 0 $size3 [jint [expr {$size2 * [my jget defaultStringWidth]}]] [[my jget yArray] get [jint [expr {$index + 1}]]] 0
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::canvas::GameStatisticsFactory ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::graphics::paint::InitUpdatePaintable ();
+namespace eval ::GamePerformanceInitUpdatePaintable {
+}
 
-1;
 

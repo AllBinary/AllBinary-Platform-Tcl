@@ -11,46 +11,38 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.compound
 
-package org::allbinary::animation::compound::SimultaneousCompoundRotationAnimationInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::compound::CompoundAnimationInterfaceFactory';
+oo::class create ::SimultaneousCompoundRotationAnimationInterfaceFactory {
+    superclass ::CompoundAnimationInterfaceFactory
+}
 
+oo::define ::SimultaneousCompoundRotationAnimationInterfaceFactory {
+    method initFields_SimultaneousCompoundRotationAnimationInterfaceFactory {} {
+        return
+    }
+    
 
-
-sub new {
-    my ($class, $basicAnimationInterfaceFactoryInterfaceArray, $animationBehaviorFactory) = @_;
-    my $self = $class->SUPER::new($basicAnimationInterfaceFactoryInterfaceArray, $animationBehaviorFactory);
-        # super(...) made $self above
-        if ($animationBehaviorFactory == 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance()) {
-            'org::allbinary::logic::communication::log::ForcedLogUtil'->log("Using default AnimationBehaviorFactory with IndexedAnimationFactory", $self);
+    constructor {basicAnimationInterfaceFactoryInterfaceArray animationBehaviorFactory} {
+        next $basicAnimationInterfaceFactoryInterfaceArray $animationBehaviorFactory
+        my initFields_SimultaneousCompoundRotationAnimationInterfaceFactory
+        if {[expr {$animationBehaviorFactory eq [::AnimationBehaviorFactory::getInstance]}]} {
+            ::ForcedLogUtil::log "Using default AnimationBehaviorFactory with IndexedAnimationFactory" [self]
         }
-    return $self;
+    }
+    
+
+    method createArray {size} {
+        return [jarray $size {}]
+    }
+    
+
+    method createAnimation {animationInterfaceArray} {
+        return [::SimultaneousCompoundRotationAnimation new $animationInterfaceArray [[my jget animationBehaviorFactory] getOrCreateInstance]]
+    }
 }
 
-
-sub createArray {
-    my ($self, $size) = @_;
-        return [(undef) x ($size)];
+namespace eval ::SimultaneousCompoundRotationAnimationInterfaceFactory {
 }
 
-
-sub createAnimation {
-    my ($self, $animationInterfaceArray) = @_;
-        return 'org::allbinary::animation::compound::SimultaneousCompoundRotationAnimation'->new($animationInterfaceArray, $self->{animationBehaviorFactory}->getOrCreateInstance());
-}
-
-use java::lang::Object ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::RotationAnimation ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::animation::compound::CompoundAnimationInterfaceFactory ();
-use org::allbinary::animation::compound::SimultaneousCompoundRotationAnimation ();
-
-1;
 

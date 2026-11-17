@@ -11,21 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.scroller
 
-# Java interface
-package org::allbinary::game::ag::ai::scroller::TimeFiredInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getLastFireTime {
-    my ($self) = @_;
-    die "abstract method getLastFireTime";
+oo::class create ::TimeFiredInterface {
+    superclass ::JObject
 }
 
+oo::define ::TimeFiredInterface {
+    method initFields_TimeFiredInterface {} {
+        return
+    }
+    
 
-1;
+    method getLastFireTime {} {
+        error [jexception AbstractMethodError getLastFireTime]
+    }
+}
+
+namespace eval ::TimeFiredInterface {
+}
+
 

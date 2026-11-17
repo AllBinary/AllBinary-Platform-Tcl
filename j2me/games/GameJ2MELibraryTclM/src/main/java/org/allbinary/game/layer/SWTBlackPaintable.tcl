@@ -11,40 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-package org::allbinary::game::layer::SWTBlackPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{basicSetColorUtil} = 'org::allbinary::graphics::color::BasicColorSetUtil'->getInstance();
-    $self->{BLACK} = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{BLACK};
+oo::class create ::SWTBlackPaintable {
+    superclass ::Paintable
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
+oo::define ::SWTBlackPaintable {
+    method initFields_SWTBlackPaintable {} {
+        my jset basicSetColorUtil {}
+        my jset BLACK {}
+        my jset basicSetColorUtil [::BasicColorSetUtil::getInstance]
+        my jset BLACK [[::BasicColorFactory::getInstance] jget BLACK]
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_SWTBlackPaintable
+    }
+    
+
+    method paint {graphics} {
+        [my jget basicSetColorUtil] setBasicColorP $graphics [my jget BLACK]
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{basicSetColorUtil}->setBasicColorP($graphics, $self->{BLACK});
+namespace eval ::SWTBlackPaintable {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::color::BasicColorSetUtil ();
-use org::allbinary::graphics::paint::Paintable ();
-
-1;
 

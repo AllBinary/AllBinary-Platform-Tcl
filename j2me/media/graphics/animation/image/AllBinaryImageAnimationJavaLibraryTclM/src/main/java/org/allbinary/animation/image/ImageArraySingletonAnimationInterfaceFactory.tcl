@@ -11,31 +11,25 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image
 
-package org::allbinary::animation::image::ImageArraySingletonAnimationInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::SingletonAnimationInterfaceFactory';
-
-
-
-sub new {
-    my ($class, $imageArray) = @_;
-    my $self = $class->SUPER::new('org::allbinary::animation::image::ImageArrayAnimation'->new($imageArray, 'org::allbinary::animation::AnimationBehavior'->getInstance()));
-        # super(...) made $self above
-    return $self;
+oo::class create ::ImageArraySingletonAnimationInterfaceFactory {
+    superclass ::SingletonAnimationInterfaceFactory
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehavior ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::animation::SingletonAnimationInterfaceFactory ();
-use org::allbinary::image::IndexedAnimationToImageArrayUtil ();
-use org::allbinary::animation::image::ImageArrayAnimation ();
+oo::define ::ImageArraySingletonAnimationInterfaceFactory {
+    method initFields_ImageArraySingletonAnimationInterfaceFactory {} {
+        return
+    }
+    
 
-1;
+    constructor {imageArray} {
+        next [::ImageArrayAnimation new $imageArray [::AnimationBehavior::getInstance]]
+        my initFields_ImageArraySingletonAnimationInterfaceFactory
+    }
+}
+
+namespace eval ::ImageArraySingletonAnimationInterfaceFactory {
+}
+
 

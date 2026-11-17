@@ -11,31 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::TouchButtonsPaintableCompositeFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::TouchButtonsPaintableCompositeFactory {
+    superclass ::JObject
 }
 
+oo::define ::TouchButtonsPaintableCompositeFactory {
+    method initFields_TouchButtonsPaintableCompositeFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class, $inputMappingInterface, $basicColor) = @_;
-        return 'org::allbinary::graphics::paint::ProcessPaintable'->new();
+    constructor {} {
+        next
+        my initFields_TouchButtonsPaintableCompositeFactory
+    }
+    
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::mapping::InputMappingInterface ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::paint::ProcessPaintable ();
+namespace eval ::TouchButtonsPaintableCompositeFactory {
+    proc getInstance {inputMappingInterface basicColor} {
+        return [::ProcessPaintable new]
+    }
+}
 
-1;
 

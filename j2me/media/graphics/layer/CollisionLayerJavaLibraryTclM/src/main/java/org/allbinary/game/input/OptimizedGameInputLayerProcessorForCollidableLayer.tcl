@@ -11,47 +11,40 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::OptimizedGameInputLayerProcessorForCollidableLayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::LayerProcessor';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::game::input::OptimizedGameInputLayerManager'->new());
-        # super(...) made $self above
-    return $self;
+oo::class create ::OptimizedGameInputLayerProcessorForCollidableLayer {
+    superclass ::LayerProcessor
 }
 
+oo::define ::OptimizedGameInputLayerProcessorForCollidableLayer {
+    method initFields_OptimizedGameInputLayerProcessorForCollidableLayer {} {
+        return
+    }
+    
 
-# throws Exception
-sub processAt {
-    my ($self, $allBinaryLayerManager, $layerInterface, $index) = @_;
-        my $gameInputInterface = $layerInterface;
-        $gameInputInterface->processInput($allBinaryLayerManager);
-}
+    constructor {} {
+        next [::OptimizedGameInputLayerManager new]
+        my initFields_OptimizedGameInputLayerProcessorForCollidableLayer
+    }
+    
 
+    method processAt {allBinaryLayerManager layerInterface index} {
+        set gameInputInterface $layerInterface
+        $gameInputInterface processInput $allBinaryLayerManager
+    }
+    
 
-sub isProcessorLayer {
-    my ($self, $layerInterface) = @_;
-        if ($layerInterface->implmentsGameInputInterface()) {
-            return 1;
+    method isProcessorLayer {layerInterface} {
+        if {[$layerInterface implmentsGameInputInterface]} {
+            return true
         } else {
-            return 0;
+            return false
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::layer::AllBinaryGameLayer ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::layer::LayerProcessor ();
-use org::allbinary::game::input::OptimizedGameInputLayerManager ();
+namespace eval ::OptimizedGameInputLayerProcessorForCollidableLayer {
+}
 
-1;
 

@@ -11,138 +11,138 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.draw
 
-package org::allbinary::graphics::draw::DrawVerticalStringUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::draw::DrawVerticalStringUtil'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{EMPTY_STRING} = 'org::allbinary::logic::string::StringUtil'->getInstance()->{EMPTY_STRING};
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
-    $self->{charHeight} = 0;
-    $self->{offsetY} = 0;
-    $self->{offsetXArray} = 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_INT_ARRAY};
+oo::class create ::DrawVerticalStringUtil {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::DrawVerticalStringUtil {
+    method initFields_DrawVerticalStringUtil {} {
+        my jset EMPTY_STRING {}
+        my jset anchor 0
+        my jset charHeight 0
+        my jset offsetY 0
+        my jset offsetXArray {}
+        my jset EMPTY_STRING [[::StringUtil::getInstance] jget EMPTY_STRING]
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        my jset charHeight 0
+        my jset offsetY 0
+        my jset offsetXArray [[::NullUtil::getInstance] jget NULL_INT_ARRAY]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_DrawVerticalStringUtil
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::draw::DrawVerticalStringUtil::instance;
-}
-
-
-sub updateMeasurement {
-    my ($self, $graphics, $string) = @_;
-        my $openGLFeatureUtil = 'org::allbinary::graphics::opengles::OpenGLFeatureUtil'->getInstance();
-        my $font = $graphics->getFont();
-        $self->{charHeight} = $font->getHeight();
-        $self->{offsetY} = 0;
-        if ('org::allbinary::J2MEUtil'->isHTML()) {
-            $self->{charHeight} += 1;
-        } elsif ($openGLFeatureUtil->isAnyThreed()) {
-            $self->{charHeight} += 2;
-            if ('org::allbinary::AndroidUtil'->isAndroid()) {
+    method updateMeasurement {graphics string} {
+        set openGLFeatureUtil [::OpenGLFeatureUtil::getInstance]
+        set font [$graphics getFont]
+        my jset charHeight [$font getHeight]
+        my jset offsetY 0
+        if {[::J2MEUtil::isHTML]} {
+            my jset charHeight [jint [expr {[my jget charHeight] + 1}]]
+        } elseif {[$openGLFeatureUtil isAnyThreed]} {
+            my jset charHeight [jint [expr {[my jget charHeight] + 2}]]
+            if {[::AndroidUtil::isAndroid]} {
             } else {
-                $self->{offsetY} = 2 + (int($self->{charHeight} * 2 / 3));
+                my jset offsetY [jint [expr {2 + ([jdiv [jint [expr {[my jget charHeight] * 2}]] 3])}]]
             }
         }
-        my $size = length($string);
-        my $aChar = "\0";
-        my $offsetXArray = [(0) x ($size)];
-        for (my $index = $size - 1; $index >= 0; $index--) {
-            $aChar = substr($string, $index, 1);
-            if ($openGLFeatureUtil->isAnyThreed()) {
-                $offsetXArray->[$index] = $font->charWidth($aChar) / 2;
+        set size [string length $string]
+        set aChar 0
+        set offsetXArray [jarray $size 0]
+        for {set index [jint [expr {$size - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set aChar [scan [string index $string $index] %c]
+            if {[$openGLFeatureUtil isAnyThreed]} {
+                $offsetXArray set $index [expr {[$font charWidth $aChar] / 2}]
             }
         }
-        $self->{offsetXArray} = $offsetXArray;
-}
+        my jset offsetXArray $offsetXArray
+    }
+    
 
-
-sub paintVerticle {
-    my ($self, $graphics, $string, $x, $y, $anchor) = @_;
-        my $size = length($string);
-        my $aChar = "\0";
-        for (my $index = $size - 1; $index >= 0; $index--) {
-            $aChar = substr($string, $index, 1);
-            $graphics->drawChar($aChar, $x + $self->{offsetXArray}->[$index], $y + ($self->{charHeight} * $index) + $self->{offsetY}, $anchor);
+    method paintVerticle {graphics string x y anchor} {
+        set size [string length $string]
+        set aChar 0
+        for {set index [jint [expr {$size - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            set aChar [scan [string index $string $index] %c]
+            $graphics drawChar $aChar [jint [expr {$x + [[my jget offsetXArray] get $index]}]] [jint [expr {[jint [expr {$y + ([jint [expr {[my jget charHeight] * $index}]])}]] + [my jget offsetY]}]] $anchor
         }
-}
+    }
+    
 
-
-sub drawCenterString {
-    my ($self, $graphics, $string, $offset, $length, $x, $y) = @_;
-        my $width = (POSIX::floor(($graphics->getFont()->substringWidth($string, $offset, $length)) / (2 ** (1))));
+    method drawCenterString {graphics string offset length x y} {
+        set width ([expr {[[$graphics getFont] substringWidth $string $offset $length] >> 1}])
         try {
-            $graphics->drawSubstring($string, $offset, $length, $x - $width, $y, $self->{anchor});
-        } catch ($e) {
-            'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append("Exception: stringLength: ")->appendint(length($string))->append(" offset: ")->appendint($offset)->append(" currentLength: ")->appendint($length)->toString(), $self, "drawCenterString");
+            $graphics drawSubstring $string $offset $length [jint [expr {$x - $width}]] $y [my jget anchor]
+        } on error {e} {
+            ::PreLogUtil::put [[[[[[[[::StringMaker new] append "Exception: stringLength: "] appendint [string length $string]] append " offset: "] appendint $offset] append " currentLength: "] appendint $length] toString] [self] "drawCenterString"
         }
-}
+    }
+    
 
-
-sub drawCenterStrings {
-    my ($self, $graphics, $stringArray, $maxWidth, $x, $y) = @_;
-        my $extraLines = 0;
-        for (my $index = 0; $index < scalar(@{$stringArray}); $index++) {
-            my $string = $stringArray->[$index];
-            if ($string ne $self->{EMPTY_STRING}) {
-                my $width = $graphics->getFont()->stringWidth($string);
-                my $minTotalLines = 1;
-                if ($width > $maxWidth) {
-                    $minTotalLines = (int($width / $maxWidth)) + 1;
+    method drawCenterStrings {graphics stringArray maxWidth x y} {
+        set extraLines 0
+        for {set index 0} {[expr {$index < [$stringArray length]}]} {jpostincr index 1} {
+            set string [$stringArray get $index]
+            if {[expr {$string ne [my jget EMPTY_STRING]}]} {
+                set width [[$graphics getFont] stringWidth $string]
+                set minTotalLines 1
+                if {[expr {$width > $maxWidth}]} {
+                    set minTotalLines [jint [expr {([jdiv $width $maxWidth]) + 1}]]
                 }
-                my $linePortion = int(length($string) / $minTotalLines);
-                my $offset = 0;
-                my $currentLength = $linePortion;
-                my $size = length($string);
-                while ($offset < $size) {
-                    if ($offset + $currentLength > $size) {
-                        $currentLength = $size - $offset;
+                set linePortion [jdiv [string length $string] $minTotalLines]
+                set offset 0
+                set currentLength $linePortion
+                set size [string length $string]
+                while {[expr {$offset < $size}]} {
+                    if {[expr {[jint [expr {$offset + $currentLength}]] > $size}]} {
+                        set currentLength [jint [expr {$size - $offset}]]
                     }
-                    if ($offset + $currentLength != $size) {
-                        while ($currentLength > 0 && $stringArray->[$index]->charAt($offset + $currentLength) ne " ") {
-                            $currentLength--;
+                    if {[expr {[jint [expr {$offset + $currentLength}]] != $size}]} {
+                        while {[expr {[expr {$currentLength > 0}] && [expr {[[$stringArray get $index] charAt [jint [expr {$offset + $currentLength}]]] != [scan " " %c]}]}]} {
+                            jpostincr currentLength -1
                         }
-                        if ($currentLength <= 4) {
-                            $currentLength = $linePortion;
+                        if {[expr {$currentLength <= 4}]} {
+                            set currentLength $linePortion
                         }
                     }
-                    $self->drawCenterString($graphics, $string, $offset, $currentLength, $x, $y + (($index + $extraLines++) * $self->{charHeight}));
-                    $offset = $offset + $currentLength;
-                    $currentLength = $linePortion;
+                    my drawCenterString $graphics $string $offset $currentLength $x [jint [expr {$y + ([jint [expr {([jint [expr {$index + [jpostincr extraLines 1]}]]) * [my jget charHeight]}]])}]]
+                    set offset [jint [expr {$offset + $currentLength}]]
+                    set currentLength $linePortion
                 }
-                $extraLines--;
+                jpostincr extraLines -1
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::AndroidUtil ();
-use org::allbinary::J2MEUtil ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::graphics::opengles::OpenGLFeatureUtil ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::string::StringUtil ();
+namespace eval ::DrawVerticalStringUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::DrawVerticalStringUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::DrawVerticalStringUtil::staticGet_instance]
+    }
+}
 
-1;
 

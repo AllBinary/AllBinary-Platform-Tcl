@@ -11,37 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.canvas
 
-package org::allbinary::canvas::CustomGameMenuUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::CustomGameMenuUtil {
+    superclass ::JObject
 }
 
+oo::define ::CustomGameMenuUtil {
+    method initFields_CustomGameMenuUtil {} {
+        return
+    }
 
-sub add {
-    my ($class, $canvas) = @_;
-        my $gameCommandsFactory = 'org::allbinary::game::commands::GameCommandsFactory'->getInstance();
-        if ('org::allbinary::AppletUtil'->isAppletLoader($canvas)) {
-        } elsif ('org::allbinary::J2MEUtil'->isHTML()) {
+    constructor {} {
+        next
+        my initFields_CustomGameMenuUtil
+    }
+    
+}
+
+namespace eval ::CustomGameMenuUtil {
+    proc add {canvas} {
+        set gameCommandsFactory [::GameCommandsFactory::getInstance]
+        if {[::AppletUtil::isAppletLoader $canvas]} {
+        } elseif {[::J2MEUtil::isHTML]} {
         } else {
-            $canvas->addCommand($gameCommandsFactory->{EXIT_COMMAND});
+            $canvas addCommand [$gameCommandsFactory jget EXIT_COMMAND]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::AppletUtil ();
-use org::allbinary::J2MEUtil ();
-use org::allbinary::game::commands::GameCommandsFactory ();
-use org::allbinary::graphics::displayable::MyCanvas ();
-
-1;
 

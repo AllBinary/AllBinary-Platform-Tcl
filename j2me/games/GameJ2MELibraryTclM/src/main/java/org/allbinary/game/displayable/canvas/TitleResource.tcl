@@ -11,23 +11,41 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.displayable.canvas
 
-package org::allbinary::game::displayable::canvas::TitleResource;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $RESOURCE_TITLE = "/title_sprite_100_by_100.png";
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::TitleResource {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
+oo::define ::TitleResource {
+    method initFields_TitleResource {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_TitleResource
+    }
+}
+
+namespace eval ::TitleResource {
+    variable RESOURCE_TITLEValue {}
+    variable RESOURCE_TITLESet 0
+    proc staticGet_RESOURCE_TITLE {} {
+        variable RESOURCE_TITLEValue
+        variable RESOURCE_TITLESet
+        if {!$RESOURCE_TITLESet} {
+            set RESOURCE_TITLESet 1
+            set RESOURCE_TITLEValue "/title_sprite_100_by_100.png"
+        }
+        return $RESOURCE_TITLEValue
+    }
+    proc staticSet_RESOURCE_TITLE {value} {
+        variable RESOURCE_TITLEValue
+        variable RESOURCE_TITLESet
+        set RESOURCE_TITLESet 1
+        set RESOURCE_TITLEValue $value
+    }
+}
+
 

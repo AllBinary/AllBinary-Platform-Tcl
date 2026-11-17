@@ -11,41 +11,57 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.media.audio
 
-package org::allbinary::media::audio::SoundStrings;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::media::audio::SoundStrings'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{STOP_ALL} = "stopAll";
-    $self->{CLOSE_ALL} = "closeAll";
-    $self->{SOUND} = " Sound: ";
-    $self->{INIT_SOUND} = "Initializing Sound: ";
-    $self->{STOPPING_SOUND} = "Stopping Sound: ";
-    $self->{CLOSING_SOUND} = "Closing Sound: ";
+oo::class create ::SoundStrings {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::SoundStrings {
+    method initFields_SoundStrings {} {
+        my jset STOP_ALL {}
+        my jset CLOSE_ALL {}
+        my jset SOUND {}
+        my jset INIT_SOUND {}
+        my jset STOPPING_SOUND {}
+        my jset CLOSING_SOUND {}
+        my jset STOP_ALL "stopAll"
+        my jset CLOSE_ALL "closeAll"
+        my jset SOUND " Sound: "
+        my jset INIT_SOUND "Initializing Sound: "
+        my jset STOPPING_SOUND "Stopping Sound: "
+        my jset CLOSING_SOUND "Closing Sound: "
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_SoundStrings
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::media::audio::SoundStrings::instance;
+namespace eval ::SoundStrings {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::SoundStrings new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::SoundStrings::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

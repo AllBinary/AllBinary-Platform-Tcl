@@ -11,43 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.tactical
 
-package org::allbinary::game::ag::ai::tactical::BasicRandomAIFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::BasicRandomAIFactory {
+    superclass ::JObject
 }
 
+oo::define ::BasicRandomAIFactory {
+    method initFields_BasicRandomAIFactory {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($self, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-        my $visitor = $hashtable->get($org::allbinary::game::ai::BasicAI::AI_VISITOR);
-        if (!defined($visitor)) {
-            die ("No Visitor Provided");
+    constructor {} {
+        next
+        my initFields_BasicRandomAIFactory
+    }
+    
+
+    method getInstance {hashtable ownerLayerInterface gameInput} {
+        set visitor [$hashtable get [::BasicAI::staticGet_AI_VISITOR]]
+        if {[expr {$visitor eq {}}]} {
+            error [jexception Exception "No Visitor Provided"]
         }
-        my $inputProbability = $hashtable->get($org::allbinary::game::ag::ai::InputProbability::INPUT_PROBABILITY);
-        return 'org::allbinary::game::ag::ai::tactical::BasicRandomAI'->new($ownerLayerInterface, $gameInput, $inputProbability, $visitor);
+        set inputProbability [$hashtable get [::InputProbability::staticGet_INPUT_PROBABILITY]]
+        return [::BasicRandomAI new $ownerLayerInterface $gameInput $inputProbability $visitor]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-use org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface ();
-use org::allbinary::game::ai::BasicAI ();
-use org::allbinary::game::ag::ai::InputProbability ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::logic::util::visitor::Visitor ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::ag::ai::tactical::BasicRandomAI ();
+namespace eval ::BasicRandomAIFactory {
+}
 
-1;
 

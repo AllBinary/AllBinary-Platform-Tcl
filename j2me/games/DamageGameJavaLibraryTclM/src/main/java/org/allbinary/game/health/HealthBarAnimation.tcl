@@ -11,83 +11,78 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.health
 
-package org::allbinary::game::health::HealthBarAnimation;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::animation::Animation';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{basicColorFactory} = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance();
-    $self->{x2} = 0;
-    $self->{thickness} = 0;
-    $self->{location} = undef;
-    $self->{allbinaryLayer} = undef;
+oo::class create ::HealthBarAnimation {
+    superclass ::Animation
 }
 
+oo::define ::HealthBarAnimation {
+    method initFields_HealthBarAnimation {} {
+        my jset basicColorFactory {}
+        my jset x2 0
+        my jset thickness 0
+        my jset location 0
+        my jset allbinaryLayer {}
+        my jset basicColorFactory [::BasicColorFactory::getInstance]
+        my jset x2 0
+        my jset thickness 0
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $layerInterface, $location) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{allbinaryLayer} = $layerInterface;
-        $self->{location} = $location;
-        my $basicHudFactory = 'org::allbinary::game::graphics::hud::BasicHudFactory'->getInstance();
-        if ($self->{location} != $basicHudFactory->{TOPLEFT} && $self->{location} != $basicHudFactory->{BOTTOMLEFT}) {
-            die ("Location Not Valid");
+    constructor {layerInterface location} {
+        next
+        my initFields_HealthBarAnimation
+        my jset allbinaryLayer $layerInterface
+        my jset location $location
+        set basicHudFactory [::BasicHudFactory::getInstance]
+        if {[expr {[expr {[my jget location] != [$basicHudFactory jget TOPLEFT]}] && [expr {[my jget location] != [$basicHudFactory jget BOTTOMLEFT]}]}]} {
+            error [jexception Exception "Location Not Valid"]
         }
-        if ($layerInterface->getWidth() > 40) {
-            $self->{thickness} = 3;
-        } elsif ($layerInterface->getWidth() > 20) {
-            $self->{thickness} = 2;
+        if {[expr {[$layerInterface getWidth] > 40}]} {
+            my jset thickness 3
+        } elseif {[expr {[$layerInterface getWidth] > 20}]} {
+            my jset thickness 2
         } else {
-            $self->{thickness} = 1;
+            my jset thickness 1
         }
-    return $self;
-}
+    }
+    
 
-
-sub onHealthChange {
-    my ($self, $newX2) = @_;
-        $self->{x2} = $newX2;
-        my $quarter = (POSIX::floor(($self->{allbinaryLayer}->getWidth()) / (2 ** (2))));
-        if ($self->{x2} > $quarter * 3) {
-            $self->{basicColor} = $self->{basicColorFactory}->{GREEN};
-            $self->{colorP} = int($self->{basicColor});
-        } elsif ($self->{x2} > $quarter * 2) {
-            $self->{basicColor} = $self->{basicColorFactory}->{YELLOW};
-            $self->{colorP} = int($self->{basicColor});
-        } elsif ($self->{x2} > $quarter) {
-            $self->{basicColor} = $self->{basicColorFactory}->{ORANGE};
-            $self->{colorP} = int($self->{basicColor});
+    method onHealthChange {newX2} {
+        my jset x2 $newX2
+        set quarter ([expr {[[my jget allbinaryLayer] getWidth] >> 2}])
+        if {[expr {[my jget x2] > [jint [expr {$quarter * 3}]]}]} {
+            my jset basicColor [[my jget basicColorFactory] jget GREEN]
+            my jset colorP [[my jget basicColor] intValue]
+        } elseif {[expr {[my jget x2] > [jint [expr {$quarter * 2}]]}]} {
+            my jset basicColor [[my jget basicColorFactory] jget YELLOW]
+            my jset colorP [[my jget basicColor] intValue]
+        } elseif {[expr {[my jget x2] > $quarter}]} {
+            my jset basicColor [[my jget basicColorFactory] jget ORANGE]
+            my jset colorP [[my jget basicColor] intValue]
         } else {
-            $self->{basicColor} = $self->{basicColorFactory}->{RED};
-            $self->{colorP} = int($self->{basicColor});
+            my jset basicColor [[my jget basicColorFactory] jget RED]
+            my jset colorP [[my jget basicColor] intValue]
         }
+    }
+    
+
+    method getY {} {
+        set basicHudFactory [::BasicHudFactory::getInstance]
+        if {[expr {[my jget location] == [$basicHudFactory jget TOPLEFT]}]} {
+            return [expr {[[[my jget allbinaryLayer] getViewPosition] getY] - 4}]
+        } elseif {[expr {[my jget location] == [$basicHudFactory jget BOTTOMLEFT]}]} {
+            return [expr {[[[my jget allbinaryLayer] getViewPosition] getY2] + 4}]
+        }
+        return [expr {-1}]
+    }
 }
 
-
-sub getY {
-    my ($self) = @_;
-        my $basicHudFactory = 'org::allbinary::game::graphics::hud::BasicHudFactory'->getInstance();
-        if ($self->{location} == $basicHudFactory->{TOPLEFT}) {
-            return $self->{allbinaryLayer}->getViewPosition()->getY() - 4;
-        } elsif ($self->{location} == $basicHudFactory->{BOTTOMLEFT}) {
-            return $self->{allbinaryLayer}->getViewPosition()->getY2() + 4;
-        }
-        return -1;
+namespace eval ::HealthBarAnimation {
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::game::graphics::hud::BasicHudFactory ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::layer::AllBinaryLayer ();
-
-1;
 

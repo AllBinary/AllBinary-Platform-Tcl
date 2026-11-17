@@ -11,46 +11,40 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation.transition
 
-package org::allbinary::animation::transition::RunAtEndAnimationListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::transition::AnimationListenerInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{runnable} = undef;
+oo::class create ::RunAtEndAnimationListener {
+    superclass ::JObject
 }
 
+oo::define ::RunAtEndAnimationListener {
+    method initFields_RunAtEndAnimationListener {} {
+        my jset runnable {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $runnable) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{runnable} = $runnable;
-    return $self;
+    constructor {runnable} {
+        next
+        my initFields_RunAtEndAnimationListener
+        my jset runnable $runnable
+    }
+    
+
+    method onPlatformAnimationStart {} {
+    }
+    
+
+    method onPlatformAnimationEnd {} {
+    }
+    
+
+    method onPlatformAnimationRepeat {} {
+    }
 }
 
-
-sub onPlatformAnimationStart {
-    my ($self) = @_;
+namespace eval ::RunAtEndAnimationListener {
 }
 
-
-sub onPlatformAnimationEnd {
-    my ($self) = @_;
-}
-
-
-sub onPlatformAnimationRepeat {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-use org::allbinary::animation::transition::AnimationListenerInterface ();
-
-1;
 

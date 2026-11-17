@@ -11,45 +11,56 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary
 
-package org::allbinary::DisposalUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::DisposalUtil'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::DisposalUtil {
+    superclass ::JObject
 }
 
+oo::define ::DisposalUtil {
+    method initFields_DisposalUtil {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::DisposalUtil::instance;
-}
+    constructor {} {
+        next
+        my initFields_DisposalUtil
+    }
+    
+    
 
+    method disposeImage {image} {
+    }
+    
 
-sub disposeImage {
-    my ($self, $image) = @_;
-}
-
-
-sub disposeResource {
-    my ($self, $resource) = @_;
-        if (!$resource->isDisposed()) {
-            $resource->dispose();
+    method disposeResource {resource} {
+        if {[expr {![$resource isDisposed]}]} {
+            $resource dispose
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Image ();
-# use org::eclipse::swt::graphics::Resource ();
+namespace eval ::DisposalUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::DisposalUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::DisposalUtil::staticGet_instance]
+    }
+}
 
-1;
 

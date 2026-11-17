@@ -11,42 +11,56 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.media
 
-package org::allbinary::media::ScaleProperties;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::media::ScaleProperties'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{scaleX} = 0.0;
-    $self->{scaleY} = 0.0;
-    $self->{scaleWidth} = 0;
-    $self->{scaleHeight} = 0;
-    $self->{shouldScale} = 0;
+oo::class create ::ScaleProperties {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::ScaleProperties {
+    method initFields_ScaleProperties {} {
+        my jset scaleX 0.0
+        my jset scaleY 0.0
+        my jset scaleWidth 0
+        my jset scaleHeight 0
+        my jset shouldScale false
+        my jset scaleX 0.0
+        my jset scaleY 0.0
+        my jset scaleWidth 0
+        my jset scaleHeight 0
+        my jset shouldScale false
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_ScaleProperties
+    }
+    
+
+    method toString {} {
+        return [[[[[[[[[[[[::StringMaker new] append [[::CommonLabels::getInstance] jget COLON_SEP]] appendboolean [my jget shouldScale]] append "scaleX: "] appendfloat [my jget scaleX]] append "scaleY: "] appendfloat [my jget scaleY]] append "scaleWidth: "] appendint [my jget scaleWidth]] append "scaleHeight: "] appendint [my jget scaleHeight]] toString]
+    }
 }
 
-
-sub toString {
-    my ($self) = @_;
-        return 'org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{COLON_SEP})->appendboolean($self->{shouldScale})->append("scaleX: ")->appendfloat($self->{scaleX})->append("scaleY: ")->appendfloat($self->{scaleY})->append("scaleWidth: ")->appendint($self->{scaleWidth})->append("scaleHeight: ")->appendint($self->{scaleHeight})->toString();
+namespace eval ::ScaleProperties {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ScaleProperties new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonLabels ();
-
-1;
 

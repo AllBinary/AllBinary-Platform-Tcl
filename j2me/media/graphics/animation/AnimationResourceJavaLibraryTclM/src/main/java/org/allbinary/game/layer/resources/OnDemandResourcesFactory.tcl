@@ -11,35 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.resources
 
-package org::allbinary::game::layer::resources::OnDemandResourcesFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::OnDemandResourcesFactory {
+    superclass ::JObject
 }
 
+oo::define ::OnDemandResourcesFactory {
+    method initFields_OnDemandResourcesFactory {} {
+        return
+    }
 
-sub size {
-    my ($self) = @_;
-        return 0;
+    constructor {} {
+        next
+        my initFields_OnDemandResourcesFactory
+    }
+    
+
+    method size {} {
+        return 0
+    }
+    
+
+    method remove {layerId} {
+        return [::OnDemandResources::staticGet_NULL_ON_DEMAND_RESOURCES]
+    }
 }
 
-
-sub remove {
-    my ($self, $layerId) = @_;
-        return $org::allbinary::game::layer::resources::OnDemandResources::NULL_ON_DEMAND_RESOURCES;
+namespace eval ::OnDemandResourcesFactory {
 }
 
-use java::lang::Object ();
-use org::allbinary::game::layer::resources::OnDemandResources ();
-
-1;
 

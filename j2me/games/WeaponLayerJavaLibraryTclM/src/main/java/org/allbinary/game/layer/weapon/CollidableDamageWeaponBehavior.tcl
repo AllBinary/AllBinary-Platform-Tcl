@@ -11,109 +11,88 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.weapon
 
-package org::allbinary::game::layer::weapon::CollidableDamageWeaponBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::special::CollidableDestroyableDamageableBehavior';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{collided} = 0;
-    $self->{collisionHelper} = undef;
+oo::class create ::CollidableDamageWeaponBehavior {
+    superclass ::CollidableDestroyableDamageableBehavior
 }
 
+oo::define ::CollidableDamageWeaponBehavior {
+    method initFields_CollidableDamageWeaponBehavior {} {
+        my jset collided false
+        my jset collisionHelper {}
+        my jset collided false
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $collidable) = @_;
-    my $self = $class->SUPER::new($collidable);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->setCollided(0);
-        $self->setCollidable(1);
-        $self->{collisionHelper} = 'org::allbinary::game::collision::CollidableHelperFactory'->getInstance();
-    return $self;
-}
+    constructor {collidable} {
+        next $collidable
+        my initFields_CollidableDamageWeaponBehavior
+        my setCollided false
+        my setCollidable true
+        my jset collisionHelper [::CollidableHelperFactory::getInstance]
+    }
+    
 
+    method init {sourceLayerInterface} {
+        my setCollided false
+        [my jget collisionHelper] setOwnerLayerInterface $sourceLayerInterface
+    }
+    
 
-sub init {
-    my ($self, $sourceLayerInterface) = @_;
-        $self->setCollided(0);
-        $self->{collisionHelper}->setOwnerLayerInterface($sourceLayerInterface);
-}
-
-
-sub isCollision {
-    my ($self, $ownerLayer, $collisionLayer) = @_;
-        if ($self->{collisionHelper}->isCollidable($collisionLayer)) {
-            if ($ownerLayer->getGroupInterface()->[0] != $collisionLayer->getGroupInterface()->[0]) {
-                return $self->SUPER::isCollision($ownerLayer, $collisionLayer);
+    method isCollision {ownerLayer collisionLayer} {
+        if {[[my jget collisionHelper] isCollidable $collisionLayer]} {
+            if {[expr {[[$ownerLayer getGroupInterface] get 0] != [[$collisionLayer getGroupInterface] get 0]}]} {
+                return [next $ownerLayer $collisionLayer]
             }
         }
-        return 0;
-}
+        return false
+    }
+    
 
+    method collide {ownerLayer collisionLayer} {
+        next $ownerLayer $collisionLayer
+        my jset collided true
+    }
+    
 
-# throws Exception
-sub collide {
-    my ($self, $ownerLayer, $collisionLayer) = @_;
-        $self->SUPER::collide($ownerLayer, $collisionLayer);
-        $self->{collided} = 1;
-}
-
-
-sub isCollisionInterface {
-    my ($self, $ownerLayer, $collidableInterfaceCompositeInterface) = @_;
-        if ($self->{collisionHelper}->isCollidable($collidableInterfaceCompositeInterface)) {
-            my $layerInterface = $collidableInterfaceCompositeInterface;
-            if ($ownerLayer->getGroupInterface()->[0] != $layerInterface->getGroupInterface()->[0]) {
-                if ($self->{layerCollisionUtil}->isCollision($ownerLayer, $layerInterface)) {
-                    return 1;
+    method isCollisionInterface {ownerLayer collidableInterfaceCompositeInterface} {
+        if {[[my jget collisionHelper] isCollidable $collidableInterfaceCompositeInterface]} {
+            set layerInterface $collidableInterfaceCompositeInterface
+            if {[expr {[[$ownerLayer getGroupInterface] get 0] != [[$layerInterface getGroupInterface] get 0]}]} {
+                if {[[my jget layerCollisionUtil] isCollision $ownerLayer $layerInterface]} {
+                    return true
                 }
             }
         }
-        return 0;
+        return false
+    }
+    
+
+    method collideInterface {ownerLayer collidableInterfaceCompositeInterface} {
+        [my jget damageUtil] process $ownerLayer $collidableInterfaceCompositeInterface
+        my jset collided true
+    }
+    
+
+    method getCollisionTypeWith {layerInterface} {
+        return [[::CollisionTypeFactory::getInstance] jget COLLISION]
+    }
+    
+
+    method isCollided {} {
+        return [my jget collided]
+    }
+    
+
+    method setCollided {collided} {
+        my jset collided $collided
+    }
 }
 
-
-# throws Exception
-sub collideInterface {
-    my ($self, $ownerLayer, $collidableInterfaceCompositeInterface) = @_;
-        $self->{damageUtil}->process($ownerLayer, $collidableInterfaceCompositeInterface);
-        $self->{collided} = 1;
+namespace eval ::CollidableDamageWeaponBehavior {
 }
 
-
-sub getCollisionTypeWith {
-    my ($self, $layerInterface) = @_;
-        return 'org::allbinary::game::collision::CollisionTypeFactory'->getInstance()->{COLLISION};
-}
-
-
-sub isCollided {
-    my ($self) = @_;
-        return $self->{collided};
-}
-
-
-sub setCollided {
-    my ($self, $collided) = @_;
-        $self->{collided} = $collided;
-}
-
-use java::lang::Object ();
-use org::allbinary::game::collision::CollidableHelperFactory ();
-use org::allbinary::game::collision::CollidableInterfaceCompositeInterface ();
-use org::allbinary::game::collision::CollisionHelper ();
-use org::allbinary::game::collision::CollisionType ();
-use org::allbinary::game::collision::CollisionTypeFactory ();
-use org::allbinary::game::combat::damage::DamageableInterface ();
-use org::allbinary::game::layer::CollidableCompositeLayer ();
-use org::allbinary::game::layer::special::CollidableDestroyableDamageableBehavior ();
-use org::allbinary::layer::AllBinaryLayer ();
-
-1;
 

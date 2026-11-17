@@ -11,42 +11,58 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game
 
-package org::allbinary::game::GameInfoData;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::GameInfoData'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{GAME_TYPE} = "GAME_TYPE";
-    $self->{GAME_MODE} = "GAME_MODE";
-    $self->{PLAYER_TYPE} = "PLAYER_TYPE";
-    $self->{HIGHEST_LEVEL} = "HIGHEST_LEVEL";
-    $self->{CURRENT_LEVEL} = "CURRENT_LEVEL";
-    $self->{SOFTWARE_INFORMATION} = "SOFTWARE_INFORMATION";
+oo::class create ::GameInfoData {
+    superclass ::JObject
 }
 
+oo::define ::GameInfoData {
+    method initFields_GameInfoData {} {
+        my jset GAME_TYPE {}
+        my jset GAME_MODE {}
+        my jset PLAYER_TYPE {}
+        my jset HIGHEST_LEVEL {}
+        my jset CURRENT_LEVEL {}
+        my jset SOFTWARE_INFORMATION {}
+        my jset GAME_TYPE "GAME_TYPE"
+        my jset GAME_MODE "GAME_MODE"
+        my jset PLAYER_TYPE "PLAYER_TYPE"
+        my jset HIGHEST_LEVEL "HIGHEST_LEVEL"
+        my jset CURRENT_LEVEL "CURRENT_LEVEL"
+        my jset SOFTWARE_INFORMATION "SOFTWARE_INFORMATION"
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::GameInfoData::instance;
+    constructor {} {
+        next
+        my initFields_GameInfoData
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+namespace eval ::GameInfoData {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameInfoData new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameInfoData::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

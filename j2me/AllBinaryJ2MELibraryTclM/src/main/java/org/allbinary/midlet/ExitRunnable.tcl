@@ -11,60 +11,57 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.midlet
 
-package org::allbinary::midlet::ExitRunnable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{midlet} = undef;
-    $self->{processor} = undef;
-    $self->{isProgress} = undef;
+oo::class create ::ExitRunnable {
+    superclass ::JObject
 }
 
+oo::define ::ExitRunnable {
+    method initFields_ExitRunnable {} {
+        my jset logUtil {}
+        my jset commonStrings {}
+        my jset midlet {}
+        my jset processor {}
+        my jset isProgress false
+        my jset logUtil [::LogUtil::getInstance]
+        my jset commonStrings [::CommonStrings::getInstance]
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $midlet, $processor, $isProgress) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{midlet} = $midlet;
-        $self->{isProgress} = $isProgress;
-        $self->{processor} = $processor;
-    return $self;
-}
+    constructor {midlet processor isProgress} {
+        next
+        my initFields_ExitRunnable
+        my jset midlet $midlet
+        my jset isProgress $isProgress
+        my jset processor $processor
+    }
+    
 
-
-sub run {
-    my ($self) = @_;
+    method run {} {
         try {
-            $self->{logUtil}->putF($self->{commonStrings}->{START_RUNNABLE}, $self, $self->{commonStrings}->{RUN});
-            $self->{midlet}->destroyAppInRunnable(0, $self->{isProgress});
-            $self->{midlet}->setDisplay($javax::microedition::lcdui::NullCanvas::NULL_CANVAS);
-            $self->{midlet}->notifyDestroyed();
-            $self->{logUtil}->putF($self->{commonStrings}->{END_RUNNABLE}, $self, $self->{commonStrings}->{RUN});
-            $self->{processor}->process();
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{RUN}, $e);
+            [my jget logUtil] putF [[my jget commonStrings] jget START_RUNNABLE] [self] [[my jget commonStrings] jget RUN]
+            [my jget midlet] destroyAppInRunnable false [my jget isProgress]
+            [my jget midlet] setDisplay [::NullCanvas::staticGet_NULL_CANVAS]
+            [my jget midlet] notifyDestroyed
+            [my jget logUtil] putF [[my jget commonStrings] jget END_RUNNABLE] [self] [[my jget commonStrings] jget RUN]
+            [my jget processor] process
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget RUN] $e
             try {
-                $self->{processor}->process();
-            } catch ($e2) {
-                $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{RUN}, $e);
+                [my jget processor] process
+            } on error {e2} {
+                [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget RUN] $e
             }
         }
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::NullCanvas ();
-use org::allbinary::canvas::Processor ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::string::CommonStrings ();
+namespace eval ::ExitRunnable {
+}
 
-1;
 

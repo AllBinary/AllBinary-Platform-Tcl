@@ -11,153 +11,111 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-package org::allbinary::game::layer::AllBinaryGameLayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::layer::AllBinaryLayer','org::allbinary::view::event::ViewPositionEventListenerInterface','org::allbinary::image::opengles::OpenGLSurfaceChangedInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{commonStrings} = 'org::allbinary::string::CommonStrings'->getInstance();
-    $self->{basicSetColorUtil} = 'org::allbinary::graphics::color::BasicColorSetUtil'->getInstance();
-    $self->{RED} = 'org::allbinary::graphics::color::BasicColorFactory'->getInstance()->{RED};
-    $self->{paintable} = __PACKAGE__->createPaintable();
-    $self->{gameKeyEventList} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::AllBinaryGameLayer {
+    superclass ::AllBinaryLayer
 }
 
+oo::define ::AllBinaryGameLayer {
+    method initFields_AllBinaryGameLayer {} {
+        my jset commonStrings {}
+        my jset basicSetColorUtil {}
+        my jset RED {}
+        my jset paintable {}
+        my jset gameKeyEventList {}
+        my jset commonStrings [::CommonStrings::getInstance]
+        my jset basicSetColorUtil [::BasicColorSetUtil::getInstance]
+        my jset RED [[::BasicColorFactory::getInstance] jget RED]
+        my jset paintable [::AllBinaryGameLayer::createPaintable]
+        my jset gameKeyEventList [::BasicArrayListD new]
+        return
+    }
+    
+    
 
-sub createPaintable {
-    my ($class) = @_;
-        if ($org::allbinary::game::layer::SWTUtil::isSWT) {
-            return 'org::allbinary::game::layer::SWTBlackPaintable'->new();
-        }
-        return 'org::allbinary::graphics::paint::NullPaintable'->getInstance();
-}
+    constructor {name layerInfo viewPosition} {
+        next $name $layerInfo $viewPosition
+        my initFields_AllBinaryGameLayer
+    }
+    
 
+    method set {gl} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
 
-sub new {
-    my ($class, $name, $layerInfo, $viewPosition) = @_;
-    my $self = $class->SUPER::new($name, $layerInfo, $viewPosition);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
-}
+    method move {} {
+    }
+    
 
+    method getGameKeyEventList {} {
+        return [my jget gameKeyEventList]
+    }
+    
 
-# throws Exception
-sub set {
-    my ($self, $gl) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
+    method processInput {allBinaryLayerManager} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
 
+    method processTick {allBinaryLayerManager} {
+        error [jexception Exception [[my jget commonStrings] jget NOT_IMPLEMENTED]]
+    }
+    
 
-sub move {
-    my ($self) = @_;
-}
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
 
+    method onViewPositionChangeEvent {} {
+        my onChangeEvent [my jget viewPositionEvent]
+    }
+    
 
-sub getGameKeyEventList {
-    my ($self) = @_;
-        return $self->{gameKeyEventList};
-}
-
-
-# throws Exception
-sub processInput {
-    my ($self, $allBinaryLayerManager) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
-
-
-# throws Exception
-sub processTick {
-    my ($self, $allBinaryLayerManager) = @_;
-        die ($self->{commonStrings}->{NOT_IMPLEMENTED});
-}
-
-
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
-}
-
-
-# throws Exception
-sub onViewPositionChangeEvent {
-    my ($self) = @_;
-        $self->onChangeEvent($self->{viewPositionEvent});
-}
-
-
-# throws Exception
-sub onChangeEvent {
-    my ($self, $layerManagerEvent) = @_;
-        if ('org::allbinary::game::layer::GameLayerUtil'->isOnScreen($self)) {
-            $self->setVisible(1);
+    method onChangeEvent {layerManagerEvent} {
+        if {[::GameLayerUtil::isOnScreen [self]]} {
+            my setVisible true
         } else {
-            $self->setVisible(0);
+            my setVisible false
         }
+    }
+    
+
+    method paintFirst {graphics} {
+        [my jget paintable] paint $graphics
+    }
+    
+
+    method paintDebug {graphics} {
+        set viewPosition [my getViewPosition]
+        set viewX [$viewPosition getX]
+        set viewY [$viewPosition getY]
+        [my jget basicSetColorUtil] setBasicColorP $graphics [my jget RED]
+        $graphics drawRect $viewX $viewY [my getWidth] [my getHeight]
+    }
+    
+
+    method setWidth {width} {
+        next $width
+        my setHalfWidth [expr {$width >> 1}]
+    }
+    
+
+    method setHeight {height} {
+        next $height
+        my setHalfHeight [expr {$height >> 1}]
+    }
 }
 
-
-sub paintFirst {
-    my ($self, $graphics) = @_;
-        $self->{paintable}->paint($graphics);
+namespace eval ::AllBinaryGameLayer {
+    proc createPaintable {} {
+        if {[::SWTUtil::staticGet_isSWT]} {
+            return [::SWTBlackPaintable new]
+        }
+        return [::NullPaintable::getInstance]
+    }
 }
 
-
-sub paintDebug {
-    my ($self, $graphics) = @_;
-        my $viewPosition = $self->getViewPosition();
-        my $viewX = $viewPosition->getX();
-        my $viewY = $viewPosition->getY();
-        $self->{basicSetColorUtil}->setBasicColorP($graphics, $self->{RED});
-        $graphics->drawRect($viewX, $viewY, $self->getWidth(), $self->getHeight());
-}
-
-
-sub setWidth {
-    my ($self, $width) = @_;
-        $self->SUPER::setLayerWidth($width);
-        $self->setHalfWidth(POSIX::floor(($width) / (2 ** (1))));
-}
-
-
-sub setHeight {
-    my ($self, $height) = @_;
-        $self->SUPER::setLayerHeight($height);
-        $self->setHalfHeight(POSIX::floor(($height) / (2 ** (1))));
-}
-
-use java::lang::Object ();
-use javax::microedition::khronos::opengles::GL ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::color::BasicColorFactory ();
-use org::allbinary::graphics::color::BasicColorSetUtil ();
-use org::allbinary::graphics::paint::NullPaintable ();
-use org::allbinary::graphics::paint::Paintable ();
-use org::allbinary::image::opengles::OpenGLSurfaceChangedInterface ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::view::ViewPositionBase ();
-use org::allbinary::view::event::ViewPositionEvent ();
-use org::allbinary::view::event::ViewPositionEventListenerInterface ();
-use org::allbinary::game::layer::SWTUtil ();
-use org::allbinary::game::layer::SWTBlackPaintable ();
-use org::allbinary::game::layer::GameLayerUtil ();
-
-1;
 

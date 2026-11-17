@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::VectorExplosionType;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::VectorExplosionType {
+    superclass ::JObject
 }
 
-use java::lang::Object ();
+oo::define ::VectorExplosionType {
+    method initFields_VectorExplosionType {} {
+        return
+    }
 
-1;
+    constructor {} {
+        next
+        my initFields_VectorExplosionType
+    }
+}
+
+namespace eval ::VectorExplosionType {
+}
+
 

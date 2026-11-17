@@ -11,30 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.physics.friction
 
-package org::allbinary::game::physics::friction::FrictionData;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-our $FRICTION_DENOMINATOR = 100;
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::FrictionData {
+    superclass ::JObject
 }
 
+oo::define ::FrictionData {
+    method initFields_FrictionData {} {
+        return
+    }
+    
 
-sub getFrictionDenominator {
-    my ($class) = @_;
-        return $org::allbinary::game::physics::friction::FrictionData::FRICTION_DENOMINATOR;
+    constructor {} {
+        next
+        my initFields_FrictionData
+    }
+    
 }
 
-use java::lang::Object ();
+namespace eval ::FrictionData {
+    variable FRICTION_DENOMINATORValue {}
+    variable FRICTION_DENOMINATORSet 0
+    proc staticGet_FRICTION_DENOMINATOR {} {
+        variable FRICTION_DENOMINATORValue
+        variable FRICTION_DENOMINATORSet
+        if {!$FRICTION_DENOMINATORSet} {
+            set FRICTION_DENOMINATORSet 1
+            set FRICTION_DENOMINATORValue 100
+        }
+        return $FRICTION_DENOMINATORValue
+    }
+    proc staticSet_FRICTION_DENOMINATOR {value} {
+        variable FRICTION_DENOMINATORValue
+        variable FRICTION_DENOMINATORSet
+        set FRICTION_DENOMINATORSet 1
+        set FRICTION_DENOMINATORValue $value
+    }
+    proc getFrictionDenominator {} {
+        return [::FrictionData::staticGet_FRICTION_DENOMINATOR]
+    }
+}
 
-1;
 

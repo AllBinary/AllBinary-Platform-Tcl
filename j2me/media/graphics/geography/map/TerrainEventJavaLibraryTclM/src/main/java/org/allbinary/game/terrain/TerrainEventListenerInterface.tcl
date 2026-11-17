@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.terrain
 
-# Java interface
-package org::allbinary::game::terrain::TerrainEventListenerInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-# throws Exception
-sub onTerrainEvent {
-    my ($self, $trackingEvent) = @_;
-    die "abstract method onTerrainEvent";
+oo::class create ::TerrainEventListenerInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+oo::define ::TerrainEventListenerInterface {
+    method initFields_TerrainEventListenerInterface {} {
+        return
+    }
+    
 
-1;
+    method onTerrainEvent {trackingEvent} {
+        error [jexception AbstractMethodError onTerrainEvent]
+    }
+}
+
+namespace eval ::TerrainEventListenerInterface {
+}
+
 

@@ -11,51 +11,41 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.renderer
 
-package org::allbinary::graphics::opengles::renderer::AllBinaryRendererBase3;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{list} = 'org::allbinary::util::BasicArrayListD'->new();
+oo::class create ::AllBinaryRendererBase3 {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::AllBinaryRendererBase3 {
+    method initFields_AllBinaryRendererBase3 {} {
+        my jset list {}
+        my jset list [::BasicArrayListD new]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_AllBinaryRendererBase3
+    }
+    
 
-# throws Exception
-sub update {
-    my ($self, $gl) = @_;
-        while ($self->{list}->size() > 0) {
-            my $openGLESImage = $self->{list}->removeAt(0);
-            if (defined($openGLESImage)) {
-                $openGLESImage->set($gl);
+    method update {gl} {
+        while {[expr {[[my jget list] size] > 0}]} {
+            set openGLESImage [[my jget list] removeAt 0]
+            if {[expr {$openGLESImage ne {}}]} {
+                $openGLESImage set $gl
             }
         }
+    }
+    
+
+    method add {image} {
+        [my jget list] add $image
+    }
 }
 
-
-sub add {
-    my ($self, $image) = @_;
-        $self->{list}->add($image);
+namespace eval ::AllBinaryRendererBase3 {
 }
 
-use java::lang::Object ();
-use javax::microedition::khronos::opengles::GL10 ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::image::opengles::OpenGLESImage ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-
-1;
 

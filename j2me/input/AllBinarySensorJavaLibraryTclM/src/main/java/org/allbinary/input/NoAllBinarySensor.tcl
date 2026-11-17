@@ -11,32 +11,46 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input
 
-package org::allbinary::input::NoAllBinarySensor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::AllBinarySensor';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::input::NoAllBinarySensor'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::input::NoAllBinarySensor::instance;
+oo::class create ::NoAllBinarySensor {
+    superclass ::AllBinarySensor
 }
 
+oo::define ::NoAllBinarySensor {
+    method initFields_NoAllBinarySensor {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+    constructor {} {
+        next
+        my initFields_NoAllBinarySensor
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::input::AllBinarySensor ();
+namespace eval ::NoAllBinarySensor {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::NoAllBinarySensor new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::NoAllBinarySensor::staticGet_instance]
+    }
+}
 
-1;
 

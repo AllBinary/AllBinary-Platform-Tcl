@@ -11,43 +11,54 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::NoScoreable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::score::Scoreable';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::score::NoScoreable'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::score::NoScoreable::SINGLETON;
+oo::class create ::NoScoreable {
+    superclass ::Scoreable
 }
 
+oo::define ::NoScoreable {
+    method initFields_NoScoreable {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new(0);
-        # super(...) made $self above
-    return $self;
+    constructor {} {
+        next 0
+        my initFields_NoScoreable
+    }
+    
+
+    method addPoints {points} {
+    }
+    
+
+    method removePoints {points} {
+    }
 }
 
-
-sub addPoints {
-    my ($self, $points) = @_;
+namespace eval ::NoScoreable {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::NoScoreable new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::NoScoreable::staticGet_SINGLETON]
+    }
 }
 
-
-sub removePoints {
-    my ($self, $points) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::score::Scoreable ();
-
-1;
 

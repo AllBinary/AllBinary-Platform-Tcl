@@ -11,83 +11,72 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai
 
-package org::allbinary::game::ag::ai::ReverseVelocityBoundsVisitor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::bounds::BoundsVisitorInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{velocityInterface} = undef;
-    $self->{layerInterface} = undef;
+oo::class create ::ReverseVelocityBoundsVisitor {
+    superclass ::JObject
 }
 
+oo::define ::ReverseVelocityBoundsVisitor {
+    method initFields_ReverseVelocityBoundsVisitor {} {
+        my jset logUtil {}
+        my jset velocityInterface {}
+        my jset layerInterface {}
+        my jset logUtil [::LogUtil::getInstance]
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $layerInterface) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{layerInterface} = $layerInterface;
-        my $velocityInterfaceCompositeInterface = $layerInterface;
-        $self->{velocityInterface} = $velocityInterfaceCompositeInterface->getVelocityProperties();
-    return $self;
-}
+    constructor {layerInterface} {
+        next
+        my initFields_ReverseVelocityBoundsVisitor
+        my jset layerInterface $layerInterface
+        set velocityInterfaceCompositeInterface $layerInterface
+        my jset velocityInterface [$velocityInterfaceCompositeInterface getVelocityProperties]
+    }
+    
 
+    method getX {} {
+        return [[my jget layerInterface] getXP]
+    }
+    
 
-sub getX {
-    my ($self) = @_;
-        return $self->{layerInterface}->getXP();
-}
+    method getY {} {
+        return [[my jget layerInterface] getYP]
+    }
+    
 
-
-sub getY {
-    my ($self) = @_;
-        return $self->{layerInterface}->getYP();
-}
-
-
-sub minX {
-    my ($self) = @_;
-        if ($self->{velocityInterface}->getVelocityXBasicDecimalP()->getUnscaled() < 0) {
-            $self->{velocityInterface}->getVelocityXBasicDecimalP()->multiplyint(-1);
+    method minX {} {
+        if {[expr {[[[my jget velocityInterface] getVelocityXBasicDecimalP] getUnscaled] < 0}]} {
+            [[my jget velocityInterface] getVelocityXBasicDecimalP] multiplyint [expr {-1}]
         }
-}
+    }
+    
 
-
-sub maxX {
-    my ($self) = @_;
-        if ($self->{velocityInterface}->getVelocityXBasicDecimalP()->getUnscaled() > 0) {
-            $self->{velocityInterface}->getVelocityXBasicDecimalP()->multiplyint(-1);
+    method maxX {} {
+        if {[expr {[[[my jget velocityInterface] getVelocityXBasicDecimalP] getUnscaled] > 0}]} {
+            [[my jget velocityInterface] getVelocityXBasicDecimalP] multiplyint [expr {-1}]
         }
-}
+    }
+    
 
-
-sub minY {
-    my ($self) = @_;
-        if ($self->{velocityInterface}->getVelocityYBasicDecimalP()->getUnscaled() < 0) {
-            $self->{velocityInterface}->getVelocityYBasicDecimalP()->multiplyint(-1);
+    method minY {} {
+        if {[expr {[[[my jget velocityInterface] getVelocityYBasicDecimalP] getUnscaled] < 0}]} {
+            [[my jget velocityInterface] getVelocityYBasicDecimalP] multiplyint [expr {-1}]
         }
-}
+    }
+    
 
-
-sub maxY {
-    my ($self) = @_;
-        if ($self->{velocityInterface}->getVelocityYBasicDecimalP()->getUnscaled() > 0) {
-            $self->{velocityInterface}->getVelocityYBasicDecimalP()->multiplyint(-1);
+    method maxY {} {
+        if {[expr {[[[my jget velocityInterface] getVelocityYBasicDecimalP] getUnscaled] > 0}]} {
+            [[my jget velocityInterface] getVelocityYBasicDecimalP] multiplyint [expr {-1}]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::bounds::BoundsVisitorInterface ();
-use org::allbinary::game::physics::velocity::VelocityInterface ();
-use org::allbinary::game::physics::velocity::VelocityInterfaceCompositeInterface ();
-use org::allbinary::layer::LayerInterface ();
-use org::allbinary::logic::communication::log::LogUtil ();
+namespace eval ::ReverseVelocityBoundsVisitor {
+}
 
-1;
 

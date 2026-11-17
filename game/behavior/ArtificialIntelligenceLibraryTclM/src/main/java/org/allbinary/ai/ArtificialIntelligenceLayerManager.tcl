@@ -11,26 +11,25 @@
 # Created By: Travis Berthelot
 # 
 # Generated Code Do Not Modify
+# package org.allbinary.ai
 
-package org::allbinary::ai::ArtificialIntelligenceLayerManager;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::LayerManager';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new('org::allbinary::layer::LayerManagerNoDebug'->getInstance());
-        # super(...) made $self above
-    return $self;
+oo::class create ::ArtificialIntelligenceLayerManager {
+    superclass ::LayerManager
 }
 
-use java::lang::Object ();
-use org::allbinary::layer::LayerManager ();
-use org::allbinary::layer::LayerManagerNoDebug ();
+oo::define ::ArtificialIntelligenceLayerManager {
+    method initFields_ArtificialIntelligenceLayerManager {} {
+        return
+    }
+    
 
-1;
+    constructor {} {
+        next [::LayerManagerNoDebug::getInstance]
+        my initFields_ArtificialIntelligenceLayerManager
+    }
+}
+
+namespace eval ::ArtificialIntelligenceLayerManager {
+}
+
 

@@ -11,57 +11,47 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-package org::allbinary::animation::BaseAnimationInterfaceFactoryInterfaceComposite;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::animation::AnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{basicAnimationInterfaceFactoryInterfaceArray} = undef;
+oo::class create ::BaseAnimationInterfaceFactoryInterfaceComposite {
+    superclass ::JObject
 }
 
+oo::define ::BaseAnimationInterfaceFactoryInterfaceComposite {
+    method initFields_BaseAnimationInterfaceFactoryInterfaceComposite {} {
+        my jset basicAnimationInterfaceFactoryInterfaceArray {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $basicAnimationInterfaceFactoryInterfaceArray) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{basicAnimationInterfaceFactoryInterfaceArray} = $basicAnimationInterfaceFactoryInterfaceArray;
-    return $self;
+    constructor {basicAnimationInterfaceFactoryInterfaceArray} {
+        next
+        my initFields_BaseAnimationInterfaceFactoryInterfaceComposite
+        my jset basicAnimationInterfaceFactoryInterfaceArray $basicAnimationInterfaceFactoryInterfaceArray
+    }
+    
+
+    method getInstance {instanceId} {
+        return [[::NullAnimationFactory::getFactoryInstance] getInstance 0]
+    }
+    
+
+    method getBasicAnimationInterfaceFactoryInterfaceArray {} {
+        return [my jget basicAnimationInterfaceFactoryInterfaceArray]
+    }
+    
+
+    method setBasicAnimationInterfaceFactoryInterfaceArray {basicAnimationInterfaceFactoryInterfaceArray} {
+        my jset basicAnimationInterfaceFactoryInterfaceArray $basicAnimationInterfaceFactoryInterfaceArray
+    }
+    
+
+    method setInitialScale {scaleProperties} {
+    }
 }
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        return 'org::allbinary::animation::NullAnimationFactory'->getFactoryInstance()->getInstance(0);
+namespace eval ::BaseAnimationInterfaceFactoryInterfaceComposite {
 }
 
-
-sub getBasicAnimationInterfaceFactoryInterfaceArray {
-    my ($self) = @_;
-        return $self->{basicAnimationInterfaceFactoryInterfaceArray};
-}
-
-
-sub setBasicAnimationInterfaceFactoryInterfaceArray {
-    my ($self, $basicAnimationInterfaceFactoryInterfaceArray) = @_;
-        $self->{basicAnimationInterfaceFactoryInterfaceArray} = $basicAnimationInterfaceFactoryInterfaceArray;
-}
-
-
-sub setInitialScale {
-    my ($self, $scaleProperties) = @_;
-}
-
-use java::lang::Object ();
-use org::allbinary::media::ScaleProperties ();
-use org::allbinary::animation::AnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::NullAnimationFactory ();
-
-1;
 

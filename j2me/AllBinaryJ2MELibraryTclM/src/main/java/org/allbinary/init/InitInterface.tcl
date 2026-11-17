@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.init
 
-# Java interface
-package org::allbinary::init::InitInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub init {
-    my ($self) = @_;
-    die "abstract method init";
+oo::class create ::InitInterface {
+    superclass ::JObject
 }
 
+oo::define ::InitInterface {
+    method initFields_InitInterface {} {
+        return
+    }
+    
 
-1;
+    method init {} {
+        error [jexception AbstractMethodError init]
+    }
+}
+
+namespace eval ::InitInterface {
+}
+
 

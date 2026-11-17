@@ -11,40 +11,55 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.opengles.renderer
 
-package org::allbinary::graphics::opengles::renderer::RendererStrings;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::opengles::renderer::RendererStrings'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{ON_SURFACE_CREATED} = "onSurfaceCreated";
-    $self->{ON_SURFACE_CHANGED} = "onSurfaceChanged";
-    $self->{ON_DRAW_FRAME} = "onDrawFrame";
-    $self->{ON_DRAW_FRAME_THREED} = "onDrawFrameThreed";
-    $self->{ON_DRAW_FRAME_2D} = "onDrawFrame2d";
+oo::class create ::RendererStrings {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::RendererStrings {
+    method initFields_RendererStrings {} {
+        my jset ON_SURFACE_CREATED {}
+        my jset ON_SURFACE_CHANGED {}
+        my jset ON_DRAW_FRAME {}
+        my jset ON_DRAW_FRAME_THREED {}
+        my jset ON_DRAW_FRAME_2D {}
+        my jset ON_SURFACE_CREATED "onSurfaceCreated"
+        my jset ON_SURFACE_CHANGED "onSurfaceChanged"
+        my jset ON_DRAW_FRAME "onDrawFrame"
+        my jset ON_DRAW_FRAME_THREED "onDrawFrameThreed"
+        my jset ON_DRAW_FRAME_2D "onDrawFrame2d"
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_RendererStrings
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::graphics::opengles::renderer::RendererStrings::instance;
+namespace eval ::RendererStrings {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::RendererStrings new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::RendererStrings::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

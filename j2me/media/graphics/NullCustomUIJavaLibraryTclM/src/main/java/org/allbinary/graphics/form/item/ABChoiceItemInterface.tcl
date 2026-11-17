@@ -1,13 +1,17 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
-# Java interface
-package org::allbinary::graphics::form::item::ABChoiceItemInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
+oo::class create ::ABChoiceItemInterface {
+    superclass ::JObject
+}
 
+oo::define ::ABChoiceItemInterface {
+    method initFields_ABChoiceItemInterface {} {
+        return
+    }
+}
 
+namespace eval ::ABChoiceItemInterface {
+}
 
-1;
 

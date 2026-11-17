@@ -1,22 +1,23 @@
 # Generated Code Do Not Modify
+# package org.apache.xmlrpc
 
-package org::apache::xmlrpc::XmlRpcException;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-
-sub new {
-    my ($class, $code, $message) = @_;
-    my $self = $class->SUPER::new($message);
-        # super(...) made $self above
-    return $self;
+oo::class create ::XmlRpcException {
+    superclass ::Exception
 }
 
-use java::lang::Object ();
+oo::define ::XmlRpcException {
+    method initFields_XmlRpcException {} {
+        return
+    }
+    
 
-1;
+    constructor {code message} {
+        next $message
+        my initFields_XmlRpcException
+    }
+}
+
+namespace eval ::XmlRpcException {
+}
+
 

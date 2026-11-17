@@ -11,49 +11,39 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
-package org::allbinary::input::motion::gesture::observer::MotionEventCircularPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{MIN} = 'org::allbinary::input::motion::gesture::TouchMotionGestureFactory'->getInstance()->{LAST_MOTION}->getId();
-    $self->{eventPool} = 'org::allbinary::logic::util::event::AllBinaryEventCircularPool'->new(('org::allbinary::game::input::InputFactory'->getInstance()->{MAX} - 1) - $self->{MIN});
+oo::class create ::MotionEventCircularPool {
+    superclass ::JObject
 }
 
+oo::define ::MotionEventCircularPool {
+    method initFields_MotionEventCircularPool {} {
+        my jset MIN 0
+        my jset eventPool {}
+        my jset MIN [[[::TouchMotionGestureFactory::getInstance] jget LAST_MOTION] getId]
+        my jset eventPool [::AllBinaryEventCircularPool new [expr {([expr {[[::InputFactory::getInstance] jget MAX] - 1}]) - [my jget MIN]}]]
+        return
+    }
+    
+    
 
-sub createPool {
-    my ($class, $id) = @_;
-        return 'org::allbinary::input::motion::gesture::observer::MotionEventCircularPool'->new($id);
+    constructor {id} {
+        next
+        my initFields_MotionEventCircularPool
+        [my jget eventPool] initAllBinaryEventCircularPool [::MotionEventFactory new [my jget eventPool] $id]
+    }
+    
+
+    method getInstance {motionGestureInput} {
+        return [[my jget eventPool] getInstance [expr {[$motionGestureInput getId] - [my jget MIN]}]]
+    }
 }
 
-
-sub new {
-    my ($class, $id) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{eventPool}->initAllBinaryEventCircularPool('org::allbinary::input::motion::gesture::observer::MotionEventFactory'->new($self->{eventPool}, $id));
-    return $self;
+namespace eval ::MotionEventCircularPool {
+    proc createPool {id} {
+        return [::MotionEventCircularPool new $id]
+    }
 }
 
-
-# throws Exception
-sub getInstance {
-    my ($self, $motionGestureInput) = @_;
-        return $self->{eventPool}->getInstance($motionGestureInput->getId() - $self->{MIN});
-}
-
-use java::lang::Object ();
-use org::allbinary::game::input::InputFactory ();
-use org::allbinary::input::motion::gesture::MotionGestureInput ();
-use org::allbinary::input::motion::gesture::TouchMotionGestureFactory ();
-use org::allbinary::logic::util::event::AllBinaryEventCircularPool ();
-use org::allbinary::input::motion::gesture::observer::MotionEventFactory ();
-
-1;
 

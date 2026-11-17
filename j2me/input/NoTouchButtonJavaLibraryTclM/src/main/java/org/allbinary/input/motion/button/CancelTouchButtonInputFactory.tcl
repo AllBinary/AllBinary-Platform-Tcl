@@ -11,57 +11,64 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::CancelTouchButtonInputFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{cancelInputArray} = [(undef) x ('org::allbinary::game::input::InputFactory'->getInstance()->{MAX})];
+oo::class create ::CancelTouchButtonInputFactory {
+    superclass ::JObject
 }
 
+oo::define ::CancelTouchButtonInputFactory {
+    method initFields_CancelTouchButtonInputFactory {} {
+        my jset cancelInputArray {}
+        my jset cancelInputArray [jarray [[::InputFactory::getInstance] jget MAX] {}]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::input::motion::button::CancelTouchButtonInputFactory::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::input::motion::button::CancelTouchButtonInputFactory::instance = 'org::allbinary::input::motion::button::CancelTouchButtonInputFactory'->new();
+    constructor {} {
+        next
+        my initFields_CancelTouchButtonInputFactory
+        set basicTouchInputFactory [::BasicTouchInputFactory::getInstance]
+        for {set index [jint [expr {[[my jget cancelInputArray] length] - 1}]]} {[expr {$index >= 0}]} {jpostincr index -1} {
+            [my jget cancelInputArray] set $index [$basicTouchInputFactory jget NONE]
         }
-        return $org::allbinary::input::motion::button::CancelTouchButtonInputFactory::instance;
+        [my jget cancelInputArray] set [[$basicTouchInputFactory jget UP] getId] [$basicTouchInputFactory jget DOWN]
+        [my jget cancelInputArray] set [[$basicTouchInputFactory jget DOWN] getId] [$basicTouchInputFactory jget UP]
+        [my jget cancelInputArray] set [[$basicTouchInputFactory jget LEFT] getId] [$basicTouchInputFactory jget RIGHT]
+        [my jget cancelInputArray] set [[$basicTouchInputFactory jget RIGHT] getId] [$basicTouchInputFactory jget LEFT]
+    }
+    
+
+    method getCancel {touchButtonInput} {
+        return [[my jget cancelInputArray] get [$touchButtonInput getId]]
+    }
 }
 
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        my $basicTouchInputFactory = 'org::allbinary::input::motion::button::BasicTouchInputFactory'->getInstance();
-        for (my $index = scalar(@{$self->{cancelInputArray}}) - 1; $index >= 0; $index--) {
-            $self->{cancelInputArray}->[$index] = $basicTouchInputFactory->{NONE};
+namespace eval ::CancelTouchButtonInputFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        $self->{cancelInputArray}->[$basicTouchInputFactory->{UP}->getId()] = $basicTouchInputFactory->{DOWN};
-        $self->{cancelInputArray}->[$basicTouchInputFactory->{DOWN}->getId()] = $basicTouchInputFactory->{UP};
-        $self->{cancelInputArray}->[$basicTouchInputFactory->{LEFT}->getId()] = $basicTouchInputFactory->{RIGHT};
-        $self->{cancelInputArray}->[$basicTouchInputFactory->{RIGHT}->getId()] = $basicTouchInputFactory->{LEFT};
-    return $self;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::CancelTouchButtonInputFactory::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::CancelTouchButtonInputFactory::staticSet_instance [::CancelTouchButtonInputFactory new]
+        }
+        return [::CancelTouchButtonInputFactory::staticGet_instance]
+    }
 }
 
-
-sub getCancel {
-    my ($self, $touchButtonInput) = @_;
-        return $self->{cancelInputArray}->[$touchButtonInput->getId()];
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::game::input::InputFactory ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::input::motion::button::BasicTouchInputFactory ();
-
-1;
 

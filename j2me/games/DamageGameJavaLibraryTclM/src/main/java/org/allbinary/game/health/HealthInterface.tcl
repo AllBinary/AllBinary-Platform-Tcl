@@ -11,63 +11,59 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.health
 
-# Java interface
-package org::allbinary::game::health::HealthInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub isAlive {
-    my ($self) = @_;
-    die "abstract method isAlive";
+oo::class create ::HealthInterface {
+    superclass ::JObject
 }
 
+oo::define ::HealthInterface {
+    method initFields_HealthInterface {} {
+        return
+    }
+    
 
-sub damage {
-    my ($self, $ahealth) = @_;
-    die "abstract method damage";
+    method isAlive {} {
+        error [jexception AbstractMethodError isAlive]
+    }
+    
+
+    method damage {ahealth} {
+        error [jexception AbstractMethodError damage]
+    }
+    
+
+    method heal {ahealth} {
+        error [jexception AbstractMethodError heal]
+    }
+    
+
+    method healMax {} {
+        error [jexception AbstractMethodError healMax]
+    }
+    
+
+    method getMaxHealth {} {
+        error [jexception AbstractMethodError getMaxHealth]
+    }
+    
+
+    method setMaxHealth {maxHealth} {
+        error [jexception AbstractMethodError setMaxHealth]
+    }
+    
+
+    method getHealth {} {
+        error [jexception AbstractMethodError getHealth]
+    }
+    
+
+    method addListener {healthListenerInterface} {
+        error [jexception AbstractMethodError addListener]
+    }
 }
 
-
-sub heal {
-    my ($self, $ahealth) = @_;
-    die "abstract method heal";
+namespace eval ::HealthInterface {
 }
 
-
-sub healMax {
-    my ($self) = @_;
-    die "abstract method healMax";
-}
-
-
-sub getMaxHealth {
-    my ($self) = @_;
-    die "abstract method getMaxHealth";
-}
-
-
-sub setMaxHealth {
-    my ($self, $maxHealth) = @_;
-    die "abstract method setMaxHealth";
-}
-
-
-sub getHealth {
-    my ($self) = @_;
-    die "abstract method getHealth";
-}
-
-
-sub addListener {
-    my ($self, $healthListenerInterface) = @_;
-    die "abstract method addListener";
-}
-
-
-1;
 

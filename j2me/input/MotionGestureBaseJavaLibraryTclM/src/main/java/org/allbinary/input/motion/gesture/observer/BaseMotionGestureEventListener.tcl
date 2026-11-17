@@ -11,29 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.gesture.observer
 
-# Java interface
-package org::allbinary::input::motion::gesture::observer::BaseMotionGestureEventListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::logic::util::event::EventListenerInterface';
-
-
-
-sub onMotionGestureEvent {
-    my ($self, $motionGestureEvent) = @_;
-    die "abstract method onMotionGestureEvent";
+oo::class create ::BaseMotionGestureEventListener {
+    superclass ::JObject
 }
 
+oo::define ::BaseMotionGestureEventListener {
+    method initFields_BaseMotionGestureEventListener {} {
+        return
+    }
+    
 
-sub onScrolledMotionGestureEvent {
-    my ($self, $motionGestureEvent) = @_;
-    die "abstract method onScrolledMotionGestureEvent";
+    method onMotionGestureEvent {motionGestureEvent} {
+        error [jexception AbstractMethodError onMotionGestureEvent]
+    }
+    
+
+    method onScrolledMotionGestureEvent {motionGestureEvent} {
+        error [jexception AbstractMethodError onScrolledMotionGestureEvent]
+    }
 }
 
-use org::allbinary::logic::util::event::EventListenerInterface ();
+namespace eval ::BaseMotionGestureEventListener {
+}
 
-1;
 

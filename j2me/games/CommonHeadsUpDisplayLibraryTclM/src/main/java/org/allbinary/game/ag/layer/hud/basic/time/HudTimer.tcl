@@ -11,99 +11,94 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.hud.basic.time
 
-package org::allbinary::game::ag::layer::hud::basic::time::HudTimer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{startTime} = -1;
-    $self->{hundredthTime} = 0;
-    $self->{maxTime} = undef;
-    $self->{modifier} = 0;
-    $self->{hundrethsString} = 'org::allbinary::logic::math::PrimitiveLongSingleton'->getInstance()->{ZERO};
-    $self->{totalDigits} = 1;
-    $self->{primitiveLongUtil} = undef;
-    $self->{MAX} = ["L", "O", "L"];
-    $self->{gameTickTimeDelayHelper} = 'org::allbinary::time::GameTickTimeDelayHelperFactory'->getInstance();
+oo::class create ::HudTimer {
+    superclass ::JObject
 }
 
+oo::define ::HudTimer {
+    method initFields_HudTimer {} {
+        my jset startTime 0
+        my jset hundredthTime 0
+        my jset maxTime 0
+        my jset modifier 0
+        my jset hundrethsString {}
+        my jset totalDigits 0
+        my jset primitiveLongUtil {}
+        my jset MAX {}
+        my jset gameTickTimeDelayHelper {}
+        my jset startTime [expr {-1}]
+        my jset hundredthTime 0
+        
+        my jset modifier 0
+        my jset hundrethsString [[::PrimitiveLongSingleton::getInstance] jget ZERO]
+        my jset totalDigits 1
+        
+        my jset MAX [jarrayfrom [list [scan "L" %c] [scan "O" %c] [scan "L" %c]]]
+        my jset gameTickTimeDelayHelper [::GameTickTimeDelayHelperFactory::getInstance]
+        return
+    }
+    
 
-sub new {
-    my ($class, $maxTime) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{primitiveLongUtil} = 'org::allbinary::logic::math::PrimitiveLongUtil'->createPowerOfTen($maxTime);
-        $self->{maxTime} = $maxTime;
-    return $self;
-}
+    constructor {maxTime} {
+        next
+        my initFields_HudTimer
+        my jset primitiveLongUtil [::PrimitiveLongUtil::createPowerOfTen $maxTime]
+        my jset maxTime $maxTime
+    }
+    
 
+    method start {} {
+        my jset hundredthTime 0
+        my jset startTime [[my jget gameTickTimeDelayHelper] jget startTime]
+    }
+    
 
-sub start {
-    my ($self) = @_;
-        $self->{hundredthTime} = 0;
-        $self->{startTime} = $self->{gameTickTimeDelayHelper}->{startTime};
-}
+    method get {} {
+        return [my jget hundredthTime]
+    }
+    
 
-
-sub get {
-    my ($self) = @_;
-        return $self->{hundredthTime};
-}
-
-
-sub update {
-    my ($self) = @_;
-        my $lastLowerTime = $self->{hundredthTime};
-        my $currentTime = (($self->{modifier} + $self->{gameTickTimeDelayHelper}->{startTime}) - $self->{startTime});
-        if ($currentTime < 0) {
-            $currentTime = 0;
+    method update {} {
+        set lastLowerTime [my jget hundredthTime]
+        set currentTime ([expr {([expr {[my jget modifier] + [[my jget gameTickTimeDelayHelper] jget startTime]}]) - [my jget startTime]}])
+        if {[expr {$currentTime < 0}]} {
+            set currentTime 0
         }
-        $self->{hundredthTime} = int($currentTime / 100);
-        if ($self->{hundredthTime} >= $self->{maxTime}) {
-            if ($self->{startTime} > 0) {
-                $self->{hundrethsString} = $self->{MAX};
+        my jset hundredthTime [jdiv $currentTime 100]
+        if {[expr {[my jget hundredthTime] >= [my jget maxTime]}]} {
+            if {[expr {[my jget startTime] > 0}]} {
+                my jset hundrethsString [my jget MAX]
             }
-        } elsif ($lastLowerTime != $self->{hundredthTime}) {
-            $self->{hundrethsString} = $self->{primitiveLongUtil}->getCharArray($self->{hundredthTime});
-            $self->{totalDigits} = $self->{primitiveLongUtil}->getCurrentTotalDigits();
+        } elseif {[expr {$lastLowerTime != [my jget hundredthTime]}]} {
+            my jset hundrethsString [[my jget primitiveLongUtil] getCharArray [jint [my jget hundredthTime]]]
+            my jset totalDigits [[my jget primitiveLongUtil] getCurrentTotalDigits]
         }
+    }
+    
+
+    method reduce {value} {
+        my jset modifier [jlong [expr {[my jget modifier] - $value}]]
+    }
+    
+
+    method add {value} {
+        my jset modifier [jlong [expr {[my jget modifier] + $value}]]
+    }
+    
+
+    method getTimeChars {} {
+        return [my jget hundrethsString]
+    }
+    
+
+    method getCurrentTotalDigits {} {
+        return [my jget totalDigits]
+    }
 }
 
-
-sub reduce {
-    my ($self, $value) = @_;
-        $self->{modifier} -= $value;
+namespace eval ::HudTimer {
 }
 
-
-sub add {
-    my ($self, $value) = @_;
-        $self->{modifier} += $value;
-}
-
-
-sub getTimeChars {
-    my ($self) = @_;
-        return $self->{hundrethsString};
-}
-
-
-sub getCurrentTotalDigits {
-    my ($self) = @_;
-        return $self->{totalDigits};
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::math::PrimitiveLongSingleton ();
-use org::allbinary::logic::math::PrimitiveLongUtil ();
-use org::allbinary::time::GameTickTimeDelayHelper ();
-use org::allbinary::time::GameTickTimeDelayHelperFactory ();
-
-1;
 

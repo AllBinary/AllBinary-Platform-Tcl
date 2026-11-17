@@ -11,90 +11,93 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::PlatformKeyFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT} };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::PlatformKeyFactory {
+    superclass ::JObject
 }
 
+oo::define ::PlatformKeyFactory {
+    method initFields_PlatformKeyFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        if ($org::allbinary::game::input::PlatformKeyFactory::instance == 'org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT}) {
-            $org::allbinary::game::input::PlatformKeyFactory::instance = 'org::allbinary::game::input::PlatformKeyFactory'->new();
+    constructor {} {
+        next
+        my initFields_PlatformKeyFactory
+    }
+    
+    
+
+    method getString {keyCode} {
+        return [::PCGameKey::getString $keyCode]
+    }
+    
+
+    method isSubmission {input} {
+        return [[::PCKeyFactory::getInstance] isSubmission $input]
+    }
+    
+
+    method isDelete {input} {
+        return [[::PCKeyFactory::getInstance] isDelete $input]
+    }
+    
+
+    method isBackSpace {input} {
+        return [[::PCKeyFactory::getInstance] isBackSpace $input]
+    }
+    
+
+    method isUp {input} {
+        return [[::PCKeyFactory::getInstance] isUp $input]
+    }
+    
+
+    method isDown {input} {
+        return [[::PCKeyFactory::getInstance] isDown $input]
+    }
+    
+
+    method isEnter {input} {
+        return [[::PCKeyFactory::getInstance] isEnter $input]
+    }
+    
+
+    method isLeft {input} {
+        return [[::PCKeyFactory::getInstance] isLeft $input]
+    }
+    
+
+    method isRight {input} {
+        return [[::PCKeyFactory::getInstance] isRight $input]
+    }
+}
+
+namespace eval ::PlatformKeyFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [[::NullUtil::getInstance] jget NULL_OBJECT]
         }
-        return $org::allbinary::game::input::PlatformKeyFactory::instance;
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        if {[expr {[::PlatformKeyFactory::staticGet_instance] eq [[::NullUtil::getInstance] jget NULL_OBJECT]}]} {
+            ::PlatformKeyFactory::staticSet_instance [::PlatformKeyFactory new]
+        }
+        return [::PlatformKeyFactory::staticGet_instance]
+    }
 }
 
-
-sub getString {
-    my ($self, $keyCode) = @_;
-        return 'org::allbinary::game::input::PCGameKey'->getString($keyCode);
-}
-
-
-sub isSubmission {
-    my ($self, $input) = @_;
-        return 'org::allbinary::game::input::PCKeyFactory'->getInstance()->isSubmission($input);
-}
-
-
-sub isDelete {
-    my ($self, $input) = @_;
-        return 'org::allbinary::game::input::PCKeyFactory'->getInstance()->isDelete($input);
-}
-
-
-sub isBackSpace {
-    my ($self, $input) = @_;
-        return 'org::allbinary::game::input::PCKeyFactory'->getInstance()->isBackSpace($input);
-}
-
-
-sub isUp {
-    my ($self, $input) = @_;
-        return 'org::allbinary::game::input::PCKeyFactory'->getInstance()->isUp($input);
-}
-
-
-sub isDown {
-    my ($self, $input) = @_;
-        return 'org::allbinary::game::input::PCKeyFactory'->getInstance()->isDown($input);
-}
-
-
-sub isEnter {
-    my ($self, $input) = @_;
-        return 'org::allbinary::game::input::PCKeyFactory'->getInstance()->isEnter($input);
-}
-
-
-sub isLeft {
-    my ($self, $input) = @_;
-        return 'org::allbinary::game::input::PCKeyFactory'->getInstance()->isLeft($input);
-}
-
-
-sub isRight {
-    my ($self, $input) = @_;
-        return 'org::allbinary::game::input::PCKeyFactory'->getInstance()->isRight($input);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::game::input::PCGameKey ();
-use org::allbinary::game::input::PCKeyFactory ();
-
-1;
 

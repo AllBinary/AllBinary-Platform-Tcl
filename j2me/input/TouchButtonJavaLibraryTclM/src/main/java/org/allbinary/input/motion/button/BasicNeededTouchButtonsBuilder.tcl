@@ -11,65 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion.button
 
-package org::allbinary::input::motion::button::BasicNeededTouchButtonsBuilder;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::motion::button::BaseTouchInput';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
+oo::class create ::BasicNeededTouchButtonsBuilder {
+    superclass ::BaseTouchInput
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-    return $self;
-}
+oo::define ::BasicNeededTouchButtonsBuilder {
+    method initFields_BasicNeededTouchButtonsBuilder {} {
+        my jset logUtil {}
+        my jset logUtil [::LogUtil::getInstance]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_BasicNeededTouchButtonsBuilder
+    }
+    
 
-sub getList {
-    my ($self) = @_;
+    method getList {} {
         try {
-            $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{CONSTRUCTOR});
-            my $list = 'org::allbinary::util::BasicArrayListD'->new();
-            my $touchButtonLocationHelper = 'org::allbinary::input::motion::button::TouchButtonLocationHelper'->new();
-            my $basicTouchButtonCellPositionFactory = 'org::allbinary::input::motion::button::BasicTouchButtonCellPositionFactory'->new();
-            my $commonButtons = 'org::allbinary::input::motion::button::CommonButtons'->getInstance();
-            my $animationInterface = 'org::allbinary::animation::NullAnimationFactory'->getFactoryInstance()->getInstance(0);
-            my $UP = 'org::allbinary::input::motion::button::TouchButton'->new('org::allbinary::input::motion::button::BasicTouchInputFactory'->getInstance()->{UP}, $animationInterface, $animationInterface, $commonButtons->{NORMAL_BUTTON}, $basicTouchButtonCellPositionFactory->{SECOND_FROM_BOTTOM_LEFT}, $touchButtonLocationHelper->getColumnsRemainderHalf(), $touchButtonLocationHelper->getRowsRemainderHalf());
-            my $DOWN = 'org::allbinary::input::motion::button::TouchButton'->new('org::allbinary::input::motion::button::BasicTouchInputFactory'->getInstance()->{DOWN}, $animationInterface, $animationInterface, $commonButtons->{NORMAL_BUTTON}, $basicTouchButtonCellPositionFactory->{BOTTOM_LEFT}, $touchButtonLocationHelper->getColumnsRemainderHalf(), $touchButtonLocationHelper->getRowsRemainderHalf());
-            my $LEFT = 'org::allbinary::input::motion::button::TouchButton'->new('org::allbinary::input::motion::button::BasicTouchInputFactory'->getInstance()->{LEFT}, $animationInterface, $animationInterface, $commonButtons->{NORMAL_BUTTON}, $basicTouchButtonCellPositionFactory->{BOTTOM_SECOND_FROM_RIGHT}, $touchButtonLocationHelper->getColumnsRemainderHalf(), $touchButtonLocationHelper->getRowsRemainderHalf());
-            my $RIGHT = 'org::allbinary::input::motion::button::TouchButton'->new('org::allbinary::input::motion::button::BasicTouchInputFactory'->getInstance()->{RIGHT}, $animationInterface, $animationInterface, $commonButtons->{NORMAL_BUTTON}, $basicTouchButtonCellPositionFactory->{BOTTOM_RIGHT}, $touchButtonLocationHelper->getColumnsRemainderHalf(), $touchButtonLocationHelper->getRowsRemainderHalf());
-            $list->add($UP);
-            $list->add($DOWN);
-            $list->add($LEFT);
-            $list->add($RIGHT);
-            return $list;
-        } catch ($e) {
-            $self->{logUtil}->put($self->{commonStrings}->{EXCEPTION}, $self, $self->{commonStrings}->{GET_LIST}, $e);
-            return 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance();
+            [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+            set list [::BasicArrayListD new]
+            set touchButtonLocationHelper [::TouchButtonLocationHelper new]
+            set basicTouchButtonCellPositionFactory [::BasicTouchButtonCellPositionFactory new]
+            set commonButtons [::CommonButtons::getInstance]
+            set animationInterface [[::NullAnimationFactory::getFactoryInstance] getInstance 0]
+            set UP [::TouchButton new [[::BasicTouchInputFactory::getInstance] jget UP] $animationInterface $animationInterface [$commonButtons jget NORMAL_BUTTON] [$basicTouchButtonCellPositionFactory jget SECOND_FROM_BOTTOM_LEFT] [$touchButtonLocationHelper getColumnsRemainderHalf] [$touchButtonLocationHelper getRowsRemainderHalf]]
+            set DOWN [::TouchButton new [[::BasicTouchInputFactory::getInstance] jget DOWN] $animationInterface $animationInterface [$commonButtons jget NORMAL_BUTTON] [$basicTouchButtonCellPositionFactory jget BOTTOM_LEFT] [$touchButtonLocationHelper getColumnsRemainderHalf] [$touchButtonLocationHelper getRowsRemainderHalf]]
+            set LEFT [::TouchButton new [[::BasicTouchInputFactory::getInstance] jget LEFT] $animationInterface $animationInterface [$commonButtons jget NORMAL_BUTTON] [$basicTouchButtonCellPositionFactory jget BOTTOM_SECOND_FROM_RIGHT] [$touchButtonLocationHelper getColumnsRemainderHalf] [$touchButtonLocationHelper getRowsRemainderHalf]]
+            set RIGHT [::TouchButton new [[::BasicTouchInputFactory::getInstance] jget RIGHT] $animationInterface $animationInterface [$commonButtons jget NORMAL_BUTTON] [$basicTouchButtonCellPositionFactory jget BOTTOM_RIGHT] [$touchButtonLocationHelper getColumnsRemainderHalf] [$touchButtonLocationHelper getRowsRemainderHalf]]
+            $list add $UP
+            $list add $DOWN
+            $list add $LEFT
+            $list add $RIGHT
+            return $list
+        } on error {e} {
+            [my jget logUtil] put [[my jget commonStrings] jget EXCEPTION] [self] [[my jget commonStrings] jget GET_LIST] $e
+            return [[::BasicArrayListUtil::getInstance] getImmutableInstance]
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::NullAnimationFactory ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::BasicArrayListD ();
-use org::allbinary::util::BasicArrayListUtil ();
-use org::allbinary::input::motion::button::BaseTouchInput ();
-use org::allbinary::input::motion::button::TouchButtonLocationHelper ();
-use org::allbinary::input::motion::button::BasicTouchButtonCellPositionFactory ();
-use org::allbinary::input::motion::button::CommonButtons ();
-use org::allbinary::input::motion::button::TouchButton ();
-use org::allbinary::input::motion::button::BasicTouchInputFactory ();
+namespace eval ::BasicNeededTouchButtonsBuilder {
+}
 
-1;
 

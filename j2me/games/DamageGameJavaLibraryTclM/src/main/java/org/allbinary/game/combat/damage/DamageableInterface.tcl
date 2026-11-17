@@ -11,31 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.damage
 
-# Java interface
-package org::allbinary::game::combat::damage::DamageableInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::NamedInterface';
-
-
-
-# throws Exception
-sub damage {
-    my ($self, $damage, $damageType) = @_;
-    die "abstract method damage";
+oo::class create ::DamageableInterface {
+    superclass ::JObject
 }
 
+oo::define ::DamageableInterface {
+    method initFields_DamageableInterface {} {
+        return
+    }
+    
 
-# throws Exception
-sub getDamage {
-    my ($self, $damageType) = @_;
-    die "abstract method getDamage";
+    method damage {damage damageType} {
+        error [jexception AbstractMethodError damage]
+    }
+    
+
+    method getDamage {damageType} {
+        error [jexception AbstractMethodError getDamage]
+    }
 }
 
-use org::allbinary::layer::NamedInterface ();
+namespace eval ::DamageableInterface {
+}
 
-1;
 

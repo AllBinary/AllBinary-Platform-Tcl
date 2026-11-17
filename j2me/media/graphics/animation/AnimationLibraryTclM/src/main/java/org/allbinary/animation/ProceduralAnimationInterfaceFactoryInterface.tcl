@@ -11,24 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.animation
 
-# Java interface
-package org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::animation::BasicAnimationInterfaceFactoryInterface';
-
-
-
-# throws Exception
-sub getInstanceAnimation {
-    my ($self, $animationInterface) = @_;
-    die "abstract method getInstanceAnimation";
+oo::class create ::ProceduralAnimationInterfaceFactoryInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::animation::BasicAnimationInterfaceFactoryInterface ();
+oo::define ::ProceduralAnimationInterfaceFactoryInterface {
+    method initFields_ProceduralAnimationInterfaceFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getInstanceAnimation {animationInterface} {
+        error [jexception AbstractMethodError getInstanceAnimation]
+    }
+}
+
+namespace eval ::ProceduralAnimationInterfaceFactoryInterface {
+}
+
 

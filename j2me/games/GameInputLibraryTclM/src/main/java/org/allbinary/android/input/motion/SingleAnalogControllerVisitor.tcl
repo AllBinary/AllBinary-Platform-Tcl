@@ -11,41 +11,34 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.android.input.motion
 
-package org::allbinary::android::input::motion::SingleAnalogControllerVisitor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::android::input::motion::AnalogControllerVisitor';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{playerInputId} = undef;
+oo::class create ::SingleAnalogControllerVisitor {
+    superclass ::AnalogControllerVisitor
 }
 
+oo::define ::SingleAnalogControllerVisitor {
+    method initFields_SingleAnalogControllerVisitor {} {
+        my jset playerInputId 0
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $playerInputId) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{playerInputId} = $playerInputId;
-    return $self;
+    constructor {playerInputId} {
+        next
+        my initFields_SingleAnalogControllerVisitor
+        my jset playerInputId $playerInputId
+    }
+    
+
+    method process {allbinaryLayerManager analogLocationInputProcessor} {
+        set analogLocationInput [[::AnalogLocationInputFactory::getInstance] getInstanceForPlayer [my jget playerInputId]]
+        $analogLocationInputProcessor process $allbinaryLayerManager $analogLocationInput
+    }
 }
 
-
-sub process {
-    my ($self, $allbinaryLayerManager, $analogLocationInputProcessor) = @_;
-        my $analogLocationInput = 'org::allbinary::game::input::analog::AnalogLocationInputFactory'->getInstance()->getInstanceForPlayer($self->{playerInputId});
-        $analogLocationInputProcessor->process($allbinaryLayerManager, $analogLocationInput);
+namespace eval ::SingleAnalogControllerVisitor {
 }
 
-use java::lang::Object ();
-use org::allbinary::game::input::analog::AnalogLocationInput ();
-use org::allbinary::game::input::analog::AnalogLocationInputFactory ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::android::input::motion::AnalogControllerVisitor ();
-
-1;
 

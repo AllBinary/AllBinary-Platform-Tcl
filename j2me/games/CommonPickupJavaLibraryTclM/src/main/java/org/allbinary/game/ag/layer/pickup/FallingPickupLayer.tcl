@@ -11,46 +11,52 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.pickup
 
-package org::allbinary::game::ag::layer::pickup::FallingPickupLayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::pickup::PickupLayer','org::allbinary::game::tick::TickableInterface';
-
-our $NAME = "FallingPickupLayer";
-
-
-sub new {
-    my ($class, $remoteInfo) = @_;
-    my $self = $class->SUPER::new($org::allbinary::game::ag::layer::pickup::FallingPickupLayer::NAME, $remoteInfo, 0, $org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactory::NULL_COUNTED_PICKUP_LAYER_FACTORY, 'org::allbinary::animation::NullAnimationFactory'->getFactoryInstance()->getInstance(0), 'org::allbinary::graphics::Rectangle'->new('org::allbinary::graphics::PointFactory'->getInstance()->{ZERO_ZERO}, 0, 0), 'org::allbinary::view::ViewPosition'->getInstanceD());
-        # super(...) made $self above
-    return $self;
+oo::class create ::FallingPickupLayer {
+    superclass ::PickupLayer
 }
 
+oo::define ::FallingPickupLayer {
+    method initFields_FallingPickupLayer {} {
+        return
+    }
+    
 
-sub processTick {
-    my ($self, $allBinaryLayerManager) = @_;
-        $self->setPosition($self->{x}, $self->{y} + 1, $self->{z});
+    constructor {remoteInfo} {
+        next [::FallingPickupLayer::staticGet_NAME] $remoteInfo 0 [::CountedPickedUpLayerInterfaceFactory::staticGet_NULL_COUNTED_PICKUP_LAYER_FACTORY] [[::NullAnimationFactory::getFactoryInstance] getInstance 0] [::Rectangle new [[::PointFactory::getInstance] jget ZERO_ZERO] 0 0] [::ViewPosition::getInstanceD]
+        my initFields_FallingPickupLayer
+    }
+    
+
+    method processTick {allBinaryLayerManager} {
+        my setPosition [my jget x] [expr {[my jget y] + 1}] [my jget z]
+    }
+    
+
+    method implmentsTickableInterface {} {
+        return true
+    }
 }
 
-
-sub implmentsTickableInterface {
-    my ($self) = @_;
-        return 1;
+namespace eval ::FallingPickupLayer {
+    variable NAMEValue {}
+    variable NAMESet 0
+    proc staticGet_NAME {} {
+        variable NAMEValue
+        variable NAMESet
+        if {!$NAMESet} {
+            set NAMESet 1
+            set NAMEValue "FallingPickupLayer"
+        }
+        return $NAMEValue
+    }
+    proc staticSet_NAME {value} {
+        variable NAMEValue
+        variable NAMESet
+        set NAMESet 1
+        set NAMEValue $value
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::animation::NullAnimationFactory ();
-use org::allbinary::game::layer::pickup::CountedPickedUpLayerInterfaceFactory ();
-use org::allbinary::game::layer::pickup::PickupLayer ();
-use org::allbinary::game::multiplayer::layer::RemoteInfo ();
-use org::allbinary::game::tick::TickableInterface ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::layer::AllBinaryLayerManager ();
-use org::allbinary::view::ViewPosition ();
-
-1;
 

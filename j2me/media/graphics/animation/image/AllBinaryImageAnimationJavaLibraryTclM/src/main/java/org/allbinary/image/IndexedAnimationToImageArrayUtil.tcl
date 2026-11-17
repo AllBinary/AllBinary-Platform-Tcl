@@ -11,38 +11,34 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.image
 
-package org::allbinary::image::IndexedAnimationToImageArrayUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::IndexedAnimationToImageArrayUtil {
+    superclass ::JObject
 }
 
+oo::define ::IndexedAnimationToImageArrayUtil {
+    method initFields_IndexedAnimationToImageArrayUtil {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($class, $width, $height, $sequentialAnimationInterface) = @_;
-        my $size = $sequentialAnimationInterface->getAnimationSize();
-        my $imageArray = [(undef) x ($size)];
-        for (my $index = 0; $index < $size; $index++) {
-            $sequentialAnimationInterface->setFrame($index);
-            $imageArray->[$index] = 'org::allbinary::image::AnimationFrameToImageUtil'->getInstance()->getInstanceWH($width, $height, $sequentialAnimationInterface);
+    constructor {} {
+        next
+        my initFields_IndexedAnimationToImageArrayUtil
+    }
+    
+}
+
+namespace eval ::IndexedAnimationToImageArrayUtil {
+    proc getInstance {width height sequentialAnimationInterface} {
+        set size [$sequentialAnimationInterface getAnimationSize]
+        set imageArray [jarray $size {}]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            $sequentialAnimationInterface setFrame $index
+            $imageArray set $index [[::AnimationFrameToImageUtil::getInstance] getInstanceWH $width $height $sequentialAnimationInterface]
         }
-        return $imageArray;
+        return $imageArray
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::animation::IndexedAnimation ();
-use org::allbinary::image::AnimationFrameToImageUtil ();
-
-1;
 

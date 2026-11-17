@@ -11,47 +11,55 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.paint
 
-package org::allbinary::game::paint::ColorFillPaintableFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::paint::ColorFillPaintableFactory'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::ColorFillPaintableFactory {
+    superclass ::JObject
 }
 
+oo::define ::ColorFillPaintableFactory {
+    method initFields_ColorFillPaintableFactory {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::paint::ColorFillPaintableFactory::instance;
-}
+    constructor {} {
+        next
+        my initFields_ColorFillPaintableFactory
+    }
+    
+    
 
-
-# Java overloaded method: Perl keeps the last definition
-sub getInstance {
-    my ($self, $basicColor, $forThreedCanvas) = @_;
-        my $operatingSystem = 'org::allbinary::logic::system::os::OperatingSystemFactory'->getInstance()->getOperatingSystemInstance();
-        if ($operatingSystem->isOverScan()) {
-            return 'org::allbinary::game::paint::OverScanColorFillPaintable'->new($basicColor);
+    method getInstance {basicColor forThreedCanvas} {
+        set operatingSystem [[::OperatingSystemFactory::getInstance] getOperatingSystemInstance]
+        if {[$operatingSystem isOverScan]} {
+            return [::OverScanColorFillPaintable new $basicColor]
         } else {
-            return 'org::allbinary::game::paint::ColorFillPaintable'->new($basicColor);
+            return [::ColorFillPaintable new $basicColor]
         }
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::logic::system::os::GenericOperatingSystem ();
-use org::allbinary::logic::system::os::OperatingSystemFactory ();
-use org::allbinary::game::paint::ColorFillPaintable ();
-use org::allbinary::game::paint::OverScanColorFillPaintable ();
+namespace eval ::ColorFillPaintableFactory {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ColorFillPaintableFactory new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ColorFillPaintableFactory::staticGet_instance]
+    }
+}
 
-1;
 

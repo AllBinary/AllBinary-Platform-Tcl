@@ -11,28 +11,25 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer.relationship
 
-package org::allbinary::layer::relationship::MiddleRelativeLayerRelationship;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::relationship::RelativeLayerRelationship';
-
-
-
-sub new {
-    my ($class, $layer) = @_;
-    my $self = $class->SUPER::new($layer, 'org::allbinary::graphics::PointFactory'->getInstance()->createXY($layer->getHalfWidth(), $layer->getHalfHeight()), 'org::allbinary::util::BasicArrayListUtil'->getInstance()->getImmutableInstance());
-        # super(...) made $self above
-    return $self;
+oo::class create ::MiddleRelativeLayerRelationship {
+    superclass ::RelativeLayerRelationship
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::util::BasicArrayListUtil ();
-use org::allbinary::layer::relationship::RelativeLayerRelationship ();
+oo::define ::MiddleRelativeLayerRelationship {
+    method initFields_MiddleRelativeLayerRelationship {} {
+        return
+    }
+    
 
-1;
+    constructor {layer} {
+        next $layer [[::PointFactory::getInstance] createXY [$layer getHalfWidth] [$layer getHalfHeight]] [[::BasicArrayListUtil::getInstance] getImmutableInstance]
+        my initFields_MiddleRelativeLayerRelationship
+    }
+}
+
+namespace eval ::MiddleRelativeLayerRelationship {
+}
+
 

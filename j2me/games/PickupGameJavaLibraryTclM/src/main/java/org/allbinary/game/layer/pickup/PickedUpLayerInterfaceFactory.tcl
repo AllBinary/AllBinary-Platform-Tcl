@@ -11,55 +11,49 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.pickup
 
-package org::allbinary::game::layer::pickup::PickedUpLayerInterfaceFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::layer::pickup::PickedUpLayerInterfaceFactoryBase';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{pickedUpLayerType} = undef;
-    $self->{iconLayer} = undef;
-    $self->{animationInterface} = undef;
+oo::class create ::PickedUpLayerInterfaceFactory {
+    superclass ::PickedUpLayerInterfaceFactoryBase
 }
 
+oo::define ::PickedUpLayerInterfaceFactory {
+    method initFields_PickedUpLayerInterfaceFactory {} {
+        my jset pickedUpLayerType {}
+        my jset iconLayer {}
+        my jset animationInterface {}
+        
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $pickeUpLayerType, $iconLayer, $animationInterface) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{pickedUpLayerType} = $pickeUpLayerType;
-        $self->{animationInterface} = $animationInterface;
-        $self->{iconLayer} = $iconLayer;
-    return $self;
+    constructor {pickeUpLayerType iconLayer animationInterface} {
+        next
+        my initFields_PickedUpLayerInterfaceFactory
+        my jset pickedUpLayerType $pickeUpLayerType
+        my jset animationInterface $animationInterface
+        my jset iconLayer $iconLayer
+    }
+    
+
+    method getIconLayer {} {
+        return [my jget iconLayer]
+    }
+    
+
+    method getAnimationInterface {} {
+        return [my jget animationInterface]
+    }
+    
+
+    method getPickedUpLayerType {} {
+        return [my jget pickedUpLayerType]
+    }
 }
 
-
-sub getIconLayer {
-    my ($self) = @_;
-        return $self->{iconLayer};
+namespace eval ::PickedUpLayerInterfaceFactory {
 }
 
-
-sub getAnimationInterface {
-    my ($self) = @_;
-        return $self->{animationInterface};
-}
-
-
-sub getPickedUpLayerType {
-    my ($self) = @_;
-        return $self->{pickedUpLayerType};
-}
-
-use java::lang::Object ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::game::layer::pickup::PickedUpLayerInterfaceFactoryBase ();
-
-1;
 

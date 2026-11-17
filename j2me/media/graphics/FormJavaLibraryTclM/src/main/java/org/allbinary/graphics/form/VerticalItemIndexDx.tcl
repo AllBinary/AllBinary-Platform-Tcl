@@ -11,39 +11,33 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form
 
-package org::allbinary::graphics::form::VerticalItemIndexDx;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::ItemIndexDx';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{scrollCurrentSelectionForm} = undef;
+oo::class create ::VerticalItemIndexDx {
+    superclass ::ItemIndexDx
 }
 
+oo::define ::VerticalItemIndexDx {
+    method initFields_VerticalItemIndexDx {} {
+        my jset scrollCurrentSelectionForm {}
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $scrollCurrentSelectionForm) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{scrollCurrentSelectionForm} = $scrollCurrentSelectionForm;
-    return $self;
+    constructor {scrollCurrentSelectionForm} {
+        next
+        my initFields_VerticalItemIndexDx
+        my jset scrollCurrentSelectionForm $scrollCurrentSelectionForm
+    }
+    
+
+    method getDx {index item dx dy} {
+        return [[my jget scrollCurrentSelectionForm] getXVerticalForm $index $item $dx $dy]
+    }
 }
 
-
-# throws Exception
-sub getDx {
-    my ($self, $index, $item, $dx, $dy) = @_;
-        return $self->{scrollCurrentSelectionForm}->getXVerticalForm($index, $item, $dx, $dy);
+namespace eval ::VerticalItemIndexDx {
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
-use org::allbinary::graphics::form::ItemIndexDx ();
-
-1;
 

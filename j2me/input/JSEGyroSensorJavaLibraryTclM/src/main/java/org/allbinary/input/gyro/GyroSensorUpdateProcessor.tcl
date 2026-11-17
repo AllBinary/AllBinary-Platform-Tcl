@@ -11,29 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.gyro
 
-package org::allbinary::input::gyro::GyroSensorUpdateProcessor;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::canvas::Processor';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::GyroSensorUpdateProcessor {
+    superclass ::Processor
 }
 
+oo::define ::GyroSensorUpdateProcessor {
+    method initFields_GyroSensorUpdateProcessor {} {
+        return
+    }
 
-# throws Exception
-sub process {
-    my ($self) = @_;
+    constructor {} {
+        next
+        my initFields_GyroSensorUpdateProcessor
+    }
+    
+
+    method process {} {
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::canvas::Processor ();
+namespace eval ::GyroSensorUpdateProcessor {
+}
 
-1;
 

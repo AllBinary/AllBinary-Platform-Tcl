@@ -11,50 +11,59 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.combat.destroy
 
-package org::allbinary::game::combat::destroy::DestroyableBaseBehavior;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::combat::destroy::DestroyableInterface';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::combat::destroy::DestroyableBaseBehavior'->new() };
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::DestroyableBaseBehavior {
+    superclass ::JObject
 }
 
+oo::define ::DestroyableBaseBehavior {
+    method initFields_DestroyableBaseBehavior {} {
+        return
+    }
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::combat::destroy::DestroyableBaseBehavior::instance;
+    constructor {} {
+        next
+        my initFields_DestroyableBaseBehavior
+    }
+    
+    
+
+    method getName {} {
+        return [jclassname [self]]
+    }
+    
+
+    method isDestroyed {} {
+        error [jexception Exception [[::CommonStrings::getInstance] jget NOT_IMPLEMENTED]]
+    }
+    
+
+    method setDestroyed {destroyed} {
+    }
 }
 
-
-sub getName {
-    my ($self) = @_;
-        return ref($self);
+namespace eval ::DestroyableBaseBehavior {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::DestroyableBaseBehavior new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::DestroyableBaseBehavior::staticGet_instance]
+    }
 }
 
-
-# throws Exception
-sub isDestroyed {
-    my ($self) = @_;
-        die ('org::allbinary::string::CommonStrings'->getInstance()->{NOT_IMPLEMENTED});
-}
-
-
-sub setDestroyed {
-    my ($self, $destroyed) = @_;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::combat::destroy::DestroyableInterface ();
-
-1;
 

@@ -1,40 +1,31 @@
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.form.item
 
-package org::allbinary::graphics::form::item::CustomCustomItem;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::form::item::ABCustomItem','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{updateMyFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{myFontProcessor} = $self->{updateMyFontProcessor};
+oo::class create ::CustomCustomItem {
+    superclass ::ABCustomItem
 }
 
+oo::define ::CustomCustomItem {
+    method initFields_CustomCustomItem {} {
+        my jset updateMyFontProcessor {}
+        my jset myFontProcessor {}
+        my jset updateMyFontProcessor [::UpdateMyFontProcessor new [self]]
+        my jset myFontProcessor [my jget updateMyFontProcessor]
+        return
+    }
+    
 
-sub new {
-    my ($class, $label, $backgroundBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($label, $backgroundBasicColor, $foregroundBasicColor);
-    _init_fields($self);
-        # super(...) made $self above
-    return $self;
+    constructor {label backgroundBasicColor foregroundBasicColor} {
+        next $label $backgroundBasicColor $foregroundBasicColor
+        my initFields_CustomCustomItem
+    }
+    
+
+    method updateMeasurement {graphics} {
+    }
 }
 
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
+namespace eval ::CustomCustomItem {
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::graphics::form::item::ABCustomItem ();
-
-1;
 

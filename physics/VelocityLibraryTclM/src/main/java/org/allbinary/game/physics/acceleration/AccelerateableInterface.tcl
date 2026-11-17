@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.physics.acceleration
 
-# Java interface
-package org::allbinary::game::physics::acceleration::AccelerateableInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub accelerate {
-    my ($self, $accelerate) = @_;
-    die "abstract method accelerate";
+oo::class create ::AccelerateableInterface {
+    superclass ::JObject
 }
 
-use org::allbinary::logic::math::BasicDecimal ();
+oo::define ::AccelerateableInterface {
+    method initFields_AccelerateableInterface {} {
+        return
+    }
+    
 
-1;
+    method accelerate {accelerate} {
+        error [jexception AbstractMethodError accelerate]
+    }
+}
+
+namespace eval ::AccelerateableInterface {
+}
+
 

@@ -11,38 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.ai.scroller
 
-package org::allbinary::game::ag::ai::scroller::PacePatrolAIFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::PacePatrolAIFactory {
+    superclass ::JObject
 }
 
+oo::define ::PacePatrolAIFactory {
+    method initFields_PacePatrolAIFactory {} {
+        return
+    }
 
-# throws Exception
-sub getInstance {
-    my ($self, $hashtable, $ownerLayerInterface, $gameInput) = @_;
-        $hashtable->put($org::allbinary::game::ag::ai::scroller::BasePatrolAI::MAX_DISTANCE, 'org::allbinary::logic::math::SmallIntegerSingletonFactory'->getInstance()->getAt(220));
-        return 'org::allbinary::game::ag::ai::scroller::PacePatrolAI'->new($hashtable, $ownerLayerInterface, $gameInput);
+    constructor {} {
+        next
+        my initFields_PacePatrolAIFactory
+    }
+    
+
+    method getInstance {hashtable ownerLayerInterface gameInput} {
+        $hashtable put [::BasePatrolAI::staticGet_MAX_DISTANCE] [[::SmallIntegerSingletonFactory::getInstance] getAt 220]
+        return [::PacePatrolAI new $hashtable $ownerLayerInterface $gameInput]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::ai::ArtificialIntelligenceInterface ();
-use org::allbinary::game::ai::ArtificialIntelligenceInterfaceFactoryInterface ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::logic::math::SmallIntegerSingletonFactory ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::game::ag::ai::scroller::BasePatrolAI ();
-use org::allbinary::game::ag::ai::scroller::PacePatrolAI ();
+namespace eval ::PacePatrolAIFactory {
+}
 
-1;
 

@@ -11,92 +11,71 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.input
 
-package org::allbinary::game::input::PlayerGameInput;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::game::input::GameInput','org::allbinary::game::input::event::GameKeyEventListenerInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{gameInputStrings} = 'org::allbinary::game::input::GameInputStrings'->getInstance();
-    $self->{playerInputId} = undef;
+oo::class create ::PlayerGameInput {
+    superclass ::GameInput
 }
 
+oo::define ::PlayerGameInput {
+    method initFields_PlayerGameInput {} {
+        my jset gameInputStrings {}
+        my jset playerInputId 0
+        my jset gameInputStrings [::GameInputStrings::getInstance]
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $gameKeyEventList, $removalGameKeyEventList, $playerInputId) = @_;
-    my $self = $class->SUPER::new($gameKeyEventList, $removalGameKeyEventList);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{playerInputId} = $playerInputId;
-    return $self;
+    constructor {gameKeyEventList removalGameKeyEventList playerInputId} {
+        next $gameKeyEventList $removalGameKeyEventList
+        my initFields_PlayerGameInput
+        my jset playerInputId $playerInputId
+    }
+    
+
+    method onPressGameKeyEvent {gameKeyEvent} {
+        my add $gameKeyEvent
+        my addForRemoval $gameKeyEvent
+    }
+    
+
+    method onDownGameKeyEvent {gameKeyEvent} {
+        my add $gameKeyEvent
+    }
+    
+
+    method onDownKeyEvent {gameKeyEvent} {
+        my add $gameKeyEvent
+        my addForRemoval $gameKeyEvent
+    }
+    
+
+    method onDownKey {gameKeyEvent} {
+        ::PreLogUtil::put [[[[::StringMaker new] append [[::CommonLabels::getInstance] jget START_LABEL]] append [$gameKeyEvent toString]] toString] [self] [[my jget gameInputStrings] jget ON_DOWN_GAME_KEY]
+    }
+    
+
+    method onUpGameKeyEvent {gameKeyEvent} {
+        my addForRemoval $gameKeyEvent
+    }
+    
+
+    method onUpKeyEvent {gameKeyEvent} {
+    }
+    
+
+    method onEvent {eventObject} {
+        ::ForcedLogUtil::log [[::EventStrings::getInstance] jget PERFORMANCE_MESSAGE] [self]
+    }
+    
+
+    method getPlayerInputId {} {
+        return [my jget playerInputId]
+    }
 }
 
-
-sub onPressGameKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
-        $self->add($gameKeyEvent);
-        $self->addForRemoval($gameKeyEvent);
+namespace eval ::PlayerGameInput {
 }
 
-
-sub onDownGameKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
-        $self->add($gameKeyEvent);
-}
-
-
-sub onDownKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
-        $self->add($gameKeyEvent);
-        $self->addForRemoval($gameKeyEvent);
-}
-
-
-sub onDownKey {
-    my ($self, $gameKeyEvent) = @_;
-        'org::allbinary::logic::communication::log::PreLogUtil'->put('org::allbinary::logic::string::StringMaker'->new()->append('org::allbinary::string::CommonLabels'->getInstance()->{START_LABEL})->append($gameKeyEvent->toString())->toString(), $self, $self->{gameInputStrings}->{ON_DOWN_GAME_KEY});
-}
-
-
-sub onUpGameKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
-        $self->addForRemoval($gameKeyEvent);
-}
-
-
-sub onUpKeyEvent {
-    my ($self, $gameKeyEvent) = @_;
-}
-
-
-sub onEvent {
-    my ($self, $eventObject) = @_;
-        'org::allbinary::logic::communication::log::ForcedLogUtil'->log('org::allbinary::logic::util::event::EventStrings'->getInstance()->{PERFORMANCE_MESSAGE}, $self);
-}
-
-
-sub getPlayerInputId {
-    my ($self) = @_;
-        return $self->{playerInputId};
-}
-
-use java::lang::Object ();
-use org::allbinary::game::input::event::GameKeyEvent ();
-use org::allbinary::game::input::event::GameKeyEventListenerInterface ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::communication::log::PreLogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::EventStrings ();
-use org::allbinary::string::CommonLabels ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::game::input::GameInput ();
-use org::allbinary::game::input::GameInputStrings ();
-
-1;
 

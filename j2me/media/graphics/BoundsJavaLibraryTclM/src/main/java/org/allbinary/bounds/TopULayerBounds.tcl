@@ -11,40 +11,38 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.bounds
 
-package org::allbinary::bounds::TopULayerBounds;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::bounds::LayerBounds';
-
-
-
-sub new {
-    my ($class, $rectangle) = @_;
-    my $self = $class->SUPER::new($rectangle);
-        # super(...) made $self above
-    return $self;
+oo::class create ::TopULayerBounds {
+    superclass ::LayerBounds
 }
 
+oo::define ::TopULayerBounds {
+    method initFields_TopULayerBounds {} {
+        return
+    }
+    
 
-sub visit {
-    my ($self, $boundsVisitorInterface) = @_;
-        if ($boundsVisitorInterface->getX() > $self->{rectangle}->getMaxX()) {
-            $boundsVisitorInterface->maxX();
+    constructor {rectangle} {
+        next $rectangle
+        my initFields_TopULayerBounds
+    }
+    
+
+    method visit {boundsVisitorInterface} {
+        if {[expr {[$boundsVisitorInterface getX] > [[my jget rectangle] getMaxX]}]} {
+            $boundsVisitorInterface maxX
         }
-        if ($boundsVisitorInterface->getX() < $self->{rectangle}->getPoint()->getX()) {
-            $boundsVisitorInterface->minX();
+        if {[expr {[$boundsVisitorInterface getX] < [[[my jget rectangle] getPoint] getX]}]} {
+            $boundsVisitorInterface minX
         }
-        if ($boundsVisitorInterface->getY() < $self->{rectangle}->getPoint()->getY()) {
-            $boundsVisitorInterface->minY();
+        if {[expr {[$boundsVisitorInterface getY] < [[[my jget rectangle] getPoint] getY]}]} {
+            $boundsVisitorInterface minY
         }
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::Rectangle ();
-use org::allbinary::bounds::LayerBounds ();
+namespace eval ::TopULayerBounds {
+}
 
-1;
 

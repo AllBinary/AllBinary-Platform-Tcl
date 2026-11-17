@@ -11,124 +11,142 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion
 
-package org::allbinary::input::motion::AllMotionRecognizer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::motion::MotionRecognizer';
-
-our $index = 0;
-tie our $pointCircularPool, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::GPointCircularPool'->new(40) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{motionGestureRecognizer} = undef;
-    $self->{touchButtonProcessing} = 0;
-    $self->{touchButtonRecognizer} = undef;
-    $self->{id} = undef;
-    $self->{lastX} = 0;
-    $self->{lastY} = 0;
+oo::class create ::AllMotionRecognizer {
+    superclass ::MotionRecognizer
 }
 
+oo::define ::AllMotionRecognizer {
+    method initFields_AllMotionRecognizer {} {
+        my jset logUtil {}
+        my jset motionGestureRecognizer {}
+        my jset touchButtonProcessing false
+        my jset touchButtonRecognizer {}
+        my jset id 0
+        my jset lastX 0
+        my jset lastY 0
+        my jset logUtil [::LogUtil::getInstance]
+        
+        my jset touchButtonProcessing false
+        
+        
+        my jset lastX 0
+        my jset lastY 0
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{id} = $org::allbinary::input::motion::AllMotionRecognizer::index++;
-        $self->{motionGestureRecognizer} = 'org::allbinary::input::motion::gesture::MotionGestureRecognizer'->new($self->{id});
-        $self->{touchButtonRecognizer} = 'org::allbinary::input::motion::button::TouchButtonRecognizer'->new();
-    return $self;
+    constructor {} {
+        next
+        my initFields_AllMotionRecognizer
+        my jset id [AllMotionRecognizer jpostinc index 1]
+        my jset motionGestureRecognizer [::MotionGestureRecognizer new [my jget id]]
+        my jset touchButtonRecognizer [::TouchButtonRecognizer new]
+    }
+    
+
+    method processStartMotionEvent {x y deviceId modifiers} {
+        if {[[my jget touchButtonRecognizer] pressTouchButtonInput $x $y $deviceId]} {
+            my jset touchButtonProcessing true
+        }
+        if {[expr {![my jget touchButtonProcessing]}]} {
+            set point [[::AllMotionRecognizer::staticGet_pointCircularPool] getNextInstance]
+            $point setX $x
+            $point setY $y
+            [my jget motionGestureRecognizer] processPressedMotionEvent $point $deviceId $modifiers
+        }
+    }
+    
+
+    method processEndMotionEvent {x y deviceId modifiers} {
+        if {[[my jget touchButtonRecognizer] releaseTouchButtonInput $x $y $deviceId]} {
+        }
+        if {[expr {![my jget touchButtonProcessing]}]} {
+            set point [[::AllMotionRecognizer::staticGet_pointCircularPool] getNextInstance]
+            $point setX $x
+            $point setY $y
+            [my jget motionGestureRecognizer] processReleasedMotionEvent $point $deviceId $modifiers
+        }
+        if {[my jget touchButtonProcessing]} {
+            my jset touchButtonProcessing false
+        }
+    }
+    
+
+    method processDraggedMotionEvent {x y deviceId modifiers} {
+        if {[my jget touchButtonProcessing]} {
+            [my jget touchButtonRecognizer] pressTouchButtonInput $x $y $deviceId
+        }
+        if {[expr {![my jget touchButtonProcessing]}]} {
+            set point [[::AllMotionRecognizer::staticGet_pointCircularPool] getNextInstance]
+            $point setX $x
+            $point setY $y
+            [my jget motionGestureRecognizer] processDraggedMotionEvent $point $deviceId $modifiers
+        }
+    }
+    
+
+    method processMovedMotionEvent {x y deviceId modifiers} {
+        if {[expr {[expr {$x != [my jget lastX]}] || [expr {$y != [my jget lastY]}]}]} {
+            my jset lastX $x
+            my jset lastY $y
+            set point [[::AllMotionRecognizer::staticGet_pointCircularPool] getNextInstance]
+            $point setX $x
+            $point setY $y
+            [my jget motionGestureRecognizer] processMovedMotionEvent $point $deviceId $modifiers
+        }
+    }
+    
+
+    method processScrolledMotionEvent {x y deviceId modifiers} {
+        set point [[::AllMotionRecognizer::staticGet_pointCircularPool] getNextInstance]
+        $point setX $x
+        $point setY $y
+        [my jget motionGestureRecognizer] processScrolledMotionEvent $point $deviceId $modifiers
+    }
+    
+
+    method getMotionGestureRecognizer {} {
+        return [my jget motionGestureRecognizer]
+    }
 }
 
-
-# throws Exception
-sub processStartMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-        if ($self->{touchButtonRecognizer}->pressTouchButtonInput($x, $y, $deviceId)) {
-            $self->{touchButtonProcessing} = 1;
+namespace eval ::AllMotionRecognizer {
+    variable indexValue {}
+    variable indexSet 0
+    proc staticGet_index {} {
+        variable indexValue
+        variable indexSet
+        if {!$indexSet} {
+            set indexSet 1
+            set indexValue 0
         }
-        if (!$self->{touchButtonProcessing}) {
-            my $point = $org::allbinary::input::motion::AllMotionRecognizer::pointCircularPool->getNextInstance();
-            $point->setX($x);
-            $point->setY($y);
-            $self->{motionGestureRecognizer}->processPressedMotionEvent($point, $deviceId, $modifiers);
+        return $indexValue
+    }
+    proc staticSet_index {value} {
+        variable indexValue
+        variable indexSet
+        set indexSet 1
+        set indexValue $value
+    }
+    variable pointCircularPoolValue {}
+    variable pointCircularPoolSet 0
+    proc staticGet_pointCircularPool {} {
+        variable pointCircularPoolValue
+        variable pointCircularPoolSet
+        if {!$pointCircularPoolSet} {
+            set pointCircularPoolSet 1
+            set pointCircularPoolValue [::GPointCircularPool new 40]
         }
+        return $pointCircularPoolValue
+    }
+    proc staticSet_pointCircularPool {value} {
+        variable pointCircularPoolValue
+        variable pointCircularPoolSet
+        set pointCircularPoolSet 1
+        set pointCircularPoolValue $value
+    }
 }
 
-
-# throws Exception
-sub processEndMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-        if ($self->{touchButtonRecognizer}->releaseTouchButtonInput($x, $y, $deviceId)) {
-        }
-        if (!$self->{touchButtonProcessing}) {
-            my $point = $org::allbinary::input::motion::AllMotionRecognizer::pointCircularPool->getNextInstance();
-            $point->setX($x);
-            $point->setY($y);
-            $self->{motionGestureRecognizer}->processReleasedMotionEvent($point, $deviceId, $modifiers);
-        }
-        if ($self->{touchButtonProcessing}) {
-            $self->{touchButtonProcessing} = 0;
-        }
-}
-
-
-# throws Exception
-sub processDraggedMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-        if ($self->{touchButtonProcessing}) {
-            $self->{touchButtonRecognizer}->pressTouchButtonInput($x, $y, $deviceId);
-        }
-        if (!$self->{touchButtonProcessing}) {
-            my $point = $org::allbinary::input::motion::AllMotionRecognizer::pointCircularPool->getNextInstance();
-            $point->setX($x);
-            $point->setY($y);
-            $self->{motionGestureRecognizer}->processDraggedMotionEvent($point, $deviceId, $modifiers);
-        }
-}
-
-
-# throws Exception
-sub processMovedMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-        if ($x != $self->{lastX} || $y != $self->{lastY}) {
-            $self->{lastX} = $x;
-            $self->{lastY} = $y;
-            my $point = $org::allbinary::input::motion::AllMotionRecognizer::pointCircularPool->getNextInstance();
-            $point->setX($x);
-            $point->setY($y);
-            $self->{motionGestureRecognizer}->processMovedMotionEvent($point, $deviceId, $modifiers);
-        }
-}
-
-
-# throws Exception
-sub processScrolledMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-        my $point = $org::allbinary::input::motion::AllMotionRecognizer::pointCircularPool->getNextInstance();
-        $point->setX($x);
-        $point->setY($y);
-        $self->{motionGestureRecognizer}->processScrolledMotionEvent($point, $deviceId, $modifiers);
-}
-
-
-sub getMotionGestureRecognizer {
-    my ($self) = @_;
-        return $self->{motionGestureRecognizer};
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::CustomGPoint ();
-use org::allbinary::graphics::GPointCircularPool ();
-use org::allbinary::input::motion::button::TouchButtonRecognizer ();
-use org::allbinary::input::motion::gesture::MotionGestureRecognizer ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::input::motion::MotionRecognizer ();
-
-1;
 

@@ -1,7 +1,6 @@
 # Generated Code Do Not Modify
+# package java.lang
 
-# Otherwise - classOrInterfaceDeclaration - type - AnnotationDeclaration
+# Java annotation Override: annotations have no Tcl form
 
-
-1;
 

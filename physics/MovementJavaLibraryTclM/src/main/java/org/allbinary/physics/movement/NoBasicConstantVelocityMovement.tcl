@@ -11,34 +11,29 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.physics.movement
 
-package org::allbinary::physics::movement::NoBasicConstantVelocityMovement;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::physics::movement::BasicConstantVelocityMovement';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new($org::allbinary::logic::math::BasicDecimal::ZERO_BIGDECIMAL, 'org::allbinary::game::physics::velocity::BasicVelocityProperties'->new());
-        # super(...) made $self above
-    return $self;
+oo::class create ::NoBasicConstantVelocityMovement {
+    superclass ::BasicConstantVelocityMovement
 }
 
+oo::define ::NoBasicConstantVelocityMovement {
+    method initFields_NoBasicConstantVelocityMovement {} {
+        return
+    }
+    
 
-# throws Exception
-sub process {
-    my ($self, $layer) = @_;
+    constructor {} {
+        next [::BasicDecimal::staticGet_ZERO_BIGDECIMAL] [::BasicVelocityProperties new]
+        my initFields_NoBasicConstantVelocityMovement
+    }
+    
+
+    method process {layer} {
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::game::layer::AllBinaryGameLayer ();
-use org::allbinary::game::physics::velocity::BasicVelocityProperties ();
-use org::allbinary::logic::math::BasicDecimal ();
-use org::allbinary::physics::movement::BasicConstantVelocityMovement ();
+namespace eval ::NoBasicConstantVelocityMovement {
+}
 
-1;
 

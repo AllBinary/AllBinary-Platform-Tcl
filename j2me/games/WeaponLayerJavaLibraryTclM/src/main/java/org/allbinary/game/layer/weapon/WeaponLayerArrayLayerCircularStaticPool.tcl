@@ -11,79 +11,89 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer.weapon
 
-package org::allbinary::game::layer::weapon::WeaponLayerArrayLayerCircularStaticPool;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::layer::weapon::WeaponLayerArrayLayerCircularStaticPool'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{MAX} = 5;
-    $self->{circularIndexUtil} = 'org::allbinary::util::CircularIndexUtil'->createInstance($self->{MAX});
-    $self->{WEAPONLAYER_ARRAY} = undef;
-    $self->{TWO_WEAPONLAYER_ARRAY} = undef;
-    $self->{THREE_WEAPONLAYER_ARRAY} = undef;
+oo::class create ::WeaponLayerArrayLayerCircularStaticPool {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::WeaponLayerArrayLayerCircularStaticPool {
+    method initFields_WeaponLayerArrayLayerCircularStaticPool {} {
+        my jset MAX 0
+        my jset circularIndexUtil {}
+        my jset WEAPONLAYER_ARRAY {}
+        my jset TWO_WEAPONLAYER_ARRAY {}
+        my jset THREE_WEAPONLAYER_ARRAY {}
+        my jset MAX 5
+        my jset circularIndexUtil [::CircularIndexUtil::createInstance [my jget MAX]]
+        my jset WEAPONLAYER_ARRAY {}
+        my jset TWO_WEAPONLAYER_ARRAY {}
+        my jset THREE_WEAPONLAYER_ARRAY {}
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_WeaponLayerArrayLayerCircularStaticPool
+    }
+    
+    
 
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::layer::weapon::WeaponLayerArrayLayerCircularStaticPool::instance;
-}
-
-
-sub init {
-    my ($self) = @_;
-        my $WEAPONLAYER_ARRAY = [(undef) x ($self->{MAX} * 2)];
-        my $TWO_WEAPONLAYER_ARRAY = [(undef) x ($self->{MAX})];
-        my $THREE_WEAPONLAYER_ARRAY = [(undef) x ($self->{MAX})];
-        for (my $index = 0; $index < $self->{MAX}; $index++) {
-            $WEAPONLAYER_ARRAY->[$index] = [(undef) x (1)];
-            $TWO_WEAPONLAYER_ARRAY->[$index] = [(undef) x (2)];
-            $THREE_WEAPONLAYER_ARRAY->[$index] = [(undef) x (3)];
+    method init {} {
+        set WEAPONLAYER_ARRAY [jarray [jint [expr {[my jget MAX] * 2}]] {}]
+        set TWO_WEAPONLAYER_ARRAY [jarray [my jget MAX] {}]
+        set THREE_WEAPONLAYER_ARRAY [jarray [my jget MAX] {}]
+        for {set index 0} {[expr {$index < [my jget MAX]}]} {jpostincr index 1} {
+            $WEAPONLAYER_ARRAY set $index [jarray 1 {}]
+            $TWO_WEAPONLAYER_ARRAY set $index [jarray 2 {}]
+            $THREE_WEAPONLAYER_ARRAY set $index [jarray 3 {}]
         }
-        $self->{WEAPONLAYER_ARRAY} = $WEAPONLAYER_ARRAY;
-        $self->{TWO_WEAPONLAYER_ARRAY} = $TWO_WEAPONLAYER_ARRAY;
-        $self->{THREE_WEAPONLAYER_ARRAY} = $THREE_WEAPONLAYER_ARRAY;
-}
+        my jset WEAPONLAYER_ARRAY $WEAPONLAYER_ARRAY
+        my jset TWO_WEAPONLAYER_ARRAY $TWO_WEAPONLAYER_ARRAY
+        my jset THREE_WEAPONLAYER_ARRAY $THREE_WEAPONLAYER_ARRAY
+    }
+    
 
-
-sub getWeaponLayerArrays {
-    my ($self, $size) = @_;
-        if ($size == 1) {
-            return $self->{WEAPONLAYER_ARRAY};
-        } elsif ($size == 2) {
-            return $self->{TWO_WEAPONLAYER_ARRAY};
-        } elsif ($size == 3) {
-            return $self->{THREE_WEAPONLAYER_ARRAY};
+    method getWeaponLayerArrays {size} {
+        if {[expr {$size == 1}]} {
+            return [my jget WEAPONLAYER_ARRAY]
+        } elseif {[expr {$size == 2}]} {
+            return [my jget TWO_WEAPONLAYER_ARRAY]
+        } elseif {[expr {$size == 3}]} {
+            return [my jget THREE_WEAPONLAYER_ARRAY]
         }
-        die ("RuntimeException");
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method getInstanceArray {size} {
+        set weaponLayerArray [[my getWeaponLayerArrays $size] get [[my jget circularIndexUtil] getIndex]]
+        [my jget circularIndexUtil] next
+        return $weaponLayerArray
+    }
 }
 
-
-# throws Exception
-sub getInstanceArray {
-    my ($self, $size) = @_;
-        my $weaponLayerArray = $self->getWeaponLayerArrays($size)->[$self->{circularIndexUtil}->getIndex()];
-        $self->{circularIndexUtil}->next();
-        return $weaponLayerArray;
+namespace eval ::WeaponLayerArrayLayerCircularStaticPool {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::WeaponLayerArrayLayerCircularStaticPool new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::WeaponLayerArrayLayerCircularStaticPool::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::util::CircularIndexUtil ();
-
-1;
 

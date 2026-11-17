@@ -11,45 +11,65 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game
 
-package org::allbinary::game::GameStrings;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::game::GameStrings'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{PROCESS_TICK} = "processTick";
-    $self->{ON_GAME_INITIALIZED} = "onGameInitialized";
-    $self->{UPDATESURFACE} = "updateSurface";
-    $self->{ON_SET_DISPLAYABLE} = "onSetDisplayable";
-    $self->{UNPAUSE} = "unPause";
-    $self->{TOGGLE_MENU} = "toggleMenu";
-    $self->{SET_GAME_OVER} = "setGameOver";
-    $self->{GAME_STATE} = "Game State: ";
-    $self->{SET_GAME_STATE} = "setGameState";
-    $self->{STOP_GAME_CANVAS_RUNNABLE_INTERFACE} = "stopGameCanvasRunnableInterface";
+oo::class create ::GameStrings {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+oo::define ::GameStrings {
+    method initFields_GameStrings {} {
+        my jset PROCESS_TICK {}
+        my jset ON_GAME_INITIALIZED {}
+        my jset UPDATESURFACE {}
+        my jset ON_SET_DISPLAYABLE {}
+        my jset UNPAUSE {}
+        my jset TOGGLE_MENU {}
+        my jset SET_GAME_OVER {}
+        my jset GAME_STATE {}
+        my jset SET_GAME_STATE {}
+        my jset STOP_GAME_CANVAS_RUNNABLE_INTERFACE {}
+        my jset PROCESS_TICK "processTick"
+        my jset ON_GAME_INITIALIZED "onGameInitialized"
+        my jset UPDATESURFACE "updateSurface"
+        my jset ON_SET_DISPLAYABLE "onSetDisplayable"
+        my jset UNPAUSE "unPause"
+        my jset TOGGLE_MENU "toggleMenu"
+        my jset SET_GAME_OVER "setGameOver"
+        my jset GAME_STATE "Game State: "
+        my jset SET_GAME_STATE "setGameState"
+        my jset STOP_GAME_CANVAS_RUNNABLE_INTERFACE "stopGameCanvasRunnableInterface"
+        return
+    }
+
+    constructor {} {
+        next
+        my initFields_GameStrings
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::GameStrings::instance;
+namespace eval ::GameStrings {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::GameStrings new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::GameStrings::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 

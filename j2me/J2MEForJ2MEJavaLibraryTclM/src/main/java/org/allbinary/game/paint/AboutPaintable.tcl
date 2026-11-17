@@ -11,99 +11,92 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.paint
 
 #J2MEForJ2ME
-package org::allbinary::game::paint::AboutPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::graphics::paint::Paintable','org::allbinary::graphics::font::UpdateMyFontInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{displayInfoSingleton} = 'org::allbinary::graphics::displayable::DisplayInfoSingleton'->getInstance();
-    $self->{ABOUT} = 'org::allbinary::graphics::displayable::CanvasStrings'->getInstance()->{ABOUT};
-    $self->{info} = undef;
-    $self->{developers} = undef;
-    $self->{paintableArray} = [$self];
-    $self->{myFontProcessor} = 'org::allbinary::graphics::font::UpdateMyFontProcessor'->new($self);
-    $self->{charHeight} = 0;
-    $self->{aboutBeginWidth} = 0;
-    $self->{infoBeginWidth} = undef;
-    $self->{developersBeginWidth} = undef;
-    $self->{anchor} = $org::allbinary::graphics::Anchor::TOP_LEFT;
+oo::class create ::AboutPaintable {
+    superclass ::Paintable
 }
 
+oo::define ::AboutPaintable {
+    method initFields_AboutPaintable {} {
+        my jset displayInfoSingleton {}
+        my jset ABOUT {}
+        my jset info {}
+        my jset developers {}
+        my jset paintableArray {}
+        my jset myFontProcessor {}
+        my jset charHeight 0
+        my jset aboutBeginWidth 0
+        my jset infoBeginWidth {}
+        my jset developersBeginWidth {}
+        my jset anchor 0
+        my jset displayInfoSingleton [::DisplayInfoSingleton::getInstance]
+        my jset ABOUT [[::CanvasStrings::getInstance] jget ABOUT]
+        
+        
+        my jset paintableArray [jarrayfrom [list [self]]]
+        my jset myFontProcessor [::UpdateMyFontProcessor new [self]]
+        my jset charHeight 0
+        my jset aboutBeginWidth 0
+        
+        
+        my jset anchor [::Anchor::staticGet_TOP_LEFT]
+        return
+    }
+    
+    
 
-sub getInstance {
-    my ($class, $info, $developers) = @_;
-        return 'org::allbinary::game::paint::AboutPaintable'->new($info, $developers);
-}
+    constructor {info developers} {
+        next
+        my initFields_AboutPaintable
+        my jset info $info
+        my jset infoBeginWidth [jarray [[my jget info] length] 0]
+        my jset developers $developers
+        my jset developersBeginWidth [jarray [[my jget developers] length] 0]
+    }
+    
 
-
-sub new {
-    my ($class, $info, $developers) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{info} = $info;
-        $self->{infoBeginWidth} = [(0) x (scalar(@{$self->{info}}))];
-        $self->{developers} = $developers;
-        $self->{developersBeginWidth} = [(0) x (scalar(@{$self->{developers}}))];
-    return $self;
-}
-
-
-sub updateMeasurement {
-    my ($self, $graphics) = @_;
-        my $font = $graphics->getFont();
-        $self->{charHeight} = $font->getHeight();
-        $self->{aboutBeginWidth} = (POSIX::floor(($font->stringWidth($self->{ABOUT})) / (2 ** (1))));
-        my $infoSize = scalar(@{$self->{info}});
-        for (my $index = 0; $index < $infoSize; $index++) {
-            $self->{infoBeginWidth}->[$index] = (POSIX::floor(($font->stringWidth($self->{info}->[$index])) / (2 ** (1))));
+    method updateMeasurement {graphics} {
+        set font [$graphics getFont]
+        my jset charHeight [$font getHeight]
+        my jset aboutBeginWidth ([expr {[$font stringWidth [my jget ABOUT]] >> 1}])
+        set infoSize [[my jget info] length]
+        for {set index 0} {[expr {$index < $infoSize}]} {jpostincr index 1} {
+            [my jget infoBeginWidth] set $index ([expr {[$font stringWidth [[my jget info] get $index]] >> 1}])
         }
-        my $size = scalar(@{$self->{developers}});
-        for (my $index = 0; $index < $size; $index++) {
-            $self->{developersBeginWidth}->[$index] = (POSIX::floor(($font->stringWidth($self->{developers}->[$index])) / (2 ** (1))));
+        set size [[my jget developers] length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            [my jget developersBeginWidth] set $index ([expr {[$font stringWidth [[my jget developers] get $index]] >> 1}])
         }
-        $self->{myFontProcessor} = 'org::allbinary::graphics::font::MyFontProcessor'->getInstance();
+        my jset myFontProcessor [::MyFontProcessor::getInstance]
+    }
+    
+
+    method getPaintableArrayInstance {} {
+        return [my jget paintableArray]
+    }
+    
+
+    method paint {graphics} {
+        [my jget myFontProcessor] process $graphics
+        set halfWidth [[my jget displayInfoSingleton] getLastHalfWidth]
+        $graphics drawString [my jget ABOUT] [jint [expr {$halfWidth - [my jget aboutBeginWidth]}]] [jint [expr {2 * [my jget charHeight]}]] [my jget anchor]
+        set infoSize [[my jget info] length]
+        for {set index 0} {[expr {$index < $infoSize}]} {jpostincr index 1} {
+            $graphics drawString [[my jget info] get $index] [jint [expr {$halfWidth - [[my jget infoBeginWidth] get $index]}]] [jint [expr {([jint [expr {4 + $index}]]) * [my jget charHeight]}]] [my jget anchor]
+        }
+        set size [[my jget developers] length]
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            $graphics drawString [[my jget developers] get $index] [jint [expr {$halfWidth - [[my jget developersBeginWidth] get $index]}]] [jint [expr {([jint [expr {[jint [expr {5 + $infoSize}]] + $index}]]) * [my jget charHeight]}]] [my jget anchor]
+        }
+    }
 }
 
-
-sub getPaintableArrayInstance {
-    my ($self) = @_;
-        return $self->{paintableArray};
+namespace eval ::AboutPaintable {
+    proc getInstance {info developers} {
+        return [::AboutPaintable new $info $developers]
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
-        $self->{myFontProcessor}->process($graphics);
-        my $halfWidth = $self->{displayInfoSingleton}->getLastHalfWidth();
-        $graphics->drawString($self->{ABOUT}, $halfWidth - $self->{aboutBeginWidth}, 2 * $self->{charHeight}, $self->{anchor});
-        my $infoSize = scalar(@{$self->{info}});
-        for (my $index = 0; $index < $infoSize; $index++) {
-            $graphics->drawString($self->{info}->[$index], $halfWidth - $self->{infoBeginWidth}->[$index], (4 + $index) * $self->{charHeight}, $self->{anchor});
-        }
-        my $size = scalar(@{$self->{developers}});
-        for (my $index = 0; $index < $size; $index++) {
-            $graphics->drawString($self->{developers}->[$index], $halfWidth - $self->{developersBeginWidth}->[$index], (5 + $infoSize + $index) * $self->{charHeight}, $self->{anchor});
-        }
-}
-
-use java::lang::Object ();
-use javax::microedition::lcdui::Font ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::graphics::Anchor ();
-use org::allbinary::graphics::displayable::CanvasStrings ();
-use org::allbinary::graphics::displayable::DisplayInfoSingleton ();
-use org::allbinary::graphics::font::MyFontProcessor ();
-use org::allbinary::graphics::font::UpdateMyFontInterface ();
-use org::allbinary::graphics::font::UpdateMyFontProcessor ();
-use org::allbinary::graphics::paint::Paintable ();
-
-1;
 

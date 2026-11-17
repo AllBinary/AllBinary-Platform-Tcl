@@ -11,33 +11,30 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.terrain
 
-package org::allbinary::game::terrain::TerrainEventFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::logic::util::event::AllBinaryEventObjectFactoryInterface';
-
-
-
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+oo::class create ::TerrainEventFactory {
+    superclass ::JObject
 }
 
+oo::define ::TerrainEventFactory {
+    method initFields_TerrainEventFactory {} {
+        return
+    }
+    
 
-sub getInstance {
-    my ($self) = @_;
-        return 'org::allbinary::game::terrain::TerrainEvent'->new('org::allbinary::logic::NullUtil'->getInstance()->{NULL_OBJECT});
+    constructor {} {
+        next
+        my initFields_TerrainEventFactory
+    }
+    
+
+    method getInstance {} {
+        return [::TerrainEvent new [[::NullUtil::getInstance] jget NULL_OBJECT]]
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::logic::NullUtil ();
-use org::allbinary::logic::util::event::AllBinaryEventObject ();
-use org::allbinary::logic::util::event::AllBinaryEventObjectFactoryInterface ();
-use org::allbinary::game::terrain::TerrainEvent ();
+namespace eval ::TerrainEventFactory {
+}
 
-1;
 

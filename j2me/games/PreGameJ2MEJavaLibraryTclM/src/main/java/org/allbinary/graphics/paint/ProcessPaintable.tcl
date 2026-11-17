@@ -11,28 +11,28 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.paint
 
-package org::allbinary::graphics::paint::ProcessPaintable;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::Paintable';
-
-
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    return $self;
+oo::class create ::ProcessPaintable {
+    superclass ::Paintable
 }
 
+oo::define ::ProcessPaintable {
+    method initFields_ProcessPaintable {} {
+        return
+    }
 
-sub process {
-    my ($self) = @_;
+    constructor {} {
+        next
+        my initFields_ProcessPaintable
+    }
+    
+
+    method process {} {
+    }
 }
 
-use java::lang::Object ();
-use org::allbinary::graphics::paint::Paintable ();
+namespace eval ::ProcessPaintable {
+}
 
-1;
 

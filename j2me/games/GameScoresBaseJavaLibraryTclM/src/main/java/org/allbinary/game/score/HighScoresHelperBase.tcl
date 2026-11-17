@@ -11,82 +11,68 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.game.score
 
-package org::allbinary::game::score::HighScoresHelperBase;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object','org::allbinary::game::score::HighScoresHelperBaseInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{logUtil} = 'org::allbinary::logic::communication::log::LogUtil'->getInstance();
-    $self->{highScoresArrayP} = 'org::allbinary::game::score::LastFetchHighScoresFactory'->getInstance()->{highScoresArray};
+oo::class create ::HighScoresHelperBase {
+    superclass ::JObject
 }
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
-}
+oo::define ::HighScoresHelperBase {
+    method initFields_HighScoresHelperBase {} {
+        my jset logUtil {}
+        my jset highScoresArrayP {}
+        my jset logUtil [::LogUtil::getInstance]
+        my jset highScoresArrayP [[::LastFetchHighScoresFactory::getInstance] jget highScoresArray]
+        return
+    }
 
+    constructor {} {
+        next
+        my initFields_HighScoresHelperBase
+    }
+    
 
-sub setHighScoresArray {
-    my ($self, $highScoresArrayP) = @_;
-        if (defined($highScoresArrayP)) {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->putF('org::allbinary::logic::string::StringMaker'->new()->append($commonStrings->{START})->appendint(scalar(@{$highScoresArrayP}))->toString(), $self, "setHighScoresArray");
+    method setHighScoresArray {highScoresArrayP} {
+        if {[expr {$highScoresArrayP ne {}}]} {
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] putF [[[[::StringMaker new] append [$commonStrings jget START]] appendint [$highScoresArrayP length]] toString] [self] "setHighScoresArray"
         } else {
-            my $commonStrings = 'org::allbinary::string::CommonStrings'->getInstance();
-            $self->{logUtil}->putF($commonStrings->{START}, $self, "setHighScoresArray");
+            set commonStrings [::CommonStrings::getInstance]
+            [my jget logUtil] putF [$commonStrings jget START] [self] "setHighScoresArray"
         }
-        $self->{highScoresArrayP} = $highScoresArrayP;
+        my jset highScoresArrayP $highScoresArrayP
+    }
+    
+
+    method getNextHighScores {} {
+        return [::NullHighScoresSingletonFactory::getInstance]
+    }
+    
+
+    method isAnyHighScores {} {
+        error [jexception RuntimeException {}]
+    }
+    
+
+    method setSelectedHighScores {selectedHighScores} {
+    }
+    
+
+    method getSelectedHighScores {} {
+        return [::NullHighScoresSingletonFactory::getInstance]
+    }
+    
+
+    method getHighScoresArray {} {
+        return [my jget highScoresArrayP]
+    }
+    
+
+    method selectHighScores {} {
+    }
 }
 
-
-sub getNextHighScores {
-    my ($self) = @_;
-        return 'org::allbinary::game::score::NullHighScoresSingletonFactory'->getInstance();
+namespace eval ::HighScoresHelperBase {
 }
 
-
-sub isAnyHighScores {
-    my ($self) = @_;
-        die ("RuntimeException");
-}
-
-
-sub setSelectedHighScores {
-    my ($self, $selectedHighScores) = @_;
-}
-
-
-sub getSelectedHighScores {
-    my ($self) = @_;
-        return 'org::allbinary::game::score::NullHighScoresSingletonFactory'->getInstance();
-}
-
-
-sub getHighScoresArray {
-    my ($self) = @_;
-        return $self->{highScoresArrayP};
-}
-
-
-sub selectHighScores {
-    my ($self) = @_;
-}
-
-use java::lang::Object ();
-use org::allbinary::logic::communication::log::LogUtil ();
-use org::allbinary::logic::string::StringMaker ();
-use org::allbinary::string::CommonStrings ();
-use org::allbinary::game::score::HighScoresHelperBaseInterface ();
-use org::allbinary::game::score::LastFetchHighScoresFactory ();
-use org::allbinary::game::score::NullHighScoresSingletonFactory ();
-
-1;
 

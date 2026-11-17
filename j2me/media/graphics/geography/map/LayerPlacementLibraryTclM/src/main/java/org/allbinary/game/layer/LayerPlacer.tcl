@@ -11,103 +11,87 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.layer
 
-package org::allbinary::game::layer::LayerPlacer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{enumerationUtil} = 'org::allbinary::util::EnumerationUtil'->getInstance();
-    $self->{layerInterfaceVisitor} = undef;
-    $self->{dimension} = undef;
+oo::class create ::LayerPlacer {
+    superclass ::JObject
 }
 
+oo::define ::LayerPlacer {
+    method initFields_LayerPlacer {} {
+        my jset enumerationUtil {}
+        my jset layerInterfaceVisitor {}
+        my jset dimension {}
+        my jset enumerationUtil [::EnumerationUtil::getInstance]
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class, $layerInterfaceVisitor, $dimension) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-        $self->{layerInterfaceVisitor} = $layerInterfaceVisitor;
-        $self->{dimension} = $dimension;
-    return $self;
-}
+    constructor {layerInterfaceVisitor dimension} {
+        next
+        my initFields_LayerPlacer
+        my jset layerInterfaceVisitor $layerInterfaceVisitor
+        my jset dimension $dimension
+    }
+    
 
-
-# throws Exception
-sub processList {
-    my ($self, $list) = @_;
-        my $size = $list->size();
-        my $layerPlacementInterface = undef;
-        for (my $index = 0; $index < $size; $index++) {
-            $layerPlacementInterface = $list->{objectArray}->[$index];
-            $self->process($layerPlacementInterface);
+    method processList {list} {
+        set size [$list size]
+        set layerPlacementInterface {}
+        for {set index 0} {[expr {$index < $size}]} {jpostincr index 1} {
+            set layerPlacementInterface [[$list jget objectArray] get $index]
+            my process $layerPlacementInterface
         }
-}
+    }
+    
 
-
-# throws Exception
-sub process {
-    my ($self, $layerPlacementInterface) = @_;
-        my $relativePoint = $self->getPoint($layerPlacementInterface);
-        my $layerInterfaceFactory = 'org::allbinary::layer::LayerInterfaceFactory'->getInstance();
-        my $hashtable = $layerPlacementInterface->getInstance();
-        my $enumeration = $hashtable->keys();
-        my $point = undef;
-        my $layerHashtable = undef;
-        my $x = 0;
-        my $y = 0;
-        my $z = 0;
-        my $layerInterface = undef;
-        while ($self->{enumerationUtil}->hasMoreElements($enumeration)) {
-            $point = $self->{enumerationUtil}->nextElement($enumeration);
-            $layerHashtable = $hashtable->get($point);
-            $x = $point->getX() + $relativePoint->getX();
-            $y = $point->getY() + $relativePoint->getY();
-            $z = $point->getZ() + $relativePoint->getZ();
-            $layerInterface = $layerInterfaceFactory->getNexInstance($layerHashtable, $x, $y, $z);
-            $self->{layerInterfaceVisitor}->visit($layerInterface);
+    method process {layerPlacementInterface} {
+        set relativePoint [my getPoint $layerPlacementInterface]
+        set layerInterfaceFactory [::LayerInterfaceFactory::getInstance]
+        set hashtable [$layerPlacementInterface getInstance]
+        set enumeration [$hashtable keys]
+        set point {}
+        set layerHashtable {}
+        set x 0
+        set y 0
+        set z 0
+        set layerInterface {}
+        while {[[my jget enumerationUtil] hasMoreElements $enumeration]} {
+            set point [[my jget enumerationUtil] nextElement $enumeration]
+            set layerHashtable [$hashtable get $point]
+            set x [expr {[$point getX] + [$relativePoint getX]}]
+            set y [expr {[$point getY] + [$relativePoint getY]}]
+            set z [expr {[$point getZ] + [$relativePoint getZ]}]
+            set layerInterface [$layerInterfaceFactory getNexInstance $layerHashtable $x $y $z]
+            [my jget layerInterfaceVisitor] visit $layerInterface
         }
-}
+    }
+    
 
-
-# throws Exception
-sub getPoint {
-    my ($self, $layerPlacementInterface) = @_;
-        my $pointFactory = 'org::allbinary::graphics::PointFactory'->getInstance();
-        my $layerPlacementType = $layerPlacementInterface->getLayerType();
-        if ($layerPlacementType == 'org::allbinary::game::layer::LayerPlacementTypeFactory'->getInstance()->{MAP}) {
-            my $width = $layerPlacementInterface->getWidth();
-            my $height = $layerPlacementInterface->getHeight();
-            my $x = (($self->{dimension}->getX() - $width) / 2);
-            my $y = (($self->{dimension}->getY() - $height) / 2);
-            return $pointFactory->createXY($x, $y);
-        } elsif ($layerPlacementType == 'org::allbinary::game::layer::LayerPlacementTypeFactory'->getInstance()->{UP}) {
-            my $width = $layerPlacementInterface->getWidth();
-            my $height = $layerPlacementInterface->getHeight();
-            my $x = (($self->{dimension}->getX() - $width) / 2);
-            my $y = -$height;
-            return $pointFactory->createXY($x, $y);
+    method getPoint {layerPlacementInterface} {
+        set pointFactory [::PointFactory::getInstance]
+        set layerPlacementType [$layerPlacementInterface getLayerType]
+        if {[expr {$layerPlacementType eq [[::LayerPlacementTypeFactory::getInstance] jget MAP]}]} {
+            set width [$layerPlacementInterface getWidth]
+            set height [$layerPlacementInterface getHeight]
+            set x ([expr {([expr {[[my jget dimension] getX] - $width}]) / 2}])
+            set y ([expr {([expr {[[my jget dimension] getY] - $height}]) / 2}])
+            return [$pointFactory createXY $x $y]
+        } elseif {[expr {$layerPlacementType eq [[::LayerPlacementTypeFactory::getInstance] jget UP]}]} {
+            set width [$layerPlacementInterface getWidth]
+            set height [$layerPlacementInterface getHeight]
+            set x ([expr {([expr {[[my jget dimension] getX] - $width}]) / 2}])
+            set y [expr {-$height}]
+            return [$pointFactory createXY $x $y]
         } else {
-            die ("PlacementType Not Recognized");
+            error [jexception Exception "PlacementType Not Recognized"]
         }
+    }
 }
 
-use java::lang::Object ();
-use java::util::Enumeration ();
-use org::allbinary::graphics::GPoint ();
-use org::allbinary::graphics::PointFactory ();
-use org::allbinary::layer::AllBinaryLayer ();
-use org::allbinary::layer::LayerInterfaceFactory ();
-use org::allbinary::layer::LayerInterfaceVisitor ();
-use org::allbinary::util::ABHashtable ();
-use org::allbinary::util::BasicArrayList ();
-use org::allbinary::util::EnumerationUtil ();
-use org::allbinary::game::layer::LayerPlacementTypeFactory ();
+namespace eval ::LayerPlacer {
+}
 
-1;
 

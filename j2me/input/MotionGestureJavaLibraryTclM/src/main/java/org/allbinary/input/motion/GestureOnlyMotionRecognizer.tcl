@@ -11,69 +11,89 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.input.motion
 
-package org::allbinary::input::motion::GestureOnlyMotionRecognizer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::input::motion::MotionRecognizer';
-
-our $index = 0;
-tie our $pointCircularPool, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::GPointCircularPool'->new(40) };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{motionGestureRecognizer} = undef;
-    $self->{id} = undef;
+oo::class create ::GestureOnlyMotionRecognizer {
+    superclass ::MotionRecognizer
 }
 
+oo::define ::GestureOnlyMotionRecognizer {
+    method initFields_GestureOnlyMotionRecognizer {} {
+        my jset motionGestureRecognizer {}
+        my jset id 0
+        
+        
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new();
-    _init_fields($self);
-        $self->{id} = $org::allbinary::input::motion::GestureOnlyMotionRecognizer::index++;
-        $self->{motionGestureRecognizer} = 'org::allbinary::input::motion::gesture::MotionGestureRecognizer'->new($self->{id});
-    return $self;
+    constructor {} {
+        next
+        my initFields_GestureOnlyMotionRecognizer
+        my jset id [GestureOnlyMotionRecognizer jpostinc index 1]
+        my jset motionGestureRecognizer [::MotionGestureRecognizer new [my jget id]]
+    }
+    
+
+    method processStartMotionEvent {x y deviceId modifiers} {
+        set point [[::GestureOnlyMotionRecognizer::staticGet_pointCircularPool] getNextInstance]
+        $point setX $x
+        $point setY $y
+        [my jget motionGestureRecognizer] processPressedMotionEvent $point $deviceId $modifiers
+    }
+    
+
+    method processEndMotionEvent {x y deviceId modifiers} {
+        set point [[::GestureOnlyMotionRecognizer::staticGet_pointCircularPool] getNextInstance]
+        $point setX $x
+        $point setY $y
+        [my jget motionGestureRecognizer] processReleasedMotionEvent $point $deviceId $modifiers
+    }
+    
+
+    method processDraggedMotionEvent {x y deviceId modifiers} {
+        set point [[::GestureOnlyMotionRecognizer::staticGet_pointCircularPool] getNextInstance]
+        $point setX $x
+        $point setY $y
+        [my jget motionGestureRecognizer] processDraggedMotionEvent $point $deviceId $modifiers
+    }
 }
 
-
-# throws Exception
-sub processStartMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-        my $point = $org::allbinary::input::motion::GestureOnlyMotionRecognizer::pointCircularPool->getNextInstance();
-        $point->setX($x);
-        $point->setY($y);
-        $self->{motionGestureRecognizer}->processPressedMotionEvent($point, $deviceId, $modifiers);
+namespace eval ::GestureOnlyMotionRecognizer {
+    variable indexValue {}
+    variable indexSet 0
+    proc staticGet_index {} {
+        variable indexValue
+        variable indexSet
+        if {!$indexSet} {
+            set indexSet 1
+            set indexValue 0
+        }
+        return $indexValue
+    }
+    proc staticSet_index {value} {
+        variable indexValue
+        variable indexSet
+        set indexSet 1
+        set indexValue $value
+    }
+    variable pointCircularPoolValue {}
+    variable pointCircularPoolSet 0
+    proc staticGet_pointCircularPool {} {
+        variable pointCircularPoolValue
+        variable pointCircularPoolSet
+        if {!$pointCircularPoolSet} {
+            set pointCircularPoolSet 1
+            set pointCircularPoolValue [::GPointCircularPool new 40]
+        }
+        return $pointCircularPoolValue
+    }
+    proc staticSet_pointCircularPool {value} {
+        variable pointCircularPoolValue
+        variable pointCircularPoolSet
+        set pointCircularPoolSet 1
+        set pointCircularPoolValue $value
+    }
 }
 
-
-# throws Exception
-sub processEndMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-        my $point = $org::allbinary::input::motion::GestureOnlyMotionRecognizer::pointCircularPool->getNextInstance();
-        $point->setX($x);
-        $point->setY($y);
-        $self->{motionGestureRecognizer}->processReleasedMotionEvent($point, $deviceId, $modifiers);
-}
-
-
-# throws Exception
-sub processDraggedMotionEvent {
-    my ($self, $x, $y, $deviceId, $modifiers) = @_;
-        my $point = $org::allbinary::input::motion::GestureOnlyMotionRecognizer::pointCircularPool->getNextInstance();
-        $point->setX($x);
-        $point->setY($y);
-        $self->{motionGestureRecognizer}->processDraggedMotionEvent($point, $deviceId, $modifiers);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use org::allbinary::graphics::CustomGPoint ();
-use org::allbinary::graphics::GPointCircularPool ();
-use org::allbinary::input::motion::gesture::MotionGestureRecognizer ();
-use org::allbinary::input::motion::MotionRecognizer ();
-
-1;
 

@@ -11,22 +11,24 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.ai
 
-# Java interface
-package org::allbinary::ai::ArtificialIntelligenceFactoryInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-# throws Exception
-sub getInstance {
-    my ($self, $anyType) = @_;
-    die "abstract method getInstance";
+oo::class create ::ArtificialIntelligenceFactoryInterface {
+    superclass ::JObject
 }
 
+oo::define ::ArtificialIntelligenceFactoryInterface {
+    method initFields_ArtificialIntelligenceFactoryInterface {} {
+        return
+    }
+    
 
-1;
+    method getInstance {anyType} {
+        error [jexception AbstractMethodError getInstance]
+    }
+}
+
+namespace eval ::ArtificialIntelligenceFactoryInterface {
+}
+
 

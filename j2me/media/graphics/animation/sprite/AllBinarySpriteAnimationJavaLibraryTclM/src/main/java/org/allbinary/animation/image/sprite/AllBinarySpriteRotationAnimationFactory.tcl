@@ -11,127 +11,88 @@
 # Created By: Travis Berthelot
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.animation.image.sprite
 
-package org::allbinary::animation::image::sprite::AllBinarySpriteRotationAnimationFactory;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use POSIX ();
-use parent -norequire,'org::allbinary::animation::image::BaseImageAnimationFactory','org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface';
-
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{animationFactorySpriteScaleUtil} = 'org::allbinary::image::sprite::AnimationFactorySpriteScaleUtil'->getInstance();
+oo::class create ::AllBinarySpriteRotationAnimationFactory {
+    superclass ::BaseImageAnimationFactory
 }
 
+oo::define ::AllBinarySpriteRotationAnimationFactory {
+    method initFields_AllBinarySpriteRotationAnimationFactory {} {
+        my jset animationFactorySpriteScaleUtil {}
+        my jset animationFactorySpriteScaleUtil [::AnimationFactorySpriteScaleUtil::getInstance]
+        return
+    }
+    
+    
+    
+    
+    
+    
+    
 
-# throws Exception
-sub createWHDY {
-    my ($class, $image, $dx, $dy, $animationBehaviorFactory) = @_;
-        my $spriteRotationAnimationFactory = 'org::allbinary::animation::image::sprite::AllBinarySpriteRotationAnimationFactory'->new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), (POSIX::floor(($image->getHeight()) / (2 ** (2)))), (POSIX::floor(($image->getHeight()) / (2 ** (2)))), 0, 0, $animationBehaviorFactory);
-        $spriteRotationAnimationFactory->initWH($dx, $dy);
-        return $spriteRotationAnimationFactory;
-}
-
-
-# throws Exception
-sub createWH {
-    my ($class, $image, $animationBehaviorFactory) = @_;
-        return 'org::allbinary::animation::image::sprite::AllBinarySpriteRotationAnimationFactory'->createWHDY($image, 0, 0, $animationBehaviorFactory);
-}
-
-
-# throws Exception
-sub createDXY {
-    my ($class, $image, $dx, $dy, $animationBehaviorFactory) = @_;
-        my $spriteRotationAnimationFactory = 'org::allbinary::animation::image::sprite::AllBinarySpriteRotationAnimationFactory'->new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $image->getHeight(), $image->getHeight(), 0, 0, $animationBehaviorFactory);
-        $spriteRotationAnimationFactory->init($dx, $dy);
-        return $spriteRotationAnimationFactory;
-}
-
-
-# throws Exception
-sub createDXYQ {
-    my ($class, $image, $dx, $dy, $animationBehaviorFactory) = @_;
-        my $spriteRotationAnimationFactory = 'org::allbinary::animation::image::sprite::AllBinarySpriteRotationAnimationFactory'->new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), (POSIX::floor(($image->getHeight()) / (2 ** (2)))), (POSIX::floor(($image->getHeight()) / (2 ** (2)))), 0, 0, $animationBehaviorFactory);
-        $spriteRotationAnimationFactory->init($dx, $dy);
-        return $spriteRotationAnimationFactory;
-}
-
-
-# throws Exception
-sub createQ {
-    my ($class, $image, $animationBehaviorFactory) = @_;
-        return 'org::allbinary::animation::image::sprite::AllBinarySpriteRotationAnimationFactory'->new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), (POSIX::floor(($image->getHeight()) / (2 ** (2)))), (POSIX::floor(($image->getHeight()) / (2 ** (2)))), 0, 0, $animationBehaviorFactory);
-}
-
-
-# throws Exception
-sub createWHF {
-    my ($class, $image, $animationBehaviorFactory) = @_;
-        return 'org::allbinary::animation::image::sprite::AllBinarySpriteRotationAnimationFactory'->new($image, 'org::allbinary::logic::math::PrimitiveIntUtil'->getArrayInstance(), $image->getHeight(), $image->getHeight(), 0, 0, $animationBehaviorFactory);
-}
-
-
-sub new {
-    my ($class, $image, $sequenceArray, $width, $height, $dx, $dy, $animationBehaviorFactory) = @_;
-    my $self = $class->SUPER::new($image, $sequenceArray, $width, $height, $dx, $dy, $animationBehaviorFactory);
-    _init_fields($self);
-        # super(...) made $self above
-        if ($animationBehaviorFactory == 'org::allbinary::animation::AnimationBehaviorFactory'->getInstance()) {
-            'org::allbinary::logic::communication::log::ForcedLogUtil'->log("Using default AnimationBehaviorFactory with IndexedAnimationFactory", $self);
+    constructor {image sequenceArray width height dx dy animationBehaviorFactory} {
+        next $image $sequenceArray $width $height $dx $dy $animationBehaviorFactory
+        my initFields_AllBinarySpriteRotationAnimationFactory
+        if {[expr {$animationBehaviorFactory eq [::AnimationBehaviorFactory::getInstance]}]} {
+            ::ForcedLogUtil::log "Using default AnimationBehaviorFactory with IndexedAnimationFactory" [self]
         }
-    return $self;
-}
+    }
+    
 
+    method init {dx dy} {
+        [my jget animationFactoryInitializationVisitor] jset dx $dx
+        [my jget animationFactoryInitializationVisitor] jset dy $dy
+    }
+    
 
-sub init {
-    my ($self, $dx, $dy) = @_;
-        $self->{animationFactoryInitializationVisitor}->{dx} = $dx;
-        $self->{animationFactoryInitializationVisitor}->{dy} = $dy;
-}
+    method initWH {dx dy} {
+        my init $dx $dy
+        [my jget animationFactoryInitializationVisitor] jset dx [expr {[[my jget animationFactoryInitializationVisitor] jget dx] + [expr {[expr {-[[my jget animationFactoryInitializationVisitor] jget width]}] / 5}]}]
+        [my jget animationFactoryInitializationVisitor] jset dy [expr {[[my jget animationFactoryInitializationVisitor] jget dy] + [expr {[expr {-[[my jget animationFactoryInitializationVisitor] jget height]}] / 5}]}]
+    }
+    
 
-
-sub initWH {
-    my ($self, $dx, $dy) = @_;
-        $self->init($dx, $dy);
-        $self->{animationFactoryInitializationVisitor}->{dx} += -$self->{animationFactoryInitializationVisitor}->{width} / 5;
-        $self->{animationFactoryInitializationVisitor}->{dy} += -$self->{animationFactoryInitializationVisitor}->{height} / 5;
-}
-
-
-# throws Exception
-sub getInstance {
-    my ($self, $instanceId) = @_;
-        my $sprite = $self->{animationFactorySpriteScaleUtil}->createImage($self->getImage(), $self->{animationFactoryInitializationVisitor}->{width}, $self->{animationFactoryInitializationVisitor}->{height}, $self->{scaleProperties}->{scaleWidth}, $self->{scaleProperties}->{scaleHeight});
-        if ($self->{animationFactoryInitializationVisitor}->{dx} != 0 || $self->{animationFactoryInitializationVisitor}->{dy} != 0) {
-            return 'org::allbinary::animation::image::sprite::AllBinaryAdjustedSpriteRotationAnimation'->new($sprite, $self->getImage(), $self->{animationFactoryInitializationVisitor}->{dx}, $self->{animationFactoryInitializationVisitor}->{dy}, $self->{animationBehaviorFactory}->getOrCreateInstance());
+    method getInstance {instanceId} {
+        set sprite [[my jget animationFactorySpriteScaleUtil] createImage [my getImage] [[my jget animationFactoryInitializationVisitor] jget width] [[my jget animationFactoryInitializationVisitor] jget height] [[my jget scaleProperties] jget scaleWidth] [[my jget scaleProperties] jget scaleHeight]]
+        if {[expr {[expr {[[my jget animationFactoryInitializationVisitor] jget dx] != 0}] || [expr {[[my jget animationFactoryInitializationVisitor] jget dy] != 0}]}]} {
+            return [::AllBinaryAdjustedSpriteRotationAnimation new $sprite [my getImage] [[my jget animationFactoryInitializationVisitor] jget dx] [[my jget animationFactoryInitializationVisitor] jget dy] [[my jget animationBehaviorFactory] getOrCreateInstance]]
         } else {
-            return 'org::allbinary::animation::image::sprite::AllBinarySpriteRotationAnimation'->new($sprite, $self->getImage(), $self->{animationBehaviorFactory}->getOrCreateInstance());
+            return [::AllBinarySpriteRotationAnimation new $sprite [my getImage] [[my jget animationBehaviorFactory] getOrCreateInstance]]
         }
+    }
+    
+
+    method getInstanceAnimation {animationInterface} {
+        return [my getInstance 0]
+    }
 }
 
-
-# throws Exception
-sub getInstanceAnimation {
-    my ($self, $animationInterface) = @_;
-        return $self->getInstance(0);
+namespace eval ::AllBinarySpriteRotationAnimationFactory {
+    proc createWHDY {image dx dy animationBehaviorFactory} {
+        set spriteRotationAnimationFactory [::AllBinarySpriteRotationAnimationFactory new $image [::PrimitiveIntUtil::getArrayInstance] ([expr {[$image getHeight] >> 2}]) ([expr {[$image getHeight] >> 2}]) 0 0 $animationBehaviorFactory]
+        $spriteRotationAnimationFactory initWH $dx $dy
+        return $spriteRotationAnimationFactory
+    }
+    proc createWH {image animationBehaviorFactory} {
+        return [::AllBinarySpriteRotationAnimationFactory::createWHDY $image 0 0 $animationBehaviorFactory]
+    }
+    proc createDXY {image dx dy animationBehaviorFactory} {
+        set spriteRotationAnimationFactory [::AllBinarySpriteRotationAnimationFactory new $image [::PrimitiveIntUtil::getArrayInstance] [$image getHeight] [$image getHeight] 0 0 $animationBehaviorFactory]
+        $spriteRotationAnimationFactory init $dx $dy
+        return $spriteRotationAnimationFactory
+    }
+    proc createDXYQ {image dx dy animationBehaviorFactory} {
+        set spriteRotationAnimationFactory [::AllBinarySpriteRotationAnimationFactory new $image [::PrimitiveIntUtil::getArrayInstance] ([expr {[$image getHeight] >> 2}]) ([expr {[$image getHeight] >> 2}]) 0 0 $animationBehaviorFactory]
+        $spriteRotationAnimationFactory init $dx $dy
+        return $spriteRotationAnimationFactory
+    }
+    proc createQ {image animationBehaviorFactory} {
+        return [::AllBinarySpriteRotationAnimationFactory new $image [::PrimitiveIntUtil::getArrayInstance] ([expr {[$image getHeight] >> 2}]) ([expr {[$image getHeight] >> 2}]) 0 0 $animationBehaviorFactory]
+    }
+    proc createWHF {image animationBehaviorFactory} {
+        return [::AllBinarySpriteRotationAnimationFactory new $image [::PrimitiveIntUtil::getArrayInstance] [$image getHeight] [$image getHeight] 0 0 $animationBehaviorFactory]
+    }
 }
 
-use java::lang::Object ();
-use javax::microedition::lcdui::Image ();
-use javax::microedition::lcdui::game::Sprite ();
-use org::allbinary::animation::Animation ();
-use org::allbinary::animation::AnimationBehaviorFactory ();
-use org::allbinary::animation::ProceduralAnimationInterfaceFactoryInterface ();
-use org::allbinary::animation::image::BaseImageAnimationFactory ();
-use org::allbinary::image::sprite::AnimationFactorySpriteScaleUtil ();
-use org::allbinary::logic::communication::log::ForcedLogUtil ();
-use org::allbinary::logic::math::PrimitiveIntUtil ();
-use org::allbinary::animation::image::sprite::AllBinarySpriteRotationAnimation ();
-use org::allbinary::animation::image::sprite::AllBinaryAdjustedSpriteRotationAnimation ();
-
-1;
 

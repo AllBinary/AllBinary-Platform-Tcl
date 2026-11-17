@@ -11,39 +11,50 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.layer
 
-package org::allbinary::layer::NullLayer;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::layer::Layer';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::layer::NullLayer'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::layer::NullLayer::instance;
+oo::class create ::NullLayer {
+    superclass ::Layer
 }
 
+oo::define ::NullLayer {
+    method initFields_NullLayer {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = $class->SUPER::new(0, 0);
-        # super(...) made $self above
-    return $self;
+    constructor {} {
+        next 0 0
+        my initFields_NullLayer
+    }
+    
+
+    method paint {graphics} {
+    }
 }
 
-
-sub paint {
-    my ($self, $graphics) = @_;
+namespace eval ::NullLayer {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::NullLayer new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::NullLayer::staticGet_instance]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Graphics ();
-use org::allbinary::layer::Layer ();
-
-1;
 

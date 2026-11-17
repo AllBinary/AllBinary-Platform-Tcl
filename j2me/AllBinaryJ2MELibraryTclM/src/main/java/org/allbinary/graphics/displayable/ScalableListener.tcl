@@ -11,39 +11,39 @@
 # Created By: Travis Berthelot 
 #   
 # Generated Code Do Not Modify
+# package org.allbinary.graphics.displayable
 
-# Java interface
-package org::allbinary::graphics::displayable::ScalableListener;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-
-
-
-sub getRatio {
-    my ($self, $ratio) = @_;
-    die "abstract method getRatio";
+oo::class create ::ScalableListener {
+    superclass ::JObject
 }
 
+oo::define ::ScalableListener {
+    method initFields_ScalableListener {} {
+        return
+    }
+    
 
-sub getLeft {
-    my ($self, $xOffset) = @_;
-    die "abstract method getLeft";
+    method getRatio {ratio} {
+        error [jexception AbstractMethodError getRatio]
+    }
+    
+
+    method getLeft {xOffset} {
+        error [jexception AbstractMethodError getLeft]
+    }
+    
+
+    method getTop {yOffset} {
+        error [jexception AbstractMethodError getTop]
+    }
+    
+
+    method scale {ratio} {
+        error [jexception AbstractMethodError scale]
+    }
 }
 
-
-sub getTop {
-    my ($self, $yOffset) = @_;
-    die "abstract method getTop";
+namespace eval ::ScalableListener {
 }
 
-
-sub scale {
-    my ($self, $ratio) = @_;
-    die "abstract method scale";
-}
-
-
-1;
 

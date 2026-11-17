@@ -11,47 +11,56 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.media.image
 
-package org::allbinary::media::image::ImageScaleUtil;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $instance, 'java::lang::LazyStatic', sub { 'org::allbinary::media::image::ImageScaleUtil'->new() };
-
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::media::image::ImageScaleUtil::instance;
+oo::class create ::ImageScaleUtil {
+    superclass ::JObject
 }
 
+oo::define ::ImageScaleUtil {
+    method initFields_ImageScaleUtil {} {
+        return
+    }
+    
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    return $self;
+    constructor {} {
+        next
+        my initFields_ImageScaleUtil
+    }
+    
+
+    method createImage2 {imageCache originalImage scaleNominatorX scaleDenominatorX scaleNominatorY scaleDenominatorY cached} {
+        return [my createImage3 $imageCache $originalImage $scaleNominatorX $scaleDenominatorX $scaleNominatorY $scaleDenominatorY $cached true]
+    }
+    
+
+    method createImage3 {imageCache originalImage scaleNominatorX scaleDenominatorX scaleNominatorY scaleDenominatorY cached mutable} {
+        return $originalImage
+    }
 }
 
-
-# throws Exception
-sub createImage2 {
-    my ($self, $imageCache, $originalImage, $scaleNominatorX, $scaleDenominatorX, $scaleNominatorY, $scaleDenominatorY, $cached) = @_;
-        return $self->createImage3($imageCache, $originalImage, $scaleNominatorX, $scaleDenominatorX, $scaleNominatorY, $scaleDenominatorY, $cached, 1);
+namespace eval ::ImageScaleUtil {
+    variable instanceValue {}
+    variable instanceSet 0
+    proc staticGet_instance {} {
+        variable instanceValue
+        variable instanceSet
+        if {!$instanceSet} {
+            set instanceSet 1
+            set instanceValue [::ImageScaleUtil new]
+        }
+        return $instanceValue
+    }
+    proc staticSet_instance {value} {
+        variable instanceValue
+        variable instanceSet
+        set instanceSet 1
+        set instanceValue $value
+    }
+    proc getInstance {} {
+        return [::ImageScaleUtil::staticGet_instance]
+    }
 }
 
-
-# throws Exception
-sub createImage3 {
-    my ($self, $imageCache, $originalImage, $scaleNominatorX, $scaleDenominatorX, $scaleNominatorY, $scaleDenominatorY, $cached, $mutable) = @_;
-        return $originalImage;
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::Image ();
-use org::allbinary::image::ImageCache ();
-
-1;
 

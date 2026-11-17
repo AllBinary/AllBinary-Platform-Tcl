@@ -11,18 +11,19 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.part
 
-# Java interface
-package org::allbinary::game::part::PartInterface;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'org::allbinary::graphics::paint::PaintableInterface','org::allbinary::animation::AnimationInterfaceCompositeInterface';
+oo::class create ::PartInterface {
+    superclass ::JObject
+}
 
+oo::define ::PartInterface {
+    method initFields_PartInterface {} {
+        return
+    }
+}
 
-use org::allbinary::animation::AnimationInterfaceCompositeInterface ();
-use org::allbinary::graphics::paint::PaintableInterface ();
+namespace eval ::PartInterface {
+}
 
-1;
 

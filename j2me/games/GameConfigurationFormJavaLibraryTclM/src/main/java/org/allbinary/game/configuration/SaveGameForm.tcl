@@ -11,68 +11,66 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.configuration
 
-package org::allbinary::game::configuration::SaveGameForm;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use Time::HiRes ();
-use parent -norequire,'org::allbinary::graphics::displayable::screen::CommandForm';
-
-tie our $FORM, 'java::lang::LazyStatic', sub { 'org::allbinary::graphics::displayable::screen::CommandForm'->getNullCommandForm() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{meUtil} = 'org::allbinary::MIDPUtil'->getInstance();
+oo::class create ::SaveGameForm {
+    superclass ::CommandForm
 }
 
+oo::define ::SaveGameForm {
+    method initFields_SaveGameForm {} {
+        my jset meUtil {}
+        my jset meUtil [::MIDPUtil::getInstance]
+        return
+    }
+    
+    
+    
 
-# throws Exception
-sub createForm {
-    my ($class, $commandListener, $title, $backgrounBasicColor, $foregroundBasicColor) = @_;
-        $org::allbinary::game::configuration::SaveGameForm::FORM = 'org::allbinary::game::configuration::SaveGameForm'->new($commandListener, $title, $backgrounBasicColor, $foregroundBasicColor);
-        return $org::allbinary::game::configuration::SaveGameForm::FORM;
+    constructor {commandListener title backgrounBasicColor foregroundBasicColor} {
+        next $commandListener $title $backgrounBasicColor $foregroundBasicColor
+        my initFields_SaveGameForm
+        [my jget logUtil] putF [[my jget commonStrings] jget START] [self] [[my jget commonStrings] jget CONSTRUCTOR]
+        set timeString [jstr [[::ABSystemWrapper::getInstance] currentTimeMillis]]
+        [my jget meUtil] appendItem [self] [::TextField new "Name: " $timeString 30 [::TextField::staticGet_ANY]]
+        my initCommands $commandListener
+    }
+    
+
+    method initCommands {cmdListener} {
+        set gameCommandsFactory [::GameCommandsFactory::getInstance]
+        my removeAllCommands
+        my addCommand [$gameCommandsFactory jget SAVE]
+        my addCommand [$gameCommandsFactory jget CLOSE_AND_SHOW_GAME_CANVAS]
+        my setCommandListener $cmdListener
+    }
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::configuration::SaveGameForm::FORM;
+namespace eval ::SaveGameForm {
+    variable FORMValue {}
+    variable FORMSet 0
+    proc staticGet_FORM {} {
+        variable FORMValue
+        variable FORMSet
+        if {!$FORMSet} {
+            set FORMSet 1
+            set FORMValue [::CommandForm::getNullCommandForm]
+        }
+        return $FORMValue
+    }
+    proc staticSet_FORM {value} {
+        variable FORMValue
+        variable FORMSet
+        set FORMSet 1
+        set FORMValue $value
+    }
+    proc createForm {commandListener title backgrounBasicColor foregroundBasicColor} {
+        ::SaveGameForm::staticSet_FORM [::SaveGameForm new $commandListener $title $backgrounBasicColor $foregroundBasicColor]
+        return [::SaveGameForm::staticGet_FORM]
+    }
+    proc getInstance {} {
+        return [::SaveGameForm::staticGet_FORM]
+    }
 }
 
-
-sub new {
-    my ($class, $commandListener, $title, $backgrounBasicColor, $foregroundBasicColor) = @_;
-    my $self = $class->SUPER::new($commandListener, $title, $backgrounBasicColor, $foregroundBasicColor);
-    _init_fields($self);
-        # super(...) made $self above
-        $self->{logUtil}->putF($self->{commonStrings}->{START}, $self, $self->{commonStrings}->{CONSTRUCTOR});
-        my $timeString = ("" . ('org::allbinary::logic::ABSystemWrapper'->getInstance()->currentTimeMillis()));
-        $self->{meUtil}->appendItem($self, 'javax::microedition::lcdui::TextField'->new("Name: ", $timeString, 30, $javax::microedition::lcdui::TextField::ANY));
-        $self->initCommands($commandListener);
-    return $self;
-}
-
-
-sub initCommands {
-    my ($self, $cmdListener) = @_;
-        my $gameCommandsFactory = 'org::allbinary::game::commands::GameCommandsFactory'->getInstance();
-        $self->removeAllCommands();
-        $self->addCommand($gameCommandsFactory->{SAVE});
-        $self->addCommand($gameCommandsFactory->{CLOSE_AND_SHOW_GAME_CANVAS});
-        $self->setCommandListener($cmdListener);
-}
-
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-use javax::microedition::lcdui::CommandListener ();
-use javax::microedition::lcdui::TextField ();
-use org::allbinary::MIDPUtil ();
-use org::allbinary::game::commands::GameCommandsFactory ();
-use org::allbinary::graphics::color::BasicColor ();
-use org::allbinary::graphics::displayable::screen::CommandForm ();
-use org::allbinary::logic::ABSystemWrapper ();
-
-1;
 

@@ -11,37 +11,48 @@
 # Created By: Travis Berthelot
 #  
 # Generated Code Do Not Modify
+# package org.allbinary.game.ag.layer.pickup.health
 
-package org::allbinary::game::ag::layer::pickup::health::HealthResources;
-use strict;
-use warnings;
-use feature 'try';
-no warnings 'experimental::try';
-use parent -norequire,'java::lang::Object';
-
-tie our $SINGLETON, 'java::lang::LazyStatic', sub { 'org::allbinary::game::ag::layer::pickup::health::HealthResources'->new() };
-
-sub _init_fields {
-    my ($self) = @_;
-    $self->{RESOURCE} = "health_drop_20_by_20.png";
+oo::class create ::HealthResources {
+    superclass ::JObject
 }
 
+oo::define ::HealthResources {
+    method initFields_HealthResources {} {
+        my jset RESOURCE {}
+        my jset RESOURCE "health_drop_20_by_20.png"
+        return
+    }
+    
 
-sub new {
-    my ($class) = @_;
-    my $self = bless({}, $class);
-    _init_fields($self);
-    return $self;
+    constructor {} {
+        next
+        my initFields_HealthResources
+    }
+    
 }
 
-
-sub getInstance {
-    my ($class) = @_;
-        return $org::allbinary::game::ag::layer::pickup::health::HealthResources::SINGLETON;
+namespace eval ::HealthResources {
+    variable SINGLETONValue {}
+    variable SINGLETONSet 0
+    proc staticGet_SINGLETON {} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        if {!$SINGLETONSet} {
+            set SINGLETONSet 1
+            set SINGLETONValue [::HealthResources new]
+        }
+        return $SINGLETONValue
+    }
+    proc staticSet_SINGLETON {value} {
+        variable SINGLETONValue
+        variable SINGLETONSet
+        set SINGLETONSet 1
+        set SINGLETONValue $value
+    }
+    proc getInstance {} {
+        return [::HealthResources::staticGet_SINGLETON]
+    }
 }
 
-use java::lang::Object ();
-use java::lang::LazyStatic ();
-
-1;
 
